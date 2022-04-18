@@ -1,27 +1,23 @@
 using System.Collections;
 using System.Collections.Generic;
-using System.Numerics;
 using UnityEngine;
-using Vector2 = UnityEngine.Vector2;
-using Vector3 = UnityEngine.Vector3;
 
-public class EnemyAttack : MonoBehaviour
+public class EnemyProjectile : EnemyAttack
 {
-    public float delay = 0.5f;
-    public float cooldown = 1f;
-    [SerializeField] private float damage = 10f;
-
     private new Collider2D collider;
     private SpriteRenderer sprite;
     private Rigidbody2D rb;
-
 
     void Start()
     {
         collider = GetComponent<Collider2D>();
         sprite = GetComponent<SpriteRenderer>();
         rb = GetComponent<Rigidbody2D>();
+        Use();
+    }
 
+    private void Use()
+    {
         StartCoroutine(ExecuteAttack());
     }
 
@@ -54,6 +50,6 @@ public class EnemyAttack : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D col)
     {
-        Debug.Log(col.gameObject.name);
+        Debug.Log(col.gameObject.name + " takes damage " + damage);
     }
 }
