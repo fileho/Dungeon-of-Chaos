@@ -2,16 +2,16 @@
 #
 # Get latest from https://github.com/github/gitignore/blob/master/Unity.gitignore
 #
-/[Ll]ibrary/
-/[Tt]emp/
-/[Oo]bj/
-/[Bb]uild/
-/[Bb]uilds/
-/[Ll]ogs/
-/[Mm]emoryCaptures/
+/Dungeon of Chaos/[Ll]ibrary/
+/Dungeon of Chaos/[Tt]emp/
+/Dungeon of Chaos/[Oo]bj/
+/Dungeon of Chaos/[Bb]uild/
+/Dungeon of Chaos/[Bb]uilds/
+/Dungeon of Chaos/[Ll]ogs/
+/Dungeon of Chaos/[Mm]emoryCaptures/
 
 # Asset meta data should only be ignored when the corresponding asset is also ignored
-!/[Aa]ssets/**/*.meta
+!/Dungeon of Chaos/[Aa]ssets/**/*.meta
 
 # Uncomment this line if you wish to ignore the asset store tools plugin
 # /[Aa]ssets/AssetStoreTools*
