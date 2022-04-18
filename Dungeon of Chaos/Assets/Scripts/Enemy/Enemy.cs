@@ -30,12 +30,15 @@ public class Enemy : MonoBehaviour
 
     private void Attack()
     {
-        if (cooldown > 0)
+        if (cooldown > 0 || !attack.CanUse(transform.position))
             return;
+
+
 
         attacking = true;
         cooldown = attack.cooldown;
         Instantiate(attack, transform.position, Quaternion.identity);
+
         Invoke(nameof(ReadyAttack), attack.delay + 0.2f);
     }
 
