@@ -6,40 +6,50 @@ public class Enemy : MonoBehaviour
 {
     [SerializeField] private float movementSpeed = 2f;
 
-    [SerializeField] private EnemyAttack attack;
 
-    private float cooldown = 0;
+    private EnemyAttack attack;
 
+    private Weapon weapon;
 
     private bool attacking = false;
+
+    private void Start()
+    {
+        weapon = GetComponentInChildren<Weapon>();
+        attack = GetComponentInChildren<EnemyAttack>();
+    }
 
     void Update()
     {
         if (attacking)
             return;
         Move();
-        UpdateCooldown();
         Attack();
+        RotateWeapon();
     }
 
-    private void UpdateCooldown()
+    public void AttackWeapon(float swipe, float dmg, float range)
     {
-        if (cooldown > 0)
-            cooldown -= Time.deltaTime;
+        weapon.Attack(swipe, dmg, range);
+    }
+
+    private void RotateWeapon()
+    {
+        if (weapon != null)
+        {
+            weapon.RotateWeapon(Character.instance.transform.position);
+        }
     }
 
     private void Attack()
     {
-        if (cooldown > 0 || !attack.CanUse(transform.position))
+        if (!attack.CanUse(transform.position))
             return;
 
-
-
         attacking = true;
-        cooldown = attack.cooldown;
-        Instantiate(attack, transform.position, Quaternion.identity);
+        attack.Use();
 
-        Invoke(nameof(ReadyAttack), attack.delay + 0.2f);
+        Invoke(nameof(ReadyAttack), attack.GetDelay());
     }
 
     private void ReadyAttack()

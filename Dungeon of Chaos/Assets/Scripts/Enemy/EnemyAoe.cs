@@ -1,30 +1,21 @@
 using System.Collections;
 using System.Collections.Generic;
-using System.Data;
 using UnityEngine;
 
-public class EnemyMelee : MonoBehaviour, IEnemy
+public class EnemyAoe : MonoBehaviour, IEnemy
 {
-    [SerializeField] private float swipe = 20f;
-    [SerializeField] private float damage = 10;
-    [SerializeField] private float range = 5;
-
-    [SerializeField] private float delay = 0.8f;
-
-
-
-    public void SetEnemy(Enemy e)
-    {
-        enemy = e;
-        transform.up = enemy.GetComponentInChildren<Weapon>().transform.up;
-    }
+    [SerializeField] private float damage;
+    [SerializeField] private float delay;
+    [SerializeField] private float distance;
 
     private Enemy enemy;
     private SpriteRenderer sprite;
+    private new Collider2D collider;
 
     void Start()
     {
         sprite = GetComponent<SpriteRenderer>();
+        collider = GetComponent<Collider2D>();
         Use();
     }
 
@@ -47,12 +38,30 @@ public class EnemyMelee : MonoBehaviour, IEnemy
         }
 
         sprite.color = Color.white;
-        enemy.AttackWeapon(swipe, damage, range);
+        collider.enabled = true;
+
         Invoke(nameof(CleanUp), 0.25f);
     }
 
     private void CleanUp()
     {
         Destroy(gameObject);
+    }
+
+    private void OnTriggerEnter2D(Collider2D col)
+    {
+        Debug.Log(col.gameObject.name + " takes damage " + damage);
+        Destroy(gameObject);
+    }
+
+    public void SetEnemy(Enemy e)
+    {
+        enemy = e;
+        Weapon w = enemy.GetComponentInChildren<Weapon>();
+        if (w == null)
+            return;
+
+        transform.Translate(distance * w.transform.up);
+        w.HammerAttack(delay);
     }
 }

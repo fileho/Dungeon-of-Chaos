@@ -2,8 +2,20 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyProjectile : EnemyAttack
+public class Projectile : MonoBehaviour
 {
+    [SerializeField] private float damage = 10f;
+    public float speed = 200f;
+    [Tooltip("How fast should the projectile appear")]
+    public float delay = 0.5f;
+    [Tooltip("Should is go directly towards player?")]
+    [Range(0,1)]
+    public float offset = 0f;
+
+    [SerializeField] private float homingStrength = 0;
+
+
+
     private new Collider2D collider;
     private SpriteRenderer sprite;
     private Rigidbody2D rb;
@@ -14,6 +26,17 @@ public class EnemyProjectile : EnemyAttack
         sprite = GetComponent<SpriteRenderer>();
         rb = GetComponent<Rigidbody2D>();
         Use();
+    }
+
+    void FixedUpdate()
+    {
+        if (homingStrength == 0 && rb.velocity.magnitude < 0.01f)
+            return;
+
+        rb.drag = 0.5f;
+        Vector2 dir = Character.instance.transform.position - transform.position;
+        dir.Normalize();
+        rb.AddForce(homingStrength * Time.fixedDeltaTime * dir);
     }
 
     private void Use()
@@ -38,8 +61,11 @@ public class EnemyProjectile : EnemyAttack
         collider.enabled = true;
 
         Vector2 dir = Character.instance.transform.position - transform.position;
-        dir = dir.normalized;
-        rb.AddForce(200 * dir);
+        dir.Normalize();
+        dir += offset * Random.insideUnitCircle;
+        dir.Normalize();
+
+        rb.AddForce(speed * dir);
         Invoke(nameof(CleanUp), 10f);
     }
 
@@ -51,5 +77,6 @@ public class EnemyProjectile : EnemyAttack
     private void OnTriggerEnter2D(Collider2D col)
     {
         Debug.Log(col.gameObject.name + " takes damage " + damage);
+        Destroy(gameObject);
     }
 }

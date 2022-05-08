@@ -8,10 +8,12 @@ public class Weapon : MonoBehaviour
     [SerializeField] private float swipe = 10f;
     [SerializeField] private float dmg = 10f;
     [SerializeField] private float range = 1f;
+    [Range(0, 1)]
+    [SerializeField] private float rotationSpeed = 1f;
 
 
     private TrailRenderer trail;
-    private new Camera camera;
+
     private new BoxCollider2D collider;
     private bool attacking = false;
     private List<GameObject> hitEnemies;
@@ -19,7 +21,6 @@ public class Weapon : MonoBehaviour
     void Start()
     {
         hitEnemies = new List<GameObject>();
-        camera = Camera.main;
         trail = GetComponentInChildren<TrailRenderer>();
         collider = GetComponent<BoxCollider2D>();
         collider.enabled = false;
@@ -30,17 +31,21 @@ public class Weapon : MonoBehaviour
     {
         if (attacking)
             return;
-        Attack();
-        RotateWeapon();
         transform.localPosition = Vector3.back;
     }
 
-    private void Attack()
+    public void Attack()
     {
-        if (!Input.GetMouseButtonDown(0))
-            return;
+        Attack(swipe, dmg, range);
 
-        StartCoroutine(AttackAnimation());
+
+    }
+
+    public void Attack(float s, float d, float r)
+    {
+        if (attacking)
+            return;
+        StartCoroutine(AttackAnimation(s, d, r));
     }
 
 
@@ -49,20 +54,22 @@ public class Weapon : MonoBehaviour
         return dmg;
     }
 
-    private void RotateWeapon()
+    public void RotateWeapon(Vector2 target)
     {
-        Vector2 wp = camera.ScreenToWorldPoint(Input.mousePosition);
-        Vector2 dir = (wp - (Vector2)transform.position).normalized;
+        if (attacking)
+            return;
 
-        transform.up = Vector3.Lerp(transform.up, dir, 0.1f);
+        Vector2 dir = (target - (Vector2)transform.position).normalized;
+
+        transform.up = Vector3.Lerp(transform.up, dir, rotationSpeed * 0.1f);
     }
 
-    private IEnumerator AttackAnimation()
+    private IEnumerator AttackAnimation(float s, float d, float r)
     {
         // Setup
         attacking = true;
         Vector3 startPos = transform.localPosition;
-        Vector3 endPos = startPos + transform.up * range;
+        Vector3 endPos = startPos + transform.up * r;
         trail.gameObject.SetActive(true);
         collider.enabled = true;
         var rot = transform.localRotation;
@@ -78,14 +85,14 @@ public class Weapon : MonoBehaviour
 
             float setup = 0.2f;
             if (t < setup)
-                transform.localRotation = Quaternion.Lerp(rot, Quaternion.Euler(0, 0, rot.eulerAngles.z - swipe), t / setup);
+                transform.localRotation = Quaternion.Lerp(rot, Quaternion.Euler(0, 0, rot.eulerAngles.z - s), t / setup);
             else if (1 - t < setup)
-                transform.localRotation = Quaternion.Lerp(rot, Quaternion.Euler(0, 0, rot.eulerAngles.z + swipe), (1 - t) / setup);
+                transform.localRotation = Quaternion.Lerp(rot, Quaternion.Euler(0, 0, rot.eulerAngles.z + s), (1 - t) / setup);
             else
             {
                 transform.localRotation = Quaternion.Lerp(
-                    Quaternion.Euler(0, 0, rot.eulerAngles.z - swipe),
-                    Quaternion.Euler(0, 0, rot.eulerAngles.z + swipe), 
+                    Quaternion.Euler(0, 0, rot.eulerAngles.z - s),
+                    Quaternion.Euler(0, 0, rot.eulerAngles.z + s), 
                     (t - setup) / (1 - 2 * setup));
             }
             yield return null;
@@ -98,8 +105,45 @@ public class Weapon : MonoBehaviour
         attacking = false;
     }
 
+    public void HammerAttack(float duration)
+    {
+        StartCoroutine(ExecuteHammerAttack(duration));
+    }
+
+    private IEnumerator ExecuteHammerAttack(float duration)
+    {
+        float t = 0;
+
+        Vector2 startPoint = transform.up;
+
+        Vector2 endPoint = -transform.right;
+
+        float d = duration * 0.8f;
+
+        while (t < d)
+        {
+            t += Time.deltaTime;
+            transform.up = Vector2.Lerp(startPoint, endPoint, t / d);
+            yield return null;
+        }
+
+        t = 0;
+        d = duration * 0.2f;
+
+        while (t < d)
+        {
+            t += Time.deltaTime;
+            transform.up = Vector2.Lerp(endPoint, startPoint,t / d);
+            yield return null;
+        }
+    }
+
+
     private void OnTriggerEnter2D(Collider2D col)
     {
+        if (col.CompareTag("Player"))
+            Debug.Log("Player hit");
+
         if (!col.CompareTag("Enemy"))
             return;
         Enemy enemy = col.GetComponent<Enemy>();
