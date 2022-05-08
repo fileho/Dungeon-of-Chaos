@@ -3,29 +3,29 @@ using System.Collections.Generic;
 using System.Data;
 using UnityEngine;
 
-public class EnemyMelee : EnemyAttack
+public class EnemyMelee : MonoBehaviour, IEnemy
 {
-    private new Collider2D collider;
+    [SerializeField] private float swipe = 20f;
+    [SerializeField] private float damage = 10;
+    [SerializeField] private float range = 5;
+
+    [SerializeField] private float delay = 0.8f;
+
+
+
+    public void SetEnemy(Enemy e)
+    {
+        enemy = e;
+        transform.up = enemy.GetComponentInChildren<Weapon>().transform.up;
+    }
+
+    private Enemy enemy;
     private SpriteRenderer sprite;
-    private Rigidbody2D rb;
 
     void Start()
     {
-        collider = GetComponent<Collider2D>();
         sprite = GetComponent<SpriteRenderer>();
-        rb = GetComponent<Rigidbody2D>();
-
-        collider.enabled = false;
-
-        Rotate();
         Use();
-    }
-
-    private void Rotate()
-    {
-        Vector2 dir = Character.instance.transform.position - transform.position;
-
-        transform.up = dir;
     }
 
     private void Use()
@@ -46,8 +46,8 @@ public class EnemyMelee : EnemyAttack
             yield return null;
         }
 
-        collider.enabled = true;
         sprite.color = Color.white;
+        enemy.AttackWeapon(swipe, damage, range);
         Invoke(nameof(CleanUp), 0.25f);
     }
 
@@ -55,11 +55,4 @@ public class EnemyMelee : EnemyAttack
     {
         Destroy(gameObject);
     }
-
-    private void OnTriggerEnter2D(Collider2D col)
-    {
-        Debug.Log(col.gameObject.name + " takes damage " + damage);
-    }
-
-    
 }

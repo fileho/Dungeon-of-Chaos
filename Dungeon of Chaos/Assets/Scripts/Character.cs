@@ -8,12 +8,17 @@ public class Character : MonoBehaviour
     [SerializeField] private float movementSpeed = 3f;
     [SerializeField] private float dashSpeed = 8f;
 
+
     public static Character instance;
 
     private TrailRenderer trail;
-    
+    private Weapon weapon;
+    private new Camera camera;
+
     private Vector2 moveDir = Vector2.up;
     private bool dashing = false;
+
+    private bool stopDash = false;
 
     private void Awake()
     {
@@ -24,6 +29,8 @@ public class Character : MonoBehaviour
     {
         trail = transform.Find("Trail").GetComponent<TrailRenderer>();
         trail.enabled = false;
+        weapon = GetComponentInChildren<Weapon>();
+        camera = Camera.main;
     }
 
     void Update()
@@ -32,6 +39,7 @@ public class Character : MonoBehaviour
             return;
         Move();
         Dash();
+        Attack();
     }
 
     private void Dash()
@@ -39,7 +47,7 @@ public class Character : MonoBehaviour
         if (!Input.GetKeyDown(KeyCode.Space))
             return;
 
-        StartCoroutine(DashAnamation(moveDir));
+        StartCoroutine(DashAnimation(moveDir));
     }
 
     private void Move()
@@ -60,15 +68,27 @@ public class Character : MonoBehaviour
         transform.Translate(movementSpeed * Time.deltaTime * dir);
     }
 
-    private IEnumerator DashAnamation(Vector2 dir)
+    private void Attack()
+    {
+        Vector2 target = camera.ScreenToWorldPoint(Input.mousePosition);
+        weapon.RotateWeapon(target);
+
+        if (!Input.GetMouseButtonDown(0))
+            return;
+
+        weapon.Attack();
+    }
+
+    private IEnumerator DashAnimation(Vector2 dir)
     {
         trail.enabled = true;
         dashing = true;
+        stopDash = false;
 
         float duration = .4f;
 
         float t = 0;
-        while (t < duration)
+        while (t < duration && !stopDash)
         {
             transform.Translate(dashSpeed * Time.deltaTime * dir);
             t += Time.deltaTime;
@@ -78,5 +98,10 @@ public class Character : MonoBehaviour
         yield return new WaitForSeconds(0.1f);
         dashing = false;
         trail.enabled = false;
+    }
+
+    private void OnCollisionEnter2D(Collision2D col)
+    {
+        stopDash = true;
     }
 }
