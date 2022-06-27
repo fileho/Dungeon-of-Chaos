@@ -4,9 +4,12 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
+    [SerializeField] private float maxHP = 100f;
     [SerializeField] private float movementSpeed = 2f;
 
+    private float HP;
 
+    private Rigidbody2D rb;
     private EnemyAttack attack;
 
     private Weapon weapon;
@@ -17,15 +20,28 @@ public class Enemy : MonoBehaviour
     {
         weapon = GetComponentInChildren<Weapon>();
         attack = GetComponentInChildren<EnemyAttack>();
+        rb = GetComponent<Rigidbody2D>();
+
+        HP = maxHP;
     }
 
     void Update()
     {
         if (attacking)
             return;
-        Move();
         Attack();
         RotateWeapon();
+    }
+
+    private void FixedUpdate()
+    {
+        if (attacking)
+        {
+            // rb.velocity = Vector2.zero;
+            return;
+        }
+      
+        Move();
     }
 
     public void AttackWeapon(float swipe, float dmg, float range)
@@ -59,20 +75,31 @@ public class Enemy : MonoBehaviour
 
     private void Move()
     {
+        // TODO Add pathfinding
         Vector2 dir = (Character.instance.transform.position - transform.position).normalized;
-        transform.Translate(movementSpeed * Time.deltaTime * dir);
+        
+        rb.AddForce(movementSpeed * Time.fixedDeltaTime * 1000 * dir);
     }
 
 
     public void TakeDamage(float value)
     {
-        Debug.Log("AU " + value);
+        HP -= value;
+        if (HP <= 0)
+            Die();
 
-        Vector2 dir = Character.instance.transform.position - transform.position;
+        Vector2 dir = transform.position - Character.instance.transform.position;
+
+        rb.AddForce(dir * 300);
 
         Vector2 n = new Vector2(dir.y, -dir.x).normalized;
 
         StartCoroutine(TakeDamageAnimation(n));
+    }
+
+    private void Die()
+    {
+        Destroy(gameObject);
     }
 
     private IEnumerator TakeDamageAnimation(Vector2 dir)
@@ -82,14 +109,8 @@ public class Enemy : MonoBehaviour
         for (int i = 0; i < 4; i++)
         {
             float sign = (i & 0x1) * 2 - 1;
-
-            float time = 0;
-            while (time < duration)
-            {
-                time += Time.deltaTime;
-                transform.Translate(sign * 2 * Time.deltaTime * dir);
-                yield return null;
-            }
+            rb.AddForce(sign * 200 * dir);
+            yield return new WaitForSeconds(duration);
         }
     }
 }

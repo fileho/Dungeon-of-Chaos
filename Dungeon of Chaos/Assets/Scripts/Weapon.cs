@@ -8,6 +8,7 @@ public class Weapon : MonoBehaviour
     [SerializeField] private float swipe = 10f;
     [SerializeField] private float dmg = 10f;
     [SerializeField] private float range = 1f;
+    [SerializeField] private float staminaCost = 20f;
     [Range(0, 1)]
     [SerializeField] private float rotationSpeed = 1f;
 
@@ -37,8 +38,6 @@ public class Weapon : MonoBehaviour
     public void Attack()
     {
         Attack(swipe, dmg, range);
-
-
     }
 
     public void Attack(float s, float d, float r)
@@ -105,6 +104,11 @@ public class Weapon : MonoBehaviour
         attacking = false;
     }
 
+    public float GetStaminaCost()
+    {
+        return staminaCost;
+    }
+
     public void HammerAttack(float duration)
     {
         StartCoroutine(ExecuteHammerAttack(duration));
@@ -142,7 +146,10 @@ public class Weapon : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D col)
     {
         if (col.CompareTag("Player"))
-            Debug.Log("Player hit");
+        {
+            Character.instance.TakeDamage(DealDamage());
+            return;
+        }
 
         if (!col.CompareTag("Enemy"))
             return;

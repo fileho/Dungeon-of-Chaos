@@ -50,7 +50,7 @@ public class EnemyAoe : MonoBehaviour, IEnemy
 
     private void OnTriggerEnter2D(Collider2D col)
     {
-        Debug.Log(col.gameObject.name + " takes damage " + damage);
+        Character.instance.TakeDamage(damage);
         Destroy(gameObject);
     }
 
