@@ -76,7 +76,10 @@ public class Projectile : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D col)
     {
-        Debug.Log(col.gameObject.name + " takes damage " + damage);
+        if (col.CompareTag("Player"))
+        {
+            Character.instance.TakeDamage(damage);
+        }
         Destroy(gameObject);
     }
 }
