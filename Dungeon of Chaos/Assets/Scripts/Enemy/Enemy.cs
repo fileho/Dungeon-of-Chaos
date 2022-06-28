@@ -88,9 +88,9 @@ public class Enemy : MonoBehaviour
         if (HP <= 0)
             Die();
 
-        Vector2 dir = transform.position - Character.instance.transform.position;
+        Vector2 dir = (transform.position - Character.instance.transform.position).normalized;
 
-        rb.AddForce(dir * 300);
+        rb.AddForce(dir * 500);
 
         Vector2 n = new Vector2(dir.y, -dir.x).normalized;
 

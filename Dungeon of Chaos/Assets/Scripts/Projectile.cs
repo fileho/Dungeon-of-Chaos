@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
 public class Projectile : MonoBehaviour
@@ -14,11 +15,12 @@ public class Projectile : MonoBehaviour
 
     [SerializeField] private float homingStrength = 0;
 
-
+    private Transform caster;
 
     private new Collider2D collider;
     private SpriteRenderer sprite;
     private Rigidbody2D rb;
+
 
     void Start()
     {
@@ -30,13 +32,20 @@ public class Projectile : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (homingStrength == 0 && rb.velocity.magnitude < 0.01f)
+        if (homingStrength == 0)
             return;
 
         rb.drag = 0.5f;
         Vector2 dir = Character.instance.transform.position - transform.position;
         dir.Normalize();
         rb.AddForce(homingStrength * Time.fixedDeltaTime * dir);
+    }
+
+    public void SetStats(float damage, float speed, Transform caster)
+    {
+        this.damage = damage;
+        this.speed = speed;
+        this.caster = caster;
     }
 
     private void Use()
@@ -54,18 +63,25 @@ public class Projectile : MonoBehaviour
             float t = time / delay;
             sprite.color = Color.Lerp(Color.yellow, new Color(1f, 0.5f, 0f), t);
             transform.localScale = Vector3.Lerp(Vector3.zero, Vector3.one, t);
+            // move it with the player
+            if (caster)
+                transform.position = caster.position;
 
             yield return null;
         }
 
         collider.enabled = true;
 
-        Vector2 dir = Character.instance.transform.position - transform.position;
+        int enemyLayer = LayerMask.NameToLayer("EnemyAttack");
+        Vector2 goalPos = gameObject.layer == enemyLayer
+            ? Character.instance.transform.position
+            : Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        Vector2 dir = goalPos - (Vector2)transform.position;
         dir.Normalize();
         dir += offset * Random.insideUnitCircle;
         dir.Normalize();
 
-        rb.AddForce(speed * dir);
+        rb.AddForce(100 * speed * dir);
         Invoke(nameof(CleanUp), 10f);
     }
 
@@ -80,6 +96,12 @@ public class Projectile : MonoBehaviour
         {
             Character.instance.TakeDamage(damage);
         }
+
+        if (col.CompareTag("Enemy"))
+        {
+            col.GetComponent<Enemy>().TakeDamage(damage);
+        }
+
         Destroy(gameObject);
     }
 }
