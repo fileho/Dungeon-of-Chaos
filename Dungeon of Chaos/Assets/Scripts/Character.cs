@@ -1,9 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditorInternal;
 using UnityEngine;
-using UnityEngine.UIElements;
 
 public class Character : MonoBehaviour
 {
@@ -12,24 +10,22 @@ public class Character : MonoBehaviour
     [SerializeField] private float maxStamina;
 
     [SerializeField] private float movementSpeed = 3f;
-    [SerializeField] private float dashSpeed = 8f;
 
     private float hp;
     private float mana;
     private float stamina;
 
+    [SerializeField] private List<Skill> skills;
+    [SerializeField] private Dash dash;
+
 
     public static Character instance;
-
-    private TrailRenderer trail;
     private Weapon weapon;
     private new Camera camera;
     private Rigidbody2D rb;
+    private SpriteRenderer sprite;
 
     private Vector2 moveDir = Vector2.up;
-    private bool dashing = false;
-
-    private bool stopDash = false;
 
     private void Awake()
     {
@@ -38,11 +34,11 @@ public class Character : MonoBehaviour
 
     private void Start()
     {
-        trail = transform.Find("Trail").GetComponent<TrailRenderer>();
-        trail.enabled = false;
+        transform.Find("Trail").GetComponent<TrailRenderer>().enabled = false;
         weapon = GetComponentInChildren<Weapon>();
         camera = Camera.main;
         rb = GetComponent<Rigidbody2D>();
+        sprite = GetComponent<SpriteRenderer>();
 
         hp = maxHP;
         UpdateHealthBar();
@@ -56,12 +52,27 @@ public class Character : MonoBehaviour
     {
         RegenerateStamina();
         Dash();
+        RotateWeapon();
         Attack();
+        FlipSprite();
+        UseSkills();
+    }
+
+    private void UseSkills()
+    {
+        if (Input.GetKeyDown(KeyCode.Q))
+        {
+            skills[0].GetComponent<IActiveSkill>().Use();
+        }
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            skills[1].GetComponent<IActiveSkill>().Use();
+        }
     }
 
     private void FixedUpdate()
     {
-        if (dashing)
+        if (dash.IsDashing())
             return;
         Move();
     }
@@ -73,19 +84,25 @@ public class Character : MonoBehaviour
         UpdateStaminaBar();
     }
 
+    private void FlipSprite()
+    {
+        if (rb.velocity.x < 0.01f)
+            sprite.flipX = false;
+        if (rb.velocity.x > 0.01f)
+            sprite.flipX = true;
+    }
+
     private void Dash()
     {
-        const float dashCost = 20f;
-
-        if (!Input.GetKeyDown(KeyCode.Space))
+        if (!Input.GetKeyDown(KeyCode.Space) || dash.IsDashing())
             return;
 
+        float dashCost = dash.Cost();
         if (stamina < dashCost)
             return;
 
         stamina -= dashCost;
-
-        StartCoroutine(DashAnimation(moveDir));
+        dash.StartDash(moveDir);
     }
 
     private void Move()
@@ -107,11 +124,14 @@ public class Character : MonoBehaviour
         rb.AddForce(movementSpeed * Time.fixedDeltaTime * 1000 * dir);
     }
 
-    private void Attack()
+    private void RotateWeapon()
     {
         Vector2 target = camera.ScreenToWorldPoint(Input.mousePosition);
         weapon.RotateWeapon(target);
+    }
 
+    private void Attack()
+    {
         if (!Input.GetMouseButtonDown(0))
             return;
 
@@ -133,6 +153,13 @@ public class Character : MonoBehaviour
             Die();
     }
 
+    public void RestoreHealth(float value)
+    {
+        hp += value;
+        hp = Mathf.Min(hp, maxHP);
+        UpdateHealthBar();
+    }
+
     private void Die()
     {
         // TODO death screen + respawn
@@ -140,29 +167,15 @@ public class Character : MonoBehaviour
         UpdateHealthBar();
     }
 
-
-    private IEnumerator DashAnimation(Vector2 dir)
+    public void ConsumeMana(float value)
     {
-        trail.enabled = true;
-        dashing = true;
-        stopDash = false;
+        mana -= value;
+        UpdateManaBar();
+    }
 
-        rb.AddForce(dashSpeed * 100 * dir);
-        rb.drag = 1;
-
-        float duration = .4f;
-
-        float t = 0;
-        while (t < duration && !stopDash)
-        {
-            t += Time.deltaTime;
-            yield return null;
-        }
-
-        yield return new WaitForSeconds(0.1f);
-        rb.drag = 10;
-        dashing = false;
-        trail.enabled = false;
+    public float GetMana()
+    {
+        return mana;
     }
 
     private void UpdateHealthBar()
@@ -183,6 +196,6 @@ public class Character : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D col)
     {
-        stopDash = true;
+        dash.OnCollisionEnter2D(col);
     }
 }

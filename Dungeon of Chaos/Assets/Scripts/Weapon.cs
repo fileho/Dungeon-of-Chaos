@@ -15,6 +15,7 @@ public class Weapon : MonoBehaviour
 
     private TrailRenderer trail;
 
+    private SpriteRenderer sprite;
     private new BoxCollider2D collider;
     private bool attacking = false;
     private List<GameObject> hitEnemies;
@@ -23,6 +24,7 @@ public class Weapon : MonoBehaviour
     {
         hitEnemies = new List<GameObject>();
         trail = GetComponentInChildren<TrailRenderer>();
+        sprite = GetComponent<SpriteRenderer>();
         collider = GetComponent<BoxCollider2D>();
         collider.enabled = false;
         trail.gameObject.SetActive(false);
@@ -61,6 +63,16 @@ public class Weapon : MonoBehaviour
         Vector2 dir = (target - (Vector2)transform.position).normalized;
 
         transform.up = Vector3.Lerp(transform.up, dir, rotationSpeed * 0.1f);
+
+        FlipWeapon();
+    }
+
+    private void FlipWeapon()
+    {
+        float d = Vector3.Dot(transform.up, Vector3.right);
+        bool flip = d < 0;
+
+        sprite.flipX = flip;
     }
 
     private IEnumerator AttackAnimation(float s, float d, float r)
