@@ -10,7 +10,7 @@ public class HealSkill : Skill, IActiveSkill
 
     public override bool CanUse()
     {
-        return Character.instance.GetMana() >= manaCost;
+        return Character.instance.stats.HasMana(manaCost);
     }
 
     public void Use()
@@ -18,9 +18,8 @@ public class HealSkill : Skill, IActiveSkill
         if (!CanUse())
             return;
 
-        Character.instance.ConsumeMana(manaCost);
-
-        Character.instance.RestoreHealth(healAmount);
+        Character.instance.stats.ConsumeMana(manaCost);
+        Character.instance.stats.RegenerateHealth(healAmount);
 
         CreateEffect();
     }

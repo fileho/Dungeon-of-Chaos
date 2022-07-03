@@ -2,14 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(menuName = "SO/Dash")]
+[CreateAssetMenu(menuName = "SO/Dash/Dash")]
 public class Dash : ScriptableObject
 {
     [SerializeField] protected float dashSpeed;
     [SerializeField] protected float staminaCost;
 
-    protected bool dashing;
-    protected bool stopDash;
+    protected bool dashing = false;
+    protected bool stopDash = false;
 
     protected Rigidbody2D rb;
     protected Character character;
@@ -62,7 +62,11 @@ public class Dash : ScriptableObject
         trail.enabled = false;
     }
 
-    
+    public void ResetDash()
+    {
+        dashing = false;
+        stopDash = false;
+    }
 
     public virtual void OnCollisionEnter2D(Collision2D col)
     {

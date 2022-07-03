@@ -25,6 +25,10 @@ public class EnemyMelee : MonoBehaviour, IEnemy
     void Start()
     {
         sprite = GetComponent<SpriteRenderer>();
+        var p = transform.position;
+        p.z += 1;
+        transform.position = p;
+
         Use();
     }
 
@@ -47,7 +51,6 @@ public class EnemyMelee : MonoBehaviour, IEnemy
         }
 
         sprite.color = Color.white;
-        enemy.AttackWeapon(swipe, damage, range);
         Invoke(nameof(CleanUp), 0.25f);
     }
 

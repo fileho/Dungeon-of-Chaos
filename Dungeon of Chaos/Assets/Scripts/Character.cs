@@ -3,27 +3,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Character : MonoBehaviour
+public class Character : Unit
 {
-    [SerializeField] private float maxHP;
-    [SerializeField] private float maxMana;
-    [SerializeField] private float maxStamina;
-
-    [SerializeField] private float movementSpeed = 3f;
-
-    private float hp;
-    private float mana;
-    private float stamina;
-
     [SerializeField] private List<Skill> skills;
     [SerializeField] private Dash dash;
 
 
     public static Character instance;
-    private Weapon weapon;
     private new Camera camera;
-    private Rigidbody2D rb;
-    private SpriteRenderer sprite;
 
     private Vector2 moveDir = Vector2.up;
 
@@ -32,20 +19,27 @@ public class Character : MonoBehaviour
         instance = this;
     }
 
-    private void Start()
+    protected override void Init()
     {
         transform.Find("Trail").GetComponent<TrailRenderer>().enabled = false;
-        weapon = GetComponentInChildren<Weapon>();
         camera = Camera.main;
-        rb = GetComponent<Rigidbody2D>();
-        sprite = GetComponent<SpriteRenderer>();
 
-        hp = maxHP;
+        dash.ResetDash();
+        stats.ResetStats();
         UpdateHealthBar();
-        mana = maxMana;
         UpdateManaBar();
-        stamina = maxStamina;
         UpdateStaminaBar();
+    }
+
+    protected override void TakeDamageSideEffect()
+    {
+        UpdateHealthBar();
+    }
+
+    protected override void Die()
+    {
+        // TODO respawn logic
+        stats.ResetStats();
     }
 
     void Update()
@@ -68,6 +62,7 @@ public class Character : MonoBehaviour
         {
             skills[1].GetComponent<IActiveSkill>().Use();
         }
+        UpdateManaBar();
     }
 
     private void FixedUpdate()
@@ -79,17 +74,16 @@ public class Character : MonoBehaviour
 
     private void RegenerateStamina()
     {
-        stamina += 20 * Time.deltaTime;
-        stamina = Math.Min(stamina, maxStamina);
+        stats.RegenerateStamina(20 * Time.deltaTime);
         UpdateStaminaBar();
     }
 
     private void FlipSprite()
     {
         if (rb.velocity.x < 0.01f)
-            sprite.flipX = false;
-        if (rb.velocity.x > 0.01f)
             sprite.flipX = true;
+        if (rb.velocity.x > 0.01f)
+            sprite.flipX = false;
     }
 
     private void Dash()
@@ -98,10 +92,10 @@ public class Character : MonoBehaviour
             return;
 
         float dashCost = dash.Cost();
-        if (stamina < dashCost)
+        if (!stats.HasStamina(dashCost))
             return;
 
-        stamina -= dashCost;
+        stats.ConsumeStamina(dashCost);
         dash.StartDash(moveDir);
     }
 
@@ -121,7 +115,7 @@ public class Character : MonoBehaviour
         if (dir != Vector2.zero)
             moveDir = dir;
 
-        rb.AddForce(movementSpeed * Time.fixedDeltaTime * 1000 * dir);
+        rb.AddForce(stats.MovementSpeed() * Time.fixedDeltaTime * 1000 * dir);
     }
 
     private void RotateWeapon()
@@ -132,64 +126,31 @@ public class Character : MonoBehaviour
 
     private void Attack()
     {
-        if (!Input.GetMouseButtonDown(0))
+        if (!Input.GetMouseButtonDown(0) || weapon.IsAttacking())
             return;
 
-        if (stamina < weapon.GetStaminaCost())
+        float staminaCost = weapon.GetStaminaCost();
+        if (!stats.HasStamina(staminaCost))
             return;
 
-        stamina -= weapon.GetStaminaCost();
+        stats.ConsumeStamina(staminaCost);
         UpdateStaminaBar();
 
         weapon.Attack();
     }
 
-    public void TakeDamage(float value)
-    {
-        hp -= value;
-        UpdateHealthBar();
-
-        if (hp <= 0)
-            Die();
-    }
-
-    public void RestoreHealth(float value)
-    {
-        hp += value;
-        hp = Mathf.Min(hp, maxHP);
-        UpdateHealthBar();
-    }
-
-    private void Die()
-    {
-        // TODO death screen + respawn
-        hp = maxHP;
-        UpdateHealthBar();
-    }
-
-    public void ConsumeMana(float value)
-    {
-        mana -= value;
-        UpdateManaBar();
-    }
-
-    public float GetMana()
-    {
-        return mana;
-    }
-
     private void UpdateHealthBar()
     {
-        UIManager.instance.SetHealthBar(hp / maxHP);
+        UIManager.instance.SetHealthBar(stats.HpRatio());
     }
     
     private void UpdateManaBar()
     {
-        UIManager.instance.SetManaBar(mana / maxMana);
+        UIManager.instance.SetManaBar(stats.ManaRatio());
     }
     private void UpdateStaminaBar()
     {
-        UIManager.instance.SetStaminaBar(stamina / maxStamina);
+        UIManager.instance.SetStaminaBar(stats.StaminaRatio());
     }
 
 

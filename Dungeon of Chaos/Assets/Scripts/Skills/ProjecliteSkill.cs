@@ -11,7 +11,7 @@ public class ProjecliteSkill : Skill, IActiveSkill
 
     public override bool CanUse()
     {
-        return Character.instance.GetMana() >= manaCost;
+        return Character.instance.stats.HasMana(manaCost);
     }
 
     public void Use()
@@ -19,7 +19,7 @@ public class ProjecliteSkill : Skill, IActiveSkill
         if (!CanUse())
             return;
 
-        Character.instance.ConsumeMana(manaCost);
+        Character.instance.stats.ConsumeMana(manaCost);
 
         CreateProjectile();
     }
