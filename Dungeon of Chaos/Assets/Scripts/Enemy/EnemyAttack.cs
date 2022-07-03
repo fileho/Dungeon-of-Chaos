@@ -56,7 +56,7 @@ public class EnemyAttack : MonoBehaviour
     {
         for (int i = 0; i < attackCount; i++)
         {
-            var o = Instantiate(attack, transform.position, transform.rotation);
+            var o = Instantiate(attack, transform.position, transform.rotation, enemy.transform);
 
             IEnemy ie = o.GetComponent<IEnemy>();
             ie?.SetEnemy(enemy);

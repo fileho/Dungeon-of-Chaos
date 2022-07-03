@@ -16,6 +16,11 @@ public class EnemyAoe : MonoBehaviour, IEnemy
     {
         sprite = GetComponent<SpriteRenderer>();
         collider = GetComponent<Collider2D>();
+
+        var p = transform.position;
+        p.z += 1;
+        transform.position = p;
+
         Use();
     }
 

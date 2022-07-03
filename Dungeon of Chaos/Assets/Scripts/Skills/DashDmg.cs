@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 
-[CreateAssetMenu(menuName = "SO/Dash dmg")]
+[CreateAssetMenu(menuName = "SO/Dash/Dash dmg")]
 public class DashDmg : Dash
 {
     [SerializeField] protected float damage;

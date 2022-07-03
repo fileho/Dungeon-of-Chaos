@@ -1,31 +1,38 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using UnityEngine;
 
-public class Enemy : MonoBehaviour
+public class Enemy : Unit
 {
-    [SerializeField] private float maxHP = 100f;
-    [SerializeField] private float movementSpeed = 2f;
-
-    private float HP;
-
-    private Rigidbody2D rb;
     private EnemyAttack attack;
-
-    private Weapon weapon;
 
     private bool attacking = false;
 
-    private void Start()
+    protected override void Init()
     {
-        weapon = GetComponentInChildren<Weapon>();
+        CreateUniqueStats();
         attack = GetComponentInChildren<EnemyAttack>();
-        rb = GetComponent<Rigidbody2D>();
-
-        HP = maxHP;
     }
 
-    void Update()
+    protected override void TakeDamageSideEffect()
+    {
+        Vector2 dir = (transform.position - Character.instance.transform.position).normalized;
+        rb.AddForce(dir * 500);
+        Vector2 n = new Vector2(dir.y, -dir.x).normalized;
+
+        StartCoroutine(TakeDamageAnimation(n));
+    }
+
+    // Each enemy has its unique stats instance so it can be modified
+    private void CreateUniqueStats()
+    {
+        stats = Instantiate(stats);
+        stats.ResetStats();
+    }
+
+
+    private void Update()
     {
         if (attacking)
             return;
@@ -37,7 +44,6 @@ public class Enemy : MonoBehaviour
     {
         if (attacking)
         {
-            // rb.velocity = Vector2.zero;
             return;
         }
       
@@ -62,6 +68,7 @@ public class Enemy : MonoBehaviour
         if (!attack.CanUse(transform.position))
             return;
 
+
         attacking = true;
         attack.Use();
 
@@ -78,29 +85,9 @@ public class Enemy : MonoBehaviour
         // TODO Add pathfinding
         Vector2 dir = (Character.instance.transform.position - transform.position).normalized;
         
-        rb.AddForce(movementSpeed * Time.fixedDeltaTime * 1000 * dir);
+        rb.AddForce(stats.MovementSpeed() * Time.fixedDeltaTime * 1000 * dir);
     }
 
-
-    public void TakeDamage(float value)
-    {
-        HP -= value;
-        if (HP <= 0)
-            Die();
-
-        Vector2 dir = (transform.position - Character.instance.transform.position).normalized;
-
-        rb.AddForce(dir * 500);
-
-        Vector2 n = new Vector2(dir.y, -dir.x).normalized;
-
-        StartCoroutine(TakeDamageAnimation(n));
-    }
-
-    private void Die()
-    {
-        Destroy(gameObject);
-    }
 
     private IEnumerator TakeDamageAnimation(Vector2 dir)
     {

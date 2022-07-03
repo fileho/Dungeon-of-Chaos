@@ -154,6 +154,11 @@ public class Weapon : MonoBehaviour
         }
     }
 
+    public bool IsAttacking()
+    {
+        return attacking;
+    }
+
 
     private void OnTriggerEnter2D(Collider2D col)
     {
@@ -170,5 +175,10 @@ public class Weapon : MonoBehaviour
             return;
         hitEnemies.Add(enemy.gameObject);
         enemy.TakeDamage(DealDamage());
+    }
+
+    public void SetAttacking(bool value)
+    {
+        attacking = value;
     }
 }
