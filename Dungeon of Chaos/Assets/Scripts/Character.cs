@@ -80,10 +80,22 @@ public class Character : Unit
 
     private void FlipSprite()
     {
-        if (rb.velocity.x < 0.01f)
-            sprite.flipX = true;
-        if (rb.velocity.x > 0.01f)
-            sprite.flipX = false;
+        if (weapon.IsAttacking())
+            return;
+
+        Vector2 dir = camera.ScreenToWorldPoint(Input.mousePosition) - transform.position;
+
+        if (dir.x > 0.01f)
+            transform.localScale = new Vector3(-1, 1, 1);
+        else if (dir.x < -0.01f)
+            transform.localScale = Vector3.one;
+
+
+
+        // if (rb.velocity.x < -0.01f)
+        //     sprite.flipX = true;
+        // if (rb.velocity.x > 0.01f)
+        //     sprite.flipX = false;
     }
 
     private void Dash()
