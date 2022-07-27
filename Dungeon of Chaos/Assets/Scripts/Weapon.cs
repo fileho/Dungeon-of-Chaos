@@ -11,31 +11,25 @@ public class Weapon : MonoBehaviour
     [SerializeField] private float staminaCost = 20f;
     [Range(0, 1)]
     [SerializeField] private float rotationSpeed = 1f;
+    [Tooltip("Initial offset z angle for weapon to point right")]
+    [SerializeField] private float angleOffset = 0f;
 
 
     private TrailRenderer trail;
-
-    private SpriteRenderer sprite;
     private new BoxCollider2D collider;
     private bool attacking = false;
-    private List<GameObject> hitEnemies;
+    private List<GameObject> hitUnits;
 
     void Start()
     {
-        hitEnemies = new List<GameObject>();
+        hitUnits = new List<GameObject>();
         trail = GetComponentInChildren<TrailRenderer>();
-        sprite = GetComponent<SpriteRenderer>();
-        collider = GetComponent<BoxCollider2D>();
+        // sprite = GetComponent<SpriteRenderer>();
+        collider = GetComponentInChildren<BoxCollider2D>();
         collider.enabled = false;
         trail.gameObject.SetActive(false);
     }
 
-    void Update()
-    {
-        if (attacking)
-            return;
-        transform.localPosition = Vector3.back;
-    }
 
     public void Attack()
     {
@@ -62,17 +56,31 @@ public class Weapon : MonoBehaviour
 
         Vector2 dir = (target - (Vector2)transform.position).normalized;
 
-        transform.up = Vector3.Lerp(transform.up, dir, rotationSpeed * 0.1f);
+        if (transform.lossyScale.x > 0)
+            dir *= -1;
 
-        FlipWeapon();
+
+        Vector3 rotated = Quaternion.Euler(0, 0, 90) * dir;
+
+        var q = Quaternion.LookRotation(Vector3.forward, rotated);
+
+        var e = q.eulerAngles;
+        e.z += transform.lossyScale.x > 0 ? - angleOffset : angleOffset;
+
+        transform.rotation = Quaternion.Euler(e);
     }
 
-    private void FlipWeapon()
-    {
-        float d = Vector3.Dot(transform.up, Vector3.right);
-        bool flip = d < 0;
 
-        sprite.flipX = flip;
+    private Vector3 GetForwardDirection()
+    {
+        float dir = transform.lossyScale.x > 0 ? 1 : -1;
+
+        float a =  angleOffset + transform.rotation.eulerAngles.z * dir;
+        a *= Mathf.Deg2Rad;
+        // Vector3.R
+
+
+        return new Vector3(Mathf.Cos(a), Mathf.Sin(a), 0);
     }
 
     private IEnumerator AttackAnimation(float s, float d, float r)
@@ -80,11 +88,11 @@ public class Weapon : MonoBehaviour
         // Setup
         attacking = true;
         Vector3 startPos = transform.localPosition;
-        Vector3 endPos = startPos + transform.up * r;
+        Vector3 endPos = startPos - GetForwardDirection() * r;
         trail.gameObject.SetActive(true);
         collider.enabled = true;
         var rot = transform.localRotation;
-        hitEnemies.Clear();
+        hitUnits.Clear();
 
         float time = 0;
         float duration = .6f;
@@ -133,6 +141,7 @@ public class Weapon : MonoBehaviour
         Vector2 startPoint = transform.up;
 
         Vector2 endPoint = -transform.right;
+        hitUnits.Clear();
 
         float d = duration * 0.8f;
 
@@ -159,23 +168,25 @@ public class Weapon : MonoBehaviour
         return attacking;
     }
 
-
-    private void OnTriggerEnter2D(Collider2D col)
+    public void PlayerHit()
     {
-        if (col.CompareTag("Player"))
-        {
-            Character.instance.TakeDamage(DealDamage());
+        if (hitUnits.Contains(Character.instance.gameObject))
             return;
-        }
 
-        if (!col.CompareTag("Enemy"))
+        hitUnits.Add(Character.instance.gameObject);
+
+        Character.instance.TakeDamage(DealDamage());
+    }
+
+    public void EnemyHit(Enemy enemy)
+    {
+        if (hitUnits.Contains(enemy.gameObject))
             return;
-        Enemy enemy = col.GetComponent<Enemy>();
-        if (hitEnemies.Contains(enemy.gameObject))
-            return;
-        hitEnemies.Add(enemy.gameObject);
+        hitUnits.Add(enemy.gameObject);
         enemy.TakeDamage(DealDamage());
     }
+
+
 
     public void SetAttacking(bool value)
     {

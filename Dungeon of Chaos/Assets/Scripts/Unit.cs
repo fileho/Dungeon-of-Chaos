@@ -14,7 +14,7 @@ public class Unit : MonoBehaviour
 
     protected void Start()
     {
-        sprite = GetComponent<SpriteRenderer>();
+        sprite = GetComponentInChildren<SpriteRenderer>();
         rb = GetComponent<Rigidbody2D>();
         weapon = GetComponentInChildren<Weapon>();
 
