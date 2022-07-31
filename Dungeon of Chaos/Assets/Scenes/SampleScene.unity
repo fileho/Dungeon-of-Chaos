@@ -335,6 +335,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   stats: {fileID: 11400000, guid: edd8ebbaec4fc7d45816454a4ef7d31c, type: 2}
+  movement: {fileID: 11400000, guid: 83dc2227213629241955f333461dff43, type: 2}
+  effects: {fileID: 11400000, guid: 105ea18b6c69cb14b93d27f80a075a5d, type: 2}
   skills:
   - {fileID: 1554472596}
   - {fileID: 8066123}
@@ -600,7 +602,6 @@ MonoBehaviour:
   dmg: 10
   range: 1
   staminaCost: 20
-  rotationSpeed: 0.5
   angleOffset: -90
 --- !u!212 &138383223
 SpriteRenderer:
@@ -1089,7 +1090,6 @@ MonoBehaviour:
   dmg: 10
   range: 1.2
   staminaCost: 20
-  rotationSpeed: 1
   angleOffset: 35
 --- !u!212 &518659937
 SpriteRenderer:
@@ -1778,7 +1778,6 @@ MonoBehaviour:
   dmg: 10
   range: 1
   staminaCost: 20
-  rotationSpeed: 0.5
   angleOffset: -90
 --- !u!212 &671002663
 SpriteRenderer:
@@ -2181,7 +2180,6 @@ MonoBehaviour:
   dmg: 10
   range: 1
   staminaCost: 20
-  rotationSpeed: 0.5
   angleOffset: -90
 --- !u!212 &844717852
 SpriteRenderer:
@@ -2481,10 +2479,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 911041928}
+  - component: {fileID: 911041924}
   - component: {fileID: 911041927}
   - component: {fileID: 911041926}
   - component: {fileID: 911041925}
-  - component: {fileID: 911041924}
   m_Layer: 8
   m_Name: Enemy
   m_TagString: Enemy
@@ -2505,6 +2503,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   stats: {fileID: 11400000, guid: 8de6aac91f1482043b659913e862caac, type: 2}
+  movement: {fileID: 11400000, guid: 2a1e0ff95ed4b814db5f1624832232f4, type: 2}
+  effects: {fileID: 11400000, guid: b8c2e379a823a5f4a907481e41277e70, type: 2}
 --- !u!50 &911041925
 Rigidbody2D:
   serializedVersion: 4
@@ -2902,10 +2902,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 990356816}
+  - component: {fileID: 990356812}
   - component: {fileID: 990356815}
   - component: {fileID: 990356814}
   - component: {fileID: 990356813}
-  - component: {fileID: 990356812}
   m_Layer: 8
   m_Name: MeleeEnemy
   m_TagString: Enemy
@@ -2926,6 +2926,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   stats: {fileID: 11400000, guid: 8de6aac91f1482043b659913e862caac, type: 2}
+  movement: {fileID: 11400000, guid: 2a1e0ff95ed4b814db5f1624832232f4, type: 2}
+  effects: {fileID: 11400000, guid: b8c2e379a823a5f4a907481e41277e70, type: 2}
 --- !u!50 &990356813
 Rigidbody2D:
   serializedVersion: 4
@@ -3138,10 +3140,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1052089111}
+  - component: {fileID: 1052089107}
   - component: {fileID: 1052089110}
   - component: {fileID: 1052089109}
   - component: {fileID: 1052089108}
-  - component: {fileID: 1052089107}
   m_Layer: 8
   m_Name: MeleeEnemy (1)
   m_TagString: Enemy
@@ -3162,6 +3164,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   stats: {fileID: 11400000, guid: 8de6aac91f1482043b659913e862caac, type: 2}
+  movement: {fileID: 11400000, guid: 2a1e0ff95ed4b814db5f1624832232f4, type: 2}
+  effects: {fileID: 11400000, guid: b8c2e379a823a5f4a907481e41277e70, type: 2}
 --- !u!50 &1052089108
 Rigidbody2D:
   serializedVersion: 4

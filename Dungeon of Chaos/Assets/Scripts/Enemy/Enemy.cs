@@ -15,15 +15,6 @@ public class Enemy : Unit
         attack = GetComponentInChildren<EnemyAttack>();
     }
 
-    protected override void TakeDamageSideEffect()
-    {
-        Vector2 dir = (transform.position - Character.instance.transform.position).normalized;
-        rb.AddForce(dir * 500);
-        Vector2 n = new Vector2(dir.y, -dir.x).normalized;
-
-        StartCoroutine(TakeDamageAnimation(n));
-    }
-
     // Each enemy has its unique stats instance so it can be modified
     private void CreateUniqueStats()
     {
@@ -82,22 +73,6 @@ public class Enemy : Unit
 
     private void Move()
     {
-        // TODO Add pathfinding
-        Vector2 dir = (Character.instance.transform.position - transform.position).normalized;
-        
-        rb.AddForce(stats.MovementSpeed() * Time.fixedDeltaTime * 1000 * dir);
-    }
-
-
-    private IEnumerator TakeDamageAnimation(Vector2 dir)
-    {
-        float duration = 0.15f;
-
-        for (int i = 0; i < 4; i++)
-        {
-            float sign = (i & 0x1) * 2 - 1;
-            rb.AddForce(sign * 200 * dir);
-            yield return new WaitForSeconds(duration);
-        }
+        movement.Move();
     }
 }
