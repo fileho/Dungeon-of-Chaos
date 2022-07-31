@@ -337,6 +337,7 @@ MonoBehaviour:
   stats: {fileID: 11400000, guid: edd8ebbaec4fc7d45816454a4ef7d31c, type: 2}
   movement: {fileID: 11400000, guid: 83dc2227213629241955f333461dff43, type: 2}
   effects: {fileID: 11400000, guid: 105ea18b6c69cb14b93d27f80a075a5d, type: 2}
+  bars: {fileID: 11400000, guid: 22f29cc90695c74488bd6904cf777211, type: 2}
   skills:
   - {fileID: 1554472596}
   - {fileID: 8066123}
@@ -2505,6 +2506,7 @@ MonoBehaviour:
   stats: {fileID: 11400000, guid: 8de6aac91f1482043b659913e862caac, type: 2}
   movement: {fileID: 11400000, guid: 2a1e0ff95ed4b814db5f1624832232f4, type: 2}
   effects: {fileID: 11400000, guid: b8c2e379a823a5f4a907481e41277e70, type: 2}
+  bars: {fileID: 11400000, guid: 0221322a962978542a4599e9d2390aec, type: 2}
 --- !u!50 &911041925
 Rigidbody2D:
   serializedVersion: 4
@@ -2928,6 +2930,7 @@ MonoBehaviour:
   stats: {fileID: 11400000, guid: 8de6aac91f1482043b659913e862caac, type: 2}
   movement: {fileID: 11400000, guid: 2a1e0ff95ed4b814db5f1624832232f4, type: 2}
   effects: {fileID: 11400000, guid: b8c2e379a823a5f4a907481e41277e70, type: 2}
+  bars: {fileID: 11400000, guid: 0221322a962978542a4599e9d2390aec, type: 2}
 --- !u!50 &990356813
 Rigidbody2D:
   serializedVersion: 4
@@ -3166,6 +3169,7 @@ MonoBehaviour:
   stats: {fileID: 11400000, guid: 8de6aac91f1482043b659913e862caac, type: 2}
   movement: {fileID: 11400000, guid: 2a1e0ff95ed4b814db5f1624832232f4, type: 2}
   effects: {fileID: 11400000, guid: b8c2e379a823a5f4a907481e41277e70, type: 2}
+  bars: {fileID: 11400000, guid: 0221322a962978542a4599e9d2390aec, type: 2}
 --- !u!50 &1052089108
 Rigidbody2D:
   serializedVersion: 4
