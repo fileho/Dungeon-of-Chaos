@@ -9,8 +9,6 @@ public class Weapon : MonoBehaviour
     [SerializeField] private float dmg = 10f;
     [SerializeField] private float range = 1f;
     [SerializeField] private float staminaCost = 20f;
-    [Range(0, 1)]
-    [SerializeField] private float rotationSpeed = 1f;
     [Tooltip("Initial offset z angle for weapon to point right")]
     [SerializeField] private float angleOffset = 0f;
 

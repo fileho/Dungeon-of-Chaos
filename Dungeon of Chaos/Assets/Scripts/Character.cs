@@ -12,8 +12,6 @@ public class Character : Unit
     public static Character instance;
     private new Camera camera;
 
-    private Vector2 moveDir = Vector2.up;
-
     private void Awake()
     {
         instance = this;
@@ -26,14 +24,6 @@ public class Character : Unit
 
         dash.ResetDash();
         stats.ResetStats();
-        UpdateHealthBar();
-        UpdateManaBar();
-        UpdateStaminaBar();
-    }
-
-    protected override void TakeDamageSideEffect()
-    {
-        UpdateHealthBar();
     }
 
     protected override void Die()
@@ -62,7 +52,7 @@ public class Character : Unit
         {
             skills[1].GetComponent<IActiveSkill>().Use();
         }
-        UpdateManaBar();
+        bars.UpdateManaBar();
     }
 
     private void FixedUpdate()
@@ -75,7 +65,7 @@ public class Character : Unit
     private void RegenerateStamina()
     {
         stats.RegenerateStamina(20 * Time.deltaTime);
-        UpdateStaminaBar();
+        bars.UpdateStaminaBar();
     }
 
     private void FlipSprite()
@@ -89,13 +79,6 @@ public class Character : Unit
             transform.localScale = new Vector3(-1, 1, 1);
         else if (dir.x < -0.01f)
             transform.localScale = Vector3.one;
-
-
-
-        // if (rb.velocity.x < -0.01f)
-        //     sprite.flipX = true;
-        // if (rb.velocity.x > 0.01f)
-        //     sprite.flipX = false;
     }
 
     private void Dash()
@@ -108,26 +91,12 @@ public class Character : Unit
             return;
 
         stats.ConsumeStamina(dashCost);
-        dash.StartDash(moveDir);
+        dash.StartDash(movement.GetMoveDir());
     }
 
     private void Move()
     {
-        Vector2 dir = Vector2.zero;
-        if (Input.GetKey(KeyCode.A))
-            dir += Vector2.left;
-        if (Input.GetKey(KeyCode.D))
-            dir += Vector2.right;
-        if (Input.GetKey(KeyCode.W))
-            dir += Vector2.up;
-        if (Input.GetKey(KeyCode.S))
-            dir += Vector2.down;
-
-        dir = dir.normalized;
-        if (dir != Vector2.zero)
-            moveDir = dir;
-
-        rb.AddForce(stats.MovementSpeed() * Time.fixedDeltaTime * 1000 * dir);
+        movement.Move();
     }
 
     private void RotateWeapon()
@@ -146,23 +115,9 @@ public class Character : Unit
             return;
 
         stats.ConsumeStamina(staminaCost);
-        UpdateStaminaBar();
+        bars.UpdateStaminaBar();
 
         weapon.Attack();
-    }
-
-    private void UpdateHealthBar()
-    {
-        UIManager.instance.SetHealthBar(stats.HpRatio());
-    }
-    
-    private void UpdateManaBar()
-    {
-        UIManager.instance.SetManaBar(stats.ManaRatio());
-    }
-    private void UpdateStaminaBar()
-    {
-        UIManager.instance.SetStaminaBar(stats.StaminaRatio());
     }
 
 

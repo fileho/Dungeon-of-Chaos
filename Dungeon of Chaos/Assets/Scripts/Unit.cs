@@ -6,19 +6,24 @@ public class Unit : MonoBehaviour
 {
     public Stats stats;
 
-    protected SpriteRenderer sprite; 
     protected Rigidbody2D rb;
     protected Weapon weapon;
 
-    private Color spriteColor;
+    [SerializeField] protected IMovement movement;
+    [SerializeField] protected Ieffects effects;
+    [SerializeField] protected IBars bars;
+
 
     protected void Start()
     {
-        sprite = GetComponentInChildren<SpriteRenderer>();
         rb = GetComponent<Rigidbody2D>();
         weapon = GetComponentInChildren<Weapon>();
 
-        spriteColor = sprite.color;
+        movement = Instantiate(movement).Init(transform, stats);
+        effects = Instantiate(effects).Init(transform);
+        bars = Instantiate(bars).Init(transform, stats);
+
+        bars.UpdateAllBars();
 
         Init();
     }
@@ -28,33 +33,15 @@ public class Unit : MonoBehaviour
     public void TakeDamage(float value)
     {
         stats.ConsumeHealth(value);
-        StartCoroutine(FlashRedEffect());
-        TakeDamageSideEffect();
+        effects.TakeDamage();
+        bars.UpdateHpBar();
         if (stats.IsDead())
             Die();
     }
 
-    protected virtual void TakeDamageSideEffect() { }
 
     protected virtual void Die()
     {
         Destroy(gameObject);
-    }
-
-    protected IEnumerator FlashRedEffect()
-    {
-        const float duration = 0.35f;
-
-        sprite.color = Color.red;
-
-        float t = 0;
-        while (t < duration)
-        {
-            sprite.color = Color.Lerp(spriteColor, Color.red, t / duration);
-            t += Time.deltaTime;
-            yield return null;
-        }
-
-        sprite.color = spriteColor;
     }
 }
