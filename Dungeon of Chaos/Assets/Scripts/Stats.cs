@@ -98,10 +98,12 @@ public class Stats : ScriptableObject
     }
 
 
-    public void ResetStats()
+    public Stats ResetStats()
     {
         hp = maxHP;
         mana = maxMana;
         stamina = maxStamina;
+
+        return this;
     }
 }

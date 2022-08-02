@@ -22,8 +22,7 @@ public class Character : Unit
         transform.Find("Trail").GetComponent<TrailRenderer>().enabled = false;
         camera = Camera.main;
 
-        dash.ResetDash();
-        stats.ResetStats();
+        dash = Instantiate(dash).Init(stats);
     }
 
     protected override void Die()
@@ -83,14 +82,6 @@ public class Character : Unit
 
     private void Dash()
     {
-        if (!Input.GetKeyDown(KeyCode.Space) || dash.IsDashing())
-            return;
-
-        float dashCost = dash.Cost();
-        if (!stats.HasStamina(dashCost))
-            return;
-
-        stats.ConsumeStamina(dashCost);
         dash.StartDash(movement.GetMoveDir());
     }
 

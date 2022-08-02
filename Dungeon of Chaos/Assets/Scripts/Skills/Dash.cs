@@ -14,6 +14,7 @@ public class Dash : ScriptableObject
     protected Rigidbody2D rb;
     protected Character character;
     protected TrailRenderer trail;
+    protected Stats stats;
 
     public bool IsDashing()
     {
@@ -27,16 +28,32 @@ public class Dash : ScriptableObject
 
     public void StartDash(Vector2 dir)
     {
-        Init();
+        if (!Input.GetKeyDown(KeyCode.Space) || IsDashing())
+            return;
+
+
+        if (!stats.HasStamina(staminaCost))
+            return;
+
+        stats.ConsumeStamina(staminaCost);
+
         character.StartCoroutine(DashAnimation(dir));
     }
 
-    protected virtual void Init()
+    public Dash Init(Stats stats)
     {
+        this.stats = stats;
+        ResetDash();
+
         character = Character.instance;
         rb = character.GetComponent<Rigidbody2D>();
         trail = character.transform.Find("Trail").GetComponent<TrailRenderer>();
+        CustomInit();
+
+        return this;
     }
+
+    protected virtual void CustomInit() {}
 
     private IEnumerator DashAnimation(Vector2 dir)
     {

@@ -16,6 +16,8 @@ public class Unit : MonoBehaviour
 
     protected void Start()
     {
+        stats = Instantiate(stats).ResetStats();
+
         rb = GetComponent<Rigidbody2D>();
         weapon = GetComponentInChildren<Weapon>();
 

@@ -7,9 +7,8 @@ using UnityEngine;
 public class DashDmg : Dash
 {
     [SerializeField] protected float damage;
-    protected override void Init()
+    protected override void CustomInit()
     {
-        base.Init();
         trail.startColor = Color.red;
         trail.endColor = Color.red;
     }

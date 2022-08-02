@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
+using System.Security.Cryptography;
 using UnityEngine;
 
 public class Enemy : Unit
@@ -11,7 +12,7 @@ public class Enemy : Unit
 
     protected override void Init()
     {
-        CreateUniqueStats();
+        // CreateUniqueStats();
         attack = GetComponentInChildren<EnemyAttack>();
     }
 
@@ -74,5 +75,10 @@ public class Enemy : Unit
     private void Move()
     {
         movement.Move();
+    }
+
+    protected override void Die()
+    {
+        Destroy(transform.parent.gameObject);
     }
 }
