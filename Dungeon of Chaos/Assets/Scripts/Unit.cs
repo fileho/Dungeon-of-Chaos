@@ -25,6 +25,8 @@ public class Unit : MonoBehaviour
         effects = Instantiate(effects).Init(transform);
         bars = Instantiate(bars).Init(transform, stats);
 
+        stats.AssignBars(bars);
+
         bars.UpdateAllBars();
 
         Init();
@@ -36,7 +38,6 @@ public class Unit : MonoBehaviour
     {
         stats.ConsumeHealth(value);
         effects.TakeDamage();
-        bars.UpdateHpBar();
         if (stats.IsDead())
             Die();
     }

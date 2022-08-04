@@ -2874,6 +2874,7 @@ MonoBehaviour:
   movement: {fileID: 11400000, guid: 2a1e0ff95ed4b814db5f1624832232f4, type: 2}
   effects: {fileID: 11400000, guid: b8c2e379a823a5f4a907481e41277e70, type: 2}
   bars: {fileID: 11400000, guid: 0221322a962978542a4599e9d2390aec, type: 2}
+  loot: {fileID: 11400000, guid: 55110f0bef1256e42a7f83b3fc2b4ea9, type: 2}
 --- !u!1 &911041923
 GameObject:
   m_ObjectHideFlags: 0
@@ -2910,6 +2911,7 @@ MonoBehaviour:
   movement: {fileID: 11400000, guid: 2a1e0ff95ed4b814db5f1624832232f4, type: 2}
   effects: {fileID: 11400000, guid: b8c2e379a823a5f4a907481e41277e70, type: 2}
   bars: {fileID: 11400000, guid: 0221322a962978542a4599e9d2390aec, type: 2}
+  loot: {fileID: 11400000, guid: 55110f0bef1256e42a7f83b3fc2b4ea9, type: 2}
 --- !u!50 &911041925
 Rigidbody2D:
   serializedVersion: 4
@@ -3358,6 +3360,7 @@ MonoBehaviour:
   movement: {fileID: 11400000, guid: 2a1e0ff95ed4b814db5f1624832232f4, type: 2}
   effects: {fileID: 11400000, guid: b8c2e379a823a5f4a907481e41277e70, type: 2}
   bars: {fileID: 11400000, guid: 0221322a962978542a4599e9d2390aec, type: 2}
+  loot: {fileID: 11400000, guid: 55110f0bef1256e42a7f83b3fc2b4ea9, type: 2}
 --- !u!1 &986935639
 GameObject:
   m_ObjectHideFlags: 0
