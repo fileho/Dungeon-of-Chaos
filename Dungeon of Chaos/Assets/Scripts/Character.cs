@@ -51,7 +51,6 @@ public class Character : Unit
         {
             skills[1].GetComponent<IActiveSkill>().Use();
         }
-        bars.UpdateManaBar();
     }
 
     private void FixedUpdate()
@@ -64,7 +63,6 @@ public class Character : Unit
     private void RegenerateStamina()
     {
         stats.RegenerateStamina(20 * Time.deltaTime);
-        bars.UpdateStaminaBar();
     }
 
     private void FlipSprite()
@@ -106,8 +104,6 @@ public class Character : Unit
             return;
 
         stats.ConsumeStamina(staminaCost);
-        bars.UpdateStaminaBar();
-
         weapon.Attack();
     }
 

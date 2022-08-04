@@ -17,14 +17,18 @@ public class Stats : ScriptableObject
     private float mana;
     private float stamina;
 
+    private IBars bars;
+
     public void ConsumeHealth(float value)
     {
         hp = Consume(hp, value);
+        bars.UpdateHpBar();
     }
 
     public void RegenerateHealth(float value)
     {
         hp = Regenerate(hp, maxHP, value);
+        bars.UpdateHpBar();
     }
 
     public bool IsDead()
@@ -40,11 +44,13 @@ public class Stats : ScriptableObject
     public void ConsumeMana(float value)
     {
         mana = Consume(mana, value);
+        bars.UpdateManaBar();
     }
 
     public void RegenerateMana(float value)
     {
         mana = Regenerate(mana, maxMana, value);
+        bars.UpdateManaBar();
     }
 
     public bool HasStamina(float value)
@@ -55,11 +61,13 @@ public class Stats : ScriptableObject
     public void ConsumeStamina(float value)
     {
         stamina = Consume(stamina, value);
+        bars.UpdateStaminaBar();
     }
 
     public void RegenerateStamina(float value)
     {
         stamina = Regenerate(stamina, maxStamina, value);
+        bars.UpdateStaminaBar();
     }
 
     private static float Consume(float stat, float value)
@@ -105,5 +113,10 @@ public class Stats : ScriptableObject
         stamina = maxStamina;
 
         return this;
+    }
+
+    public void AssignBars(IBars bars)
+    {
+        this.bars = bars;
     }
 }

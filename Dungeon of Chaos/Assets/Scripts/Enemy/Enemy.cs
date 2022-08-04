@@ -6,23 +6,18 @@ using UnityEngine;
 
 public class Enemy : Unit
 {
+    [SerializeField] private ILoot loot;
+
     private EnemyAttack attack;
 
     private bool attacking = false;
 
     protected override void Init()
     {
-        // CreateUniqueStats();
         attack = GetComponentInChildren<EnemyAttack>();
+        loot = Instantiate(loot).Init(transform);
     }
-
-    // Each enemy has its unique stats instance so it can be modified
-    private void CreateUniqueStats()
-    {
-        stats = Instantiate(stats);
-        stats.ResetStats();
-    }
-
+    
 
     private void Update()
     {
@@ -79,6 +74,7 @@ public class Enemy : Unit
 
     protected override void Die()
     {
+        loot.Drop();
         Destroy(transform.parent.gameObject);
     }
 }
