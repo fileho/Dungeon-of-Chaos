@@ -1,8 +1,4 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Assertions;
 
 [CreateAssetMenu(menuName = "SO/Stats")]
 public class Stats : ScriptableObject
@@ -22,13 +18,13 @@ public class Stats : ScriptableObject
     public void ConsumeHealth(float value)
     {
         hp = Consume(hp, value);
-        bars.UpdateHpBar();
+        bars.UpdateHpBar(HpRatio());
     }
 
     public void RegenerateHealth(float value)
     {
         hp = Regenerate(hp, maxHP, value);
-        bars.UpdateHpBar();
+        bars.UpdateHpBar(HpRatio());
     }
 
     public bool IsDead()
@@ -44,13 +40,13 @@ public class Stats : ScriptableObject
     public void ConsumeMana(float value)
     {
         mana = Consume(mana, value);
-        bars.UpdateManaBar();
+        bars.UpdateManaBar(ManaRatio());
     }
 
     public void RegenerateMana(float value)
     {
         mana = Regenerate(mana, maxMana, value);
-        bars.UpdateManaBar();
+        bars.UpdateManaBar(ManaRatio());
     }
 
     public bool HasStamina(float value)
@@ -61,13 +57,13 @@ public class Stats : ScriptableObject
     public void ConsumeStamina(float value)
     {
         stamina = Consume(stamina, value);
-        bars.UpdateStaminaBar();
+        bars.UpdateStaminaBar(StaminaRatio());
     }
 
     public void RegenerateStamina(float value)
     {
         stamina = Regenerate(stamina, maxStamina, value);
-        bars.UpdateStaminaBar();
+        bars.UpdateStaminaBar(StaminaRatio());
     }
 
     private static float Consume(float stat, float value)
@@ -106,17 +102,15 @@ public class Stats : ScriptableObject
     }
 
 
-    public Stats ResetStats()
+    public Stats ResetStats(IBars bars = null)
     {
+        if (bars != null)
+            this.bars = bars;
+
         hp = maxHP;
         mana = maxMana;
         stamina = maxStamina;
 
         return this;
-    }
-
-    public void AssignBars(IBars bars)
-    {
-        this.bars = bars;
     }
 }

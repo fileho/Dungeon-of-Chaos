@@ -15,4 +15,4 @@ MonoBehaviour:
   maxHP: 80
   maxMana: 50
   maxStamina: 50
-  movementSpeed: 3
+  movementSpeed: 4.5

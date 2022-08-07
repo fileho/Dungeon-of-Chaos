@@ -1,30 +1,25 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(menuName = "SO/Bars/CharacterBars")]
 public class CharacterBars : IBars
 {
-    private Stats stats;
-    public override IBars Init(Transform transform, Stats stats)
+    public override IBars Init(Transform transform)
     {
-        this.stats = stats;
-
         return this;
     }
 
-    public override void UpdateHpBar()
+    public override void UpdateHpBar(float value)
     {
-        UIManager.instance.SetHealthBar(stats.HpRatio());
+        UIManager.instance.SetHealthBar(value);
     }
 
-    public override void UpdateManaBar()
+    public override void UpdateManaBar(float value)
     {
-        UIManager.instance.SetManaBar(stats.ManaRatio());
+        UIManager.instance.SetManaBar(value);
     }
 
-    public override void UpdateStaminaBar()
+    public override void UpdateStaminaBar(float value)
     {
-        UIManager.instance.SetStaminaBar(stats.StaminaRatio());
+        UIManager.instance.SetStaminaBar(value);
     }
 }

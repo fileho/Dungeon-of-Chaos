@@ -1,8 +1,4 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class Essence : MonoBehaviour
 {
@@ -17,7 +13,7 @@ public class Essence : MonoBehaviour
     [SerializeField] private float value = 10f;
     [SerializeField] private float lifetime = 5f;
 
-    // Start is called before the first frame update
+
     void Start()
     {
         Invoke(nameof(CleanUp), lifetime);
@@ -33,10 +29,10 @@ public class Essence : MonoBehaviour
     {
         if (!collider.CompareTag("Player")) return;
 
-        Drop();
+        Collect();
     }
 
-    private void Drop()
+    private void Collect()
     {
         switch (essenceType)
         {

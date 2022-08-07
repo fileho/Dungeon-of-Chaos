@@ -1,19 +1,17 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public abstract class IBars : ScriptableObject
 {
-    public abstract IBars Init(Transform transform, Stats stats);
-    public abstract void UpdateHpBar();
-    public abstract void UpdateManaBar();
-    public abstract void UpdateStaminaBar();
+    public abstract IBars Init(Transform transform);
+    public abstract void UpdateHpBar(float value);
+    public abstract void UpdateManaBar(float value);
+    public abstract void UpdateStaminaBar(float value);
 
-    public void UpdateAllBars()
+    public void FillAllBars()
     {
-        UpdateHpBar();
-        UpdateManaBar();
-        UpdateStaminaBar();
+        UpdateHpBar(1);
+        UpdateManaBar(1);
+        UpdateStaminaBar(1);
     }
 
 

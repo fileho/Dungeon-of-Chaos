@@ -1,18 +1,13 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
 [CreateAssetMenu(menuName = "SO/Bars/EnemyBars")]
 public class EnemyBars : IBars
 {
-    private Stats stats;
     private Slider hpbar;
 
-    public override IBars Init(Transform transform, Stats stats)
+    public override IBars Init(Transform transform)
     {
-        this.stats = stats;
-
         Transform bars = transform.parent.Find("Bars");
 
         hpbar = bars.Find("HPbar").GetComponent<Slider>();
@@ -20,17 +15,17 @@ public class EnemyBars : IBars
         return this;
     }
 
-    public override void UpdateHpBar()
+    public override void UpdateHpBar(float value)
     {
-        hpbar.value = stats.HpRatio();
+        hpbar.value = value;
     }
 
-    public override void UpdateManaBar()
+    public override void UpdateManaBar(float value)
     {
         
     }
 
-    public override void UpdateStaminaBar()
+    public override void UpdateStaminaBar(float value)
     {
         
     }

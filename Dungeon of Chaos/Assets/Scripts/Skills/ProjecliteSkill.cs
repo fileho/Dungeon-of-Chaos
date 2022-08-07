@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class ProjecliteSkill : Skill, IActiveSkill
@@ -26,9 +24,9 @@ public class ProjecliteSkill : Skill, IActiveSkill
 
     private void CreateProjectile()
     {
-        Vector2 target = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-
-        Vector2 dir = target - (Vector2)transform.position;
+        // Vector2 target = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        // 
+        // Vector2 dir = target - (Vector2)transform.position;
 
         var p = Instantiate(prefab, transform.position, Quaternion.identity);
         p.SetStats(damage, speed, transform);
