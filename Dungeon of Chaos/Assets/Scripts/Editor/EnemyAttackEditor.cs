@@ -1,6 +1,5 @@
 using UnityEditor;
 using UnityEngine;
-using System.Collections;
 
 // Custom Editor using SerializedProperties.
 [CustomEditor(typeof(EnemyAttack))]
@@ -42,14 +41,5 @@ public class EnemyAttackEditor : Editor
 
         // Apply changes to the serializedProperty - always do this in the end of OnInspectorGUI.
         serializedObject.ApplyModifiedProperties();
-    }
-
-    // Custom GUILayout progress bar.
-    void ProgressBar(float value, string label)
-    {
-        // Get a rect for the progress bar using the same margins as a textfield:
-        Rect rect = GUILayoutUtility.GetRect(18, 18, "TextField");
-        EditorGUI.ProgressBar(rect, value, label);
-        EditorGUILayout.Space();
     }
 }

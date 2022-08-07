@@ -1,12 +1,9 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Unit : MonoBehaviour
 {
     public Stats stats;
 
-    protected Rigidbody2D rb;
     protected Weapon weapon;
 
     [SerializeField] protected IMovement movement;
@@ -16,18 +13,15 @@ public class Unit : MonoBehaviour
 
     protected void Start()
     {
-        stats = Instantiate(stats).ResetStats();
-
-        rb = GetComponent<Rigidbody2D>();
         weapon = GetComponentInChildren<Weapon>();
+
+        bars = Instantiate(bars).Init(transform);
+        stats = Instantiate(stats).ResetStats(bars);
 
         movement = Instantiate(movement).Init(transform, stats);
         effects = Instantiate(effects).Init(transform);
-        bars = Instantiate(bars).Init(transform, stats);
 
-        stats.AssignBars(bars);
-
-        bars.UpdateAllBars();
+        bars.FillAllBars();
 
         Init();
     }

@@ -1,5 +1,3 @@
-using System;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -28,7 +26,8 @@ public class Character : Unit
     protected override void Die()
     {
         // TODO respawn logic
-        stats.ResetStats();
+        SaveSystem.instance.save.LoadLevel();
+        // stats.ResetStats();
     }
 
     void Update()
