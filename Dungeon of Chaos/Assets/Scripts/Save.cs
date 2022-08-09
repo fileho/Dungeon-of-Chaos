@@ -4,22 +4,27 @@ using UnityEngine.SceneManagement;
 [CreateAssetMenu(menuName = "SO/Save")]
 public class Save : ScriptableObject
 {
-    private const int sceneOffset = -1;
+    private const int sceneOffset = 0;
 
     public int dungeon = 1;
 
-    public Vector3 characterPosition;
+    [SerializeField] private Vector3 characterPosition;
 
 
     public void LoadLevel()
     {
         SceneManager.LoadScene(dungeon + sceneOffset);
-        Character.instance.transform.position = characterPosition;
+        
     }
 
     public void SavePosition(Vector3 pos)
     {
         characterPosition = pos;
+    }
+
+    public void MoveCharacter()
+    {
+        Character.instance.transform.position = characterPosition;
     }
 
 
