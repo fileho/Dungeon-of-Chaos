@@ -662,7 +662,7 @@ MonoBehaviour:
   skills:
   - {fileID: 7935060808040654713}
   - {fileID: 2744179301676973760}
-  dash: {fileID: 11400000, guid: 3951998361b7c4444b0e6a93bb644728, type: 2}
+  dash: {fileID: 11400000, guid: f362aadcfb4d0784ab39c05ed9347fca, type: 2}
 --- !u!212 &8032505234307454447
 SpriteRenderer:
   m_ObjectHideFlags: 0
