@@ -111,6 +111,9 @@ public class Stats : ScriptableObject
         mana = maxMana;
         stamina = maxStamina;
 
+        if (this.bars) 
+            this.bars.FillAllBars();
+
         return this;
     }
 }

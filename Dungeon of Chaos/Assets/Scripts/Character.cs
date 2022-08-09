@@ -21,13 +21,14 @@ public class Character : Unit
         camera = Camera.main;
 
         dash = Instantiate(dash).Init(stats);
+
+        SaveSystem.instance.save.MoveCharacter();
     }
 
     protected override void Die()
     {
         // TODO respawn logic
         SaveSystem.instance.save.LoadLevel();
-        // stats.ResetStats();
     }
 
     void Update()
