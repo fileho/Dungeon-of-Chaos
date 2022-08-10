@@ -45,7 +45,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attack: {fileID: 1052187207571410619, guid: 93bd63905bb7a554c9da5c440257e34a, type: 3}
   range: 3
-  delay: 0.2
+  delay: 0.5
   cooldown: 1
   attackCount: 1
   delayBetweenAttacks: 0.2

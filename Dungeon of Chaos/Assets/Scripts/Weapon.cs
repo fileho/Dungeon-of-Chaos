@@ -68,7 +68,7 @@ public class Weapon : MonoBehaviour
     }
 
 
-    private Vector3 GetForwardDirection()
+    public Vector3 GetForwardDirection()
     {
         float dir = transform.lossyScale.x > 0 ? 1 : -1;
 
@@ -77,7 +77,19 @@ public class Weapon : MonoBehaviour
         // Vector3.R
 
 
-        return new Vector3(Mathf.Cos(a), Mathf.Sin(a), 0);
+        return new Vector3(-Mathf.Cos(a), -Mathf.Sin(a), 0);
+    }
+
+
+    // Assumes the current scale of the Enemy, useful for attack indicators
+    public Vector3 GetForwardDirectionRotated()
+    {
+        float dir = transform.lossyScale.x > 0 ? 1 : -1;
+
+        var ret = GetForwardDirection();
+        ret.x *= dir;
+
+        return ret;
     }
 
     private IEnumerator AttackAnimation(float s, float d, float r)
@@ -85,7 +97,7 @@ public class Weapon : MonoBehaviour
         // Setup
         attacking = true;
         Vector3 startPos = transform.localPosition;
-        Vector3 endPos = startPos - GetForwardDirection() * r;
+        Vector3 endPos = startPos + GetForwardDirection() * r;
         trail.gameObject.SetActive(true);
         collider.enabled = true;
         var rot = transform.localRotation;
