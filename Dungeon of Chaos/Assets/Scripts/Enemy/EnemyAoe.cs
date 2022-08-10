@@ -17,7 +17,7 @@ public class EnemyAoe : MonoBehaviour, IEnemy
         collider = GetComponent<Collider2D>();
 
         var p = transform.position;
-        p.z += 1;
+        p.z = 5;
         transform.position = p;
 
         Use();
@@ -65,7 +65,9 @@ public class EnemyAoe : MonoBehaviour, IEnemy
         if (w == null)
             return;
 
-        transform.Translate(distance * w.transform.up);
+        transform.Translate(distance * w.GetForwardDirection());
+        transform.parent = e.transform;
+
         w.HammerAttack(delay);
     }
 }

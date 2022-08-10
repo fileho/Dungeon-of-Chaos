@@ -13,25 +13,34 @@ public class Enemy : Unit
         attack = GetComponentInChildren<EnemyAttack>();
         loot = Instantiate(loot).Init(transform);
     }
-    
+
 
     private void Update()
     {
-        if (attacking)
+        if (IsAttacking())
             return;
+
+        FlipSprite();
         Attack();
         RotateWeapon();
     }
 
     private void FixedUpdate()
     {
-        if (attacking)
+        if (IsAttacking())
         {
             return;
         }
       
         Move();
     }
+
+
+    private bool IsAttacking()
+    {
+        return attacking || weapon.IsAttacking();
+    }
+
 
     public void AttackWeapon(float swipe, float dmg, float range)
     {
@@ -56,6 +65,19 @@ public class Enemy : Unit
         attack.Use();
 
         Invoke(nameof(ReadyAttack), attack.GetDelay());
+    }
+
+    private void FlipSprite()
+    {
+        if (weapon.IsAttacking())
+            return;
+
+        Vector2 dir = Character.instance.transform.position - transform.position;
+
+        if (dir.x > 0.01f)
+            transform.localScale = new Vector3(-1, 1, 1);
+        else if (dir.x < -0.01f)
+            transform.localScale = Vector3.one;
     }
 
     private void ReadyAttack()

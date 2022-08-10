@@ -33,7 +33,7 @@ public class EnemyAttack : MonoBehaviour
 
     public float GetDelay()
     {
-        return delay + attackCount * delayBetweenAttacks;
+        return delay + attackCount * delayBetweenAttacks + 0.2f;
     }
 
     

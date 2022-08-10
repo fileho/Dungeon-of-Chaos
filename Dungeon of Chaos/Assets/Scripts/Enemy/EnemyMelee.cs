@@ -14,7 +14,7 @@ public class EnemyMelee : MonoBehaviour, IEnemy
     public void SetEnemy(Enemy e)
     {
         enemy = e;
-        transform.up = enemy.GetComponentInChildren<Weapon>().transform.up;
+        transform.up = enemy.GetComponentInChildren<Weapon>().GetForwardDirectionRotated();
     }
 
     private Enemy enemy;
@@ -24,7 +24,7 @@ public class EnemyMelee : MonoBehaviour, IEnemy
     {
         sprite = GetComponent<SpriteRenderer>();
         var p = transform.position;
-        p.z += 1;
+        p.z += 5;
         transform.position = p;
 
         Use();
