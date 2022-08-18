@@ -1,44 +1,37 @@
 using System.Collections;
 using UnityEngine;
 
-public class EnemyMelee : MonoBehaviour, IEnemy
+public class Indicator : MonoBehaviour
 {
-    [SerializeField] private float swipe = 20f;
-    [SerializeField] private float damage = 10;
-    [SerializeField] private float range = 5;
-
-    [SerializeField] private float delay = 0.8f;
-
-
-
-    public void SetEnemy(Enemy e)
-    {
-        enemy = e;
-        transform.up = enemy.GetComponentInChildren<Weapon>().GetForwardDirectionRotated();
-    }
-
-    private Enemy enemy;
+    [SerializeField] IndicatorConfiguration indicatorConfiguration;
+    private float delay;
     private SpriteRenderer sprite;
 
-    void Start()
+    void Awake()
     {
+
         sprite = GetComponent<SpriteRenderer>();
+        delay = indicatorConfiguration.delay;
+        sprite.sprite = indicatorConfiguration.sprite;
+
         var p = transform.position;
         p.z += 5;
         transform.position = p;
-
         Use();
     }
 
-    private void Use()
-    {
-        StartCoroutine(ExecuteAttack());
+    public float GetDelay() {
+        return delay;
     }
 
-    private IEnumerator ExecuteAttack()
+    private void Use() {
+        StartCoroutine(ShowIndicator());
+    }
+
+
+    private IEnumerator ShowIndicator()
     {
         float time = 0f;
-
         while (time < delay)
         {
             time += Time.deltaTime;
@@ -47,13 +40,7 @@ public class EnemyMelee : MonoBehaviour, IEnemy
             sprite.color = Color.Lerp(Color.black, Color.white, t);
             yield return null;
         }
-
-        
-
         sprite.color = Color.white;
-
-        //enemy.GetComponentInChildren<Weapon>().Attack(swipe, damage, range);
-
         Invoke(nameof(CleanUp), 0.25f);
     }
 

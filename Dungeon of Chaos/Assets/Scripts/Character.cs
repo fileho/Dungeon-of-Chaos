@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -5,7 +6,7 @@ public class Character : Unit
 {
     [SerializeField] private List<Skill> skills;
     [SerializeField] private Dash dash;
-
+    private IAttack attack;
 
     public static Character instance;
     private new Camera camera;
@@ -19,8 +20,8 @@ public class Character : Unit
     {
         transform.Find("Trail").GetComponent<TrailRenderer>().enabled = false;
         camera = Camera.main;
-
         dash = Instantiate(dash).Init(stats);
+        attack = GetComponentInChildren<IAttack>();
 
         SaveSystem.instance.save.MoveCharacter();
     }
@@ -99,12 +100,12 @@ public class Character : Unit
         if (!Input.GetMouseButtonDown(0) || weapon.IsAttacking())
             return;
 
-        float staminaCost = weapon.GetStaminaCost();
+        float staminaCost = attack.GetStaminaCost();
         if (!stats.HasStamina(staminaCost))
             return;
 
         stats.ConsumeStamina(staminaCost);
-        weapon.Attack();
+        attack.Attack();
     }
 
 

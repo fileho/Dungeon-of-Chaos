@@ -1,74 +1,71 @@
 using UnityEngine;
+using static UnityEngine.GraphicsBuffer;
+using UnityEngine.SocialPlatforms;
 
-public class Enemy : Unit
-{
+public class Enemy : Unit {
     [SerializeField] private ILoot loot;
+    private IAttack attack;
+    private float distanceFromTarget = Mathf.Infinity;
 
-    private EnemyAttack attack;
-
-    private bool attacking = false;
-
-    protected override void Init()
-    {
-        attack = GetComponentInChildren<EnemyAttack>();
+    protected override void Init() {
         loot = Instantiate(loot).Init(transform);
+        attack = GetComponentInChildren<IAttack>();
     }
 
 
-    private void Update()
-    {
+    private void Update() {
         if (IsAttacking())
             return;
 
         FlipSprite();
         Attack();
-        RotateWeapon();
+
+        if (IsCharacterInRange())
+            RotateWeapon();
+        else
+            ResetWeapon();
     }
 
-    private void FixedUpdate()
-    {
-        if (IsAttacking())
-        {
+    private void FixedUpdate() {
+
+        if (IsCharacterInRange() || attack.IsAttacking()) {
             return;
         }
-      
         Move();
     }
 
 
-    private bool IsAttacking()
-    {
-        return attacking || weapon.IsAttacking();
+    private bool IsCharacterInRange() {
+        distanceFromTarget = ((Vector2)Character.instance.transform.position - (Vector2)transform.position).magnitude;
+        return distanceFromTarget <= attack.GetAttackRange();
+
     }
 
 
-    public void AttackWeapon(float swipe, float dmg, float range)
-    {
-        weapon.Attack(swipe, dmg, range);
+    private bool IsAttacking() {
+        return attack.IsAttacking();
     }
 
-    private void RotateWeapon()
-    {
-        if (weapon != null)
-        {
+
+    private void RotateWeapon() {
+        if (weapon != null) {
             weapon.RotateWeapon(Character.instance.transform.position);
         }
     }
 
-    private void Attack()
-    {
-        if (!attack.CanUse(transform.position))
-            return;
 
-
-        attacking = true;
-        attack.Use();
-
-        Invoke(nameof(ReadyAttack), attack.GetDelay());
+    private void ResetWeapon() {
+        if (weapon != null) {
+            weapon.ResetWeapon();
+        }
     }
 
-    private void FlipSprite()
-    {
+    private void Attack() {
+        if (IsCharacterInRange() && !IsAttacking() && attack.CanAttack())
+            attack.Attack();
+    }
+
+    private void FlipSprite() {
         if (weapon.IsAttacking())
             return;
 
@@ -80,18 +77,13 @@ public class Enemy : Unit
             transform.localScale = Vector3.one;
     }
 
-    private void ReadyAttack()
-    {
-        attacking = false;
-    }
 
-    private void Move()
-    {
+    private void Move() {
+
         movement.Move();
     }
 
-    protected override void Die()
-    {
+    protected override void Die() {
         loot.Drop();
         Destroy(transform.parent.gameObject);
     }
