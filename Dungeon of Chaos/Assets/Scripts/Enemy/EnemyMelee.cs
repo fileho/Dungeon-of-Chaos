@@ -52,7 +52,7 @@ public class EnemyMelee : MonoBehaviour, IEnemy
 
         sprite.color = Color.white;
 
-        enemy.GetComponentInChildren<Weapon>().Attack(swipe, damage, range);
+        //enemy.GetComponentInChildren<Weapon>().Attack(swipe, damage, range);
 
         Invoke(nameof(CleanUp), 0.25f);
     }

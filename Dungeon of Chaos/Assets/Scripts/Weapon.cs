@@ -1,56 +1,59 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static UnityEngine.GraphicsBuffer;
 
-public class Weapon : MonoBehaviour
-{
-    [SerializeField] private float swipe = 10f;
-    [SerializeField] private float dmg = 10f;
-    [SerializeField] private float range = 1f;
-    [SerializeField] private float staminaCost = 20f;
+public class Weapon : MonoBehaviour {
+
     [Tooltip("Initial offset z angle for weapon to point right")]
     [SerializeField] private float angleOffset = 0f;
 
 
     private TrailRenderer trail;
     private new BoxCollider2D collider;
-    private bool attacking = false;
     private List<GameObject> hitUnits;
+    private bool isAttacking = false;
+    private float damage = 0;
 
-    void Start()
-    {
-        hitUnits = new List<GameObject>();
+
+    void Start() {
         trail = GetComponentInChildren<TrailRenderer>();
-        // sprite = GetComponent<SpriteRenderer>();
         collider = GetComponentInChildren<BoxCollider2D>();
-        collider.enabled = false;
-        trail.gameObject.SetActive(false);
+        EnableDisableCollider(false);
+        EnableDisableTrail(false);
     }
 
 
-    public void Attack()
-    {
-        Attack(swipe, dmg, range);
-    }
-
-    public void Attack(float s, float d, float r)
-    {
-        if (attacking)
-            return;
-        StartCoroutine(AttackAnimation(s, d, r));
+    // Damage is set by the attack as different attacks can have different damage for the same weapon.
+    public void SetDamage(float d) {
+        damage = d;
     }
 
 
-    public float DealDamage()
-    {
-        return dmg;
+    public void InflictDamage(Unit unit) {
+        unit.TakeDamage(damage);
     }
 
-    public void RotateWeapon(Vector2 target)
-    {
-        if (attacking)
-            return;
+    public void EnableDisableCollider(bool state) {
+        collider.enabled = state;
+    }
 
+    public void EnableDisableTrail(bool state) {
+        trail.gameObject.SetActive(state);
+    }
+
+
+    public void EnableDisableAttackingState(bool state) {
+        isAttacking = state;
+    }
+
+
+    public bool IsAttacking() {
+        return isAttacking;
+    }
+
+
+    public void RotateWeapon(Vector2 target) {
         Vector2 dir = (target - (Vector2)transform.position).normalized;
 
         if (transform.lossyScale.x > 0)
@@ -62,17 +65,22 @@ public class Weapon : MonoBehaviour
         var q = Quaternion.LookRotation(Vector3.forward, rotated);
 
         var e = q.eulerAngles;
-        e.z += transform.lossyScale.x > 0 ? - angleOffset : angleOffset;
+        e.z += transform.lossyScale.x > 0 ? -angleOffset : angleOffset;
 
         transform.rotation = Quaternion.Euler(e);
     }
 
 
-    public Vector3 GetForwardDirection()
-    {
+    // Resets weapon to the default position
+    public void ResetWeapon() {
+        RotateWeapon(transform.position);
+    }
+
+
+    public Vector3 GetForwardDirection() {
         float dir = transform.lossyScale.x > 0 ? 1 : -1;
 
-        float a =  angleOffset + transform.rotation.eulerAngles.z * dir;
+        float a = angleOffset + transform.rotation.eulerAngles.z * dir;
         a *= Mathf.Deg2Rad;
         // Vector3.R
 
@@ -82,8 +90,7 @@ public class Weapon : MonoBehaviour
 
 
     // Assumes the current scale of the Enemy, useful for attack indicators
-    public Vector3 GetForwardDirectionRotated()
-    {
+    public Vector3 GetForwardDirectionRotated() {
         float dir = transform.lossyScale.x > 0 ? 1 : -1;
 
         var ret = GetForwardDirection();
@@ -92,113 +99,4 @@ public class Weapon : MonoBehaviour
         return ret;
     }
 
-    private IEnumerator AttackAnimation(float s, float d, float r)
-    {
-        // Setup
-        attacking = true;
-        Vector3 startPos = transform.localPosition;
-        Vector3 endPos = startPos + GetForwardDirection() * r;
-        trail.gameObject.SetActive(true);
-        collider.enabled = true;
-        var rot = transform.localRotation;
-        hitUnits.Clear();
-
-        float time = 0;
-        float duration = .6f;
-        while (time < duration)
-        {
-            time += Time.deltaTime;
-            float t = Mathf.Clamp01(time / duration);
-            transform.localPosition = Vector3.Lerp(startPos, endPos, t * (1 - t) * 4);
-
-            float setup = 0.2f;
-            if (t < setup)
-                transform.localRotation = Quaternion.Lerp(rot, Quaternion.Euler(0, 0, rot.eulerAngles.z - s), t / setup);
-            else if (1 - t < setup)
-                transform.localRotation = Quaternion.Lerp(rot, Quaternion.Euler(0, 0, rot.eulerAngles.z + s), (1 - t) / setup);
-            else
-            {
-                transform.localRotation = Quaternion.Lerp(
-                    Quaternion.Euler(0, 0, rot.eulerAngles.z - s),
-                    Quaternion.Euler(0, 0, rot.eulerAngles.z + s), 
-                    (t - setup) / (1 - 2 * setup));
-            }
-            yield return null;
-        }
-
-        // Restore settings
-        collider.enabled = false;
-        trail.gameObject.SetActive(false);
-        transform.localRotation = rot;
-        attacking = false;
-    }
-
-    public float GetStaminaCost()
-    {
-        return staminaCost;
-    }
-
-    public void HammerAttack(float duration)
-    {
-        StartCoroutine(ExecuteHammerAttack(duration));
-    }
-
-    private IEnumerator ExecuteHammerAttack(float duration)
-    {
-        float t = 0;
-
-        Vector2 startPoint = transform.up;
-
-        Vector2 endPoint = -transform.right;
-        hitUnits.Clear();
-
-        float d = duration * 0.8f;
-
-        while (t < d)
-        {
-            t += Time.deltaTime;
-            transform.up = Vector2.Lerp(startPoint, endPoint, t / d);
-            yield return null;
-        }
-
-        t = 0;
-        d = duration * 0.2f;
-
-        while (t < d)
-        {
-            t += Time.deltaTime;
-            transform.up = Vector2.Lerp(endPoint, startPoint,t / d);
-            yield return null;
-        }
-    }
-
-    public bool IsAttacking()
-    {
-        return attacking;
-    }
-
-    public void PlayerHit()
-    {
-        if (hitUnits.Contains(Character.instance.gameObject))
-            return;
-
-        hitUnits.Add(Character.instance.gameObject);
-
-        Character.instance.TakeDamage(DealDamage());
-    }
-
-    public void EnemyHit(Enemy enemy)
-    {
-        if (hitUnits.Contains(enemy.gameObject))
-            return;
-        hitUnits.Add(enemy.gameObject);
-        enemy.TakeDamage(DealDamage());
-    }
-
-
-
-    public void SetAttacking(bool value)
-    {
-        attacking = value;
-    }
 }
