@@ -9,7 +9,6 @@ public class Indicator : MonoBehaviour
 
     void Awake()
     {
-
         sprite = GetComponent<SpriteRenderer>();
         delay = indicatorConfiguration.delay;
         sprite.sprite = indicatorConfiguration.sprite;

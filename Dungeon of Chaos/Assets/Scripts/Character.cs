@@ -42,6 +42,12 @@ public class Character : Unit
         UseSkills();
     }
 
+
+    public override Vector2 GetTargetPosition() {
+        return camera.ScreenToWorldPoint(Input.mousePosition); ;
+    }
+
+
     private void UseSkills()
     {
         if (Input.GetKeyDown(KeyCode.Q))
@@ -71,7 +77,7 @@ public class Character : Unit
         if (weapon.IsAttacking())
             return;
 
-        Vector2 dir = camera.ScreenToWorldPoint(Input.mousePosition) - transform.position;
+        Vector2 dir = GetTargetPosition() - (Vector2)transform.position;
 
         if (dir.x > 0.01f)
             transform.localScale = new Vector3(-1, 1, 1);
@@ -91,8 +97,7 @@ public class Character : Unit
 
     private void RotateWeapon()
     {
-        Vector2 target = camera.ScreenToWorldPoint(Input.mousePosition);
-        weapon.RotateWeapon(target);
+        weapon.RotateWeapon(GetTargetPosition());
     }
 
     private void Attack()

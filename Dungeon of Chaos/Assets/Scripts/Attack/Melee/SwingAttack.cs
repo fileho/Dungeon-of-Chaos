@@ -18,40 +18,11 @@ public class SwingAttack : MeleeAttack {
 
 
     public override void Attack() {
-        if (isAttacking)
-            return;
         base.Attack();
-
-        isAttacking = true;
-        cooldownLeft = cooldown;
-
-        ActivateIndicator();
-        PrepareWeapon();
-        StartCoroutine(StartAttackAnimation(swing, damage, reach));
+        StartCoroutine(StartAttackAnimation(swing, reach));
     }
 
-
-    private void ActivateIndicator() {
-        if (indicator == null) return;
-        GameObject _indicator = Instantiate(indicator, transform.position, transform.rotation, transform);
-        _indicator.transform.up = weapon.GetForwardDirectionRotated();
-    }
-
-
-    private void PrepareWeapon() {
-        weapon.EnableDisableTrail(true);
-        weapon.EnableDisableCollider(true);
-        weapon.SetDamage(damage);
-    }
-
-
-    private void ResetWeapon() {
-        weapon.EnableDisableTrail(false);
-        weapon.EnableDisableCollider(false);
-    }
-
-
-    private IEnumerator StartAttackAnimation(float swing, float damage, float reach) {
+    private IEnumerator StartAttackAnimation(float swing, float reach) {
         yield return new WaitForSeconds(delayAfterIndicator);
         Vector3 startPos = weapon.transform.localPosition;
         Vector3 endPos = startPos + weapon.GetForwardDirection() * reach;
