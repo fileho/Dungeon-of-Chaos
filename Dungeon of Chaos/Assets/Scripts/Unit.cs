@@ -28,6 +28,14 @@ public class Unit : MonoBehaviour
 
     protected virtual void Init() { }
 
+    // It can be either the position of the Unit or Mouse Position [In case of the character]
+    public virtual Vector2 GetTargetPosition() { return Target.transform.position; }
+
+    // Character in case of the enemy.
+    // It can be changed at runtime.
+    // Null in the case of player
+    public Unit Target { get; protected set; }
+
     public void TakeDamage(float value)
     {
         stats.ConsumeHealth(value);

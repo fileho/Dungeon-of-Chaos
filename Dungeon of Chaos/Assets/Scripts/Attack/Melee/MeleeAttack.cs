@@ -19,15 +19,23 @@ public abstract class MeleeAttack : IAttack {
     protected float duration;
 
 
-    public override void ApplyConfigurations() {
+    protected override void ApplyConfigurations() {
         base.ApplyConfigurations();
         swing = (attackConfiguration as MeleeAttackConfiguration).swing;
         reach = (attackConfiguration as MeleeAttackConfiguration).reach;
         duration = (attackConfiguration as MeleeAttackConfiguration).duration;
     }
 
+    
     public override void Attack() {
+        if (isAttacking)
+            return;
 
+        isAttacking = true;
+        cooldownLeft = cooldown;
+
+        ActivateIndicator();
+        PrepareWeapon();
     }
 
 }

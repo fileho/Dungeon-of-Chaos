@@ -1,4 +1,5 @@
 using UnityEngine;
+using static UnityEngine.GraphicsBuffer;
 
 [RequireComponent(typeof(Weapon))]
 public abstract class IAttack : MonoBehaviour {
@@ -21,12 +22,11 @@ public abstract class IAttack : MonoBehaviour {
     protected bool isAttacking = false;
     protected bool isEnemyInRange = false;
 
-    //protected Unit target;
+    protected Unit owner;
     protected GameObject indicator;
     
     
     public abstract void Attack();
-
 
     public virtual bool CanAttack() {
         return cooldownLeft <= 0;
@@ -46,8 +46,37 @@ public abstract class IAttack : MonoBehaviour {
     }
 
 
-    public virtual void ApplyConfigurations() {
+    public Unit GetTarget() {
+        return owner.Target;
+    }
+
+
+    public Vector2 GetTargetPosition() {
+        return owner.GetTargetPosition();
+    }
+
+
+    protected virtual void ActivateIndicator() {
+        if (indicator == null) return;
+        GameObject _indicator = Instantiate(indicator, transform.position, transform.rotation, transform);
+        _indicator.transform.up = weapon.GetForwardDirectionRotated();
+    }
+
+    protected virtual void PrepareWeapon() {
+        weapon.EnableDisableTrail(true);
+        weapon.EnableDisableCollider(true);
+        weapon.SetDamage(damage);
+    }
+
+
+    protected virtual void ResetWeapon() {
+        weapon.EnableDisableTrail(false);
+        weapon.EnableDisableCollider(false);
+    }
+
+    protected virtual void ApplyConfigurations() {
         weapon = GetComponent<Weapon>();
+        owner = GetComponentInParent<Unit>();
         range = attackConfiguration.range;
         damage = attackConfiguration.damage;
         staminaCost = attackConfiguration.staminaCost;
