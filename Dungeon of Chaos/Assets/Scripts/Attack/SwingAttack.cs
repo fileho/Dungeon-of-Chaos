@@ -1,8 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static UnityEngine.Rendering.DebugUI.Table;
 
-public class SwingAttack : MeeleAttack {
+public class SwingAttack : MeleeAttack {
 
     // Start is called before the first frame update
     protected override void Start() {
@@ -17,10 +18,16 @@ public class SwingAttack : MeeleAttack {
 
 
     public override void Attack() {
-        base.Attack();
         if (isAttacking)
             return;
-        StartCoroutine(StartAttack(swing, damage, reach));
+        base.Attack();
+
+        isAttacking = true;
+        cooldownLeft = cooldown;
+
+        ActivateIndicator();
+        PrepareWeapon();
+        StartCoroutine(StartAttackAnimation(swing, damage, reach));
     }
 
 
@@ -31,24 +38,26 @@ public class SwingAttack : MeeleAttack {
     }
 
 
-    private IEnumerator StartAttack(float swing, float damage, float reach) {
-        // Setup
-
-        isAttacking = true;
-        cooldownLeft = cooldown;
-        ActivateIndicator();
-        yield return new WaitForSeconds(delayAfterIndicator);
-
+    private void PrepareWeapon() {
         weapon.EnableDisableTrail(true);
         weapon.EnableDisableCollider(true);
         weapon.SetDamage(damage);
+    }
 
+
+    private void ResetWeapon() {
+        weapon.EnableDisableTrail(false);
+        weapon.EnableDisableCollider(false);
+    }
+
+
+    private IEnumerator StartAttackAnimation(float swing, float damage, float reach) {
+        yield return new WaitForSeconds(delayAfterIndicator);
         Vector3 startPos = weapon.transform.localPosition;
         Vector3 endPos = startPos + weapon.GetForwardDirection() * reach;
         var rot = weapon.transform.localRotation;
 
         float time = 0;
-        float duration = .6f;
         while (time < duration) {
             time += Time.deltaTime;
             float t = Mathf.Clamp01(time / duration);
@@ -67,11 +76,10 @@ public class SwingAttack : MeeleAttack {
             }
             yield return null;
         }
-
-        // Restore settings
-        weapon.EnableDisableTrail(false);
-        weapon.EnableDisableCollider(false);
         transform.localRotation = rot;
+
+        // Reset
+        ResetWeapon();
         isAttacking = false;
     }
 

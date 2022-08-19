@@ -5,11 +5,8 @@ public abstract class IAttack : MonoBehaviour {
 
     [SerializeField] protected AttackConfiguration attackConfiguration;
     protected Weapon weapon;
-    // Angle sweeped during the weapon animation
-    protected float swing;
-    // Reach is how far the weapon travels during the attack animation
-    protected float reach;
-    // The distance from the unit at which the attack can be used 
+    
+    // The distance from the unit at which the attack can be used
     protected float range;
     // Damage dealt by the attack
     protected float damage;
@@ -27,16 +24,13 @@ public abstract class IAttack : MonoBehaviour {
     //protected Unit target;
     protected GameObject indicator;
     
-
-    public abstract bool CanAttack();
     
     public abstract void Attack();
 
 
-    //public bool IsEnemyInRange() {
-    //    return isEnemyInRange;
-    //}
-
+    public virtual bool CanAttack() {
+        return cooldownLeft <= 0;
+    }
 
     public float GetAttackRange() {
         return range;
@@ -46,24 +40,30 @@ public abstract class IAttack : MonoBehaviour {
         return isAttacking;
     }
 
-    //public void SetTarget(Unit unit) {
-    //    target = unit;
-    //}
 
     public float GetStaminaCost() {
         return staminaCost;
     }
 
-    protected virtual void Start() {
+
+    public virtual void ApplyConfigurations() {
         weapon = GetComponent<Weapon>();
-        swing = attackConfiguration.swing;
-        reach = attackConfiguration.reach;
         range = attackConfiguration.range;
         damage = attackConfiguration.damage;
         staminaCost = attackConfiguration.staminaCost;
         cooldown = attackConfiguration.cooldown;
         indicator = attackConfiguration.indicator;
         delayAfterIndicator = attackConfiguration.delayAfterIndicator;
+    }
+
+    protected virtual void Start() {
+        ApplyConfigurations();
+    }
+
+
+    protected virtual void Update() {
+        if (!isAttacking && cooldownLeft > 0)
+            cooldownLeft -= Time.deltaTime;
     }
 
 }
