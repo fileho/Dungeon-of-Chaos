@@ -12,10 +12,10 @@ GameObject:
   - component: {fileID: 1052187207571410598}
   - component: {fileID: 1052187207571410617}
   - component: {fileID: -8598035832204300386}
-  - component: {fileID: -1935851705781859807}
-  - component: {fileID: -8223936217892396163}
+  - component: {fileID: 8091975695518667906}
+  - component: {fileID: 3519116850337155208}
   m_Layer: 9
-  m_Name: Basic Circle Follow
+  m_Name: Projectile-Basic
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -123,7 +123,7 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!114 &-1935851705781859807
+--- !u!114 &8091975695518667906
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -135,7 +135,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d7e8f837938a78448b18bf1b255952b0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &-8223936217892396163
+--- !u!114 &3519116850337155208
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -144,7 +144,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1052187207571410619}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e09dd1c0d59634925a21cfd847df1d1a, type: 3}
+  m_Script: {fileID: 11500000, guid: 8282ca970f96c47059b6897616212caf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  projectileConfiguration: {fileID: 11400000, guid: 227a9ef0026c24f1199052641c655646, type: 2}
+  projectileConfiguration: {fileID: 11400000, guid: 045a0780cd4934d8fa0a501c7066533b, type: 2}

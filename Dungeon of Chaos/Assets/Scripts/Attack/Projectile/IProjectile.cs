@@ -11,7 +11,7 @@ public abstract class IProjectile : MonoBehaviour
     protected float speed = 200f;
     protected float delay = 0.5f;
     protected float offset = 0f;
-    //protected float homingStrength = 0;
+    protected float destroyTime = 5f;
 
 
     protected Weapon weapon;
@@ -40,6 +40,7 @@ public abstract class IProjectile : MonoBehaviour
         speed = projectileConfiguration.speed;
         delay = projectileConfiguration.delay;
         offset = projectileConfiguration.offset;
+        destroyTime = projectileConfiguration.destroyTime;
     }
 
     protected virtual void Start() {
@@ -78,7 +79,7 @@ public abstract class IProjectile : MonoBehaviour
         dir.Normalize();
 
         rb.AddForce(100 * speed * dir);
-        Invoke(nameof(CleanUp), 10f);
+        Invoke(nameof(CleanUp), destroyTime);
     }
 
     protected virtual void CleanUp() {
