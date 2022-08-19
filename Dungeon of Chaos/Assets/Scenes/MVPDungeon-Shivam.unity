@@ -148,7 +148,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c6cba19a2df74cc3b714cd8c73f1623, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackConfiguration: {fileID: 11400000, guid: 521352648e89445bb831041e6e79baed, type: 2}
+  attackConfiguration: {fileID: 11400000, guid: 84c6590fcf93b4880be2cca1888e2b9a, type: 2}
 --- !u!1001 &30252606
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5357,7 +5357,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c6cba19a2df74cc3b714cd8c73f1623, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackConfiguration: {fileID: 11400000, guid: 601fdde2ce7ec4830b658917b8a7e0b2, type: 2}
+  attackConfiguration: {fileID: 11400000, guid: 5c652ac0aabab4117b68dc754c1b32f0, type: 2}
 --- !u!114 &4740107300132509667
 MonoBehaviour:
   m_ObjectHideFlags: 0

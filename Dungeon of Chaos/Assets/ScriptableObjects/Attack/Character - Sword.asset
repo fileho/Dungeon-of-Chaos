@@ -9,14 +9,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 60397576fa46c4569a907da2a6e2e6af, type: 3}
-  m_Name: Giant
+  m_Script: {fileID: 11500000, guid: 656d4005658cf4e07808ec6178e5ef23, type: 3}
+  m_Name: Character - Sword
   m_EditorClassIdentifier: 
-  swing: 30
-  reach: 2
-  range: 9
+  range: 0
   damage: 18
-  staminaCost: 0
+  staminaCost: 20
   cooldown: 1
-  delayAfterIndicator: 1.5
-  indicator: {fileID: 4329331889789977291, guid: d1a59e053a17c4eaaacc05a0931f0200, type: 3}
+  delayAfterIndicator: 0
+  indicator: {fileID: 0}
+  swing: 15
+  reach: 1.5
+  duration: 0.6
