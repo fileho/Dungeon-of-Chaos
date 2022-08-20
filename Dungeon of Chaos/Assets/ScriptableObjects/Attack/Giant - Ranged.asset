@@ -16,6 +16,8 @@ MonoBehaviour:
   damage: 18
   staminaCost: 0
   cooldown: 1
-  delayAfterIndicator: 1.5
-  indicator: {fileID: 4329331889789977291, guid: d1a59e053a17c4eaaacc05a0931f0200, type: 3}
+  attackAnimationDuration: 1.5
+  indicator: {fileID: 4329331889789977291, guid: 573504e254dad4a68a414698270d4d81, type: 3}
   projectile: {fileID: 1052187207571410619, guid: b03845b2e170c4237ad5953ab466b279, type: 3}
+  wandReach: 1
+  wandWave: 10

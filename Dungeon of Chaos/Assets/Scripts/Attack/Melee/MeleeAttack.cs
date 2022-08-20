@@ -11,19 +11,20 @@ using UnityEditor;
 
 public abstract class MeleeAttack : IAttack {
 
-    // Angle sweeped during the weapon animation
+    // Angle sweeped during the attack animation
     protected float swing;
     // Reach is how far the weapon travels during the attack animation
     protected float reach;
-    // Duration of the swing
-    protected float duration;
+
+    protected override void SetIndicatorTransform() {
+        indicatorTransform = owner.transform.Find(INDICATOR_SPAWN_POSITION);
+    }
 
 
     protected override void ApplyConfigurations() {
         base.ApplyConfigurations();
         swing = (attackConfiguration as MeleeAttackConfiguration).swing;
         reach = (attackConfiguration as MeleeAttackConfiguration).reach;
-        duration = (attackConfiguration as MeleeAttackConfiguration).duration;
     }
 
     
@@ -34,8 +35,8 @@ public abstract class MeleeAttack : IAttack {
         isAttacking = true;
         cooldownLeft = cooldown;
 
-        ActivateIndicator();
         PrepareWeapon();
+        ActivateIndicator();
     }
 
 }

@@ -72,7 +72,7 @@ public class Enemy : Unit {
     }
 
     private void FlipSprite() {
-        if (weapon.IsAttacking())
+        if (IsAttacking())
             return;
 
         Vector2 dir = GetTargetPosition() - (Vector2)transform.position;

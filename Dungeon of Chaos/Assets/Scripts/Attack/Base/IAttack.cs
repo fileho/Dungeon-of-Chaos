@@ -5,6 +5,7 @@ using static UnityEngine.GraphicsBuffer;
 public abstract class IAttack : MonoBehaviour {
 
     [SerializeField] protected AttackConfiguration attackConfiguration;
+
     protected Weapon weapon;
     
     // The distance from the unit at which the attack can be used
@@ -15,17 +16,21 @@ public abstract class IAttack : MonoBehaviour {
     protected float staminaCost;
     // Time after which the attack can be used again
     protected float cooldown;
-    // The delay between attack and the attack indicator [0 in case of the player]
-    protected float delayAfterIndicator;
+    // The duration of the attack animation
+    public float AttackAnimationDuration { get; private set; }
 
     protected float cooldownLeft = 0f;
     protected bool isAttacking = false;
     protected bool isEnemyInRange = false;
+    protected float IndicatorDuration { get; private set; }
 
     protected Unit owner;
     protected GameObject indicator;
-    
-    
+    protected Transform indicatorTransform;
+
+
+    protected const string INDICATOR_SPAWN_POSITION = "IndicatorSpawnPosition";
+
     public abstract void Attack();
 
     public virtual bool CanAttack() {
@@ -56,10 +61,15 @@ public abstract class IAttack : MonoBehaviour {
     }
 
 
+    protected virtual void SetIndicatorTransform() { }
+
+
+
     protected virtual void ActivateIndicator() {
         if (indicator == null) return;
-        GameObject _indicator = Instantiate(indicator, transform.position, transform.rotation, transform);
+        GameObject _indicator = Instantiate(indicator, indicatorTransform.position, indicatorTransform.rotation, indicatorTransform);
         _indicator.transform.up = weapon.GetForwardDirectionRotated();
+        IndicatorDuration = _indicator.GetComponent<IIndicator>().Duration;
     }
 
     protected virtual void PrepareWeapon() {
@@ -75,18 +85,22 @@ public abstract class IAttack : MonoBehaviour {
     }
 
     protected virtual void ApplyConfigurations() {
-        weapon = GetComponent<Weapon>();
-        owner = GetComponentInParent<Unit>();
+
         range = attackConfiguration.range;
         damage = attackConfiguration.damage;
         staminaCost = attackConfiguration.staminaCost;
         cooldown = attackConfiguration.cooldown;
         indicator = attackConfiguration.indicator;
-        delayAfterIndicator = attackConfiguration.delayAfterIndicator;
+        AttackAnimationDuration = attackConfiguration.attackAnimationDuration;
+        IndicatorDuration = 0;
     }
 
     protected virtual void Start() {
+        weapon = GetComponent<Weapon>();
+        owner = GetComponentInParent<Unit>();
+        SetIndicatorTransform();
         ApplyConfigurations();
+
     }
 
 

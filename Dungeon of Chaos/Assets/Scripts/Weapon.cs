@@ -12,7 +12,6 @@ public class Weapon : MonoBehaviour {
     private TrailRenderer trail;
     private new BoxCollider2D collider;
     private List<GameObject> hitUnits;
-    private bool isAttacking = false;
     private float damage = 0;
 
 
@@ -40,16 +39,6 @@ public class Weapon : MonoBehaviour {
 
     public void EnableDisableTrail(bool state) {
         trail.gameObject.SetActive(state);
-    }
-
-
-    public void EnableDisableAttackingState(bool state) {
-        isAttacking = state;
-    }
-
-
-    public bool IsAttacking() {
-        return isAttacking;
     }
 
 

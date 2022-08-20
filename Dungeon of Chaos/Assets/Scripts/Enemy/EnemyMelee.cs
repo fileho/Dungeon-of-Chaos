@@ -3,9 +3,9 @@ using UnityEngine;
 
 public class EnemyMelee : MonoBehaviour, IEnemy
 {
-    [SerializeField] private float swipe = 20f;
-    [SerializeField] private float damage = 10;
-    [SerializeField] private float range = 5;
+    //[SerializeField] private float swipe = 20f;
+    //[SerializeField] private float damage = 10;
+    //[SerializeField] private float range = 5;
 
     [SerializeField] private float delay = 0.8f;
 
