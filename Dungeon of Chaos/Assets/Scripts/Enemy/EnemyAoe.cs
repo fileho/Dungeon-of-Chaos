@@ -68,6 +68,6 @@ public class EnemyAoe : MonoBehaviour, IEnemy
         transform.Translate(distance * w.GetForwardDirection());
         transform.parent = e.transform;
 
-        w.HammerAttack(delay);
+        //w.HammerAttack(delay);
     }
 }
