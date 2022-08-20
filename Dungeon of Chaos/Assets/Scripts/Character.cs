@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -5,7 +6,7 @@ public class Character : Unit
 {
     [SerializeField] private List<Skill> skills;
     [SerializeField] private Dash dash;
-
+    private IAttack attack;
 
     public static Character instance;
     private new Camera camera;
@@ -19,8 +20,8 @@ public class Character : Unit
     {
         transform.Find("Trail").GetComponent<TrailRenderer>().enabled = false;
         camera = Camera.main;
-
         dash = Instantiate(dash).Init(stats);
+        attack = GetComponentInChildren<IAttack>();
 
         SaveSystem.instance.save.MoveCharacter();
     }
@@ -40,6 +41,12 @@ public class Character : Unit
         FlipSprite();
         UseSkills();
     }
+
+
+    public override Vector2 GetTargetPosition() {
+        return camera.ScreenToWorldPoint(Input.mousePosition); ;
+    }
+
 
     private void UseSkills()
     {
@@ -67,10 +74,10 @@ public class Character : Unit
 
     private void FlipSprite()
     {
-        if (weapon.IsAttacking())
+        if (attack.IsAttacking())
             return;
 
-        Vector2 dir = camera.ScreenToWorldPoint(Input.mousePosition) - transform.position;
+        Vector2 dir = GetTargetPosition() - (Vector2)transform.position;
 
         if (dir.x > 0.01f)
             transform.localScale = new Vector3(-1, 1, 1);
@@ -90,21 +97,20 @@ public class Character : Unit
 
     private void RotateWeapon()
     {
-        Vector2 target = camera.ScreenToWorldPoint(Input.mousePosition);
-        weapon.RotateWeapon(target);
+        weapon.RotateWeapon(GetTargetPosition());
     }
 
     private void Attack()
     {
-        if (!Input.GetMouseButtonDown(0) || weapon.IsAttacking())
+        if (!Input.GetMouseButtonDown(0) || attack.IsAttacking())
             return;
 
-        float staminaCost = weapon.GetStaminaCost();
+        float staminaCost = attack.GetStaminaCost();
         if (!stats.HasStamina(staminaCost))
             return;
 
         stats.ConsumeStamina(staminaCost);
-        weapon.Attack();
+        attack.Attack();
     }
 
 

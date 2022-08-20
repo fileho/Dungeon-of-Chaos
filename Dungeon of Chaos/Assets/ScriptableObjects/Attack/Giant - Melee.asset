@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 656d4005658cf4e07808ec6178e5ef23, type: 3}
+  m_Name: Giant - Melee
+  m_EditorClassIdentifier: 
+  range: 9
+  damage: 18
+  staminaCost: 0
+  cooldown: 1
+  attackAnimationDuration: 0.6
+  indicator: {fileID: 4329331889789977291, guid: d1a59e053a17c4eaaacc05a0931f0200, type: 3}
+  swing: 30
+  reach: 1.5

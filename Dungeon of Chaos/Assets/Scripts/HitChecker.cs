@@ -9,18 +9,11 @@ public class HitChecker : MonoBehaviour
         weapon = GetComponentInParent<Weapon>();
     }
 
+    private void OnTriggerEnter2D(Collider2D col) {
 
-    private void OnTriggerEnter2D(Collider2D col)
-    {
-        if (col.CompareTag("Player"))
-        {
-            weapon.PlayerHit();
-            return;
+        if (col.GetComponent<Unit>()) {
+            weapon.InflictDamage(col.GetComponent<Unit>());
         }
-
-        if (!col.CompareTag("Enemy"))
-            return;
-        Enemy enemy = col.GetComponent<Enemy>();
-        weapon.EnemyHit(enemy);
     }
+
 }
