@@ -74,7 +74,7 @@ public class Character : Unit
 
     private void FlipSprite()
     {
-        if (weapon.IsAttacking())
+        if (attack.IsAttacking())
             return;
 
         Vector2 dir = GetTargetPosition() - (Vector2)transform.position;
@@ -102,7 +102,7 @@ public class Character : Unit
 
     private void Attack()
     {
-        if (!Input.GetMouseButtonDown(0) || weapon.IsAttacking())
+        if (!Input.GetMouseButtonDown(0) || attack.IsAttacking())
             return;
 
         float staminaCost = attack.GetStaminaCost();

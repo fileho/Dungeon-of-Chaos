@@ -5,33 +5,21 @@ using static UnityEngine.Rendering.DebugUI.Table;
 
 public class SwingAttack : MeleeAttack {
 
-    // Start is called before the first frame update
-    protected override void Start() {
-        base.Start();
-    }
-
-
-    // Update is called once per frame
-    protected override void Update() {
-        base.Update();
-    }
-
-
     public override void Attack() {
         base.Attack();
         StartCoroutine(StartAttackAnimation(swing, reach));
     }
 
     private IEnumerator StartAttackAnimation(float swing, float reach) {
-        yield return new WaitForSeconds(delayAfterIndicator);
+        yield return new WaitForSeconds(IndicatorDuration);
         Vector3 startPos = weapon.transform.localPosition;
         Vector3 endPos = startPos + weapon.GetForwardDirection() * reach;
         var rot = weapon.transform.localRotation;
 
         float time = 0;
-        while (time < duration) {
+        while (time < AttackAnimationDuration) {
             time += Time.deltaTime;
-            float t = Mathf.Clamp01(time / duration);
+            float t = Mathf.Clamp01(time / AttackAnimationDuration);
             weapon.transform.localPosition = Vector3.Lerp(startPos, endPos, t * (1 - t) * 4);
 
             float setup = 0.2f;

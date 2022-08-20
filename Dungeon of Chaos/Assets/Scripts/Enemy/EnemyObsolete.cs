@@ -6,7 +6,7 @@ public class EnemyObsolete : Unit
 
     private EnemyAttack attack;
 
-    private bool attacking = false;
+    //private bool attacking = false;
 
     protected override void Init()
     {
@@ -15,31 +15,31 @@ public class EnemyObsolete : Unit
     }
 
 
-    private void Update()
-    {
-        if (IsAttacking())
-            return;
+    //private void Update()
+    //{
+    //    if (IsAttacking())
+    //        return;
 
-        FlipSprite();
-        Attack();
-        RotateWeapon();
-    }
+    //    FlipSprite();
+    //    Attack();
+    //    RotateWeapon();
+    //}
 
-    private void FixedUpdate()
-    {
-        if (IsAttacking())
-        {
-            return;
-        }
+    //private void FixedUpdate()
+    //{
+        //if (IsAttacking())
+        //{
+        //    return;
+        //}
       
-        Move();
-    }
+        //Move();
+    //}
 
 
-    private bool IsAttacking()
-    {
-        return attacking || weapon.IsAttacking();
-    }
+    //private bool IsAttacking()
+    //{
+    //    return attacking || weapon.IsAttacking();
+    //}
 
 
     public void AttackWeapon(float swipe, float dmg, float range)
@@ -61,7 +61,7 @@ public class EnemyObsolete : Unit
             return;
 
 
-        attacking = true;
+        //attacking = true;
         attack.Use();
 
         Invoke(nameof(ReadyAttack), attack.GetDelay());
@@ -69,8 +69,8 @@ public class EnemyObsolete : Unit
 
     private void FlipSprite()
     {
-        if (weapon.IsAttacking())
-            return;
+        //if (weapon.IsAttacking())
+        //    return;
 
         Vector2 dir = Character.instance.transform.position - transform.position;
 
@@ -82,7 +82,7 @@ public class EnemyObsolete : Unit
 
     private void ReadyAttack()
     {
-        attacking = false;
+        //attacking = false;
     }
 
     private void Move()

@@ -16,8 +16,7 @@ MonoBehaviour:
   damage: 18
   staminaCost: 20
   cooldown: 1
-  delayAfterIndicator: 0
+  attackAnimationDuration: 0.6
   indicator: {fileID: 0}
   swing: 15
   reach: 1.5
-  duration: 0.6

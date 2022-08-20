@@ -7,6 +7,6 @@ public abstract class AttackConfiguration : ScriptableObject
     public float damage = 18f;
     public float staminaCost = 0f;
     public float cooldown = 1f;
-    public float delayAfterIndicator = 1.5f;
+    public float attackAnimationDuration = 1.5f;
     public GameObject indicator;
 }

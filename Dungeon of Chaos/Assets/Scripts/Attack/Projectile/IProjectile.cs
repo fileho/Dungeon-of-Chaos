@@ -4,7 +4,6 @@ using UnityEngine;
 using UnityEngine.SocialPlatforms;
 using static UnityEngine.GraphicsBuffer;
 
-[RequireComponent(typeof(HitChecker))]
 public abstract class IProjectile : MonoBehaviour
 {
     [SerializeField] protected ProjectileConfiguration projectileConfiguration;
@@ -52,24 +51,18 @@ public abstract class IProjectile : MonoBehaviour
         Launch();
     }
 
+    protected virtual void OnTriggerEnter2D(Collider2D col) {
+        if (col.GetComponent<Unit>()) {
+            weapon.InflictDamage(col.GetComponent<Unit>());
+        }
+    }
+
+
     protected virtual void Launch() {
         StartCoroutine(LaunchAttack());
     }
 
     protected virtual IEnumerator LaunchAttack() {
-        float time = 0;
-
-        while (time < delay) {
-            time += Time.deltaTime;
-            float t = time / delay;
-            sprite.color = Color.Lerp(Color.yellow, new Color(1f, 0.5f, 0f), t);
-            transform.localScale = Vector3.Lerp(Vector3.zero, Vector3.one, t);
-
-            // move it with the player
-            transform.position = transform.parent.position;
-            yield return null;
-        }
-
         collider.enabled = true;
 
         Vector2 goalPos = GetTarget().transform.position;
@@ -79,7 +72,9 @@ public abstract class IProjectile : MonoBehaviour
         dir.Normalize();
 
         rb.AddForce(100 * speed * dir);
-        Invoke(nameof(CleanUp), destroyTime);
+
+        yield return new WaitForSeconds(destroyTime);
+        CleanUp();
     }
 
     protected virtual void CleanUp() {
