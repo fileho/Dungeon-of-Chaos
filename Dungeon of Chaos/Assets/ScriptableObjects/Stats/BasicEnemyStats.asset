@@ -12,7 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c7862adca1b56944f82bba604ba0d4b9, type: 3}
   m_Name: BasicEnemyStats
   m_EditorClassIdentifier: 
-  maxHP: 80
-  maxMana: 50
-  maxStamina: 50
   movementSpeed: 4.5
+  staminaRegen: 20

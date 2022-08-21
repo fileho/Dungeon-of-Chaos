@@ -12,7 +12,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c7862adca1b56944f82bba604ba0d4b9, type: 3}
   m_Name: PlayerStats
   m_EditorClassIdentifier: 
-  maxHP: 100
-  maxMana: 50
-  maxStamina: 80
   movementSpeed: 5
+  staminaRegen: 20
+  primaryStats:
+    id: 0
+  references:
+    version: 1
+    00000000:
+      type: {class: PrimaryStats, ns: , asm: Assembly-CSharp}
+      data:
+        strength: 10
+        intelligence: 10
+        constitution: 10
+        endurance: 10
+        wisdom: 10
+        damageMultiplier: 2.5
+        spellPowerMultiplier: 2.5
+        hpMultiplier: 10
+        staminaMultiplier: 10
+        manaMultiplier: 10
