@@ -5,7 +5,7 @@ public class Stats : ScriptableObject
 {
     [SerializeField] private float movementSpeed;
     [SerializeField] private float staminaRegen;
-
+   
     [SerializeReference] private PrimaryStats primaryStats = new PrimaryStats();
     
     private RegenerableStat health = new RegenerableStat();
@@ -14,7 +14,7 @@ public class Stats : ScriptableObject
     private float physicalDamage;
     private float spellPower;
 
-    private int level;
+    [SerializeField] private int level;
     private float xp;
 
     private IBars bars;

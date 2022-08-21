@@ -8,6 +8,7 @@ public class StatsModifiers : ScriptableObject
     [SerializeField] private float statsBonus;
     private const float lvlBonus = 0.3f;
 
+    [Header("Essence Modifiers")]
     [SerializeField] private float xpMultiplier;
     private const float lvlXPMultiplier = 1.5f;
 
@@ -28,4 +29,13 @@ public class StatsModifiers : ScriptableObject
     {
         return lvlBonus;
     }
+
+    public float GetEssenceChance(int lvl)
+    {
+        return Mathf.Pow(essenceChance * (lvlEssenceChanceMultiplier - lvl / ((maxLevel / (lvlEssenceChanceMultiplier - 1)) * 2 + 1)),lvl-1);
+    }
+
+    /*public float GetXPValue(int lvl)
+    {
+    }*/
 }
