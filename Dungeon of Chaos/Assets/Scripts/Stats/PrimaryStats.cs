@@ -4,18 +4,22 @@ using UnityEngine;
 
 public class PrimaryStats
 {
+    [Header("Primary Stats")]
     public float strength;
     public float intelligence;
     public float constitution;
     public float endurance;
     public float wisdom;
 
+    [Header("Primary to Secondary Multipliers")]
     public float damageMultiplier;
     public float spellPowerMultiplier;
     public float hpMultiplier;
     public float staminaMultiplier;
     public float manaMultiplier;
 
+    [Header("Stats Modifier Scriptable Object")]
+    [Tooltip("Only for enemies, leave empty for character")]
     [SerializeField] private StatsModifiers statsModifiers;
 
     private float ModifiedStat(int l, float value)
