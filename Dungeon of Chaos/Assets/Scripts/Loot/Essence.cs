@@ -26,11 +26,23 @@ public class Essence : MonoBehaviour
 
     public float GetChance(Enemy e)
     {
-        return 1f;
+        return e.lootModifiers.GetEssenceChance(e.stats.GetLevel());
     }
 
     public void SetValue(Enemy e)
     { 
+        switch (essenceType)
+        {
+            case EssenceType.health:
+                value = e.lootModifiers.GetHealthEssence(e.stats.GetLevel());
+                break;
+            case EssenceType.stamina:
+                value = e.lootModifiers.GetStaminaEssence(e.stats.GetLevel());
+                break;
+            case EssenceType.mana:
+                value = e.lootModifiers.GetManaEssence(e.stats.GetLevel());
+                break;
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D collider)
