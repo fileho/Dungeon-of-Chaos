@@ -4,11 +4,13 @@ using UnityEngine.SocialPlatforms;
 
 public class Enemy : Unit {
     [SerializeField] private ILoot loot;
+    public LootModifiers lootModifiers;
     private IAttack attack;
     private float distanceFromTarget = Mathf.Infinity;
 
     protected override void Init() {
         loot = Instantiate(loot).Init(this);
+        lootModifiers = Instantiate(lootModifiers);
         attack = GetComponentInChildren<IAttack>();
         Target = Character.instance;
     }

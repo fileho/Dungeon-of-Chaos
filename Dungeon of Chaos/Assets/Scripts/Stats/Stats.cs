@@ -19,6 +19,10 @@ public class Stats : ScriptableObject
 
     private IBars bars;
 
+    public int GetLevel()
+    {
+        return level;
+    }
     public void ConsumeHealth(float value)
     {
         health.Consume(value);
