@@ -69,7 +69,7 @@ public class Character : Unit
 
     private void RegenerateStamina()
     {
-        stats.RegenerateStamina(20 * Time.deltaTime);
+        stats.RegenerateStamina(stats.GetStaminaRegen() * Time.deltaTime);
     }
 
     private void FlipSprite()
