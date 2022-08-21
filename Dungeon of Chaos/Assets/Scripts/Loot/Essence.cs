@@ -10,10 +10,10 @@ public class Essence : MonoBehaviour
     }
 
     [SerializeField] private EssenceType essenceType;
-    [SerializeField] private float value = 10f;
     [SerializeField] private float lifetime = 5f;
 
-
+    private float value;
+  
     void Start()
     {
         Invoke(nameof(CleanUp), lifetime);
@@ -24,6 +24,14 @@ public class Essence : MonoBehaviour
         Destroy(gameObject);
     }
 
+    public float GetChance(Enemy e)
+    {
+        return 1f;
+    }
+
+    public void SetValue(Enemy e)
+    { 
+    }
 
     private void OnTriggerEnter2D(Collider2D collider)
     {

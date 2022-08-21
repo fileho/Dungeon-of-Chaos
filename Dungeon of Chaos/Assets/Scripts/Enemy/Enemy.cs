@@ -8,7 +8,7 @@ public class Enemy : Unit {
     private float distanceFromTarget = Mathf.Infinity;
 
     protected override void Init() {
-        loot = Instantiate(loot).Init(transform);
+        loot = Instantiate(loot).Init(this);
         attack = GetComponentInChildren<IAttack>();
         Target = Character.instance;
     }

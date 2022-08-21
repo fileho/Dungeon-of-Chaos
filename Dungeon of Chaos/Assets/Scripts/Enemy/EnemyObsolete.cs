@@ -11,7 +11,7 @@ public class EnemyObsolete : Unit
     protected override void Init()
     {
         attack = GetComponentInChildren<EnemyAttack>();
-        loot = Instantiate(loot).Init(transform);
+        //loot = Instantiate(loot).Init(this);
     }
 
 

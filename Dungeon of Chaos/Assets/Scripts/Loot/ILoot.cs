@@ -2,7 +2,7 @@ using UnityEngine;
 
 public abstract class ILoot : ScriptableObject
 {
-    public abstract ILoot Init(Transform transform);
+    public abstract ILoot Init(Enemy enemy);
     public abstract void Drop();
 }
 
