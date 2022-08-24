@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class HealSkill : Skill, IActiveSkill
+public class HealSkillDeprecatedDeprecated : SkillDeprecated, IActiveSkillDeprecated
 {
     [SerializeField] private GameObject prefab;
     [SerializeField] private float healAmount;

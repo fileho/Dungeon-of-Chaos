@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Character : Unit
 {
-    [SerializeField] private List<Skill> skills;
+    [SerializeField] private List<SkillDeprecated> skills;
     [SerializeField] private Dash dash;
     private IAttack attack;
 
@@ -52,11 +52,11 @@ public class Character : Unit
     {
         if (Input.GetKeyDown(KeyCode.Q))
         {
-            skills[0].GetComponent<IActiveSkill>().Use();
+        //    skills[0].GetComponent<IActiveSkill>().Use();
         }
         if (Input.GetKeyDown(KeyCode.E))
         {
-            skills[1].GetComponent<IActiveSkill>().Use();
+        //    skills[1].GetComponent<IActiveSkill>().Use();
         }
     }
 

@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class ProjecliteSkill : Skill, IActiveSkill
+public class ProjecliteSkillDeprecatedDeprecated : SkillDeprecated, IActiveSkillDeprecated
 {
     [SerializeField] private Projectile prefab;
     [SerializeField] private float damage;

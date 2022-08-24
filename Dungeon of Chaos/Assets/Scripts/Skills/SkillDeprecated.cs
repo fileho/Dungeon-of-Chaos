@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class Skill : MonoBehaviour
+public class SkillDeprecated : MonoBehaviour
 {
     public virtual bool CanUse()
     {
