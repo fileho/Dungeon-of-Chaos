@@ -7,13 +7,17 @@ public class ProjectileSkill : ISkillEffect
     [SerializeField] private float speed;
     [SerializeField] private float dmg;
 
-    [SerializeField] private GameObject prefab;
+    [SerializeField] private SkillEffectType skillEffectType;
+
+    [SerializeField] private Projectile prefab;
 
 
     public override void Use(Unit unit)
     {
-        Instantiate(prefab, unit.transform.position, Quaternion.identity);
-        var a =unit.stats.GetPhysicalDamage() + dmg;
+        var projectile = Instantiate(prefab, unit.transform.position, Quaternion.identity);
+        float damage = skillEffectType == SkillEffectType.physical ? unit.stats.GetPhysicalDamage() * dmg 
+            : unit.stats.GetSpellPower()*dmg;
+        projectile.SetStats(damage, speed, unit.transform);
 
     }
 }

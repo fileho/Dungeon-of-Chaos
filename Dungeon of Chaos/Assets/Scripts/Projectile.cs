@@ -3,8 +3,8 @@ using UnityEngine;
 
 public class Projectile : MonoBehaviour
 {
-    [SerializeField] private float damage = 10f;
-    public float speed = 200f;
+    private float damage;
+    public float speed;
     [Tooltip("How fast should the projectile appear")]
     public float delay = 0.5f;
     [Tooltip("Should is go directly towards player?")]

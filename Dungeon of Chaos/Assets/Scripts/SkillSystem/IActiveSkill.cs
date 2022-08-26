@@ -24,15 +24,18 @@ public class IActiveSkill : ScriptableObject
 
     [SerializeField] private List<ISkillEffect> effects;
 
+    private float cooldownLeft;
+
 
     public bool CanUse(Stats stats)
     {
-        return true;
+        return cooldownLeft <= 0 && stats.HasMana(manaCost) && stats.HasStamina(staminaCost);
     }
-
+ 
     public void UpdateCooldown()
     {
-        //TODO
+        if (cooldownLeft > 0)
+            cooldownLeft -= Time.deltaTime;
     }
 
     public void Use(Unit unit)
@@ -40,6 +43,7 @@ public class IActiveSkill : ScriptableObject
         if (!CanUse(unit.stats))
             return;
 
+        cooldownLeft = cooldown;
         Consume(unit.stats);
 
         foreach (var e in effects)
@@ -50,6 +54,7 @@ public class IActiveSkill : ScriptableObject
 
     private void Consume(Stats stats)
     {
-        throw new System.NotImplementedException();
+        stats.ConsumeMana(manaCost);
+        stats.ConsumeStamina(staminaCost);
     }
 }
