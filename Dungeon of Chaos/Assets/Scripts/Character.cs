@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class Character : Unit
 {
-    [SerializeField] private List<SkillDeprecated> skills;
     [SerializeField] private Dash dash;
     private IAttack attack;
 
@@ -40,6 +39,7 @@ public class Character : Unit
         Attack();
         FlipSprite();
         UseSkills();
+        UpdateCooldowns();
     }
 
 
@@ -47,17 +47,32 @@ public class Character : Unit
         return camera.ScreenToWorldPoint(Input.mousePosition); ;
     }
 
+    private void UpdateCooldowns()
+    {
+        foreach (var skill in SkillSystem.instance.GetActivatedSkills())
+        {
+            skill.GetSkills()[skill.GetLevel()].UpdateCooldown();
+        }
+    }
 
     private void UseSkills()
     {
         if (Input.GetKeyDown(KeyCode.Q))
         {
-        //    skills[0].GetComponent<IActiveSkill>().Use();
+            UseSkill(0);
         }
         if (Input.GetKeyDown(KeyCode.E))
         {
-        //    skills[1].GetComponent<IActiveSkill>().Use();
+            UseSkill(1);
         }
+    }
+
+    private void UseSkill(int index)
+    {
+        SkillInfoActive skill = SkillSystem.instance.GetActivatedSkills()[index];
+        if (!skill)
+            return;
+        skill.GetSkills()[skill.GetLevel() - 1].Use(this);
     }
 
     private void FixedUpdate()
@@ -112,8 +127,6 @@ public class Character : Unit
         stats.ConsumeStamina(staminaCost);
         attack.Attack();
     }
-
-
 
     private void OnCollisionEnter2D(Collision2D col)
     {

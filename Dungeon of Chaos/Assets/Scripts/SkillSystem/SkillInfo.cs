@@ -22,4 +22,14 @@ public class SkillInfo<T> : ScriptableObject
     [SerializeField] protected List<T> skills;
 
     [SerializeField] protected int level;
+
+    public List<T> GetSkills()
+    {
+        return skills;
+    }
+
+    public int GetLevel()
+    {
+        return level;
+    }
 }

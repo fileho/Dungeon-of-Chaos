@@ -12,4 +12,16 @@ public class SkillSystem : MonoBehaviour
 
     private List<SkillInfoActive> activated;
     private List<SkillInfoPassive> equipped;
+
+    public static SkillSystem instance;
+
+    private void Awake()
+    {
+        instance = this;
+    }
+
+    public List<SkillInfoActive> GetActivatedSkills()
+    {
+        return activated;
+    }
 }
