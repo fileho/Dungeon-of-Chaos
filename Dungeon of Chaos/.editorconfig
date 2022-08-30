@@ -1,0 +1,4 @@
+﻿[*.cs]
+
+# CS0436: Typ je v konfliktu s importovaným typem.
+dotnet_diagnostic.CS0436.severity = none
