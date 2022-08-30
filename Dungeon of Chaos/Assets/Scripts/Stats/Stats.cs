@@ -94,6 +94,39 @@ public class Stats : ScriptableObject
         return staminaRegen;
     }
 
+    public void ChangeStaminaRegen(float value)
+    {
+        staminaRegen += value;
+    }
+
+    public void ChangeMaxHealth(float value)
+    {
+        health.ChangeMaxValue(value);
+        bars.UpdateHpBar(health.Ratio());
+    }
+
+    public void ChangeMaxStamina(float value)
+    {
+        stamina.ChangeMaxValue(value);
+        bars.UpdateStaminaBar(stamina.Ratio());
+    }
+
+    public void ChangeMaxMana(float value)
+    {
+        mana.ChangeMaxValue(value);
+        bars.UpdateManaBar(mana.Ratio());
+    }
+
+    public void ChangePhysicalDamage(float value)
+    {
+        physicalDamage += value;
+    }
+
+    public void ChangeSpellPower(float value)
+    {
+        spellPower += value;
+    }
+
     public Stats ResetStats(IBars bars = null)
     {
         if (bars != null)

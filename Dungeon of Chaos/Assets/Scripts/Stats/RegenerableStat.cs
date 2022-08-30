@@ -29,6 +29,11 @@ public class RegenerableStat
         currentValue = maxValue;
     }
 
+    public void ChangeMaxValue(float value)
+    {
+        maxValue += value;
+    }
+
     public bool HasEnough(float value)
     {
         return currentValue >= value;
