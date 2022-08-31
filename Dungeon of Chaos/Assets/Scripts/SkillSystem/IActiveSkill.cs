@@ -5,12 +5,27 @@ using System.Reflection;
 using UnityEngine;
 
 [System.Serializable]
-struct SkillData
+public struct SkillData
 {
     private string name;
     private string description;
 
     private Sprite icon;
+
+    public Sprite GetIcon()
+    {
+        return icon;
+    }
+
+    public string GetName()
+    {
+        return name;
+    }
+
+    public string GetDescription()
+    {
+        return description;
+    }
 }
 
 [CreateAssetMenu(menuName = "SO/Skills/Active")]
@@ -26,6 +41,10 @@ public class IActiveSkill : ScriptableObject
 
     private float cooldownLeft;
 
+    public SkillData GetSkillData()
+    {
+        return skillData;
+    }
 
     public bool CanUse(Stats stats)
     {

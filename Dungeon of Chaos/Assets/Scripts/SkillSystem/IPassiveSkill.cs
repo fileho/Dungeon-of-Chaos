@@ -8,4 +8,9 @@ public abstract class IPassiveSkill : ScriptableObject
 
     public abstract void Equip(Stats stats);
     public abstract void Unequip(Stats stats);
+
+    public SkillData GetSkillData()
+    {
+        return skillData;
+    }
 }

@@ -49,6 +49,8 @@ public class Character : Unit
 
     private void UpdateCooldowns()
     {
+        if (SkillSystem.instance == null || SkillSystem.instance.GetActivatedSkills() == null)
+            return;
         foreach (var skill in SkillSystem.instance.GetActivatedSkills())
         {
             skill.GetSkills()[skill.GetLevel()].UpdateCooldown();
