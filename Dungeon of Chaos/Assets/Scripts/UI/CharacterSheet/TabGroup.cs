@@ -5,18 +5,22 @@ using UnityEngine.UI;
 
 public class TabGroup : MonoBehaviour
 {
-    List<TabButton> tabButtons;
-    [SerializeField]
-    List<GameObject> pages;
-    [SerializeField]
-    Color tabIdle;
-    [SerializeField]
-    Color tabHover;
-    [SerializeField]
-    Color tabSelected;
+    private List<TabButton> tabButtons;
+    [SerializeField] private List<GameObject> pages;
+    [SerializeField] private Color tabIdle;
+    [SerializeField] private Color tabHover;
+    [SerializeField] private Color tabSelected;
+    [SerializeField] private TabButton defaultTab;
 
     [HideInInspector]
     public TabButton selectedTab;
+
+    private void Start()
+    {
+        if (defaultTab == null)
+            return;
+        OnTabSelected(defaultTab);
+    }
 
     public void Subscribe(TabButton button)
     {
@@ -61,6 +65,8 @@ public class TabGroup : MonoBehaviour
 
     public void ResetTabs()
     {
+        if (tabButtons == null)
+            return;
         foreach (TabButton button in tabButtons)
         {
             if (selectedTab != null && selectedTab == button) { continue; }

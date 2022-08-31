@@ -9,6 +9,15 @@ public class SkillInfoActive : SkillInfo<IActiveSkill>
     {
         level++;
     }
+
+    public SkillData GetSkillData()
+    {
+        int index = level - 1;
+        if (level == 0)
+            index += 1;
+
+        return skills[index].GetSkillData();
+    }
 }
 
 [CreateAssetMenu(menuName = "SO/SkillSystem/SkillInfoPassive")]
@@ -29,6 +38,15 @@ public class SkillInfoPassive : SkillInfo<IPassiveSkill>
     {
         skills[level].Unequip(stats);
     }
+
+    public SkillData GetSkillData()
+    {
+        int index = level - 1;
+        if (level == 0)
+            index += 1;
+
+        return skills[index].GetSkillData();
+    }
 }
 
 
@@ -36,7 +54,7 @@ public class SkillInfo<T> : ScriptableObject
 {
     [SerializeField] protected List<T> skills;
 
-    [SerializeField] protected int level;
+    protected int level = 0;
 
     [SerializeField] protected int maxLevel;
 

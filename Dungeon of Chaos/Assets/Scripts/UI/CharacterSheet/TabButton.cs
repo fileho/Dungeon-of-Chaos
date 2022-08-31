@@ -25,7 +25,7 @@ public class TabButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
         tabGroup.OnTabExit(this);
     }
 
-    void Start()
+    void Awake()
     {
         background = GetComponent<Image>();
         tabGroup.Subscribe(this);
