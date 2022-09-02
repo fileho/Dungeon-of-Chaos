@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class SkillSystem : MonoBehaviour
 {
-    private List<SkillInfoActive> activeSkills;
-    private List<SkillInfoPassive> passiveSkills;
+    [SerializeField] private List<SkillInfoActive> activeSkills;
+    [SerializeField] private List<SkillInfoPassive> passiveSkills;
     
     private List<SkillInfoActive> activeSkillsUnlocked;
     private List<SkillInfoPassive> passiveSkillsUnlocked;
@@ -18,7 +18,9 @@ public class SkillSystem : MonoBehaviour
     [SerializeField] private int activeSkillsSlots;
     [SerializeField] private int passiveSkillsSlots;
 
-    private int skillPoints = 0;
+    [SerializeField] private List<int> skillPointsRequired;
+
+    public int skillPoints = 0;
 
     private void Awake()
     {
@@ -36,32 +38,57 @@ public class SkillSystem : MonoBehaviour
         return activated;
     }
 
+    public List<SkillInfoPassive> GetEquippedSkills()
+    {
+        return equipped;
+    }
+
     public void Upgrade(SkillInfoActive skill)
     {
-        if (skill.CanUpgrade())
-            skill.Upgrade();
+        skillPoints -= skillPointsRequired[skill.GetLevel()];
+        skill.Upgrade();
     }
 
     public void Upgrade(SkillInfoPassive skill)
     {
-        if (skill.CanUpgrade())
-            skill.Upgrade();
+        skillPoints -= skillPointsRequired[skill.GetLevel()];
+        skill.Upgrade();
     }
 
     public void Activate(SkillInfoActive skill, int slot)
     {
-        if (!activeSkillsUnlocked.Contains(skill))
-            return;
+        if (activated.Contains(skill))
+        {
+            int i = activated.IndexOf(skill);
+            activated[i] = null;
+        }
         activated[slot] = skill;
     }
 
     public void Equip(SkillInfoPassive skill, int slot)
-    {
-        if (!passiveSkillsUnlocked.Contains(skill))
-            return;
+    { 
         if (passiveSkillsUnlocked[slot] != null)
             passiveSkillsUnlocked[slot].Unequip(Character.instance.stats);
         passiveSkillsUnlocked[slot] = skill;
         skill.Equip(Character.instance.stats);
+    }
+
+    public bool IsUnlocked(SkillInfoActive skill)
+    {
+        return activeSkillsUnlocked.Contains(skill);
+    }
+
+    public bool IsUnlocked(SkillInfoPassive skill)
+    {
+        return passiveSkillsUnlocked.Contains(skill);
+    }
+
+    public bool CanUpgrade(SkillInfoActive skill)
+    {
+        return skillPoints >= skillPointsRequired[skill.GetLevel()];
+    }
+    public bool CanUpgrade(SkillInfoPassive skill)
+    {
+        return skillPoints >= skillPointsRequired[skill.GetLevel()] && skill.CanUpgrade();
     }
 }

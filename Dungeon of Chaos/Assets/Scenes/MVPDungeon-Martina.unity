@@ -4979,9 +4979,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 320099647}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 837ee9bfaaa850a48b17f91be5dc2a5c, type: 3}
+  m_Script: {fileID: 11500000, guid: 2c63ce87e7eb3174c90a43358da83e86, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  index: 0
 --- !u!1 &326818523
 GameObject:
   m_ObjectHideFlags: 0
@@ -7702,7 +7703,7 @@ CanvasGroup:
   m_Enabled: 1
   m_Alpha: 1
   m_Interactable: 1
-  m_BlocksRaycasts: 1
+  m_BlocksRaycasts: 0
   m_IgnoreParentGroups: 0
 --- !u!114 &1688120027
 MonoBehaviour:
