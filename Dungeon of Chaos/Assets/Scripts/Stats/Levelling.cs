@@ -24,7 +24,7 @@ public class Levelling
             nextLevelXP = baseXP;
             return;
         }
-       nextLevelXP = Mathf.CeilToInt((baseMultiplier - ((level + 1) / (maxLevel+1))) * nextLevelXP);
+       nextLevelXP = Mathf.CeilToInt((baseMultiplier - ((level + 1) / (maxLevel*2+1))) * nextLevelXP);
     }
 
     public int GetCurrentXP()

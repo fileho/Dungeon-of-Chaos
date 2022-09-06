@@ -35,7 +35,7 @@ public class Loot : ILoot
         foreach (LootItem item in lootTable)
         {
             float rnd = Random.Range(0, 1);
-            float chance = item.prefab.GetComponent<Essence>().GetChance(owner);
+            float chance = item.prefab.GetComponent<Essence>().GetChance(owner) * item.weight;
             if (rnd <= chance)
                 Spawn(item.prefab);
         }

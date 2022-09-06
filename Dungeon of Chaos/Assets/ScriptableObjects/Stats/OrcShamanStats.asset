@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c7862adca1b56944f82bba604ba0d4b9, type: 3}
-  m_Name: PlayerStats
+  m_Name: OrcShamanStats
   m_EditorClassIdentifier: 
-  movementSpeed: 5
+  movementSpeed: 4.5
   staminaRegen: 20
   primaryStats:
     id: 0
@@ -23,18 +23,18 @@ MonoBehaviour:
     00000000:
       type: {class: PrimaryStats, ns: , asm: Assembly-CSharp}
       data:
-        strength: 11
-        intelligence: 11
-        constitution: 10
-        endurance: 10
-        wisdom: 10
+        strength: 7
+        intelligence: 9
+        constitution: 7
+        endurance: 5
+        wisdom: 9
         multipliers: {fileID: 11400000, guid: 9bc05dc5e43aa9f49a343ca8e90f53ed, type: 2}
-        statsModifiers: {fileID: 0}
+        statsModifiers: {fileID: 11400000, guid: 45c6f8569f640f242b3e61668af2c96a, type: 2}
     00000001:
       type: {class: Levelling, ns: , asm: Assembly-CSharp}
       data:
-        maxLevel: 35
-        baseMultiplier: 1.5
-        baseXP: 100
-        level: 1
+        maxLevel: 0
+        baseMultiplier: 0
+        baseXP: 0
+        level: 3
         statsPoints: 0
