@@ -23,22 +23,18 @@ MonoBehaviour:
     00000000:
       type: {class: PrimaryStats, ns: , asm: Assembly-CSharp}
       data:
-        strength: 10
-        intelligence: 10
+        strength: 11
+        intelligence: 11
         constitution: 10
         endurance: 10
         wisdom: 10
-        damageMultiplier: 2.5
-        spellPowerMultiplier: 2.5
-        hpMultiplier: 10
-        staminaMultiplier: 10
-        manaMultiplier: 10
+        multipliers: {fileID: 11400000, guid: 9bc05dc5e43aa9f49a343ca8e90f53ed, type: 2}
         statsModifiers: {fileID: 0}
     00000001:
       type: {class: Levelling, ns: , asm: Assembly-CSharp}
       data:
-        maxLevel: 70
+        maxLevel: 35
         baseMultiplier: 1.5
         baseXP: 100
         level: 1
-        statsPoints: 4
+        statsPoints: 0

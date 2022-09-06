@@ -11,12 +11,8 @@ public class PrimaryStats
     public float endurance;
     public float wisdom;
 
-    [Header("Primary to Secondary Multipliers")]
-    public float damageMultiplier;
-    public float spellPowerMultiplier;
-    public float hpMultiplier;
-    public float staminaMultiplier;
-    public float manaMultiplier;
+    [Header("")]
+    [SerializeField] PrimaryToSecondary multipliers;
 
     [Header("Stats Modifier Scriptable Object")]
     [Tooltip("Only for enemies, leave empty for character")]
@@ -31,30 +27,30 @@ public class PrimaryStats
     public float GetDamage(int l)
     {
         float s = ModifiedStat(l, strength);
-        return s * damageMultiplier;
+        return s * multipliers.damageMultiplier;
     }
 
     public float GetSpellPower(int l)
     {
         float i = ModifiedStat(l, intelligence);
-        return i * spellPowerMultiplier;
+        return i * multipliers.spellPowerMultiplier;
     }
 
     public float GetMaxHP(int l)
     {
         float c = ModifiedStat(l, constitution);
-        return c * hpMultiplier;
+        return c * multipliers.hpMultiplier;
     }
 
     public float GetMaxStamina(int l)
     {
         float e = ModifiedStat(l, endurance);
-        return e * staminaMultiplier;
+        return e * multipliers.staminaMultiplier;
     }
 
     public float GetMaxMana(int l)
     {
         float w = ModifiedStat(l, wisdom);
-        return w * manaMultiplier;
+        return w * multipliers.manaMultiplier;
     }
 }

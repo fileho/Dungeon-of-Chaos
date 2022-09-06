@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(menuName ="SO/StatsModifiers")]
+[CreateAssetMenu(menuName ="SO/Stats/StatsModifiers")]
 public class StatsModifiers : ScriptableObject
 {
     [SerializeField] private float statsBonus;

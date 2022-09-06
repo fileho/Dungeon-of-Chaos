@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[CreateAssetMenu(menuName = "SO/Loot/LootModifiers")]
 public class LootModifiers : ScriptableObject
 {
     private const int maxLevel = 35;

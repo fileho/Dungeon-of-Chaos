@@ -6,7 +6,8 @@ public class Essence : MonoBehaviour
     {
         health,
         mana,
-        stamina
+        stamina,
+        xp        
     }
 
     [SerializeField] private EssenceType essenceType;
@@ -26,7 +27,7 @@ public class Essence : MonoBehaviour
 
     public float GetChance(Enemy e)
     {
-        return e.lootModifiers.GetEssenceChance(e.stats.GetLevel());
+        return essenceType == EssenceType.xp ? 1 : e.lootModifiers.GetEssenceChance(e.stats.GetLevel());
     }
 
     public void SetValue(Enemy e)
@@ -41,6 +42,9 @@ public class Essence : MonoBehaviour
                 break;
             case EssenceType.mana:
                 value = e.lootModifiers.GetManaEssence(e.stats.GetLevel());
+                break;
+            case EssenceType.xp:
+                value = e.lootModifiers.GetXPValue(e.stats.GetLevel());
                 break;
         }
     }

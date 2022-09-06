@@ -9,8 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c7862adca1b56944f82bba604ba0d4b9, type: 3}
-  m_Name: BasicEnemyStats
+  m_Script: {fileID: 11500000, guid: ab4bcf82772b4ce4ba30d81e9c45c000, type: 3}
+  m_Name: BasicStatsModifiers
   m_EditorClassIdentifier: 
-  movementSpeed: 4.5
-  staminaRegen: 20
+  statsBonus: 0
