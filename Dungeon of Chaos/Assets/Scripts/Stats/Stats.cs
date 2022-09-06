@@ -5,24 +5,29 @@ public class Stats : ScriptableObject
 {
     [SerializeField] private float movementSpeed;
     [SerializeField] private float staminaRegen;
-   
+
     [SerializeReference] private PrimaryStats primaryStats = new PrimaryStats();
-    
+
     private RegenerableStat health = new RegenerableStat();
     private RegenerableStat mana = new RegenerableStat();
     private RegenerableStat stamina = new RegenerableStat();
     private float physicalDamage;
     private float spellPower;
 
-    [SerializeField] private int level;
-    private float xp;
+    [SerializeReference] private Levelling XP = new Levelling();
 
     private IBars bars;
 
     public int GetLevel()
     {
-        return level;
+        return XP.GetLevel();
     }
+
+    public Levelling GetLevellingData()
+    {
+        return XP;
+    }
+
     public void ConsumeHealth(float value)
     {
         health.Consume(value);
@@ -38,6 +43,11 @@ public class Stats : ScriptableObject
     public bool IsDead()
     {
         return health.IsDepleted();
+    }
+
+    public float GetMaxHealth()
+    {
+        return health.maxValue;
     }
 
     public bool HasMana(float value)
@@ -57,6 +67,11 @@ public class Stats : ScriptableObject
         bars.UpdateManaBar(mana.Ratio());
     }
 
+    public float GetMaxMana()
+    {
+        return mana.maxValue;
+    }
+
     public bool HasStamina(float value)
     {
         return stamina.HasEnough(value);
@@ -72,6 +87,11 @@ public class Stats : ScriptableObject
     {
         stamina.Regenerate(value);
         bars.UpdateStaminaBar(stamina.Ratio());
+    }
+
+    public float GetMaxStamina()
+    {
+        return stamina.maxValue;
     }
 
     public float MovementSpeed()
@@ -133,12 +153,13 @@ public class Stats : ScriptableObject
             this.bars = bars;
 
         UpdateStats();
+        XP.SetNextLevelXP();
 
         health.Reset();
         mana.Reset();
         stamina.Reset();
 
-        if (this.bars) 
+        if (this.bars)
             this.bars.FillAllBars();
 
         return this;
@@ -146,10 +167,70 @@ public class Stats : ScriptableObject
 
     public void UpdateStats()
     {
-        physicalDamage = primaryStats.GetDamage(level);
-        spellPower = primaryStats.GetSpellPower(level);
-        health.maxValue = primaryStats.GetMaxHP(level);
-        stamina.maxValue = primaryStats.GetMaxStamina(level);
-        mana.maxValue = primaryStats.GetMaxMana(level);
+        physicalDamage = primaryStats.GetDamage(XP.GetLevel());
+        spellPower = primaryStats.GetSpellPower(XP.GetLevel());
+        health.maxValue = primaryStats.GetMaxHP(XP.GetLevel());
+        stamina.maxValue = primaryStats.GetMaxStamina(XP.GetLevel());
+        mana.maxValue = primaryStats.GetMaxMana(XP.GetLevel());
+    }
+
+    public void IncreaseStrength()
+    {
+        primaryStats.strength++;
+        XP.ConsumeStatsPoint();
+        UpdateStats();
+    }
+
+    public float GetStrength()
+    {
+        return primaryStats.strength;
+    }
+
+    public void IncreaseIntelligence()
+    {
+        primaryStats.intelligence++;
+        XP.ConsumeStatsPoint();
+        UpdateStats();
+    }
+
+    public float GetIntelligence()
+    {
+        return primaryStats.intelligence;
+    }
+
+    public void IncreaseConstitution()
+    {
+        primaryStats.constitution++;
+        XP.ConsumeStatsPoint();
+        UpdateStats();
+    }
+
+    public float GetConstitution()
+    {
+        return primaryStats.constitution;
+    }
+
+    public void IncreaseEndurance()
+    {
+        primaryStats.endurance++;
+        XP.ConsumeStatsPoint();
+        UpdateStats();
+    }
+
+    public float GetEndurance()
+    {
+        return primaryStats.endurance;
+    }
+
+    public void IncreaseWisdom()
+    {
+        primaryStats.wisdom++;
+        XP.ConsumeStatsPoint();
+        UpdateStats();
+    }
+
+    public float GetWisdom()
+    {
+        return primaryStats.wisdom;
     }
 }

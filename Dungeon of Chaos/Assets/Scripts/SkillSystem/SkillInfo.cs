@@ -72,4 +72,9 @@ public class SkillInfo<T> : ScriptableObject
     {
         return level < maxLevel;
     }
+
+    public int GetMaxLevel()
+    {
+        return maxLevel;
+    }
 }

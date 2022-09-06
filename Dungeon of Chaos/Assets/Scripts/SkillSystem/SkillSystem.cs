@@ -24,6 +24,7 @@ public class SkillSystem : MonoBehaviour
 
     private void Awake()
     {
+        Debug.Log("Instance Skill System");
         instance = this;
         activated = new List<SkillInfoActive>();
         for (int i = 0; i < activeSkillsSlots; i++)
@@ -90,5 +91,16 @@ public class SkillSystem : MonoBehaviour
     public bool CanUpgrade(SkillInfoPassive skill)
     {
         return skillPoints >= skillPointsRequired[skill.GetLevel()] && skill.CanUpgrade();
+    }
+
+    public bool HasActivatedSkill()
+    {
+        foreach (var skill in activated)
+        {
+            if (skill != null)
+                return true;
+        }
+
+        return false;
     }
 }

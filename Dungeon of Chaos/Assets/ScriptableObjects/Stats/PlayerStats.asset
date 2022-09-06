@@ -16,6 +16,8 @@ MonoBehaviour:
   staminaRegen: 20
   primaryStats:
     id: 0
+  XP:
+    id: 1
   references:
     version: 1
     00000000:
@@ -31,3 +33,12 @@ MonoBehaviour:
         hpMultiplier: 10
         staminaMultiplier: 10
         manaMultiplier: 10
+        statsModifiers: {fileID: 0}
+    00000001:
+      type: {class: Levelling, ns: , asm: Assembly-CSharp}
+      data:
+        maxLevel: 70
+        baseMultiplier: 1.5
+        baseXP: 100
+        level: 1
+        statsPoints: 4

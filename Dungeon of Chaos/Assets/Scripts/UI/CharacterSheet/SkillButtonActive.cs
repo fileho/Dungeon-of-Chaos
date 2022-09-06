@@ -32,8 +32,10 @@ public class SkillButtonActive : SkillButton
         return skillInfo;
     }
 
-    public override void Upgrade()
+    public override void Upgrade() 
     {
+        time = 0f;
+        rightClick = false;
         if (!SkillSystem.instance.CanUpgrade(skillInfo))
         {
             Debug.Log("Not enough skill points");
@@ -41,10 +43,11 @@ public class SkillButtonActive : SkillButton
         }
 
         SkillSystem.instance.Upgrade(skillInfo);
-        UpdateIcon();
+        SetIcon();
+        SetLevel();
     }
 
-    private void UpdateIcon()
+    public override void SetIcon()
     {
         Sprite icon = skillInfo.GetSkillData().GetIcon();
         GetComponent<Image>().sprite = icon;
@@ -53,5 +56,13 @@ public class SkillButtonActive : SkillButton
         {
             Debug.Log("Update icon in activated slots");
         }
+    }
+
+    public override void SetLevel()
+    {
+        if (skillInfo.GetLevel() == 0)
+            locked.SetActive(true);
+        locked.SetActive(false);
+        level.text = skillInfo.GetLevel() + "/" + skillInfo.GetMaxLevel();
     }
 }

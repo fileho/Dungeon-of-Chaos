@@ -7,9 +7,13 @@ using UnityEngine.UI;
 public abstract class SkillButton : MonoBehaviour, IPointerDownHandler, IPointerEnterHandler, IPointerExitHandler, IBeginDragHandler, IDragHandler, IEndDragHandler, IPointerUpHandler
 { 
     [SerializeField] protected GameObject dragDrop;
-    bool rightClick = false;
-    float time = 0f;
-    float upgradeTime = 1.5f;
+    [SerializeField] protected Text level;
+    [SerializeField] protected GameObject locked;
+    [SerializeField] protected GameObject load;
+
+    protected bool rightClick = false;
+    protected float time = 0f;
+    float upgradeTime = 2.5f;
 
     public abstract void OnBeginDrag(PointerEventData eventData);
     public void OnDrag(PointerEventData eventData)
@@ -33,27 +37,45 @@ public abstract class SkillButton : MonoBehaviour, IPointerDownHandler, IPointer
             Debug.Log("Right Button");
             rightClick = true;
             time = 0f;
+            load.GetComponent<Image>().fillAmount = 0;
+            load.SetActive(true);
         }
-
     }
 
     public abstract void OnPointerEnter(PointerEventData eventData);
 
     public abstract void OnPointerExit(PointerEventData eventData);
 
+    public void OnPointerUp(PointerEventData eventData)
+    {
+        Debug.Log("OnPointerUp");
+        rightClick = false;
+        time = 0f;
+    }
+
+    void Start()
+    {
+        SetLevel();
+        SetIcon();
+    }
+
     void Update()
     {
         if (rightClick)
+        {
             time += Time.deltaTime;
-        if (time >= upgradeTime)    
+            load.GetComponent<Image>().fillAmount = time / upgradeTime;
+        }
+        if (time >= upgradeTime)
+        {
+            load.SetActive(false);
             Upgrade();
+        }
     }
 
     public abstract void Upgrade();
 
-    public void OnPointerUp(PointerEventData eventData)
-    {
-        rightClick = false;
-        time = 0f;
-    }
+    public abstract void SetIcon();
+
+    public abstract void SetLevel();
 }

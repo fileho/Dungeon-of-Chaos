@@ -33,6 +33,35 @@ public class SkillButtonPassive : SkillButton
 
     public override void Upgrade()
     {
-        throw new System.NotImplementedException();
+        time = 0f;
+        rightClick = false;
+        if (!SkillSystem.instance.CanUpgrade(skillInfo))
+        {
+            Debug.Log("Not enough skill points");
+            return;
+        }
+
+        SkillSystem.instance.Upgrade(skillInfo);
+        SetIcon();
+        SetLevel();
+    }
+
+    public override void SetLevel()
+    {
+        if (skillInfo.GetLevel() == 0)
+            locked.SetActive(true);
+        locked.SetActive(false);
+        level.text = skillInfo.GetLevel() + "/" + skillInfo.GetMaxLevel();
+    }
+
+    public override void SetIcon()
+    {
+        Sprite icon = skillInfo.GetSkillData().GetIcon();
+        GetComponent<Image>().sprite = icon;
+
+        if (SkillSystem.instance.GetEquippedSkills().Contains(skillInfo))
+        {
+            Debug.Log("Update icon in activated slots");
+        }
     }
 }
