@@ -49,7 +49,7 @@ public class Character : Unit
 
     private void UpdateCooldowns()
     {
-        if (SkillSystem.instance == null || SkillSystem.instance.GetActivatedSkills() == null)
+        if (SkillSystem.instance == null || SkillSystem.instance.GetActivatedSkills() == null || !SkillSystem.instance.HasActivatedSkill())
             return;
         foreach (var skill in SkillSystem.instance.GetActivatedSkills())
         {
