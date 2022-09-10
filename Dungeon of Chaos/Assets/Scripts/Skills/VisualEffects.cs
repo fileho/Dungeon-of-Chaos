@@ -2,13 +2,10 @@ using UnityEngine;
 
 public class VisualEffects : MonoBehaviour
 {
-    [SerializeField] private float duration;
-
-    void Start()
+    public void Init(float duration)
     {
         Invoke(nameof(End), duration);
     }
-
     private void End()
     {
         Destroy(gameObject);

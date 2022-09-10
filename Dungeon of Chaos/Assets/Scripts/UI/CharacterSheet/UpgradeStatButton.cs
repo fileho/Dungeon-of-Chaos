@@ -8,7 +8,6 @@ using UnityEngine.Events;
 public class UpgradeStatButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerClickHandler, IPointerUpHandler
 {
     [SerializeField] private UnityEvent changeStat;
-    [SerializeField] private int index;
 
     [SerializeField] private Color idle;
     [SerializeField] private Color hover;
@@ -21,7 +20,7 @@ public class UpgradeStatButton : MonoBehaviour, IPointerEnterHandler, IPointerEx
     public void OnPointerClick(PointerEventData eventData)
     {
         gameObject.GetComponent<Image>().color = selected;
-        StatsOverview.instance.IncreaseStat(changeStat, index);
+        changeStat.Invoke();
     }
 
     public void OnPointerEnter(PointerEventData eventData)

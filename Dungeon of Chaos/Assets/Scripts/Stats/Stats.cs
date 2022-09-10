@@ -174,11 +174,30 @@ public class Stats : ScriptableObject
         mana.maxValue = primaryStats.GetMaxMana(XP.GetLevel());
     }
 
+    public void UpdateStatsUI()
+    {
+        if (StatsOverview.instance == null)
+            return;
+        XP.UpdateLevellingUI();
+        StatsOverview.instance.SetStrength(primaryStats.strength);
+        StatsOverview.instance.SetDamage(physicalDamage);
+        StatsOverview.instance.SetIntelligence(primaryStats.intelligence);
+        StatsOverview.instance.SetPower(spellPower);
+        StatsOverview.instance.SetConstitution(primaryStats.constitution);
+        StatsOverview.instance.SetHP(health.maxValue);
+        StatsOverview.instance.SetEndurance(primaryStats.endurance);
+        StatsOverview.instance.SetStamina(stamina.maxValue);
+        StatsOverview.instance.SetWisdom(primaryStats.wisdom);
+        StatsOverview.instance.SetMana(mana.maxValue);
+    }
+
     public void IncreaseStrength()
     {
         primaryStats.strength++;
         XP.ConsumeStatsPoint();
-        UpdateStats();
+        physicalDamage = primaryStats.GetDamage(XP.GetLevel());
+        StatsOverview.instance.SetStrength(primaryStats.strength);
+        StatsOverview.instance.SetDamage(physicalDamage);
     }
 
     public float GetStrength()
@@ -190,7 +209,9 @@ public class Stats : ScriptableObject
     {
         primaryStats.intelligence++;
         XP.ConsumeStatsPoint();
-        UpdateStats();
+        spellPower = primaryStats.GetSpellPower(XP.GetLevel());
+        StatsOverview.instance.SetIntelligence(primaryStats.intelligence);
+        StatsOverview.instance.SetPower(spellPower);
     }
 
     public float GetIntelligence()
@@ -202,7 +223,9 @@ public class Stats : ScriptableObject
     {
         primaryStats.constitution++;
         XP.ConsumeStatsPoint();
-        UpdateStats();
+        health.maxValue = primaryStats.GetMaxHP(XP.GetLevel());
+        StatsOverview.instance.SetConstitution(primaryStats.constitution);
+        StatsOverview.instance.SetHP(health.maxValue);
     }
 
     public float GetConstitution()
@@ -213,8 +236,10 @@ public class Stats : ScriptableObject
     public void IncreaseEndurance()
     {
         primaryStats.endurance++;
+        stamina.maxValue = primaryStats.GetMaxStamina(XP.GetLevel());
         XP.ConsumeStatsPoint();
-        UpdateStats();
+        StatsOverview.instance.SetEndurance(primaryStats.endurance);
+        StatsOverview.instance.SetStamina(stamina.maxValue);
     }
 
     public float GetEndurance()
@@ -226,7 +251,9 @@ public class Stats : ScriptableObject
     {
         primaryStats.wisdom++;
         XP.ConsumeStatsPoint();
-        UpdateStats();
+        mana.maxValue = primaryStats.GetMaxMana(XP.GetLevel());
+        StatsOverview.instance.SetWisdom(primaryStats.wisdom);
+        StatsOverview.instance.SetMana(mana.maxValue);
     }
 
     public float GetWisdom()

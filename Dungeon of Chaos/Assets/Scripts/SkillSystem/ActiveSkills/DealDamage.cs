@@ -2,8 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(menuName = "SO/Skills/SkillEffects/AoEDamage")]
-public class AoEDamage : ISkillEffect
+[CreateAssetMenu(menuName = "SO/Skills/SkillEffects/DealDamage")]
+public class DealDamage : ISkillEffect
 {
     [SerializeField] private float damage;
     [SerializeField] private float range;

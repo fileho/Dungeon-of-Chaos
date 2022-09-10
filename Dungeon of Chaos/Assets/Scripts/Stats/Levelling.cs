@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class Levelling
 {
-    private int currentXP = 0;
+    private int currentXP = 100;
     private int nextLevelXP;
     [Header("Levelling settings")]
     [Tooltip("Only for character")]
@@ -15,7 +15,7 @@ public class Levelling
     [Header("Starting level")]
     [SerializeField] private int level = 1;
 
-    [SerializeField] private int statsPoints;
+    [SerializeField] private int statsPoints = 0;
 
     public void SetNextLevelXP()
     {
@@ -55,10 +55,22 @@ public class Levelling
     public void LevelUp()
     {
         level++;
-        statsPoints += GetStatsPointsReward();
+        this.statsPoints += GetStatsPointsReward();
         SkillSystem.instance.skillPoints += GetSkillPointsReward();
         currentXP -= nextLevelXP;
         SetNextLevelXP();
+        UpdateLevellingUI();
+    }
+
+    public void UpdateLevellingUI()
+    {
+        StatsOverview.instance.SetLevel(level);
+        StatsOverview.instance.SetXP(currentXP);
+        StatsOverview.instance.SetNextLevelXP(nextLevelXP);
+        StatsOverview.instance.SetStatsPoints(statsPoints);
+        StatsOverview.instance.UpdateSkillPoints();
+        StatsOverview.instance.ShowLevelUpButton(CanLevelUp());
+        StatsOverview.instance.ShowStatsIncreaseButtons(HasStatsPoints());
     }
 
     private int GetStatsPointsReward()
@@ -83,13 +95,10 @@ public class Levelling
         return SkillSystem.instance.skillPoints > 0;
     }
 
-    public int GetStatsPoints()
-    {
-        return statsPoints;
-    }
-
     public void ConsumeStatsPoint()
     {
         statsPoints--;
+        StatsOverview.instance.SetStatsPoints(statsPoints);
+        StatsOverview.instance.ShowStatsIncreaseButtons(HasStatsPoints());
     }
 }
