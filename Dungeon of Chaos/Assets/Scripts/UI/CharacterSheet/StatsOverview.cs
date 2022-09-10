@@ -1,3 +1,4 @@
+
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -8,60 +9,71 @@ using TMPro;
 
 public class StatsOverview : MonoBehaviour
 {
-    [SerializeField] private GameObject xp;
-    [SerializeField] private GameObject nextLevelXP;
-    [SerializeField] private GameObject level;
+    [Header("Levelling UI")]
+    [SerializeField] private TextMeshProUGUI xp;
+    [SerializeField] private TextMeshProUGUI nextLevelXP;
+    [SerializeField] private TextMeshProUGUI level;
     [SerializeField] private GameObject levelUpButton;
-    [SerializeField] private GameObject statsPoints;
-    [SerializeField] private GameObject skillPoints;
-
+    [SerializeField] private TextMeshProUGUI statsPoints;
+    [SerializeField] private TextMeshProUGUI skillPoints;
     [SerializeField] private List<GameObject> statsIncreaseButtons;
-    [SerializeField] private List<StatUI> primaryStats;
-    [SerializeField] private List<StatUI> secondaryStats;
+
+    [Header("Primary Stats Text")]
+    [SerializeField] private TextMeshProUGUI strengthText;
+    [SerializeField] private TextMeshProUGUI intelligenceText;
+    [SerializeField] private TextMeshProUGUI constitutionText;
+    [SerializeField] private TextMeshProUGUI enduranceText;
+    [SerializeField] private TextMeshProUGUI wisdomText;
+
+    [Header("Secondary Stats Text")]
+    [SerializeField] private TextMeshProUGUI damageText;
+    [SerializeField] private TextMeshProUGUI powerText;
+    [SerializeField] private TextMeshProUGUI hpText;
+    [SerializeField] private TextMeshProUGUI staminaText;
+    [SerializeField] private TextMeshProUGUI manaText;
 
     public static StatsOverview instance;
 
     private void Start()
     {
         instance = this;
-        UpdateUI();
+        Character.instance.stats.UpdateStatsUI();
     }
 
-    private void UpdateXP()
+    public void SetXP(float value)
     {
-        xp.GetComponent<TextMeshProUGUI>().text = Character.instance.stats.GetLevellingData().GetCurrentXP().ToString();
+        SetStat(value, xp);
     }
 
-    private void UpdateNextLevelXP()
+    public void SetNextLevelXP(float value)
     {
-        nextLevelXP.GetComponent<TextMeshProUGUI>().text = Character.instance.stats.GetLevellingData().GetNextLevelXP().ToString();
+        SetStat(value, nextLevelXP);
     }
 
-    private void UpdateLevel()
+    public void SetLevel(float value)
     {
-        level.GetComponent<TextMeshProUGUI>().text = Character.instance.stats.GetLevel().ToString();
+        SetStat(value, level);
     }
 
-    private void ShowLevelUpButton()
+    public void ShowLevelUpButton(bool show)
     {
-        levelUpButton.SetActive(Character.instance.stats.GetLevellingData().CanLevelUp());
+        levelUpButton.SetActive(show);
     }
 
-    private void ShowStatsIncreaseButtons()
+    public void ShowStatsIncreaseButtons(bool show)
     {
         foreach (GameObject btn in statsIncreaseButtons)
         {
-            btn.SetActive(Character.instance.stats.GetLevellingData().HasStatsPoints()); 
+            btn.SetActive(show); 
         }            
     }
 
-    private void UpdateStatsPoints()
+    public void SetStatsPoints(float value)
     {
-       // Debug.Log("StatsPoints " + Character.instance.stats.GetLevellingData().GetStatsPoints().ToString());
-        statsPoints.GetComponent<TextMeshProUGUI>().text = Character.instance.stats.GetLevellingData().GetStatsPoints().ToString();
+        SetStat(value, statsPoints);
     }
 
-    private void UpdateSkillPoints()
+    public void UpdateSkillPoints()
     {
         if (SkillSystem.instance == null)
         {
@@ -70,46 +82,65 @@ public class StatsOverview : MonoBehaviour
         }
         skillPoints.GetComponent<TextMeshProUGUI>().text = SkillSystem.instance.skillPoints.ToString();
     }
-
-    public void UpdateUI()
-    {
-        Debug.Log("UpdateUI");
-        UpdateXP();
-        UpdateNextLevelXP();
-        UpdateLevel();
-        ShowLevelUpButton();
-        ShowStatsIncreaseButtons();
-        UpdateStatsPoints();
-        UpdateSkillPoints();
-        UpdateSecondaryStats();
-        UpdatePrimaryStats();
-    }
-
+    
     public void LevelUp()
     {
         Character.instance.stats.GetLevellingData().LevelUp();
-        UpdateUI();
     }
 
-    public void IncreaseStat(UnityEvent changeStat, int index)
+    private void SetStat(float value, TextMeshProUGUI textGUI)
     {
-        changeStat.Invoke();
-        primaryStats[index].UpdateStat();
-        secondaryStats[index].UpdateStat();
-        UpdateUI();
+        textGUI.text = value.ToString();
     }
 
-    private void UpdateSecondaryStats()
+    public void SetStrength(float value)
     {
-        foreach (StatUI secondary in secondaryStats)
-        {
-            secondary.UpdateStat();
-        }
+        SetStat(value, strengthText);
     }
 
-    private void UpdatePrimaryStats()
+    public void SetIntelligence(float value)
     {
-        foreach (StatUI primary in primaryStats)
-            primary.UpdateStat();
+        SetStat(value, intelligenceText);
     }
+
+    public void SetConstitution(float value)
+    {
+        SetStat(value, constitutionText);
+    }
+
+    public void SetEndurance(float value)
+    {
+        SetStat(value, enduranceText);
+    }
+
+    public void SetWisdom(float value)
+    {
+        SetStat(value, wisdomText);
+    }
+
+    public void SetDamage(float value)
+    {
+        SetStat(value, damageText);
+    }
+
+    public void SetPower(float value)
+    {
+        SetStat(value, powerText);
+    }
+
+    public void SetHP(float value)
+    {
+        SetStat(value, hpText);
+    }
+
+    public void SetMana(float value)
+    {
+        SetStat(value, manaText);
+    }
+    public void SetStamina(float value)
+    {
+        SetStat(value, staminaText);
+    }
+
+
 }
