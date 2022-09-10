@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-[CreateAssetMenu(menuName = "SO/Skills/TemporalBuff")]
+[CreateAssetMenu(menuName = "SO/Skills/SkillEffects/TemporalBuff")]
 public class TemporalBuff : ISkillEffect
 {
     [SerializeField] private float duration;

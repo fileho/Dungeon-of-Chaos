@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-[CreateAssetMenu(menuName = "SO/Skills/RepeatedEffect")]
+[CreateAssetMenu(menuName = "SO/Skills/SkillEffects/RepeatedEffect")]
 public class RepeatedEffect : ISkillEffect
 {
     [SerializeField] private float value;

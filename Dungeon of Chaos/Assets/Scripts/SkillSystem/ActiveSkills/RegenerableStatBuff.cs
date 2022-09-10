@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.Events;
 
-[CreateAssetMenu(menuName = "SO/Skills/RegenerableStatBuff")]
+[CreateAssetMenu(menuName = "SO/Skills/SkillEffects/RegenerableStatBuff")]
 public class RegenerableStatBuff : ISkillEffect
 {
     [SerializeField] private float value;
