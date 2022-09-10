@@ -5,12 +5,12 @@ using System.Reflection;
 using UnityEngine;
 
 [System.Serializable]
-public struct SkillData
+public class SkillData
 {
-    private string name;
-    private string description;
+    [SerializeField] private string name;
+    [SerializeField] private string description;
 
-    private Sprite icon;
+    [SerializeField] private Sprite icon;
 
     public Sprite GetIcon()
     {
@@ -28,7 +28,7 @@ public struct SkillData
     }
 }
 
-[CreateAssetMenu(menuName = "SO/Skills/Active")]
+[CreateAssetMenu(menuName = "SO/Skills/Skills/Active")]
 public class IActiveSkill : ScriptableObject
 {
     [SerializeField] private SkillData skillData;

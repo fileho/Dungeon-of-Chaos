@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[CreateAssetMenu(menuName = "SO/Skills/SkillEffects/Projectile")]
 public class ProjectileSkill : ISkillEffect
 {
     [SerializeField] private float speed;
@@ -18,6 +19,5 @@ public class ProjectileSkill : ISkillEffect
         float damage = skillEffectType == SkillEffectType.physical ? unit.stats.GetPhysicalDamage() * dmg 
             : unit.stats.GetSpellPower()*dmg;
         projectile.SetStats(damage, speed, unit.transform);
-
     }
 }
