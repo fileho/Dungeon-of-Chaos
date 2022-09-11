@@ -19,12 +19,12 @@ public class SkillButtonActive : SkillButton
 
     public override void OnPointerEnter(PointerEventData eventData)
     {
-        Debug.Log("OnPointerEnter");
+        TooltipSystem.instance.Show(skillInfo.GetSkillData().GetDescription(), skillInfo.GetSkillData().GetName(), "Active Skill");
     }
 
     public override void OnPointerExit(PointerEventData eventData)
     {
-        Debug.Log("OnPointerExit");
+        TooltipSystem.instance.Hide();
     }
 
     public SkillInfoActive GetSkillInfo()
@@ -60,9 +60,9 @@ public class SkillButtonActive : SkillButton
 
     public override void SetLevel()
     {
-        if (skillInfo.GetLevel() == 0)
-            locked.SetActive(true);
         locked.SetActive(false);
+        if (skillInfo.GetLevel() == 0)
+            locked.SetActive(true);        
         level.text = skillInfo.GetLevel() + "/" + skillInfo.GetMaxLevel();
     }
 }

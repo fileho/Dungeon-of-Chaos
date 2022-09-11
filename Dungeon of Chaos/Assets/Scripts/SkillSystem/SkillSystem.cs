@@ -47,12 +47,16 @@ public class SkillSystem : MonoBehaviour
     public void Upgrade(SkillInfoActive skill)
     {
         skillPoints -= skillPointsRequired[skill.GetLevel()];
+        if (!activeSkillsUnlocked.Contains(skill))
+            activeSkillsUnlocked.Add(skill);
         skill.Upgrade();
     }
 
     public void Upgrade(SkillInfoPassive skill)
     {
         skillPoints -= skillPointsRequired[skill.GetLevel()];
+        if (!passiveSkillsUnlocked.Contains(skill))
+            passiveSkillsUnlocked.Add(skill);
         skill.Upgrade();
     }
 

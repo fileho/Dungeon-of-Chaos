@@ -38,7 +38,13 @@ public class Unit : MonoBehaviour
 
     public void TakeDamage(float value)
     {
-        stats.ConsumeHealth(value);
+        float rest = value - stats.GetArmor();
+        if (stats.HasArmor())
+            stats.SetArmor(-value);
+        if (rest <= 0)
+            return;
+        
+        stats.ConsumeHealth(rest);
         effects.TakeDamage();
         if (stats.IsDead())
             Die();
