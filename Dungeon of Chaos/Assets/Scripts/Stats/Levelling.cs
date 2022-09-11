@@ -55,7 +55,7 @@ public class Levelling
     public void LevelUp()
     {
         level++;
-        this.statsPoints += GetStatsPointsReward();
+        statsPoints += GetStatsPointsReward();
         SkillSystem.instance.skillPoints += GetSkillPointsReward();
         currentXP -= nextLevelXP;
         SetNextLevelXP();

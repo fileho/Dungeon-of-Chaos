@@ -14,6 +14,8 @@ public class Stats : ScriptableObject
     private float physicalDamage;
     private float spellPower;
 
+    private float armor = 0;
+
     [SerializeReference] private Levelling XP = new Levelling();
 
     private IBars bars;
@@ -145,6 +147,23 @@ public class Stats : ScriptableObject
     public void ChangeSpellPower(float value)
     {
         spellPower += value;
+    }
+
+    public bool HasArmor()
+    {
+        return armor > 0;
+    }
+
+    public float GetArmor()
+    {
+        return armor;
+    }
+
+    public void SetArmor(float value)
+    {
+        armor += value;
+        armor = Mathf.Max(armor, 0);
+        // TODO Display/Hide/Update UI
     }
 
     public Stats ResetStats(IBars bars = null)

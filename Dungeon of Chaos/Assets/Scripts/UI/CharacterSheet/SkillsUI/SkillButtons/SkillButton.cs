@@ -18,6 +18,7 @@ public abstract class SkillButton : MonoBehaviour, IPointerDownHandler, IPointer
     public abstract void OnBeginDrag(PointerEventData eventData);
     public void OnDrag(PointerEventData eventData)
     {
+        TooltipSystem.instance.Hide();
         dragDrop.GetComponent<RectTransform>().anchoredPosition += eventData.delta;
     }
 
@@ -29,6 +30,7 @@ public abstract class SkillButton : MonoBehaviour, IPointerDownHandler, IPointer
     public void OnPointerDown(PointerEventData eventData)
     {
         //TODO: Hide Tooltip
+        TooltipSystem.instance.Hide();
         Debug.Log("OnPointerDown");
         if (eventData.button == PointerEventData.InputButton.Left)
             Debug.Log("Left Button");

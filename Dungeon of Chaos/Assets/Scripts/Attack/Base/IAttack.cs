@@ -16,6 +16,8 @@ public abstract class IAttack : MonoBehaviour {
     protected float staminaCost;
     // Time after which the attack can be used again
     protected float cooldown;
+    // The type (physical/magical) of the attack
+    protected SkillEffectType type;
     // The duration of the attack animation
     public float AttackAnimationDuration { get; private set; }
 
@@ -75,7 +77,10 @@ public abstract class IAttack : MonoBehaviour {
     protected virtual void PrepareWeapon() {
         weapon.EnableDisableTrail(true);
         weapon.EnableDisableCollider(true);
-        weapon.SetDamage(damage);
+        float dmg = type == SkillEffectType.physical
+            ? damage * owner.stats.GetPhysicalDamage()
+            : damage * owner.stats.GetSpellPower();
+        weapon.SetDamage(dmg);
     }
 
 
@@ -93,6 +98,7 @@ public abstract class IAttack : MonoBehaviour {
         indicator = attackConfiguration.indicator;
         AttackAnimationDuration = attackConfiguration.attackAnimationDuration;
         IndicatorDuration = 0;
+        type = attackConfiguration.type;
     }
 
     protected virtual void Start() {
