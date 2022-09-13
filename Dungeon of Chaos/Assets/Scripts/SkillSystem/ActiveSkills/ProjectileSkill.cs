@@ -10,7 +10,7 @@ public class ProjectileSkill : ISkillEffect
 
     [SerializeField] private SkillEffectType skillEffectType;
 
-    [SerializeField] private Projectile prefab;
+    [SerializeField] private ProjectileDeprecated prefab;
 
     protected override void ApplyOnTargets(Unit unit, List<Unit> targets)
     {

@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class ProjecliteSkillDeprecatedDeprecated : SkillDeprecated, IActiveSkillDeprecated
 {
-    [SerializeField] private Projectile prefab;
+    [SerializeField] private ProjectileDeprecated prefab;
     [SerializeField] private float damage;
     [SerializeField] private float speed;
     [SerializeField] private float manaCost;
