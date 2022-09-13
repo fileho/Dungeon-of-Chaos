@@ -6,12 +6,10 @@ using UnityEngine;
 public class ApplyForce : ISkillEffect
 {
     [SerializeField] private float force;
-    [SerializeField] private float range;
 
-    public override void Use(Unit unit)
+    protected override void ApplyOnTargets(Unit unit, List<Unit> targets)
     {
-        target.InitTargettingData(unit, range, unit.transform.position);
-        foreach (var t in target.GetTargetUnits())
+        foreach (var t in targets)
         {
             var direction = (t.transform.position - unit.transform.position).normalized;
             t.gameObject.GetComponent<Rigidbody2D>().AddForce(direction * force);

@@ -12,8 +12,12 @@ public class ProjectileSkill : ISkillEffect
 
     [SerializeField] private Projectile prefab;
 
+    protected override void ApplyOnTargets(Unit unit, List<Unit> targets)
+    {
+        return;
+    }
 
-    public override void Use(Unit unit)
+    protected override void Apply(Unit unit)
     {
         var projectile = Instantiate(prefab, unit.transform.position, Quaternion.identity);
         float damage = skillEffectType == SkillEffectType.physical ? unit.stats.GetPhysicalDamage() * dmg 
