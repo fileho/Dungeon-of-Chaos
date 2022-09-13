@@ -6,18 +6,16 @@ using UnityEngine;
 public class DealDamage : ISkillEffect
 {
     [SerializeField] private float damage;
-    [SerializeField] private float range;
     [SerializeField] private SkillEffectType skillEffectType;
 
-    public override void Use(Unit unit)
+    protected override void ApplyOnTargets(Unit unit, List<Unit> targets)
     {
-        target.InitTargettingData(unit, range, unit.transform.position);
-        float dmg = skillEffectType == SkillEffectType.physical 
+        float dmg = skillEffectType == SkillEffectType.physical
             ? unit.stats.GetPhysicalDamage() * damage
             : unit.stats.GetSpellPower() * damage;
-        foreach (Unit t in target.GetTargetUnits())
+        foreach (Unit t in targets)
         {
             t.TakeDamage(dmg);
         }
-    } 
+    }
 }

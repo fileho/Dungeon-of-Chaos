@@ -1,13 +1,18 @@
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
 [CreateAssetMenu(menuName = "SO/Skills/SkillEffects/RegenerableStatBuff")]
-public class RegenerableStatBuff : ISkillEffect
+public abstract class RegenerableStatBuff : ISkillEffect
 {
     [SerializeField] private float value;
-    [SerializeField] private UnityEvent<float> regenerateStat;
-    public override void Use(Unit unit)
+
+    protected override void ApplyOnTargets(Unit unit, List<Unit> targets)
     {
-        regenerateStat.Invoke(value*unit.stats.GetSpellPower());
+        float val = value * unit.stats.GetSpellPower();
+        foreach (Unit t in targets)
+            ApplyEffect(t, val);
     }
+
+    protected abstract void ApplyEffect(Unit target, float val);
 }
