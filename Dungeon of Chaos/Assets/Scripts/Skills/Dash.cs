@@ -1,61 +1,50 @@
+using System.Collections.Generic;
 using System.Collections;
 using UnityEngine;
 
 [CreateAssetMenu(menuName = "SO/Dash/Dash")]
 public class Dash : ScriptableObject
 {
-    [SerializeField] protected float dashSpeed;
-    [SerializeField] protected float staminaCost;
-
     protected bool dashing = false;
     protected bool stopDash = false;
 
-    protected Rigidbody2D rb;
-    protected Character character;
+    protected Unit owner;
+    protected List<ISkillEffect> effects;
+    protected float dashSpeed;
+
+    protected Rigidbody2D rb;    
     protected TrailRenderer trail;
-    protected Stats stats;
 
     public bool IsDashing()
     {
         return dashing;
     }
 
-    public float Cost()
+    public Dash Init(float speed, List<ISkillEffect> effects, Color color, Unit unit)
     {
-        return staminaCost;
-    }
-
-    public void StartDash(Vector2 dir)
-    {
-        if (!Input.GetKeyDown(KeyCode.Space) || IsDashing())
-            return;
-
-
-        if (!stats.HasStamina(staminaCost))
-            return;
-
-        stats.ConsumeStamina(staminaCost);
-
-        character.StartCoroutine(DashAnimation(dir));
-    }
-
-    public Dash Init(Stats stats)
-    {
-        this.stats = stats;
+        owner = unit;
+        this.effects = effects;
+        dashSpeed = speed;
         ResetDash();
 
-        character = Character.instance;
-        rb = character.GetComponent<Rigidbody2D>();
-        trail = character.transform.Find("Trail").GetComponent<TrailRenderer>();
-        CustomInit();
+        rb = owner.GetComponent<Rigidbody2D>();
+        trail = owner.transform.Find("Trail").GetComponent<TrailRenderer>();
+        trail.startColor = color;
+        trail.endColor = color;
+
+        //owner.StartCoroutine(DashAnimation(direction));
 
         return this;
     }
 
-    protected virtual void CustomInit() {}
+    public void Use(Vector2 dir)
+    {
+        owner.StartCoroutine(DashAnimation(dir));
+    }
 
     private IEnumerator DashAnimation(Vector2 dir)
     {
+        Debug.Log("Dash");
         trail.enabled = true;
         dashing = true;
         stopDash = false;
@@ -90,5 +79,21 @@ public class Dash : ScriptableObject
             return;
 
         stopDash = true;
+        
+        if (col.gameObject.CompareTag("Player"))
+        {
+            foreach (var e in effects)
+            {
+                e.Use(owner, new List<Unit>() { Character.instance });
+            }
+        }
+
+        if (col.gameObject.CompareTag("Enemy"))
+        {
+            foreach (var e in effects)
+            {
+                e.Use(owner, new List<Unit>() { col.gameObject.GetComponent<Enemy>() });
+            }
+        }
     }
 }

@@ -13,6 +13,9 @@ public class SkillSystem : MonoBehaviour
     private List<SkillInfoActive> activated;
     private List<SkillInfoPassive> equipped;
 
+    [SerializeField] private SkillInfoActive activatedDash;
+    private SkillInfoActive activatedSecondary;
+
     public static SkillSystem instance;
 
     [SerializeField] private int activeSkillsSlots;
@@ -24,7 +27,7 @@ public class SkillSystem : MonoBehaviour
 
     private void Awake()
     {
-        Debug.Log("Instance Skill System");
+        //Debug.Log("Instance Skill System");
         instance = this;
         activated = new List<SkillInfoActive>();
         for (int i = 0; i < activeSkillsSlots; i++)
@@ -42,6 +45,16 @@ public class SkillSystem : MonoBehaviour
     public List<SkillInfoPassive> GetEquippedSkills()
     {
         return equipped;
+    }
+
+    public SkillInfoActive GetDash()
+    {
+        return activatedDash;
+    }
+
+    public SkillInfoActive GetSecondary()
+    {
+        return activatedSecondary;
     }
 
     public void Upgrade(SkillInfoActive skill)

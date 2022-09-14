@@ -17,6 +17,19 @@ public class SkillInfo<T> : ScriptableObject
         return skills;
     }
 
+    protected int GetIndex()
+    {
+        int index = level - 1;
+        if (level == 0)
+            index += 1;
+        return index;
+    }
+
+    public T GetCurrentSkill()
+    {
+        return skills[GetIndex()];
+    }
+
     public int GetLevel()
     {
         return level;
