@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class Character : Unit
 {
-    [SerializeField] private Dash dash;
     private IAttack attack;
 
     public static Character instance;
@@ -19,7 +18,7 @@ public class Character : Unit
     {
         transform.Find("Trail").GetComponent<TrailRenderer>().enabled = false;
         camera = Camera.main;
-        dash = Instantiate(dash).Init(stats);
+        (SkillSystem.instance.GetDash().GetCurrentSkill() as IDashSkill).Init(this);
         attack = GetComponentInChildren<IAttack>();
 
         SaveSystem.instance.save.MoveCharacter();
@@ -34,7 +33,6 @@ public class Character : Unit
     void Update()
     {
         RegenerateStamina();
-        Dash();
         RotateWeapon();
         Attack();
         FlipSprite();
@@ -53,8 +51,12 @@ public class Character : Unit
             return;
         foreach (var skill in SkillSystem.instance.GetActivatedSkills())
         {
-            skill.GetSkills()[skill.GetLevel()].UpdateCooldown();
+            skill.GetCurrentSkill().UpdateCooldown();
         }
+        SkillSystem.instance.GetDash().GetCurrentSkill().UpdateCooldown();
+        if (SkillSystem.instance.GetSecondary() != null)
+            SkillSystem.instance.GetSecondary().GetCurrentSkill().UpdateCooldown();
+
     }
 
     private void UseSkills()
@@ -67,6 +69,10 @@ public class Character : Unit
         {
             UseSkill(1);
         }
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            (SkillSystem.instance.GetDash().GetCurrentSkill() as IDashSkill).Use(this, null, new List<Vector2>() { movement.GetMoveDir() });
+        }
     }
 
     private void UseSkill(int index)
@@ -74,12 +80,12 @@ public class Character : Unit
         SkillInfoActive skill = SkillSystem.instance.GetActivatedSkills()[index];
         if (!skill)
             return;
-        skill.GetSkills()[skill.GetLevel()].Use(this);
+        skill.GetCurrentSkill().Use(this);
     }
 
     private void FixedUpdate()
     {
-        if (dash.IsDashing())
+        if (SkillSystem.instance != null && (SkillSystem.instance.GetDash().GetCurrentSkill() as IDashSkill).IsDashing())
             return;
         Move();
     }
@@ -100,11 +106,6 @@ public class Character : Unit
             transform.localScale = new Vector3(-1, 1, 1);
         else if (dir.x < -0.01f)
             transform.localScale = Vector3.one;
-    }
-
-    private void Dash()
-    {
-        dash.StartDash(movement.GetMoveDir());
     }
 
     private void Move()
@@ -132,6 +133,6 @@ public class Character : Unit
 
     private void OnCollisionEnter2D(Collision2D col)
     {
-        dash.OnCollisionEnter2D(col);
+        (SkillSystem.instance.GetDash().GetCurrentSkill() as IDashSkill).TriggerCollision(col);
     }
 }

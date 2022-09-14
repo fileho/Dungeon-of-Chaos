@@ -4,11 +4,18 @@ using System.Net.Configuration;
 using System.Reflection;
 using UnityEngine;
 
+public enum ActiveSkillType
+{
+    activeSkill,
+    dash,
+    secondaryAttack
+}
 [System.Serializable]
 public class SkillData
 {
     [SerializeField] private string name;
     [SerializeField] private string description;
+    [SerializeField] private ActiveSkillType skillType;
 
     [SerializeField] private Sprite icon;
 
@@ -26,20 +33,25 @@ public class SkillData
     {
         return description;
     }
+
+    public ActiveSkillType GetSkillType()
+    {
+        return skillType;
+    }
 }
 
 [CreateAssetMenu(menuName = "SO/Skills/Skills/Active")]
 public class IActiveSkill : ScriptableObject
 {
-    [SerializeField] private SkillData skillData;
+    [SerializeField] protected SkillData skillData;
 
-    [SerializeField] private float cooldown;
-    [SerializeField] private float manaCost;
-    [SerializeField] private float staminaCost;
+    [SerializeField] protected float cooldown;
+    [SerializeField] protected float manaCost;
+    [SerializeField] protected float staminaCost;
 
-    [SerializeField] private List<ISkillEffect> effects;
+    [SerializeField] protected List<ISkillEffect> effects;
 
-    private float cooldownLeft;
+    protected float cooldownLeft;
 
     public SkillData GetSkillData()
     {
@@ -57,7 +69,7 @@ public class IActiveSkill : ScriptableObject
             cooldownLeft -= Time.deltaTime;
     }
 
-    public void Use(Unit unit)
+    public virtual void Use(Unit unit, List<Unit> targets = null, List<Vector2> targetPositions = null)
     {
         if (!CanUse(unit.stats))
             return;
@@ -67,11 +79,11 @@ public class IActiveSkill : ScriptableObject
 
         foreach (var e in effects)
         {
-            e.Use(unit);
+            e.Use(unit, targets, targetPositions);
         }
     }
 
-    private void Consume(Stats stats)
+    protected void Consume(Stats stats)
     {
         stats.ConsumeMana(manaCost);
         stats.ConsumeStamina(staminaCost);

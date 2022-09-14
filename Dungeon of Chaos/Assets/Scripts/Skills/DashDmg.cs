@@ -4,11 +4,6 @@ using UnityEngine;
 public class DashDmg : Dash
 {
     [SerializeField] protected float damage;
-    protected override void CustomInit()
-    {
-        trail.startColor = Color.red;
-        trail.endColor = Color.red;
-    }
 
     public override void OnCollisionEnter2D(Collision2D col)
     {
