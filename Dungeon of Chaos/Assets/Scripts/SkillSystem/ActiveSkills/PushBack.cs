@@ -2,8 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(menuName = "SO/Skills/SkillEffects/ApplyForce")]
-public class ApplyForce : ISkillEffect
+[CreateAssetMenu(menuName = "SO/Skills/SkillEffects/PushBack")]
+public class PushBack : ISkillEffect
 {
     [SerializeField] private float force;
 

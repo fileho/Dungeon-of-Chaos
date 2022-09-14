@@ -74,7 +74,7 @@ public class Character : Unit
         SkillInfoActive skill = SkillSystem.instance.GetActivatedSkills()[index];
         if (!skill)
             return;
-        skill.GetSkills()[skill.GetLevel() - 1].Use(this);
+        skill.GetSkills()[skill.GetLevel()].Use(this);
     }
 
     private void FixedUpdate()

@@ -4,12 +4,7 @@ using UnityEngine;
 
 [CreateAssetMenu(menuName = "SO/Skills/Targets/AlliesInRange")]
 public class AlliesInRangeTargets : ITarget
-{
-    public override List<Vector2> GetTargetPositions()
-    {
-        return null;
-    }
-
+{ 
     public override List<Unit> GetTargetUnits()
     {
         Collider2D[] hitColliders = Physics2D.OverlapCircleAll(targettingData.position, targettingData.range, targettingData.owner.gameObject.layer);
