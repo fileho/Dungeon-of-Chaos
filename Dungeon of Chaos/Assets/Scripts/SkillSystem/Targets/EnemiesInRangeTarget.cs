@@ -5,11 +5,6 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "SO/Skills/Targets/EnemiesInRange")]
 public class EnemiesInRangeTarget : ITarget
 {
-    public override List<Vector2> GetTargetPositions()
-    {
-        return null;
-    }
-
     public override List<Unit> GetTargetUnits()
     {
         int ownerLayer = targettingData.owner.gameObject.layer;

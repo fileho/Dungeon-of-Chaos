@@ -11,25 +11,38 @@ public abstract class ISkillEffect : ScriptableObject
 {
     [SerializeReference] protected ITarget target;
     [SerializeField] protected float range;
-   
-    public void Use(Unit unit, List<Unit> targets = null)
+
+    public void Use(Unit unit, List<Unit> targets = null, List<Vector2> targetPositions = null)
     {
-        if (targets == null)
+        if (targets == null && targetPositions == null)
         {
             Apply(unit);
             return;
         }
+        if (targets != null)
+        {
+            ApplyOnTargets(unit, targets);
+            return;
+        }
 
-        ApplyOnTargets(unit, targets);
+        ApplyOnPositions(unit, targetPositions);
     }
 
-    protected abstract void ApplyOnTargets(Unit unit, List<Unit> targets);
+    protected virtual void ApplyOnTargets(Unit unit, List<Unit> targets) { ; }
+
+    protected virtual void ApplyOnPositions(Unit unit, List<Vector2> targetPositions) { ; }
 
     protected virtual void Apply(Unit unit)
     {
         target.InitTargettingData(unit, range, unit.transform.position);
         var targets = target.GetTargetUnits();
-        ApplyOnTargets(unit, targets);
+        if (targets != null)
+        {
+            ApplyOnTargets(unit, targets);
+            return;
+        }
+        var targetPositions = target.GetTargetPositions();
+        ApplyOnPositions(unit, targetPositions);        
     }
 
     

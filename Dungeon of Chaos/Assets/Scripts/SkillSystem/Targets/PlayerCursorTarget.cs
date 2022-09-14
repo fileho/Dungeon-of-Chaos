@@ -13,9 +13,4 @@ public class PlayerCursorTarget : ITarget
             : Camera.main.ScreenToWorldPoint(Input.mousePosition); 
         return new List<Vector2>() { position };
     }
-
-    public override List<Unit> GetTargetUnits()
-    {
-        return null;
-    }
 }

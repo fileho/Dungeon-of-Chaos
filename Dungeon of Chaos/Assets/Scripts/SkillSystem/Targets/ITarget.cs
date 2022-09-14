@@ -20,9 +20,9 @@ public abstract class ITarget : ScriptableObject
         targettingData.position = position;
     }
 
-    public abstract List<Unit> GetTargetUnits();
+    public virtual List<Unit> GetTargetUnits() { return null; }
 
-    public abstract List<Vector2> GetTargetPositions();
+    public virtual List<Vector2> GetTargetPositions() { return null; }
 
     public int GetEnemyLayer(int ownerLayer)
     {

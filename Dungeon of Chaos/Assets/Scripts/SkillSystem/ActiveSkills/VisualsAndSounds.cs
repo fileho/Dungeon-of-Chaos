@@ -12,11 +12,6 @@ public class VisualsAndSounds : ISkillEffect
 
     [SerializeField] protected List<ISkillEffect> effects;
 
-    protected override void ApplyOnTargets(Unit unit, List<Unit> targets)
-    {
-        return;
-    }
-
     protected override void Apply(Unit unit)
     {
         Instantiate(vfx, unit.transform);
