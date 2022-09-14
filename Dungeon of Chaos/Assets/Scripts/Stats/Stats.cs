@@ -16,7 +16,7 @@ public class Stats : ScriptableObject
 
     private float armor = 0;
 
-    [SerializeReference] private Levelling XP = new Levelling();
+    [SerializeField] private Levelling XP = new Levelling();
 
     private IBars bars;
 

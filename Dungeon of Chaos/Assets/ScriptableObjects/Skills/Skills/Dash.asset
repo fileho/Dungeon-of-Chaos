@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: Dash
   m_EditorClassIdentifier: 
   skillData:
-    name: 
-    description: 
-    skillType: 0
+    name: Dash
+    description: Allows the player to dash.
+    skillType: 1
     icon: {fileID: 0}
   cooldown: 0
   manaCost: 0

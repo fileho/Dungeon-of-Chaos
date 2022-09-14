@@ -32,8 +32,6 @@ public class Dash : ScriptableObject
         trail.startColor = color;
         trail.endColor = color;
 
-        //owner.StartCoroutine(DashAnimation(direction));
-
         return this;
     }
 

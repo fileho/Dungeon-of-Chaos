@@ -22,7 +22,7 @@ public class IDashSkill : IActiveSkill
 
     public void Init(Unit owner)
     {
-        dash = Instantiate(dash).Init(dashSpeed, effects, trailColor, owner); 
+        dash = dash.Init(dashSpeed, effects, trailColor, owner); 
         
     }
 

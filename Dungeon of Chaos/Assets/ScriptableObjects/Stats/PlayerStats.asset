@@ -17,7 +17,11 @@ MonoBehaviour:
   primaryStats:
     id: 0
   XP:
-    id: 1
+    maxLevel: 35
+    baseMultiplier: 1.5
+    baseXP: 100
+    level: 1
+    statsPoints: 0
   references:
     version: 1
     00000000:
@@ -25,16 +29,8 @@ MonoBehaviour:
       data:
         strength: 10
         intelligence: 10
-        constitution: 10
+        constitution: 11
         endurance: 10
         wisdom: 10
         multipliers: {fileID: 11400000, guid: 9bc05dc5e43aa9f49a343ca8e90f53ed, type: 2}
         statsModifiers: {fileID: 0}
-    00000001:
-      type: {class: Levelling, ns: , asm: Assembly-CSharp}
-      data:
-        maxLevel: 35
-        baseMultiplier: 1.5
-        baseXP: 100
-        level: 1
-        statsPoints: 0
