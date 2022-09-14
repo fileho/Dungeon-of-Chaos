@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-
+[System.Serializable]
 public class Levelling
 {
     private int currentXP = 100;
@@ -14,8 +14,7 @@ public class Levelling
     [SerializeField] private int baseXP;
     [Header("Starting level")]
     [SerializeField] private int level = 1;
-
-    [SerializeField] private int statsPoints = 0;
+    [SerializeField] private int statsPoints;
 
     public void SetNextLevelXP()
     {
@@ -97,6 +96,7 @@ public class Levelling
 
     public void ConsumeStatsPoint()
     {
+        Debug.Log("Stats Points: " + statsPoints);
         statsPoints--;
         StatsOverview.instance.SetStatsPoints(statsPoints);
         StatsOverview.instance.ShowStatsIncreaseButtons(HasStatsPoints());
