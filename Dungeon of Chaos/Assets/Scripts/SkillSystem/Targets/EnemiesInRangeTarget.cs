@@ -13,7 +13,7 @@ public class EnemiesInRangeTarget : ITarget
         List<Unit> targets = new List<Unit>();
         foreach (var collider in hitColliders)
         {
-            if (ownerLayer == LayerMask.NameToLayer("Enemy"))
+            if (ownerLayer == LayerMask.NameToLayer("Enemy") || ownerLayer == LayerMask.NameToLayer("EnemyAttack"))
                 targets.Add(collider.gameObject.GetComponent<Enemy>());
             else
                 targets.Add(collider.gameObject.GetComponent<Character>());

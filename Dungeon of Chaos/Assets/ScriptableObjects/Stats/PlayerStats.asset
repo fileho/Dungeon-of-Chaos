@@ -29,7 +29,7 @@ MonoBehaviour:
       data:
         strength: 10
         intelligence: 10
-        constitution: 11
+        constitution: 10
         endurance: 10
         wisdom: 10
         multipliers: {fileID: 11400000, guid: 9bc05dc5e43aa9f49a343ca8e90f53ed, type: 2}

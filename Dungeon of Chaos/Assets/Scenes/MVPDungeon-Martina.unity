@@ -10634,9 +10634,9 @@ MonoBehaviour:
   changeStat:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 11400000, guid: edd8ebbaec4fc7d45816454a4ef7d31c, type: 2}
-        m_TargetAssemblyTypeName: Stats, Assembly-CSharp
-        m_MethodName: IncreaseIntelligence
+      - m_Target: {fileID: 4003005130171425917}
+        m_TargetAssemblyTypeName: UpgradeStatButton, Assembly-CSharp
+        m_MethodName: UpgradeIntelligence
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -10683,9 +10683,9 @@ MonoBehaviour:
   changeStat:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 11400000, guid: edd8ebbaec4fc7d45816454a4ef7d31c, type: 2}
-        m_TargetAssemblyTypeName: Stats, Assembly-CSharp
-        m_MethodName: IncreaseEndurance
+      - m_Target: {fileID: 4003005130392643522}
+        m_TargetAssemblyTypeName: UpgradeStatButton, Assembly-CSharp
+        m_MethodName: UpgradeEndurance
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -10732,9 +10732,9 @@ MonoBehaviour:
   changeStat:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 11400000, guid: edd8ebbaec4fc7d45816454a4ef7d31c, type: 2}
-        m_TargetAssemblyTypeName: Stats, Assembly-CSharp
-        m_MethodName: IncreaseStrength
+      - m_Target: {fileID: 4003005130806883388}
+        m_TargetAssemblyTypeName: UpgradeStatButton, Assembly-CSharp
+        m_MethodName: UpgradeStrength
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -10800,9 +10800,9 @@ MonoBehaviour:
   changeStat:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 11400000, guid: edd8ebbaec4fc7d45816454a4ef7d31c, type: 2}
-        m_TargetAssemblyTypeName: Stats, Assembly-CSharp
-        m_MethodName: IncreaseConstitution
+      - m_Target: {fileID: 4003005131704923022}
+        m_TargetAssemblyTypeName: UpgradeStatButton, Assembly-CSharp
+        m_MethodName: UpgradeIntelligence
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -10849,9 +10849,9 @@ MonoBehaviour:
   changeStat:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 11400000, guid: edd8ebbaec4fc7d45816454a4ef7d31c, type: 2}
-        m_TargetAssemblyTypeName: Stats, Assembly-CSharp
-        m_MethodName: IncreaseWisdom
+      - m_Target: {fileID: 4003005132139004425}
+        m_TargetAssemblyTypeName: UpgradeStatButton, Assembly-CSharp
+        m_MethodName: UpgradeWisdom
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
