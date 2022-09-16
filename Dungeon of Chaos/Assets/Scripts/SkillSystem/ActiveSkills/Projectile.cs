@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Projectile1 : MonoBehaviour
+public class Projectile : MonoBehaviour
 {
     private List<ISkillEffect> effects;
     private Unit source;
@@ -29,10 +29,6 @@ public class Projectile1 : MonoBehaviour
         this.source = source;
         this.speed = speed;
         this.target = target;
-    }
-
-    private void Use()
-    { 
     }
 
     private IEnumerator ExecuteAction()

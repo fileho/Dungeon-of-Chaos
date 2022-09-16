@@ -131,11 +131,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 4990205605468402921}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 936a0902051f1d24d932501c919df904, type: 3}
+  m_Script: {fileID: 11500000, guid: e2a63a279bd364641a32991e5023ac7d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 10
-  speed: 200
   delay: 0.5
-  offset: 0
-  homingStrength: 0

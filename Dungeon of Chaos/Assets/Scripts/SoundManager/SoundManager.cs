@@ -3,11 +3,26 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [System.Serializable]
-public struct SoundSettings
+public class SoundSettings
 {
-    [SerializeField] public string name { get; private set; }
-    [SerializeField] public float volume { get => volume; private set => volume = 1; }
-    [SerializeField] public float pitch { get => pitch; private set => pitch = 1; }
+    [SerializeField] private string name;
+    [SerializeField] private float volume = 1;
+    [SerializeField] private float pitch = 1;
+
+    public string GetName()
+    {
+        return name;
+    }
+
+    public float GetVolume()
+    {
+        return volume;
+    }
+
+    public float GetPitch()
+    {
+        return pitch;
+    }
 }
 
 [System.Serializable]
