@@ -10,7 +10,7 @@ public class SkillSystem : MonoBehaviour
     private List<SkillInfoActive> activeSkillsUnlocked;
     private List<SkillInfoPassive> passiveSkillsUnlocked;
 
-    private List<SkillInfoActive> activated;
+    [SerializeField] private List<SkillInfoActive> activated;
     private List<SkillInfoPassive> equipped;
 
     [SerializeField] private SkillInfoActive activatedDash;
@@ -29,9 +29,9 @@ public class SkillSystem : MonoBehaviour
     {
         //Debug.Log("Instance Skill System");
         instance = this;
-        activated = new List<SkillInfoActive>();
+        /*activated = new List<SkillInfoActive>();
         for (int i = 0; i < activeSkillsSlots; i++)
-            activated.Add(null);
+            activated.Add(null);*/
         equipped = new List<SkillInfoPassive>();
         for (int i = 0; i < passiveSkillsSlots; i++)
             equipped.Add(null);

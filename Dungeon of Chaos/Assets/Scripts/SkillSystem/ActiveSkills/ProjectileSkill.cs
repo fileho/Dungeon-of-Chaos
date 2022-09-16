@@ -7,7 +7,7 @@ public class ProjectileSkill : ISkillEffect
 {
     [SerializeField] private float speed;
 
-    [SerializeField] private Projectile1 prefab;
+    [SerializeField] private Projectile prefab;
     [SerializeField] private List<ISkillEffect> effects;
 
     protected override void ApplyOnPositions(Unit unit, List<Vector2> targetPositions)

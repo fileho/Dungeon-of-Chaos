@@ -13,7 +13,8 @@ MonoBehaviour:
   m_Name: FireballProjectile
   m_EditorClassIdentifier: 
   target: {fileID: 11400000, guid: 9daea2f8eef85fd4d87df7ad3697d89c, type: 2}
-  speed: 0
-  dmg: 0
-  skillEffectType: 0
-  prefab: {fileID: 0}
+  range: 0
+  speed: 5
+  prefab: {fileID: -2455563289009189059, guid: f0c17e2c4ae45634dbbe9c6bd5e0bc57, type: 3}
+  effects:
+  - {fileID: 11400000, guid: 166029bc8794bba488edfc3e0401028d, type: 2}

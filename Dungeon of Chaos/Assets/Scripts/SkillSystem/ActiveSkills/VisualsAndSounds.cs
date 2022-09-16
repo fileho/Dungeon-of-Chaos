@@ -2,11 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-
+[CreateAssetMenu(menuName = "SO/Skills/SkillEffects/Visuals")]
 public class VisualsAndSounds : ISkillEffect
 {
     [SerializeField] private GameObject vfx;
-    [SerializeField] private SoundSettings sfx;
+    [SerializeField] private SoundSettings sfx = new SoundSettings();
 
     [SerializeField] private float duration;
 
@@ -16,6 +16,6 @@ public class VisualsAndSounds : ISkillEffect
     {
         Instantiate(vfx, unit.transform);
         vfx.GetComponent<VisualEffects>().Init(duration, unit, effects);
-        SoundManager.instance.PlaySound(sfx.name, sfx.volume, sfx.pitch);
+        SoundManager.instance.PlaySound(sfx.GetName(), sfx.GetVolume(), sfx.GetPitch());
     }
 }
