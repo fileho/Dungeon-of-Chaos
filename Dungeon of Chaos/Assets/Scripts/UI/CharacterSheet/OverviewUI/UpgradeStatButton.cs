@@ -37,4 +37,30 @@ public class UpgradeStatButton : MonoBehaviour, IPointerEnterHandler, IPointerEx
     {
         gameObject.GetComponent<Image>().color = hover;
     }
+
+    public void UpgradeStrength()
+    {
+        Character.instance.stats.IncreaseStrength();
+    }
+
+    public void UpgradeIntelligence()
+    {
+        Character.instance.stats.IncreaseIntelligence();
+    }
+
+    public void UpgradeConstitution()
+    {
+        Character.instance.stats.IncreaseConstitution();
+    }
+
+    public void UpgradeEndurance()
+    {
+        Character.instance.stats.IncreaseEndurance();
+    }
+
+    public void UpgradeWisdom()
+    {
+        Character.instance.stats.IncreaseWisdom();
+    }
 }
+

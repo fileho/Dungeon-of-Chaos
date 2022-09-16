@@ -11,7 +11,7 @@ public class AlliesInRangeTargets : ITarget
         List<Unit> targets = new List<Unit>();
         foreach (var collider in hitColliders)
         {
-            if (targettingData.owner.gameObject.layer == LayerMask.NameToLayer("Enemy"))
+            if (targettingData.owner.gameObject.layer == LayerMask.NameToLayer("Enemy") || targettingData.owner.gameObject.layer == LayerMask.NameToLayer("EnemyAttack"))
                 targets.Add(collider.gameObject.GetComponent<Enemy>());
             else
                 targets.Add(collider.gameObject.GetComponent<Character>());
