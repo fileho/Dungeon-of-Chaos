@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 374e7d7dbf74fc54981050f17a5f1992, type: 3}
+  m_Name: DashLvl2
+  m_EditorClassIdentifier: 
+  skillData:
+    name: Dash
+    description: Allows the player to dash faster.
+    skillType: 1
+    icon: {fileID: 21300000, guid: d5e79e0e2fb320c4b96a70f7a5cad5d3, type: 3}
+  cooldown: 0
+  manaCost: 0
+  staminaCost: 10
+  effects: []
+  dash: {fileID: 11400000, guid: f362aadcfb4d0784ab39c05ed9347fca, type: 2}
+  dashSpeed: 15
+  trailColor: {r: 0.2565333, g: 0.735849, b: 0, a: 1}

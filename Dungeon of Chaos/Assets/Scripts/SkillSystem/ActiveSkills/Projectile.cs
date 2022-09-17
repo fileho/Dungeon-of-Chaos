@@ -21,6 +21,8 @@ public class Projectile : MonoBehaviour
         collider = GetComponent<Collider2D>();
         sprite = GetComponent<SpriteRenderer>();
         rb = GetComponent<Rigidbody2D>();
+
+        StartCoroutine(ExecuteAction());
     }
 
     public void Init(List<ISkillEffect> effects, Unit source, float speed, Vector2 target)
