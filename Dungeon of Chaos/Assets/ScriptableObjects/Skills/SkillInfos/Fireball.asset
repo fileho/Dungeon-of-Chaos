@@ -14,4 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   skills:
   - {fileID: 11400000, guid: 8abe12a138da3be42b8774f3331a1374, type: 2}
-  maxLevel: 1
+  - {fileID: 11400000, guid: ab6ae21c7e70dfa44bdd000e312abb0e, type: 2}
+  - {fileID: 11400000, guid: 234e0c0ed510f1a4f95ade74ac26d919, type: 2}
+  maxLevel: 3
