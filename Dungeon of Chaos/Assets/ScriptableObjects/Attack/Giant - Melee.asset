@@ -27,5 +27,9 @@ MonoBehaviour:
     name: GiantSwingAttackImpact
     volume: 1
     pitch: 1
+  indicatorSFX:
+    name: GiantAttackIndicator
+    volume: 1
+    pitch: 1
   swing: 30
   reach: 1.5

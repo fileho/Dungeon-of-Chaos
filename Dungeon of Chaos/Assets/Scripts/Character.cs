@@ -32,6 +32,8 @@ public class Character : Unit
 
     void Update()
     {
+        if (dead)
+            return;
         RegenerateStamina();
         RotateWeapon();
         Attack();

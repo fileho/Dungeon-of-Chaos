@@ -17,6 +17,8 @@ public class Enemy : Unit {
 
 
     private void Update() {
+        if (dead)
+            return;
         if (IsAttacking())
             return;
 
