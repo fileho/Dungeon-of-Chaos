@@ -16,3 +16,7 @@ MonoBehaviour:
   range: 0
   damage: 0.5
   skillEffectType: 0
+  dmgSFX:
+    name: FireballImpact
+    volume: 1
+    pitch: 1

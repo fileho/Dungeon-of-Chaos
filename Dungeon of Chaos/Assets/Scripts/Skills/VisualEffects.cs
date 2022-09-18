@@ -4,7 +4,7 @@ using System.Collections.Generic;
 public class VisualEffects : MonoBehaviour
 {
     private List<ISkillEffect> effects;
-    private Unit source; 
+    private Unit source;
 
     public void Init(float duration, Unit source, List<ISkillEffect> effects)
     {

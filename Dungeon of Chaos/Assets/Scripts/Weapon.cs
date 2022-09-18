@@ -14,6 +14,7 @@ public class Weapon : MonoBehaviour {
     private List<GameObject> hitUnits;
     private float damage = 0;
 
+    private SoundSettings impactSFX;
 
     void Start() {
         trail = GetComponentInChildren<TrailRenderer>();
@@ -28,8 +29,15 @@ public class Weapon : MonoBehaviour {
         damage = d;
     }
 
+    // Impact sound is set by the attack as different attacks can have different impact sounds
+    public void SetImpactSound(SoundSettings sound)
+    {
+        impactSFX = sound;
+    }
+
 
     public void InflictDamage(Unit unit) {
+        SoundManager.instance.PlaySound(impactSFX.GetName(), impactSFX.GetVolume(), impactSFX.GetPitch());
         unit.TakeDamage(damage);
     }
 

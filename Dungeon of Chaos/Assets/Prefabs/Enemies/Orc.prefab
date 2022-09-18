@@ -563,6 +563,18 @@ MonoBehaviour:
   movement: {fileID: 11400000, guid: 2a1e0ff95ed4b814db5f1624832232f4, type: 2}
   effects: {fileID: 11400000, guid: b8c2e379a823a5f4a907481e41277e70, type: 2}
   bars: {fileID: 11400000, guid: 0221322a962978542a4599e9d2390aec, type: 2}
+  takeDmgSFX:
+    name: OrcTakeDamage
+    volume: 1
+    pitch: 1
+  deathSFX:
+    name: OrcDeath
+    volume: 1
+    pitch: 1
+  footstepsSFX:
+    name: OrcFootsteps
+    volume: 1
+    pitch: 1
   loot: {fileID: 11400000, guid: 55110f0bef1256e42a7f83b3fc2b4ea9, type: 2}
   lootModifiers: {fileID: 11400000, guid: 35780333c3ddf16479422c4965e1b2c2, type: 2}
 --- !u!1 &1419886182409672312

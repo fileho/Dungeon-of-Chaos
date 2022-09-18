@@ -10,6 +10,10 @@ public class Unit : MonoBehaviour
     [SerializeField] protected Ieffects effects;
     [SerializeField] protected IBars bars;
 
+    [SerializeField] protected SoundSettings takeDmgSFX;
+    [SerializeField] protected SoundSettings deathSFX;
+    [SerializeField] protected SoundSettings footstepsSFX;
+
 
     protected void Start()
     {
@@ -46,12 +50,20 @@ public class Unit : MonoBehaviour
         
         stats.ConsumeHealth(rest);
         effects.TakeDamage();
+        SoundManager.instance.PlaySound(takeDmgSFX.GetName(), takeDmgSFX.GetVolume(), takeDmgSFX.GetPitch());
         if (stats.IsDead())
             Die();
     }
 
 
-    protected virtual void Die()
+    protected void Die()
+    {
+        SoundManager.instance.PlaySound(deathSFX.GetName(), deathSFX.GetVolume(), deathSFX.GetPitch());
+        Invoke(nameof(CleanUp), SoundManager.instance.GetLenght(deathSFX.GetName()));
+        //Destroy(gameObject);
+    }
+
+    protected virtual void CleanUp()
     {
         Destroy(gameObject);
     }

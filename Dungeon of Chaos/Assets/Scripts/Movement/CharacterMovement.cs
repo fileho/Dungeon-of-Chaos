@@ -16,7 +16,7 @@ public class CharacterMovement : IMovement
         return this;
     }
 
-    public override void Move()
+    public override void Move(SoundSettings footstepsSFX)
     {
         Vector2 dir = Vector2.zero;
         if (Input.GetKey(KeyCode.A))
@@ -30,7 +30,10 @@ public class CharacterMovement : IMovement
 
         dir = dir.normalized;
         if (dir != Vector2.zero)
+        {
             moveDir = dir;
+            SoundManager.instance.PlaySound(footstepsSFX.GetName());
+        }
 
         rb.AddForce(stats.MovementSpeed() * Time.fixedDeltaTime * 1000 * dir);
     }

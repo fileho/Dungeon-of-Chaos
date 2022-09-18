@@ -29,8 +29,8 @@ public class SoundSettings
 public class Sound
 {
     [SerializeField] private AudioClip audioClip;
-    [Range(0f,1f)] private float volume;
-    [Range(0.5f, 1.5f)] private float pitch;
+    [SerializeField] [Range(0f,1f)] private float volume = 1;
+    [SerializeField] [Range(0.5f, 1.5f)] private float pitch = 1;
     public string name;
 
     private AudioSource audioSource;
@@ -46,6 +46,21 @@ public class Sound
         audioSource.volume = volume*vol;
         audioSource.pitch = pitch*p;
         audioSource.Play();
+    }
+
+    public bool IsPlaying()
+    {
+        return audioSource.isPlaying;
+    }
+
+    public void StopPlaying()
+    {
+        audioSource.Stop();
+    }
+
+    public float GetLenght()
+    {
+        return audioClip.length;
     }
 }
 
@@ -67,6 +82,26 @@ public class SoundManager : MonoBehaviour
     public void PlaySound(string name, float vol = 1f, float pitch = 1f)
     {
         Sound s = soundEffects.Find(sound => sound.name == name);
+        if (s == null)
+            return;
+        if (s.IsPlaying())
+            return;
         s.Play(vol, pitch);
+    }
+
+    public void StopPlaying(string name)
+    {
+        Sound s = soundEffects.Find(sound => sound.name == name);
+        if (s == null)
+            return;
+        s.StopPlaying();
+    }
+
+    public float GetLenght(string name)
+    {
+        Sound s = soundEffects.Find(sound => sound.name == name);
+        if (s == null)
+            return 0;
+        return s.GetLenght();
     }
 }

@@ -12,8 +12,8 @@ public class AoEVisual : ISkillEffect
 
     protected override void Apply(Unit unit)
     {
-        Instantiate(vfx, unit.transform);
-        vfx.GetComponent<AoEVisualEffect>().Init(range, duration);
-        SoundManager.instance.PlaySound(sfx.GetName(), sfx.GetVolume(), sfx.GetPitch());
+        var clone = Instantiate(vfx, unit.transform);
+        clone.GetComponent<AoEVisualEffect>().Init(range, duration);
+        //SoundManager.instance.PlaySound(sfx.GetName(), sfx.GetVolume(), sfx.GetPitch());
     }
 }

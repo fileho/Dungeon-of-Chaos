@@ -24,10 +24,10 @@ public abstract class ITarget : ScriptableObject
 
     public virtual List<Vector2> GetTargetPositions() { return null; }
 
-    public int GetEnemyLayer(int ownerLayer)
+    public LayerMask GetEnemyLayer(int ownerLayer)
     {
-        return ownerLayer == LayerMask.NameToLayer("Enemy")
-            ? LayerMask.NameToLayer("Player")
-            : LayerMask.NameToLayer("Enemy");
+        return (ownerLayer == LayerMask.NameToLayer("Enemy") || ownerLayer == LayerMask.NameToLayer("EnemyAttack"))
+            ? LayerMask.GetMask("Player")
+            : LayerMask.GetMask("Enemy");
     }
 }

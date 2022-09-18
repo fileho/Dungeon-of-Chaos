@@ -13,10 +13,19 @@ MonoBehaviour:
   m_Name: Character - Sword
   m_EditorClassIdentifier: 
   range: 0
-  damage: 18
+  damage: 1
   staminaCost: 20
   cooldown: 1
   attackAnimationDuration: 0.6
   indicator: {fileID: 0}
+  type: 1
+  swingSFX:
+    name: Attack
+    volume: 1
+    pitch: 1
+  impactSFX:
+    name: AttackImpact
+    volume: 1
+    pitch: 1
   swing: 15
   reach: 1.5

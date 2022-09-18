@@ -12,3 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 73682414587c1a34e8fad0c4d002eef7, type: 3}
   m_Name: CharacterMovement
   m_EditorClassIdentifier: 
+  footstepsSFX:
+    name: CharacterFootsteps
+    volume: 1
+    pitch: 1

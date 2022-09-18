@@ -18,6 +18,9 @@ public abstract class IAttack : MonoBehaviour {
     protected float cooldown;
     // The type (physical/magical) of the attack
     protected SkillEffectType type;
+
+    protected SoundSettings swingSFX;
+    protected SoundSettings impactSFX;
     // The duration of the attack animation
     public float AttackAnimationDuration { get; private set; }
 
@@ -81,6 +84,7 @@ public abstract class IAttack : MonoBehaviour {
             ? damage * owner.stats.GetPhysicalDamage()
             : damage * owner.stats.GetSpellPower();
         weapon.SetDamage(dmg);
+        weapon.SetImpactSound(impactSFX);
     }
 
 
@@ -99,6 +103,8 @@ public abstract class IAttack : MonoBehaviour {
         AttackAnimationDuration = attackConfiguration.attackAnimationDuration;
         IndicatorDuration = 0;
         type = attackConfiguration.type;
+        swingSFX = attackConfiguration.swingSFX;
+        impactSFX = attackConfiguration.impactSFX;
     }
 
     protected virtual void Start() {
