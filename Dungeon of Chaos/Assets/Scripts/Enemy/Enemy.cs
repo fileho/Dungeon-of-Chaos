@@ -88,10 +88,10 @@ public class Enemy : Unit {
 
     private void Move() {
 
-        movement.Move();
+        movement.Move(footstepsSFX);
     }
 
-    protected override void Die() {
+    protected override void CleanUp() {
         loot.Drop();
         Destroy(transform.parent.gameObject);
     }

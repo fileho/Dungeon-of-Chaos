@@ -8,15 +8,15 @@ public class EnemiesInRangeTarget : ITarget
     public override List<Unit> GetTargetUnits()
     {
         int ownerLayer = targettingData.owner.gameObject.layer;
-        int enemyLayer = GetEnemyLayer(ownerLayer);
+        LayerMask enemyLayer = GetEnemyLayer(ownerLayer);
         Collider2D[] hitColliders = Physics2D.OverlapCircleAll(targettingData.position, targettingData.range, enemyLayer);
         List<Unit> targets = new List<Unit>();
         foreach (var collider in hitColliders)
         {
             if (ownerLayer == LayerMask.NameToLayer("Enemy") || ownerLayer == LayerMask.NameToLayer("EnemyAttack"))
-                targets.Add(collider.gameObject.GetComponent<Enemy>());
-            else
                 targets.Add(collider.gameObject.GetComponent<Character>());
+            else
+                targets.Add(collider.gameObject.GetComponent<Enemy>());
         }
         return targets;
     }

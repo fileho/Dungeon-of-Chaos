@@ -7,7 +7,16 @@ public class AlliesInRangeTargets : ITarget
 { 
     public override List<Unit> GetTargetUnits()
     {
-        Collider2D[] hitColliders = Physics2D.OverlapCircleAll(targettingData.position, targettingData.range, targettingData.owner.gameObject.layer);
+        string layerName = LayerMask.LayerToName(targettingData.owner.gameObject.layer);
+        LayerMask layer;
+        if (layerName == "Enemy" || layerName == "EnemyAttack")
+            layer = LayerMask.GetMask("Enemy");
+        else if (layerName == "Player" || layerName == "PlayerAttack")
+            layer = LayerMask.GetMask("Player");
+        else
+            return null;
+
+        Collider2D[] hitColliders = Physics2D.OverlapCircleAll(targettingData.position, targettingData.range, layer);
         List<Unit> targets = new List<Unit>();
         foreach (var collider in hitColliders)
         {

@@ -14,8 +14,8 @@ public class VisualsAndSounds : ISkillEffect
 
     protected override void Apply(Unit unit)
     {
-        Instantiate(vfx, unit.transform);
-        vfx.GetComponent<VisualEffects>().Init(duration, unit, effects);
+        var clone = Instantiate(vfx, unit.transform);
+        clone.GetComponent<VisualEffects>().Init(duration, unit, effects);
         SoundManager.instance.PlaySound(sfx.GetName(), sfx.GetVolume(), sfx.GetPitch());
     }
 }

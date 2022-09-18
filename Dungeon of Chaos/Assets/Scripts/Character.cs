@@ -24,7 +24,7 @@ public class Character : Unit
         SaveSystem.instance.save.MoveCharacter();
     }
 
-    protected override void Die()
+    protected override void CleanUp()
     {
         // TODO respawn logic
         SaveSystem.instance.save.LoadLevel();
@@ -110,7 +110,7 @@ public class Character : Unit
 
     private void Move()
     {
-        movement.Move();
+        movement.Move(footstepsSFX);
     }
 
     private void RotateWeapon()

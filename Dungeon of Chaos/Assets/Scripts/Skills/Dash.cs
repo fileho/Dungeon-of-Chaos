@@ -15,6 +15,8 @@ public class Dash : ScriptableObject
     protected Rigidbody2D rb;    
     protected TrailRenderer trail;
 
+    [SerializeField] protected SoundSettings dashSFX;
+
     public bool IsDashing()
     {
         return dashing;
@@ -42,10 +44,11 @@ public class Dash : ScriptableObject
 
     private IEnumerator DashAnimation(Vector2 dir)
     {
-        Debug.Log("Dash");
         trail.enabled = true;
         dashing = true;
         stopDash = false;
+
+        SoundManager.instance.PlaySound(dashSFX.GetName(), dashSFX.GetVolume(), dashSFX.GetPitch());
 
         rb.AddForce(dashSpeed * 100 * dir);
         rb.drag = 1;
@@ -60,6 +63,7 @@ public class Dash : ScriptableObject
         }
 
         yield return new WaitForSeconds(0.1f);
+        SoundManager.instance.StopPlaying(dashSFX.GetName());
         rb.drag = 10;
         dashing = false;
         trail.enabled = false;

@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 04cf044d0d7bc4c49b07ad36e053e806, type: 3}
-  m_Name: Dash dmg
+  m_Name: DamagingDash
   m_EditorClassIdentifier: 
   dashSpeed: 5
   staminaCost: 15

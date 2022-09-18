@@ -12,5 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5b4c007e8ec46f249aed5484f4c02710, type: 3}
   m_Name: Dash
   m_EditorClassIdentifier: 
-  dashSpeed: 10
-  staminaCost: 10
+  dashSFX:
+    name: Dash
+    volume: 1
+    pitch: 1

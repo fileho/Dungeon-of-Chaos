@@ -10,4 +10,7 @@ public abstract class AttackConfiguration : ScriptableObject
     public float attackAnimationDuration = 1.5f;
     public GameObject indicator;
     public SkillEffectType type;
+
+    public SoundSettings swingSFX;
+    public SoundSettings impactSFX;
 }

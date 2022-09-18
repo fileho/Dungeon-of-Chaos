@@ -14,11 +14,11 @@ public class EnemyMovement : IMovement
         return this;
     }
 
-    public override void Move()
+    public override void Move(SoundSettings footstepsSFX)
     {
         // TODO Add pathfinding
         Vector2 dir = (Character.instance.transform.position - rb.transform.position).normalized;
-
+        SoundManager.instance.PlaySound(footstepsSFX.GetName());
         rb.AddForce(stats.MovementSpeed() * Time.fixedDeltaTime * 1000 * dir);
     }
 
