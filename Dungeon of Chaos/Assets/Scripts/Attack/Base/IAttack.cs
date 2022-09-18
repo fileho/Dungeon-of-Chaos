@@ -21,6 +21,7 @@ public abstract class IAttack : MonoBehaviour {
 
     protected SoundSettings swingSFX;
     protected SoundSettings impactSFX;
+    protected SoundSettings indicatorSFX;
     // The duration of the attack animation
     public float AttackAnimationDuration { get; private set; }
 
@@ -72,6 +73,7 @@ public abstract class IAttack : MonoBehaviour {
 
     protected virtual void ActivateIndicator() {
         if (indicator == null) return;
+        SoundManager.instance.PlaySound(indicatorSFX.GetName(), indicatorSFX.GetVolume(), indicatorSFX.GetPitch());
         GameObject _indicator = Instantiate(indicator, indicatorTransform.position, indicatorTransform.rotation, indicatorTransform);
         _indicator.transform.up = weapon.GetForwardDirectionRotated();
         IndicatorDuration = _indicator.GetComponent<IIndicator>().Duration;
@@ -105,6 +107,7 @@ public abstract class IAttack : MonoBehaviour {
         type = attackConfiguration.type;
         swingSFX = attackConfiguration.swingSFX;
         impactSFX = attackConfiguration.impactSFX;
+        indicatorSFX = attackConfiguration.indicatorSFX;
     }
 
     protected virtual void Start() {

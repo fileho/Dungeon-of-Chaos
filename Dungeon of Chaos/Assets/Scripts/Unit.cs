@@ -14,6 +14,7 @@ public class Unit : MonoBehaviour
     [SerializeField] protected SoundSettings deathSFX;
     [SerializeField] protected SoundSettings footstepsSFX;
 
+    protected bool dead = false;
 
     protected void Start()
     {
@@ -58,6 +59,7 @@ public class Unit : MonoBehaviour
 
     protected void Die()
     {
+        dead = true;
         SoundManager.instance.PlaySound(deathSFX.GetName(), deathSFX.GetVolume(), deathSFX.GetPitch());
         Invoke(nameof(CleanUp), SoundManager.instance.GetLenght(deathSFX.GetName()));
         //Destroy(gameObject);

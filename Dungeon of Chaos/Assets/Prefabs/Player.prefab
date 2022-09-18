@@ -506,6 +506,10 @@ MonoBehaviour:
     name: CharacterDeath
     volume: 1
     pitch: 1
+  footstepsSFX:
+    name: CharacterFootsteps
+    volume: 1
+    pitch: 1
 --- !u!212 &5714781287747887695
 SpriteRenderer:
   m_ObjectHideFlags: 0

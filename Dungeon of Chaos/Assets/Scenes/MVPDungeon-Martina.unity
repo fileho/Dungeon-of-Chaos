@@ -9302,7 +9302,7 @@ MonoBehaviour:
     pitch: 1
     name: GiantDeath
   - audioClip: {fileID: 8300000, guid: 0989c369f059cb446af4733d240ff011, type: 3}
-    volume: 1
+    volume: 0.5
     pitch: 1
     name: GiantFootsteps
   - audioClip: {fileID: 8300000, guid: 21640cb206eed044ebeb9160590168c3, type: 3}
@@ -9317,6 +9317,10 @@ MonoBehaviour:
     volume: 1
     pitch: 1
     name: GiantSwingAttackImpact
+  - audioClip: {fileID: 8300000, guid: 3ec4bba8cfabc644586ed6728d4cebc7, type: 3}
+    volume: 1
+    pitch: 1
+    name: GiantAttackIndicator
   - audioClip: {fileID: 8300000, guid: 968b95d6f48eeb8439904fad75a39198, type: 3}
     volume: 1
     pitch: 1

@@ -18,6 +18,8 @@ public class CharacterMovement : IMovement
 
     public override void Move(SoundSettings footstepsSFX)
     {
+        if (rb.velocity == Vector2.zero)
+            SoundManager.instance.StopPlaying(footstepsSFX.GetName());
         Vector2 dir = Vector2.zero;
         if (Input.GetKey(KeyCode.A))
             dir += Vector2.left;
