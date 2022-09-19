@@ -1,17 +1,32 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+#if UNITY_EDITOR
+using UnityEngine.Assertions;
+#endif
+
+
+
 
 [System.Serializable]
 public class SoundSettings
 {
-    [SerializeField] private string name;
+    [SerializeField] private SoundCategories.SoundCategory soundCategory;
+    [SerializeField] private int sound;
+
     [SerializeField] private float volume = 1;
     [SerializeField] private float pitch = 1;
+    [SerializeField] private float priority = 0;
 
-    public string GetName()
+    public SoundCategories.SoundCategory GetSoundCategory()
     {
-        return name;
+        return soundCategory;
+    }
+
+    public int GetSoundIndex()
+    {
+        return sound;
     }
 
     public float GetVolume()
@@ -23,6 +38,11 @@ public class SoundSettings
     {
         return pitch;
     }
+
+    public float GetPriority()
+    {
+        return priority;
+    }
 }
 
 [System.Serializable]
@@ -31,77 +51,133 @@ public class Sound
     [SerializeField] private AudioClip audioClip;
     [SerializeField] [Range(0f,1f)] private float volume = 1;
     [SerializeField] [Range(0.5f, 1.5f)] private float pitch = 1;
-    public string name;
 
-    private AudioSource audioSource;
-
-    public void SetSource(AudioSource source)
+    public AudioClip GetAudioClip()
     {
-        audioSource = source;
-        audioSource.clip = audioClip;
+        return audioClip;
     }
 
-    public void Play(float vol = 1f, float p = 1f)
+    public float GetVolume()
     {
-        audioSource.volume = volume*vol;
-        audioSource.pitch = pitch*p;
-        audioSource.Play();
+        return volume;
     }
 
-    public bool IsPlaying()
+    public float GetPitch()
     {
-        return audioSource.isPlaying;
+        return pitch;
     }
 
-    public void StopPlaying()
-    {
-        audioSource.Stop();
-    }
 
-    public float GetLenght()
+    public float GetLength()
     {
         return audioClip.length;
     }
 }
 
+[System.Serializable]
+public class SoundPool
+{
+    [SerializeField] private int poolSize = 30;
+    [SerializeField] private List<Sound> sounds;
+    private AudioSource[] pool;
+    private int poolIndex;
+
+    public void Start(Transform transform)
+    {
+        pool = new AudioSource[poolSize];
+        for(int i = 0; i < poolSize; ++i)
+        {
+            GameObject go = new GameObject();
+            go.AddComponent<AudioSource>();
+            go.transform.parent = transform;
+            pool[i] = go.GetComponent<AudioSource>();
+        }
+    }
+
+    public Sound GetSoundAtIndex(int index)
+    {
+        return sounds[index];
+    }
+
+    // TODO add priority handling
+    public AudioSource FindEmptyAudioSource(float priority)
+    {
+        int lastIndex = poolIndex;
+        // start search from last empty position
+        while (++poolIndex < poolSize)
+        {
+            if (!pool[poolIndex].isPlaying)
+                return pool[poolIndex];
+        }
+
+        poolIndex = 0;
+        while (++poolIndex < lastIndex)
+        {
+            if (!pool[poolIndex].isPlaying)
+                return pool[poolIndex];
+        }
+
+        return pool[(lastIndex + 1) % poolSize];
+    }
+}
+
 public class SoundManager : MonoBehaviour
 {
-    [SerializeField] List<Sound> soundEffects;
+    [SerializeField] private SoundPool ambients;
+    [SerializeField] private SoundPool footsteps;
+    [SerializeField] private SoundPool attack;
+    [SerializeField] private SoundPool skill;
+    [SerializeField] private SoundPool ui;
+    [SerializeField] private SoundPool items;
+
     public static SoundManager instance;
 
     private void Awake()
     {
         instance = this;
-        foreach (var s in soundEffects)
+
+        ambients.Start(transform);
+        footsteps.Start(transform);
+        attack.Start(transform);
+        skill.Start(transform);
+        ui.Start(transform);
+        items.Start(transform);
+    }
+
+    public void PlaySound(SoundSettings soundSettings)
+    {
+        var pool = GetPool(soundSettings.GetSoundCategory());
+        var source = pool.FindEmptyAudioSource(soundSettings.GetPriority());
+        var sound = pool.GetSoundAtIndex(soundSettings.GetSoundIndex());
+        PlaySound(source, sound, soundSettings);
+    }
+
+    private void PlaySound(AudioSource source, Sound sound, SoundSettings soundSettings)
+    {
+        source.volume = sound.GetVolume() * soundSettings.GetVolume();
+        source.pitch = sound.GetPitch() * soundSettings.GetPitch();
+        source.clip = sound.GetAudioClip();
+        source.Play();
+    }
+
+    private SoundPool GetPool(SoundCategories.SoundCategory category)
+    {
+        return category switch
         {
-            GameObject go = new GameObject(s.name);
-            s.SetSource(go.AddComponent<AudioSource>());
-        }
+            SoundCategories.SoundCategory.Ambient => ambients,
+            SoundCategories.SoundCategory.Footsteps => footsteps,
+            SoundCategories.SoundCategory.Attack => attack,
+            SoundCategories.SoundCategory.Skill => skill,
+            SoundCategories.SoundCategory.Ui => ui,
+            SoundCategories.SoundCategory.Items => items,
+            _ => throw new ArgumentOutOfRangeException(nameof(category), category, null)
+        };
     }
 
-    public void PlaySound(string name, float vol = 1f, float pitch = 1f)
+    public float GetLength(SoundSettings soundSettings)
     {
-        Sound s = soundEffects.Find(sound => sound.name == name);
-        if (s == null)
-            return;
-        if (s.IsPlaying())
-            return;
-        s.Play(vol, pitch);
-    }
-
-    public void StopPlaying(string name)
-    {
-        Sound s = soundEffects.Find(sound => sound.name == name);
-        if (s == null)
-            return;
-        s.StopPlaying();
-    }
-
-    public float GetLenght(string name)
-    {
-        Sound s = soundEffects.Find(sound => sound.name == name);
-        if (s == null)
-            return 0;
-        return s.GetLenght();
+        var pool = GetPool(soundSettings.GetSoundCategory());
+        var sound = pool.GetSoundAtIndex(soundSettings.GetSoundIndex());
+        return sound.GetLength();
     }
 }

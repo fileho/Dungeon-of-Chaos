@@ -73,7 +73,7 @@ public abstract class IAttack : MonoBehaviour {
 
     protected virtual void ActivateIndicator() {
         if (indicator == null) return;
-        SoundManager.instance.PlaySound(indicatorSFX.GetName(), indicatorSFX.GetVolume(), indicatorSFX.GetPitch());
+        SoundManager.instance.PlaySound(indicatorSFX);
         GameObject _indicator = Instantiate(indicator, indicatorTransform.position, indicatorTransform.rotation, indicatorTransform);
         _indicator.transform.up = weapon.GetForwardDirectionRotated();
         IndicatorDuration = _indicator.GetComponent<IIndicator>().Duration;

@@ -18,7 +18,7 @@ public class EnemyMovement : IMovement
     {
         // TODO Add pathfinding
         Vector2 dir = (Character.instance.transform.position - rb.transform.position).normalized;
-        SoundManager.instance.PlaySound(footstepsSFX.GetName());
+        // SoundManager.instance.PlaySound(footstepsSFX);
         rb.AddForce(stats.MovementSpeed() * Time.fixedDeltaTime * 1000 * dir);
     }
 
