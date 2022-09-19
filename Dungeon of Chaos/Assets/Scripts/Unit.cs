@@ -51,7 +51,7 @@ public class Unit : MonoBehaviour
         
         stats.ConsumeHealth(rest);
         effects.TakeDamage();
-        SoundManager.instance.PlaySound(takeDmgSFX.GetName(), takeDmgSFX.GetVolume(), takeDmgSFX.GetPitch());
+        SoundManager.instance.PlaySound(takeDmgSFX);
         if (stats.IsDead())
             Die();
     }
@@ -60,8 +60,8 @@ public class Unit : MonoBehaviour
     protected void Die()
     {
         dead = true;
-        SoundManager.instance.PlaySound(deathSFX.GetName(), deathSFX.GetVolume(), deathSFX.GetPitch());
-        Invoke(nameof(CleanUp), SoundManager.instance.GetLenght(deathSFX.GetName()));
+        SoundManager.instance.PlaySound(deathSFX);
+        Invoke(nameof(CleanUp), SoundManager.instance.GetLength(deathSFX));
         //Destroy(gameObject);
     }
 

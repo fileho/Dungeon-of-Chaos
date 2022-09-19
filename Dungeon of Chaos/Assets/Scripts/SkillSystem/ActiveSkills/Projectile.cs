@@ -41,7 +41,7 @@ public class Projectile : MonoBehaviour
 
         while (time < delay)
         {
-            SoundManager.instance.PlaySound(castSFX.GetName(), castSFX.GetVolume(), castSFX.GetPitch());
+            SoundManager.instance.PlaySound(castSFX);
             time += Time.deltaTime;
             float t = time / delay;
             sprite.color = Color.Lerp(Color.yellow, new Color(1f, 0.5f, 0f), t);
@@ -52,14 +52,13 @@ public class Projectile : MonoBehaviour
 
             yield return null;
         }
-        SoundManager.instance.StopPlaying(castSFX.GetName());
 
         collider.enabled = true;
         Vector2 dir = target - (Vector2)transform.position;
         dir.Normalize();
 
         rb.AddForce(100 * speed * dir);
-        SoundManager.instance.PlaySound(flightSFX.GetName(), flightSFX.GetVolume(), flightSFX.GetPitch());
+        SoundManager.instance.PlaySound(flightSFX);
         Invoke(nameof(CleanUp), 10f);
     }
 
@@ -70,8 +69,7 @@ public class Projectile : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        SoundManager.instance.StopPlaying(flightSFX.GetName());
-        SoundManager.instance.PlaySound(impactSFX.GetName(), impactSFX.GetVolume(), impactSFX.GetPitch());
+        SoundManager.instance.PlaySound(impactSFX);
         if (collision.CompareTag("Player"))
         {
             foreach (var e in effects)

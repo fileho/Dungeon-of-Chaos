@@ -48,7 +48,7 @@ public class Dash : ScriptableObject
         dashing = true;
         stopDash = false;
 
-        SoundManager.instance.PlaySound(dashSFX.GetName(), dashSFX.GetVolume(), dashSFX.GetPitch());
+        SoundManager.instance.PlaySound(dashSFX);
 
         rb.AddForce(dashSpeed * 100 * dir);
         rb.drag = 1;
@@ -63,7 +63,6 @@ public class Dash : ScriptableObject
         }
 
         yield return new WaitForSeconds(0.1f);
-        SoundManager.instance.StopPlaying(dashSFX.GetName());
         rb.drag = 10;
         dashing = false;
         trail.enabled = false;

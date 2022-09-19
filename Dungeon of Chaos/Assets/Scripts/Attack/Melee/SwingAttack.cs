@@ -16,7 +16,7 @@ public class SwingAttack : MeleeAttack {
         Vector3 endPos = startPos + weapon.GetForwardDirection() * reach;
         var rot = weapon.transform.localRotation;
 
-        SoundManager.instance.PlaySound(swingSFX.GetName(), swingSFX.GetVolume(), swingSFX.GetPitch());
+        SoundManager.instance.PlaySound(swingSFX);
 
         float time = 0;
         while (time < AttackAnimationDuration) {
@@ -37,8 +37,6 @@ public class SwingAttack : MeleeAttack {
             }
             yield return null;
         }
-
-        SoundManager.instance.StopPlaying(swingSFX.GetName());
         transform.localRotation = rot;
 
         // Reset

@@ -16,6 +16,6 @@ public class VisualsAndSounds : ISkillEffect
     {
         var clone = Instantiate(vfx, unit.transform);
         clone.GetComponent<VisualEffects>().Init(duration, unit, effects);
-        SoundManager.instance.PlaySound(sfx.GetName(), sfx.GetVolume(), sfx.GetPitch());
+        SoundManager.instance.PlaySound(sfx);
     }
 }

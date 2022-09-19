@@ -20,6 +20,6 @@ public class DealDamage : ISkillEffect
             t.TakeDamage(dmg);
         }
 
-        SoundManager.instance.PlaySound(dmgSFX.GetName(), dmgSFX.GetVolume(), dmgSFX.GetPitch());
+        SoundManager.instance.PlaySound(dmgSFX);
     }
 }
