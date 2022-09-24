@@ -8,7 +8,7 @@ public class SkillInfo<T> : ScriptableObject
 {
     [SerializeField] protected List<T> skills;
 
-    protected int level = 0;
+    [SerializeField] protected int level = 0;
 
     [SerializeField] protected int maxLevel;
 
@@ -43,5 +43,10 @@ public class SkillInfo<T> : ScriptableObject
     public int GetMaxLevel()
     {
         return maxLevel;
+    }
+
+    public void ResetLevel()
+    {
+        level = 0;
     }
 }

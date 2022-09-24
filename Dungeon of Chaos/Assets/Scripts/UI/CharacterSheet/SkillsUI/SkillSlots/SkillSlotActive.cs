@@ -11,7 +11,7 @@ public class SkillSlotActive : SkillSlot
         if (eventData.pointerDrag == null)
             return;
         SkillInfoActive skillInfo = eventData.pointerDrag.GetComponent<SkillButtonActive>().GetSkillInfo();
-        SkillSystem.instance.Activate(skillInfo, index);
-        GetComponent<Image>().sprite = eventData.pointerDrag.GetComponent<Image>().sprite;
+        skillSystem.Activate(skillInfo, index);
+        image.sprite = eventData.pointerDrag.GetComponent<Image>().sprite;
     }
 }

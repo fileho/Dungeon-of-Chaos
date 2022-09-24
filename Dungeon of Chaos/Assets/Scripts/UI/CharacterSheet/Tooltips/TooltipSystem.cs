@@ -15,12 +15,17 @@ public class TooltipSystem : MonoBehaviour
     public void Show(string content, string header, string subheader)
     {
         tooltip.gameObject.SetActive(true);
-        tooltip.SetText(content, header, subheader);
-        
+        tooltip.SetText(content, header, subheader);        
+    }
+
+    public void DisplayMessage(string message)
+    {
+        tooltip.DisplayMessage(message);
     }
 
     public void Hide()
     {
-        tooltip.gameObject.SetActive(false); 
+        tooltip.gameObject.SetActive(false);
+        tooltip.DeleteMessage();
     }
 }

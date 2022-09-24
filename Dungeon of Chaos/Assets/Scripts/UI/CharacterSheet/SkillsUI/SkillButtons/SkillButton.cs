@@ -11,18 +11,20 @@ public abstract class SkillButton : MonoBehaviour, IPointerDownHandler, IPointer
     [SerializeField] protected GameObject locked;
     [SerializeField] protected GameObject load;
 
+    protected SkillSystem skillSystem;
+
     protected bool rightClick = false;
     protected float time = 0f;
-    float upgradeTime = 2.5f;
+    float upgradeTime = 1f;
 
     public abstract void OnBeginDrag(PointerEventData eventData);
     public void OnDrag(PointerEventData eventData)
     {
         TooltipSystem.instance.Hide();
-        dragDrop.GetComponent<RectTransform>().anchoredPosition += eventData.delta;
+        dragDrop.GetComponent<RectTransform>().position = eventData.position;
     }
 
-    public void OnEndDrag(PointerEventData eventData)
+    public virtual void OnEndDrag(PointerEventData eventData)
     {
         dragDrop.SetActive(false);
     }
@@ -30,18 +32,22 @@ public abstract class SkillButton : MonoBehaviour, IPointerDownHandler, IPointer
     public void OnPointerDown(PointerEventData eventData)
     {
         //TODO: Hide Tooltip
-        TooltipSystem.instance.Hide();
+        //TooltipSystem.instance.Hide();
         Debug.Log("OnPointerDown");
         if (eventData.button == PointerEventData.InputButton.Left)
             Debug.Log("Left Button");
         else if (eventData.button == PointerEventData.InputButton.Right)
         {
-            Debug.Log("Right Button");
-            rightClick = true;
-            time = 0f;
-            load.GetComponent<Image>().fillAmount = 0;
-            load.SetActive(true);
+            RightMouseDown();
         }
+    }
+
+    public virtual void RightMouseDown()
+    {
+        rightClick = true;
+        time = 0f;
+        load.GetComponent<Image>().fillAmount = 0;
+        load.SetActive(true);
     }
 
     public abstract void OnPointerEnter(PointerEventData eventData);
@@ -50,13 +56,15 @@ public abstract class SkillButton : MonoBehaviour, IPointerDownHandler, IPointer
 
     public void OnPointerUp(PointerEventData eventData)
     {
-        Debug.Log("OnPointerUp");
         rightClick = false;
         time = 0f;
+        load.GetComponent<Image>().fillAmount = 0;
+        load.SetActive(false);
     }
 
-    void Start()
+    protected virtual void Start()
     {
+        skillSystem = FindObjectOfType<SkillSystem>();
         SetLevel();
         SetIcon();
     }

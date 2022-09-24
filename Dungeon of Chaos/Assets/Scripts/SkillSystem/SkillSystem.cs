@@ -7,12 +7,12 @@ public class SkillSystem : MonoBehaviour
     [SerializeField] private List<SkillInfoActive> activeSkills;
     [SerializeField] private List<SkillInfoPassive> passiveSkills;
     
-    private List<SkillInfoActive> activeSkillsUnlocked;
-    private List<SkillInfoPassive> passiveSkillsUnlocked;
+    private List<SkillInfoActive> activeSkillsUnlocked = new List<SkillInfoActive>();
+    private List<SkillInfoPassive> passiveSkillsUnlocked = new List<SkillInfoPassive>();
 
     [SerializeField] private List<SkillInfoActive> activated;
     private List<SkillInfoPassive> equipped;
-    // TODO add SkillInfoDash??
+    // TODO add SkillInfoDash?? - probably yes
     [SerializeField] private SkillInfoActive activatedDash;
     private SkillInfoActive activatedSecondary;
 
@@ -23,32 +23,37 @@ public class SkillSystem : MonoBehaviour
 
     [SerializeField] private List<int> skillPointsRequired;
 
-    public int skillPoints = 0;
-
     private Unit owner;
+    private Levelling levelling;
 
     private void Awake()
     {
-        //Debug.Log("Instance Skill System");
-        // instance = this;
-        /*activated = new List<SkillInfoActive>();
+        activated = new List<SkillInfoActive>();
         for (int i = 0; i < activeSkillsSlots; i++)
-            activated.Add(null);*/
+            activated.Add(null);
         equipped = new List<SkillInfoPassive>();
         for (int i = 0; i < passiveSkillsSlots; i++)
             equipped.Add(null);
+        foreach (SkillInfoActive skill in activeSkills)
+            skill.ResetLevel();
     }
 
     public void Init(Unit owner)
     {
         this.owner = owner;
         ((IDashSkill)activatedDash.GetCurrentSkill()).Init(owner);
+        levelling = owner.stats.GetLevellingData();
     }
+
+
 
     public void UpdateCooldowns()
     {
-        foreach (var skill in activated) 
-            skill.GetCurrentSkill().UpdateCooldown();
+        foreach (var skill in activated)
+        {
+            if (skill)
+                skill.GetCurrentSkill().UpdateCooldown();
+        }
 
         activatedDash.GetCurrentSkill().UpdateCooldown();
         if (activatedSecondary)
@@ -79,7 +84,7 @@ public class SkillSystem : MonoBehaviour
 
     public void Upgrade(SkillInfoActive skill)
     {
-        skillPoints -= skillPointsRequired[skill.GetLevel()];
+        levelling.skillPoints -= skillPointsRequired[skill.GetLevel()];
         if (!activeSkillsUnlocked.Contains(skill))
             activeSkillsUnlocked.Add(skill);
         skill.Upgrade();
@@ -87,7 +92,7 @@ public class SkillSystem : MonoBehaviour
 
     public void Upgrade(SkillInfoPassive skill)
     {
-        skillPoints -= skillPointsRequired[skill.GetLevel()];
+        levelling.skillPoints -= skillPointsRequired[skill.GetLevel()];
         if (!passiveSkillsUnlocked.Contains(skill))
             passiveSkillsUnlocked.Add(skill);
         skill.Upgrade();
@@ -123,11 +128,11 @@ public class SkillSystem : MonoBehaviour
 
     public bool CanUpgrade(SkillInfoActive skill)
     {
-        return skillPoints >= skillPointsRequired[skill.GetLevel()];
+        return levelling.skillPoints >= skillPointsRequired[skill.GetLevel()];
     }
     public bool CanUpgrade(SkillInfoPassive skill)
     {
-        return skillPoints >= skillPointsRequired[skill.GetLevel()] && skill.CanUpgrade();
+        return levelling.skillPoints >= skillPointsRequired[skill.GetLevel()] && skill.CanUpgrade();
     }
 
     public bool HasActivatedSkill()
@@ -139,5 +144,15 @@ public class SkillSystem : MonoBehaviour
         }
 
         return false;
+    }
+
+    public bool IsActivated(SkillInfoActive skillInfo)
+    {
+        return activated.Contains(skillInfo);
+    }
+
+    public bool IsEquipped(SkillInfoPassive skillInfo)
+    {
+        return equipped.Contains(skillInfo);
     }
 }

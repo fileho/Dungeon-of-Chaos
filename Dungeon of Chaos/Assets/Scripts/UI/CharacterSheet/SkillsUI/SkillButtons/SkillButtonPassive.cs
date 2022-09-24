@@ -9,7 +9,7 @@ public class SkillButtonPassive : SkillButton
     [SerializeField] private SkillInfoPassive skillInfo;
     public override void OnBeginDrag(PointerEventData eventData)
     {
-        if (!SkillSystem.instance.IsUnlocked(skillInfo))
+        if (!skillSystem.IsUnlocked(skillInfo))
             return;
         dragDrop.transform.position = eventData.position;
         dragDrop.GetComponent<Image>().sprite = skillInfo.GetSkillData().GetIcon();
@@ -35,13 +35,13 @@ public class SkillButtonPassive : SkillButton
     {
         time = 0f;
         rightClick = false;
-        if (!SkillSystem.instance.CanUpgrade(skillInfo))
+        if (!skillSystem.CanUpgrade(skillInfo))
         {
             Debug.Log("Not enough skill points");
             return;
         }
 
-        SkillSystem.instance.Upgrade(skillInfo);
+        skillSystem.Upgrade(skillInfo);
         SetIcon();
         SetLevel();
     }
@@ -59,7 +59,7 @@ public class SkillButtonPassive : SkillButton
         Sprite icon = skillInfo.GetSkillData().GetIcon();
         GetComponent<Image>().sprite = icon;
 
-        if (SkillSystem.instance.GetEquippedSkills().Contains(skillInfo))
+        if (skillSystem.IsEquipped(skillInfo))
         {
             Debug.Log("Update icon in activated slots");
         }
