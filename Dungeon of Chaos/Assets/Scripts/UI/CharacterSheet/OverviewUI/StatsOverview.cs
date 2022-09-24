@@ -34,10 +34,13 @@ public class StatsOverview : MonoBehaviour
 
     public static StatsOverview instance;
 
+    private Stats stats;
+
     private void Start()
     {
         instance = this;
-        Character.instance.stats.UpdateStatsUI();
+        stats = Character.instance.stats;
+        stats.UpdateStatsUI();
     }
 
     public void SetXP(float value)
@@ -75,17 +78,12 @@ public class StatsOverview : MonoBehaviour
 
     public void UpdateSkillPoints()
     {
-        if (SkillSystem.instance == null)
-        {
-            skillPoints.GetComponent<TextMeshProUGUI>().text = "0";
-            return;
-        }
-        skillPoints.GetComponent<TextMeshProUGUI>().text = SkillSystem.instance.skillPoints.ToString();
+        skillPoints.text = stats.GetLevellingData().skillPoints.ToString();
     }
     
     public void LevelUp()
     {
-        Character.instance.stats.GetLevellingData().LevelUp();
+        stats.GetLevellingData().LevelUp();
     }
 
     private void SetStat(float value, TextMeshProUGUI textGUI)

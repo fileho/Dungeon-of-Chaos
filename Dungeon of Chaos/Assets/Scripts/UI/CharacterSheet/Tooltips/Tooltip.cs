@@ -10,6 +10,8 @@ public class Tooltip : MonoBehaviour
     [SerializeField] private TextMeshProUGUI subheaderText;
     [SerializeField] private TextMeshProUGUI contentText;
 
+    [SerializeField] private TextMeshProUGUI messageText;
+
     [SerializeField] private int wrapLimit;
     
     private LayoutElement layoutElement;
@@ -33,6 +35,18 @@ public class Tooltip : MonoBehaviour
         layoutElement.enabled = (headerLength > wrapLimit || contentLength > wrapLimit || subheaderLength > wrapLimit);
     }
 
+    public void DisplayMessage(string message)
+    {
+        messageText.text = message;
+        messageText.color = Color.red;
+    }
+
+    public void DeleteMessage()
+    {
+        messageText.text = "";
+    }
+
+
     private void Update()
     {
         Vector2 position = Input.mousePosition;
@@ -40,7 +54,7 @@ public class Tooltip : MonoBehaviour
         float pivotY = GetCoordinate(position.y / Screen.height);
 
         rectTransform.pivot = new Vector2(pivotX, pivotY);
-        Debug.Log(rectTransform.pivot);
+        //Debug.Log(rectTransform.pivot);
         transform.position = position;
     }
 

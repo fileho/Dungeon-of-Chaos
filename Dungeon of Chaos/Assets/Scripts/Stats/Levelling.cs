@@ -15,6 +15,7 @@ public class Levelling
     [Header("Starting level")]
     [SerializeField] private int level = 1;
     [SerializeField] private int statsPoints;
+    public int skillPoints;
 
     public void SetNextLevelXP()
     {
@@ -55,7 +56,7 @@ public class Levelling
     {
         level++;
         statsPoints += GetStatsPointsReward();
-        SkillSystem.instance.skillPoints += GetSkillPointsReward();
+        skillPoints += GetSkillPointsReward();
         currentXP -= nextLevelXP;
         SetNextLevelXP();
         UpdateLevellingUI();
@@ -91,7 +92,7 @@ public class Levelling
 
     public bool HasSkillPoints()
     {
-        return SkillSystem.instance.skillPoints > 0;
+        return skillPoints > 0;
     }
 
     public void ConsumeStatsPoint()
