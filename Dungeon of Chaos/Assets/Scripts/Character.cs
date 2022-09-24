@@ -8,6 +8,7 @@ public class Character : Unit
 
     public static Character instance;
     private new Camera camera;
+    private SkillSystem skillSystem;
 
     private void Awake()
     {
@@ -18,9 +19,9 @@ public class Character : Unit
     {
         transform.Find("Trail").GetComponent<TrailRenderer>().enabled = false;
         camera = Camera.main;
-        (SkillSystem.instance.GetDash().GetCurrentSkill() as IDashSkill).Init(this);
+        skillSystem = FindObjectOfType<SkillSystem>();
+        skillSystem.Init(this);
         attack = GetComponentInChildren<IAttack>();
-
         SaveSystem.instance.save.MoveCharacter();
     }
 
@@ -49,45 +50,29 @@ public class Character : Unit
 
     private void UpdateCooldowns()
     {
-        if (SkillSystem.instance == null || SkillSystem.instance.GetActivatedSkills() == null || !SkillSystem.instance.HasActivatedSkill())
-            return;
-        foreach (var skill in SkillSystem.instance.GetActivatedSkills())
-        {
-            skill.GetCurrentSkill().UpdateCooldown();
-        }
-        SkillSystem.instance.GetDash().GetCurrentSkill().UpdateCooldown();
-        if (SkillSystem.instance.GetSecondary() != null)
-            SkillSystem.instance.GetSecondary().GetCurrentSkill().UpdateCooldown();
-
+        skillSystem.UpdateCooldowns();
     }
 
     private void UseSkills()
     {
         if (Input.GetKeyDown(KeyCode.Q))
         {
-            UseSkill(0);
+            skillSystem.UseSkill(0);
         }
         if (Input.GetKeyDown(KeyCode.E))
         {
-            UseSkill(1);
+            skillSystem.UseSkill(1);
         }
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            (SkillSystem.instance.GetDash().GetCurrentSkill() as IDashSkill).Use(this, null, new List<Vector2>() { movement.GetMoveDir() });
+            skillSystem.Dash(movement.GetMoveDir());
         }
     }
 
-    private void UseSkill(int index)
-    {
-        SkillInfoActive skill = SkillSystem.instance.GetActivatedSkills()[index];
-        if (!skill)
-            return;
-        skill.GetCurrentSkill().Use(this);
-    }
 
     private void FixedUpdate()
     {
-        if (SkillSystem.instance != null && (SkillSystem.instance.GetDash().GetCurrentSkill() as IDashSkill).IsDashing())
+        if (skillSystem.IsDashing())
             return;
         Move();
     }
@@ -135,6 +120,6 @@ public class Character : Unit
 
     private void OnCollisionEnter2D(Collision2D col)
     {
-        (SkillSystem.instance.GetDash().GetCurrentSkill() as IDashSkill).TriggerCollision(col);
+        skillSystem.DashCollision(col);
     }
 }

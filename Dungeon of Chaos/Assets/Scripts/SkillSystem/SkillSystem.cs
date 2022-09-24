@@ -12,11 +12,11 @@ public class SkillSystem : MonoBehaviour
 
     [SerializeField] private List<SkillInfoActive> activated;
     private List<SkillInfoPassive> equipped;
-
+    // TODO add SkillInfoDash??
     [SerializeField] private SkillInfoActive activatedDash;
     private SkillInfoActive activatedSecondary;
 
-    public static SkillSystem instance;
+    // public static SkillSystem instance;
 
     [SerializeField] private int activeSkillsSlots;
     [SerializeField] private int passiveSkillsSlots;
@@ -25,10 +25,12 @@ public class SkillSystem : MonoBehaviour
 
     public int skillPoints = 0;
 
+    private Unit owner;
+
     private void Awake()
     {
         //Debug.Log("Instance Skill System");
-        instance = this;
+        // instance = this;
         /*activated = new List<SkillInfoActive>();
         for (int i = 0; i < activeSkillsSlots; i++)
             activated.Add(null);*/
@@ -37,24 +39,42 @@ public class SkillSystem : MonoBehaviour
             equipped.Add(null);
     }
 
-    public List<SkillInfoActive> GetActivatedSkills()
+    public void Init(Unit owner)
     {
-        return activated;
+        this.owner = owner;
+        ((IDashSkill)activatedDash.GetCurrentSkill()).Init(owner);
     }
 
-    public List<SkillInfoPassive> GetEquippedSkills()
+    public void UpdateCooldowns()
     {
-        return equipped;
+        foreach (var skill in activated) 
+            skill.GetCurrentSkill().UpdateCooldown();
+
+        activatedDash.GetCurrentSkill().UpdateCooldown();
+        if (activatedSecondary)
+            activatedSecondary.GetCurrentSkill().UpdateCooldown();
     }
 
-    public SkillInfoActive GetDash()
+    public void Dash(Vector2 dir)
     {
-        return activatedDash;
+        ((IDashSkill)activatedDash.GetCurrentSkill()).Use(owner, null, new List<Vector2>() { dir });
     }
 
-    public SkillInfoActive GetSecondary()
+    public void UseSkill(int index)
     {
-        return activatedSecondary;
+        SkillInfoActive skill = activated[index];
+        if (skill)
+            skill.GetCurrentSkill().Use(owner);
+    }
+
+    public bool IsDashing()
+    {
+        return ((IDashSkill) activatedDash.GetCurrentSkill()).IsDashing();
+    }
+
+    public void DashCollision(Collision2D col)
+    {
+        ((IDashSkill)activatedDash.GetCurrentSkill()).TriggerCollision(col);
     }
 
     public void Upgrade(SkillInfoActive skill)

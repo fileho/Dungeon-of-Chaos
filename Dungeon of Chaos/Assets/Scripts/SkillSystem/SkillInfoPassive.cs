@@ -23,10 +23,6 @@ public class SkillInfoPassive : SkillInfo<IPassiveSkill>
 
     public SkillData GetSkillData()
     {
-        int index = level - 1;
-        if (level == 0)
-            index += 1;
-
-        return skills[index].GetSkillData();
+        return skills[GetIndex()].GetSkillData();
     }
 }
