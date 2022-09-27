@@ -129,6 +129,8 @@ public class SoundManager : MonoBehaviour
     [SerializeField] private SoundPool skill;
     [SerializeField] private SoundPool ui;
     [SerializeField] private SoundPool items;
+    [SerializeField] private SoundPool deaths;
+    [SerializeField] private SoundPool takeDamage;
 
     public static SoundManager instance;
 
@@ -142,6 +144,8 @@ public class SoundManager : MonoBehaviour
         skill.Start(transform);
         ui.Start(transform);
         items.Start(transform);
+        deaths.Start(transform);
+        takeDamage.Start(transform);
     }
 
     public void PlaySound(SoundSettings soundSettings)
@@ -170,6 +174,8 @@ public class SoundManager : MonoBehaviour
             SoundCategories.SoundCategory.Skill => skill,
             SoundCategories.SoundCategory.Ui => ui,
             SoundCategories.SoundCategory.Items => items,
+            SoundCategories.SoundCategory.Death => deaths,
+            SoundCategories.SoundCategory.TakeDamage => takeDamage,
             _ => throw new ArgumentOutOfRangeException(nameof(category), category, null)
         };
     }

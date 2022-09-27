@@ -17,6 +17,8 @@ MonoBehaviour:
   damage: 0.35
   skillEffectType: 1
   dmgSFX:
-    name: DashImpact
+    soundCategory: 3
+    sound: 6
     volume: 1
     pitch: 1
+    priority: 0

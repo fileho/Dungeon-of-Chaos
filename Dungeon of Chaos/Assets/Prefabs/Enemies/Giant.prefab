@@ -212,17 +212,23 @@ MonoBehaviour:
   effects: {fileID: 11400000, guid: b8c2e379a823a5f4a907481e41277e70, type: 2}
   bars: {fileID: 11400000, guid: 0221322a962978542a4599e9d2390aec, type: 2}
   takeDmgSFX:
-    name: GiantTakeDamage
+    soundCategory: 7
+    sound: 1
     volume: 1
     pitch: 1
+    priority: 0
   deathSFX:
-    name: GiantDeath
+    soundCategory: 6
+    sound: 1
     volume: 1
     pitch: 1
+    priority: 0
   footstepsSFX:
-    name: GiantFootsteps
+    soundCategory: 1
+    sound: 1
     volume: 1
     pitch: 1
+    priority: 0
   loot: {fileID: 11400000, guid: 55110f0bef1256e42a7f83b3fc2b4ea9, type: 2}
   lootModifiers: {fileID: 11400000, guid: 54be39060d6909b4983736398e32d996, type: 2}
 --- !u!212 &4749972822253201943

@@ -17,6 +17,8 @@ MonoBehaviour:
   damage: 0.65
   skillEffectType: 0
   dmgSFX:
-    name: FireballImpact
+    soundCategory: 3
+    sound: 2
     volume: 1
     pitch: 1
+    priority: 0

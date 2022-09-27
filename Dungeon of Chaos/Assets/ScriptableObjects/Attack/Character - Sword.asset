@@ -20,12 +20,22 @@ MonoBehaviour:
   indicator: {fileID: 0}
   type: 1
   swingSFX:
-    name: Attack
+    soundCategory: 2
+    sound: 0
     volume: 1
     pitch: 1
+    priority: 0
   impactSFX:
-    name: AttackImpact
+    soundCategory: 2
+    sound: 1
     volume: 1
     pitch: 1
+    priority: 0
+  indicatorSFX:
+    soundCategory: 0
+    sound: 0
+    volume: 1
+    pitch: 1
+    priority: 0
   swing: 15
   reach: 1.5

@@ -301,7 +301,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &40577384
 Transform:
   m_ObjectHideFlags: 0
@@ -5502,9 +5502,9 @@ RectTransform:
   m_Father: {fileID: 228462665}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 300, y: -50}
   m_SizeDelta: {x: 300, y: 100}
   m_Pivot: {x: 0, y: 0.5}
 --- !u!114 &246266244
@@ -5736,9 +5736,9 @@ RectTransform:
   m_Father: {fileID: 1707865448}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 65, y: -50}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &320099649
@@ -5909,9 +5909,9 @@ RectTransform:
   m_Father: {fileID: 1707865448}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 295, y: -50}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &336606408
@@ -6388,9 +6388,9 @@ RectTransform:
   m_Father: {fileID: 1707865448}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 410, y: -50}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &497114687
@@ -8113,9 +8113,9 @@ RectTransform:
   m_Father: {fileID: 1707865448}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 525, y: -50}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &935015223
@@ -8207,9 +8207,9 @@ RectTransform:
   m_Father: {fileID: 1707865448}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 180, y: -50}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &940284895
@@ -8980,9 +8980,9 @@ RectTransform:
   m_Father: {fileID: 228462665}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 0, y: -50}
   m_SizeDelta: {x: 300, y: 100}
   m_Pivot: {x: 0, y: 0.5}
 --- !u!114 &1134062103
@@ -9555,23 +9555,95 @@ MonoBehaviour:
     poolSize: 30
     sounds: []
   footsteps:
-    poolSize: 30
+    poolSize: 10
     sounds:
-    - audioClip: {fileID: 0}
-      volume: 0
-      pitch: 0
+    - audioClip: {fileID: 8300000, guid: 2ddfe8dc855508647b18bb41c1ad2c24, type: 3}
+      volume: 0.5
+      pitch: 1
+    - audioClip: {fileID: 8300000, guid: 0989c369f059cb446af4733d240ff011, type: 3}
+      volume: 0.5
+      pitch: 1
+    - audioClip: {fileID: 8300000, guid: 9d0765b2940f6824cb445f87ddce6976, type: 3}
+      volume: 0.5
+      pitch: 1
   attack:
     poolSize: 30
-    sounds: []
+    sounds:
+    - audioClip: {fileID: 8300000, guid: 482bc57d142e80941914a6d1c48d7a19, type: 3}
+      volume: 0.5
+      pitch: 1
+    - audioClip: {fileID: 8300000, guid: d5f306f60bf76b24abaf79d39010b31a, type: 3}
+      volume: 0.5
+      pitch: 1
+    - audioClip: {fileID: 8300000, guid: ec99d311ff7d70948a904548f87a24d6, type: 3}
+      volume: 1
+      pitch: 1
+    - audioClip: {fileID: 8300000, guid: 885029c77e464854ca9dad650c340eb2, type: 3}
+      volume: 1
+      pitch: 1
+    - audioClip: {fileID: 8300000, guid: 3ec4bba8cfabc644586ed6728d4cebc7, type: 3}
+      volume: 0.5
+      pitch: 1
+    - audioClip: {fileID: 8300000, guid: 34ca78ea0ca4c26489e9a5e921a9174a, type: 3}
+      volume: 1
+      pitch: 1
+    - audioClip: {fileID: 8300000, guid: a82cc731eb0710a44bced8c570edcc1f, type: 3}
+      volume: 1
+      pitch: 1
   skill:
     poolSize: 30
-    sounds: []
+    sounds:
+    - audioClip: {fileID: 8300000, guid: 4a45d4f2357be7448a5b687b799c4aae, type: 3}
+      volume: 1
+      pitch: 1
+    - audioClip: {fileID: 8300000, guid: d56d1a516fce3194d83a35d483a431d4, type: 3}
+      volume: 1
+      pitch: 1
+    - audioClip: {fileID: 8300000, guid: 7ec2c2cd971fbb549984a2f503d75618, type: 3}
+      volume: 1
+      pitch: 1
+    - audioClip: {fileID: 8300000, guid: 29670bbe0c910644c8db0ac57c0dee77, type: 3}
+      volume: 1
+      pitch: 1
+    - audioClip: {fileID: 8300000, guid: 240524c6805c69642a6a42f547f42fb1, type: 3}
+      volume: 0.25
+      pitch: 1
+    - audioClip: {fileID: 8300000, guid: 311341c6465f2844f819a81c8e57fbe9, type: 3}
+      volume: 1
+      pitch: 1
+    - audioClip: {fileID: 8300000, guid: 8f7e2d83be776e54284479d2d890d971, type: 3}
+      volume: 1
+      pitch: 1
   ui:
     poolSize: 30
     sounds: []
   items:
     poolSize: 30
     sounds: []
+  deaths:
+    poolSize: 30
+    sounds:
+    - audioClip: {fileID: 8300000, guid: 92a43c5770e55cf4581c9abc4d2b8cea, type: 3}
+      volume: 0.5
+      pitch: 0.5
+    - audioClip: {fileID: 8300000, guid: f336b4a6c4e073b4e9d0777da1b1d7eb, type: 3}
+      volume: 1
+      pitch: 1
+    - audioClip: {fileID: 8300000, guid: 968b95d6f48eeb8439904fad75a39198, type: 3}
+      volume: 1
+      pitch: 1
+  takeDamage:
+    poolSize: 30
+    sounds:
+    - audioClip: {fileID: 8300000, guid: 0d4d94e9efde55e44a6e165876bd9486, type: 3}
+      volume: 1
+      pitch: 1
+    - audioClip: {fileID: 8300000, guid: 21640cb206eed044ebeb9160590168c3, type: 3}
+      volume: 1
+      pitch: 1
+    - audioClip: {fileID: 8300000, guid: 8409a0daec5e8ea4481f30e7813d9429, type: 3}
+      volume: 1
+      pitch: 1
 --- !u!4 &1332878771
 Transform:
   m_ObjectHideFlags: 0

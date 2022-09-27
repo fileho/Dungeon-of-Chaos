@@ -78,6 +78,18 @@ public class SoundsEditor : PropertyDrawer
                 soundIndex.intValue = (int) (SoundCategories.Items) EditorGUI.EnumPopup(soundRect, s);
                 break;
             }
+            case 6:
+            {
+                SoundCategories.Death s = (SoundCategories.Death)soundIndex.intValue;
+                soundIndex.intValue = (int)(SoundCategories.Death)EditorGUI.EnumPopup(soundRect, s);
+                break;
+            }
+            case 7:
+            {
+                SoundCategories.TakeDamage s = (SoundCategories.TakeDamage)soundIndex.intValue;
+                soundIndex.intValue = (int)(SoundCategories.TakeDamage)EditorGUI.EnumPopup(soundRect, s);
+                break;
+            }
 
             default:
                 break;

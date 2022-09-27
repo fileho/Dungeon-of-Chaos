@@ -12,6 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 04cf044d0d7bc4c49b07ad36e053e806, type: 3}
   m_Name: DamagingDash
   m_EditorClassIdentifier: 
-  dashSpeed: 5
-  staminaCost: 15
+  dashSFX:
+    soundCategory: 3
+    sound: 5
+    volume: 1
+    pitch: 1
+    priority: 0
   damage: 20

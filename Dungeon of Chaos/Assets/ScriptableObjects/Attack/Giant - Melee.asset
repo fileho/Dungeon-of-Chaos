@@ -20,16 +20,22 @@ MonoBehaviour:
   indicator: {fileID: 4329331889789977291, guid: d1a59e053a17c4eaaacc05a0931f0200, type: 3}
   type: 1
   swingSFX:
-    name: GiantSwingAttack
+    soundCategory: 2
+    sound: 2
     volume: 1
     pitch: 1
+    priority: 0
   impactSFX:
-    name: GiantSwingAttackImpact
+    soundCategory: 2
+    sound: 3
     volume: 1
     pitch: 1
+    priority: 0
   indicatorSFX:
-    name: GiantAttackIndicator
+    soundCategory: 2
+    sound: 4
     volume: 1
     pitch: 1
+    priority: 0
   swing: 30
   reach: 1.5
