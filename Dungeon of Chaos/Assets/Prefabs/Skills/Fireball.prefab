@@ -136,14 +136,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   delay: 0.5
   castSFX:
-    name: CastSpell
+    soundCategory: 3
+    sound: 0
     volume: 1
     pitch: 1
+    priority: 0
   impactSFX:
-    name: FireballImpact
+    soundCategory: 3
+    sound: 2
     volume: 1
     pitch: 1
+    priority: 0
   flightSFX:
-    name: FireballFlight
+    soundCategory: 3
+    sound: 1
     volume: 1
     pitch: 1
+    priority: 0

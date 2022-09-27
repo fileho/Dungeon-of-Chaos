@@ -16,7 +16,9 @@ MonoBehaviour:
   range: 5
   vfx: {fileID: 3440211394499801297, guid: 001f80d720e3a964eae94651fcfea2eb, type: 3}
   sfx:
-    name: Whirlwind
+    soundCategory: 2
+    sound: 2
     volume: 1
     pitch: 1
+    priority: 0
   duration: 2

@@ -16,9 +16,11 @@ MonoBehaviour:
   range: 0
   vfx: {fileID: 3440211394499801297, guid: 4f26aa18ace843d46835c34a16789dad, type: 3}
   sfx:
-    name: CastSpell
+    soundCategory: 3
+    sound: 0
     volume: 1
     pitch: 1
+    priority: 0
   duration: 1
   effects:
   - {fileID: 11400000, guid: 1f543a3cac5e4ac4cb1ec38e6021588d, type: 2}

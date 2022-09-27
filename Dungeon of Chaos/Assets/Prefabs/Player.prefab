@@ -499,17 +499,23 @@ MonoBehaviour:
   effects: {fileID: 11400000, guid: 105ea18b6c69cb14b93d27f80a075a5d, type: 2}
   bars: {fileID: 11400000, guid: 22f29cc90695c74488bd6904cf777211, type: 2}
   takeDmgSFX:
-    name: CharacterTakeDamage
+    soundCategory: 7
+    sound: 0
     volume: 1
     pitch: 1
+    priority: 0
   deathSFX:
-    name: CharacterDeath
+    soundCategory: 6
+    sound: 0
     volume: 1
     pitch: 1
+    priority: 0
   footstepsSFX:
-    name: CharacterFootsteps
+    soundCategory: 1
+    sound: 0
     volume: 1
     pitch: 1
+    priority: 0
 --- !u!212 &5714781287747887695
 SpriteRenderer:
   m_ObjectHideFlags: 0

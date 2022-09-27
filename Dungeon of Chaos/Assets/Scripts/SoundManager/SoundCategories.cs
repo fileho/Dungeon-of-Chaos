@@ -11,7 +11,9 @@ public class SoundCategories
         Attack, 
         Skill, 
         Ui, 
-        Items
+        Items,
+        Death,
+        TakeDamage
     }
 
     public enum Ambient
@@ -24,20 +26,29 @@ public class SoundCategories
     {
         Character,
         Giant,
-        Ogre
+        Orc
     }
 
     public enum Attack
     {
-        Character,
-        Giant,
-        Ogre
+        CharacterSwing,
+        CharacterSwingImpact,
+        GiantSwing,
+        GiantSwingImpact,
+        GiantSwingIndicator,
+        OrcSwing,
+        OrcSwingImpact
     }
 
     public enum Skill
     {
-        FireballCast,
-        FireballImpact
+        SpellCast,
+        FireballFlight,
+        FireballImpact,
+        Healing,
+        Dash,
+        DamagingDash,
+        DashImpact
     }
 
     public enum Ui
@@ -50,6 +61,20 @@ public class SoundCategories
     {
         Pickup,
         Drop
+    }
+
+    public enum Death
+    {
+        Character,
+        Giant,
+        Orc
+    }
+
+    public enum TakeDamage
+    { 
+        Character,
+        Giant,
+        Orc
     }
 
 }

@@ -13,6 +13,8 @@ MonoBehaviour:
   m_Name: Dash
   m_EditorClassIdentifier: 
   dashSFX:
-    name: Dash
+    soundCategory: 3
+    sound: 4
     volume: 1
     pitch: 1
+    priority: 0
