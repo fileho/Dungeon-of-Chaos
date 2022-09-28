@@ -1,0 +1,56 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &7554636208614027489
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7554636208614027503}
+  - component: {fileID: 7554636208614027488}
+  m_Layer: 0
+  m_Name: SkillSystem
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7554636208614027503
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7554636208614027489}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 436.02924, y: 593.7261, z: -2635.2139}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7554636208614027488
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7554636208614027489}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0338ec0561c8d1c4fa296402e39edac1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  activeSkills:
+  - {fileID: 11400000, guid: 3d707106cc6445f47b4150ff22e38f26, type: 2}
+  - {fileID: 11400000, guid: 2ef78b948e70c2a4f875ebd859e91fdb, type: 2}
+  - {fileID: 11400000, guid: e22c2ae27ef73d242b8fdd056c7cb4df, type: 2}
+  - {fileID: 11400000, guid: 2ac1f3af184e3804a88bbf794faaa338, type: 2}
+  passiveSkills: []
+  activated: []
+  activatedDash: {fileID: 11400000, guid: 2ac30d8afbb535c43ad68d41a52540c8, type: 2}
+  activeSkillsSlots: 5
+  passiveSkillsSlots: 5
+  skillPointsRequired: 010000000200000003000000
