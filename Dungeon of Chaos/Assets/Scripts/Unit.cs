@@ -57,9 +57,10 @@ public class Unit : MonoBehaviour
     }
 
 
-    protected void Die()
+    private void Die()
     {
         dead = true;
+        GetComponent<Collider2D>().enabled = false;
         SoundManager.instance.PlaySound(deathSFX);
         Invoke(nameof(CleanUp), SoundManager.instance.GetLength(deathSFX));
         //Destroy(gameObject);
