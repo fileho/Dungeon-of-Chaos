@@ -10,16 +10,16 @@ public class CharacterBars : IBars
 
     public override void UpdateHpBar(float value)
     {
-        UIManager.instance.SetHealthBar(value);
+        InGameUIManager.instance.SetHealthBar(value);
     }
 
     public override void UpdateManaBar(float value)
     {
-        UIManager.instance.SetManaBar(value);
+        InGameUIManager.instance.SetManaBar(value);
     }
 
     public override void UpdateStaminaBar(float value)
     {
-        UIManager.instance.SetStaminaBar(value);
+        InGameUIManager.instance.SetStaminaBar(value);
     }
 }
