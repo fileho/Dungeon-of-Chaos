@@ -1,13 +1,13 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class UIManager : MonoBehaviour
+public class InGameUIManager : MonoBehaviour
 {
     [SerializeField] private Slider healthBar;
     [SerializeField] private Slider manaBar;
     [SerializeField] private Slider staminaBar;
 
-    public static UIManager instance;
+    public static InGameUIManager instance;
 
     private void Awake()
     {
