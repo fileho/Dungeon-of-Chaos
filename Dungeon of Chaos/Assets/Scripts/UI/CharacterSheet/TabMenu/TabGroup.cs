@@ -1,19 +1,18 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class TabGroup : MonoBehaviour
 {
-    private List<TabButton> tabButtons;
+    private List<TabBtn> tabButtons;
     [SerializeField] private List<GameObject> pages;
     [SerializeField] private Color tabIdle;
     [SerializeField] private Color tabHover;
     [SerializeField] private Color tabSelected;
-    [SerializeField] private TabButton defaultTab;
+    [SerializeField] private TabBtn defaultTab;
 
     [HideInInspector]
-    public TabButton selectedTab;
+    public TabBtn selectedTab;
 
     private void Start()
     {
@@ -22,29 +21,29 @@ public class TabGroup : MonoBehaviour
         OnTabSelected(defaultTab);
     }
 
-    public void Subscribe(TabButton button)
+    public void Subscribe(TabBtn button)
     {
         if (tabButtons == null)
         {
-            tabButtons = new List<TabButton>();
+            tabButtons = new List<TabBtn>();
         }
 
         tabButtons.Add(button);
     }
 
-    public void OnTabEnter(TabButton button)
+    public void OnTabEnter(TabBtn button)
     {
         ResetTabs();
         if (selectedTab == null || button != selectedTab)
             button.background.color = tabHover;
     }
 
-    public void OnTabExit(TabButton button)
+    public void OnTabExit(TabBtn button)
     {
         ResetTabs();
     }
 
-    public void OnTabSelected(TabButton button)
+    public void OnTabSelected(TabBtn button)
     {
         selectedTab = button;
         ResetTabs();
@@ -67,7 +66,7 @@ public class TabGroup : MonoBehaviour
     {
         if (tabButtons == null)
             return;
-        foreach (TabButton button in tabButtons)
+        foreach (TabBtn button in tabButtons)
         {
             if (selectedTab != null && selectedTab == button) { continue; }
             button.background.color = tabIdle;
