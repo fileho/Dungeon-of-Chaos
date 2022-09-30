@@ -16,12 +16,12 @@ public class SkillSystem : MonoBehaviour
     [SerializeField] private SkillInfoActive activatedDash;
     private SkillInfoActive activatedSecondary;
 
-    // public static SkillSystem instance;
-
     [SerializeField] private int activeSkillsSlots;
     [SerializeField] private int passiveSkillsSlots;
 
     [SerializeField] private List<int> skillPointsRequired;
+
+    private List<SkillSlotActive> skillSlots = new List<SkillSlotActive>();
 
     private Unit owner;
     private Levelling levelling;
@@ -36,6 +36,19 @@ public class SkillSystem : MonoBehaviour
             equipped.Add(null);
         foreach (SkillInfoActive skill in activeSkills)
             skill.ResetLevel();
+    }
+
+    public void InitSkillSlots()
+    {
+        if (skillSlots.Count == activeSkillsSlots)
+            return;
+        SkillSlotActive[] slots = FindObjectsOfType<SkillSlotActive>();
+        for (int i = 0; i < activeSkillsSlots; i++)
+            skillSlots.Add(null);
+        foreach (SkillSlotActive slot in slots)
+        {
+            skillSlots[slot.GetIndex()] = slot;
+        }
     }
 
     public void Init(Unit owner)
@@ -103,9 +116,19 @@ public class SkillSystem : MonoBehaviour
         if (activated.Contains(skill))
         {
             int i = activated.IndexOf(skill);
-            activated[i] = null;
+            if (activated[slot] != null)
+            {
+                activated[i] = activated[slot];
+                skillSlots[i].SetImage(activated[i].GetSkillData().GetIcon());
+            }
+            else
+            {
+                activated[i] = null;
+                skillSlots[i].SetImage(null);
+            }
         }
         activated[slot] = skill;
+        skillSlots[slot].SetImage(skill.GetSkillData().GetIcon());
     }
 
     public void Equip(SkillInfoPassive skill, int slot)

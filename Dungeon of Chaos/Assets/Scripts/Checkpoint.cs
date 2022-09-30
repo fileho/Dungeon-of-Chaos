@@ -6,10 +6,12 @@ using UnityEngine.Rendering;
 public class Checkpoint : MonoBehaviour
 {
     private GameObject canvas;
+    private CharacterSheet characterSheet;
 
     private void Start()
     {
         canvas = GetComponentInChildren<Canvas>().gameObject;
+        characterSheet = FindObjectOfType<CharacterSheet>();
 
         canvas.SetActive(false);
     }
@@ -49,6 +51,7 @@ public class Checkpoint : MonoBehaviour
     private void Interact()
     {
         canvas.SetActive(false);
+        characterSheet.Open();
         Rest();
     }
 
