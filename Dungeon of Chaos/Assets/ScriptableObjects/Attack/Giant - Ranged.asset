@@ -12,12 +12,31 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bbd3a0c455db840c4b2d4da7454d06f3, type: 3}
   m_Name: Giant - Ranged
   m_EditorClassIdentifier: 
-  range: 9
-  damage: 18
+  range: 10
+  damage: 0.1
   staminaCost: 0
-  cooldown: 1
+  cooldown: 5
   attackAnimationDuration: 1.5
   indicator: {fileID: 4329331889789977291, guid: 573504e254dad4a68a414698270d4d81, type: 3}
+  type: 0
+  swingSFX:
+    soundCategory: 0
+    sound: 0
+    volume: 1
+    pitch: 1
+    priority: 0
+  impactSFX:
+    soundCategory: 0
+    sound: 0
+    volume: 1
+    pitch: 1
+    priority: 0
+  indicatorSFX:
+    soundCategory: 0
+    sound: 0
+    volume: 1
+    pitch: 1
+    priority: 0
   projectile: {fileID: 1052187207571410619, guid: b03845b2e170c4237ad5953ab466b279, type: 3}
   wandReach: 1
   wandWave: 10

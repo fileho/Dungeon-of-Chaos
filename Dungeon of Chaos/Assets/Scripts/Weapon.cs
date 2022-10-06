@@ -37,7 +37,7 @@ public class Weapon : MonoBehaviour {
 
 
     public void InflictDamage(Unit unit) {
-        SoundManager.instance.PlaySound(impactSFX);
+        //SoundManager.instance.PlaySound(impactSFX);
         unit.TakeDamage(damage);
     }
 

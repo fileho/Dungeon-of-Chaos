@@ -13,7 +13,6 @@ public abstract class IProjectile : MonoBehaviour
     protected float destroyTime = 5f;
 
 
-    protected Weapon weapon;
     protected IAttack attack;
     protected SpriteRenderer sprite;
     protected new Collider2D collider;
@@ -43,7 +42,6 @@ public abstract class IProjectile : MonoBehaviour
     }
 
     protected virtual void Start() {
-        weapon = GetComponentInParent<Weapon>();
         collider = GetComponent<Collider2D>();
         sprite = GetComponent<SpriteRenderer>();
         rb = GetComponent<Rigidbody2D>();
@@ -53,7 +51,7 @@ public abstract class IProjectile : MonoBehaviour
 
     protected virtual void OnTriggerEnter2D(Collider2D col) {
         if (col.GetComponent<Unit>()) {
-            weapon.InflictDamage(col.GetComponent<Unit>());
+            attack.Weapon.InflictDamage(col.GetComponent<Unit>());
         }
     }
 
