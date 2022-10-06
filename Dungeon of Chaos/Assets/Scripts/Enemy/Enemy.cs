@@ -127,7 +127,7 @@ public class Enemy : Unit {
 
 
 
-    // TODO: This code to be moved to AttackManager
+    //============== TODO: This code to be moved to AttackManager ====================================
     List<IAttack> attacks;
     private float minimumAttackRange = 0;
 
@@ -141,7 +141,11 @@ public class Enemy : Unit {
 
 
     private float GetAttacKWeight(IAttack attack) {
-        return attack.GetAttackRange() + attack.GetDamage() - attack.GetCoolDownTime() - attack.GetStaminaCost();
+        // TODO: add weights for each factor
+        // weightRange * attack.GetAttackRange()
+        // weightDamage * attack.GetDamage()
+        // weightStamina * attack.GetStaminaCost()
+        return attack.GetAttackRange() + attack.GetDamage() - attack.GetStaminaCost();
     }
 
 
@@ -156,4 +160,5 @@ public class Enemy : Unit {
         }
         return null;
     }
+    //===================================================================================================
 }
