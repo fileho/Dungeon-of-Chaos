@@ -87,7 +87,7 @@ public class Character : Unit
         if (attack.IsAttacking())
             return;
 
-        Vector2 dir = GetTargetPosition() - (Vector2)transform.position;
+        Vector2 dir = GetTargetDirection();
 
         if (dir.x > 0.01f)
             transform.localScale = new Vector3(-1, 1, 1);

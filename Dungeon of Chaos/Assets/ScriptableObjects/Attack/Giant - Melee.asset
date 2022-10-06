@@ -12,10 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 656d4005658cf4e07808ec6178e5ef23, type: 3}
   m_Name: Giant - Melee
   m_EditorClassIdentifier: 
-  range: 9
-  damage: 1
+  range: 4
+  damage: 0.3
   staminaCost: 0
-  cooldown: 1
+  cooldown: 4
   attackAnimationDuration: 0.6
   indicator: {fileID: 4329331889789977291, guid: d1a59e053a17c4eaaacc05a0931f0200, type: 3}
   type: 1
