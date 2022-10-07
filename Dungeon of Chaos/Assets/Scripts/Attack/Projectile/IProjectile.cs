@@ -1,8 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SocialPlatforms;
-using static UnityEngine.GraphicsBuffer;
 
 public abstract class IProjectile : MonoBehaviour
 {
@@ -49,12 +47,15 @@ public abstract class IProjectile : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         ApplyConfigurations();
         Launch();
+        transform.parent = null;
     }
 
     protected virtual void OnTriggerEnter2D(Collider2D col) {
-        if (col.GetComponent<Unit>()) {
-            weapon.InflictDamage(col.GetComponent<Unit>());
+        var unit = col.GetComponent<Unit>();
+        if (unit != null) {
+            weapon.InflictDamage(unit);
         }
+        Destroy(gameObject);
     }
 
 
