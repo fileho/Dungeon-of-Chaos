@@ -71,6 +71,9 @@ public class Essence : MonoBehaviour
             case EssenceType.stamina:
                 Character.instance.stats.RegenerateStamina(value);
                 break;
+            case EssenceType.xp:
+                Character.instance.stats.GetLevellingData().ModifyCurrentXP(((int)value));
+                break;
         }
         CleanUp();
     }
