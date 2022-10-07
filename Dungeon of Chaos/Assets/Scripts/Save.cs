@@ -14,7 +14,7 @@ public class Save : ScriptableObject
     public void LoadLevel()
     {
         Time.timeScale = 1f;
-    //    SceneManager.LoadScene(dungeon + sceneOffset);
+        SceneManager.LoadScene(dungeon);
     }
 
     public void SavePosition(Vector3 pos)

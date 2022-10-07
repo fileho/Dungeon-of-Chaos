@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class SaveSystem : MonoBehaviour
 {
@@ -9,5 +10,10 @@ public class SaveSystem : MonoBehaviour
     private void Awake()
     {
         instance = this;
+    }
+
+    private void Start()
+    {
+        save.dungeon = SceneManager.GetActiveScene().buildIndex;
     }
 }
