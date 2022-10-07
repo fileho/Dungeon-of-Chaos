@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: -689852826091450854}
   - component: {fileID: 7107406000160287135}
   m_Layer: 0
-  m_Name: HealthEssence
+  m_Name: EXPEssence
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -75,7 +75,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: -2413806693520163455, guid: ebe73ca9363db456bacf42c025bb4847, type: 3}
-  m_Color: {r: 1, g: 0, b: 0, a: 1}
+  m_Color: {r: 1, g: 0.8510299, b: 0, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -97,7 +97,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 81157b6d6ef26494597c3c6382e5d078, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  essenceType: 0
+  essenceType: 3
   lifetime: 8
   force: 5
 --- !u!58 &-689852826091450854

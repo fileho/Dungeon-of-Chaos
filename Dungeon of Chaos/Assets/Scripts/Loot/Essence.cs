@@ -12,12 +12,14 @@ public class Essence : MonoBehaviour
 
     [SerializeField] private EssenceType essenceType;
     [SerializeField] private float lifetime = 5f;
+    [SerializeField] private float force = 5f;
 
     private float value;
   
     void Start()
     {
         Invoke(nameof(CleanUp), lifetime);
+        GetComponent<Rigidbody2D>().AddForce(Random.insideUnitCircle * 100 * force);
     }
 
     private void CleanUp()
