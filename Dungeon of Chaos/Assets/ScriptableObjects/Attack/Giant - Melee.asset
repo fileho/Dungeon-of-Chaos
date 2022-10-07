@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Giant - Melee
   m_EditorClassIdentifier: 
   range: 9
-  damage: 1
+  damage: 1.5
   staminaCost: 0
   cooldown: 1
   attackAnimationDuration: 0.6
