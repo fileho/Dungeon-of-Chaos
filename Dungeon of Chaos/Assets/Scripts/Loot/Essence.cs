@@ -19,7 +19,7 @@ public class Essence : MonoBehaviour
     void Start()
     {
         Invoke(nameof(CleanUp), lifetime);
-        GetComponent<Rigidbody2D>().AddForce(100 * force * Random.insideUnitCircle);
+        GetComponent<Rigidbody2D>().AddForce(80 * force * Random.insideUnitCircle);
     }
 
     private void CleanUp()
@@ -51,9 +51,9 @@ public class Essence : MonoBehaviour
         }
     }
 
-    private void OnTriggerEnter2D(Collider2D collider)
+    private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (!collider.CompareTag("Player")) return;
+        if (!collision.collider.CompareTag("Player")) return;
 
         Collect();
     }
