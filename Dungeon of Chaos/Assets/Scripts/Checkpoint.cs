@@ -34,6 +34,7 @@ public class Checkpoint : MonoBehaviour
             return;
 
         // TODO implement aggro enemies
+        
 
 
         if (Input.GetKeyDown(KeyCode.F))
@@ -50,9 +51,10 @@ public class Checkpoint : MonoBehaviour
 
     private void Interact()
     {
+        Debug.Log("interact");
         canvas.SetActive(false);
         characterSheet.Open();
-        Rest();
+     //   Rest();
     }
 
     private void Rest()

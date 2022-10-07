@@ -4677,6 +4677,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Giant
       objectReference: {fileID: 0}
+    - target: {fileID: 4749972822549525796, guid: dadbeb6aa8207da468b4a2529c7826ef, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4749972822549525797, guid: dadbeb6aa8207da468b4a2529c7826ef, type: 3}
       propertyPath: m_RootOrder
       value: 15
@@ -4723,11 +4727,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4749972823407496717, guid: dadbeb6aa8207da468b4a2529c7826ef, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: 0.574
       objectReference: {fileID: 0}
     - target: {fileID: 4749972823407496717, guid: dadbeb6aa8207da468b4a2529c7826ef, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: dadbeb6aa8207da468b4a2529c7826ef, type: 3}
