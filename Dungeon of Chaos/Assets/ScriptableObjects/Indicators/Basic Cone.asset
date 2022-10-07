@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aa709494e0a5e4379bc9d877d7fc95c7, type: 3}
   m_Name: Basic Cone
   m_EditorClassIdentifier: 
-  duration: 1.5
+  duration: 0.4
   sprite: {fileID: 21300000, guid: ed5dcaf413c5f514786c8f7f33c0adb9, type: 3}
   color: {r: 1, g: 1, b: 1, a: 0}

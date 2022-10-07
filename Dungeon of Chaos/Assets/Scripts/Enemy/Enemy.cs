@@ -1,6 +1,5 @@
 using UnityEngine;
-using static UnityEngine.GraphicsBuffer;
-using UnityEngine.SocialPlatforms;
+
 
 public class Enemy : Unit {
     [SerializeField] private ILoot loot;
@@ -32,7 +31,8 @@ public class Enemy : Unit {
     }
 
     private void FixedUpdate() {
-
+        if (dead)
+            return;
         if (IsTargetInRange() || attack.IsAttacking()) {
             return;
         }
