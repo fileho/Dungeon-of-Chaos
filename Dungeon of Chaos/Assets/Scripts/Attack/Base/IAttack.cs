@@ -81,12 +81,12 @@ public abstract class IAttack : MonoBehaviour {
 
     protected virtual void PrepareWeapon() {
         weapon.EnableDisableTrail(true);
-        weapon.EnableDisableCollider(true);
         float dmg = type == SkillEffectType.physical
             ? damage * owner.stats.GetPhysicalDamage()
             : damage * owner.stats.GetSpellPower();
         weapon.SetDamage(dmg);
         weapon.SetImpactSound(impactSFX);
+        weapon.ResetHitUnits();
     }
 
 
