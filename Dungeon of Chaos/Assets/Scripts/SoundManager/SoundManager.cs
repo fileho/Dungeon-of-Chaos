@@ -96,6 +96,10 @@ public class SoundPool
 
     public Sound GetSoundAtIndex(int index)
     {
+        if (index >= sounds.Count)
+        {
+            return null;
+        }
         return sounds[index];
     }
 
@@ -153,6 +157,12 @@ public class SoundManager : MonoBehaviour
         var pool = GetPool(soundSettings.GetSoundCategory());
         var source = pool.FindEmptyAudioSource(soundSettings.GetPriority());
         var sound = pool.GetSoundAtIndex(soundSettings.GetSoundIndex());
+        if (sound == null)
+        {
+            Debug.LogWarning("Sound not found " + soundSettings.GetSoundCategory() + " at index " + soundSettings.GetSoundIndex());
+            return;
+        }
+
         PlaySound(source, sound, soundSettings);
     }
 
