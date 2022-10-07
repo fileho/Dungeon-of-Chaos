@@ -25,6 +25,7 @@ public class CharacterSheet : MonoBehaviour
 
     public void Close()
     {
+        SaveSystem.instance.save.LoadLevel();
         child.SetActive(false);
     }
 

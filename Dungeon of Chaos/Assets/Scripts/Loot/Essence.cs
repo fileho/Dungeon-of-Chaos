@@ -19,7 +19,7 @@ public class Essence : MonoBehaviour
     void Start()
     {
         Invoke(nameof(CleanUp), lifetime);
-        GetComponent<Rigidbody2D>().AddForce(Random.insideUnitCircle * 100 * force);
+        GetComponent<Rigidbody2D>().AddForce(100 * force * Random.insideUnitCircle);
     }
 
     private void CleanUp()

@@ -2,18 +2,30 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Rendering;
+using UnityEngine.Tilemaps;
 
 public class Checkpoint : MonoBehaviour
 {
-    private GameObject canvas;
+    [SerializeField] private float range = 2.5f;
+
+    private GameObject tooltipCanvas;
     private CharacterSheet characterSheet;
 
     private void Start()
     {
-        canvas = GetComponentInChildren<Canvas>().gameObject;
+        tooltipCanvas = GetComponentInChildren<Canvas>().gameObject;
         characterSheet = FindObjectOfType<CharacterSheet>();
 
-        canvas.SetActive(false);
+        tooltipCanvas.SetActive(false);
+    }
+
+    private void Update()
+    {
+        if (!Input.GetKeyDown(KeyCode.F))
+            return;
+
+        if (((Vector2)transform.position - (Vector2)Character.instance.transform.position).magnitude < range)
+            Interact();
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -21,47 +33,36 @@ public class Checkpoint : MonoBehaviour
         if (!collision.CompareTag("Player"))
             return;
 
-        canvas.SetActive(true);
-
-        if (Input.GetKeyDown(KeyCode.F))
-            Interact();
+        tooltipCanvas.SetActive(true);
     }
 
-
-    private void OnTriggerStay2D(Collider2D collision)
+    private void OnDrawGizmos()
     {
-        if (!collision.CompareTag("Player"))
-            return;
-
-        // TODO implement aggro enemies
-        
-
-
-        if (Input.GetKeyDown(KeyCode.F))
-            Interact();
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(transform.position, range);
     }
+
 
     private void OnTriggerExit2D(Collider2D collision)
     {
         if (!collision.CompareTag("Player"))
             return;
 
-        canvas.SetActive(false);
+        tooltipCanvas.SetActive(false);
     }
 
     private void Interact()
     {
-        Debug.Log("interact");
-        canvas.SetActive(false);
+        tooltipCanvas.SetActive(false);
         characterSheet.Open();
-     //   Rest();
+        Rest();
+        Time.timeScale = 0f;
     }
 
     private void Rest()
     {
         Debug.Log("Location saved");
         SaveSystem.instance.save.SavePosition(transform.position);
-
         Character.instance.stats.ResetStats();
     }
 }
