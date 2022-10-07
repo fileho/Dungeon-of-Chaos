@@ -36,7 +36,7 @@ public class Unit : MonoBehaviour
     // It can be either the position of the Unit or Mouse Position [In case of the character]
     public virtual Vector2 GetTargetPosition() { return Target == null ? Vector2.positiveInfinity : (Vector2)Target.transform.position; }
 
-    public Vector2 GetTargetDirection() {
+    public virtual Vector2 GetTargetDirection() {
         return Target == null ? Vector2.positiveInfinity : (GetTargetPosition() - (Vector2)transform.position);
     }
 

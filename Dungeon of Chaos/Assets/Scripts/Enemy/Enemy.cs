@@ -25,11 +25,10 @@ public class Enemy : Unit {
     protected override void Init() {
         loot = Instantiate(loot).Init(this);
         lootModifiers = Instantiate(lootModifiers);
-        attackManager = GetComponent<AttackManager>();
-        attacks = GetComponentsInChildren<IAttack>().ToList();
         Target = Character.instance;
         state = State.Patrol;
-        SortAttacks();
+        attackManager = GetComponent<AttackManager>();
+        attackManager.Init();
     }
 
 
@@ -72,7 +71,7 @@ public class Enemy : Unit {
 
     private bool Attack() {
         if (IsAttacking()) return true;
-            currentAttack = GetBestAvailableAttack();
+            currentAttack = attackManager.GetBestAvailableAttack();
         if (currentAttack != null) {
             state = State.Attack;
             currentAttack.Attack();
@@ -88,7 +87,7 @@ public class Enemy : Unit {
     private bool Chase() {
         if (IsTargetInChaseRange()) {
             state = State.Chase;
-            if (GetTargetDistance() > GetMinimumAttackRange()) {
+            if (GetTargetDistance() > attackManager.GetMinimumAttackRange()) {
                 Move();
             }
             FlipSprite();
@@ -125,40 +124,4 @@ public class Enemy : Unit {
         Destroy(transform.parent.gameObject);
     }
 
-
-
-    //============== TODO: This code to be moved to AttackManager ====================================
-    List<IAttack> attacks;
-    private float minimumAttackRange = 0;
-
-
-    private void SortAttacks() {
-        List<IAttack> rangeSortedAttack = attacks.OrderBy(x => x.GetAttackRange()).ToList();
-        minimumAttackRange = rangeSortedAttack[0].GetAttackRange();
-        List<IAttack> sortedAttacks = attacks.OrderByDescending(x => GetAttacKWeight(x)).ToList();
-        attacks = sortedAttacks;
-    }
-
-
-    private float GetAttacKWeight(IAttack attack) {
-        // TODO: add weights for each factor
-        // weightRange * attack.GetAttackRange()
-        // weightDamage * attack.GetDamage()
-        // weightStamina * attack.GetStaminaCost()
-        return attack.GetAttackRange() + attack.GetDamage() - attack.GetStaminaCost();
-    }
-
-
-    private float GetMinimumAttackRange() {
-        return minimumAttackRange;
-    }
-
-    private IAttack GetBestAvailableAttack() {
-        for (int i = 0; i < attacks.Count; ++i) {
-            if (attacks[i].CanAttack())
-                return attacks[i];
-        }
-        return null;
-    }
-    //===================================================================================================
 }
