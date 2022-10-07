@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using static UnityEngine.Rendering.DebugUI.Table;
+
 
 public class SwingAttack : MeleeAttack {
 
@@ -17,6 +17,7 @@ public class SwingAttack : MeleeAttack {
         var rot = weapon.transform.localRotation;
 
         SoundManager.instance.PlaySound(swingSFX);
+        weapon.EnableDisableCollider(true);
 
         float time = 0;
         while (time < AttackAnimationDuration) {

@@ -11,7 +11,7 @@ public class Weapon : MonoBehaviour {
 
     private TrailRenderer trail;
     private new BoxCollider2D collider;
-    private List<GameObject> hitUnits;
+    private List<Unit> hitUnits;
     private float damage = 0;
 
     private SoundSettings impactSFX;
@@ -19,6 +19,7 @@ public class Weapon : MonoBehaviour {
     void Start() {
         trail = GetComponentInChildren<TrailRenderer>();
         collider = GetComponentInChildren<BoxCollider2D>();
+        hitUnits = new List<Unit>();
         EnableDisableCollider(false);
         EnableDisableTrail(false);
     }
@@ -37,8 +38,12 @@ public class Weapon : MonoBehaviour {
 
 
     public void InflictDamage(Unit unit) {
-        SoundManager.instance.PlaySound(impactSFX);
-        unit.TakeDamage(damage);
+        if (!hitUnits.Contains(unit))
+        {
+            hitUnits.Add(unit);
+            SoundManager.instance.PlaySound(impactSFX);
+            unit.TakeDamage(damage);
+        }
     }
 
     public void EnableDisableCollider(bool state) {
@@ -47,6 +52,11 @@ public class Weapon : MonoBehaviour {
 
     public void EnableDisableTrail(bool state) {
         trail.gameObject.SetActive(state);
+    }
+
+    public void ResetHitUnits()
+    {
+        hitUnits.Clear();
     }
 
 
@@ -95,5 +105,4 @@ public class Weapon : MonoBehaviour {
 
         return ret;
     }
-
 }
