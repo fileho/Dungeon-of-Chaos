@@ -32,6 +32,7 @@ public abstract class IIndicator : MonoBehaviour
         {
             time += Time.deltaTime;
             float t = time / Duration;
+            t = (t + 0.3f) * 0.3f; 
             sprite.color = new Color(sprite.color.r, sprite.color.g, sprite.color.b, t);
             yield return null;
         }
