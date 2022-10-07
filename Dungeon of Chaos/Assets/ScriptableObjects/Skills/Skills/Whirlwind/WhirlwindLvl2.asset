@@ -22,5 +22,3 @@ MonoBehaviour:
   staminaCost: 15
   effects:
   - {fileID: 11400000, guid: 5fcf5f63c1f9e0341b29030c2200c358, type: 2}
-  - {fileID: 11400000, guid: deef922b405f82846a0062e24b32f73f, type: 2}
-  - {fileID: 11400000, guid: b931e6015a8a6d04eb84ad895086c711, type: 2}

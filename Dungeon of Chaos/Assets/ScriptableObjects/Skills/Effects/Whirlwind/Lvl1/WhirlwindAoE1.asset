@@ -22,3 +22,6 @@ MonoBehaviour:
     pitch: 1
     priority: 0
   duration: 2
+  effects:
+  - {fileID: 11400000, guid: c4a8d8d684a1c6942b131968e94c3caa, type: 2}
+  - {fileID: 11400000, guid: 59502cf340a5c3242a2431ccdab56eb0, type: 2}

@@ -8,11 +8,15 @@ public class AoEVisualEffect : MonoBehaviour
 
     private float range;
     private float duration;
+    private Unit source;
+    private List<ISkillEffect> effects;
 
-    public void Init(float range, float duration)
+    public void Init(float range, float duration, Unit source, List<ISkillEffect> effects)
     {
         this.range = range;
         this.duration = duration;
+        this.source = source;
+        this.effects = effects;
     }
 
     private void Start()
@@ -20,13 +24,16 @@ public class AoEVisualEffect : MonoBehaviour
         ParticleSystem.MainModule aoeMain = aoeEffect.main;
         aoeMain.startSize = range;
         aoeMain.duration = duration;
+        Invoke(nameof(CleanUp), duration);
         aoeEffect.Play();
 
-        Invoke(nameof(CleanUp), duration);      
+             
     }
 
     private void CleanUp()
     {
+        foreach (ISkillEffect e in effects)
+            e.Use(source);
         Destroy(gameObject);
     }
 }
