@@ -16,7 +16,11 @@ MonoBehaviour:
   range: 10
   vfx: {fileID: 3440211394499801297, guid: 107b93b1367157848aacc4dfa551850f, type: 3}
   sfx:
-    name: Shockwave
+    soundCategory: 0
+    sound: 0
     volume: 1
     pitch: 1
+    priority: 0
   duration: 2
+  effects:
+  - {fileID: 11400000, guid: c41757fe280ec3a47bc8615a43e6b832, type: 2}

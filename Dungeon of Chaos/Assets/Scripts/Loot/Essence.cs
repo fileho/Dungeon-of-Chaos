@@ -12,12 +12,14 @@ public class Essence : MonoBehaviour
 
     [SerializeField] private EssenceType essenceType;
     [SerializeField] private float lifetime = 5f;
+    [SerializeField] private float force = 5f;
 
     private float value;
   
     void Start()
     {
         Invoke(nameof(CleanUp), lifetime);
+        GetComponent<Rigidbody2D>().AddForce(80 * force * Random.insideUnitCircle);
     }
 
     private void CleanUp()
@@ -49,9 +51,9 @@ public class Essence : MonoBehaviour
         }
     }
 
-    private void OnTriggerEnter2D(Collider2D collider)
+    private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (!collider.CompareTag("Player")) return;
+        if (!collision.collider.CompareTag("Player")) return;
 
         Collect();
     }
@@ -68,6 +70,9 @@ public class Essence : MonoBehaviour
                 break;
             case EssenceType.stamina:
                 Character.instance.stats.RegenerateStamina(value);
+                break;
+            case EssenceType.xp:
+                Character.instance.stats.GetLevellingData().ModifyCurrentXP(((int)value));
                 break;
         }
         CleanUp();
