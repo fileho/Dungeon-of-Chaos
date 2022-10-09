@@ -53,6 +53,7 @@ public abstract class IProjectile : MonoBehaviour
         if (col.GetComponent<Unit>()) {
             attack.Weapon.InflictDamage(col.GetComponent<Unit>());
         }
+        Destroy(gameObject);
     }
 
 

@@ -30,7 +30,14 @@ public abstract class MeleeAttack : IAttack {
         reach = _attackConfiguration.reach;
     }
 
-    
+
+    protected override void PrepareWeapon()
+    {
+        base.PrepareWeapon();
+        Weapon.EnableDisableTrail(true);
+        Weapon.EnableDisableCollider(true);
+    }
+
     public override void Attack() {
         if (isAttacking)
             return;
