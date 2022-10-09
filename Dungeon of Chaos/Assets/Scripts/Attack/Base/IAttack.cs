@@ -53,7 +53,11 @@ public abstract class IAttack : MonoBehaviour {
     }
 
 
-    public float GetDamage() {
+    public float GetDamage()
+    {
+        if (owner == null)
+            return 0;
+
         return type == SkillEffectType.physical
             ? damage * owner.stats.GetPhysicalDamage()
             : damage * owner.stats.GetSpellPower();
@@ -96,12 +100,12 @@ public abstract class IAttack : MonoBehaviour {
         IndicatorDuration = _indicator.GetComponent<IIndicator>().Duration;
     }
 
+
     protected virtual void PrepareWeapon() {
-        Weapon.EnableDisableTrail(true);
-        Weapon.EnableDisableCollider(true);
-        
+       
         Weapon.SetDamage(GetDamage());
         Weapon.SetImpactSound(impactSFX);
+        Weapon.ResetHitUnits();
     }
 
 

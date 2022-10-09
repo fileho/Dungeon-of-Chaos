@@ -39,6 +39,7 @@ public class RangedAttack : IAttack {
         Vector3 endPos = startPos + Weapon.GetForwardDirection() * wandReach;
         var rot = Weapon.transform.localRotation;
 
+        PrepareWeapon();
         float time = 0;
         //float duration = 0.6f;
         while (time < AttackAnimationDuration) {
