@@ -27,4 +27,15 @@ public abstract class SkillSlot : MonoBehaviour, IDropHandler
     {
         highlight.color = new Color(1f, 1f, 1f, 0f);
     }
+
+    public int GetIndex()
+    {
+        return index;
+    }
+
+    public void SetImage(Sprite sprite)
+    {
+        image.sprite = sprite;
+    }
 }
+

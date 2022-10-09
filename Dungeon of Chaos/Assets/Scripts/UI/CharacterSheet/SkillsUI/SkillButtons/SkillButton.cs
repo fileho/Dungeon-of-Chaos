@@ -73,7 +73,7 @@ public abstract class SkillButton : MonoBehaviour, IPointerDownHandler, IPointer
     {
         if (rightClick)
         {
-            time += Time.deltaTime;
+            time += Time.unscaledDeltaTime;
             load.GetComponent<Image>().fillAmount = time / upgradeTime;
         }
         if (time >= upgradeTime)

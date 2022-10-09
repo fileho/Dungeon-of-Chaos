@@ -4,7 +4,7 @@ using UnityEngine.SceneManagement;
 [CreateAssetMenu(menuName = "SO/Save")]
 public class Save : ScriptableObject
 {
-    private const int sceneOffset = 0;
+    // private const int sceneOffset = 0;
 
     public int dungeon = 1;
 
@@ -13,13 +13,14 @@ public class Save : ScriptableObject
 
     public void LoadLevel()
     {
-        SceneManager.LoadScene(dungeon + sceneOffset);
-        
+        Time.timeScale = 1f;
+        SceneManager.LoadScene(dungeon);
     }
 
     public void SavePosition(Vector3 pos)
     {
         characterPosition = pos;
+        dungeon = SceneManager.GetActiveScene().buildIndex;
     }
 
     public void MoveCharacter()
