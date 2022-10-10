@@ -22,6 +22,7 @@ MonoBehaviour:
     baseXP: 100
     level: 1
     statsPoints: 0
+    skillPoints: 0
   references:
     version: 1
     00000000:
