@@ -1,12 +1,43 @@
 using UnityEngine;
 
+// Raw data for saves
+[System.Serializable]
+public class SavedStats
+{
+    public PrimaryStats.SavedPrimaryStats savedPrimary;
+    public Levelling.SavedLevelling savedLevelling;
+    public float maxHP;
+    public float maxMana;
+    public float maxStamina;
+    public float physicalDamage;
+    public float spellPower;
+    public float armor;
+
+    public SavedStats(PrimaryStats.SavedPrimaryStats savedPrimary, Levelling.SavedLevelling savedLevelling, float maxHp,
+                      float maxMana, float maxStamina, float physicalDamage, float spellPower, float armor)
+    {
+        this.savedPrimary = savedPrimary;
+        this.savedLevelling = savedLevelling;
+        maxHP = maxHp;
+        this.maxMana = maxMana;
+        this.maxStamina = maxStamina;
+        this.physicalDamage = physicalDamage;
+        this.spellPower = spellPower;
+        this.armor = armor;
+    }
+}
+
 [CreateAssetMenu(menuName = "SO/Stats/Stats")]
 public class Stats : ScriptableObject
 {
-    [SerializeField] private float movementSpeed;
-    [SerializeField] private float staminaRegen;
 
-    [SerializeReference] private PrimaryStats primaryStats = new PrimaryStats();
+    [SerializeField]
+    private float movementSpeed;
+    [SerializeField]
+    private float staminaRegen;
+
+    [SerializeReference]
+    private PrimaryStats primaryStats = new PrimaryStats();
 
     private RegenerableStat health = new RegenerableStat();
     private RegenerableStat mana = new RegenerableStat();
@@ -16,7 +47,8 @@ public class Stats : ScriptableObject
 
     private float armor = 0;
 
-    [SerializeField] private Levelling XP = new Levelling();
+    [SerializeField]
+    private Levelling XP = new Levelling();
 
     private IBars bars;
 
@@ -278,5 +310,23 @@ public class Stats : ScriptableObject
     public float GetWisdom()
     {
         return primaryStats.wisdom;
+    }
+
+    public SavedStats Save()
+    {
+        return new SavedStats(primaryStats.Save(), XP.Save(), health.maxValue, mana.maxValue, stamina.maxValue,
+                              physicalDamage, spellPower, armor);
+    }
+
+    public void Load(SavedStats saved)
+    {
+        primaryStats.Load(saved.savedPrimary);
+        XP.Load(saved.savedLevelling);
+        health.Load(saved.maxHP);
+        mana.Load(saved.maxMana);
+        stamina.Load(saved.maxStamina);
+        physicalDamage = saved.physicalDamage;
+        spellPower = saved.spellPower;
+        armor = saved.armor;
     }
 }

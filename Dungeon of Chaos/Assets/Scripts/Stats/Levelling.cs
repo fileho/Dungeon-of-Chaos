@@ -5,6 +5,25 @@ using UnityEngine;
 [System.Serializable]
 public class Levelling
 {
+    [System.Serializable]
+    public class SavedLevelling
+    {
+        public int xp;
+        public int level;
+        public int statsPoints;
+        public int skillPoints;
+
+        public SavedLevelling(int xp, int level, int statsPoints, int skillPoints)
+        {
+            this.xp = xp;
+            this.level = level;
+            this.statsPoints = statsPoints;
+            this.skillPoints = skillPoints;
+        }
+    }
+
+
+
     private int currentXP = 100;
     private int nextLevelXP;
     [Header("Levelling settings")]
@@ -24,7 +43,8 @@ public class Levelling
             nextLevelXP = baseXP;
             return;
         }
-       nextLevelXP = Mathf.CeilToInt((baseMultiplier - ((level + 1) / (maxLevel*2+1))) * nextLevelXP);
+
+        nextLevelXP = Mathf.CeilToInt((baseMultiplier - ((level + 1) / (maxLevel * 2 + 1))) * nextLevelXP);
     }
 
     public int GetCurrentXP()
@@ -101,5 +121,18 @@ public class Levelling
         statsPoints--;
         StatsOverview.instance.SetStatsPoints(statsPoints);
         StatsOverview.instance.ShowStatsIncreaseButtons(HasStatsPoints());
+    }
+
+    public void Load(SavedLevelling saved)
+    {
+        currentXP = saved.xp;
+        level = saved.level;
+        statsPoints = saved.statsPoints;
+        skillPoints = saved.skillPoints;
+    }
+
+    public SavedLevelling Save()
+    {
+        return new SavedLevelling(currentXP, level, statsPoints, skillPoints);
     }
 }
