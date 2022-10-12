@@ -7,17 +7,12 @@ using UnityEngine.Assertions;
 
 public class SaveController : MonoBehaviour
 {
-    // save slot
-    // save settings
-    // save game
-
     public SaveData saveData;
-    private string saveName = "save1";
+    private readonly ActiveSaveSlot saveSlot = new ActiveSaveSlot();
 
     public Stats stats;
     public SkillSystem skillSystem;
 
-    // Start is called before the first frame update
     void Start()
     {
         saveData = new SaveData(stats, skillSystem);
@@ -38,40 +33,61 @@ public class SaveController : MonoBehaviour
         Save();
     }
 
+    private string CreatePath()
+    {
+        return CreatePath(saveSlot.GetSaveSlot());
+    }
+
+    private string CreatePath(int saveIndex)
+    {
+        return Application.persistentDataPath + "/save" + saveIndex + ".bin";
+    }
+
     private void Save()
     {
         var formatter = new BinaryFormatter();
-        string path = Application.persistentDataPath + "/" + saveName + ".bin";
-
+        string path = CreatePath();
         FileStream stream = new FileStream(path, FileMode.Create) { Position = 0 };
 
         formatter.Serialize(stream, saveData);
         stream.Close();
-
-        Debug.Log("saved");
     }
 
     public void Load()
     {
-        string path = Application.persistentDataPath + "/" + saveName + ".bin";
+        string path = Application.persistentDataPath + "/" + saveSlot + ".bin";
 
-        if (!File.Exists(path))
-        {
-            Debug.Log("new save created");
-            saveData = new SaveData(stats, skillSystem);
-            return;
-        }
-
-        var formatter = new BinaryFormatter();
-        FileStream stream = new FileStream(path, FileMode.Open) { Position = 0 };
-
-        saveData = formatter.Deserialize(stream) as SaveData;
-        stream.Close();
+        saveData = LoadData(path);
 
         Assert.IsNotNull(saveData);
         stats.Load(saveData.savedStats);
         skillSystem.Load(saveData.savedSkillSystem);
+    }
 
-        Debug.Log("loaded");
+    private SaveData LoadData(string filePath)
+    {
+        if (!File.Exists(filePath))
+        {
+            Debug.Log("new save created");
+            return new SaveData(stats, skillSystem);
+        }
+
+        var formatter = new BinaryFormatter();
+        FileStream stream = new FileStream(filePath, FileMode.Open) { Position = 0 };
+
+        saveData = formatter.Deserialize(stream) as SaveData;
+        stream.Close();
+        return saveData;
+    }
+
+    public SaveData GetSavedData(int index)
+    {
+        var path = CreatePath(index);
+        return !File.Exists(path) ? null : LoadData(CreatePath(index));
+    }
+
+    public void SetSaveSlot(int index)
+    {
+        saveSlot.SaveActiveSlot(index);
     }
 }
