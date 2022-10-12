@@ -9,6 +9,7 @@
 /Dungeon of Chaos/[Bb]uilds/
 /Dungeon of Chaos/[Ll]ogs/
 /Dungeon of Chaos/[Mm]emoryCaptures/
+/Dungeon of Chaos/[Uu]serSettings/
 
 # Asset meta data should only be ignored when the corresponding asset is also ignored
 !/Dungeon of Chaos/[Aa]ssets/**/*.meta
