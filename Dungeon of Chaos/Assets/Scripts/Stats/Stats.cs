@@ -6,24 +6,11 @@ public class SavedStats
 {
     public PrimaryStats.SavedPrimaryStats savedPrimary;
     public Levelling.SavedLevelling savedLevelling;
-    public float maxHP;
-    public float maxMana;
-    public float maxStamina;
-    public float physicalDamage;
-    public float spellPower;
-    public float armor;
 
-    public SavedStats(PrimaryStats.SavedPrimaryStats savedPrimary, Levelling.SavedLevelling savedLevelling, float maxHp,
-                      float maxMana, float maxStamina, float physicalDamage, float spellPower, float armor)
+    public SavedStats(PrimaryStats.SavedPrimaryStats savedPrimary, Levelling.SavedLevelling savedLevelling)
     {
         this.savedPrimary = savedPrimary;
         this.savedLevelling = savedLevelling;
-        maxHP = maxHp;
-        this.maxMana = maxMana;
-        this.maxStamina = maxStamina;
-        this.physicalDamage = physicalDamage;
-        this.spellPower = spellPower;
-        this.armor = armor;
     }
 }
 
@@ -314,19 +301,12 @@ public class Stats : ScriptableObject
 
     public SavedStats Save()
     {
-        return new SavedStats(primaryStats.Save(), XP.Save(), health.maxValue, mana.maxValue, stamina.maxValue,
-                              physicalDamage, spellPower, armor);
+        return new SavedStats(primaryStats.Save(), XP.Save());
     }
 
     public void Load(SavedStats saved)
     {
         primaryStats.Load(saved.savedPrimary);
         XP.Load(saved.savedLevelling);
-        health.Load(saved.maxHP);
-        mana.Load(saved.maxMana);
-        stamina.Load(saved.maxStamina);
-        physicalDamage = saved.physicalDamage;
-        spellPower = saved.spellPower;
-        armor = saved.armor;
     }
 }
