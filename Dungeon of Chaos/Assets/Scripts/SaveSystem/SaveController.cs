@@ -7,28 +7,34 @@ using UnityEngine.Assertions;
 
 public class SaveController : MonoBehaviour
 {
+    // save slot
+    // save settings
+    // save game
+
     public SaveData saveData;
     private string saveName = "save1";
 
     public Stats stats;
+    public SkillSystem skillSystem;
 
     // Start is called before the first frame update
     void Start()
     {
-        saveData = new SaveData(stats);
+        saveData = new SaveData(stats, skillSystem);
     }
 
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.K))
-            SaveStats();
+            SaveProgress();
         if (Input.GetKeyDown(KeyCode.L))
             Load();
     }
 
-    public void SaveStats()
+    public void SaveProgress()
     {
         saveData.SaveStats(stats);
+        saveData.SaveSkillSystem(skillSystem);
         Save();
     }
 
@@ -37,11 +43,12 @@ public class SaveController : MonoBehaviour
         var formatter = new BinaryFormatter();
         string path = Application.persistentDataPath + "/" + saveName + ".bin";
 
-        FileStream stream = new FileStream(path, FileMode.Create) {Position = 0};
-
+        FileStream stream = new FileStream(path, FileMode.Create) { Position = 0 };
 
         formatter.Serialize(stream, saveData);
         stream.Close();
+
+        Debug.Log("saved");
     }
 
     public void Load()
@@ -50,19 +57,21 @@ public class SaveController : MonoBehaviour
 
         if (!File.Exists(path))
         {
-            saveData = new SaveData(stats);
+            Debug.Log("new save created");
+            saveData = new SaveData(stats, skillSystem);
             return;
         }
 
         var formatter = new BinaryFormatter();
-        FileStream stream = new FileStream(path, FileMode.Open) {Position = 0};
+        FileStream stream = new FileStream(path, FileMode.Open) { Position = 0 };
 
         saveData = formatter.Deserialize(stream) as SaveData;
         stream.Close();
 
         Assert.IsNotNull(saveData);
         stats.Load(saveData.savedStats);
+        skillSystem.Load(saveData.savedSkillSystem);
 
-        Debug.Log(stats.GetStrength());
+        Debug.Log("loaded");
     }
 }
