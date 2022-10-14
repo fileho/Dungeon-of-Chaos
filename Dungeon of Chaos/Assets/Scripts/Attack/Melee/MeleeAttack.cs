@@ -16,6 +16,8 @@ public abstract class MeleeAttack : IAttack {
     // Reach is how far the weapon travels during the attack animation
     protected float reach;
 
+    protected const string INDICATOR_SPAWN_POSITION = "MeleeIndicatorSpawnPosition";
+
     protected override void SetIndicatorTransform() {
         indicatorTransform = owner.transform.Find(INDICATOR_SPAWN_POSITION);
     }
@@ -23,11 +25,19 @@ public abstract class MeleeAttack : IAttack {
 
     protected override void ApplyConfigurations() {
         base.ApplyConfigurations();
-        swing = (attackConfiguration as MeleeAttackConfiguration).swing;
-        reach = (attackConfiguration as MeleeAttackConfiguration).reach;
+        MeleeAttackConfiguration _attackConfiguration = attackConfiguration as MeleeAttackConfiguration;
+        swing = _attackConfiguration.swing;
+        reach = _attackConfiguration.reach;
     }
 
-    
+
+    protected override void PrepareWeapon()
+    {
+        base.PrepareWeapon();
+        Weapon.EnableDisableTrail(true);
+        Weapon.EnableDisableCollider(true);
+    }
+
     public override void Attack() {
         if (isAttacking)
             return;
@@ -35,8 +45,10 @@ public abstract class MeleeAttack : IAttack {
         isAttacking = true;
         cooldownLeft = cooldown;
 
-        PrepareWeapon();
         ActivateIndicator();
     }
 
+    public override string ToString() {
+        return base.ToString() + "_Melee";
+    }
 }

@@ -13,11 +13,17 @@ MonoBehaviour:
   m_Name: OrcFighterStats
   m_EditorClassIdentifier: 
   movementSpeed: 4.5
+  chaseDistance: 17
   staminaRegen: 20
   primaryStats:
     id: 0
   XP:
-    id: 1
+    maxLevel: 0
+    baseMultiplier: 0
+    baseXP: 0
+    level: 1
+    statsPoints: 0
+    skillPoints: 0
   references:
     version: 1
     00000000:
@@ -30,11 +36,3 @@ MonoBehaviour:
         wisdom: 0
         multipliers: {fileID: 11400000, guid: 9bc05dc5e43aa9f49a343ca8e90f53ed, type: 2}
         statsModifiers: {fileID: 11400000, guid: c69963b711bc6cf4192b46465e4ad3d7, type: 2}
-    00000001:
-      type: {class: Levelling, ns: , asm: Assembly-CSharp}
-      data:
-        maxLevel: 0
-        baseMultiplier: 0
-        baseXP: 0
-        level: 1
-        statsPoints: 0

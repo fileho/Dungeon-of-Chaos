@@ -48,6 +48,11 @@ public class Character : Unit
         return camera.ScreenToWorldPoint(Input.mousePosition); ;
     }
 
+    public override Vector2 GetTargetDirection() {
+        return (GetTargetPosition() - (Vector2)transform.position);
+    }
+
+
     private void UpdateCooldowns()
     {
         skillSystem.UpdateCooldowns();
@@ -87,8 +92,7 @@ public class Character : Unit
         if (attack.IsAttacking())
             return;
 
-        Vector2 dir = GetTargetPosition() - (Vector2)transform.position;
-
+        Vector2 dir = GetTargetDirection();
         if (dir.x > 0.01f)
             transform.localScale = new Vector3(-1, 1, 1);
         else if (dir.x < -0.01f)

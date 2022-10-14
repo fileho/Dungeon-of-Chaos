@@ -139,7 +139,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1661663378292665135}
   m_Layer: 9
-  m_Name: IndicatorSpawnPosition
+  m_Name: MeleeIndicatorSpawnPosition
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -172,6 +172,7 @@ GameObject:
   - component: {fileID: 4749972822253201943}
   - component: {fileID: 4749972822253201941}
   - component: {fileID: 8826653930369151913}
+  - component: {fileID: 8554070827507868208}
   m_Layer: 8
   m_Name: Enemy
   m_TagString: Enemy
@@ -319,6 +320,18 @@ CapsuleCollider2D:
   m_Offset: {x: -0.15091133, y: 0.117375374}
   m_Size: {x: 1.599369, y: 2.0465202}
   m_Direction: 0
+--- !u!114 &8554070827507868208
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4749972822253201939}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: deee871eddebb455cbe7fe5f329ae9b1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &4749972822270549039
 GameObject:
   m_ObjectHideFlags: 0

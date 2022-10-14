@@ -34,7 +34,15 @@ public class Unit : MonoBehaviour
     protected virtual void Init() { }
 
     // It can be either the position of the Unit or Mouse Position [In case of the character]
-    public virtual Vector2 GetTargetPosition() { return Target.transform.position; }
+    public virtual Vector2 GetTargetPosition() { return Target == null ? Vector2.positiveInfinity : (Vector2)Target.transform.position; }
+
+    public virtual Vector2 GetTargetDirection() {
+        return Target == null ? Vector2.positiveInfinity : (GetTargetPosition() - (Vector2)transform.position);
+    }
+
+    public float GetTargetDistance() {
+        return GetTargetDirection().magnitude;
+    }
 
     // Character in case of the enemy.
     // It can be changed at runtime.
