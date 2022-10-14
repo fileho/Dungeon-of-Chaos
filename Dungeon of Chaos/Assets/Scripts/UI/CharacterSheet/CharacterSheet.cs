@@ -4,12 +4,16 @@ using UnityEngine;
 
 public class CharacterSheet : MonoBehaviour
 {
-    [SerializeField] private GameObject child;
+    [SerializeField]
+    private GameObject child;
     private SkillSystem skillSystem;
+
+    private GameController gameController;
 
     private void Start()
     {
         skillSystem = FindObjectOfType<SkillSystem>();
+        gameController = FindObjectOfType<GameController>();
     }
 
     private void Update()
@@ -25,8 +29,6 @@ public class CharacterSheet : MonoBehaviour
 
     public void Close()
     {
-        Time.timeScale = 1f;
-        child.SetActive(false);
+        gameController.SaveAndReload();
     }
-
 }

@@ -61,8 +61,6 @@ public class Checkpoint : MonoBehaviour
 
     private void Rest()
     {
-        Debug.Log("Location saved");
-        SaveSystem.instance.save.SavePosition(transform.position);
-        Character.instance.stats.ResetStats();
+     //   Character.instance.stats.ResetStats();
     }
 }
