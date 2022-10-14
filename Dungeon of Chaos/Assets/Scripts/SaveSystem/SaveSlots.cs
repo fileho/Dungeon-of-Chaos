@@ -5,11 +5,13 @@ using UnityEngine.UI;
 
 public class SaveSlots : MonoBehaviour
 {
-    public SaveController saveController;
+    private SaveSystem saveSystem;
     public List<Button> buttons;
 
     void Start()
     {
+        saveSystem = FindObjectOfType<SaveSystem>();
+
         for (int i = 0; i < buttons.Count; i++)
         {
             var index = i;
@@ -23,7 +25,7 @@ public class SaveSlots : MonoBehaviour
 
     private void DrawInfo(int index)
     {
-        var saveData = saveController.GetSavedData(index);
+        var saveData = saveSystem.GetSavedData(index);
         DrawInfo(saveData, buttons[index].GetComponentInChildren<Text>());
     }
 
@@ -44,6 +46,6 @@ public class SaveSlots : MonoBehaviour
 
     private void ButtonClick(int index)
     {
-        saveController.SetSaveSlot(index);
+        saveSystem.SetSaveSlot(index);
     }
 }

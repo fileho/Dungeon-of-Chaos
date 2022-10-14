@@ -22,29 +22,41 @@ public class Levelling
         }
     }
 
-
-
     private int currentXP = 100;
     private int nextLevelXP;
     [Header("Levelling settings")]
     [Tooltip("Only for character")]
-    [SerializeField] private int maxLevel;
-    [SerializeField] private float baseMultiplier;
-    [SerializeField] private int baseXP;
+    [SerializeField]
+    private int maxLevel;
+    [SerializeField]
+    private float baseMultiplier;
+    [SerializeField]
+    private int baseXP;
     [Header("Starting level")]
-    [SerializeField] private int level = 1;
-    [SerializeField] private int statsPoints;
+    [SerializeField]
+    private int level = 1;
+    [SerializeField]
+    private int statsPoints;
     public int skillPoints;
 
     public void SetNextLevelXP()
     {
-        if (level == 1) 
+        nextLevelXP = GetXPValue(level);
+    }
+
+    private int GetXPValue(int lvl)
+    {
+        int value = baseXP;
+
+        if (lvl == 1)
+            return value;
+
+        for (int i = 1; i < lvl; i++)
         {
-            nextLevelXP = baseXP;
-            return;
+            value = Mathf.CeilToInt((baseMultiplier - (float)(i + 1) / (maxLevel * 2 + 1)) * value);
         }
 
-        nextLevelXP = Mathf.CeilToInt((baseMultiplier - ((level + 1) / (maxLevel * 2 + 1))) * nextLevelXP);
+        return value;
     }
 
     public int GetCurrentXP()
@@ -103,8 +115,8 @@ public class Levelling
     {
         // Can be modified based on level
         return 1;
-    }   
-    
+    }
+
     public bool HasStatsPoints()
     {
         return statsPoints > 0;

@@ -58,8 +58,8 @@ public class SkillSystem : MonoBehaviour
         for (int i = 0; i < activeSkillsSlots; i++)
             activated.Add(activeSkills[0]);
         equipped = new List<SkillInfoPassive>();
-    //    for (int i = 0; i < passiveSkillsSlots; i++)
-    //        equipped.Add(null);
+        //    for (int i = 0; i < passiveSkillsSlots; i++)
+        //        equipped.Add(null);
         foreach (SkillInfoActive skill in activeSkills)
             skill.ResetLevel();
     }

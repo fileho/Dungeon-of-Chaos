@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1271310001873820018}
-  - component: {fileID: 1271310001873820013}
+  - component: {fileID: 542692673618528057}
   m_Layer: 0
   m_Name: SaveSystem
   m_TagString: Untagged
@@ -31,7 +31,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1271310001873820013
+--- !u!114 &542692673618528057
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -40,7 +40,29 @@ MonoBehaviour:
   m_GameObject: {fileID: 1271310001873820012}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b0683f5d2ccd6334f944e1bb10196155, type: 3}
+  m_Script: {fileID: 11500000, guid: 7dcf4f0734f81e241900fb7646a60f75, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  save: {fileID: 11400000, guid: 08ad544af48e25649a6cd557b72fc603, type: 2}
+  saveData:
+    dungeon: 0
+    characterPosition:
+      x: 0
+      y: 0
+      z: 0
+    savedStats:
+      savedPrimary:
+        strength: 0
+        intelligence: 0
+        constitution: 0
+        endurance: 0
+        wisdom: 0
+      savedLevelling:
+        xp: 0
+        level: 0
+        statsPoints: 0
+        skillPoints: 0
+    savedSkillSystem:
+      backlogActive: []
+      backlogPassive: []
+      activated: 
+      equipped: 

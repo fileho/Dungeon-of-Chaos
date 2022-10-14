@@ -5,12 +5,12 @@ using UnityEngine.SceneManagement;
 
 public class GameController : MonoBehaviour
 {
-    private SaveController saveController;
+    private SaveSystem saveSystem;
 
     private void Start()
     {
-        saveController = FindObjectOfType<SaveController>();
-        saveController.Load();
+        saveSystem = FindObjectOfType<SaveSystem>();
+        saveSystem.Load();
     }
 
     public void Death()
@@ -20,7 +20,8 @@ public class GameController : MonoBehaviour
 
     public void SaveAndReload()
     {
-        saveController.SaveProgress();
+        Time.timeScale = 1f;
+        saveSystem.SaveProgress();
         ReloadScene();
     }
 

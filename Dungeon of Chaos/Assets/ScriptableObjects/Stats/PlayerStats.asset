@@ -21,8 +21,8 @@ MonoBehaviour:
     baseMultiplier: 1.5
     baseXP: 100
     level: 1
-    statsPoints: 0
-    skillPoints: 0
+    statsPoints: 2
+    skillPoints: 2
   references:
     version: 1
     00000000:
