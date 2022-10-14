@@ -1,59 +1,48 @@
 using UnityEngine;
+using static UnityEngine.GraphicsBuffer;
+using UnityEngine.SocialPlatforms;
+using System.Collections.Generic;
+using System.Linq;
 
-
+[RequireComponent(typeof(AttackManager))]
 public class Enemy : Unit {
+
+    private enum State {
+        Idle,
+        Patrol,
+        Chase,
+        Attack,
+    }
+
+
     [SerializeField] private ILoot loot;
     public LootModifiers lootModifiers;
-    private IAttack attack;
-    private float distanceFromTarget = Mathf.Infinity;
+    private AttackManager attackManager;
+    private IAttack currentAttack;
+    private State state;
+
 
     protected override void Init() {
         loot = Instantiate(loot).Init(this);
         lootModifiers = Instantiate(lootModifiers);
-        attack = GetComponentInChildren<IAttack>();
         Target = Character.instance;
+        state = State.Patrol;
+        attackManager = GetComponent<AttackManager>();
+        attackManager.Init();
     }
 
 
-    private void Update() {
-        if (dead)
-            return;
-        if (IsAttacking())
-            return;
-
-        FlipSprite();
-        Attack();
-
-        if (IsTargetInRange())
-            RotateWeapon();
-        else
-            ResetWeapon();
+    private bool IsTargetInChaseRange() {
+        return GetTargetDistance() < stats.ChaseDistance();
     }
 
     private void FixedUpdate() {
-        if (dead)
-            return;
-        if (IsTargetInRange() || attack.IsAttacking()) {
-            return;
-        }
-        Move();
-    }
-
-
-    public override Vector2 GetTargetPosition() {
-        return (Vector2)Target.transform.position;
-    }
-
-
-    private bool IsTargetInRange() {
-        distanceFromTarget = (GetTargetPosition() - (Vector2)transform.position).magnitude;
-        return distanceFromTarget <= attack.GetAttackRange();
-
+        SwitchEnemyStates();
     }
 
 
     private bool IsAttacking() {
-        return attack.IsAttacking();
+        return currentAttack != null && currentAttack.IsAttacking();
     }
 
 
@@ -70,16 +59,9 @@ public class Enemy : Unit {
         }
     }
 
-    private void Attack() {
-        if (IsTargetInRange() && !IsAttacking() && attack.CanAttack())
-            attack.Attack();
-    }
 
     private void FlipSprite() {
-        if (IsAttacking())
-            return;
-
-        Vector2 dir = GetTargetPosition() - (Vector2)transform.position;
+        Vector2 dir = GetTargetDirection();
 
         if (dir.x > 0.01f)
             transform.localScale = new Vector3(-1, 1, 1);
@@ -87,14 +69,59 @@ public class Enemy : Unit {
             transform.localScale = Vector3.one;
     }
 
+    private bool Attack() {
+        if (IsAttacking()) return true;
+            currentAttack = attackManager.GetBestAvailableAttack();
+        if (currentAttack != null) {
+            state = State.Attack;
+            currentAttack.Attack();
+            return true;
+        }
+        return false;
+    }
 
     private void Move() {
-
         movement.Move(footstepsSFX);
     }
+
+    private bool Chase() {
+        if (IsTargetInChaseRange()) {
+            state = State.Chase;
+            if (GetTargetDistance() > attackManager.GetMinimumAttackRange()) {
+                Move();
+            }
+            FlipSprite();
+            RotateWeapon();
+            return true;
+        }
+        return false;
+    }
+
+
+    private bool Patrol() {
+        //TODO: Write the patrol logic
+        state = State.Patrol;
+        ResetWeapon();
+        return false;
+    }
+
+    private void SwitchEnemyStates() {
+        if (dead) return;
+        if(Attack());
+        else if (Chase());
+        else Patrol();
+        //print("Test: " + state.ToString());
+    }
+
+
+    public bool IsAwake() {
+        return state == State.Attack || state == State.Chase;
+    }
+   
 
     protected override void CleanUp() {
         loot.Drop();
         Destroy(transform.parent.gameObject);
     }
+
 }

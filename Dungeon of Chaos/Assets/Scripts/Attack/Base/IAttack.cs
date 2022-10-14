@@ -6,7 +6,7 @@ public abstract class IAttack : MonoBehaviour {
 
     [SerializeField] protected AttackConfiguration attackConfiguration;
 
-    protected Weapon weapon;
+    public Weapon Weapon { get; private set; }
     
     // The distance from the unit at which the attack can be used
     protected float range;
@@ -35,16 +35,37 @@ public abstract class IAttack : MonoBehaviour {
     protected Transform indicatorTransform;
 
 
-    protected const string INDICATOR_SPAWN_POSITION = "IndicatorSpawnPosition";
+    
 
     public abstract void Attack();
 
     public virtual bool CanAttack() {
-        return cooldownLeft <= 0;
+        return (IsTargetInAttackRange() && !isAttacking && cooldownLeft <= 0);
     }
 
     public float GetAttackRange() {
         return range;
+    }
+
+
+    private bool IsTargetInAttackRange() {
+        return owner.GetTargetDistance() <= GetAttackRange();
+    }
+
+
+    public float GetDamage()
+    {
+        if (owner == null)
+            return 0;
+
+        return type == SkillEffectType.physical
+            ? damage * owner.stats.GetPhysicalDamage()
+            : damage * owner.stats.GetSpellPower();
+    }
+
+
+    public float GetCoolDownTime() {
+        return cooldown;
     }
 
     public bool IsAttacking() {
@@ -67,32 +88,30 @@ public abstract class IAttack : MonoBehaviour {
     }
 
 
-    protected virtual void SetIndicatorTransform() { }
+    protected virtual void SetIndicatorTransform() {}
 
 
 
     protected virtual void ActivateIndicator() {
         if (indicator == null) return;
-        SoundManager.instance.PlaySound(indicatorSFX);
+        //SoundManager.instance.PlaySound(indicatorSFX);
         GameObject _indicator = Instantiate(indicator, indicatorTransform.position, indicatorTransform.rotation, indicatorTransform);
-        _indicator.transform.up = weapon.GetForwardDirectionRotated();
+        _indicator.transform.up = Weapon.GetForwardDirectionRotated();
         IndicatorDuration = _indicator.GetComponent<IIndicator>().Duration;
     }
 
+
     protected virtual void PrepareWeapon() {
-        weapon.EnableDisableTrail(true);
-        float dmg = type == SkillEffectType.physical
-            ? damage * owner.stats.GetPhysicalDamage()
-            : damage * owner.stats.GetSpellPower();
-        weapon.SetDamage(dmg);
-        weapon.SetImpactSound(impactSFX);
-        weapon.ResetHitUnits();
+       
+        Weapon.SetDamage(GetDamage());
+        Weapon.SetImpactSound(impactSFX);
+        Weapon.ResetHitUnits();
     }
 
 
     protected virtual void ResetWeapon() {
-        weapon.EnableDisableTrail(false);
-        weapon.EnableDisableCollider(false);
+        Weapon.EnableDisableTrail(false);
+        Weapon.EnableDisableCollider(false);
     }
 
     protected virtual void ApplyConfigurations() {
@@ -111,7 +130,7 @@ public abstract class IAttack : MonoBehaviour {
     }
 
     protected virtual void Start() {
-        weapon = GetComponent<Weapon>();
+        Weapon = GetComponent<Weapon>();
         owner = GetComponentInParent<Unit>();
         SetIndicatorTransform();
         ApplyConfigurations();

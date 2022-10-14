@@ -4,6 +4,7 @@ using UnityEngine;
 public class Stats : ScriptableObject
 {
     [SerializeField] private float movementSpeed;
+    [SerializeField] private float chaseDistance;
     [SerializeField] private float staminaRegen;
 
     [SerializeReference] private PrimaryStats primaryStats = new PrimaryStats();
@@ -99,6 +100,10 @@ public class Stats : ScriptableObject
     public float MovementSpeed()
     {
         return movementSpeed;
+    }
+
+    public float ChaseDistance() {
+        return chaseDistance;
     }
 
     public float GetPhysicalDamage()
