@@ -17,11 +17,15 @@ public class SavedStats
 [CreateAssetMenu(menuName = "SO/Stats/Stats")]
 public class Stats : ScriptableObject
 {
-    [SerializeField] private float movementSpeed;
-    [SerializeField] private float chaseDistance;
-    [SerializeField] private float staminaRegen;
+    [SerializeField]
+    private float movementSpeed;
+    [SerializeField]
+    private float chaseDistance;
+    [SerializeField]
+    private float staminaRegen;
 
-    [SerializeReference] private PrimaryStats primaryStats = new PrimaryStats();
+    [SerializeReference]
+    private PrimaryStats primaryStats = new PrimaryStats();
 
     private RegenerableStat health = new RegenerableStat();
     private RegenerableStat mana = new RegenerableStat();
@@ -117,7 +121,8 @@ public class Stats : ScriptableObject
         return movementSpeed;
     }
 
-    public float ChaseDistance() {
+    public float ChaseDistance()
+    {
         return chaseDistance;
     }
 
