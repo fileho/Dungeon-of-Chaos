@@ -6,7 +6,8 @@ using UnityEngine.Tilemaps;
 
 public class Checkpoint : MonoBehaviour
 {
-    [SerializeField] private float range = 2.5f;
+    [SerializeField]
+    private float range = 2.5f;
 
     private GameObject tooltipCanvas;
     private CharacterSheet characterSheet;
@@ -42,7 +43,6 @@ public class Checkpoint : MonoBehaviour
         Gizmos.DrawWireSphere(transform.position, range);
     }
 
-
     private void OnTriggerExit2D(Collider2D collision)
     {
         if (!collision.CompareTag("Player"))
@@ -55,12 +55,6 @@ public class Checkpoint : MonoBehaviour
     {
         tooltipCanvas.SetActive(false);
         characterSheet.Open();
-        Rest();
         Time.timeScale = 0f;
-    }
-
-    private void Rest()
-    {
-     //   Character.instance.stats.ResetStats();
     }
 }
