@@ -9,7 +9,12 @@ public class ActiveSaveSlot
     [System.Serializable]
     public class SaveSlotData
     {
-        public int index = 0;
+        public int index;
+
+        public SaveSlotData(int index = 0)
+        {
+            this.index = index;
+        }
     }
 
     private SaveSlotData data;
@@ -17,7 +22,7 @@ public class ActiveSaveSlot
 
     public void SaveActiveSlot(int index)
     {
-        data.index = index;
+        data = new SaveSlotData(index);
         Save();
     }
 

@@ -10,12 +10,11 @@ public class SaveController : MonoBehaviour
     public SaveData saveData;
     private readonly ActiveSaveSlot saveSlot = new ActiveSaveSlot();
 
-    public Stats stats;
-    public SkillSystem skillSystem;
+    private Character character;
 
-    void Start()
+    private void Start()
     {
-        saveData = new SaveData(stats, skillSystem);
+        character = FindObjectOfType<Character>();
     }
 
     void Update()
@@ -26,10 +25,16 @@ public class SaveController : MonoBehaviour
             Load();
     }
 
+    public void SaveProgress(SaveAttributes attributes)
+    {
+        saveData = new SaveData(attributes);
+        Save();
+    }
+
     public void SaveProgress()
     {
-        saveData.SaveStats(stats);
-        saveData.SaveSkillSystem(skillSystem);
+        saveData =
+            new SaveData(new SaveAttributes(1, character.transform.position, character.stats, character.SkillSystem));
         Save();
     }
 
@@ -55,35 +60,37 @@ public class SaveController : MonoBehaviour
 
     public void Load()
     {
-        string path = Application.persistentDataPath + "/" + saveSlot + ".bin";
+        if (!character)
+            character = FindObjectOfType<Character>();
 
+        string path = CreatePath();
         saveData = LoadData(path);
 
         Assert.IsNotNull(saveData);
-        stats.Load(saveData.savedStats);
-        skillSystem.Load(saveData.savedSkillSystem);
+        character.stats.Load(saveData.savedStats);
+        character.SkillSystem.Load(saveData.savedSkillSystem);
+        character.transform.position = saveData.characterPosition.ToV3();
     }
 
     private SaveData LoadData(string filePath)
     {
         if (!File.Exists(filePath))
         {
-            Debug.Log("new save created");
-            return new SaveData(stats, skillSystem);
+            return new SaveData(new SaveAttributes(1, Vector3.zero, character.stats, character.SkillSystem));
         }
 
         var formatter = new BinaryFormatter();
         FileStream stream = new FileStream(filePath, FileMode.Open) { Position = 0 };
 
-        saveData = formatter.Deserialize(stream) as SaveData;
+        var data = formatter.Deserialize(stream) as SaveData;
         stream.Close();
-        return saveData;
+        return data;
     }
 
-    public SaveData GetSavedData(int index)
+    public SaveData GetSavedData(int saveSlotIndex)
     {
-        var path = CreatePath(index);
-        return !File.Exists(path) ? null : LoadData(CreatePath(index));
+        var path = CreatePath(saveSlotIndex);
+        return !File.Exists(path) ? null : LoadData(CreatePath(saveSlotIndex));
     }
 
     public void SetSaveSlot(int index)
