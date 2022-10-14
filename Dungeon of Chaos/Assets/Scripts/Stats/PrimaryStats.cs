@@ -2,9 +2,27 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-
 public class PrimaryStats
 {
+    [System.Serializable]
+    public class SavedPrimaryStats
+    {
+        public float strength;
+        public float intelligence;
+        public float constitution;
+        public float endurance;
+        public float wisdom;
+
+        public SavedPrimaryStats(float strength, float intelligence, float constitution, float endurance, float wisdom)
+        {
+            this.strength = strength;
+            this.intelligence = intelligence;
+            this.constitution = constitution;
+            this.endurance = endurance;
+            this.wisdom = wisdom;
+        }
+    }
+
     [Header("Primary Stats")]
     public float strength;
     public float intelligence;
@@ -13,11 +31,13 @@ public class PrimaryStats
     public float wisdom;
 
     [Header("")]
-    [SerializeField] PrimaryToSecondary multipliers;
+    [SerializeField]
+    PrimaryToSecondary multipliers;
 
     [Header("Stats Modifier Scriptable Object")]
     [Tooltip("Only for enemies, leave empty for character")]
-    [SerializeField] private StatsModifiers statsModifiers;
+    [SerializeField]
+    private StatsModifiers statsModifiers;
 
     private float ModifiedStat(int l, float value)
     {
@@ -53,5 +73,19 @@ public class PrimaryStats
     {
         float w = ModifiedStat(l, wisdom);
         return w * multipliers.manaMultiplier;
+    }
+
+    public void Load(SavedPrimaryStats saved)
+    {
+        strength = saved.strength;
+        intelligence = saved.intelligence;
+        constitution = saved.constitution;
+        endurance = saved.endurance;
+        wisdom = saved.wisdom;
+    }
+
+    public SavedPrimaryStats Save()
+    {
+        return new SavedPrimaryStats(strength, intelligence, constitution, endurance, wisdom);
     }
 }
