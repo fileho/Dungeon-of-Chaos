@@ -7,6 +7,7 @@ public class CharacterSheet : MonoBehaviour
     [SerializeField]
     private GameObject child;
     [SerializeField] private ActivatedSkillSlots activatedSkillSlots;
+    private SkillButtonActive[] skillButtonsActive;
 
     private GameController gameController;
 
@@ -24,6 +25,9 @@ public class CharacterSheet : MonoBehaviour
     {
         child.SetActive(true);
         activatedSkillSlots.InitSkillSlots();
+        skillButtonsActive = FindObjectsOfType<SkillButtonActive>();
+        foreach (SkillButtonActive skillBtn in skillButtonsActive)
+            skillBtn.Init();
     }
 
     public void Close()

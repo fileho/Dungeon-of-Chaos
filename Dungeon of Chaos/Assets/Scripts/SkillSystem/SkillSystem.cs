@@ -207,9 +207,18 @@ public class SkillSystem : MonoBehaviour
         return equipped.Contains(index);
     }
 
+    public SkillInfoActive GetActivatedSkill(int index)
+    {
+        return GetSkillInfoActive(activated[index]);
+    }
+
+    public SkillInfoPassive GetEquippedSkill(int index)
+    {
+        return GetSkillInfoPassive(equipped[index]);
+    }    
+
     public SkillInfoActive GetSkillInfoActive(int index)
     {
-        
         return IsValidActive(index) ? activeSkills[index] : null;
     }
 

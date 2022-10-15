@@ -53,11 +53,11 @@ public class TabGroup : MonoBehaviour
         {
             if (index == i)
             {
-                pages[i].SetActive(true);
+                SetActive(pages[i], true);
             }
             else
             {
-                pages[i].SetActive(false);
+                SetActive(pages[i], false);
             }
         }
     }
@@ -71,5 +71,13 @@ public class TabGroup : MonoBehaviour
             if (selectedTab != null && selectedTab == button) { continue; }
             button.background.color = tabIdle;
         }
+    }
+
+    private void SetActive(GameObject page, bool value)
+    {
+        CanvasGroup group = page.GetComponent<CanvasGroup>();
+        group.blocksRaycasts = value;
+        group.alpha = value ? 1 : 0;
+        group.interactable = value;
     }
 }

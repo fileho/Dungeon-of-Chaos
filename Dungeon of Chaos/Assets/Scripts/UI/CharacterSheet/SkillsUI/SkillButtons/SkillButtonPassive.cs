@@ -9,12 +9,13 @@ public class SkillButtonPassive : SkillButton
     [SerializeField] private int skillIndex;
     private SkillInfoPassive skillInfo;
 
-    protected override void Start()
+    public override void Init()
     {
-        base.Start();
+        base.Init();
         skillInfo = skillSystem.GetSkillInfoPassive(skillIndex);
         if (skillInfo == null)
             enabled = false;
+        highlight.color = Color.blue;
     }
 
     public override void OnBeginDrag(PointerEventData eventData)

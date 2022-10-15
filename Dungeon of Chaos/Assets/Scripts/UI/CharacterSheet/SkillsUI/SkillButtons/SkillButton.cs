@@ -10,6 +10,7 @@ public abstract class SkillButton : MonoBehaviour, IPointerDownHandler, IPointer
     [SerializeField] protected Text level;
     [SerializeField] protected GameObject locked;
     [SerializeField] protected GameObject load;
+    [SerializeField] protected Image highlight;
 
     protected SkillSystem skillSystem;
 
@@ -31,9 +32,6 @@ public abstract class SkillButton : MonoBehaviour, IPointerDownHandler, IPointer
 
     public void OnPointerDown(PointerEventData eventData)
     {
-        //TODO: Hide Tooltip
-        //TooltipSystem.instance.Hide();
-        Debug.Log("OnPointerDown");
         if (eventData.button == PointerEventData.InputButton.Left)
             Debug.Log("Left Button");
         else if (eventData.button == PointerEventData.InputButton.Right)
@@ -62,11 +60,9 @@ public abstract class SkillButton : MonoBehaviour, IPointerDownHandler, IPointer
         load.SetActive(false);
     }
 
-    protected virtual void Start()
+    public virtual void Init()
     {
         skillSystem = FindObjectOfType<SkillSystem>();
-        SetLevel();
-        SetIcon();
     }
 
     void Update()
