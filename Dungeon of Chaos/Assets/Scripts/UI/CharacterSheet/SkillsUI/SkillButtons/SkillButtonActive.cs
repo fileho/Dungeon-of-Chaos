@@ -6,18 +6,22 @@ using UnityEngine.UI;
 
 public class SkillButtonActive : SkillButton
 {
-    [SerializeField] private SkillInfoActive skillInfo;
-    SkillSlotActive[] skillSlots;
+    [SerializeField] private int skillIndex;
+    private ActivatedSkillSlots activatedSkillSlots;
+    private SkillInfoActive skillInfo;
 
     protected override void Start()
     {
         base.Start();
-        skillSlots = FindObjectsOfType<SkillSlotActive>();
+        activatedSkillSlots = FindObjectOfType<ActivatedSkillSlots>();
+        skillInfo = skillSystem.GetSkillInfoActive(skillIndex);
+        if (skillInfo == null)
+            enabled = false;
     }
 
     public override void OnBeginDrag(PointerEventData eventData)
     {
-        if (eventData.button == PointerEventData.InputButton.Right || !skillSystem.IsUnlocked(skillInfo))
+        if (eventData.button == PointerEventData.InputButton.Right || !skillSystem.IsUnlockedActive(skillIndex))
         {
             eventData.pointerDrag = null;
             return;
@@ -27,8 +31,7 @@ public class SkillButtonActive : SkillButton
         dragDrop.GetComponent<Image>().sprite = skillInfo.GetSkillData().GetIcon();
         dragDrop.SetActive(true);
 
-        foreach (SkillSlotActive skillSlot in skillSlots)
-            skillSlot.Highlight();
+        activatedSkillSlots.Highlight();
     }
 
     public override void OnPointerEnter(PointerEventData eventData)
@@ -43,9 +46,8 @@ public class SkillButtonActive : SkillButton
 
     public override void RightMouseDown()
     {
-        if (!skillSystem.CanUpgrade(skillInfo))
+        if (!skillSystem.CanUpgradeActive(skillIndex))
         {
-            //Debug.Log("Not enough skill points");
             TooltipSystem.instance.DisplayMessage("Not enough skill points");
             return;
         }
@@ -55,12 +57,12 @@ public class SkillButtonActive : SkillButton
     public override void OnEndDrag(PointerEventData eventData)
     {
         base.OnEndDrag(eventData);
-        foreach (SkillSlotActive skillSlot in skillSlots)
-            skillSlot.RemoveHighlight();
+        activatedSkillSlots.RemoveHighlight();
     }
-    public SkillInfoActive GetSkillInfo()
+
+    public int GetSkillIndex()
     {
-        return skillInfo;
+        return skillIndex;
     }
 
     public override void Upgrade() 
@@ -68,7 +70,7 @@ public class SkillButtonActive : SkillButton
         time = 0f;
         rightClick = false;
 
-        skillSystem.Upgrade(skillInfo);
+        skillSystem.UpgradeActive(skillIndex);
         SetIcon();
         SetLevel();
     }
@@ -78,7 +80,7 @@ public class SkillButtonActive : SkillButton
         Sprite icon = skillInfo.GetSkillData().GetIcon();
         GetComponent<Image>().sprite = icon;
 
-        if (skillSystem.IsActivated(skillInfo))
+        if (skillSystem.IsActivated(skillIndex))
         {
             Debug.Log("Update icon in activated slots");
         }

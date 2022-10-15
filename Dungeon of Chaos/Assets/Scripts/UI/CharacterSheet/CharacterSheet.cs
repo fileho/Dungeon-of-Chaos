@@ -6,13 +6,12 @@ public class CharacterSheet : MonoBehaviour
 {
     [SerializeField]
     private GameObject child;
-    private SkillSystem skillSystem;
+    [SerializeField] private ActivatedSkillSlots activatedSkillSlots;
 
     private GameController gameController;
 
     private void Start()
     {
-        skillSystem = FindObjectOfType<SkillSystem>();
         gameController = FindObjectOfType<GameController>();
     }
 
@@ -24,7 +23,7 @@ public class CharacterSheet : MonoBehaviour
     public void Open()
     {
         child.SetActive(true);
-        skillSystem.InitSkillSlots();
+        activatedSkillSlots.InitSkillSlots();
     }
 
     public void Close()

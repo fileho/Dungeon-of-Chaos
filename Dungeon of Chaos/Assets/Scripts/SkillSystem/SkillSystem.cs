@@ -32,8 +32,8 @@ public class SkillSystem : MonoBehaviour
     private List<SkillInfoPassive> passiveSkills;
 
     [SerializeField]
-    private List<SkillInfoActive> activated;
-    private List<SkillInfoPassive> equipped;
+    private List<int> activated;
+    private List<int> equipped;
     // TODO add SkillInfoDash?? - probably yes
     [SerializeField]
     private SkillInfoActive activatedDash;
@@ -44,37 +44,29 @@ public class SkillSystem : MonoBehaviour
     [SerializeField]
     private int passiveSkillsSlots;
 
+    private ActivatedSkillSlots activatedSkillSlots;
+
     [SerializeField]
     private List<int> skillPointsRequired;
-
-    private List<SkillSlotActive> skillSlots = new List<SkillSlotActive>();
 
     private Unit owner;
     private Levelling levelling;
 
     private void Awake()
     {
-        activated = new List<SkillInfoActive>();
+        activated = new List<int>();
         for (int i = 0; i < activeSkillsSlots; i++)
-            activated.Add(activeSkills[0]);
-        equipped = new List<SkillInfoPassive>();
-        //    for (int i = 0; i < passiveSkillsSlots; i++)
-        //        equipped.Add(null);
+            activated.Add(-1);
+        equipped = new List<int>();
+        for (int i = 0; i < passiveSkillsSlots; i++)
+           equipped.Add(-1);
         foreach (SkillInfoActive skill in activeSkills)
             skill.ResetLevel();
     }
 
-    public void InitSkillSlots()
+    public int GetActiveSkillSlots()
     {
-        if (skillSlots.Count == activeSkillsSlots)
-            return;
-        SkillSlotActive[] slots = FindObjectsOfType<SkillSlotActive>();
-        for (int i = 0; i < activeSkillsSlots; i++)
-            skillSlots.Add(null);
-        foreach (SkillSlotActive slot in slots)
-        {
-            skillSlots[slot.GetIndex()] = slot;
-        }
+        return activeSkillsSlots;
     }
 
     public void Init(Unit owner)
@@ -84,12 +76,22 @@ public class SkillSystem : MonoBehaviour
         levelling = owner.stats.GetLevellingData();
     }
 
+    private bool IsValidActive(int index)
+    {
+        return index >= 0 && index < activeSkills.Count;
+    }
+
+    private bool IsValidPassive(int index)
+    {
+        return index >= 0 && index < passiveSkills.Count;
+    }
+
     public void UpdateCooldowns()
     {
-        foreach (var skill in activated)
+        foreach (int index in activated)
         {
-            if (skill)
-                skill.GetCurrentSkill().UpdateCooldown();
+            if (IsValidActive(index))
+                activeSkills[index].GetCurrentSkill().UpdateCooldown();
         }
 
         activatedDash.GetCurrentSkill().UpdateCooldown();
@@ -104,9 +106,11 @@ public class SkillSystem : MonoBehaviour
 
     public void UseSkill(int index)
     {
-        SkillInfoActive skill = activated[index];
-        if (skill)
+        if (IsValidActive(index))
+        {
+            SkillInfoActive skill = activeSkills[activated[index]];
             skill.GetCurrentSkill().Use(owner);
+        }
     }
 
     public bool IsDashing()
@@ -119,86 +123,99 @@ public class SkillSystem : MonoBehaviour
         ((IDashSkill)activatedDash.GetCurrentSkill()).TriggerCollision(col);
     }
 
-    public void Upgrade(SkillInfoActive skill)
+    public void UpgradeActive(int index)
     {
+        if (!IsValidActive(index))
+            return;
+        SkillInfoActive skill = activeSkills[index];
         levelling.skillPoints -= skillPointsRequired[skill.GetLevel()];
         skill.Unlock();
         skill.Upgrade();
     }
 
-    public void Upgrade(SkillInfoPassive skill)
+    public void UpgradePassive(int index)
     {
+        if (!IsValidPassive(index))
+            return;
+        SkillInfoPassive skill = passiveSkills[index];
         levelling.skillPoints -= skillPointsRequired[skill.GetLevel()];
         skill.Unlock();
         skill.Upgrade();
     }
 
-    public void Activate(SkillInfoActive skill, int slot)
+    public void Activate(int index, int slot)
     {
-        if (activated.Contains(skill))
+        if (activated.Contains(index))
         {
-            int i = activated.IndexOf(skill);
-            if (activated[slot] != null)
+            int i = activated.IndexOf(index);
+            if (activated[slot] != -1)
             {
                 activated[i] = activated[slot];
-                skillSlots[i].SetImage(activated[i].GetSkillData().GetIcon());
             }
             else
             {
-                activated[i] = null;
-                skillSlots[i].SetImage(null);
+                activated[i] = -1;
             }
         }
-        activated[slot] = skill;
-        skillSlots[slot].SetImage(skill.GetSkillData().GetIcon());
+        activated[slot] = index;
     }
 
-    public void Equip(SkillInfoPassive skill, int slot)
+    public void Equip(int index, int slot)
     {
-        if (equipped[slot] != null)
-            equipped[slot].Unequip(Character.instance.stats);
-        equipped[slot] = skill;
-        skill.Equip(Character.instance.stats);
+        if (equipped[slot] != -1)
+            passiveSkills[equipped[slot]].Unequip(Character.instance.stats);
+        equipped[slot] = index;
+        passiveSkills[index].Equip(Character.instance.stats);
     }
 
-    public bool IsUnlocked(SkillInfoActive skill)
+    public bool IsUnlockedActive(int index)
     {
-        return skill.IsUnlocked();
+        return IsValidActive(index) && activeSkills[index].IsUnlocked();
     }
 
-    public bool IsUnlocked(SkillInfoPassive skill)
+    public bool IsUnlockedPassive(int index)
     {
-        return skill.IsUnlocked();
+        return IsValidPassive(index) && passiveSkills[index] .IsUnlocked();
     }
 
-    public bool CanUpgrade(SkillInfoActive skill)
+    public bool CanUpgradeActive(int index)
     {
-        return levelling.skillPoints >= skillPointsRequired[skill.GetLevel()];
+        return IsValidActive(index) && levelling.skillPoints >= skillPointsRequired[activeSkills[index].GetLevel()] && activeSkills[index].CanUpgrade();
     }
-    public bool CanUpgrade(SkillInfoPassive skill)
+    public bool CanUpgradePassive(int index)
     {
-        return levelling.skillPoints >= skillPointsRequired[skill.GetLevel()] && skill.CanUpgrade();
+        return IsValidPassive(index) && levelling.skillPoints >= skillPointsRequired[passiveSkills[index].GetLevel()] && passiveSkills[index].CanUpgrade();
     }
 
     public bool HasActivatedSkill()
     {
         foreach (var skill in activated)
         {
-            if (skill != null)
+            if (skill != -1)
                 return true;
         }
-
         return false;
     }
 
-    public bool IsActivated(SkillInfoActive skillInfo)
+    public bool IsActivated(int index)
     {
-        return activated.Contains(skillInfo);
+        return activated.Contains(index);
     }
 
-    public bool IsEquipped(SkillInfoPassive skillInfo)
+    public bool IsEquipped(int index)
     {
-        return equipped.Contains(skillInfo);
+        return equipped.Contains(index);
+    }
+
+    public SkillInfoActive GetSkillInfoActive(int index)
+    {
+        
+        return IsValidActive(index) ? activeSkills[index] : null;
+    }
+
+    public SkillInfoPassive GetSkillInfoPassive(int index)
+    {
+        return IsValidPassive(index) ? passiveSkills[index] : null;
     }
 
     // helpers for saving
@@ -221,45 +238,18 @@ public class SkillSystem : MonoBehaviour
         return ret;
     }
 
-    private List<int> GetIndices(List<SkillInfoActive> list)
-    {
-        List<int> ret = new List<int>(list.Capacity);
-        foreach (var elem in list)
-        {
-            ret.Add(activeSkills.FindIndex(active => active.GetId() == elem.GetId()));
-        }
-        return ret;
-    }
-    private List<int> GetIndices(List<SkillInfoPassive> list)
-    {
-        List<int> ret = new List<int>(list.Capacity);
-        foreach (var elem in list)
-        {
-            ret.Add(passiveSkills.FindIndex(passive => passive.GetId() == elem.GetId()));
-        }
-        return ret;
-    }
-
     public SavedSkillSystem Save()
     {
-        return new SavedSkillSystem(GetSavedInfo(activeSkills), GetSavedInfo(passiveSkills), GetIndices(activated),
-                                    GetIndices(equipped));
+        return new SavedSkillSystem(GetSavedInfo(activeSkills), GetSavedInfo(passiveSkills), activated,
+                                    equipped);
     }
 
-    private void LoadList(List<SkillInfoActive> target, List<int> indices)
+    private void LoadList(List<int> target, List<int> indices)
     {
         Assert.AreEqual(target.Count, indices.Count);
         for (int i = 0; i < target.Count; i++)
         {
-            target[i] = activeSkills[indices[i]];
-        }
-    }
-    private void LoadList(List<SkillInfoPassive> target, List<int> indices)
-    {
-        Assert.AreEqual(target.Count, indices.Count);
-        for (int i = 0; i < target.Count; i++)
-        {
-            target[i] = passiveSkills[indices[i]];
+            target[i] = indices[i];
         }
     }
 

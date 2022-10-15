@@ -6,10 +6,20 @@ using UnityEngine.UI;
 
 public class SkillButtonPassive : SkillButton
 {
-    [SerializeField] private SkillInfoPassive skillInfo;
+    [SerializeField] private int skillIndex;
+    private SkillInfoPassive skillInfo;
+
+    protected override void Start()
+    {
+        base.Start();
+        skillInfo = skillSystem.GetSkillInfoPassive(skillIndex);
+        if (skillInfo == null)
+            enabled = false;
+    }
+
     public override void OnBeginDrag(PointerEventData eventData)
     {
-        if (!skillSystem.IsUnlocked(skillInfo))
+        if (!skillSystem.IsUnlockedPassive(skillIndex))
             return;
         dragDrop.transform.position = eventData.position;
         dragDrop.GetComponent<Image>().sprite = skillInfo.GetSkillData().GetIcon();
@@ -18,30 +28,28 @@ public class SkillButtonPassive : SkillButton
 
     public override void OnPointerEnter(PointerEventData eventData)
     {
-        Debug.Log("OnPointerEnter");
     }
 
     public override void OnPointerExit(PointerEventData eventData)
     {
-        Debug.Log("OnPointerExit");
     }
 
-    public SkillInfoPassive GetSkillInfo()
+    public int GetSkillIndex()
     {
-        return skillInfo;
+        return skillIndex;
     }
 
     public override void Upgrade()
     {
         time = 0f;
         rightClick = false;
-        if (!skillSystem.CanUpgrade(skillInfo))
+        if (!skillSystem.CanUpgradePassive(skillIndex))
         {
             Debug.Log("Not enough skill points");
             return;
         }
 
-        skillSystem.Upgrade(skillInfo);
+        skillSystem.UpgradePassive(skillIndex);
         SetIcon();
         SetLevel();
     }
@@ -59,7 +67,7 @@ public class SkillButtonPassive : SkillButton
         Sprite icon = skillInfo.GetSkillData().GetIcon();
         GetComponent<Image>().sprite = icon;
 
-        if (skillSystem.IsEquipped(skillInfo))
+        if (skillSystem.IsEquipped(skillIndex))
         {
             Debug.Log("Update icon in activated slots");
         }

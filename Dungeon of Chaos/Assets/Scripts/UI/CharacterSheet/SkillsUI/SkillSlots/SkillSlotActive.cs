@@ -1,16 +1,20 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 using UnityEngine.EventSystems;
-using UnityEngine.UI;
 
 public class SkillSlotActive : SkillSlot
 {
+    protected ActivatedSkillSlots activatedSkillSlots;
+
+    protected override void Start()
+    {
+        base.Start();
+        activatedSkillSlots = FindObjectOfType<ActivatedSkillSlots>();
+    }
     public override void OnDrop(PointerEventData eventData)
     {
         if (eventData.pointerDrag == null)
             return;
-        SkillInfoActive skillInfo = eventData.pointerDrag.GetComponent<SkillButtonActive>().GetSkillInfo();
-        skillSystem.Activate(skillInfo, index);
+        int skillIndex = eventData.pointerDrag.GetComponent<SkillButtonActive>().GetSkillIndex();
+        skillSystem.Activate(skillIndex, index);
+        activatedSkillSlots.Redraw();
     }
 }

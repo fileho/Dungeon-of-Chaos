@@ -10,9 +10,8 @@ public class SkillSlotPassive : SkillSlot
     {
         if (eventData.pointerDrag == null)
             return;
-        SkillInfoPassive skillInfo = eventData.pointerDrag.GetComponent<SkillButtonPassive>().GetSkillInfo();
-        skillSystem.Equip(skillInfo, index);
-        GetComponent<Image>().sprite = eventData.pointerDrag.GetComponent<Image>().sprite;
+        int skillIndex = eventData.pointerDrag.GetComponent<SkillButtonPassive>().GetSkillIndex();
+        skillSystem.Equip(skillIndex, index);
     }
 }
 
