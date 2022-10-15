@@ -49,12 +49,12 @@ public class ActivatedSkillSlots : MonoBehaviour
     {
         for (int i = 0; i < skillSlots.Count; i++)
         {
-            if (skillSystem.GetSkillInfoActive(i) == null)
+            if (skillSystem.GetActivatedSkill(i) == null)
             {
                 skillSlots[i].SetImage(null);
                 continue;
             }
-            skillSlots[i].SetImage(skillSystem.GetSkillInfoActive(i).GetSkillData().GetIcon());
+            skillSlots[i].SetImage(skillSystem.GetActivatedSkill(i).GetSkillData().GetIcon());
         }
     }
 

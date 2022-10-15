@@ -10,13 +10,19 @@ public class SkillButtonActive : SkillButton
     private ActivatedSkillSlots activatedSkillSlots;
     private SkillInfoActive skillInfo;
 
-    protected override void Start()
+    public override void Init()
     {
-        base.Start();
+        base.Init();
         activatedSkillSlots = FindObjectOfType<ActivatedSkillSlots>();
         skillInfo = skillSystem.GetSkillInfoActive(skillIndex);
         if (skillInfo == null)
-            enabled = false;
+        {
+            transform.parent.gameObject.SetActive(false);
+            return;
+        }
+        SetLevel();
+        SetIcon();
+        highlight.color = Color.red;
     }
 
     public override void OnBeginDrag(PointerEventData eventData)
@@ -79,11 +85,6 @@ public class SkillButtonActive : SkillButton
     {
         Sprite icon = skillInfo.GetSkillData().GetIcon();
         GetComponent<Image>().sprite = icon;
-
-        if (skillSystem.IsActivated(skillIndex))
-        {
-            Debug.Log("Update icon in activated slots");
-        }
     }
 
     public override void SetLevel()
