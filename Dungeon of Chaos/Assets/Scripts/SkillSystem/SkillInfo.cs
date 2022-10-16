@@ -18,7 +18,6 @@ public class SavedSkillInfo
     }
 }
 
-
 public class SkillInfo<T> : ScriptableObject
 {
     [SerializeField] private new string name;

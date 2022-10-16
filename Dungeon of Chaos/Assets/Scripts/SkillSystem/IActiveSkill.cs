@@ -4,19 +4,12 @@ using System.Net.Configuration;
 using System.Reflection;
 using UnityEngine;
 
-public enum ActiveSkillType
-{
-    activeSkill,
-    dash,
-    secondaryAttack
-}
+
 [System.Serializable]
 public class SkillData
 {
     [SerializeField] private string name;
     [SerializeField] private string description;
-    [SerializeField] private ActiveSkillType skillType;
-
     [SerializeField] private Sprite icon;
 
     public Sprite GetIcon()
@@ -32,11 +25,6 @@ public class SkillData
     public string GetDescription()
     {
         return description;
-    }
-
-    public ActiveSkillType GetSkillType()
-    {
-        return skillType;
     }
 }
 

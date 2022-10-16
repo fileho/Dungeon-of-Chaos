@@ -22,7 +22,7 @@ public class SkillButtonActive : SkillButton
         }
         SetLevel();
         SetIcon();
-        highlight.color = Color.red;
+        frame.color = Color.red;
     }
 
     public override void OnBeginDrag(PointerEventData eventData)

@@ -15,7 +15,7 @@ public class SkillButtonPassive : SkillButton
         skillInfo = skillSystem.GetSkillInfoPassive(skillIndex);
         if (skillInfo == null)
             enabled = false;
-        highlight.color = Color.blue;
+        frame.color = Color.blue;
     }
 
     public override void OnBeginDrag(PointerEventData eventData)
