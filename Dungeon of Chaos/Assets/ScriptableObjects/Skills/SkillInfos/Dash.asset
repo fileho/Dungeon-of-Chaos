@@ -9,7 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0273a9551561c2f4b8f57df3ca9bd5aa, type: 3}
+  m_Script: {fileID: 11500000, guid: e85e0a7db5f2a0b48bcfea02e34342bf, type: 3}
   m_Name: Dash
   m_EditorClassIdentifier: 
   name: Dash
@@ -17,5 +17,5 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 7f2f6fba4e0f3c146a4916cc82123d50, type: 2}
   - {fileID: 11400000, guid: 5331628804f6ff3408199108c9c998e9, type: 2}
   - {fileID: 11400000, guid: 991cf57d7dbedec47b41b083620c6651, type: 2}
-  level: 2
+  level: 1
   maxLevel: 3

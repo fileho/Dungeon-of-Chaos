@@ -11,7 +11,8 @@ public class SkillSlotActive : SkillSlot
     }
     public override void OnDrop(PointerEventData eventData)
     {
-        if (eventData.pointerDrag == null)
+        if (eventData.pointerDrag == null || 
+            eventData.pointerDrag.GetComponent<SkillButtonActive>() == null)
             return;
         int skillIndex = eventData.pointerDrag.GetComponent<SkillButtonActive>().GetSkillIndex();
         skillSystem.Activate(skillIndex, index);

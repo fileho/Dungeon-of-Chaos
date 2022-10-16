@@ -4,17 +4,17 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class SkillButtonActive : SkillButton
+public class SkillButtonDash : SkillButton
 {
     [SerializeField] private int skillIndex;
-    private ActivatedSkillSlots activatedSkillSlots;
-    private SkillInfoActive skillInfo;
+    private SkillSlotDash skillSlot;
+    private SkillInfoDash skillInfo;
 
     public override void Init()
     {
         base.Init();
-        activatedSkillSlots = FindObjectOfType<ActivatedSkillSlots>();
-        skillInfo = skillSystem.GetSkillInfoActive(skillIndex);
+        skillSlot = FindObjectOfType<SkillSlotDash>();
+        skillInfo = skillSystem.GetSkillInfoDash(skillIndex);
         if (skillInfo == null)
         {
             transform.parent.gameObject.SetActive(false);
@@ -22,7 +22,7 @@ public class SkillButtonActive : SkillButton
         }
         SetLevel();
         SetIcon();
-        frame.color = Color.red;
+        frame.color = Color.green;
     }
 
     public override void OnBeginDrag(PointerEventData eventData)
@@ -37,7 +37,7 @@ public class SkillButtonActive : SkillButton
         dragDrop.GetComponent<Image>().sprite = skillInfo.GetSkillData().GetIcon();
         dragDrop.SetActive(true);
 
-        activatedSkillSlots.Highlight();
+        skillSlot.Highlight();
     }
 
     public override void OnPointerEnter(PointerEventData eventData)
@@ -52,7 +52,7 @@ public class SkillButtonActive : SkillButton
 
     public override void RightMouseDown()
     {
-        if (!skillSystem.CanUpgradeActive(skillIndex))
+        if (!skillSystem.CanUpgradeDash(skillIndex))
         {
             TooltipSystem.instance.DisplayMessage("Not enough skill points");
             return;
@@ -63,7 +63,7 @@ public class SkillButtonActive : SkillButton
     public override void OnEndDrag(PointerEventData eventData)
     {
         base.OnEndDrag(eventData);
-        activatedSkillSlots.RemoveHighlight();
+        skillSlot.RemoveHighlight();
     }
 
     public int GetSkillIndex()
@@ -76,7 +76,7 @@ public class SkillButtonActive : SkillButton
         time = 0f;
         rightClick = false;
 
-        skillSystem.UpgradeActive(skillIndex);
+        skillSystem.UpgradeDash(skillIndex);
         SetIcon();
         SetLevel();
     }
