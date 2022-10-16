@@ -19,5 +19,6 @@ public class SkillSlotDash : SkillSlot
             return;
         int skillIndex = eventData.pointerDrag.GetComponent<SkillButtonDash>().GetSkillIndex();
         skillSystem.ActivateDash(skillIndex);
+        SetImage(skillSystem.GetActivatedDash().GetSkillData().GetIcon());
     }
 }
