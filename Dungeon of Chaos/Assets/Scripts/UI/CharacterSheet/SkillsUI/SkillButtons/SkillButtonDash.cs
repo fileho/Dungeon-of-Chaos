@@ -27,7 +27,7 @@ public class SkillButtonDash : SkillButton
 
     public override void OnBeginDrag(PointerEventData eventData)
     {
-        if (eventData.button == PointerEventData.InputButton.Right || !skillSystem.IsUnlockedActive(skillIndex))
+        if (eventData.button == PointerEventData.InputButton.Right || !skillSystem.IsUnlockedDash(skillIndex))
         {
             eventData.pointerDrag = null;
             return;
@@ -42,7 +42,7 @@ public class SkillButtonDash : SkillButton
 
     public override void OnPointerEnter(PointerEventData eventData)
     {
-        TooltipSystem.instance.Show(skillInfo.GetSkillData().GetDescription(), skillInfo.GetSkillData().GetName(), "Active Skill");
+        TooltipSystem.instance.Show(skillInfo.GetSkillData().GetDescription(), skillInfo.GetSkillData().GetName(), "Dash skill");
     }
 
     public override void OnPointerExit(PointerEventData eventData)
