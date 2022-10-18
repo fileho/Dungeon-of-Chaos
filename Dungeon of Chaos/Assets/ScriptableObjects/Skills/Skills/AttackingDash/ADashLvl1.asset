@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 374e7d7dbf74fc54981050f17a5f1992, type: 3}
+  m_Name: ADashLvl1
+  m_EditorClassIdentifier: 
+  skillData:
+    name: Attacking Dash
+    description: Allows the player to dash. The dash deals damage.
+    icon: {fileID: 21300000, guid: d964aa84a7441424c9c0b351b7abeda5, type: 3}
+  cooldown: 0
+  manaCost: 0
+  staminaCost: 15
+  effects:
+  - {fileID: 11400000, guid: 25ed88ac01186bf4faa8f3f68f91f71a, type: 2}
+  dash: {fileID: 11400000, guid: f362aadcfb4d0784ab39c05ed9347fca, type: 2}
+  dashSpeed: 10
+  trailColor: {r: 1, g: 0.13781394, b: 0, a: 1}

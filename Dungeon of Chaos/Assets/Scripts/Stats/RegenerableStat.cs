@@ -43,4 +43,10 @@ public class RegenerableStat
     {
         return currentValue <= 0;
     }
+
+    public void Load(float saved)
+    {
+        maxValue = saved;
+        currentValue = saved;
+    }
 }

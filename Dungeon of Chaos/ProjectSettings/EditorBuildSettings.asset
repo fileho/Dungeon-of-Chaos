@@ -12,6 +12,6 @@ EditorBuildSettings:
     path: Assets/Scenes/MVPDungeon.unity
     guid: f10d057fee659cd408c3821c759fb579
   - enabled: 1
-    path: Assets/Scenes/MVPDungeon-Martina.unity
+    path: Assets/Scenes/MVPDungeon.unity
     guid: 72699e7d8ae61ed458085435ba0be3d3
   m_configObjects: {}
