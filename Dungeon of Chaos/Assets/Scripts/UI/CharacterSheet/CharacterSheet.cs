@@ -9,7 +9,9 @@ public class CharacterSheet : MonoBehaviour
     [SerializeField] private ActivatedSkillSlots activatedSkillSlots;
     private SkillButtonActive[] skillButtonsActive;
     private SkillButtonDash[] skillButtonsDash;
+    private SkillButtonSecondary[] skillButtonsSecondary;
     private SkillSlotDash skillSlotDash;
+    private SkillSlotSecondary skillSlotSecondary;
 
     private GameController gameController;
 
@@ -38,6 +40,13 @@ public class CharacterSheet : MonoBehaviour
 
         skillSlotDash = FindObjectOfType<SkillSlotDash>();
         skillSlotDash.Init();
+
+        skillButtonsSecondary = FindObjectsOfType<SkillButtonSecondary>();
+        foreach (SkillButtonSecondary skillBtn in skillButtonsSecondary)
+            skillBtn.Init();
+
+        skillSlotSecondary = FindObjectOfType<SkillSlotSecondary>();
+        skillSlotSecondary.Init();
     }
 
     public void Close()
