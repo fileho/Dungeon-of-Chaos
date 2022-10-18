@@ -74,6 +74,10 @@ public class Character : Unit
         {
             SkillSystem.Dash(movement.GetMoveDir());
         }
+        if (Input.GetKeyDown(KeyCode.Mouse1))
+        {
+            SkillSystem.SecondaryAttack();
+        }
     }
 
     private void FixedUpdate()

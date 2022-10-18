@@ -9,22 +9,24 @@ public class SavedSkillSystem
     public List<SavedSkillInfo> backlogActive;
     public List<SavedSkillInfo> backlogPassive;
     public List<SavedSkillInfo> backlogDash;
+    public List<SavedSkillInfo> backlogSecondary;
 
     public List<int> activated;
     public List<int> equipped;
     public int activatedDash;
+    public int activatedSecondary;
 
-    // TODO add backlog for dashes and secondary attacks
-
-    public SavedSkillSystem(List<SavedSkillInfo> backlogActive, List<SavedSkillInfo> backlogPassive, List<SavedSkillInfo> backlogDash,
-                            List<int> activated, List<int> equipped, int activatedDash)
+    public SavedSkillSystem(List<SavedSkillInfo> backlogActive, List<SavedSkillInfo> backlogPassive, List<SavedSkillInfo> backlogDash, List<SavedSkillInfo> backlogSecondary,
+                            List<int> activated, List<int> equipped, int activatedDash, int activatedSecondary)
     {
         this.backlogActive = backlogActive;
         this.backlogPassive = backlogPassive;
         this.backlogDash = backlogDash;
+        this.backlogSecondary = backlogSecondary;
         this.activated = activated;
         this.equipped = equipped;
         this.activatedDash = activatedDash;
+        this.activatedSecondary = activatedSecondary;
     }
 }
 
@@ -37,7 +39,7 @@ public class SkillSystem : MonoBehaviour
     [SerializeField]
     private List<SkillInfoDash> dashSkills;
     [SerializeField]
-    private List<SkillInfoActive> secondaryAttacks;
+    private List<SkillInfoSecondaryAttack> secondaryAttacks;
 
     private List<int> activated;
     private List<int> equipped;
@@ -74,6 +76,8 @@ public class SkillSystem : MonoBehaviour
     {
         this.owner = owner;
         dashSkills[activatedDash].GetCurrentSkill().Init(owner);
+        if (IsValidSecondary(activatedSecondary))
+            secondaryAttacks[activatedSecondary].GetCurrentSkill().Init(owner);
         levelling = owner.stats.GetLevellingData();
     }
 
@@ -86,8 +90,8 @@ public class SkillSystem : MonoBehaviour
         }
 
         dashSkills[activatedDash].GetCurrentSkill().UpdateCooldown();
-        if (activatedSecondary != -1)
-            dashSkills[activatedDash].GetCurrentSkill().UpdateCooldown();
+        if (IsValidSecondary(activatedSecondary))
+            secondaryAttacks[activatedSecondary].GetCurrentSkill().UpdateCooldown();
     }
 
     #region ActiveSkills
@@ -282,6 +286,70 @@ public class SkillSystem : MonoBehaviour
 
     #endregion
 
+    #region SecondaryAttack
+    private bool IsValidSecondary(int index)
+    {
+        return index >= 0 && index < secondaryAttacks.Count;
+    }
+
+    public void SecondaryAttack()
+    {
+        if (IsValidSecondary(activatedSecondary))
+            secondaryAttacks[activatedSecondary].GetCurrentSkill().Use(owner, null, null);
+    }
+
+    public bool IsAttacking()
+    {
+        return secondaryAttacks[activatedSecondary].GetCurrentSkill().IsAttacking();
+    }
+
+    public bool CanUpgradeSecondaryAttack(int index)
+    {
+        return IsValidSecondary(index) && levelling.skillPoints >= skillPointsRequired[secondaryAttacks[index].GetLevel()] && secondaryAttacks[index].CanUpgrade();
+    }
+
+    public void UpgradeSecondary(int index)
+    {
+        if (!IsValidSecondary(index))
+            return;
+        SkillInfoSecondaryAttack skill = secondaryAttacks[index];
+        levelling.skillPoints -= skillPointsRequired[skill.GetLevel()];
+        skill.Unlock();
+        skill.Upgrade();
+    }
+
+    private void DeactivateSecondary()
+    {
+        if (IsValidSecondary(activatedSecondary))
+        {
+            secondaryAttacks[activatedSecondary].GetCurrentSkill().Deactivate();
+            activatedSecondary = -1;
+        }
+    }
+
+    public void ActivateSecondaryAttack(int index)
+    {
+        DeactivateSecondary();
+        activatedSecondary = index;
+        secondaryAttacks[activatedSecondary].GetCurrentSkill().Init(owner);
+    }
+
+    public bool IsUnlockedSecondary(int index)
+    {
+        return IsValidSecondary(index) && secondaryAttacks[index].IsUnlocked();
+    }
+
+    public SkillInfoSecondaryAttack GetSkillInfoSecondary(int index)
+    {
+        return IsValidSecondary(index) ? secondaryAttacks[index] : null;
+    }
+
+    public SkillInfoSecondaryAttack GetActivatedSecondary()
+    {
+        return GetSkillInfoSecondary(activatedSecondary);
+    }
+    #endregion
+
     #region SkillSaving
     private List<SavedSkillInfo> GetSavedInfo(List<SkillInfoActive> skillInfos)
     {
@@ -312,10 +380,20 @@ public class SkillSystem : MonoBehaviour
         return ret;
     }
 
+    private List<SavedSkillInfo> GetSavedInfo(List<SkillInfoSecondaryAttack> skillInfos)
+    {
+        List<SavedSkillInfo> ret = new List<SavedSkillInfo>(skillInfos.Count);
+        foreach (var skillInfo in skillInfos)
+        {
+            ret.Add(skillInfo.Save());
+        }
+        return ret;
+    }
+
     public SavedSkillSystem Save()
     {
-        return new SavedSkillSystem(GetSavedInfo(activeSkills), GetSavedInfo(passiveSkills), GetSavedInfo(dashSkills), 
-            activated, equipped, activatedDash);
+        return new SavedSkillSystem(GetSavedInfo(activeSkills), GetSavedInfo(passiveSkills), GetSavedInfo(dashSkills), GetSavedInfo(secondaryAttacks),
+            activated, equipped, activatedDash, activatedSecondary);
     }
 
     private void LoadList(List<int> target, List<int> indices)
@@ -347,9 +425,16 @@ public class SkillSystem : MonoBehaviour
             dashSkills[i].Load(saved.backlogDash[i]);
         }
 
+        Assert.AreEqual(secondaryAttacks.Count, saved.backlogSecondary.Count);
+        for (int i = 0; i < saved.backlogSecondary.Count; i++)
+        {
+            secondaryAttacks[i].Load(saved.backlogSecondary[i]);
+        }
+
         LoadList(activated, saved.activated);
         LoadList(equipped, saved.equipped);
         activatedDash = saved.activatedDash;
+        activatedSecondary = saved.activatedSecondary;
     }
     #endregion
 }
