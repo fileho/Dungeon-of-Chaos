@@ -130,11 +130,22 @@ public abstract class IAttack : MonoBehaviour {
     }
 
     protected virtual void Start() {
+        if (attackConfiguration == null)
+            return;
         Weapon = GetComponent<Weapon>();
         owner = GetComponentInParent<Unit>();
         SetIndicatorTransform();
         ApplyConfigurations();
+    }
 
+    public IAttack Init(Unit owner, Weapon weapon, AttackConfiguration configuration)
+    {
+        this.owner = owner;
+        Weapon = weapon;
+        attackConfiguration = configuration;
+        ApplyConfigurations();
+        isAttacking = false;
+        return this;
     }
 
 

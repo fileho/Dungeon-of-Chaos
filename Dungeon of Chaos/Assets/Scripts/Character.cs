@@ -8,27 +8,28 @@ public class Character : Unit
 
     public static Character instance;
     private new Camera camera;
-    private SkillSystem skillSystem;
+    public SkillSystem SkillSystem { get; private set; }
+    private GameController gameController;
 
     private void Awake()
     {
         instance = this;
+        SkillSystem = FindObjectOfType<SkillSystem>();
     }
 
     protected override void Init()
     {
+        gameController = FindObjectOfType<GameController>();
         transform.Find("Trail").GetComponent<TrailRenderer>().enabled = false;
         camera = Camera.main;
-        skillSystem = FindObjectOfType<SkillSystem>();
-        skillSystem.Init(this);
+        SkillSystem.Init(this);
         attack = GetComponentInChildren<IAttack>();
-        SaveSystem.instance.save.MoveCharacter();
     }
 
     protected override void CleanUp()
     {
         // TODO respawn logic
-        SaveSystem.instance.save.LoadLevel();
+        gameController.Death();
     }
 
     void Update()
@@ -43,9 +44,10 @@ public class Character : Unit
         UpdateCooldowns();
     }
 
-
-    public override Vector2 GetTargetPosition() {
-        return camera.ScreenToWorldPoint(Input.mousePosition); ;
+    public override Vector2 GetTargetPosition()
+    {
+        return camera.ScreenToWorldPoint(Input.mousePosition);
+        ;
     }
 
     public override Vector2 GetTargetDirection() {
@@ -55,29 +57,32 @@ public class Character : Unit
 
     private void UpdateCooldowns()
     {
-        skillSystem.UpdateCooldowns();
+        SkillSystem.UpdateCooldowns();
     }
 
     private void UseSkills()
     {
         if (Input.GetKeyDown(KeyCode.Q))
         {
-            skillSystem.UseSkill(0);
+            SkillSystem.UseSkill(0);
         }
         if (Input.GetKeyDown(KeyCode.E))
         {
-            skillSystem.UseSkill(1);
+            SkillSystem.UseSkill(1);
         }
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            skillSystem.Dash(movement.GetMoveDir());
+            SkillSystem.Dash(movement.GetMoveDir());
+        }
+        if (Input.GetKeyDown(KeyCode.Mouse1))
+        {
+            SkillSystem.SecondaryAttack();
         }
     }
 
-
     private void FixedUpdate()
     {
-        if (skillSystem.IsDashing())
+        if (SkillSystem.IsDashing())
             return;
         Move();
     }
@@ -124,6 +129,6 @@ public class Character : Unit
 
     private void OnCollisionEnter2D(Collision2D col)
     {
-        skillSystem.DashCollision(col);
+        SkillSystem.DashCollision(col);
     }
 }

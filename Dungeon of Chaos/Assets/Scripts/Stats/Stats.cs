@@ -1,13 +1,31 @@
 using UnityEngine;
 
+// Raw data for saves
+[System.Serializable]
+public class SavedStats
+{
+    public PrimaryStats.SavedPrimaryStats savedPrimary;
+    public Levelling.SavedLevelling savedLevelling;
+
+    public SavedStats(PrimaryStats.SavedPrimaryStats savedPrimary, Levelling.SavedLevelling savedLevelling)
+    {
+        this.savedPrimary = savedPrimary;
+        this.savedLevelling = savedLevelling;
+    }
+}
+
 [CreateAssetMenu(menuName = "SO/Stats/Stats")]
 public class Stats : ScriptableObject
 {
-    [SerializeField] private float movementSpeed;
-    [SerializeField] private float chaseDistance;
-    [SerializeField] private float staminaRegen;
+    [SerializeField]
+    private float movementSpeed;
+    [SerializeField]
+    private float chaseDistance;
+    [SerializeField]
+    private float staminaRegen;
 
-    [SerializeReference] private PrimaryStats primaryStats = new PrimaryStats();
+    [SerializeReference]
+    private PrimaryStats primaryStats = new PrimaryStats();
 
     private RegenerableStat health = new RegenerableStat();
     private RegenerableStat mana = new RegenerableStat();
@@ -17,7 +35,8 @@ public class Stats : ScriptableObject
 
     private float armor = 0;
 
-    [SerializeField] private Levelling XP = new Levelling();
+    [SerializeField]
+    private Levelling XP = new Levelling();
 
     private IBars bars;
 
@@ -102,7 +121,8 @@ public class Stats : ScriptableObject
         return movementSpeed;
     }
 
-    public float ChaseDistance() {
+    public float ChaseDistance()
+    {
         return chaseDistance;
     }
 
@@ -283,5 +303,16 @@ public class Stats : ScriptableObject
     public float GetWisdom()
     {
         return primaryStats.wisdom;
+    }
+
+    public SavedStats Save()
+    {
+        return new SavedStats(primaryStats.Save(), XP.Save());
+    }
+
+    public void Load(SavedStats saved)
+    {
+        primaryStats.Load(saved.savedPrimary);
+        XP.Load(saved.savedLevelling);
     }
 }
