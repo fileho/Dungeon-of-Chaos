@@ -9,6 +9,7 @@ public class Weapon : MonoBehaviour {
     [SerializeField] private float angleOffset = 0f;
 
 
+    public Transform Asset { get; private set; }
     private TrailRenderer trail;
     private new BoxCollider2D collider;
     private List<Unit> hitUnits;
@@ -17,6 +18,7 @@ public class Weapon : MonoBehaviour {
     private SoundSettings impactSFX;
 
     void Start() {
+        Asset = transform.Find("Asset");
         trail = GetComponentInChildren<TrailRenderer>();
         collider = GetComponentInChildren<BoxCollider2D>();
         hitUnits = new List<Unit>();
@@ -36,6 +38,9 @@ public class Weapon : MonoBehaviour {
         impactSFX = sound;
     }
 
+    public float GetAngleOffset() {
+        return angleOffset;
+    }
 
     public void InflictDamage(Unit unit) {
         if (!hitUnits.Contains(unit))
