@@ -5,6 +5,18 @@ using static UnityEngine.Rendering.DebugUI.Table;
 
 public class SwingAttack : MeleeAttack {
 
+    // Angle sweeped during the attack animation
+    protected float swing;
+    // Reach is how far the weapon travels during the attack animation
+    protected float reach;
+
+    protected override void ApplyConfigurations() {
+        base.ApplyConfigurations();
+        SwingAttackConfiguration _attackConfiguration = attackConfiguration as SwingAttackConfiguration;
+        swing = _attackConfiguration.swing;
+        reach = _attackConfiguration.reach;
+    }
+
     public override void Attack() {
         base.Attack();
         StartCoroutine(StartAttackAnimation(swing, reach));

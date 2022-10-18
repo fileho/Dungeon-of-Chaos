@@ -5,6 +5,20 @@ using static UnityEngine.Rendering.DebugUI.Table;
 
 public class StompAttack : MeleeAttack {
 
+
+    // Weapon lift before stomping
+    protected float lift;
+    // How big the weapon grows
+    protected float scaleMultiplier;
+
+    protected override void ApplyConfigurations() {
+        base.ApplyConfigurations();
+        StompAttackConfiguration _attackConfiguration = attackConfiguration as StompAttackConfiguration;
+        lift = _attackConfiguration.lift;
+        scaleMultiplier = _attackConfiguration.scaleMultiplier;
+    }
+
+
     public override void Attack() {
         base.Attack();
         StartCoroutine(StartAttackAnimation());
@@ -20,10 +34,10 @@ public class StompAttack : MeleeAttack {
         PrepareWeapon();
 
         Vector3 startPos = Weapon.Asset.position;
-        Vector3 endPos = startPos + Vector3.up * 2;
+        Vector3 endPos = startPos + Vector3.up * lift;
 
         Vector3 startScale = Weapon.Asset.localScale;
-        Vector3 endScale = Weapon.Asset.localScale * 1.5f;
+        Vector3 endScale = Weapon.Asset.localScale * scaleMultiplier;
 
         float time = 0;
         float attackAnimationDurationOneWay = AttackAnimationDuration / 2f;
