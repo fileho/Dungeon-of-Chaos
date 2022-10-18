@@ -134,7 +134,15 @@ public abstract class IAttack : MonoBehaviour {
         owner = GetComponentInParent<Unit>();
         SetIndicatorTransform();
         ApplyConfigurations();
+    }
 
+    public IAttack Init(Unit owner, Weapon weapon, AttackConfiguration configuration)
+    {
+        this.owner = owner;
+        this.Weapon = weapon;
+        this.attackConfiguration = configuration;
+        ApplyConfigurations();
+        return this;
     }
 
 
