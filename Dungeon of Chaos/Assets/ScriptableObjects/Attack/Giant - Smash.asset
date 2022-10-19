@@ -9,36 +9,35 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e5a9f7272ab0a4da3b3dfeedc26d8fb7, type: 3}
-  m_Name: Giant - Stomp
+  m_Script: {fileID: 11500000, guid: 307959e3ed6fc4c359a0a6360033ccb5, type: 3}
+  m_Name: Giant - Smash
   m_EditorClassIdentifier: 
-  range: 8
-  damage: 2
+  range: 5
+  damage: 18
   staminaCost: 0
   cooldown: 1
-  attackAnimationDuration: 1
-  indicator: {fileID: 4329331889789977291, guid: d1a59e053a17c4eaaacc05a0931f0200, type: 3}
+  attackAnimationDuration: 1.5
+  indicator: {fileID: 0}
   type: 1
   swingSFX:
-    soundCategory: 2
-    sound: 2
+    soundCategory: 0
+    sound: 0
     volume: 1
     pitch: 1
     priority: 0
   impactSFX:
-    soundCategory: 2
-    sound: 3
+    soundCategory: 0
+    sound: 0
     volume: 1
     pitch: 1
     priority: 0
   indicatorSFX:
-    soundCategory: 2
-    sound: 4
+    soundCategory: 0
+    sound: 0
     volume: 1
     pitch: 1
     priority: 0
   lift: 2
-  fall: 0.8
+  fall: 1.5
   scaleMultiplier: 1.5
-  damageRadiusMajor: 4
-  damageMajor: 4
+  damageRadius: 3.5

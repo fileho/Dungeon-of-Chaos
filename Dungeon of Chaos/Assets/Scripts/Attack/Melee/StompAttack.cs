@@ -15,12 +15,30 @@ public class StompAttack : MeleeAttack {
     // How big the weapon grows
     protected float scaleMultiplier;
 
+    //Damage minor [It is the default range of the attack]
+    protected float damageMinor;
+    //Damage major [should be more than the default damage]
+    protected float damageMajor;
+
+    //Damage radius minor [It is the default damage of the attack]
+    protected float damageRadiusMinor;
+    //Damage radius major [Should be less than the default range of the attack ]
+    protected float damageRadiusMajor;
+
+
+
+
+
     protected override void ApplyConfigurations() {
         base.ApplyConfigurations();
         StompAttackConfiguration _attackConfiguration = attackConfiguration as StompAttackConfiguration;
         fall = _attackConfiguration.fall;
         lift = _attackConfiguration.lift;
         scaleMultiplier = _attackConfiguration.scaleMultiplier;
+        damageRadiusMajor = _attackConfiguration.damageRadiusMajor;
+        damageMajor = _attackConfiguration.damageMajor;
+        damageRadiusMinor = range;
+        damageMinor = damage;
     }
 
 
@@ -29,6 +47,17 @@ public class StompAttack : MeleeAttack {
         StartCoroutine(StartAttackAnimation());
     }
 
+
+    private void CheckHits(Vector3 pos, float radius) {
+        Collider2D[] colliders = Physics2D.OverlapCircleAll(pos, damageRadiusMajor);
+        if (colliders.Length > 0) {
+            for (int i = 0; i < colliders.Length; i++) {
+                if (colliders[i].GetComponent<Unit>()) {
+                    Weapon.InflictDamage(colliders[i].GetComponent<Unit>());
+                }
+            }
+        }
+    }
 
     // Ideal attack duration = 1
     private IEnumerator StartAttackAnimation() {
@@ -70,6 +99,11 @@ public class StompAttack : MeleeAttack {
 
         SoundManager.instance.PlaySound(swingSFX);
         yield return new WaitForSeconds(0.2f);
+
+        Weapon.SetDamage(damageMajor);
+        CheckHits(endPosdown, damageRadiusMajor);
+        Weapon.SetDamage(damageMinor);
+        CheckHits(endPosdown, damageRadiusMinor);
 
         // Reset
         Weapon.transform.position = startPos;

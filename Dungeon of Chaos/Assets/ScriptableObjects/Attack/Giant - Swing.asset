@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 656d4005658cf4e07808ec6178e5ef23, type: 3}
-  m_Name: Giant - Melee
+  m_Name: Giant - Swing
   m_EditorClassIdentifier: 
   range: 5
   damage: 1.5

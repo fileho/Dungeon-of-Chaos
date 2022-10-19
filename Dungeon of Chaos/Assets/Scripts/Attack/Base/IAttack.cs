@@ -102,16 +102,15 @@ public abstract class IAttack : MonoBehaviour {
 
 
     protected virtual void PrepareWeapon() {
-       
         Weapon.SetDamage(GetDamage());
         Weapon.SetImpactSound(impactSFX);
         Weapon.ResetHitUnits();
+        Weapon.EnableDisableTrail(true);
     }
 
 
     protected virtual void ResetWeapon() {
         Weapon.EnableDisableTrail(false);
-        Weapon.EnableDisableCollider(false);
     }
 
     protected virtual void ApplyConfigurations() {
