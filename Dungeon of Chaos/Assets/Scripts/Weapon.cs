@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using static UnityEngine.GraphicsBuffer;
+using static UnityEngine.Rendering.DebugUI;
 
 public class Weapon : MonoBehaviour {
 
@@ -9,7 +10,14 @@ public class Weapon : MonoBehaviour {
     [SerializeField] private float angleOffset = 0f;
 
 
-    public Transform Asset { get; private set; }
+    private Transform asset;
+    public Transform Asset {
+        get {
+            return asset ?? (asset = transform.Find("Asset"));
+        }
+    }
+
+
     private TrailRenderer trail;
     private new BoxCollider2D collider;
     private List<Unit> hitUnits;
@@ -18,7 +26,6 @@ public class Weapon : MonoBehaviour {
     private SoundSettings impactSFX;
 
     void Start() {
-        Asset = transform.Find("Asset");
         trail = GetComponentInChildren<TrailRenderer>();
         collider = GetComponentInChildren<BoxCollider2D>();
         hitUnits = new List<Unit>();
@@ -33,8 +40,7 @@ public class Weapon : MonoBehaviour {
     }
 
     // Impact sound is set by the attack as different attacks can have different impact sounds
-    public void SetImpactSound(SoundSettings sound)
-    {
+    public void SetImpactSound(SoundSettings sound) {
         impactSFX = sound;
     }
 
@@ -43,8 +49,7 @@ public class Weapon : MonoBehaviour {
     }
 
     public void InflictDamage(Unit unit) {
-        if (!hitUnits.Contains(unit))
-        {
+        if (!hitUnits.Contains(unit)) {
             hitUnits.Add(unit);
             SoundManager.instance.PlaySound(impactSFX);
             unit.TakeDamage(damage);
@@ -59,8 +64,7 @@ public class Weapon : MonoBehaviour {
         trail.gameObject.SetActive(state);
     }
 
-    public void ResetHitUnits()
-    {
+    public void ResetHitUnits() {
         hitUnits.Clear();
     }
 
