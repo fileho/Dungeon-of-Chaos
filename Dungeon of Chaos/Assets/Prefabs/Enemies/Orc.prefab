@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8842880858454876346}
   - component: {fileID: 8665999582530066639}
-  - component: {fileID: 5988952263189023803}
+  - component: {fileID: 8903195631278579334}
   m_Layer: 9
   m_Name: Sword
   m_TagString: Untagged
@@ -47,7 +47,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   angleOffset: 35
---- !u!114 &5988952263189023803
+--- !u!114 &8903195631278579334
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -56,10 +56,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 331135074163582658}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0c6cba19a2df74cc3b714cd8c73f1623, type: 3}
+  m_Script: {fileID: 11500000, guid: edf14e2cf76bf43e19b57c3915d8c092, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackConfiguration: {fileID: 11400000, guid: 5c652ac0aabab4117b68dc754c1b32f0, type: 2}
+  attackConfiguration: {fileID: 11400000, guid: 4a1302e94db3943df90fed4a4d00b78e, type: 2}
 --- !u!1 &1419886181399069787
 GameObject:
   m_ObjectHideFlags: 0

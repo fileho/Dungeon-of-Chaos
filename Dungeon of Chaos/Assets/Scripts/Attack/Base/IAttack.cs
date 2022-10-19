@@ -34,8 +34,11 @@ public abstract class IAttack : MonoBehaviour {
     protected GameObject indicator;
     protected Transform indicatorTransform;
 
+    protected Vector3 weaponOriginalPosition;
+    protected Vector3 weaponAssetOriginalPosition;
+    protected Quaternion weaponOriginalRotation;
+    protected Quaternion weaponAssetOriginalRotation;
 
-    
 
     public abstract void Attack();
 
@@ -111,10 +114,13 @@ public abstract class IAttack : MonoBehaviour {
 
     protected virtual void ResetWeapon() {
         Weapon.EnableDisableTrail(false);
+        Weapon.Asset.localPosition = weaponAssetOriginalPosition;
+        Weapon.Asset.localRotation = weaponAssetOriginalRotation;
+        Weapon.transform.localPosition = weaponOriginalPosition;
+        Weapon.transform.localRotation = weaponOriginalRotation;
     }
 
     protected virtual void ApplyConfigurations() {
-
         range = attackConfiguration.range;
         damage = attackConfiguration.damage;
         staminaCost = attackConfiguration.staminaCost;
@@ -128,11 +134,20 @@ public abstract class IAttack : MonoBehaviour {
         indicatorSFX = attackConfiguration.indicatorSFX;
     }
 
+    protected void SetWeaponDefaults()
+    {
+        weaponOriginalPosition = Weapon.transform.localPosition;
+        weaponOriginalRotation = Weapon.transform.localRotation;
+        weaponAssetOriginalPosition = Weapon.Asset.localPosition;
+        weaponAssetOriginalRotation = Weapon.Asset.localRotation;
+    }
+
     protected virtual void Start() {
         if (attackConfiguration == null)
             return;
         Weapon = GetComponent<Weapon>();
         owner = GetComponentInParent<Unit>();
+        SetWeaponDefaults();
         SetIndicatorTransform();
         ApplyConfigurations();
     }
@@ -142,6 +157,7 @@ public abstract class IAttack : MonoBehaviour {
         this.owner = owner;
         Weapon = weapon;
         attackConfiguration = configuration;
+        SetWeaponDefaults();
         ApplyConfigurations();
         isAttacking = false;
         return this;

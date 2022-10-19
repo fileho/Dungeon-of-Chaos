@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Giant - Smash
   m_EditorClassIdentifier: 
   range: 5
-  damage: 18
+  damage: 5
   staminaCost: 0
   cooldown: 1
   attackAnimationDuration: 1.5
@@ -40,4 +40,4 @@ MonoBehaviour:
   lift: 2
   fall: 1.5
   scaleMultiplier: 1.5
-  damageRadius: 3.5
+  damageRadius: 1

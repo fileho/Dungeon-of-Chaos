@@ -33,13 +33,12 @@ public class SmashAttack : MeleeAttack {
     }
 
 
-    private void CheckHits(Vector3 pos)
+    private void CheckHits(Vector3 pos, float radius)
     {
-        Collider2D[] colliders = Physics2D.OverlapCircleAll(pos, damageRadius);
+        Collider2D[] colliders = Physics2D.OverlapCircleAll(pos, radius);
         if (colliders.Length > 0) {
             for (int i = 0; i < colliders.Length; i++) {
                 if (colliders[i].GetComponent<Unit>()) {
-                    print(colliders[i].transform.name);
                     Weapon.InflictDamage(colliders[i].GetComponent<Unit>());
                 }
             }
@@ -87,7 +86,7 @@ public class SmashAttack : MeleeAttack {
             yield return null;
         }
 
-        CheckHits(endPosdown);
+        CheckHits(endPosdown, damageRadius);
 
         SoundManager.instance.PlaySound(swingSFX);
         yield return new WaitForSeconds(0.2f);
