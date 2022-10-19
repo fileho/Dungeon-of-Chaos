@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static UnityEditor.PlayerSettings;
 
 public class SmashAttack : MeleeAttack {
 
@@ -14,20 +15,36 @@ public class SmashAttack : MeleeAttack {
     // How big the weapon grows
     protected float scaleMultiplier;
 
+    //Damage radius
+    protected float damageRadius;
+
     protected override void ApplyConfigurations() {
         base.ApplyConfigurations();
-        StompAttackConfiguration _attackConfiguration = attackConfiguration as StompAttackConfiguration;
+        SmashAttackConfiguration _attackConfiguration = attackConfiguration as SmashAttackConfiguration;
         fall = _attackConfiguration.fall;
         lift = _attackConfiguration.lift;
+        damageRadius = _attackConfiguration.damageRadius;
         scaleMultiplier = _attackConfiguration.scaleMultiplier;
     }
-
 
     public override void Attack() {
         base.Attack();
         StartCoroutine(StartAttackAnimation());
     }
 
+
+    private void CheckHits(Vector3 pos)
+    {
+        Collider2D[] colliders = Physics2D.OverlapCircleAll(pos, damageRadius);
+        if (colliders.Length > 0) {
+            for (int i = 0; i < colliders.Length; i++) {
+                if (colliders[i].GetComponent<Unit>()) {
+                    print(colliders[i].transform.name);
+                    Weapon.InflictDamage(colliders[i].GetComponent<Unit>());
+                }
+            }
+        }
+    }
 
     // Ideal attack duration = 1
     private IEnumerator StartAttackAnimation() {
@@ -69,6 +86,8 @@ public class SmashAttack : MeleeAttack {
             Weapon.Asset.localRotation = Quaternion.Lerp(rot, Quaternion.Euler(0, 0, 90), currentPos);
             yield return null;
         }
+
+        CheckHits(endPosdown);
 
         SoundManager.instance.PlaySound(swingSFX);
         yield return new WaitForSeconds(0.2f);

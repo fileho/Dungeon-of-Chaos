@@ -17,13 +17,6 @@ public abstract class MeleeAttack : IAttack {
         indicatorTransform = owner.transform.Find(INDICATOR_SPAWN_POSITION);
     }
 
-    protected override void PrepareWeapon()
-    {
-        base.PrepareWeapon();
-        Weapon.EnableDisableTrail(true);
-        Weapon.EnableDisableCollider(true);
-    }
-
     public override void Attack() {
         if (isAttacking)
             return;

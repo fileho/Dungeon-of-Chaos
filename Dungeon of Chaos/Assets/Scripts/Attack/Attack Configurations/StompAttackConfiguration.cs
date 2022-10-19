@@ -6,4 +6,6 @@ public class StompAttackConfiguration : AttackConfiguration {
     public float lift = 2f;
     public float fall = 1.5f;
     public float scaleMultiplier = 1.5f;
+    public float damageRadiusMajor = 4f;
+    public float damageMajor = 4f;
 }

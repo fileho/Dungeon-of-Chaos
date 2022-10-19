@@ -17,6 +17,18 @@ public class SwingAttack : MeleeAttack {
         reach = _attackConfiguration.reach;
     }
 
+    protected override void PrepareWeapon() {
+        base.PrepareWeapon();
+        Weapon.EnableDisableCollider(true);
+    }
+
+
+    protected override void ResetWeapon() {
+        base.ResetWeapon();
+        Weapon.EnableDisableCollider(false);
+    }
+
+
     public override void Attack() {
         base.Attack();
         StartCoroutine(StartAttackAnimation(swing, reach));

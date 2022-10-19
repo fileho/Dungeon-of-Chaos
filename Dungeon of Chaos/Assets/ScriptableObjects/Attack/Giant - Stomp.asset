@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e5a9f7272ab0a4da3b3dfeedc26d8fb7, type: 3}
   m_Name: Giant - Stomp
   m_EditorClassIdentifier: 
-  range: 5
-  damage: 1.5
+  range: 8
+  damage: 2
   staminaCost: 0
   cooldown: 1
   attackAnimationDuration: 1
@@ -40,3 +40,5 @@ MonoBehaviour:
   lift: 2
   fall: 0.8
   scaleMultiplier: 1.5
+  damageRadiusMajor: 4
+  damageMajor: 4
