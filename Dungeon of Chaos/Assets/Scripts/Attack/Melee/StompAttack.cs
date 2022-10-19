@@ -8,12 +8,17 @@ public class StompAttack : MeleeAttack {
 
     // Weapon lift before stomping
     protected float lift;
+
+    // Distance below the default position that the weapon travels while stomping
+    protected float fall;
+
     // How big the weapon grows
     protected float scaleMultiplier;
 
     protected override void ApplyConfigurations() {
         base.ApplyConfigurations();
         StompAttackConfiguration _attackConfiguration = attackConfiguration as StompAttackConfiguration;
+        fall = _attackConfiguration.fall;
         lift = _attackConfiguration.lift;
         scaleMultiplier = _attackConfiguration.scaleMultiplier;
     }
@@ -33,8 +38,9 @@ public class StompAttack : MeleeAttack {
 
         PrepareWeapon();
 
-        Vector3 startPos = Weapon.Asset.position;
-        Vector3 endPos = startPos + Vector3.up * lift;
+        Vector3 startPos = Weapon.transform.position;
+        Vector3 endPosUp = startPos + Vector3.up * lift;
+        Vector3 endPosdown = startPos + Vector3.down * fall;
 
         Vector3 startScale = Weapon.Asset.localScale;
         Vector3 endScale = Weapon.Asset.localScale * scaleMultiplier;
@@ -46,7 +52,7 @@ public class StompAttack : MeleeAttack {
         while (time <= 1) {
             time += (Time.deltaTime / attackAnimationDurationOneWay);
             float currentPos = Tweens.EaseOutExpo(time);
-            Weapon.Asset.position = Vector3.Lerp(startPos, endPos, currentPos);
+            Weapon.transform.position = Vector3.Lerp(startPos, endPosUp, currentPos);
             Weapon.Asset.localScale = Vector3.Lerp(startScale, endScale, currentPos);
             yield return null;
         }
@@ -56,7 +62,7 @@ public class StompAttack : MeleeAttack {
         while (time <= 1) {
             time += (Time.deltaTime / attackAnimationDurationOneWay);
             float currentPos = Tweens.EaseOutElastic(time);
-            Weapon.Asset.position = Vector3.Lerp(endPos, startPos, currentPos);
+            Weapon.transform.position = Vector3.Lerp(endPosUp, endPosdown, currentPos);
             Weapon.Asset.localScale = Vector3.Lerp(endScale, startScale, currentPos);
 
             yield return null;
@@ -66,7 +72,7 @@ public class StompAttack : MeleeAttack {
         yield return new WaitForSeconds(0.2f);
 
         // Reset
-        Weapon.Asset.position = startPos;
+        Weapon.transform.position = startPos;
         Weapon.Asset.localScale = startScale;
         ResetWeapon();
 

@@ -139,7 +139,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7089893239129799697}
   m_Layer: 9
-  m_Name: IndicatorSpawnPosition
+  m_Name: MeleeIndicatorSpawnPosition
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
