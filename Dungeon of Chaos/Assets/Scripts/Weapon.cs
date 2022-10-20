@@ -9,6 +9,11 @@ public class Weapon : MonoBehaviour {
     [Tooltip("Initial offset z angle for weapon to point right")]
     [SerializeField] private float angleOffset = 0f;
 
+    [Tooltip("Angle at which the weapon asset aligns with the Y axis")]
+    [SerializeField] private float upRightAngle = 0f;
+
+    [Tooltip("Angle at which the weapon asset aligns with the X axis")]
+    [SerializeField] private float lyingAngle = 0f;
 
     private Transform asset;
     public Transform Asset {
@@ -43,6 +48,15 @@ public class Weapon : MonoBehaviour {
     public void SetImpactSound(SoundSettings sound) {
         impactSFX = sound;
     }
+
+    public float GetUprightAngle() {
+        return upRightAngle;
+    }
+
+    public float GetLyingAngle() {
+        return lyingAngle;
+    }
+
 
     public float GetAngleOffset() {
         return angleOffset;
