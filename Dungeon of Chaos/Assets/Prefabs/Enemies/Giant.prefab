@@ -800,7 +800,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   angleOffset: 35
-  upRightAngle: -90
+  upRightAngle: -70
+  lyingAngle: 15
 --- !u!114 &6253059448646986902
 MonoBehaviour:
   m_ObjectHideFlags: 0
