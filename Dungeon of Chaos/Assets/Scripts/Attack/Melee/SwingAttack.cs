@@ -61,7 +61,7 @@ public class SwingAttack : MeleeAttack {
             }
             yield return null;
         }
-        transform.localRotation = rot;
+        yield return new WaitForSeconds(0.1f);
 
         // Reset
         ResetWeapon();

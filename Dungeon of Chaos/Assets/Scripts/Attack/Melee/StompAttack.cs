@@ -62,12 +62,24 @@ public class StompAttack : MeleeAttack {
     // Ideal attack duration = 1
     private IEnumerator StartAttackAnimation() {
 
-        Weapon.ResetWeapon();
+
         yield return new WaitForSeconds(IndicatorDuration);
 
+        // Cache weapon rotation to restore it after the animation
+        var initialWeaponRotation = Weapon.transform.rotation;
+
+        yield return new WaitForSeconds(IndicatorDuration);
+
+        // Reset weapon rotation to default for the animation
+        Weapon.ResetWeapon();
         PrepareWeapon();
 
-        Vector3 startPos = Weapon.transform.position;
+
+        // Cache weapon rotation to restore after the animation
+        var initialAssetRotation = Weapon.Asset.localRotation;
+        Weapon.Asset.localRotation = Quaternion.Euler(0, 0, Weapon.GetUprightAngle());
+
+        Vector3 startPos = Weapon.transform.localPosition;
         Vector3 endPosUp = startPos + Vector3.up * lift;
         Vector3 endPosdown = startPos + Vector3.down * fall;
 
@@ -81,7 +93,7 @@ public class StompAttack : MeleeAttack {
         while (time <= 1) {
             time += (Time.deltaTime / attackAnimationDurationOneWay);
             float currentPos = Tweens.EaseOutExpo(time);
-            Weapon.transform.position = Vector3.Lerp(startPos, endPosUp, currentPos);
+            Weapon.transform.localPosition = Vector3.Lerp(startPos, endPosUp, currentPos);
             Weapon.Asset.localScale = Vector3.Lerp(startScale, endScale, currentPos);
             yield return null;
         }
@@ -91,26 +103,24 @@ public class StompAttack : MeleeAttack {
         while (time <= 1) {
             time += (Time.deltaTime / attackAnimationDurationOneWay);
             float currentPos = Tweens.EaseOutElastic(time);
-            Weapon.transform.position = Vector3.Lerp(endPosUp, endPosdown, currentPos);
-            Weapon.Asset.localScale = Vector3.Lerp(endScale, startScale, currentPos);
-
+            Weapon.transform.localPosition = Vector3.Lerp(endPosUp, endPosdown, currentPos);
             yield return null;
         }
-
-        SoundManager.instance.PlaySound(swingSFX);
-        yield return new WaitForSeconds(0.2f);
 
         Weapon.SetDamage(damageMajor);
         CheckHits(endPosdown, damageRadiusMajor);
         Weapon.SetDamage(damageMinor);
         CheckHits(endPosdown, damageRadiusMinor);
 
-        // Reset
-        Weapon.transform.position = startPos;
-        Weapon.Asset.localScale = startScale;
-        ResetWeapon();
+        SoundManager.instance.PlaySound(swingSFX);
 
-        yield return new WaitForSeconds(1);
+        // Reset
+        Weapon.Asset.localScale = startScale;
+        Weapon.Asset.localRotation = initialAssetRotation;
+        Weapon.transform.localPosition = startPos;
+        Weapon.transform.rotation = initialWeaponRotation;
+
+        ResetWeapon();
         isAttacking = false;
     }
 
