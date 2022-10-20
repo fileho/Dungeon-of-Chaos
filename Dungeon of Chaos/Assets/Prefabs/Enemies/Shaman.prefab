@@ -826,8 +826,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c51d3eb4b0ae042b1bf2167d65c7bf36, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  angleOffset: 0
-  upRightAngle: -18
+  angleOffset: 35
+  upRightAngle: 20
+  lyingAngle: 110
 --- !u!114 &5969104428634924909
 MonoBehaviour:
   m_ObjectHideFlags: 0
