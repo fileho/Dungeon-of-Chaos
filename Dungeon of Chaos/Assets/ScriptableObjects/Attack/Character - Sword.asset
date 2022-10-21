@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 656d4005658cf4e07808ec6178e5ef23, type: 3}
   m_Name: Character - Sword
   m_EditorClassIdentifier: 
-  range: 0
+  range: 3.5
   damage: 1
   staminaCost: 20
   cooldown: 1
@@ -38,4 +38,3 @@ MonoBehaviour:
     pitch: 1
     priority: 0
   swing: 15
-  reach: 1.5
