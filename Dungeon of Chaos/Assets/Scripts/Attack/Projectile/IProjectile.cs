@@ -11,6 +11,7 @@ public abstract class IProjectile : MonoBehaviour
     protected float delay = 0.5f;
     protected float offset = 0f;
     protected float destroyTime = 5f;
+    protected float scale = 1f;
 
 
     protected IAttack attack;
@@ -39,6 +40,7 @@ public abstract class IProjectile : MonoBehaviour
         delay = projectileConfiguration.delay;
         offset = projectileConfiguration.offset;
         destroyTime = projectileConfiguration.destroyTime;
+        scale = projectileConfiguration.scale;
     }
 
     protected virtual void Start() {
@@ -46,6 +48,7 @@ public abstract class IProjectile : MonoBehaviour
         sprite = GetComponent<SpriteRenderer>();
         rb = GetComponent<Rigidbody2D>();
         ApplyConfigurations();
+        transform.localScale *= scale;
         Launch();
     }
 
