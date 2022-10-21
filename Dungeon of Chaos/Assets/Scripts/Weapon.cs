@@ -6,19 +6,16 @@ using static UnityEngine.Rendering.DebugUI;
 
 public class Weapon : MonoBehaviour {
 
-    [Tooltip("Initial offset z angle for weapon to point right")]
-    [SerializeField] private float angleOffset = 0f;
-
     [Tooltip("Angle at which the weapon asset aligns with the Y axis")]
     [SerializeField] private float upRightAngle = 0f;
 
-    [Tooltip("Angle at which the weapon asset aligns with the X axis")]
-    [SerializeField] private float lyingAngle = 0f;
+    [Tooltip("Angle at which the weapon asset aligns with the arm")]
+    [SerializeField] private float armOffsetAngle = 0f;
 
     private Transform asset;
     public Transform Asset {
         get {
-            return asset ?? (asset = transform.Find("Asset"));
+            return asset != null ? asset : (asset = transform.Find("Asset"));
         }
     }
 
@@ -53,13 +50,8 @@ public class Weapon : MonoBehaviour {
         return upRightAngle;
     }
 
-    public float GetLyingAngle() {
-        return lyingAngle;
-    }
-
-
-    public float GetAngleOffset() {
-        return angleOffset;
+    public float GetArmOffsetAngle() {
+        return armOffsetAngle;
     }
 
     public void InflictDamage(Unit unit) {
@@ -95,7 +87,6 @@ public class Weapon : MonoBehaviour {
         var q = Quaternion.LookRotation(Vector3.forward, rotated);
 
         var e = q.eulerAngles;
-        e.z += transform.lossyScale.x > 0 ? -angleOffset : angleOffset;
 
         transform.rotation = Quaternion.Euler(e);
     }
@@ -110,10 +101,9 @@ public class Weapon : MonoBehaviour {
     public Vector3 GetForwardDirection() {
         float dir = transform.lossyScale.x > 0 ? 1 : -1;
 
-        float a = angleOffset + transform.rotation.eulerAngles.z * dir;
+        float a = transform.rotation.eulerAngles.z * dir;
         a *= Mathf.Deg2Rad;
         // Vector3.R
-
 
         return new Vector3(-Mathf.Cos(a), -Mathf.Sin(a), 0);
     }
