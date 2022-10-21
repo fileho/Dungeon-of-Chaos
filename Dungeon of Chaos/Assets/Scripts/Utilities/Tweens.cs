@@ -25,7 +25,7 @@ public static class Tweens {
     }
 
     // Slow to fast
-    public static float EaseInExpo(float currentTime)
+    public static float EaseInExponential(float currentTime)
     {
         if (currentTime == 0) return 0;
         else return (float)Math.Pow(2, 10 * (currentTime - 1));
@@ -33,8 +33,25 @@ public static class Tweens {
 
 
     // Fast to slow
-    public static float EaseOutExpo(float currentTime) {
+    public static float EaseOutExponential(float currentTime) {
         if (currentTime == 1) return 1;
         else return (1 - (float)Math.Pow(2, -10 * currentTime));
+    }
+
+    public static float EaseInQuadratic(float currentTime) {
+        return currentTime * currentTime;
+    }
+
+    public static float EaseOutQuadratic(float currentTime) {
+        return -currentTime * (currentTime - 2);
+    }
+
+
+    public static float EaseInCubic(float currentTime) {
+        return currentTime * currentTime * currentTime;
+    }
+    public static float EaseOutCubic(float currentTime) {
+        currentTime = currentTime - 1;
+        return (currentTime * currentTime * currentTime + 1);
     }
 }

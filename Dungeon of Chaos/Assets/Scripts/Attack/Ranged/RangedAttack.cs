@@ -7,7 +7,6 @@ public class RangedAttack : IAttack {
     protected GameObject projectile;
 
     protected float wandReach = 1f;
-    protected float wandWave = 10f;
     protected const string INDICATOR_SPAWN_POSITION = "RangeIndicatorSpawnPosition";
 
     protected override void SetIndicatorTransform() {
@@ -20,7 +19,6 @@ public class RangedAttack : IAttack {
         RangedAttackConfiguration _attackConfiguration = attackConfiguration as RangedAttackConfiguration;
         projectile = _attackConfiguration.projectile;
         wandReach = _attackConfiguration.wandReach;
-        wandWave = _attackConfiguration.wandWave;
     }
 
 
@@ -31,39 +29,57 @@ public class RangedAttack : IAttack {
         isAttacking = true;
         cooldownLeft = cooldown;
         ActivateIndicator();
-        StartCoroutine(StartAttackAnimation(wandWave, wandReach));
+        StartCoroutine(StartAttackAnimation());
     }
 
-    private IEnumerator StartAttackAnimation(float wandWave, float wandReach) {
-        Vector3 startPos = Weapon.transform.localPosition;
-        Vector3 endPos = startPos + Weapon.GetForwardDirection() * wandReach;
-        var rot = Weapon.transform.localRotation;
+    // Ideal attack duration = 1
+    private IEnumerator StartAttackAnimation() {
+
+        Vector3 weaponPos = Weapon.transform.position;
+        Vector3 targetDirection = (GetTargetPosition() - (Vector2)weaponPos).normalized;
+
+        yield return new WaitForSeconds(IndicatorDuration);
 
         PrepareWeapon();
-        float time = 0;
-        //float duration = 0.6f;
-        while (time < AttackAnimationDuration) {
-            time += Time.deltaTime;
-            float t = Mathf.Clamp01(time / AttackAnimationDuration);
-            Weapon.transform.localPosition = Vector3.Lerp(startPos, endPos, t * (1 - t) * 4);
 
-            float setup = 0.2f;
-            if (t < setup)
-                Weapon.transform.localRotation = Quaternion.Lerp(rot, Quaternion.Euler(0, 0, rot.eulerAngles.z - wandWave), t / setup);
-            else if (1 - t < setup)
-                Weapon.transform.localRotation = Quaternion.Lerp(rot, Quaternion.Euler(0, 0, rot.eulerAngles.z + wandWave), (1 - t) / setup);
-            else {
-                Weapon.transform.localRotation = Quaternion.Lerp(
-                    Quaternion.Euler(0, 0, rot.eulerAngles.z - wandWave),
-                    Quaternion.Euler(0, 0, rot.eulerAngles.z + wandWave),
-                    (t - setup) / (1 - 2 * setup));
-            }
+        // Cache weapon rotation to restore after the animation
+        var initialAssetRotation = Weapon.Asset.localRotation;
+        Weapon.Asset.localRotation = Quaternion.Euler(0, 0, Weapon.GetUprightAngle());
+
+        Vector3 startPos = Weapon.transform.localPosition;
+        Vector3 endPos = startPos + (targetDirection * wandReach);
+        Vector3 midPos = (endPos + startPos) / 2f;
+
+        float attackAnimationDurationOneWay = AttackAnimationDuration / 2f;
+
+        // Forward
+        float time = 0;
+        midPos -= new Vector3(0, 0.1f);
+        while (time <= 1) {
+            time += (Time.deltaTime / attackAnimationDurationOneWay);
+            float currentPos = Tweens.EaseInCubic(time);
+            Weapon.transform.localPosition = Vector3.Slerp(startPos - midPos, endPos - midPos, currentPos) + midPos;
             yield return null;
         }
+
         SpawnProjectile(projectile);
 
-        transform.localRotation = rot;
+        // Backward
+        time = 0;
+        midPos += new Vector3(0, 0.2f);
+        while (time <= 1) {
+            time += (Time.deltaTime / attackAnimationDurationOneWay);
+            float currentPos = Tweens.EaseOutCubic(time);
+            Weapon.transform.localPosition = Vector3.Slerp(endPos - midPos, startPos - midPos, currentPos) + midPos;
+            yield return null;
+        }
+
+        SoundManager.instance.PlaySound(swingSFX);
+
         // Reset
+        Weapon.Asset.localRotation = initialAssetRotation;
+        Weapon.transform.localPosition = startPos;
+
         ResetWeapon();
         isAttacking = false;
     }

@@ -176,7 +176,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c51d3eb4b0ae042b1bf2167d65c7bf36, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  upRightAngle: -56
+  upRightAngle: -30
   armOffsetAngle: 70
 --- !u!212 &8779196864980001321
 SpriteRenderer:

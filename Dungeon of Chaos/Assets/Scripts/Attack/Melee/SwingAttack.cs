@@ -76,7 +76,7 @@ public class SwingAttack : MeleeAttack {
         time = 0;
         while (time <= 1) {
             time += (Time.deltaTime / attackAnimationDurationOneWay);
-            float currentPos = Tweens.EaseOutExpo(time);
+            float currentPos = Tweens.EaseOutExponential(time);
             Weapon.transform.localPosition = Vector3.Slerp(endPosUp - startPos, endPosdown - startPos, currentPos) + startPos;
             yield return null;
         }
