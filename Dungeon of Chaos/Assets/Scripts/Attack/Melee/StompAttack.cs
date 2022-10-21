@@ -92,7 +92,7 @@ public class StompAttack : MeleeAttack {
         // Up
         while (time <= 1) {
             time += (Time.deltaTime / attackAnimationDurationOneWay);
-            float currentPos = Tweens.EaseOutExpo(time);
+            float currentPos = Tweens.EaseOutExponential(time);
             Weapon.transform.localPosition = Vector3.Lerp(startPos, endPosUp, currentPos);
             Weapon.Asset.localScale = Vector3.Lerp(startScale, endScale, currentPos);
             yield return null;
