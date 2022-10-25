@@ -14,14 +14,22 @@ public class SkillButtonPassive : SkillButton
         base.Init();
         skillInfo = skillSystem.GetSkillInfoPassive(skillIndex);
         if (skillInfo == null)
-            enabled = false;
+        {
+            transform.parent.gameObject.SetActive(false);
+            return;
+        }
+        SetLevel();
+        SetIcon();
         frame.color = Color.blue;
     }
 
     public override void OnBeginDrag(PointerEventData eventData)
     {
-        if (!skillSystem.IsUnlockedPassive(skillIndex))
+        if (eventData.button == PointerEventData.InputButton.Right || !skillSystem.IsUnlockedPassive(skillIndex))
+        {
+            eventData.pointerDrag = null;
             return;
+        }
         dragDrop.transform.position = eventData.position;
         dragDrop.GetComponent<Image>().sprite = skillInfo.GetSkillData().GetIcon();
         dragDrop.SetActive(true);
@@ -29,10 +37,22 @@ public class SkillButtonPassive : SkillButton
 
     public override void OnPointerEnter(PointerEventData eventData)
     {
+        TooltipSystem.instance.Show(skillInfo.GetSkillData().GetDescription(), skillInfo.GetSkillData().GetName(), "Passive Skill");
     }
 
     public override void OnPointerExit(PointerEventData eventData)
     {
+        TooltipSystem.instance.Hide();
+    }
+
+    public override void RightMouseDown()
+    {
+        if (!skillSystem.CanUpgradePassive(skillIndex))
+        {
+            TooltipSystem.instance.DisplayMessage("Not enough skill points");
+            return;
+        }
+        base.RightMouseDown();
     }
 
     public int GetSkillIndex()
@@ -44,11 +64,6 @@ public class SkillButtonPassive : SkillButton
     {
         time = 0f;
         rightClick = false;
-        if (!skillSystem.CanUpgradePassive(skillIndex))
-        {
-            Debug.Log("Not enough skill points");
-            return;
-        }
 
         skillSystem.UpgradePassive(skillIndex);
         SetIcon();
@@ -57,9 +72,9 @@ public class SkillButtonPassive : SkillButton
 
     public override void SetLevel()
     {
+        locked.SetActive(false);
         if (skillInfo.GetLevel() == 0)
             locked.SetActive(true);
-        locked.SetActive(false);
         level.text = skillInfo.GetLevel() + "/" + skillInfo.GetMaxLevel();
     }
 
@@ -67,10 +82,5 @@ public class SkillButtonPassive : SkillButton
     {
         Sprite icon = skillInfo.GetSkillData().GetIcon();
         GetComponent<Image>().sprite = icon;
-
-        if (skillSystem.IsEquipped(skillIndex))
-        {
-            Debug.Log("Update icon in activated slots");
-        }
     }
 }

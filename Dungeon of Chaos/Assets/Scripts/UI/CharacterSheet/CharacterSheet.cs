@@ -10,6 +10,7 @@ public class CharacterSheet : MonoBehaviour
     private SkillButtonActive[] skillButtonsActive;
     private SkillButtonDash[] skillButtonsDash;
     private SkillButtonSecondary[] skillButtonsSecondary;
+    private SkillButtonPassive[] skillButtonsPassive;
     private SkillSlotDash skillSlotDash;
     private SkillSlotSecondary skillSlotSecondary;
 
@@ -43,6 +44,10 @@ public class CharacterSheet : MonoBehaviour
 
         skillButtonsSecondary = FindObjectsOfType<SkillButtonSecondary>();
         foreach (SkillButtonSecondary skillBtn in skillButtonsSecondary)
+            skillBtn.Init();
+
+        skillButtonsPassive = FindObjectsOfType<SkillButtonPassive>();
+        foreach (SkillButtonPassive skillBtn in skillButtonsPassive)
             skillBtn.Init();
 
         skillSlotSecondary = FindObjectOfType<SkillSlotSecondary>();
