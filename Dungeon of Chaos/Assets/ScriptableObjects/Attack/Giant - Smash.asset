@@ -9,15 +9,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 656d4005658cf4e07808ec6178e5ef23, type: 3}
-  m_Name: Giant - Melee
+  m_Script: {fileID: 11500000, guid: 307959e3ed6fc4c359a0a6360033ccb5, type: 3}
+  m_Name: Giant - Smash
   m_EditorClassIdentifier: 
   range: 5
-  damage: 1.5
+  damage: 5
   staminaCost: 0
   cooldown: 1
-  attackAnimationDuration: 0.6
-  indicator: {fileID: 4329331889789977291, guid: d1a59e053a17c4eaaacc05a0931f0200, type: 3}
+  attackAnimationDuration: 1
+  indicator: {fileID: 0}
   type: 1
   swingSFX:
     soundCategory: 2
@@ -37,5 +37,7 @@ MonoBehaviour:
     volume: 1
     pitch: 1
     priority: 0
-  swing: 30
-  reach: 1.5
+  lift: 2
+  fall: 0.5
+  scaleMultiplier: 1.5
+  damageRadius: 1

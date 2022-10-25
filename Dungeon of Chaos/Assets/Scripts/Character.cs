@@ -47,7 +47,6 @@ public class Character : Unit
     public override Vector2 GetTargetPosition()
     {
         return camera.ScreenToWorldPoint(Input.mousePosition);
-        ;
     }
 
     public override Vector2 GetTargetDirection() {
@@ -111,6 +110,8 @@ public class Character : Unit
 
     private void RotateWeapon()
     {
+        if (attack.IsAttacking())
+            return;
         weapon.RotateWeapon(GetTargetPosition());
     }
 

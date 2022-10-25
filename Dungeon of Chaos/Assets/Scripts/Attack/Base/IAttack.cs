@@ -34,8 +34,11 @@ public abstract class IAttack : MonoBehaviour {
     protected GameObject indicator;
     protected Transform indicatorTransform;
 
+    protected Vector3 weaponOriginalPosition;
+    protected Vector3 weaponAssetOriginalPosition;
+    protected Quaternion weaponOriginalRotation;
+    protected Quaternion weaponAssetOriginalRotation;
 
-    
 
     public abstract void Attack();
 
@@ -102,20 +105,18 @@ public abstract class IAttack : MonoBehaviour {
 
 
     protected virtual void PrepareWeapon() {
-       
         Weapon.SetDamage(GetDamage());
         Weapon.SetImpactSound(impactSFX);
         Weapon.ResetHitUnits();
+        Weapon.EnableDisableTrail(true);
     }
 
 
     protected virtual void ResetWeapon() {
         Weapon.EnableDisableTrail(false);
-        Weapon.EnableDisableCollider(false);
     }
 
     protected virtual void ApplyConfigurations() {
-
         range = attackConfiguration.range;
         damage = attackConfiguration.damage;
         staminaCost = attackConfiguration.staminaCost;
@@ -128,6 +129,7 @@ public abstract class IAttack : MonoBehaviour {
         impactSFX = attackConfiguration.impactSFX;
         indicatorSFX = attackConfiguration.indicatorSFX;
     }
+
 
     protected virtual void Start() {
         if (attackConfiguration == null)
