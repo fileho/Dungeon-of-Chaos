@@ -39,4 +39,3 @@ MonoBehaviour:
     priority: 0
   projectile: {fileID: 1052187207571410619, guid: b03845b2e170c4237ad5953ab466b279, type: 3}
   wandReach: 1
-  wandWave: 10

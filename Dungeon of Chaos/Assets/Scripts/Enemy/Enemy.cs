@@ -71,7 +71,7 @@ public class Enemy : Unit {
 
     private bool Attack() {
         if (IsAttacking()) return true;
-            currentAttack = attackManager.GetBestAvailableAttack();
+        currentAttack = attackManager.GetBestAvailableAttack();
         if (currentAttack != null) {
             state = State.Attack;
             currentAttack.Attack();
@@ -87,6 +87,7 @@ public class Enemy : Unit {
     private bool Chase() {
         if (IsTargetInChaseRange()) {
             state = State.Chase;
+
             if (GetTargetDistance() > attackManager.GetMinimumAttackRange()) {
                 Move();
             }
@@ -107,8 +108,8 @@ public class Enemy : Unit {
 
     private void SwitchEnemyStates() {
         if (dead) return;
-        if(Attack());
-        else if (Chase());
+        if (Attack()) ;
+        else if (Chase()) ;
         else Patrol();
         //print("Test: " + state.ToString());
     }
@@ -117,7 +118,7 @@ public class Enemy : Unit {
     public bool IsAwake() {
         return state == State.Attack || state == State.Chase;
     }
-   
+
 
     protected override void CleanUp() {
         loot.Drop();

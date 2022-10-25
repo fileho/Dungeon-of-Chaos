@@ -2,11 +2,22 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using static UnityEngine.GraphicsBuffer;
+using static UnityEngine.Rendering.DebugUI;
 
 public class Weapon : MonoBehaviour {
 
-    [Tooltip("Initial offset z angle for weapon to point right")]
-    [SerializeField] private float angleOffset = 0f;
+    [Tooltip("Angle at which the weapon asset aligns with the Y axis")]
+    [SerializeField] private float upRightAngle = 0f;
+
+    [Tooltip("Angle at which the weapon asset aligns with the arm")]
+    [SerializeField] private float armOffsetAngle = 0f;
+
+    private Transform asset;
+    public Transform Asset {
+        get {
+            return asset != null ? asset : (asset = transform.Find("Asset"));
+        }
+    }
 
 
     private TrailRenderer trail;
@@ -31,15 +42,20 @@ public class Weapon : MonoBehaviour {
     }
 
     // Impact sound is set by the attack as different attacks can have different impact sounds
-    public void SetImpactSound(SoundSettings sound)
-    {
+    public void SetImpactSound(SoundSettings sound) {
         impactSFX = sound;
     }
 
+    public float GetUprightAngle() {
+        return upRightAngle;
+    }
+
+    public float GetArmOffsetAngle() {
+        return armOffsetAngle;
+    }
 
     public void InflictDamage(Unit unit) {
-        if (!hitUnits.Contains(unit))
-        {
+        if (!hitUnits.Contains(unit)) {
             hitUnits.Add(unit);
             SoundManager.instance.PlaySound(impactSFX);
             unit.TakeDamage(damage);
@@ -54,8 +70,7 @@ public class Weapon : MonoBehaviour {
         trail.gameObject.SetActive(state);
     }
 
-    public void ResetHitUnits()
-    {
+    public void ResetHitUnits() {
         hitUnits.Clear();
     }
 
@@ -72,7 +87,6 @@ public class Weapon : MonoBehaviour {
         var q = Quaternion.LookRotation(Vector3.forward, rotated);
 
         var e = q.eulerAngles;
-        e.z += transform.lossyScale.x > 0 ? -angleOffset : angleOffset;
 
         transform.rotation = Quaternion.Euler(e);
     }
@@ -87,10 +101,9 @@ public class Weapon : MonoBehaviour {
     public Vector3 GetForwardDirection() {
         float dir = transform.lossyScale.x > 0 ? 1 : -1;
 
-        float a = angleOffset + transform.rotation.eulerAngles.z * dir;
+        float a = transform.rotation.eulerAngles.z * dir;
         a *= Mathf.Deg2Rad;
         // Vector3.R
-
 
         return new Vector3(-Mathf.Cos(a), -Mathf.Sin(a), 0);
     }

@@ -5,41 +5,96 @@ using static UnityEngine.Rendering.DebugUI.Table;
 
 public class SwingAttack : MeleeAttack {
 
-    public override void Attack() {
-        base.Attack();
-        StartCoroutine(StartAttackAnimation(swing, reach));
+    // Angle sweeped during the attack animation
+    protected float swing;
+
+    protected override void ApplyConfigurations() {
+        base.ApplyConfigurations();
+        SwingAttackConfiguration _attackConfiguration = attackConfiguration as SwingAttackConfiguration;
+        swing = _attackConfiguration.swing;
     }
 
-    private IEnumerator StartAttackAnimation(float swing, float reach) {
+    protected override void PrepareWeapon() {
+        base.PrepareWeapon();
+        Weapon.EnableDisableCollider(true);
+    }
+
+
+    protected override void ResetWeapon() {
+        base.ResetWeapon();
+        Weapon.EnableDisableCollider(false);
+    }
+
+
+    public override void Attack() {
+        base.Attack();
+        StartCoroutine(StartAttackAnimation());
+    }
+
+
+    // Ideal attack duration = 1
+    private IEnumerator StartAttackAnimation() {
+
+        Vector3 weaponPos = Weapon.transform.position;
+        Vector3 targetDirection = (GetTargetPosition() - (Vector2)weaponPos).normalized;
+
+        float angleMultiplier = Weapon.transform.lossyScale.x > 0 ? 1 : -1;
+        float swingAdjusted = swing * angleMultiplier;
+
         yield return new WaitForSeconds(IndicatorDuration);
-        Vector3 startPos = Weapon.transform.localPosition;
-        Vector3 endPos = startPos + Weapon.GetForwardDirection() * reach;
-        var rot = Weapon.transform.localRotation;
 
-        SoundManager.instance.PlaySound(swingSFX);
         PrepareWeapon();
-        float time = 0;
-        while (time < AttackAnimationDuration) {
-            time += Time.deltaTime;
-            float t = Mathf.Clamp01(time / AttackAnimationDuration);
-            Weapon.transform.localPosition = Vector3.Lerp(startPos, endPos, t * (1 - t) * 4);
 
-            float setup = 0.2f;
-            if (t < setup)
-                Weapon.transform.localRotation = Quaternion.Lerp(rot, Quaternion.Euler(0, 0, rot.eulerAngles.z - swing), t / setup);
-            else if (1 - t < setup)
-                Weapon.transform.localRotation = Quaternion.Lerp(rot, Quaternion.Euler(0, 0, rot.eulerAngles.z + swing), (1 - t) / setup);
-            else {
-                Weapon.transform.localRotation = Quaternion.Lerp(
-                    Quaternion.Euler(0, 0, rot.eulerAngles.z - swing),
-                    Quaternion.Euler(0, 0, rot.eulerAngles.z + swing),
-                    (t - setup) / (1 - 2 * setup));
-            }
+        // Cache weapon rotation to restore after the animation
+        var initialAssetRotation = Weapon.Asset.localRotation;
+        Weapon.Asset.localRotation = Quaternion.Euler(0, 0, Weapon.GetArmOffsetAngle());
+
+        Vector3 upperEdge = Quaternion.AngleAxis((-swingAdjusted / 2f), Vector3.forward) * targetDirection;
+        upperEdge = Weapon.transform.lossyScale.x > 0 ? upperEdge : -Vector3.Reflect(upperEdge, Vector2.up);
+        Vector3 lowerEdge = Quaternion.AngleAxis((swingAdjusted / 2f), Vector3.forward) * targetDirection;
+        lowerEdge = Weapon.transform.lossyScale.x > 0 ? lowerEdge : -Vector3.Reflect(lowerEdge, Vector2.up);
+
+        Vector3 startPos = Weapon.transform.localPosition;
+        Vector3 endPosUp = startPos + (upperEdge * (range - 1.5f));
+        Vector3 endPosdown = startPos + (lowerEdge * (range - 1.5f));
+
+
+        float time = 0;
+        float attackAnimationDurationOneWay = AttackAnimationDuration / 3f;
+
+        // Forward
+        while (time <= 1) {
+            time += (Time.deltaTime / attackAnimationDurationOneWay);
+            Weapon.transform.localPosition = Vector3.Lerp(startPos, endPosUp, time);
             yield return null;
         }
-        transform.localRotation = rot;
+
+        // Sweep
+        var startRotation = Weapon.Asset.localRotation;
+        float startRotationZ = Weapon.Asset.localRotation.eulerAngles.z < 180 ? Weapon.Asset.localRotation.eulerAngles.z : Weapon.Asset.localRotation.eulerAngles.z - 360f;
+
+        time = 0;
+        while (time <= 1) {
+            time += (Time.deltaTime / attackAnimationDurationOneWay);
+            float currentPos = Tweens.EaseOutExponential(time);
+            Weapon.transform.localPosition = Vector3.Slerp(endPosUp - startPos, endPosdown - startPos, currentPos) + startPos;
+            yield return null;
+        }
+
+        // Backward
+        time = 0;
+        while (time <= 1) {
+            time += (Time.deltaTime / attackAnimationDurationOneWay);
+            Weapon.transform.localPosition = Vector3.Lerp(endPosdown, startPos, time);
+            yield return null;
+        }
+
+        SoundManager.instance.PlaySound(swingSFX);
 
         // Reset
+        Weapon.Asset.localRotation = initialAssetRotation;
+        Weapon.transform.localPosition = startPos;
+
         ResetWeapon();
         isAttacking = false;
     }
