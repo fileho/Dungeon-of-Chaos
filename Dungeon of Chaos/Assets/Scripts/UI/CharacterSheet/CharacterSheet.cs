@@ -4,15 +4,18 @@ using UnityEngine;
 
 public class CharacterSheet : MonoBehaviour
 {
-    [SerializeField]
-    private GameObject child;
-    [SerializeField] private ActivatedSkillSlots activatedSkillSlots;
+    [SerializeField] private GameObject child;
+
+    private SkillSlotDash skillSlotDash;
+    private SkillSlotSecondary skillSlotSecondary;
+    private ActivatedSkillSlots activatedSkillSlots;
+    private EquippedSkillSlots equippedSkillSlots;
+
     private SkillButtonActive[] skillButtonsActive;
     private SkillButtonDash[] skillButtonsDash;
     private SkillButtonSecondary[] skillButtonsSecondary;
     private SkillButtonPassive[] skillButtonsPassive;
-    private SkillSlotDash skillSlotDash;
-    private SkillSlotSecondary skillSlotSecondary;
+
 
     private GameController gameController;
 
@@ -29,7 +32,12 @@ public class CharacterSheet : MonoBehaviour
     public void Open()
     {
         child.SetActive(true);
-        activatedSkillSlots.InitSkillSlots();
+
+        activatedSkillSlots = FindObjectOfType<ActivatedSkillSlots>();
+        activatedSkillSlots.Init();
+
+        equippedSkillSlots = FindObjectOfType<EquippedSkillSlots>();
+        equippedSkillSlots.Init();
 
         skillButtonsActive = FindObjectsOfType<SkillButtonActive>();
         foreach (SkillButtonActive skillBtn in skillButtonsActive)
