@@ -2,7 +2,7 @@ using UnityEngine.EventSystems;
 
 public class SkillSlotActive : SkillSlot
 {
-    protected ActivatedSkillSlots activatedSkillSlots;
+    private ActivatedSkillSlots activatedSkillSlots;
 
     protected override void Start()
     {
