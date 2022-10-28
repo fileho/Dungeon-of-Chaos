@@ -15,6 +15,12 @@ public abstract class IAttack : MonoBehaviour {
     protected float damage;
     // The stamina cost of the attack
     protected float staminaCost;
+
+    // Weights of the respective parameters to calculate priority
+    protected float rangeWeight;
+    protected float damageWeight;
+    protected float staminaCostWeight;
+
     // Time after which the attack can be used again
     protected float cooldown;
     // The type (physical/magical) of the attack
@@ -61,6 +67,9 @@ public abstract class IAttack : MonoBehaviour {
         return range;
     }
 
+    public float GetAttackRangeWeighted() {
+        return GetAttackRange() * rangeWeight;
+    }
 
     private bool IsTargetInAttackRange() {
         return owner.GetTargetDistance() <= GetAttackRange();
@@ -76,6 +85,9 @@ public abstract class IAttack : MonoBehaviour {
             : damage * owner.stats.GetSpellPower();
     }
 
+    public float GetDamageWeighted() {
+        return GetDamage() * damageWeight;
+    }
 
     public float GetCoolDownTime() {
         return cooldown;
@@ -88,6 +100,11 @@ public abstract class IAttack : MonoBehaviour {
 
     public float GetStaminaCost() {
         return staminaCost;
+    }
+
+
+    public float GetStaminaCostWeighted() {
+        return GetStaminaCost() * staminaCostWeight;
     }
 
 
@@ -130,6 +147,11 @@ public abstract class IAttack : MonoBehaviour {
         range = attackConfiguration.range;
         damage = attackConfiguration.damage;
         staminaCost = attackConfiguration.staminaCost;
+
+        rangeWeight = attackConfiguration.rangeWeight;
+        damageWeight = attackConfiguration.damageWeight;
+        staminaCostWeight = attackConfiguration.staminaCostWeight;
+
         cooldown = attackConfiguration.cooldown;
         indicatorPrefab = attackConfiguration.indicator;
         indicatorConfiguration = attackConfiguration.indicatorConfiguration;
