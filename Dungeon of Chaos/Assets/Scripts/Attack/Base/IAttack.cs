@@ -131,7 +131,7 @@ public abstract class IAttack : MonoBehaviour {
     }
 
 
-    protected virtual void Start() {
+    protected virtual void Awake() {
         if (attackConfiguration == null)
             return;
         Weapon = GetComponent<Weapon>();
