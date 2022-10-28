@@ -54,8 +54,15 @@ public class StompAttack : MeleeAttack {
 
         // Cache weapon rotation to restore it after the animation
         var initialWeaponRotation = Weapon.transform.rotation;
+        Vector3 startPos = Weapon.transform.localPosition;
+        Vector3 endPosUp = startPos + Vector3.up * lift;
+        Vector3 endPosdown = startPos + Vector3.down * fall;
+
+        Vector3 startScale = Weapon.Asset.localScale;
+        Vector3 endScale = Weapon.Asset.localScale * scaleMultiplier;
 
         ActivateIndicator();
+        Vector3 indicatorPos = indicator.transform.position;
         yield return new WaitForSeconds(IndicatorDuration);
 
         // Reset weapon rotation to default for the animation
@@ -67,11 +74,7 @@ public class StompAttack : MeleeAttack {
         var initialAssetRotation = Weapon.Asset.localRotation;
         Weapon.Asset.localRotation = Quaternion.Euler(0, 0, Weapon.GetUprightAngle());
 
-        Vector3 startPos = Weapon.transform.localPosition;
-        Vector3 endPosUp = startPos + Vector3.up * lift;
-        Vector3 endPosdown = startPos + Vector3.down * fall;
-        Vector3 startScale = Weapon.Asset.localScale;
-        Vector3 endScale = Weapon.Asset.localScale * scaleMultiplier;
+
 
         float time = 0;
         float attackAnimationDurationOneWay = AttackAnimationDuration / 2f;
@@ -95,9 +98,9 @@ public class StompAttack : MeleeAttack {
         }
 
         Weapon.SetDamage(damageMajor);
-        CheckHits(Weapon.transform.position + endPosdown, damageRadiusMajor);
+        CheckHits(indicatorPos, damageRadiusMajor);
         Weapon.SetDamage(damageMinor);
-        CheckHits(Weapon.transform.position + endPosdown, damageRadiusMinor);
+        CheckHits(indicatorPos, damageRadiusMinor);
 
         SoundManager.instance.PlaySound(swingSFX);
 
