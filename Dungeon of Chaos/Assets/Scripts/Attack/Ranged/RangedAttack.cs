@@ -7,11 +7,19 @@ public class RangedAttack : IAttack {
     protected GameObject projectile;
 
     protected float wandReach = 1f;
-    protected const string INDICATOR_SPAWN_POSITION = "RangeIndicatorSpawnPosition";
 
-    protected override void SetIndicatorTransform() {
-        indicatorTransform = transform.Find(INDICATOR_SPAWN_POSITION);
-        //print(indicatorTransform);
+    protected override void ActivateIndicator() {
+        if (indicatorPrefab == null) return;
+        //SoundManager.instance.PlaySound(indicatorSFX);
+
+        // Set weapon arm as the parent
+        indicator = Instantiate(indicatorPrefab, transform);
+        indicator.transform.up = Weapon.GetForwardDirectionRotated();
+        var iIndicator = indicator.GetComponent<IIndicator>();
+        iIndicator.Init(indicatorConfiguration);
+        IndicatorDuration = iIndicator.Duration;
+        indicator.transform.localPosition = Weapon.GetWeaponTipOffset();
+        iIndicator.Use();
     }
 
     protected override void ApplyConfigurations() {
@@ -21,23 +29,17 @@ public class RangedAttack : IAttack {
         wandReach = _attackConfiguration.wandReach;
     }
 
-
-    public override void Attack() {
-        if (isAttacking)
-            return;
-
-        isAttacking = true;
-        cooldownLeft = cooldown;
-        ActivateIndicator();
-        StartCoroutine(StartAttackAnimation());
-    }
-
     // Ideal attack duration = 1
-    private IEnumerator StartAttackAnimation() {
+    protected override IEnumerator StartAttackAnimation() {
 
         Vector3 weaponPos = Weapon.transform.position;
         Vector3 targetDirection = (GetTargetPosition() - (Vector2)weaponPos).normalized;
 
+        Vector3 startPos = Weapon.transform.localPosition;
+        Vector3 endPos = startPos + (targetDirection * wandReach);
+        Vector3 midPos = (endPos + startPos) / 2f;
+
+        ActivateIndicator();
         yield return new WaitForSeconds(IndicatorDuration);
 
         PrepareWeapon();
@@ -46,9 +48,6 @@ public class RangedAttack : IAttack {
         var initialAssetRotation = Weapon.Asset.localRotation;
         Weapon.Asset.localRotation = Quaternion.Euler(0, 0, Weapon.GetUprightAngle());
 
-        Vector3 startPos = Weapon.transform.localPosition;
-        Vector3 endPos = startPos + (targetDirection * wandReach);
-        Vector3 midPos = (endPos + startPos) / 2f;
 
         float attackAnimationDurationOneWay = AttackAnimationDuration / 2f;
 
@@ -86,7 +85,7 @@ public class RangedAttack : IAttack {
 
 
     protected void SpawnProjectile(GameObject projectile) {
-        GameObject _projectile = Instantiate(projectile, indicatorTransform.position, indicatorTransform.rotation);
+        GameObject _projectile = Instantiate(projectile, transform.position + Weapon.GetWeaponTipOffset(), transform.rotation);
         _projectile.GetComponent<IProjectile>().SetAttack(this);
     }
 

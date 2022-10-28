@@ -9,4 +9,5 @@ public abstract class ProjectileConfiguration : ScriptableObject
     public float destroyTime = 5f;
     public float scale = 1f;
     public Sprite sprite;
+    public Color color;
 }

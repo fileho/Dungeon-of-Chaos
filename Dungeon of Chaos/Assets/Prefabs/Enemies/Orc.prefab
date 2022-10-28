@@ -26,7 +26,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1094064536408609657}
-  m_LocalRotation: {x: 0, y: 0, z: 0.20765558, w: 0.978202}
+  m_LocalRotation: {x: 0, y: 0, z: 0.40034905, w: 0.91636276}
   m_LocalPosition: {x: 0, y: 0, z: 1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -34,7 +34,7 @@ Transform:
   - {fileID: 2039096143251621655}
   m_Father: {fileID: 1419886182394290255}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 23.97}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 47.2}
 --- !u!114 &8987129635712844092
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -49,6 +49,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   upRightAngle: -30
   armOffsetAngle: 75
+  weaponTipOffset: {x: 0, y: 0, z: 0}
 --- !u!212 &4206247659596657827
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -88,7 +89,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: -1
   m_Sprite: {fileID: 21300000, guid: d98349b25b3a8a943a98159fdc70e66f, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -112,7 +113,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c6cba19a2df74cc3b714cd8c73f1623, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackConfiguration: {fileID: 11400000, guid: 5c652ac0aabab4117b68dc754c1b32f0, type: 2}
+  attackConfiguration: {fileID: 11400000, guid: 4787b10b4551b4f5dba751e04b8ae571, type: 2}
 --- !u!1 &1419886181399069787
 GameObject:
   m_ObjectHideFlags: 0
@@ -499,7 +500,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 5574832814731392626}
-  - {fileID: 5527101358198228852}
   m_Father: {fileID: 1419886182692781938}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -744,13 +744,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3857842880315447389}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.12, y: -0.34, z: 0}
+  m_LocalRotation: {x: 0, y: 0, z: -0.258819, w: 0.9659259}
+  m_LocalPosition: {x: -1.08, y: 0.18, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 5574832814731392626}
   m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -30}
 --- !u!212 &8858206756772395308
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -861,36 +861,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d7e8f837938a78448b18bf1b255952b0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!1 &5260677980319784745
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 5527101358198228852}
-  m_Layer: 9
-  m_Name: MeleeIndicatorSpawnPosition
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &5527101358198228852
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5260677980319784745}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 1419886182394290255}
-  m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &6175988435252244576
 GameObject:
   m_ObjectHideFlags: 0

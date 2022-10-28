@@ -1,0 +1,41 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 656d4005658cf4e07808ec6178e5ef23, type: 3}
+  m_Name: Orc-Swing
+  m_EditorClassIdentifier: 
+  range: 5
+  damage: 1.5
+  staminaCost: 0
+  cooldown: 1
+  attackAnimationDuration: 0.7
+  indicator: {fileID: 8311782001119121317, guid: c7018b97d1c15436b967c0ae91874678, type: 3}
+  indicatorConfiguration: {fileID: 11400000, guid: 8be7828fac8f94faf8b5629a8df80839, type: 2}
+  type: 1
+  swingSFX:
+    soundCategory: 2
+    sound: 5
+    volume: 1
+    pitch: 1
+    priority: 0
+  impactSFX:
+    soundCategory: 2
+    sound: 6
+    volume: 1
+    pitch: 1
+    priority: 0
+  indicatorSFX:
+    soundCategory: 2
+    sound: 4
+    volume: 1
+    pitch: 1
+    priority: 0
+  swing: 30

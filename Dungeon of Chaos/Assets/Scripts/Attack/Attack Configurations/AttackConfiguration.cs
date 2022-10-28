@@ -9,6 +9,7 @@ public abstract class AttackConfiguration : ScriptableObject
     public float cooldown = 1f;
     public float attackAnimationDuration = 1.5f;
     public GameObject indicator;
+    public IndicatorConfiguration indicatorConfiguration;
     public SkillEffectType type;
 
     public SoundSettings swingSFX;

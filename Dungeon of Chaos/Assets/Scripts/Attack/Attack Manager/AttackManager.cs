@@ -9,7 +9,7 @@ public class AttackManager : MonoBehaviour
     List<IAttack> attacks;
     private float minimumAttackRange = 0;
 
-    public void Init() {
+    public void Start() {
         attacks = GetComponentsInChildren<IAttack>().ToList();
         List<IAttack> rangeSortedAttack = attacks.OrderBy(x => x.GetAttackRange()).ToList();
         minimumAttackRange = rangeSortedAttack[0].GetAttackRange();

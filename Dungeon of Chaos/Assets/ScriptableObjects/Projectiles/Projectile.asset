@@ -16,5 +16,6 @@ MonoBehaviour:
   delay: 0.5
   offset: 0
   destroyTime: 5
-  scale: 0.3
-  sprite: {fileID: 21300000, guid: df0e8abf097cf41efbcef532ffcf8a36, type: 3}
+  scale: 1
+  sprite: {fileID: 21300000, guid: 4b40fc0f65c85f14fbc9c7c5f40ca686, type: 3}
+  color: {r: 1, g: 0.9529412, b: 0, a: 0}

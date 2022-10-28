@@ -4,8 +4,6 @@ using UnityEngine;
 using static UnityEditor.PlayerSettings;
 
 public class SmashAttack : MeleeAttack {
-
-
     // Weapon lift before stomping
     protected float lift;
 
@@ -27,14 +25,8 @@ public class SmashAttack : MeleeAttack {
         scaleMultiplier = _attackConfiguration.scaleMultiplier;
     }
 
-    public override void Attack() {
-        base.Attack();
-        StartCoroutine(StartAttackAnimation());
-    }
 
-
-    private void CheckHits(Vector3 pos, float radius)
-    {
+    private void CheckHits(Vector3 pos, float radius) {
         Collider2D[] colliders = Physics2D.OverlapCircleAll(pos, radius);
         if (colliders.Length > 0) {
             for (int i = 0; i < colliders.Length; i++) {
@@ -46,11 +38,23 @@ public class SmashAttack : MeleeAttack {
     }
 
     // Ideal attack duration = 1
-    private IEnumerator StartAttackAnimation() {
+    protected override IEnumerator StartAttackAnimation() {
 
         // Cache weapon rotation to restore it after the animation
         var initialWeaponRotation = Weapon.transform.rotation;
+        Vector3 startPos = Weapon.transform.localPosition;
+        Vector3 endPosUp = startPos + Vector3.up * lift;
+        Vector3 endPosdown = startPos + (-owner.transform.right * range) + (Vector3.down * fall);
+        endPosdown += Weapon.transform.position - Weapon.Asset.transform.position;
 
+        Vector3 startScale = Weapon.Asset.localScale;
+        Vector3 endScale = Weapon.Asset.localScale * scaleMultiplier;
+
+        ActivateIndicator();
+        Vector3 indicatorPos = endPosdown - Weapon.transform.position + Weapon.Asset.transform.position;
+        indicator.transform.localPosition = indicatorPos;
+        indicator.transform.localScale *= damageRadius;
+        indicatorPos = indicator.transform.position;
         yield return new WaitForSeconds(IndicatorDuration);
 
         // Reset weapon rotation to default for the animation
@@ -62,12 +66,7 @@ public class SmashAttack : MeleeAttack {
         var initialAssetRotation = Weapon.Asset.localRotation;
         Weapon.Asset.localRotation = Quaternion.Euler(0, 0, Weapon.GetUprightAngle());
 
-        Vector3 startPos = Weapon.transform.localPosition;
-        Vector3 endPosUp = startPos + Vector3.up * lift;
-        Vector3 endPosdown = startPos + (-owner.transform.right * range) + (Vector3.down * fall);
 
-        Vector3 startScale = Weapon.Asset.localScale;
-        Vector3 endScale = Weapon.Asset.localScale * scaleMultiplier;
 
         float time = 0;
         float attackAnimationDurationOneWay = AttackAnimationDuration / 2f;
@@ -82,7 +81,6 @@ public class SmashAttack : MeleeAttack {
         }
 
         // Down
-
         var startRotation = Weapon.Asset.localRotation;
         float startRotationZ = Weapon.Asset.localRotation.eulerAngles.z < 180 ? Weapon.Asset.localRotation.eulerAngles.z : Weapon.Asset.localRotation.eulerAngles.z - 360f;
 
@@ -95,7 +93,7 @@ public class SmashAttack : MeleeAttack {
             yield return null;
         }
 
-        CheckHits(endPosdown, damageRadius);
+        CheckHits(indicatorPos, damageRadius);
 
         SoundManager.instance.PlaySound(swingSFX);
 
@@ -108,6 +106,5 @@ public class SmashAttack : MeleeAttack {
         ResetWeapon();
         isAttacking = false;
     }
-
 
 }
