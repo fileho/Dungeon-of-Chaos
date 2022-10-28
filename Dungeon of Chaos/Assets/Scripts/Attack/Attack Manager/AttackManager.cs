@@ -19,11 +19,7 @@ public class AttackManager : MonoBehaviour
 
 
     private float GetAttacKWeight(IAttack attack) {
-        // TODO: add weights for each factor
-        // weightRange * attack.GetAttackRange()
-        // weightDamage * attack.GetDamage()
-        // weightStamina * attack.GetStaminaCost()
-        return attack.GetAttackRange() + attack.GetDamage() - attack.GetStaminaCost();
+        return attack.GetAttackRangeWeighted() + attack.GetDamageWeighted() - attack.GetStaminaCostWeighted();
     }
 
 
