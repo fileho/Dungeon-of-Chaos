@@ -27,7 +27,8 @@ public class SkillButtonActive : SkillButton
 
     public override void OnBeginDrag(PointerEventData eventData)
     {
-        if (eventData.button == PointerEventData.InputButton.Right || !skillSystem.IsUnlockedActive(skillIndex))
+        if (eventData.button == PointerEventData.InputButton.Right || 
+            !skillSystem.IsUnlockedActive(skillIndex))
         {
             eventData.pointerDrag = null;
             return;
