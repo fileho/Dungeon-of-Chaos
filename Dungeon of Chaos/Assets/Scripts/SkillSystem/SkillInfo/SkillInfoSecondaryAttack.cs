@@ -14,4 +14,9 @@ public class SkillInfoSecondaryAttack : SkillInfo<ISecondaryAttack>
     { 
         return skills[GetIndex()].GetSkillData();
     }
+
+    public string GetDescription()
+    {
+        return skills[GetIndex()].GetDescription();
+    }
 }

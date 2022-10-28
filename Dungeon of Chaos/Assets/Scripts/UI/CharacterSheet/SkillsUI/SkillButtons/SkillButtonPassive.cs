@@ -42,7 +42,7 @@ public class SkillButtonPassive : SkillButton
 
     public override void OnPointerEnter(PointerEventData eventData)
     {
-        TooltipSystem.instance.Show(skillInfo.GetSkillData().GetDescription(), skillInfo.GetSkillData().GetName(), "Passive Skill");
+        TooltipSystem.instance.Show(skillInfo.GetDescription(), skillInfo.GetSkillData().GetName(), "Passive Skill");
     }
 
     public override void OnEndDrag(PointerEventData eventData)

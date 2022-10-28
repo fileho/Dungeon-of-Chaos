@@ -42,7 +42,7 @@ public class SkillButtonSecondary : SkillButton
 
     public override void OnPointerEnter(PointerEventData eventData)
     {
-        TooltipSystem.instance.Show(skillInfo.GetSkillData().GetDescription(), skillInfo.GetSkillData().GetName(), "Secondary Attack");
+        TooltipSystem.instance.Show(skillInfo.GetDescription(), skillInfo.GetSkillData().GetName(), "Secondary Attack");
     }
 
     public override void OnPointerExit(PointerEventData eventData)
