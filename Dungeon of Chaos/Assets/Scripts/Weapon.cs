@@ -12,6 +12,10 @@ public class Weapon : MonoBehaviour {
     [Tooltip("Angle at which the weapon asset aligns with the arm")]
     [SerializeField] private float armOffsetAngle = 0f;
 
+    [Tooltip("Local position of weaapon tip")]
+    [SerializeField] private Vector3 weaponTipOffset = Vector3.zero;
+
+
     private Transform asset;
     public Transform Asset {
         get {
@@ -52,6 +56,10 @@ public class Weapon : MonoBehaviour {
 
     public float GetArmOffsetAngle() {
         return armOffsetAngle;
+    }
+
+    public Vector3 GetWeaponTipOffset() {
+        return weaponTipOffset;
     }
 
     public void InflictDamage(Unit unit) {

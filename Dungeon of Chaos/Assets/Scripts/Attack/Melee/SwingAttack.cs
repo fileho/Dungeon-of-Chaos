@@ -25,15 +25,8 @@ public class SwingAttack : MeleeAttack {
         Weapon.EnableDisableCollider(false);
     }
 
-
-    public override void Attack() {
-        base.Attack();
-        StartCoroutine(StartAttackAnimation());
-    }
-
-
     // Ideal attack duration = 1
-    private IEnumerator StartAttackAnimation() {
+    protected override IEnumerator StartAttackAnimation() {
 
         Vector3 weaponPos = Weapon.transform.position;
         Vector3 targetDirection = (GetTargetPosition() - (Vector2)weaponPos).normalized;
@@ -41,6 +34,7 @@ public class SwingAttack : MeleeAttack {
         float angleMultiplier = Weapon.transform.lossyScale.x > 0 ? 1 : -1;
         float swingAdjusted = swing * angleMultiplier;
 
+        ActivateIndicator();
         yield return new WaitForSeconds(IndicatorDuration);
 
         PrepareWeapon();

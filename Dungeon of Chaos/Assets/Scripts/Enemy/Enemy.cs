@@ -28,7 +28,6 @@ public class Enemy : Unit {
         Target = Character.instance;
         state = State.Patrol;
         attackManager = GetComponent<AttackManager>();
-        attackManager.Init();
     }
 
 
