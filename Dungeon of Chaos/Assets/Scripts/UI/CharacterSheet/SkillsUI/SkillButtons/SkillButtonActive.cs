@@ -42,7 +42,7 @@ public class SkillButtonActive : SkillButton
 
     public override void OnPointerEnter(PointerEventData eventData)
     {
-        TooltipSystem.instance.Show(skillInfo.GetSkillData().GetDescription(), skillInfo.GetSkillData().GetName(), "Active Skill");
+        TooltipSystem.instance.Show(skillInfo.GetDescription(), skillInfo.GetSkillData().GetName(), "Active Skill");
     }
 
     public override void OnPointerExit(PointerEventData eventData)

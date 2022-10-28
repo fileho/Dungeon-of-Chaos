@@ -15,4 +15,9 @@ public class SkillInfoDash : SkillInfo<IDashSkill>
     { 
         return skills[GetIndex()].GetSkillData();
     }
+
+    public string GetDescription()
+    {
+        return skills[GetIndex()].GetDescription();
+    }
 }

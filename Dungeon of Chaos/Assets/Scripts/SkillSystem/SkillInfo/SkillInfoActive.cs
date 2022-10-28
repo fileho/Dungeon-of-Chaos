@@ -14,4 +14,9 @@ public class SkillInfoActive : SkillInfo<IActiveSkill>
     { 
         return skills[GetIndex()].GetSkillData();
     }
+
+    public string GetDescription()
+    {
+        return skills[GetIndex()].GetDescription();
+    }
 }
