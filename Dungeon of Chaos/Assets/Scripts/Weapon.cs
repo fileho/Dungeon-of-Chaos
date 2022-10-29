@@ -28,6 +28,8 @@ public class Weapon : MonoBehaviour {
     private new BoxCollider2D collider;
     private List<Unit> hitUnits;
     private float damage = 0;
+    private int enemyLayer;
+
 
     private SoundSettings impactSFX;
 
@@ -37,6 +39,7 @@ public class Weapon : MonoBehaviour {
         hitUnits = new List<Unit>();
         EnableDisableCollider(false);
         EnableDisableTrail(false);
+        enemyLayer = GetEnemyLayer(transform.parent.gameObject.layer);
     }
 
 
@@ -63,7 +66,7 @@ public class Weapon : MonoBehaviour {
     }
 
     public void InflictDamage(Unit unit) {
-        if (!hitUnits.Contains(unit)) {
+        if (unit.gameObject.layer == enemyLayer && !hitUnits.Contains(unit)) {
             hitUnits.Add(unit);
             SoundManager.instance.PlaySound(impactSFX);
             unit.TakeDamage(damage);
@@ -125,5 +128,11 @@ public class Weapon : MonoBehaviour {
         ret.x *= dir;
 
         return ret;
+    }
+
+    public int GetEnemyLayer(int ownerLayer) {
+        return (ownerLayer == LayerMask.NameToLayer("Enemy") || ownerLayer == LayerMask.NameToLayer("EnemyAttack"))
+            ? LayerMask.NameToLayer("Player")
+            : LayerMask.NameToLayer("Enemy");
     }
 }
