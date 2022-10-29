@@ -2,60 +2,25 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ActivatedSkillSlots : MonoBehaviour
+public class ActivatedSkillSlots : SkillSlots<IActiveSkill>
 {
-    private List<SkillSlotActive> skillSlots = new List<SkillSlotActive>();
-
-    private SkillSystem skillSystem;
-
-    private void Init()
+    protected override int GetAmountOfSlots()
     {
-        if (skillSystem == null)
-            skillSystem = FindObjectOfType<SkillSystem>();
+        return skillSystem.GetActiveSkillSlots();
     }
 
-    public void InitSkillSlots()
+    protected override SkillInfo<IActiveSkill> GetSkill(int i)
     {
-        Init();
-        if (skillSlots.Count == skillSystem.GetActiveSkillSlots())
-            return;
-        SkillSlotActive[] slots = FindObjectsOfType<SkillSlotActive>();
-        for (int i = 0; i < skillSystem.GetActiveSkillSlots(); i++)
-            skillSlots.Add(null);
-        foreach (SkillSlotActive slot in slots)
-        {
-            skillSlots[slot.GetIndex()] = slot;
-        }
-        Redraw();
+        return skillSystem.GetActivatedSkill(i);
     }
 
-    public void Highlight()
+    protected override Sprite GetIcon(int i)
     {
-        foreach (SkillSlotActive skillSlot in skillSlots)
-        {
-            skillSlot.Highlight();
-        }
+        return skillSystem.GetActivatedSkill(i).GetSkillData().GetIcon();
     }
 
-    public void RemoveHighlight()
+    protected override SkillSlot[] GetSkillSlots()
     {
-        foreach (SkillSlotActive skillSlot in skillSlots)
-        {
-            skillSlot.RemoveHighlight();
-        }
+        return FindObjectsOfType<SkillSlotActive>();
     }
-
-    public void Redraw()
-    {
-        for (int i = 0; i < skillSlots.Count; i++)
-        {
-            if (skillSystem.GetActivatedSkill(i) == null)
-            {
-                skillSlots[i].SetImage(null);
-                continue;
-            }
-            skillSlots[i].SetImage(skillSystem.GetActivatedSkill(i).GetSkillData().GetIcon());
-        }
-    }
-
 }

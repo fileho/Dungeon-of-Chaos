@@ -4,14 +4,18 @@ using UnityEngine;
 
 public class CharacterSheet : MonoBehaviour
 {
-    [SerializeField]
-    private GameObject child;
-    [SerializeField] private ActivatedSkillSlots activatedSkillSlots;
+    [SerializeField] private GameObject child;
+
+    private SkillSlotDash skillSlotDash;
+    private SkillSlotSecondary skillSlotSecondary;
+    private ActivatedSkillSlots activatedSkillSlots;
+    private EquippedSkillSlots equippedSkillSlots;
+
     private SkillButtonActive[] skillButtonsActive;
     private SkillButtonDash[] skillButtonsDash;
     private SkillButtonSecondary[] skillButtonsSecondary;
-    private SkillSlotDash skillSlotDash;
-    private SkillSlotSecondary skillSlotSecondary;
+    private SkillButtonPassive[] skillButtonsPassive;
+
 
     private GameController gameController;
 
@@ -28,7 +32,12 @@ public class CharacterSheet : MonoBehaviour
     public void Open()
     {
         child.SetActive(true);
-        activatedSkillSlots.InitSkillSlots();
+
+        activatedSkillSlots = FindObjectOfType<ActivatedSkillSlots>();
+        activatedSkillSlots.Init();
+
+        equippedSkillSlots = FindObjectOfType<EquippedSkillSlots>();
+        equippedSkillSlots.Init();
 
         skillButtonsActive = FindObjectsOfType<SkillButtonActive>();
         foreach (SkillButtonActive skillBtn in skillButtonsActive)
@@ -43,6 +52,10 @@ public class CharacterSheet : MonoBehaviour
 
         skillButtonsSecondary = FindObjectsOfType<SkillButtonSecondary>();
         foreach (SkillButtonSecondary skillBtn in skillButtonsSecondary)
+            skillBtn.Init();
+
+        skillButtonsPassive = FindObjectsOfType<SkillButtonPassive>();
+        foreach (SkillButtonPassive skillBtn in skillButtonsPassive)
             skillBtn.Init();
 
         skillSlotSecondary = FindObjectOfType<SkillSlotSecondary>();
