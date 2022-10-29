@@ -98,9 +98,9 @@ public class StompAttack : MeleeAttack {
         }
 
         Weapon.SetDamage(damageMajor);
-        CheckHits(indicatorPos, damageRadiusMajor);
+        CheckHits(owner.transform.position, damageRadiusMajor);
         Weapon.SetDamage(damageMinor);
-        CheckHits(indicatorPos, damageRadiusMinor);
+        CheckHits(owner.transform.position, damageRadiusMinor);
 
         SoundManager.instance.PlaySound(swingSFX);
 
