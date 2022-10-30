@@ -50,23 +50,23 @@ public class SmashAttack : MeleeAttack {
         Vector3 startScale = Weapon.Asset.localScale;
         Vector3 endScale = Weapon.Asset.localScale * scaleMultiplier;
 
-        ActivateIndicator();
-        Vector3 indicatorPos = endPosdown - Weapon.transform.position + Weapon.Asset.transform.position;
-        indicator.transform.localPosition = indicatorPos;
-        indicator.transform.localScale *= damageRadius;
-        indicatorPos = indicator.transform.position;
-        yield return new WaitForSeconds(IndicatorDuration);
+        IIndicator indicator = CreateIndicator();
+        if (indicator) {
+            Vector3 indicatorPos = endPosdown - Weapon.transform.position + Weapon.Asset.transform.position;
+            indicator.transform.localPosition = indicatorPos;
+            indicator.transform.localScale *= damageRadius;
+            indicatorPos = indicator.transform.position;
+            indicator.Use();
+            yield return new WaitForSeconds(indicator.Duration);
+        }
 
         // Reset weapon rotation to default for the animation
         Weapon.ResetWeapon();
         PrepareWeapon();
 
-
         // Cache weapon rotation to restore after the animation
         var initialAssetRotation = Weapon.Asset.localRotation;
         Weapon.Asset.localRotation = Quaternion.Euler(0, 0, Weapon.GetUprightAngle());
-
-
 
         float time = 0;
         float attackAnimationDurationOneWay = AttackAnimationDuration / 2f;
@@ -93,7 +93,7 @@ public class SmashAttack : MeleeAttack {
             yield return null;
         }
 
-        CheckHits(indicatorPos, damageRadius);
+        CheckHits(endPosdown, damageRadius);
 
         SoundManager.instance.PlaySound(swingSFX);
 

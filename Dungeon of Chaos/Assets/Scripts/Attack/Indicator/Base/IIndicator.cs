@@ -24,7 +24,11 @@ public abstract class IIndicator : MonoBehaviour
         sprite.transform.localScale *= indicatorConfiguration.scale; 
     }
 
-    public abstract void Use();
+    public virtual void Use() {
+        //SoundManager.instance.PlaySound(indicatorSFX);
+        StartCoroutine(ShowIndicator());
+    }
+
     protected abstract IEnumerator ShowIndicator();
     
 

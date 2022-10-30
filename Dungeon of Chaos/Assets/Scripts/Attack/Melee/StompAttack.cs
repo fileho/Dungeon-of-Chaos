@@ -61,9 +61,11 @@ public class StompAttack : MeleeAttack {
         Vector3 startScale = Weapon.Asset.localScale;
         Vector3 endScale = Weapon.Asset.localScale * scaleMultiplier;
 
-        ActivateIndicator();
-        Vector3 indicatorPos = indicator.transform.position;
-        yield return new WaitForSeconds(IndicatorDuration);
+        IIndicator indicator = CreateIndicator();
+        if (indicator) {
+            indicator.Use();
+            yield return new WaitForSeconds(indicator.Duration);
+        }
 
         // Reset weapon rotation to default for the animation
         Weapon.ResetWeapon();

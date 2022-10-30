@@ -13,10 +13,6 @@ public class RangedIndicator : IIndicator {
         finalScale = _indicatorConfiguration.finalScale;
     }
 
-    public override void Use() {
-        StartCoroutine(ShowIndicator());
-    }
-
     protected override IEnumerator ShowIndicator() {
         float time = 0f;
         while (time < Duration) {
