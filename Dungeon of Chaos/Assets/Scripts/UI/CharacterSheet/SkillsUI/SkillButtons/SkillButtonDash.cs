@@ -42,7 +42,9 @@ public class SkillButtonDash : SkillButton
 
     public override void OnPointerEnter(PointerEventData eventData)
     {
-        TooltipSystem.instance.Show(skillInfo.GetDescription(), skillInfo.GetSkillData().GetName(), "Dash skill");
+        string ch1 = GetLevelDescription(skillInfo.GetLevel());
+        TooltipSystem.instance.Show(skillInfo.GetSkillData().GetName(), "Dash Skill", ch1, skillInfo.GetDescription(),
+            GetNextLevelDescription(skillInfo.GetLevel(), skillInfo.GetMaxLevel()), skillInfo.GetDescription(1));
     }
 
     public override void OnPointerExit(PointerEventData eventData)
