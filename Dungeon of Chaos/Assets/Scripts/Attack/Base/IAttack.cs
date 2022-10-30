@@ -129,27 +129,6 @@ public abstract class IAttack : MonoBehaviour {
         return indicator;
     }
 
-    //protected virtual void PrepareIndicator() {
-
-    //}
-
-    //protected virtual void UseIndicator() {
-
-    //}
-
-    //protected virtual void ActivateIndicator() {
-    //    if (indicatorPrefab == null) return;
-    //    //SoundManager.instance.PlaySound(indicatorSFX);
-
-    //    indicator = Instantiate(indicatorPrefab, transform.parent);
-    //    indicator.transform.up = Weapon.GetForwardDirectionRotated();
-    //    var iIndicator = indicator.GetComponent<IIndicator>();
-    //    iIndicator.Init(indicatorConfiguration);
-    //    IndicatorDuration = iIndicator.Duration;
-    //    iIndicator.Use();
-    //}
-
-
     protected virtual void PrepareWeapon() {
         Weapon.SetDamage(GetDamage());
         Weapon.SetImpactSound(impactSFX);
