@@ -15,8 +15,4 @@ public class MeleeIndicator : IIndicator {
         yield return new WaitForSeconds(0.1f);
         CleanUp();
     }
-
-    public override void Use() {
-        StartCoroutine(ShowIndicator());
-    }
 }

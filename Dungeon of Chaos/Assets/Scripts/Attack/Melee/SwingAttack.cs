@@ -34,15 +34,6 @@ public class SwingAttack : MeleeAttack {
         float angleMultiplier = Weapon.transform.lossyScale.x > 0 ? 1 : -1;
         float swingAdjusted = swing * angleMultiplier;
 
-        ActivateIndicator();
-        yield return new WaitForSeconds(IndicatorDuration);
-
-        PrepareWeapon();
-
-        // Cache weapon rotation to restore after the animation
-        var initialAssetRotation = Weapon.Asset.localRotation;
-        Weapon.Asset.localRotation = Quaternion.Euler(0, 0, Weapon.GetArmOffsetAngle());
-
         Vector3 upperEdge = Quaternion.AngleAxis((-swingAdjusted / 2f), Vector3.forward) * targetDirection;
         upperEdge = Weapon.transform.lossyScale.x > 0 ? upperEdge : -Vector3.Reflect(upperEdge, Vector2.up);
         Vector3 lowerEdge = Quaternion.AngleAxis((swingAdjusted / 2f), Vector3.forward) * targetDirection;
@@ -52,6 +43,20 @@ public class SwingAttack : MeleeAttack {
         Vector3 endPosUp = startPos + (upperEdge * (range));
         Vector3 endPosdown = startPos + (lowerEdge * (range));
 
+        IIndicator indicator = CreateIndicator();
+        if (indicator) {
+            Vector3 indicatorPos = startPos - Weapon.transform.position + Weapon.Asset.transform.position;
+            indicator.transform.localPosition = indicatorPos;
+            indicator.transform.up = Weapon.GetForwardDirectionRotated();
+            indicator.Use();
+            yield return new WaitForSeconds(indicator.Duration);
+        }
+
+        PrepareWeapon();
+
+        // Cache weapon rotation to restore after the animation
+        var initialAssetRotation = Weapon.Asset.localRotation;
+        Weapon.Asset.localRotation = Quaternion.Euler(0, 0, Weapon.GetArmOffsetAngle());
 
         float time = 0;
         float attackAnimationDurationOneWay = AttackAnimationDuration / 3f;

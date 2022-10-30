@@ -8,19 +8,6 @@ public class RangedAttack : IAttack {
 
     protected float wandReach = 1f;
 
-    protected override void ActivateIndicator() {
-        if (indicatorPrefab == null) return;
-        //SoundManager.instance.PlaySound(indicatorSFX);
-
-        // Set weapon arm as the parent
-        indicator = Instantiate(indicatorPrefab, transform);
-        indicator.transform.up = Weapon.GetForwardDirectionRotated();
-        var iIndicator = indicator.GetComponent<IIndicator>();
-        iIndicator.Init(indicatorConfiguration);
-        IndicatorDuration = iIndicator.Duration;
-        indicator.transform.localPosition = Weapon.GetWeaponTipOffset();
-        iIndicator.Use();
-    }
 
     protected override void ApplyConfigurations() {
         base.ApplyConfigurations();
@@ -39,8 +26,13 @@ public class RangedAttack : IAttack {
         Vector3 endPos = startPos + (targetDirection * wandReach);
         Vector3 midPos = (endPos + startPos) / 2f;
 
-        ActivateIndicator();
-        yield return new WaitForSeconds(IndicatorDuration);
+        IIndicator indicator = CreateIndicator(transform);
+        if (indicator) {
+            indicator.transform.up = Weapon.GetForwardDirectionRotated();
+            indicator.transform.localPosition = Weapon.GetWeaponTipOffset();
+            indicator.Use();
+            yield return new WaitForSeconds(indicator.Duration);
+        }
 
         PrepareWeapon();
 

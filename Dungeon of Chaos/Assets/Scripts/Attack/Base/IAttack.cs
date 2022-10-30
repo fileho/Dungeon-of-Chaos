@@ -35,12 +35,11 @@ public abstract class IAttack : MonoBehaviour {
     protected float cooldownLeft = 0f;
     protected bool isAttacking = false;
     protected bool isEnemyInRange = false;
-    public float IndicatorDuration { get; protected set; } = 0;
     public Vector3 IndicatorLocalPosition { get; protected set; } = Vector3.zero;
 
     protected Unit owner;
     protected GameObject indicatorPrefab;
-    protected GameObject indicator;
+    protected IIndicator indicator;
 
     protected Vector3 weaponOriginalPosition;
     protected Vector3 weaponAssetOriginalPosition;
@@ -118,17 +117,37 @@ public abstract class IAttack : MonoBehaviour {
     }
 
 
-    protected virtual void ActivateIndicator() {
-        if (indicatorPrefab == null) return;
-        //SoundManager.instance.PlaySound(indicatorSFX);
+    protected virtual IIndicator CreateIndicator(Transform parent = null) {
+        if (indicatorPrefab == null) return null;
 
-        indicator = Instantiate(indicatorPrefab, transform.parent);
-        indicator.transform.up = Weapon.GetForwardDirectionRotated();
-        var iIndicator = indicator.GetComponent<IIndicator>();
-        iIndicator.Init(indicatorConfiguration);
-        IndicatorDuration = iIndicator.Duration;
-        iIndicator.Use();
+        if (parent == null)
+            parent = transform.parent;
+
+        GameObject _indicator = Instantiate(indicatorPrefab, parent);
+        IIndicator indicator = _indicator.GetComponent<IIndicator>();
+        indicator.Init(indicatorConfiguration);
+        return indicator;
     }
+
+    //protected virtual void PrepareIndicator() {
+
+    //}
+
+    //protected virtual void UseIndicator() {
+
+    //}
+
+    //protected virtual void ActivateIndicator() {
+    //    if (indicatorPrefab == null) return;
+    //    //SoundManager.instance.PlaySound(indicatorSFX);
+
+    //    indicator = Instantiate(indicatorPrefab, transform.parent);
+    //    indicator.transform.up = Weapon.GetForwardDirectionRotated();
+    //    var iIndicator = indicator.GetComponent<IIndicator>();
+    //    iIndicator.Init(indicatorConfiguration);
+    //    IndicatorDuration = iIndicator.Duration;
+    //    iIndicator.Use();
+    //}
 
 
     protected virtual void PrepareWeapon() {
