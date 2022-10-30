@@ -24,6 +24,7 @@ public class RangedAttack : IAttack {
 
         Vector3 startPos = Weapon.transform.localPosition;
         Vector3 endPos = startPos + (targetDirection * wandReach);
+        endPos = Weapon.transform.lossyScale.x > 0 ? endPos : -Vector3.Reflect(endPos, Vector2.up);
         Vector3 midPos = (endPos + startPos) / 2f;
 
         IIndicator indicator = CreateIndicator(transform);
@@ -52,7 +53,7 @@ public class RangedAttack : IAttack {
             yield return null;
         }
 
-        SpawnProjectile(projectile);
+        SpawnProjectile(projectile, targetDirection);
 
         // Backward
         time = 0;
@@ -75,11 +76,13 @@ public class RangedAttack : IAttack {
     }
 
 
-    protected void SpawnProjectile(GameObject projectile) {
-        GameObject _projectile = Instantiate(projectile, transform.position + Weapon.GetWeaponTipOffset(), transform.rotation);
+    protected void SpawnProjectile(GameObject projectile, Vector2 direction) {
+        GameObject _projectile = Instantiate(projectile, transform);
+        _projectile.transform.localPosition = Weapon.GetWeaponTipOffset();
+        _projectile.transform.parent = null;
         IProjectile iProjectile = _projectile.GetComponent<IProjectile>();
         iProjectile.Init(this);
-        iProjectile.Launch();
+        iProjectile.Launch(direction);
     }
 
 
