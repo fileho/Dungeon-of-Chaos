@@ -17,7 +17,7 @@ public class ISecondaryAttack : IActiveSkill
             ? Character.instance.stats.GetPhysicalDamage() * attackConfiguration.damage
             : Character.instance.stats.GetSpellPower() * attackConfiguration.damage;
         string s = String.Format(skillData.GetDescription(), dmg.ToString());
-        return s;        
+        return s + "\n" + "\n" + GetStaticDescription();        
     }
 
     public override void Use(Unit unit, List<Unit> targets = null, List<Vector2> targetPositions = null)

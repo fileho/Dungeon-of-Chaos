@@ -61,9 +61,25 @@ public class IActiveSkill : ScriptableObject
             }
         }
         object[] args = descriptionValues.ToArray();
-        string s = string.Format(skillData.GetDescription(), args);
-        return s;
-    }    
+        string skillDes = string.Format(skillData.GetDescription(), args);
+
+        return skillDes + "\n" + "\n" + GetStaticDescription();
+    }   
+
+    protected string GetStaticDescription()
+    {
+        string mCost = manaCost > 0
+            ? "Mana Cost: " + manaCost.ToString() + "\n"
+            : "";
+        string sCost = staminaCost > 0
+            ? "Stamina Cost: " + staminaCost.ToString() + "\n"
+            : "";
+        string cool = cooldown > 0
+            ? "Cooldown: " + cooldown.ToString() + " seconds"
+            : "";
+        return mCost + sCost + cool;
+    }
+    
 
     public bool CanUse(Stats stats)
     {
