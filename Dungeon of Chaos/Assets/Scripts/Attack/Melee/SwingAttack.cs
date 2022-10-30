@@ -49,8 +49,8 @@ public class SwingAttack : MeleeAttack {
         lowerEdge = Weapon.transform.lossyScale.x > 0 ? lowerEdge : -Vector3.Reflect(lowerEdge, Vector2.up);
 
         Vector3 startPos = Weapon.transform.localPosition;
-        Vector3 endPosUp = startPos + (upperEdge * (range - 1.5f));
-        Vector3 endPosdown = startPos + (lowerEdge * (range - 1.5f));
+        Vector3 endPosUp = startPos + (upperEdge * (range));
+        Vector3 endPosdown = startPos + (lowerEdge * (range));
 
 
         float time = 0;
