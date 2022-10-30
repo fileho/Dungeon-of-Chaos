@@ -16,4 +16,4 @@ MonoBehaviour:
   color: {r: 1, g: 0.9411765, b: 0.28627452, a: 1}
   scale: 1
   initialScale: {x: 0, y: 0}
-  finalScale: {x: 0.75, y: 0.75}
+  finalScale: {x: 1.25, y: 1.25}

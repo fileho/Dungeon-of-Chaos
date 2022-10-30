@@ -61,19 +61,13 @@ public abstract class IProjectile : MonoBehaviour
     }
 
 
-    public virtual void Launch() {
-        StartCoroutine(LaunchAttack());
+    public virtual void Launch(Vector2 direction) {
+        StartCoroutine(LaunchAttack(direction));
     }
 
-    protected virtual IEnumerator LaunchAttack() {
+    protected virtual IEnumerator LaunchAttack(Vector2 direction) {
         collider.enabled = true;
-        Vector2 goalPos = GetTarget().transform.position;
-        Vector2 dir = goalPos - (Vector2)transform.position;
-        dir.Normalize();
-        dir += offset * Random.insideUnitCircle;
-        dir.Normalize();
-
-        rb.AddForce(100 * speed * dir);
+        rb.AddForce(100 * speed * direction);
 
         yield return new WaitForSeconds(destroyTime);
         CleanUp();
