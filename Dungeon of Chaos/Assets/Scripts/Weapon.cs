@@ -15,7 +15,7 @@ public class Weapon : MonoBehaviour {
     [Tooltip("Local position of weaapon tip")]
     [SerializeField] private Vector3 weaponTipOffset = Vector3.zero;
 
-    private float weaponAssetWidth;
+    private float weaponAssetWidth = 0;
     public float WeaponAssetWidth {
         get {
             return weaponAssetWidth != 0 ? weaponAssetWidth : Asset.GetComponent<SpriteRenderer>().bounds.size.x /2f;
