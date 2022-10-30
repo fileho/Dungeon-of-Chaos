@@ -40,13 +40,14 @@ public class SwingAttack : MeleeAttack {
         lowerEdge = Weapon.transform.lossyScale.x > 0 ? lowerEdge : -Vector3.Reflect(lowerEdge, Vector2.up);
 
         Vector3 startPos = Weapon.transform.localPosition;
-        Vector3 endPosUp = startPos + (upperEdge * (range));
-        Vector3 endPosdown = startPos + (lowerEdge * (range));
+        Vector3 endPosUp = startPos + (upperEdge * range);  
+        Vector3 endPosdown = startPos + (lowerEdge * range);
+        Vector3 endPosUpAdjusted = startPos + (upperEdge * (range - Weapon.ArmWeaponDistance));  //to compensate for the distance b/w arm pivot and weapon asset pivot
+        Vector3 endPosdownAdjusted = startPos + (lowerEdge * (range - Weapon.ArmWeaponDistance)); //to compensate for the distance b/w arm pivot and weapon asset pivot
 
         IIndicator indicator = CreateIndicator();
         if (indicator) {
-            Vector3 indicatorPos = startPos - Weapon.transform.position + Weapon.Asset.transform.position;
-            indicator.transform.localPosition = indicatorPos;
+            indicator.transform.localPosition = owner.transform.InverseTransformPoint(Weapon.Asset.transform.position); ;
             indicator.transform.up = Weapon.GetForwardDirectionRotated();
             indicator.Use();
             yield return new WaitForSeconds(indicator.Duration);
@@ -56,7 +57,7 @@ public class SwingAttack : MeleeAttack {
 
         // Cache weapon rotation to restore after the animation
         var initialAssetRotation = Weapon.Asset.localRotation;
-        Weapon.Asset.localRotation = Quaternion.Euler(0, 0, Weapon.GetArmOffsetAngle());
+        Weapon.Asset.localRotation = Quaternion.Euler(0, 0, Weapon.GetArmAlignAngle());
 
         float time = 0;
         float attackAnimationDurationOneWay = AttackAnimationDuration / 3f;
@@ -64,7 +65,7 @@ public class SwingAttack : MeleeAttack {
         // Forward
         while (time <= 1) {
             time += (Time.deltaTime / attackAnimationDurationOneWay);
-            Weapon.transform.localPosition = Vector3.Lerp(startPos, endPosUp, time);
+            Weapon.transform.localPosition = Vector3.Lerp(startPos, endPosUpAdjusted, time);
             yield return null;
         }
 
@@ -76,7 +77,7 @@ public class SwingAttack : MeleeAttack {
         while (time <= 1) {
             time += (Time.deltaTime / attackAnimationDurationOneWay);
             float currentPos = Tweens.EaseOutExponential(time);
-            Weapon.transform.localPosition = Vector3.Slerp(endPosUp - startPos, endPosdown - startPos, currentPos) + startPos;
+            Weapon.transform.localPosition = Vector3.Slerp(endPosUpAdjusted - startPos, endPosdownAdjusted - startPos, currentPos) + startPos;
             yield return null;
         }
 
@@ -84,7 +85,7 @@ public class SwingAttack : MeleeAttack {
         time = 0;
         while (time <= 1) {
             time += (Time.deltaTime / attackAnimationDurationOneWay);
-            Weapon.transform.localPosition = Vector3.Lerp(endPosdown, startPos, time);
+            Weapon.transform.localPosition = Vector3.Lerp(endPosdownAdjusted, startPos, time);
             yield return null;
         }
 

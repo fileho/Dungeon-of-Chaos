@@ -15,11 +15,11 @@ public class RangedIndicator : IIndicator {
 
     protected override IEnumerator ShowIndicator() {
         float time = 0f;
-        while (time < Duration) {
-            time += Time.deltaTime;
-            float t = time / Duration;
-            sprite.color = new Color(sprite.color.r, sprite.color.g, sprite.color.b, t);
-            transform.localScale = Vector3.Lerp(initialScale, finalScale, t);
+        while (time < 1) {
+            time += (Time.deltaTime / Duration);
+            float currentColor = Tweens.EaseOutQuadratic(time);
+            sprite.color = new Color(sprite.color.r, sprite.color.g, sprite.color.b, currentColor);
+            transform.localScale = Vector3.Lerp(initialScale, finalScale, currentColor);
             yield return null;
         }
         transform.localScale = finalScale;

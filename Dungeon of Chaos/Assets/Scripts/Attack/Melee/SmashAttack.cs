@@ -44,18 +44,16 @@ public class SmashAttack : MeleeAttack {
         var initialWeaponRotation = Weapon.transform.rotation;
         Vector3 startPos = Weapon.transform.localPosition;
         Vector3 endPosUp = startPos + Vector3.up * lift;
-        Vector3 endPosdown = startPos + (-owner.transform.right * range) + (Vector3.down * fall);
-        endPosdown += Weapon.transform.position - Weapon.Asset.transform.position;
+        Vector3 endPosdown = startPos + (-owner.transform.right * (range));
+        Vector3 endPosdownAdjusted = startPos + (-owner.transform.right * (range - Weapon.ArmWeaponDistance));   //to compensate for the distance b/w arm pivot and weapon asset pivot
 
         Vector3 startScale = Weapon.Asset.localScale;
         Vector3 endScale = Weapon.Asset.localScale * scaleMultiplier;
 
         IIndicator indicator = CreateIndicator();
         if (indicator) {
-            Vector3 indicatorPos = endPosdown - Weapon.transform.position + Weapon.Asset.transform.position;
-            indicator.transform.localPosition = indicatorPos;
+            indicator.transform.position = owner.transform.TransformPoint(endPosdown);
             indicator.transform.localScale *= damageRadius;
-            indicatorPos = indicator.transform.position;
             indicator.Use();
             yield return new WaitForSeconds(indicator.Duration);
         }
@@ -88,13 +86,12 @@ public class SmashAttack : MeleeAttack {
         while (time <= 1) {
             time += (Time.deltaTime / attackAnimationDurationOneWay);
             float currentPos = Tweens.EaseOutElastic(time);
-            Weapon.transform.localPosition = Vector3.Slerp(endPosUp - startPos, endPosdown - startPos, currentPos) + startPos;
-            Weapon.Asset.localRotation = Quaternion.Lerp(startRotation, Quaternion.Euler(0, 0, Weapon.GetArmOffsetAngle()), currentPos);
+            Weapon.transform.localPosition = Vector3.Slerp(endPosUp - startPos, endPosdownAdjusted - startPos, currentPos) + startPos;
+            Weapon.Asset.localRotation = Quaternion.Lerp(startRotation, Quaternion.Euler(0, 0, Weapon.GetArmAlignAngle()), currentPos);
             yield return null;
         }
 
-        CheckHits(endPosdown, damageRadius);
-
+        CheckHits(owner.transform.TransformPoint(endPosdown), damageRadius);
         SoundManager.instance.PlaySound(swingSFX);
 
         // Reset

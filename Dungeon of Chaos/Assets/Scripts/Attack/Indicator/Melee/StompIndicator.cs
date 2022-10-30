@@ -23,12 +23,16 @@ public class StompIndicator : MeleeIndicator {
 
     protected override IEnumerator ShowIndicator() {
         float time = 0f;
-        while (time < Duration) {
-            time += Time.deltaTime;
-            float t = time / Duration;
-            t = (t + 0.3f) * 0.3f;
-            sprite.color = new Color(sprite.color.r, sprite.color.g, sprite.color.b, t);
-            secondarySprite.color = new Color(secondarySprite.color.r, secondarySprite.color.g, secondarySprite.color.b, t);
+        while (time < 1) {
+            time += (Time.deltaTime / Duration);
+            float currentRotation = Tweens.EaseOutQuadratic(time);
+            float currentColor = Tweens.EaseOutQuadratic(time);
+
+            sprite.color = new Color(sprite.color.r, sprite.color.g, sprite.color.b, currentColor);
+            secondarySprite.color = new Color(secondarySprite.color.r, secondarySprite.color.g, secondarySprite.color.b, currentColor);
+
+            sprite.transform.localRotation = Quaternion.Lerp(Quaternion.Euler(0, 0, 0), Quaternion.Euler(0, 0, 180), currentRotation);
+            secondarySprite.transform.localRotation = Quaternion.Lerp(Quaternion.Euler(0, 0, 0), Quaternion.Euler(0, 0, 180), currentRotation);
             yield return null;
         }
         sprite.color = new Color(sprite.color.r, sprite.color.g, sprite.color.b, 1);

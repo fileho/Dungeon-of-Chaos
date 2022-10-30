@@ -28,7 +28,6 @@ public class RangedAttack : IAttack {
 
         IIndicator indicator = CreateIndicator(transform);
         if (indicator) {
-            indicator.transform.up = Weapon.GetForwardDirectionRotated();
             indicator.transform.localPosition = Weapon.GetWeaponTipOffset();
             indicator.Use();
             yield return new WaitForSeconds(indicator.Duration);
@@ -78,7 +77,9 @@ public class RangedAttack : IAttack {
 
     protected void SpawnProjectile(GameObject projectile) {
         GameObject _projectile = Instantiate(projectile, transform.position + Weapon.GetWeaponTipOffset(), transform.rotation);
-        _projectile.GetComponent<IProjectile>().SetAttack(this);
+        IProjectile iProjectile = _projectile.GetComponent<IProjectile>();
+        iProjectile.Init(this);
+        iProjectile.Launch();
     }
 
 
