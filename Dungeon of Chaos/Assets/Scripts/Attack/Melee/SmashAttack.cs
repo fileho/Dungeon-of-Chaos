@@ -45,7 +45,7 @@ public class SmashAttack : MeleeAttack {
         Vector3 startPos = Weapon.transform.localPosition;
         Vector3 endPosUp = startPos + Vector3.up * lift;
         Vector3 endPosdown = startPos + (-owner.transform.right * (range));
-        Vector3 endPosdownAdjusted = startPos + (-owner.transform.right * (range - Weapon.ArmWeaponDistance));   //to compensate for the distance b/w arm pivot and weapon asset pivot
+        Vector3 endPosdownAdjusted = startPos + (-owner.transform.right * (range - Weapon.WeaponAssetWidth));   //to compensate for the weapon asset width
 
         Vector3 startScale = Weapon.Asset.localScale;
         Vector3 endScale = Weapon.Asset.localScale * scaleMultiplier;

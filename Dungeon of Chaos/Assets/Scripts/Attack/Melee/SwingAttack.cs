@@ -42,8 +42,8 @@ public class SwingAttack : MeleeAttack {
         Vector3 startPos = Weapon.transform.localPosition;
         Vector3 endPosUp = startPos + (upperEdge * range);  
         Vector3 endPosdown = startPos + (lowerEdge * range);
-        Vector3 endPosUpAdjusted = startPos + (upperEdge * (range - Weapon.ArmWeaponDistance));  //to compensate for the distance b/w arm pivot and weapon asset pivot
-        Vector3 endPosdownAdjusted = startPos + (lowerEdge * (range - Weapon.ArmWeaponDistance)); //to compensate for the distance b/w arm pivot and weapon asset pivot
+        Vector3 endPosUpAdjusted = startPos + (upperEdge * (range - Weapon.WeaponAssetWidth));  //to compensate for the weapon asset width
+        Vector3 endPosdownAdjusted = startPos + (lowerEdge * (range - Weapon.WeaponAssetWidth)); //to compensate for the weapon asset width
 
         IIndicator indicator = CreateIndicator();
         if (indicator) {

@@ -71,6 +71,8 @@ public class Enemy : Unit {
     private bool Attack() {
         if (IsAttacking()) return true;
         currentAttack = attackManager.GetBestAvailableAttack();
+        FlipSprite();
+        RotateWeapon();
         if (currentAttack != null) {
             state = State.Attack;
             currentAttack.Attack();
