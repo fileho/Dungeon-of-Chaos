@@ -15,4 +15,4 @@ MonoBehaviour:
   duration: 1
   color: {r: 1, g: 0.9411765, b: 0.28627452, a: 1}
   scale: 5
-  sweep: 30
+  sweep: 60

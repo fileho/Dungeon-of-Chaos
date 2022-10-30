@@ -10,10 +10,17 @@ public class Weapon : MonoBehaviour {
     [SerializeField] private float upRightAngle = 0f;
 
     [Tooltip("Angle at which the weapon asset aligns with the arm")]
-    [SerializeField] private float armOffsetAngle = 0f;
+    [SerializeField] private float armAlignAngle = 0f;
 
     [Tooltip("Local position of weaapon tip")]
     [SerializeField] private Vector3 weaponTipOffset = Vector3.zero;
+
+    private float armWeaponDistance;
+    public float ArmWeaponDistance {
+        get {
+            return armWeaponDistance != 0 ? armWeaponDistance : (transform.position - Asset.transform.position).magnitude;
+        }
+    }
 
 
     private Transform asset;
@@ -57,8 +64,8 @@ public class Weapon : MonoBehaviour {
         return upRightAngle;
     }
 
-    public float GetArmOffsetAngle() {
-        return armOffsetAngle;
+    public float GetArmAlignAngle() {
+        return armAlignAngle;
     }
 
     public Vector3 GetWeaponTipOffset() {

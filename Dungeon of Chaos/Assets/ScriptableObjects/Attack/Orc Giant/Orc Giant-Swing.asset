@@ -15,6 +15,9 @@ MonoBehaviour:
   range: 5
   damage: 1.5
   staminaCost: 0
+  rangeWeight: 1
+  damageWeight: 1
+  staminaCostWeight: 1
   cooldown: 1
   attackAnimationDuration: 0.7
   indicator: {fileID: 8311782001119121317, guid: c7018b97d1c15436b967c0ae91874678, type: 3}
@@ -38,4 +41,4 @@ MonoBehaviour:
     volume: 1
     pitch: 1
     priority: 0
-  swing: 30
+  swing: 60
