@@ -14,6 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   skillData:
     name: Strength Training III
-    description: Increases physical damage.
+    description: Increases physical damage by {0}.
     icon: {fileID: 21300000, guid: abf320417da1a9147a3665eb74f081b8, type: 3}
   amount: 10
