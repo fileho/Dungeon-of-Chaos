@@ -38,9 +38,12 @@ public class Enemy : Unit {
     private bool IsTargetInChaseRange() {
         int hitsCount = Physics2D.RaycastNonAlloc(transform.position, (GetTargetPosition() - (Vector2)transform.position).normalized, targetLosHits, losDistance, 1 << LayerMask.NameToLayer("Player"));
 
+        if (hitsCount > 0) {
+            lastLosTime = Time.time;
+        }
+
         // if target is within line of sight || target has been out of sight for less than threshold
         // and if target is within chase distance
-
         return (hitsCount > 0 || (hitsCount == 0 && Time.time - lastLosTime < chaseForSecondsAfterLoseSight)) && GetTargetDistance() < stats.ChaseDistance();
         //return GetTargetDistance() < stats.ChaseDistance();
     }
