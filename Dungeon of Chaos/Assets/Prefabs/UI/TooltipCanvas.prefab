@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 261288718743972998}
   - component: {fileID: 261288718743972999}
+  - component: {fileID: 6781884957217621550}
   m_Layer: 5
   m_Name: Title
   m_TagString: Untagged
@@ -59,11 +60,19 @@ MonoBehaviour:
   m_Spacing: 0
   m_ChildForceExpandWidth: 0
   m_ChildForceExpandHeight: 0
-  m_ChildControlWidth: 1
+  m_ChildControlWidth: 0
   m_ChildControlHeight: 1
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
   m_ReverseArrangement: 0
+--- !u!222 &6781884957217621550
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 261288718743972997}
+  m_CullTransparentMesh: 1
 --- !u!1 &261288718939014467
 GameObject:
   m_ObjectHideFlags: 0
@@ -375,7 +384,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 400, y: 0}
-  m_SizeDelta: {x: 400, y: 202.79001}
+  m_SizeDelta: {x: 450, y: 202.79001}
   m_Pivot: {x: 1, y: 1}
 --- !u!222 &261288719898786117
 CanvasRenderer:
@@ -470,7 +479,7 @@ MonoBehaviour:
   m_IgnoreLayout: 0
   m_MinWidth: -1
   m_MinHeight: -1
-  m_PreferredWidth: 400
+  m_PreferredWidth: 450
   m_PreferredHeight: -1
   m_FlexibleWidth: -1
   m_FlexibleHeight: -1
@@ -492,7 +501,7 @@ MonoBehaviour:
   content1: {fileID: 2853703819656327215}
   content2: {fileID: 767462567007305111}
   message: {fileID: 261288718939014467}
-  wrapLimit: 80
+  wrapLimit: 100
 --- !u!1 &261288720384359499
 GameObject:
   m_ObjectHideFlags: 0
