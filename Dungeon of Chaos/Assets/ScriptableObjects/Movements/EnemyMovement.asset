@@ -12,3 +12,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3505ba4ff82a3884893624ffce65d561, type: 3}
   m_Name: EnemyMovement
   m_EditorClassIdentifier: 
+  steerForce: 1
+  lookAheadDistance: 0.5
+  nextWaypointDistance: 5
+  separationForce: 1
+  separationWeight: 1
+  separationDistance: 1.25
+  separationDetectionRadius: 7.5
+  obstacleLayer:
+    serializedVersion: 2
+    m_Bits: 2048
+  wallLayer:
+    serializedVersion: 2
+    m_Bits: 1024
