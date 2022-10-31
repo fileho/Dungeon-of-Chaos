@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 [CreateAssetMenu(menuName = "SO/Skills/Skills/SecondaryAttack")]
 public class ISecondaryAttack : IActiveSkill
@@ -9,6 +10,15 @@ public class ISecondaryAttack : IActiveSkill
     [SerializeField] private AttackConfiguration attackConfiguration;
 
     private IAttack secondaryAttack;
+
+    public override string GetDescription()
+    {
+        float dmg = attackConfiguration.type == SkillEffectType.physical
+            ? Character.instance.stats.GetPhysicalDamage() * attackConfiguration.damage
+            : Character.instance.stats.GetSpellPower() * attackConfiguration.damage;
+        string s = String.Format(skillData.GetDescription(), dmg.ToString());
+        return s + "\n" + "\n" + GetStaticDescription();        
+    }
 
     public override void Use(Unit unit, List<Unit> targets = null, List<Vector2> targetPositions = null)
     {

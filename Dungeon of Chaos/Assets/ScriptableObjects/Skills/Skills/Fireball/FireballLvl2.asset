@@ -14,11 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   skillData:
     name: Fireball
-    description: Shoots a fireball which deals damage.
-    skillType: 0
+    description: Shoots a fireball which deals {0} damage.
     icon: {fileID: 21300000, guid: d41ff3b3475455b41a30e8f9b02aa352, type: 3}
   cooldown: 5
   manaCost: 10
   staminaCost: 0
   effects:
-  - {fileID: 11400000, guid: f10022233f6a556478302a57b1dc024e, type: 2}
+  - {fileID: 11400000, guid: 7777e72acda0e254cb9d7db30aedd795, type: 2}
