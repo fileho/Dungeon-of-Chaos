@@ -15,13 +15,13 @@ MonoBehaviour:
   steerForce: 1
   lookAheadDistance: 0.5
   nextWaypointDistance: 5
-  separationForce: 1
+  separationForce: 50
   separationWeight: 1
-  separationDistance: 1.25
+  separationDistance: 4
   separationDetectionRadius: 7.5
   obstacleLayer:
     serializedVersion: 2
-    m_Bits: 2048
+    m_Bits: 256
   wallLayer:
     serializedVersion: 2
     m_Bits: 1024
