@@ -14,27 +14,14 @@ public class Loot : ILoot
     {
         this.transform = enemy.transform;
         this.owner = enemy;
-        //totalWeight = lootTable.Aggregate(0f, (sum, next) => sum += next.weight);
-
         return this;
     }
 
     public override void Drop()
     {
-        /*float rnd = Random.Range(0, totalWeight);
-
-        float sum = 0;
         foreach (LootItem item in lootTable)
         {
-            sum += item.weight;
-            if (!(sum >= rnd)) continue;
-            Spawn(item.prefab);
-            return;
-        }*/
-
-        foreach (LootItem item in lootTable)
-        {
-            float rnd = Random.Range(0, 1);
+            float rnd = Random.Range(0f, 1f);
             float chance = item.prefab.GetComponent<Essence>().GetChance(owner) * item.weight;
             if (rnd <= chance)
                 Spawn(item.prefab);
