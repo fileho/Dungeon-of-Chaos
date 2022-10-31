@@ -30,9 +30,19 @@ public class Enemy : Unit {
         attackManager = GetComponent<AttackManager>();
     }
 
+    private RaycastHit2D[] targetLosHits = new RaycastHit2D[1];
+    private float losDistance = 10f;
+    private float lastLosTime = 0f;
+    private float chaseForSecondsAfterLoseSight = 10f;
 
     private bool IsTargetInChaseRange() {
-        return GetTargetDistance() < stats.ChaseDistance();
+        int hitsCount = Physics2D.RaycastNonAlloc(transform.position, (GetTargetPosition() - (Vector2)transform.position).normalized, targetLosHits, losDistance, 1 << LayerMask.NameToLayer("Player"));
+
+        // if target is within line of sight || target has been out of sight for less than threshold
+        // and if target is within chase distance
+
+        return (hitsCount > 0 || (hitsCount == 0 && Time.time - lastLosTime < chaseForSecondsAfterLoseSight)) && GetTargetDistance() < stats.ChaseDistance();
+        //return GetTargetDistance() < stats.ChaseDistance();
     }
 
     private void FixedUpdate() {
