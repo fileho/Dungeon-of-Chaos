@@ -43,7 +43,7 @@ public class SkillButtonPassive : SkillButton
     public override void OnPointerEnter(PointerEventData eventData)
     {
         string ch1 = GetLevelDescription(skillInfo.GetLevel());
-        TooltipSystem.instance.Show(skillInfo.GetSkillData().GetName(), "Active Skill", ch1, skillInfo.GetDescription(),
+        TooltipSystem.instance.Show(skillInfo.GetSkillData().GetName(), "Passive Skill", ch1, skillInfo.GetDescription(),
             GetNextLevelDescription(skillInfo.GetLevel(), skillInfo.GetMaxLevel()), skillInfo.GetDescription(1));
     }
 
