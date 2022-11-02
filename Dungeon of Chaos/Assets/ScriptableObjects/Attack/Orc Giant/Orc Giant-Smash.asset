@@ -15,8 +15,11 @@ MonoBehaviour:
   range: 5
   damage: 5
   staminaCost: 0
+  rangeWeight: 1
+  damageWeight: 1
+  staminaCostWeight: 1
   cooldown: 1
-  attackAnimationDuration: 1
+  attackAnimationDuration: 0.6
   indicator: {fileID: 3188580857372310462, guid: 62aeaf3d3d69f48c3842ea6d3f0200dd, type: 3}
   indicatorConfiguration: {fileID: 11400000, guid: fd0fcbea778e34ec8ad56095564a8a89, type: 2}
   type: 1
