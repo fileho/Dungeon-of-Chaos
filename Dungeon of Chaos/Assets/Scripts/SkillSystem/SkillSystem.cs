@@ -106,7 +106,7 @@ public class SkillSystem : MonoBehaviour
 
     public void UseSkill(int index)
     {
-        if (IsValidActive(index))
+        if (IsValidActive(index) && IsValidActive(activated[index]))
         {
             SkillInfoActive skill = activeSkills[activated[index]];
             skill.GetCurrentSkill().Use(owner);
