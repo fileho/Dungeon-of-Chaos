@@ -1,27 +1,28 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Security.Cryptography.X509Certificates;
+using System.Reflection;
 using UnityEngine;
 using UnityEngine.Experimental.Rendering.Universal;
 using UnityEngine.Tilemaps;
+#if UNITY_EDITOR
+using UnityEditor;
+#endif
 using Vector3 = UnityEngine.Vector3;
 
+[ExecuteInEditMode]
 public class ShadowsGenerator : MonoBehaviour
 {
     private ShadowCaster2D shadowCaster2D;
-
+    [SerializeField]
     private Tilemap tilemap;
-    // Start is called before the first frame update
-    void Start()
+
+    public void BakeShadows()
     {
-
-        tilemap = FindObjectOfType<Tilemap>();
-
         shadowCaster2D = GetComponent<ShadowCaster2D>();
-        shadowCaster2D.m_ShapePath = TrackEdges();
-
-       // var n = TrackEdges();
+        BindingFlags accessFlagsPrivate = BindingFlags.NonPublic | BindingFlags.Instance;
+        FieldInfo shapePathField = typeof(ShadowCaster2D).GetField("m_ShapePath", accessFlagsPrivate);
+        shapePathField.SetValue(shadowCaster2D, TrackEdges());
     }
 
     Vector3[] TrackEdges()
@@ -38,6 +39,7 @@ public class ShadowsGenerator : MonoBehaviour
         {
             current = TrackEdge(current, ref dir, inner, outer);
         }
+        TrackEdge(current, ref dir, inner, outer);
 
         outer.Reverse();
         inner.AddRange(outer);
@@ -93,19 +95,62 @@ public class ShadowsGenerator : MonoBehaviour
 
         var tmp = inner[inner.Count - 1];
         const float limit = 0.1f;
-        if (Math.Abs(tmp.x - p1.x) < limit || Math.Abs(tmp.y - p1.y) < limit)
+
+        if (oldDir.y != 0)
         {
-            inner.Add(p1);
-            outer.Add(p2);
+            if (Math.Abs(tmp.x - p1.x) < limit)
+            {
+                inner.Add(p1);
+                outer.Add(p2);
+            }
+            else
+            {
+                inner.Add(p2);
+                outer.Add(p1);
+            }
         }
         else
         {
-            inner.Add(p2);
-            outer.Add(p1);
+            if (Math.Abs(tmp.y - p1.y) < limit)
+            {
+                inner.Add(p1);
+                outer.Add(p2);
+            }
+            else
+            {
+                inner.Add(p2);
+                outer.Add(p1);
+            }
         }
-
-        var inn = new GameObject("Inner");
-        inn.transform.position = inner[inner.Count - 1];
-        inn.transform.parent = transform;
     }
 }
+
+#if UNITY_EDITOR
+[CustomEditor(typeof(ShadowsGenerator))]
+public class ShadowsGeneratorEditor : Editor
+{
+    private ShadowsGenerator generator;
+    private SerializedProperty tilemap;
+
+    private void OnEnable()
+    {
+        generator = (ShadowsGenerator)target;
+        tilemap = serializedObject.FindProperty("tilemap");
+    }
+
+    public override void OnInspectorGUI()
+    {
+        serializedObject.Update();
+
+        if (GUILayout.Button("Bake Shadows"))
+        {
+            generator.BakeShadows();
+        }
+
+        EditorGUILayout.PropertyField(tilemap);
+
+        serializedObject.ApplyModifiedProperties();
+    }
+}
+
+#endif
