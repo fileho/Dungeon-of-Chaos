@@ -10,7 +10,7 @@ public class AIAgent : MonoBehaviour
     private float nextWaypointDistance = 5f;
     private int currentWaypoint = 0;
     private float speed = 10f;
-    private bool reachedEndOfPath = false;
+    //private bool reachedEndOfPath = false;
     private Path path;
     private Seeker seeker;
     private Rigidbody2D rb;
@@ -45,10 +45,10 @@ public class AIAgent : MonoBehaviour
 
         if (currentWaypoint >= path.vectorPath.Count)
         {
-            reachedEndOfPath = true;
+            //reachedEndOfPath = true;
             return;
         }
-        reachedEndOfPath = false;
+        //reachedEndOfPath = false;
 
         Vector2 direction = ((Vector2)path.vectorPath[currentWaypoint] - rb.position).normalized;
         Vector2 force = direction * speed * 1000f *Time.fixedDeltaTime;
