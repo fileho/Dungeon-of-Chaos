@@ -122,8 +122,8 @@ public class Enemy : Unit {
 
     private void SwitchEnemyStates() {
         if (dead) return;
-        if (Attack()) ;
-        else if (Chase()) ;
+        if (Attack()) { }
+        else if (Chase()) { }
         else Patrol();
         //print("Test: " + state.ToString());
     }

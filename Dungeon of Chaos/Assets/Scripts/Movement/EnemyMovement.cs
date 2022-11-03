@@ -10,8 +10,8 @@ public class EnemyMovement : IMovement {
     private Rigidbody2D rb;
     private Stats stats;
     [Header("Steer")]
-    [SerializeField] private float steerForce = 1f;
-    [SerializeField] private float lookAheadDistance = 0.5f;
+    //[SerializeField] private float steerForce = 1f;
+    //[SerializeField] private float lookAheadDistance = 0.5f;
     [SerializeField] private float nextWaypointDistance = 5f;
     [Header("Separation")]
     [SerializeField] private float separationForce = 1f;
