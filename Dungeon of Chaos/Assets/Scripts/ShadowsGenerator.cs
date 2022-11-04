@@ -1,16 +1,14 @@
 using System;
 using System.Collections.Generic;
 using System.Reflection;
-using UnityEditor.SceneManagement;
 using UnityEngine;
 using UnityEngine.Experimental.Rendering.Universal;
-using UnityEngine.SceneManagement;
 using UnityEngine.Tilemaps;
 #if UNITY_EDITOR
 using UnityEditor;
+using UnityEditor.SceneManagement;
 #endif
 using Vector3 = UnityEngine.Vector3;
-
 
 // Generated all the shadow casters 2D for walls
 [ExecuteInEditMode]
@@ -44,7 +42,7 @@ public class ShadowsGenerator : MonoBehaviour
 
         // scene has to be reload for the shadows to rebuild
 #if UNITY_EDITOR
-        EditorSceneManager.OpenScene(SceneManager.GetActiveScene().path); 
+        EditorSceneManager.OpenScene(EditorSceneManager.GetActiveScene().path);
 #endif
     }
 
