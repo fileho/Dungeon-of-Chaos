@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3e063d76235dc41a3b4232a63c3735b8, type: 3}
   m_Name: Orc Giant-Stomp
   m_EditorClassIdentifier: 
-  duration: 1
+  duration: 0.7
   color: {r: 1, g: 0.93992954, b: 0.28773582, a: 1}
   scale: 4
   secondarySpriteColor: {r: 1, g: 0.9411765, b: 0.28627452, a: 1}
