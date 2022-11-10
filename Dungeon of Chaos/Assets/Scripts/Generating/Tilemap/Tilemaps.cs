@@ -1,4 +1,5 @@
 using System;
+using UnityEngine;
 using UnityEngine.Tilemaps;
 
 [Serializable]
@@ -7,6 +8,8 @@ public struct Tilemaps
     public Tilemap ground;
     public Tilemap wall;
     public Tilemap decorations;
+    public Tilemap rocks;
+    public Transform objects;
 
     public Tilemap SelectMap(TilemapType type)
     {
@@ -15,6 +18,7 @@ public struct Tilemaps
             TilemapType.Ground => ground,
             TilemapType.Walls => wall,
             TilemapType.Decorations => decorations,
+            TilemapType.Rocks => rocks,
             _ => throw new ArgumentOutOfRangeException(nameof(type), type, null)
         };
     }
@@ -28,6 +32,7 @@ public struct Tilemaps
     {
         Ground,
         Walls,
-        Decorations
+        Decorations,
+        Rocks
     }
 }

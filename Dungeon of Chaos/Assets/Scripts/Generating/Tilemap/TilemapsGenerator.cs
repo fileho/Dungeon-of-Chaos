@@ -40,6 +40,9 @@ public class TilemapsGenerator : MonoBehaviour
             }
         }
 
+        foreach (var map in tilemaps.GetAllMaps())
+            map.transform.Translate(0, 0, 20);
+
         tilemaps.ground.transform.Translate(0, 0, 1);
         Debug.Log("Tilemaps export done");
     }
