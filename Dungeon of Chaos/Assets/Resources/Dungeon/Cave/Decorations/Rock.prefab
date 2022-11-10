@@ -96,7 +96,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tile: {fileID: 11400000, guid: eab830bd744bd0248a7b5a85cccf8118, type: 2}
-  tilemapType: 1
+  tilemapType: 3
 --- !u!1 &6727377892191643297
 GameObject:
   m_ObjectHideFlags: 0
