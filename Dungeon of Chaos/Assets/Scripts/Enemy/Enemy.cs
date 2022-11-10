@@ -14,13 +14,13 @@ public class Enemy : Unit {
         Attack,
     }
 
-
-    [SerializeField] private ILoot loot;
+[SerializeField] private ILoot loot;
     public LootModifiers lootModifiers;
     private AttackManager attackManager;
     private IAttack currentAttack;
     private State state;
-
+    private Animator animator;
+    private Rigidbody2D rb;
 
     protected override void Init() {
         loot = Instantiate(loot).Init(this);
@@ -28,6 +28,8 @@ public class Enemy : Unit {
         Target = Character.instance;
         state = State.Patrol;
         attackManager = GetComponent<AttackManager>();
+        animator = GetComponent<Animator>();
+        rb = transform.GetComponent<Rigidbody2D>();
     }
 
     private RaycastHit2D[] targetLosHits = new RaycastHit2D[1];
@@ -49,6 +51,7 @@ public class Enemy : Unit {
     }
 
     private void FixedUpdate() {
+        animator.SetBool("isMoving", rb.velocity.magnitude > 0.01f);
         SwitchEnemyStates();
     }
 
