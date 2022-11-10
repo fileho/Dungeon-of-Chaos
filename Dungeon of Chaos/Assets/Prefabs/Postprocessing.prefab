@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6237757758550566160}
   - component: {fileID: 455016354658043278}
+  - component: {fileID: 4190260496134956158}
   m_Layer: 0
   m_Name: Postprocessing
   m_TagString: Untagged
@@ -46,3 +47,15 @@ MonoBehaviour:
   path: {fileID: 6583401720048865544, guid: 3ef02a6dc7e072d4d8b08377682ddba9, type: 3}
   wall: {fileID: 6583401720048865544, guid: d63b97b10387274438feefafa2cd1303, type: 3}
   pathSize: 3
+--- !u!114 &4190260496134956158
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6237757758550566162}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 07b87263ad24a3b41a9d7aa786775528, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
