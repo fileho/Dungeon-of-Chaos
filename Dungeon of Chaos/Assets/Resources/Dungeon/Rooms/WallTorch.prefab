@@ -93,6 +93,7 @@ GameObject:
   - component: {fileID: 4930903741155524893}
   - component: {fileID: 4374626484018437197}
   - component: {fileID: 7455495721375416257}
+  - component: {fileID: 2550505601912841360}
   m_Layer: 0
   m_Name: WallTorch
   m_TagString: Untagged
@@ -179,3 +180,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 1
+--- !u!114 &2550505601912841360
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6583401720048865544}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eb72a2ebf19bfba4e8dff3a9f36e42c5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tile: {fileID: 11400000, guid: dff59862bc43f5444a7bc961cf8c277e, type: 2}
+  tilemapType: 1

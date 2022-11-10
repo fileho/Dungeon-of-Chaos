@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 4930903741155524893}
   - component: {fileID: 4374626484018437197}
   - component: {fileID: 7455495721375416257}
+  - component: {fileID: 8171576221403829766}
   m_Layer: 0
   m_Name: Room 1
   m_TagString: Untagged
@@ -96,3 +97,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 2
+--- !u!114 &8171576221403829766
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6583401720048865544}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eb72a2ebf19bfba4e8dff3a9f36e42c5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tile: {fileID: 11400000, guid: 3de63cf0926cf124698fdd2d96cd9aa4, type: 2}
+  tilemapType: 0
