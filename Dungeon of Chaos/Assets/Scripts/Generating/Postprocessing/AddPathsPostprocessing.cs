@@ -20,6 +20,39 @@ public class AddPathsPostprocessing : Postprocessing
         if (tiles == null)
             return;
         AddPaths();
+        RemoveAloneWalls();
+    }
+
+    private void RemoveAloneWalls()
+    {
+        for (int i = 0; i < tiles.GetLength(0); i++)
+        {
+            for (int j = 0; j < tiles.GetLength(1); j++)
+            {
+                var o = tiles[i, j];
+                if (!IsWall(o))
+                    continue;
+                if (!HasWallNeighbor(i, j))
+                {
+                    PlacePath(j, i);
+                }
+            }
+        }
+    }
+
+    private bool HasWallNeighbor(int x, int y)
+    {
+        return IsWall(tiles[x + 1, y]) || IsWall(tiles[x - 1, y]) || IsWall(tiles[x, y + 1]) || IsWall(tiles[x, y - 1]);
+    }
+
+    private static bool IsWall(GameObject go)
+    {
+        if (go == null)
+            return false;
+        var tile = go.GetComponent<TileType>();
+        if (tile == null)
+            return false;
+        return tile.type == 1;
     }
 
     public void AddPaths()

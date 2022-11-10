@@ -23,6 +23,7 @@ public class ShadowsGenerator : MonoBehaviour
     {
         Setup();
         BindingFlags accessFlagsPrivate = BindingFlags.NonPublic | BindingFlags.Instance;
+
         while (true)
         {
             var f = FindFilledArea();
@@ -42,6 +43,7 @@ public class ShadowsGenerator : MonoBehaviour
 
         // scene has to be reload for the shadows to rebuild
 #if UNITY_EDITOR
+        EditorSceneManager.SaveScene(EditorSceneManager.GetActiveScene());
         EditorSceneManager.OpenScene(EditorSceneManager.GetActiveScene().path);
 #endif
     }
@@ -59,101 +61,105 @@ public class ShadowsGenerator : MonoBehaviour
     // Finds all corners for the shadow generation
     Vector3[] TrackEdges(Vector3Int start)
     {
-        // use two lists, one for inner point, the other for outer point
-        List<Vector3> inner = new List<Vector3>();
-        List<Vector3> outer = new List<Vector3>();
-
+        var points = new List<Vector3>();
         Vector3Int dir = Vector3Int.right;
-        Vector3Int current = TrackEdge(start, ref dir, inner, outer);
 
-        while (current != start)
-        {
-            current = TrackEdge(current, ref dir, inner, outer);
-        }
-        TrackEdge(current, ref dir, inner, outer);
+        TrackEdge(start, dir, points);
+        TrackEdge(start, -dir, points);
 
-        outer.Reverse();
-        inner.AddRange(outer);
-
-        return inner.ToArray();
+        return points.ToArray();
     }
 
-    private Vector3Int TrackEdge(Vector3Int current, ref Vector3Int dir, List<Vector3> inner, List<Vector3> outer)
+    private void TrackEdge(Vector3Int pos, Vector3Int dir, List<Vector3> points)
     {
-        while (tilemap.HasTile(current + dir))
+        var start = pos;
+        var p = CalculatePosition(start, dir, GetNextDir(dir));
+        points.Add(p);
+
+        int iterations = 0;
+        do
         {
-            current += dir;
-            visited.Add(current);
-        }
+            ++iterations;
+            visited.Add(pos);
+            var nextDir = GetNextDir(dir);
+            if (tilemap.HasTile(pos + nextDir))
+            {
+                points.Add(CalculatePosition(pos, dir, nextDir));
+                pos += nextDir;
+                dir = nextDir;
+                continue;
+            }
 
-        var nextDir = GetNextDir(current, dir);
-        AddCorners(current, dir, nextDir, inner, outer);
-        dir = nextDir;
+            if (tilemap.HasTile(pos + dir))
+            {
+                pos += dir;
+                continue;
+            }
 
-        return current;
+            nextDir = GetPrevDir(dir);
+            if (tilemap.HasTile(pos + nextDir))
+            {
+                points.Add(CalculatePosition(pos, -dir, -nextDir));
+                pos += nextDir;
+                dir = nextDir;
+            }
+            else
+            {
+                points.Add(CalculatePosition(pos, -dir, GetNextDir(dir)));
+                points.Add(CalculatePosition(pos, -dir, GetNextDir(-dir)));
+                dir *= -1;
+            }
+        } while (pos != start && iterations < 2000);
+
+        if (iterations == 2000)
+            Debug.LogError("Shadow generation failed");
+
+        points.Add(p);
+    }
+
+    private Vector3 CalculatePosition(Vector3 pos, Vector3 oldDir, Vector3 newDir)
+    {
+        const int scale = 2;
+        var mid = (pos + new Vector3(0.5f, 0.5f)) * scale;
+        mid += newDir * scale * 0.5f;
+        mid -= oldDir * scale * 0.5f;
+
+        return mid;
     }
 
     private Vector3Int? FindFilledArea()
     {
         foreach (var pos in tilemap.cellBounds.allPositionsWithin)
         {
-            if (tilemap.HasTile(pos) && !visited.Contains(pos))
+            if (!tilemap.HasTile(pos) || visited.Contains(pos))
+                continue;
+            if (tilemap.HasTile(pos + Vector3Int.left) && tilemap.HasTile(pos + Vector3Int.right))
                 return pos;
         }
 
         return null;
     }
 
-    Vector3Int GetNextDir(Vector3Int pos, Vector3Int dir)
+    static Vector3Int GetNextDir(Vector3Int dir)
     {
-        var orthogonal = new Vector3Int(dir.y, dir.x, 0);
-        return tilemap.HasTile(pos + orthogonal) ? orthogonal : -orthogonal;
+        if (dir == Vector3Int.right)
+            return Vector3Int.down;
+        if (dir == Vector3Int.down)
+            return Vector3Int.left;
+        if (dir == Vector3Int.left)
+            return Vector3Int.up;
+        return Vector3Int.right;
     }
 
-    void AddCorners(Vector3Int pos, Vector3Int oldDir, Vector3Int newDir, List<Vector3> inner, List<Vector3> outer)
+    static Vector3Int GetPrevDir(Vector3Int dir)
     {
-        const int scale = 4;
-
-        var mid = (pos + new Vector3(0.5f, 0.5f)) * scale;
-        var p1 = mid + 0.5f * scale * (Vector3)(newDir - oldDir);
-        var p2 = mid + 0.5f * scale * (Vector3)(oldDir - newDir);
-
-        if (inner.Count == 0)
-        {
-            inner.Add(p1);
-            outer.Add(p2);
-            return;
-        }
-
-        var tmp = inner[inner.Count - 1];
-        const float limit = 0.1f;
-        // find next point to add to each list
-        if (oldDir.y != 0)
-        {
-            if (Math.Abs(tmp.x - p1.x) < limit)
-            {
-                inner.Add(p1);
-                outer.Add(p2);
-            }
-            else
-            {
-                inner.Add(p2);
-                outer.Add(p1);
-            }
-        }
-        else
-        {
-            if (Math.Abs(tmp.y - p1.y) < limit)
-            {
-                inner.Add(p1);
-                outer.Add(p2);
-            }
-            else
-            {
-                inner.Add(p2);
-                outer.Add(p1);
-            }
-        }
+        if (dir == Vector3Int.right)
+            return Vector3Int.up;
+        if (dir == Vector3Int.down)
+            return Vector3Int.right;
+        if (dir == Vector3Int.left)
+            return Vector3Int.down;
+        return Vector3Int.left;
     }
 }
 
@@ -174,14 +180,13 @@ public class ShadowsGeneratorEditor : Editor
     {
         serializedObject.Update();
 
-        EditorGUILayout.PropertyField(tilemap);
-
         if (GUILayout.Button("Bake Shadows"))
         {
             generator.BakeShadows();
             // need to return since the scene will be reopened from code to reload shadows
             return;
         }
+        EditorGUILayout.PropertyField(tilemap);
 
         serializedObject.ApplyModifiedProperties();
     }
