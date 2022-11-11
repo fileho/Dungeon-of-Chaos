@@ -10,8 +10,6 @@ public class ExportObject : ExportTile
     public override void Place(Tilemaps maps, Vector3Int pos)
     {
         float scale = maps.objects.parent.localScale.x;
-
-        var o =
-            Instantiate(objectToSpawn, (pos + new Vector3(0.5f, 0.5f, 0)) * scale, Quaternion.identity, maps.objects);
+        Instantiate(objectToSpawn, (pos + new Vector3(0.5f, 0.5f, 0)) * scale, Quaternion.identity, maps.objects);
     }
 }
