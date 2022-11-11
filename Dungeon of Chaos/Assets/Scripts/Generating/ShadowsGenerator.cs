@@ -1,7 +1,7 @@
-using System;
 using System.Collections.Generic;
 using System.Reflection;
 using UnityEngine;
+using UnityEngine.Assertions;
 using UnityEngine.Experimental.Rendering.Universal;
 using UnityEngine.Tilemaps;
 #if UNITY_EDITOR
@@ -14,15 +14,22 @@ using Vector3 = UnityEngine.Vector3;
 [ExecuteInEditMode]
 public class ShadowsGenerator : MonoBehaviour
 {
-    [SerializeField]
     private Tilemap tilemap;
-
     private HashSet<Vector3Int> visited;
+
+    private float scale = 1f;
 
     public void BakeShadows()
     {
+        var grid = FindObjectOfType<Grid>();
+        tilemap = GetTilemap(grid, "Walls");
+
+
         Setup();
         BindingFlags accessFlagsPrivate = BindingFlags.NonPublic | BindingFlags.Instance;
+
+        // Assume uniform scaling
+        scale = tilemap.transform.lossyScale.x;
 
         while (true)
         {
@@ -41,11 +48,20 @@ public class ShadowsGenerator : MonoBehaviour
             shapePathField.SetValue(shadowCaster2D, TrackEdges(f.Value));
         }
 
+        // Spawn shadows for rocks
+        GetComponent<RockShadows>().PlaceShadows(GetTilemap(grid, "Rocks"), scale);
+
         // scene has to be reload for the shadows to rebuild
 #if UNITY_EDITOR
         EditorSceneManager.SaveScene(EditorSceneManager.GetActiveScene());
         EditorSceneManager.OpenScene(EditorSceneManager.GetActiveScene().path);
 #endif
+    }
+
+    private Tilemap GetTilemap(Grid grid, string mapName)
+    {
+        Assert.IsNotNull(grid, "No tilemaps found");
+        return grid.transform.Find(mapName).GetComponent<Tilemap>();
     }
 
     private void Setup()
@@ -119,10 +135,9 @@ public class ShadowsGenerator : MonoBehaviour
 
     private Vector3 CalculatePosition(Vector3 pos, Vector3 oldDir, Vector3 newDir)
     {
-        const int scale = 2;
         var mid = (pos + new Vector3(0.5f, 0.5f)) * scale;
-        mid += newDir * scale * 0.5f;
-        mid -= oldDir * scale * 0.5f;
+        mid += scale * 0.5f * newDir;
+        mid -= scale * 0.5f * oldDir;
 
         return mid;
     }
@@ -186,7 +201,6 @@ public class ShadowsGeneratorEditor : Editor
             // need to return since the scene will be reopened from code to reload shadows
             return;
         }
-        EditorGUILayout.PropertyField(tilemap);
 
         serializedObject.ApplyModifiedProperties();
     }
