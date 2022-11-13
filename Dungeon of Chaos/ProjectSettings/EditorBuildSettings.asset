@@ -5,12 +5,9 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 0
-    path: 
-    guid: 00000000000000000000000000000000
-  - enabled: 0
-    path: 
-    guid: 00000000000000000000000000000000
+  - enabled: 1
+    path: Assets/Scenes/DungeonGameplay.unity
+    guid: b6341b0402bc8cf4da24707c8c3726c8
   - enabled: 1
     path: Assets/Scenes/MVPDungeon.unity
     guid: 72699e7d8ae61ed458085435ba0be3d3

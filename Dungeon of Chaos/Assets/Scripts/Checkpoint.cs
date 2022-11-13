@@ -1,8 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Rendering;
-using UnityEngine.Tilemaps;
+using UnityEngine.Assertions;
 
 public class Checkpoint : MonoBehaviour
 {
@@ -11,9 +8,13 @@ public class Checkpoint : MonoBehaviour
 
     private GameObject tooltipCanvas;
     private CharacterSheet characterSheet;
+    [SerializeField]
+    [ReadOnly]
+    private int id;
 
     private void Start()
     {
+        Assert.AreNotEqual(id, 0, "Unique id is unassigned");
         tooltipCanvas = GetComponentInChildren<Canvas>().gameObject;
         characterSheet = FindObjectOfType<CharacterSheet>();
 
@@ -56,5 +57,15 @@ public class Checkpoint : MonoBehaviour
         tooltipCanvas.SetActive(false);
         characterSheet.Open();
         Time.timeScale = 0f;
+    }
+
+    public void SetUniqueId(int uid)
+    {
+        id = uid;
+    }
+
+    public bool IsSame(int uid)
+    {
+        return id == uid;
     }
 }
