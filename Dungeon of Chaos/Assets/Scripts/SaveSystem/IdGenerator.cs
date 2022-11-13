@@ -1,6 +1,8 @@
+using System.Collections.Generic;
 using UnityEngine;
 #if UNITY_EDITOR
 using UnityEditor;
+using UnityEditor.SceneManagement;
 #endif
 
 [ExecuteInEditMode]
@@ -9,8 +11,9 @@ public class IdGenerator : MonoBehaviour
     private int id = 0;
     public void AssignIds()
     {
-        id = 0;
-        Checkpoints();
+        id = 0; 
+        SetIds(FindObjectsOfType<Checkpoint>());
+        SetIds(FindObjectsOfType<MapFragment>());
     }
 
     private int GenerateNextId()
@@ -18,14 +21,14 @@ public class IdGenerator : MonoBehaviour
         return ++id;
     }
 
-    private void Checkpoints()
+    private void SetIds<T>(IEnumerable<T> list)
+        where T : IMapSavable
     {
-        var checkpoints = FindObjectsOfType<Checkpoint>();
-
-        foreach (var checkpoint in checkpoints)
+        foreach (var elem in list)
         {
-            checkpoint.SetUniqueId(GenerateNextId());
-            EditorUtility.SetDirty(checkpoint);
+            elem.SetUniqueId(GenerateNextId());
+            // Set the component dirty to save changes
+            EditorUtility.SetDirty(elem.GetAttachedComponent());
         }
     }
 }

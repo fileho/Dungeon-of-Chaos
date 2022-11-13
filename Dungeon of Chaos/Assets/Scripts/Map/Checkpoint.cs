@@ -1,13 +1,15 @@
 using UnityEngine;
 using UnityEngine.Assertions;
 
-public class Checkpoint : MonoBehaviour
+public class Checkpoint : MonoBehaviour, IMapSavable
 {
     [SerializeField]
     private float range = 2.5f;
 
     private GameObject tooltipCanvas;
     private CharacterSheet characterSheet;
+    private SaveSystem saveSystem;
+
     [SerializeField]
     [ReadOnly]
     private int id;
@@ -17,6 +19,7 @@ public class Checkpoint : MonoBehaviour
         Assert.AreNotEqual(id, 0, "Unique id is unassigned");
         tooltipCanvas = GetComponentInChildren<Canvas>().gameObject;
         characterSheet = FindObjectOfType<CharacterSheet>();
+        saveSystem = FindObjectOfType<SaveSystem>();
 
         tooltipCanvas.SetActive(false);
     }
@@ -54,6 +57,7 @@ public class Checkpoint : MonoBehaviour
 
     private void Interact()
     {
+        saveSystem.dungeonData.AddSavedUid(id);
         tooltipCanvas.SetActive(false);
         characterSheet.Open();
         Time.timeScale = 0f;
@@ -64,8 +68,20 @@ public class Checkpoint : MonoBehaviour
         id = uid;
     }
 
-    public bool IsSame(int uid)
+    public int GetUniqueId()
     {
-        return id == uid;
+        return id;
+    }
+
+    public void Load()
+    {
+        var l = LayerMask.NameToLayer("Walls");
+        gameObject.layer = l;
+        gameObject.GetComponentInChildren<ParticleSystem>().gameObject.layer = l;
+    }
+
+    public Object GetAttachedComponent()
+    {
+        return this;
     }
 }

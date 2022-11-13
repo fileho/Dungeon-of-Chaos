@@ -8,6 +8,8 @@ using UnityEngine.Assertions;
 public class SaveSystem : MonoBehaviour
 {
     public SaveData saveData;
+    public DungeonData dungeonData;
+
     private readonly ActiveSaveSlot saveSlot = new ActiveSaveSlot();
 
     private Character character;
@@ -34,7 +36,7 @@ public class SaveSystem : MonoBehaviour
     public void SaveProgress()
     {
         saveData =
-            new SaveData(new SaveAttributes(1, character.transform.position, character.stats, character.SkillSystem));
+            new SaveData(new SaveAttributes(character.transform.position, character.stats, character.SkillSystem, dungeonData));
         Save();
     }
 
@@ -70,13 +72,14 @@ public class SaveSystem : MonoBehaviour
         character.stats.Load(saveData.savedStats);
         character.SkillSystem.Load(saveData.savedSkillSystem);
         character.transform.position = saveData.characterPosition.ToV3();
+        dungeonData = saveData.dungeonData;
     }
 
     private SaveData LoadData(string filePath)
     {
         if (!File.Exists(filePath))
         {
-            return new SaveData(new SaveAttributes(1, Vector3.zero, character.stats, character.SkillSystem));
+            return new SaveData(new SaveAttributes(Vector3.zero, character.stats, character.SkillSystem, dungeonData));
         }
 
         var formatter = new BinaryFormatter();
