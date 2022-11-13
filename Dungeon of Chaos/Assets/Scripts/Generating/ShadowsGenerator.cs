@@ -183,12 +183,10 @@ public class ShadowsGenerator : MonoBehaviour
 public class ShadowsGeneratorEditor : Editor
 {
     private ShadowsGenerator generator;
-    private SerializedProperty tilemap;
 
     private void OnEnable()
     {
         generator = (ShadowsGenerator)target;
-        tilemap = serializedObject.FindProperty("tilemap");
     }
 
     public override void OnInspectorGUI()

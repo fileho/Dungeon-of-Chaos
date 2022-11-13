@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Experimental.Rendering.Universal;
 using UnityEngine.Tilemaps;
 using UnityEngine.Video;
 
@@ -10,12 +11,16 @@ public class RockShadows : MonoBehaviour
     struct RockShadow
     {
         public TileBase rock;
-        public GameObject shadow;
+        public ShadowCaster2D shadow;
     }
 
     [SerializeField]
     private List<RockShadow> rockShadows;
 
+    /// <summary>
+    /// Uses a hand made shadow casters because the shapes of rocks are quite complex. It will only spawn corresponding
+    /// shadow caster over each rock.
+    /// </summary>
     public void PlaceShadows(Tilemap tilemap, float scale)
     {
         const string transformName = "Rocks";
