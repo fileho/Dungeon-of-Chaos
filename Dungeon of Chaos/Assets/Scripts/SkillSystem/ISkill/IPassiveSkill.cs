@@ -4,7 +4,7 @@ using UnityEngine;
 
 public abstract class IPassiveSkill : ScriptableObject
 {
-    [SerializeField] private SkillData skillData;
+    [SerializeField] protected SkillData skillData;
 
     public abstract void Equip(Stats stats);
     public abstract void Unequip(Stats stats);
@@ -13,4 +13,6 @@ public abstract class IPassiveSkill : ScriptableObject
     {
         return skillData;
     }
+
+    public abstract string GetDescription();
 }

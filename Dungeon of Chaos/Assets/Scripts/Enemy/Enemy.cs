@@ -28,12 +28,24 @@ public class Enemy : Unit {
         Target = Character.instance;
         state = State.Patrol;
         attackManager = GetComponent<AttackManager>();
-        attackManager.Init();
     }
 
+    private RaycastHit2D[] targetLosHits = new RaycastHit2D[1];
+    private float losDistance = 10f;
+    private float lastLosTime = 0f;
+    private float chaseForSecondsAfterLoseSight = 10f;
 
     private bool IsTargetInChaseRange() {
-        return GetTargetDistance() < stats.ChaseDistance();
+        int hitsCount = Physics2D.RaycastNonAlloc(transform.position, (GetTargetPosition() - (Vector2)transform.position).normalized, targetLosHits, losDistance, 1 << LayerMask.NameToLayer("Player"));
+
+        if (hitsCount > 0) {
+            lastLosTime = Time.time;
+        }
+
+        // if target is within line of sight || target has been out of sight for less than threshold
+        // and if target is within chase distance
+        return (hitsCount > 0 || (hitsCount == 0 && Time.time - lastLosTime < chaseForSecondsAfterLoseSight)) && GetTargetDistance() < stats.ChaseDistance();
+        //return GetTargetDistance() < stats.ChaseDistance();
     }
 
     private void FixedUpdate() {
@@ -72,6 +84,8 @@ public class Enemy : Unit {
     private bool Attack() {
         if (IsAttacking()) return true;
         currentAttack = attackManager.GetBestAvailableAttack();
+        FlipSprite();
+        RotateWeapon();
         if (currentAttack != null) {
             state = State.Attack;
             currentAttack.Attack();
@@ -108,8 +122,8 @@ public class Enemy : Unit {
 
     private void SwitchEnemyStates() {
         if (dead) return;
-        if (Attack()) ;
-        else if (Chase()) ;
+        if (Attack()) { }
+        else if (Chase()) { }
         else Patrol();
         //print("Test: " + state.ToString());
     }

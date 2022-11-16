@@ -45,5 +45,5 @@ public abstract class ISkillEffect : ScriptableObject
         ApplyOnPositions(unit, targetPositions);        
     }
 
-    
+    public abstract string[] GetEffectsValues(Unit owner);
 }

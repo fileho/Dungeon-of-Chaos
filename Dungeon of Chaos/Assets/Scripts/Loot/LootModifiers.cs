@@ -33,7 +33,7 @@ public class LootModifiers : ScriptableObject
     
     public float GetEssenceChance(int lvl)
     {
-        return essenceChance*LvlMultiplier(lvlEssenceChanceMultiplier, lvl);
+        return (essenceChance/100)*LvlMultiplier(lvlEssenceChanceMultiplier, lvl);
     }
 
     private float GetEssenceValue(int lvl, float baseEssence)

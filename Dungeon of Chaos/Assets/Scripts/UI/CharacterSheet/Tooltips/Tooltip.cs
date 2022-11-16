@@ -8,11 +8,13 @@ public class Tooltip : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI headerText;
     [SerializeField] private TextMeshProUGUI subheaderText;
-    [SerializeField] private TextMeshProUGUI contentText;
 
-    [SerializeField] private TextMeshProUGUI messageText;
+    [SerializeField] private TooltipContent content1;
+    [SerializeField] private TooltipContent content2;
 
-    [SerializeField] private int wrapLimit;
+    [SerializeField] private GameObject message;
+
+    [SerializeField] private int wrapLimit;   
     
     private LayoutElement layoutElement;
     private RectTransform rectTransform;
@@ -22,28 +24,39 @@ public class Tooltip : MonoBehaviour
         layoutElement = GetComponent<LayoutElement>();
         rectTransform = GetComponent<RectTransform>();
     }
-    public void SetText(string content, string header, string subheader)
+    public void SetText(string header, string subheader, string ch1, string des1, string ch2="", string des2="")
     {
         headerText.text = header;
         subheaderText.text = subheader;
-        contentText.text = content;
 
         int headerLength = headerText.text.Length;
         int subheaderLength = subheaderText.text.Length;
-        int contentLength = contentText.text.Length;
 
-        layoutElement.enabled = (headerLength > wrapLimit || contentLength > wrapLimit || subheaderLength > wrapLimit);
+        int ch1Length = ch1.Length;
+        int des1Length = des1.Length;
+
+        int ch2Length = ch2.Length;
+        int des2Length = des2.Length;
+
+        layoutElement.enabled = (headerLength > wrapLimit || subheaderLength > wrapLimit 
+            || ch1Length > wrapLimit || des1Length > wrapLimit
+            || ch2Length > wrapLimit || des2Length > wrapLimit);
+
+        content1.Fill(ch1, des1);
+        content2.Fill(ch2, des2);    
     }
 
     public void DisplayMessage(string message)
     {
-        messageText.text = message;
-        messageText.color = Color.red;
+        this.message.GetComponent<TextMeshProUGUI>().text = message;
+        this.message.GetComponent<TextMeshProUGUI>().color = Color.red;
+        this.message.SetActive(true);
     }
 
     public void DeleteMessage()
     {
-        messageText.text = "";
+        this.message.GetComponent<TextMeshProUGUI>().text = "";
+        this.message.SetActive(false);
     }
 
 
@@ -54,7 +67,7 @@ public class Tooltip : MonoBehaviour
         float pivotY = GetCoordinate(position.y / Screen.height);
 
         rectTransform.pivot = new Vector2(pivotX, pivotY);
-        //Debug.Log(rectTransform.pivot);
+
         transform.position = position;
     }
 
