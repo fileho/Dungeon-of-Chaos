@@ -5,7 +5,6 @@ using static UnityEngine.Rendering.DebugUI.Table;
 
 public class StompAttack : MeleeAttack {
 
-
     // Weapon lift before stomping
     protected float lift;
 
@@ -26,9 +25,6 @@ public class StompAttack : MeleeAttack {
     protected float damageRadiusMajor;
 
 
-
-
-
     protected override void ApplyConfigurations() {
         base.ApplyConfigurations();
         StompAttackConfiguration _attackConfiguration = attackConfiguration as StompAttackConfiguration;
@@ -42,14 +38,8 @@ public class StompAttack : MeleeAttack {
     }
 
 
-    public override void Attack() {
-        base.Attack();
-        StartCoroutine(StartAttackAnimation());
-    }
-
-
     private void CheckHits(Vector3 pos, float radius) {
-        Collider2D[] colliders = Physics2D.OverlapCircleAll(pos, damageRadiusMajor);
+        Collider2D[] colliders = Physics2D.OverlapCircleAll(pos, radius);
         if (colliders.Length > 0) {
             for (int i = 0; i < colliders.Length; i++) {
                 if (colliders[i].GetComponent<Unit>()) {
@@ -60,15 +50,22 @@ public class StompAttack : MeleeAttack {
     }
 
     // Ideal attack duration = 1
-    private IEnumerator StartAttackAnimation() {
-
-
-        yield return new WaitForSeconds(IndicatorDuration);
+    protected override IEnumerator StartAttackAnimation() {
 
         // Cache weapon rotation to restore it after the animation
         var initialWeaponRotation = Weapon.transform.rotation;
+        Vector3 startPos = Weapon.transform.localPosition;
+        Vector3 endPosUp = startPos + Vector3.up * lift;
+        Vector3 endPosdown = startPos + Vector3.down * fall;
 
-        yield return new WaitForSeconds(IndicatorDuration);
+        Vector3 startScale = Weapon.Asset.localScale;
+        Vector3 endScale = Weapon.Asset.localScale * scaleMultiplier;
+
+        IIndicator indicator = CreateIndicator();
+        if (indicator) {
+            indicator.Use();
+            yield return new WaitForSeconds(indicator.Duration);
+        }
 
         // Reset weapon rotation to default for the animation
         Weapon.ResetWeapon();
@@ -79,12 +76,7 @@ public class StompAttack : MeleeAttack {
         var initialAssetRotation = Weapon.Asset.localRotation;
         Weapon.Asset.localRotation = Quaternion.Euler(0, 0, Weapon.GetUprightAngle());
 
-        Vector3 startPos = Weapon.transform.localPosition;
-        Vector3 endPosUp = startPos + Vector3.up * lift;
-        Vector3 endPosdown = startPos + Vector3.down * fall;
 
-        Vector3 startScale = Weapon.Asset.localScale;
-        Vector3 endScale = Weapon.Asset.localScale * scaleMultiplier;
 
         float time = 0;
         float attackAnimationDurationOneWay = AttackAnimationDuration / 2f;
@@ -108,9 +100,9 @@ public class StompAttack : MeleeAttack {
         }
 
         Weapon.SetDamage(damageMajor);
-        CheckHits(endPosdown, damageRadiusMajor);
+        CheckHits(owner.transform.position, damageRadiusMajor);
         Weapon.SetDamage(damageMinor);
-        CheckHits(endPosdown, damageRadiusMinor);
+        CheckHits(owner.transform.position, damageRadiusMinor);
 
         SoundManager.instance.PlaySound(swingSFX);
 
@@ -123,6 +115,5 @@ public class StompAttack : MeleeAttack {
         ResetWeapon();
         isAttacking = false;
     }
-
 
 }
