@@ -14,8 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   skillData:
     name: Whirlwind
-    description: Deals damage to enemies in range and pushes them back.
-    skillType: 0
+    description: Deals {0} damage to enemies in range and pushes them back.
     icon: {fileID: 21300000, guid: aa562f9447233654789b885e0646fd2c, type: 3}
   cooldown: 5
   manaCost: 0

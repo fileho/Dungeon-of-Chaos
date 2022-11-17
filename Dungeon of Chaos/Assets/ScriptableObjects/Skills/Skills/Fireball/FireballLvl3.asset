@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   skillData:
     name: Explosive Fireball
-    description: Shoots a fireball which deals damage and explodes.
-    skillType: 0
+    description: Shoots a fireball which deals {0} damage to the target and {1} damage
+      to all enemies in range.
     icon: {fileID: 21300000, guid: d41ff3b3475455b41a30e8f9b02aa352, type: 3}
   cooldown: 5
   manaCost: 15

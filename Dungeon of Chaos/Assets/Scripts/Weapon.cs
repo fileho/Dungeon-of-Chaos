@@ -10,7 +10,18 @@ public class Weapon : MonoBehaviour {
     [SerializeField] private float upRightAngle = 0f;
 
     [Tooltip("Angle at which the weapon asset aligns with the arm")]
-    [SerializeField] private float armOffsetAngle = 0f;
+    [SerializeField] private float armAlignAngle = 0f;
+
+    [Tooltip("Local position of weaapon tip")]
+    [SerializeField] private Vector3 weaponTipOffset = Vector3.zero;
+
+    private float weaponAssetWidth = 0;
+    public float WeaponAssetWidth {
+        get {
+            return weaponAssetWidth != 0 ? weaponAssetWidth : Asset.GetComponent<SpriteRenderer>().bounds.size.x /2f;
+        }
+    }
+
 
     private Transform asset;
     public Transform Asset {
@@ -24,6 +35,8 @@ public class Weapon : MonoBehaviour {
     private new BoxCollider2D collider;
     private List<Unit> hitUnits;
     private float damage = 0;
+    private int enemyLayer;
+
 
     private SoundSettings impactSFX;
 
@@ -33,6 +46,7 @@ public class Weapon : MonoBehaviour {
         hitUnits = new List<Unit>();
         EnableDisableCollider(false);
         EnableDisableTrail(false);
+        enemyLayer = GetEnemyLayer(transform.parent.gameObject.layer);
     }
 
 
@@ -50,12 +64,16 @@ public class Weapon : MonoBehaviour {
         return upRightAngle;
     }
 
-    public float GetArmOffsetAngle() {
-        return armOffsetAngle;
+    public float GetArmAlignAngle() {
+        return armAlignAngle;
+    }
+
+    public Vector3 GetWeaponTipOffset() {
+        return weaponTipOffset;
     }
 
     public void InflictDamage(Unit unit) {
-        if (!hitUnits.Contains(unit)) {
+        if (unit.gameObject.layer == enemyLayer && !hitUnits.Contains(unit)) {
             hitUnits.Add(unit);
             SoundManager.instance.PlaySound(impactSFX);
             unit.TakeDamage(damage);
@@ -117,5 +135,11 @@ public class Weapon : MonoBehaviour {
         ret.x *= dir;
 
         return ret;
+    }
+
+    public int GetEnemyLayer(int ownerLayer) {
+        return (ownerLayer == LayerMask.NameToLayer("Enemy") || ownerLayer == LayerMask.NameToLayer("EnemyAttack"))
+            ? LayerMask.NameToLayer("Player")
+            : LayerMask.NameToLayer("Enemy");
     }
 }

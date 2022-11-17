@@ -14,6 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   skillData:
     name: Arcane Power II
-    description: Increases max mana.
+    description: Increases max mana by {0}.
     icon: {fileID: 21300000, guid: 0c1265cd3a5d7a944b8a9003d8b8df9e, type: 3}
   amount: 30

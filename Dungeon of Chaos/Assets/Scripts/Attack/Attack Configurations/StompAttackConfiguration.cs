@@ -2,7 +2,7 @@
 using UnityEngine;
 
 [CreateAssetMenu(menuName = "SO/Attack/Stomp Attack Configuration")]
-public class StompAttackConfiguration : AttackConfiguration {
+public class StompAttackConfiguration : MeleeAttackConfiguration {
     public float lift = 2f;
     public float fall = 0.8f;
     public float scaleMultiplier = 1.5f;

@@ -16,7 +16,6 @@ public static class Tweens {
         else return (float)Math.Pow(2, -10 * currentTime) * (float)Math.Sin((currentTime * 10 - 0.75) * EASE_OUT_ELASTIC_MULTIPLIER) + 1;
     }
 
-
     public static float EaseOutBounce(float currentTime) {
         if (currentTime < 1f / EASE_OUT_BOUNCE_MULTIPLIER_D) return EASE_OUT_BOUNCE_MULTIPLIER_N * currentTime * currentTime;
         else if (currentTime < 2f / EASE_OUT_BOUNCE_MULTIPLIER_D) return EASE_OUT_BOUNCE_MULTIPLIER_N * (currentTime -= 1.5f / EASE_OUT_BOUNCE_MULTIPLIER_D) * currentTime + 0.75f;
@@ -30,7 +29,6 @@ public static class Tweens {
         if (currentTime == 0) return 0;
         else return (float)Math.Pow(2, 10 * (currentTime - 1));
     }
-
 
     // Fast to slow
     public static float EaseOutExponential(float currentTime) {
@@ -46,12 +44,16 @@ public static class Tweens {
         return -currentTime * (currentTime - 2);
     }
 
-
     public static float EaseInCubic(float currentTime) {
         return currentTime * currentTime * currentTime;
     }
+
     public static float EaseOutCubic(float currentTime) {
         currentTime = currentTime - 1;
         return (currentTime * currentTime * currentTime + 1);
+    }
+
+    public static float Linear(float currentTime) {
+        return currentTime;
     }
 }
