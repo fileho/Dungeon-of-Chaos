@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using static UnityEngine.GraphicsBuffer;
 
@@ -7,13 +8,19 @@ public abstract class IAttack : MonoBehaviour {
     [SerializeField] protected AttackConfiguration attackConfiguration;
 
     public Weapon Weapon { get; private set; }
-    
+
     // The distance from the unit at which the attack can be used
     protected float range;
     // Damage dealt by the attack
     protected float damage;
     // The stamina cost of the attack
     protected float staminaCost;
+
+    // Weights of the respective parameters to calculate priority
+    protected float rangeWeight;
+    protected float damageWeight;
+    protected float staminaCostWeight;
+
     // Time after which the attack can be used again
     protected float cooldown;
     // The type (physical/magical) of the attack
@@ -28,19 +35,28 @@ public abstract class IAttack : MonoBehaviour {
     protected float cooldownLeft = 0f;
     protected bool isAttacking = false;
     protected bool isEnemyInRange = false;
-    protected float IndicatorDuration { get; private set; }
+    public Vector3 IndicatorLocalPosition { get; protected set; } = Vector3.zero;
 
     protected Unit owner;
-    protected GameObject indicator;
-    protected Transform indicatorTransform;
+    protected GameObject indicatorPrefab;
+    protected IIndicator indicator;
 
     protected Vector3 weaponOriginalPosition;
     protected Vector3 weaponAssetOriginalPosition;
     protected Quaternion weaponOriginalRotation;
     protected Quaternion weaponAssetOriginalRotation;
+    protected IndicatorConfiguration indicatorConfiguration;
 
+    public virtual void Attack() {
+        if (isAttacking)
+            return;
 
-    public abstract void Attack();
+        isAttacking = true;
+        cooldownLeft = cooldown;
+        StartCoroutine(StartAttackAnimation());
+    }
+
+    protected abstract IEnumerator StartAttackAnimation();
 
     public virtual bool CanAttack() {
         return (IsTargetInAttackRange() && !isAttacking && cooldownLeft <= 0);
@@ -50,14 +66,16 @@ public abstract class IAttack : MonoBehaviour {
         return range;
     }
 
+    public float GetAttackRangeWeighted() {
+        return GetAttackRange() * rangeWeight;
+    }
 
     private bool IsTargetInAttackRange() {
         return owner.GetTargetDistance() <= GetAttackRange();
     }
 
 
-    public float GetDamage()
-    {
+    public float GetDamage() {
         if (owner == null)
             return 0;
 
@@ -66,6 +84,9 @@ public abstract class IAttack : MonoBehaviour {
             : damage * owner.stats.GetSpellPower();
     }
 
+    public float GetDamageWeighted() {
+        return GetDamage() * damageWeight;
+    }
 
     public float GetCoolDownTime() {
         return cooldown;
@@ -81,6 +102,11 @@ public abstract class IAttack : MonoBehaviour {
     }
 
 
+    public float GetStaminaCostWeighted() {
+        return GetStaminaCost() * staminaCostWeight;
+    }
+
+
     public Unit GetTarget() {
         return owner.Target;
     }
@@ -91,18 +117,17 @@ public abstract class IAttack : MonoBehaviour {
     }
 
 
-    protected virtual void SetIndicatorTransform() {}
+    protected virtual IIndicator CreateIndicator(Transform parent = null) {
+        if (indicatorPrefab == null) return null;
 
+        if (parent == null)
+            parent = transform.parent;
 
-
-    protected virtual void ActivateIndicator() {
-        if (indicator == null) return;
-        //SoundManager.instance.PlaySound(indicatorSFX);
-        GameObject _indicator = Instantiate(indicator, indicatorTransform.position, indicatorTransform.rotation, indicatorTransform);
-        _indicator.transform.up = Weapon.GetForwardDirectionRotated();
-        IndicatorDuration = _indicator.GetComponent<IIndicator>().Duration;
+        GameObject _indicator = Instantiate(indicatorPrefab, parent);
+        IIndicator indicator = _indicator.GetComponent<IIndicator>();
+        indicator.Init(indicatorConfiguration);
+        return indicator;
     }
-
 
     protected virtual void PrepareWeapon() {
         Weapon.SetDamage(GetDamage());
@@ -120,10 +145,15 @@ public abstract class IAttack : MonoBehaviour {
         range = attackConfiguration.range;
         damage = attackConfiguration.damage;
         staminaCost = attackConfiguration.staminaCost;
+
+        rangeWeight = attackConfiguration.rangeWeight;
+        damageWeight = attackConfiguration.damageWeight;
+        staminaCostWeight = attackConfiguration.staminaCostWeight;
+
         cooldown = attackConfiguration.cooldown;
-        indicator = attackConfiguration.indicator;
+        indicatorPrefab = attackConfiguration.indicator;
+        indicatorConfiguration = attackConfiguration.indicatorConfiguration;
         AttackAnimationDuration = attackConfiguration.attackAnimationDuration;
-        IndicatorDuration = 0;
         type = attackConfiguration.type;
         swingSFX = attackConfiguration.swingSFX;
         impactSFX = attackConfiguration.impactSFX;
@@ -131,17 +161,15 @@ public abstract class IAttack : MonoBehaviour {
     }
 
 
-    protected virtual void Start() {
+    protected virtual void Awake() {
         if (attackConfiguration == null)
             return;
         Weapon = GetComponent<Weapon>();
         owner = GetComponentInParent<Unit>();
-        SetIndicatorTransform();
         ApplyConfigurations();
     }
 
-    public IAttack Init(Unit owner, Weapon weapon, AttackConfiguration configuration)
-    {
+    public IAttack Init(Unit owner, Weapon weapon, AttackConfiguration configuration) {
         this.owner = owner;
         Weapon = weapon;
         attackConfiguration = configuration;

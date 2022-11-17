@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: GiantStats
   m_EditorClassIdentifier: 
   movementSpeed: 4.5
-  chaseDistance: 17
+  chaseDistance: 30
   staminaRegen: 20
   primaryStats:
     id: 0

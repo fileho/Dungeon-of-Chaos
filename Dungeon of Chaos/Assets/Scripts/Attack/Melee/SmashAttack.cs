@@ -1,11 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using static UnityEditor.PlayerSettings;
 
 public class SmashAttack : MeleeAttack {
-
-
     // Weapon lift before stomping
     protected float lift;
 
@@ -27,14 +24,8 @@ public class SmashAttack : MeleeAttack {
         scaleMultiplier = _attackConfiguration.scaleMultiplier;
     }
 
-    public override void Attack() {
-        base.Attack();
-        StartCoroutine(StartAttackAnimation());
-    }
 
-
-    private void CheckHits(Vector3 pos, float radius)
-    {
+    private void CheckHits(Vector3 pos, float radius) {
         Collider2D[] colliders = Physics2D.OverlapCircleAll(pos, radius);
         if (colliders.Length > 0) {
             for (int i = 0; i < colliders.Length; i++) {
@@ -46,28 +37,42 @@ public class SmashAttack : MeleeAttack {
     }
 
     // Ideal attack duration = 1
-    private IEnumerator StartAttackAnimation() {
+    protected override IEnumerator StartAttackAnimation() {
 
         // Cache weapon rotation to restore it after the animation
         var initialWeaponRotation = Weapon.transform.rotation;
-
-        yield return new WaitForSeconds(IndicatorDuration);
-
-        // Reset weapon rotation to default for the animation
-        Weapon.ResetWeapon();
-        PrepareWeapon();
-
-
-        // Cache weapon rotation to restore after the animation
-        var initialAssetRotation = Weapon.Asset.localRotation;
-        Weapon.Asset.localRotation = Quaternion.Euler(0, 0, Weapon.GetUprightAngle());
-
+        Vector3 weaponPos = Weapon.transform.position;
+        Vector3 targetDirection = (GetTargetPosition() - (Vector2)weaponPos).normalized;
         Vector3 startPos = Weapon.transform.localPosition;
-        Vector3 endPosUp = startPos + Vector3.up * lift;
-        Vector3 endPosdown = startPos + (-owner.transform.right * range) + (Vector3.down * fall);
+
+
+        float angleMultiplier = Weapon.transform.lossyScale.x > 0 ? 1 : -1;
+        float swingAdjusted = 90 * angleMultiplier;
+
+        Vector3 upperEdge = Quaternion.AngleAxis(-swingAdjusted, Vector3.forward) * targetDirection;
+        upperEdge = Weapon.transform.lossyScale.x > 0 ? upperEdge : -Vector3.Reflect(upperEdge, Vector2.up);
+        Vector3 lowerEdge = targetDirection;
+        lowerEdge = Weapon.transform.lossyScale.x > 0 ? lowerEdge : -Vector3.Reflect(lowerEdge, Vector2.up);
+
+        Vector3 endPosUp = startPos + (upperEdge * range);
+        Vector3 endPosdown = startPos + (lowerEdge * range);
+        Vector3 endPosUpAdjusted = startPos + (upperEdge * (range - 2 * Weapon.WeaponAssetWidth));  //to compensate for the weapon asset width
+        Vector3 endPosdownAdjusted = startPos + (lowerEdge * (range - 2 * Weapon.WeaponAssetWidth)); //to compensate for the weapon asset width
+
+
 
         Vector3 startScale = Weapon.Asset.localScale;
         Vector3 endScale = Weapon.Asset.localScale * scaleMultiplier;
+
+        IIndicator indicator = CreateIndicator();
+        if (indicator) {
+            indicator.transform.position = owner.transform.TransformPoint(endPosdown);
+            indicator.transform.localScale *= damageRadius;
+            indicator.Use();
+            yield return new WaitForSeconds(indicator.Duration);
+        }
+
+        PrepareWeapon();
 
         float time = 0;
         float attackAnimationDurationOneWay = AttackAnimationDuration / 2f;
@@ -82,7 +87,6 @@ public class SmashAttack : MeleeAttack {
         }
 
         // Down
-
         var startRotation = Weapon.Asset.localRotation;
         float startRotationZ = Weapon.Asset.localRotation.eulerAngles.z < 180 ? Weapon.Asset.localRotation.eulerAngles.z : Weapon.Asset.localRotation.eulerAngles.z - 360f;
 
@@ -90,24 +94,20 @@ public class SmashAttack : MeleeAttack {
         while (time <= 1) {
             time += (Time.deltaTime / attackAnimationDurationOneWay);
             float currentPos = Tweens.EaseOutElastic(time);
-            Weapon.transform.localPosition = Vector3.Slerp(endPosUp - startPos, endPosdown - startPos, currentPos) + startPos;
-            Weapon.Asset.localRotation = Quaternion.Lerp(startRotation, Quaternion.Euler(0, 0, Weapon.GetArmOffsetAngle()), currentPos);
+            Weapon.transform.localPosition = Vector3.Slerp(endPosUp - startPos, endPosdownAdjusted - startPos, currentPos) + startPos;
             yield return null;
         }
 
-        CheckHits(endPosdown, damageRadius);
-
+        CheckHits(owner.transform.TransformPoint(endPosdown), damageRadius);
         SoundManager.instance.PlaySound(swingSFX);
 
         // Reset
         Weapon.Asset.localScale = startScale;
-        Weapon.Asset.localRotation = initialAssetRotation;
         Weapon.transform.localPosition = startPos;
         Weapon.transform.rotation = initialWeaponRotation;
 
         ResetWeapon();
         isAttacking = false;
     }
-
 
 }

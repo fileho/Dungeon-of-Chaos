@@ -7,6 +7,11 @@ public class PushBack : ISkillEffect
 {
     [SerializeField] private float force;
 
+    public override string[] GetEffectsValues(Unit owner)
+    {
+        return null;
+    }
+
     protected override void ApplyOnTargets(Unit unit, List<Unit> targets)
     {
         foreach (var t in targets)

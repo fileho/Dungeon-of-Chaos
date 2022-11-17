@@ -19,8 +19,14 @@ public abstract class IProjectile : MonoBehaviour
     protected new Collider2D collider;
     protected Rigidbody2D rb;
 
+    private void Awake() {
+        collider = GetComponent<Collider2D>();
+        sprite = GetComponent<SpriteRenderer>();
+        rb = GetComponent<Rigidbody2D>();
+        transform.localScale *= scale;
+    }
 
-    public void SetAttack(IAttack att) {
+    private void SetAttack(IAttack att) {
         attack = att;
     }
 
@@ -33,7 +39,6 @@ public abstract class IProjectile : MonoBehaviour
         return attack.GetTargetPosition();
     }
 
-
     protected virtual void ApplyConfigurations() {
         sprite.sprite = projectileConfiguration.sprite;
         speed = projectileConfiguration.speed;
@@ -43,13 +48,9 @@ public abstract class IProjectile : MonoBehaviour
         scale = projectileConfiguration.scale;
     }
 
-    protected virtual void Start() {
-        collider = GetComponent<Collider2D>();
-        sprite = GetComponent<SpriteRenderer>();
-        rb = GetComponent<Rigidbody2D>();
+    public virtual void Init(IAttack att) {
+        SetAttack(att);
         ApplyConfigurations();
-        transform.localScale *= scale;
-        Launch();
     }
 
     protected virtual void OnTriggerEnter2D(Collider2D col) {
@@ -60,20 +61,13 @@ public abstract class IProjectile : MonoBehaviour
     }
 
 
-    protected virtual void Launch() {
-        StartCoroutine(LaunchAttack());
+    public virtual void Launch(Vector2 direction) {
+        StartCoroutine(LaunchAttack(direction));
     }
 
-    protected virtual IEnumerator LaunchAttack() {
+    protected virtual IEnumerator LaunchAttack(Vector2 direction) {
         collider.enabled = true;
-
-        Vector2 goalPos = GetTarget().transform.position;
-        Vector2 dir = goalPos - (Vector2)transform.position;
-        dir.Normalize();
-        dir += offset * Random.insideUnitCircle;
-        dir.Normalize();
-
-        rb.AddForce(100 * speed * dir);
+        rb.AddForce(100 * speed * direction);
 
         yield return new WaitForSeconds(destroyTime);
         CleanUp();
