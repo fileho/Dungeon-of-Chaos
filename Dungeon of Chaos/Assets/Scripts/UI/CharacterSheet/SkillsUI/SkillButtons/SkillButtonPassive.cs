@@ -7,13 +7,11 @@ using UnityEngine.UI;
 public class SkillButtonPassive : SkillButton
 {
     [SerializeField] private int skillIndex;
-    private EquippedSkillSlots equippedSkillSlots;
     private SkillInfoPassive skillInfo;
 
     public override void Init()
     {
         base.Init();
-        equippedSkillSlots = FindObjectOfType<EquippedSkillSlots>();
         skillInfo = skillSystem.GetSkillInfoPassive(skillIndex);
         if (skillInfo == null)
         {
@@ -27,17 +25,8 @@ public class SkillButtonPassive : SkillButton
 
     public override void OnBeginDrag(PointerEventData eventData)
     {
-        if (eventData.button == PointerEventData.InputButton.Right || 
-            !skillSystem.IsUnlockedPassive(skillIndex))
-        {
             eventData.pointerDrag = null;
             return;
-        }
-        dragDrop.transform.position = eventData.position;
-        dragDrop.GetComponent<Image>().sprite = skillInfo.GetSkillData().GetIcon();
-        dragDrop.SetActive(true);
-
-        equippedSkillSlots.Highlight();
     }
 
     public override void OnPointerEnter(PointerEventData eventData)
@@ -49,8 +38,7 @@ public class SkillButtonPassive : SkillButton
 
     public override void OnEndDrag(PointerEventData eventData)
     {
-        base.OnEndDrag(eventData);
-        equippedSkillSlots.RemoveHighlight();
+        return;
     }
 
     public override void OnPointerExit(PointerEventData eventData)
