@@ -11,6 +11,18 @@ public class GameController : MonoBehaviour
     {
         saveSystem = FindObjectOfType<SaveSystem>();
         saveSystem.Load();
+
+        LoadMapElements(FindObjectsOfType<Checkpoint>());
+        LoadMapElements(FindObjectsOfType<MapFragment>());
+    }
+
+    private void LoadMapElements<T>(T[] list) where T : IMapSavable
+    {
+        foreach (var elem in list)
+        {
+            if (saveSystem.dungeonData.IsSaved(elem.GetUniqueId()))
+                elem.Load();
+        }
     }
 
     public void Death()
