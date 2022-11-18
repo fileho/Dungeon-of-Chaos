@@ -12,19 +12,17 @@ public class SavedSkillSystem
     public List<SavedSkillInfo> backlogSecondary;
 
     public List<int> activated;
-    public List<int> equipped;
     public int activatedDash;
     public int activatedSecondary;
 
     public SavedSkillSystem(List<SavedSkillInfo> backlogActive, List<SavedSkillInfo> backlogPassive, List<SavedSkillInfo> backlogDash, List<SavedSkillInfo> backlogSecondary,
-                            List<int> activated, List<int> equipped, int activatedDash, int activatedSecondary)
+                            List<int> activated, int activatedDash, int activatedSecondary)
     {
         this.backlogActive = backlogActive;
         this.backlogPassive = backlogPassive;
         this.backlogDash = backlogDash;
         this.backlogSecondary = backlogSecondary;
         this.activated = activated;
-        this.equipped = equipped;
         this.activatedDash = activatedDash;
         this.activatedSecondary = activatedSecondary;
     }
@@ -42,15 +40,12 @@ public class SkillSystem : MonoBehaviour
     private List<SkillInfoSecondaryAttack> secondaryAttacks;
 
     private List<int> activated;
-    private List<int> equipped;
 
     private int activatedDash;
     private int activatedSecondary;
 
     [SerializeField]
     private int activeSkillsSlots;
-    [SerializeField]
-    private int passiveSkillsSlots;
 
     [SerializeField]
     private List<int> skillPointsRequired;
@@ -63,9 +58,6 @@ public class SkillSystem : MonoBehaviour
         activated = new List<int>();
         for (int i = 0; i < activeSkillsSlots; i++)
             activated.Add(-1);
-        equipped = new List<int>();
-        for (int i = 0; i < passiveSkillsSlots; i++)
-           equipped.Add(-1);
         foreach (SkillInfoActive skill in activeSkills)
             skill.ResetLevel();
         activatedDash = 0;
@@ -176,10 +168,6 @@ public class SkillSystem : MonoBehaviour
     #endregion
 
     #region PassiveSkills
-    public int GetPassiveSkillSlots()
-    {
-        return passiveSkillsSlots;
-    }
     private bool IsValidPassive(int index)
     {
         return index >= 0 && index < passiveSkills.Count;
@@ -200,31 +188,14 @@ public class SkillSystem : MonoBehaviour
         skill.Upgrade();
     }
 
-    public void Equip(int index, int slot)
-    {
-        if (equipped[slot] != -1)
-            passiveSkills[equipped[slot]].Unequip(Character.instance.stats);
-        equipped[slot] = index;
-        passiveSkills[index].Equip(Character.instance.stats);
-    }
-
     public bool IsUnlockedPassive(int index)
     {
         return IsValidPassive(index) && passiveSkills[index].IsUnlocked();
     }
 
-    public bool IsEquipped(int index)
-    {
-        return equipped.Contains(index);
-    }
     public SkillInfoPassive GetSkillInfoPassive(int index)
     {
         return IsValidPassive(index) ? passiveSkills[index] : null;
-    }
-
-    public SkillInfoPassive GetEquippedSkill(int index)
-    {
-        return GetSkillInfoPassive(equipped[index]);
     }
     #endregion
 
@@ -393,7 +364,7 @@ public class SkillSystem : MonoBehaviour
     public SavedSkillSystem Save()
     {
         return new SavedSkillSystem(GetSavedInfo(activeSkills), GetSavedInfo(passiveSkills), GetSavedInfo(dashSkills), GetSavedInfo(secondaryAttacks),
-            activated, equipped, activatedDash, activatedSecondary);
+            activated, activatedDash, activatedSecondary);
     }
 
     private void LoadList(List<int> target, List<int> indices)
@@ -432,7 +403,6 @@ public class SkillSystem : MonoBehaviour
         }
 
         LoadList(activated, saved.activated);
-        LoadList(equipped, saved.equipped);
         activatedDash = saved.activatedDash;
         activatedSecondary = saved.activatedSecondary;
     }
