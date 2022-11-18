@@ -3,35 +3,35 @@ using UnityEngine;
 
 public struct SaveAttributes
 {
-    public int dungeon;
     public Vector3 characterPosition;
     public Stats stats;
     public SkillSystem skillSystem;
+    public DungeonData dungeonData;
 
-    public SaveAttributes(int dungeon, Vector3 characterPosition, Stats stats, SkillSystem skillSystem)
+    public SaveAttributes(Vector3 characterPosition, Stats stats, SkillSystem skillSystem, DungeonData dungeonData)
     {
-        this.dungeon = dungeon;
         this.characterPosition = characterPosition;
         this.stats = stats;
         this.skillSystem = skillSystem;
+        this.dungeonData = dungeonData;
     }
 }
 
 [System.Serializable]
 public class SaveData
 {
-    public int dungeon;
     public Vector3s characterPosition;
     public SavedStats savedStats;
     public SavedSkillSystem savedSkillSystem;
+    public DungeonData dungeonData;
     public DateTime timestamp;
 
     public SaveData(SaveAttributes data)
     {
-        dungeon = data.dungeon;
         characterPosition = Vector3s.FromV3(data.characterPosition);
         savedStats = data.stats.Save();
         savedSkillSystem = data.skillSystem.Save();
+        dungeonData = data.dungeonData;
         timestamp = DateTime.Now;
     }
 
