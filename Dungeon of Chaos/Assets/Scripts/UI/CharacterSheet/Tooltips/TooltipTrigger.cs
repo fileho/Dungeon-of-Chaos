@@ -9,22 +9,24 @@ public class TooltipTrigger : MonoBehaviour, IPointerEnterHandler, IPointerExitH
     [SerializeField] private string subheader;
     [SerializeField] private string content;
 
-    private float delay = 0.75f;
+    //private TooltipSystem tooltip = TooltipSystem.instance;
+
+    private const float delay = 0.35f;
     public void OnPointerEnter(PointerEventData eventData)
     {
-        StartCoroutine("ShowTooltip");
+        StartCoroutine(nameof(ShowTooltip));
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
-        StopCoroutine("ShowTooltip");
+        StopCoroutine(nameof(ShowTooltip));
         TooltipSystem.instance.Hide();
     }
 
     private IEnumerator ShowTooltip()
     {
-        yield return new WaitForSeconds(delay);
-        TooltipSystem.instance.Show(content, header, subheader);
+        yield return new WaitForSecondsRealtime(delay);
+        TooltipSystem.instance.Show(header, subheader, "", content);
         yield return null;
     }
 }

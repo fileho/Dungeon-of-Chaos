@@ -12,7 +12,7 @@ public abstract class SkillSlot : MonoBehaviour, IDropHandler
 
     protected SkillSystem skillSystem;
 
-    private void Start()
+    protected virtual void Start()
     {
         skillSystem = FindObjectOfType<SkillSystem>();
     }

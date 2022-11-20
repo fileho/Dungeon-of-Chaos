@@ -1,23 +1,25 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Events;
 
-[CreateAssetMenu(menuName = "SO/Skills/ChangeStatPassive")]
-public class IncreaseStat : IPassiveSkill
+public abstract class IncreaseStat : IPassiveSkill
 {
     [SerializeField] private float amount;
-    [SerializeField] private UnityEvent<float> changeStat;
 
-    private float value;
     public override void Equip(Stats stats)
     {
-        value = amount * stats.GetSpellPower();
-        changeStat.Invoke(value);
+        //TODO: Maybe the value could be slightly increased with level of the character?
+        ChangeStat(stats, amount);
     }
 
     public override void Unequip(Stats stats)
     {
-        changeStat.Invoke(-value);
+        ChangeStat(stats, -amount);
+    }
+
+    protected abstract void ChangeStat(Stats stats, float val);
+
+    public override string GetDescription()
+    {
+        string s = string.Format(skillData.GetDescription(), amount.ToString());
+        return s;
     }
 }

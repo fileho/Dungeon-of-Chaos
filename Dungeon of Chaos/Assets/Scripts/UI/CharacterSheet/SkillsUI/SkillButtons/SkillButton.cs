@@ -10,6 +10,7 @@ public abstract class SkillButton : MonoBehaviour, IPointerDownHandler, IPointer
     [SerializeField] protected Text level;
     [SerializeField] protected GameObject locked;
     [SerializeField] protected GameObject load;
+    [SerializeField] protected Image frame;
 
     protected SkillSystem skillSystem;
 
@@ -31,9 +32,6 @@ public abstract class SkillButton : MonoBehaviour, IPointerDownHandler, IPointer
 
     public void OnPointerDown(PointerEventData eventData)
     {
-        //TODO: Hide Tooltip
-        //TooltipSystem.instance.Hide();
-        Debug.Log("OnPointerDown");
         if (eventData.button == PointerEventData.InputButton.Left)
             Debug.Log("Left Button");
         else if (eventData.button == PointerEventData.InputButton.Right)
@@ -62,11 +60,9 @@ public abstract class SkillButton : MonoBehaviour, IPointerDownHandler, IPointer
         load.SetActive(false);
     }
 
-    protected virtual void Start()
+    public virtual void Init()
     {
         skillSystem = FindObjectOfType<SkillSystem>();
-        SetLevel();
-        SetIcon();
     }
 
     void Update()
@@ -88,4 +84,19 @@ public abstract class SkillButton : MonoBehaviour, IPointerDownHandler, IPointer
     public abstract void SetIcon();
 
     public abstract void SetLevel();
+
+    protected string GetLevelDescription(int lvl)
+    {
+        string ret = string.Format("Current level ({0})", lvl.ToString());
+        return lvl == 0
+            ? "Locked"
+            : ret;
+    }
+    protected string GetNextLevelDescription(int lvl, int max)
+    {
+        string ret = string.Format("Next level ({0})", (lvl + 1).ToString());
+        return lvl == max
+            ? "Max level reached"
+            : ret;
+    }
 }
