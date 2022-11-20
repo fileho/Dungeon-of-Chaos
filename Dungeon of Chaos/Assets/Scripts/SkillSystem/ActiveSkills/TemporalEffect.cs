@@ -4,7 +4,7 @@ using UnityEngine;
 
 public abstract class TemporalEffect : ISkillEffect
 {
-    [SerializeField] private float duration;
+    [SerializeField] protected float duration;
     [SerializeField] private float value;
 
     protected float timeLeft;
