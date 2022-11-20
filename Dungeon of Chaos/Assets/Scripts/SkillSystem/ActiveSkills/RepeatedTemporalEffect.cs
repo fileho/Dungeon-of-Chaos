@@ -7,18 +7,23 @@ using UnityEngine.Events;
 public abstract class RepeatedTemporalEffect : TemporalEffect
 {
     [SerializeField] private float frequency;
+    private float time = 0f;
 
     public override bool DestroyEffect()
     {
         if (!UpdateTime())
             return true;
         if (ShouldApplyEffect())
+        {
             ApplyEffect();
+            time -= frequency;
+        }
         return false;
     }
 
     protected bool ShouldApplyEffect()
     {
-        return (duration - timeLeft) % frequency == 0f;
+        time += Time.deltaTime;
+        return time >= frequency;
     }
 }
