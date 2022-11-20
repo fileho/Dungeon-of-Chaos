@@ -16,13 +16,30 @@ public class GameController : MonoBehaviour
         LoadMapElements(FindObjectsOfType<MapFragment>());
     }
 
-    private void LoadMapElements<T>(T[] list) where T : IMapSavable
+    // TODO remove this later
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.C))
+        {
+            Debug.Log("Level complete - cheat");
+            LevelComplete();
+        }
+    }
+
+    private void LoadMapElements<T>(IEnumerable<T> list)
+        where T : IMapSavable
     {
         foreach (var elem in list)
         {
-            if (saveSystem.dungeonData.IsSaved(elem.GetUniqueId()))
+            if (saveSystem.DungeonData.IsSaved(elem.GetUniqueId()))
                 elem.Load();
         }
+    }
+
+    public void LevelComplete()
+    {
+        saveSystem.LevelComplete();
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 
     public void Death()
