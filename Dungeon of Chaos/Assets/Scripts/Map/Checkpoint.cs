@@ -57,7 +57,7 @@ public class Checkpoint : MonoBehaviour, IMapSavable
 
     private void Interact()
     {
-        saveSystem.dungeonData.AddSavedUid(id);
+        saveSystem.DungeonData.AddSavedUid(id);
         tooltipCanvas.SetActive(false);
         characterSheet.Open();
         Time.timeScale = 0f;

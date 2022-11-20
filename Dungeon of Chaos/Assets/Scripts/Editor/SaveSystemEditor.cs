@@ -7,10 +7,12 @@ using UnityEngine;
 public class SaveSystemEditor : Editor
 {
     private SaveSystem saveSystem;
+    private SerializedProperty defaultCharacterPositions;
 
     private void OnEnable()
     {
-        saveSystem = (SaveSystem) target;
+        saveSystem = (SaveSystem)target;
+        defaultCharacterPositions = serializedObject.FindProperty("defaultCharacterPositions");
     }
 
     public override void OnInspectorGUI()
@@ -21,7 +23,9 @@ public class SaveSystemEditor : Editor
         {
             saveSystem.RemoveCurrentSave();
         }
-        
+
+        EditorGUILayout.PropertyField(defaultCharacterPositions);
+
         serializedObject.ApplyModifiedProperties();
     }
 }
