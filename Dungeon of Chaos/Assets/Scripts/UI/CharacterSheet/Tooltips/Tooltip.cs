@@ -26,7 +26,7 @@ public class Tooltip : MonoBehaviour
         layoutElement = GetComponent<LayoutElement>();
         rectTransform = GetComponent<RectTransform>();
     }
-    public void SetText(string header, string subheader, string ch1, string des1, string ch2 = "", string des2 = "")
+    public void SetText(string header, string subheader, SkillDescription current, SkillDescription next = new SkillDescription())
     {
         headerText.text = header;
         subheaderText.text = subheader;
@@ -34,18 +34,14 @@ public class Tooltip : MonoBehaviour
         int headerLength = Mathf.RoundToInt(headerText.text.Length * headerSizeModifier);
         int subheaderLength = subheaderText.text.Length;
 
-        int ch1Length = ch1.Length;
-        int des1Length = des1.Length;
-
-        int ch2Length = ch2.Length;
-        int des2Length = des2.Length;
+        int currentLength = current.GetLongestLength();
+        int nextLength = next.GetLongestLength();
 
         layoutElement.enabled = (headerLength > wrapLimit || subheaderLength > wrapLimit
-            || ch1Length > wrapLimit || des1Length > wrapLimit
-            || ch2Length > wrapLimit || des2Length > wrapLimit);
+            || currentLength > wrapLimit || nextLength > wrapLimit);
 
-        content1.Fill(ch1, des1);
-        content2.Fill(ch2, des2);
+        content1.Fill(current);
+        content2.Fill(next);
     } 
 
     public void DisplayMessage(string message)

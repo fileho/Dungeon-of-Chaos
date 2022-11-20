@@ -4,34 +4,10 @@ using System.Net.Configuration;
 using System.Reflection;
 using UnityEngine;
 
-
-[System.Serializable]
-public class SkillData
-{
-    [SerializeField] private string name;
-    [SerializeField] private string description;
-    [SerializeField] private Sprite icon;
-
-    public Sprite GetIcon()
-    {
-        return icon;
-    }
-
-    public string GetName()
-    {
-        return name;
-    }
-
-    public string GetDescription()
-    {
-        return description;
-    }
-}
-
 [CreateAssetMenu(menuName = "SO/Skills/Skills/Active")]
-public class IActiveSkill : ScriptableObject
+public class IActiveSkill : ISkill
 {
-    [SerializeField] protected SkillData skillData;
+    //[SerializeField] protected SkillData skillData;
 
     [SerializeField] protected float cooldown;
     [SerializeField] protected float manaCost;
@@ -41,12 +17,12 @@ public class IActiveSkill : ScriptableObject
 
     protected float cooldownLeft;
 
-    public SkillData GetSkillData()
+    /*public SkillData GetSkillData()
     {
         return skillData;
-    }
+    }*/
 
-    public virtual string GetDescription()
+    public override string GetEffectDescription()
     {
         List<string> descriptionValues = new List<string>();
         foreach (ISkillEffect effect in effects)
@@ -63,19 +39,19 @@ public class IActiveSkill : ScriptableObject
         object[] args = descriptionValues.ToArray();
         string skillDes = string.Format(skillData.GetDescription(), args);
 
-        return skillDes + "\n" + "\n" + GetStaticDescription();
+        return skillDes;
     }   
 
-    protected string GetStaticDescription()
+    public override string GetCostDescription()
     {
         string mCost = manaCost > 0
-            ? "Mana Cost: " + manaCost.ToString() + "\n"
+            ? "Mana Cost: " + manaCost.ToString() + " "
             : "";
         string sCost = staminaCost > 0
-            ? "Stamina Cost: " + staminaCost.ToString() + "\n"
+            ? "Stamina Cost: " + staminaCost.ToString() + " "
             : "";
         string cool = cooldown > 0
-            ? "Cooldown: " + cooldown.ToString() + " seconds"
+            ? "Cooldown: " + cooldown.ToString() + " s"
             : "";
         return mCost + sCost + cool;
     }

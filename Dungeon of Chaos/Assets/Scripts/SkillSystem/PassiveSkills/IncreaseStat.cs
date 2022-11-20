@@ -17,7 +17,7 @@ public abstract class IncreaseStat : IPassiveSkill
 
     protected abstract void ChangeStat(Stats stats, float val);
 
-    public override string GetDescription()
+    public override string GetEffectDescription()
     {
         string s = string.Format(skillData.GetDescription(), amount.ToString());
         return s;

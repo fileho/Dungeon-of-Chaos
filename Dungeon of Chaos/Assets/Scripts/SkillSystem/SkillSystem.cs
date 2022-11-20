@@ -1,4 +1,4 @@
-using System.Collections;
+using System.Linq;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Assertions;
@@ -27,6 +27,7 @@ public class SavedSkillSystem
         this.activatedSecondary = activatedSecondary;
     }
 }
+
 
 public class SkillSystem : MonoBehaviour
 {
@@ -86,6 +87,102 @@ public class SkillSystem : MonoBehaviour
             secondaryAttacks[activatedSecondary].GetCurrentSkill().UpdateCooldown();
     }
 
+    #region Unlocking
+    private bool CanUnlock<T>(SkillInfo<T> skillInfo) where T : ISkill
+    {
+        if (skillInfo.GetUnlockingRequirements() == null)
+            return true;
+        return HasEnoughSkillPoints(skillInfo) && HasEnoughLevel(skillInfo) && HasEnoughPrimary(skillInfo) && HasEnoughSecondary(skillInfo) && HasPrerequisiteSkill(skillInfo);
+    }
+
+    private bool HasEnoughSkillPoints<T>(SkillInfo<T> skillInfo) where T : ISkill
+    {
+        return levelling.skillPoints >= skillInfo.GetUnlockingRequirements().GetCost();
+    }
+
+    private bool HasEnoughLevel<T>(SkillInfo<T> skillInfo) where T : ISkill
+    {
+        return levelling.GetLevel() >= skillInfo.GetUnlockingRequirements().GetLevelRequirement();
+    }
+
+    private bool HasEnoughPrimary<T>(SkillInfo<T> skillInfo) where T : ISkill
+    {
+        return HasEnoughAttribute(skillInfo.GetUnlockingRequirements().GetPrimaryAttributeType(), 
+            skillInfo.GetUnlockingRequirements().GetPrimaryAttribute());
+    }
+
+    private bool HasEnoughSecondary<T>(SkillInfo<T> skillInfo) where T : ISkill
+    {
+        return HasEnoughAttribute(skillInfo.GetUnlockingRequirements().GetSecondaryAttributeType(),
+            skillInfo.GetUnlockingRequirements().GetSecondaryAttribute());
+    }
+
+    private bool HasEnoughAttribute(Attributes att, float val)
+    {
+        switch (att)
+        {
+            case Attributes.None:
+                return true;
+            case Attributes.Strength:
+                return owner.stats.GetStrength() >= val;
+            case Attributes.Intelligence:
+                return owner.stats.GetIntelligence() >= val;
+            case Attributes.Constitution:
+                return owner.stats.GetConstitution() >= val;
+            case Attributes.Endurance:
+                return owner.stats.GetEndurance() >= val;
+            case Attributes.Wisdom:
+                return owner.stats.GetWisdom() >= val;
+            default:
+                return true;
+        }
+    }
+
+    private bool HasPrerequisiteSkill<T>(SkillInfo<T> skillInfo) where T : ISkill
+    {
+        string key = skillInfo.GetUnlockingRequirements().GetSkillKey();
+        if (key == null || key == "")
+            return true;
+
+        SkillInfoActive sa = GetActiveSkill(key);
+        if (sa != null)
+            return sa.IsUnlocked();
+
+        SkillInfoPassive sp = GetPassiveSkill(key);
+        if (sp != null)
+            return sp.IsUnlocked();
+
+        SkillInfoDash sd = GetDashSkill(key);
+        if (sd != null)
+            return sd.IsUnlocked();
+
+        SkillInfoSecondaryAttack ssa = GetSecondaryAttack(key);
+        if (ssa != null)
+            return ssa.IsUnlocked();
+
+        return true;
+    }
+   
+    private SkillInfoActive GetActiveSkill(string key)
+    {
+        return activeSkills.First(s => (s.GetId() == key));
+    }
+
+    private SkillInfoPassive GetPassiveSkill(string key)
+    {
+        return passiveSkills.First(s => (s.GetId() == key));
+    }
+
+    private SkillInfoDash GetDashSkill(string key)
+    {
+        return dashSkills.First(s => (s.GetId() == key));
+    }
+    private SkillInfoSecondaryAttack GetSecondaryAttack(string key)
+    {
+        return secondaryAttacks.First(s => (s.GetId() == key));
+    } 
+    #endregion
+
     #region ActiveSkills
     public int GetActiveSkillSlots()
     {
@@ -106,7 +203,7 @@ public class SkillSystem : MonoBehaviour
     }
     public bool CanUpgradeActive(int index)
     {
-        return IsValidActive(index) && levelling.skillPoints >= skillPointsRequired[activeSkills[index].GetLevel()] && activeSkills[index].CanUpgrade();
+        return IsValidActive(index) && CanUnlock(activeSkills[index]) && activeSkills[index].CanUpgrade();
     }
 
     public void UpgradeActive(int index)
@@ -114,7 +211,7 @@ public class SkillSystem : MonoBehaviour
         if (!IsValidActive(index))
             return;
         SkillInfoActive skill = activeSkills[index];
-        levelling.skillPoints -= skillPointsRequired[skill.GetLevel()];
+        levelling.skillPoints -= activeSkills[index].GetUnlockingRequirements().GetCost();
         skill.Unlock();
         skill.Upgrade();
     }
@@ -175,7 +272,7 @@ public class SkillSystem : MonoBehaviour
 
     public bool CanUpgradePassive(int index)
     {
-        return IsValidPassive(index) && levelling.skillPoints >= skillPointsRequired[passiveSkills[index].GetLevel()] && passiveSkills[index].CanUpgrade();
+        return IsValidPassive(index) && CanUnlock(passiveSkills[index]) && passiveSkills[index].CanUpgrade();
     }
 
     public void UpgradePassive(int index)
@@ -183,7 +280,7 @@ public class SkillSystem : MonoBehaviour
         if (!IsValidPassive(index))
             return;
         SkillInfoPassive skill = passiveSkills[index];
-        levelling.skillPoints -= skillPointsRequired[skill.GetLevel()];
+        levelling.skillPoints -= passiveSkills[index].GetUnlockingRequirements().GetCost();
         skill.Unlock();
         skill.Upgrade();
     }
@@ -222,7 +319,7 @@ public class SkillSystem : MonoBehaviour
 
     public bool CanUpgradeDash(int index)
     {
-        return IsValidDash(index) && levelling.skillPoints >= skillPointsRequired[dashSkills[index].GetLevel()] && dashSkills[index].CanUpgrade();
+        return IsValidDash(index) && CanUnlock(dashSkills[index]) && dashSkills[index].CanUpgrade();
     }
 
     public void UpgradeDash(int index)
@@ -230,7 +327,7 @@ public class SkillSystem : MonoBehaviour
         if (!IsValidDash(index))
             return;
         SkillInfoDash skill = dashSkills[index];
-        levelling.skillPoints -= skillPointsRequired[skill.GetLevel()];
+        levelling.skillPoints -= dashSkills[index].GetUnlockingRequirements().GetCost();
         skill.Unlock();
         skill.Upgrade();
     }
@@ -276,7 +373,7 @@ public class SkillSystem : MonoBehaviour
 
     public bool CanUpgradeSecondaryAttack(int index)
     {
-        return IsValidSecondary(index) && levelling.skillPoints >= skillPointsRequired[secondaryAttacks[index].GetLevel()] && secondaryAttacks[index].CanUpgrade();
+        return IsValidSecondary(index) && CanUnlock(secondaryAttacks[index]) && secondaryAttacks[index].CanUpgrade();
     }
 
     public void UpgradeSecondary(int index)
@@ -284,7 +381,7 @@ public class SkillSystem : MonoBehaviour
         if (!IsValidSecondary(index))
             return;
         SkillInfoSecondaryAttack skill = secondaryAttacks[index];
-        levelling.skillPoints -= skillPointsRequired[skill.GetLevel()];
+        levelling.skillPoints -= secondaryAttacks[index].GetUnlockingRequirements().GetCost();
         skill.Unlock();
         skill.Upgrade();
     }

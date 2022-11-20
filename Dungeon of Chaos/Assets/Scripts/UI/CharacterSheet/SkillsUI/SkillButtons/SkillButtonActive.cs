@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -43,9 +41,8 @@ public class SkillButtonActive : SkillButton
 
     public override void OnPointerEnter(PointerEventData eventData)
     {
-        string ch1 = GetLevelDescription(skillInfo.GetLevel());
-        TooltipSystem.instance.Show(skillInfo.GetSkillData().GetName(), "Active Skill", ch1, skillInfo.GetDescription(), 
-            GetNextLevelDescription(skillInfo.GetLevel(), skillInfo.GetMaxLevel()), skillInfo.GetDescription(1));
+        TooltipSystem.instance.Show(skillInfo.GetSkillData().GetName(), "Active Skill", 
+            skillInfo.GetCurrentDescription(), skillInfo.GetNextDescription());
     }
 
     public override void OnPointerExit(PointerEventData eventData)
