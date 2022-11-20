@@ -48,9 +48,18 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 2ef78b948e70c2a4f875ebd859e91fdb, type: 2}
   - {fileID: 11400000, guid: e22c2ae27ef73d242b8fdd056c7cb4df, type: 2}
   - {fileID: 11400000, guid: 2ac1f3af184e3804a88bbf794faaa338, type: 2}
-  passiveSkills: []
-  activated: []
-  activatedDash: {fileID: 11400000, guid: 2ac30d8afbb535c43ad68d41a52540c8, type: 2}
+  passiveSkills:
+  - {fileID: 11400000, guid: 27921fe9ac8249a49b57bffb3cacc4af, type: 2}
+  - {fileID: 11400000, guid: 34c44c30e59e0a848b351307a9f8520a, type: 2}
+  - {fileID: 11400000, guid: 70b49b23543b479468e8f0029a8c50fe, type: 2}
+  - {fileID: 11400000, guid: 9d1125d6024ecc548930b06398623726, type: 2}
+  - {fileID: 11400000, guid: cbfb1160547bd614babab423a564c621, type: 2}
+  - {fileID: 11400000, guid: 186de799ab1a6aa459d94c4e1c1a5ce7, type: 2}
+  dashSkills:
+  - {fileID: 11400000, guid: c12ce609f4f210d4791cf76dd5cea6f2, type: 2}
+  - {fileID: 11400000, guid: f1e9886fb1b01a14993c4bca49cbfaf2, type: 2}
+  secondaryAttacks:
+  - {fileID: 11400000, guid: 6a66b102a01a45049a369e6dc7507d03, type: 2}
   activeSkillsSlots: 5
   passiveSkillsSlots: 5
   skillPointsRequired: 010000000200000003000000

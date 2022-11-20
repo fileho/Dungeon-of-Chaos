@@ -6,13 +6,21 @@ using UnityEngine.UI;
 
 public class SkillSlotPassive : SkillSlot
 {
+    private EquippedSkillSlots equippedSkillSlots;
+
+    protected override void Start()
+    {
+        base.Start();
+        equippedSkillSlots = FindObjectOfType<EquippedSkillSlots>();
+    }
     public override void OnDrop(PointerEventData eventData)
     {
-        if (eventData.pointerDrag == null)
+        if (eventData.pointerDrag == null || 
+            eventData.pointerDrag.GetComponent<SkillButtonPassive>() == null)
             return;
-        SkillInfoPassive skillInfo = eventData.pointerDrag.GetComponent<SkillButtonPassive>().GetSkillInfo();
-        skillSystem.Equip(skillInfo, index);
-        GetComponent<Image>().sprite = eventData.pointerDrag.GetComponent<Image>().sprite;
+        int skillIndex = eventData.pointerDrag.GetComponent<SkillButtonPassive>().GetSkillIndex();
+        skillSystem.Equip(skillIndex, index);
+        equippedSkillSlots.Redraw();
     }
 }
 

@@ -12,10 +12,20 @@ public abstract class TemporalEffect : ISkillEffect
 
     protected List<Unit> targets;
 
+    public override string[] GetEffectsValues(Unit owner)
+    {
+        return new string[] { GetValue(owner).ToString() };
+    }
+
+    private float GetValue(Unit owner)
+    {
+        return value * owner.stats.GetSpellPower();
+    }
+
     protected override void ApplyOnTargets(Unit unit, List<Unit> targets)
     {
         this.targets = targets;
-        val = value * unit.stats.GetSpellPower();
+        val = GetValue(unit);
         timeLeft = duration;
         ApplyEffect();
     }

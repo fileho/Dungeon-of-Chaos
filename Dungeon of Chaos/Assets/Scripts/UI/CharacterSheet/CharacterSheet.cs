@@ -4,15 +4,23 @@ using UnityEngine;
 
 public class CharacterSheet : MonoBehaviour
 {
-    [SerializeField]
-    private GameObject child;
-    private SkillSystem skillSystem;
+    [SerializeField] private GameObject child;
+
+    private SkillSlotDash skillSlotDash;
+    private SkillSlotSecondary skillSlotSecondary;
+    private ActivatedSkillSlots activatedSkillSlots;
+    private EquippedSkillSlots equippedSkillSlots;
+
+    private SkillButtonActive[] skillButtonsActive;
+    private SkillButtonDash[] skillButtonsDash;
+    private SkillButtonSecondary[] skillButtonsSecondary;
+    private SkillButtonPassive[] skillButtonsPassive;
+
 
     private GameController gameController;
 
     private void Start()
     {
-        skillSystem = FindObjectOfType<SkillSystem>();
         gameController = FindObjectOfType<GameController>();
     }
 
@@ -24,7 +32,34 @@ public class CharacterSheet : MonoBehaviour
     public void Open()
     {
         child.SetActive(true);
-        skillSystem.InitSkillSlots();
+
+        activatedSkillSlots = FindObjectOfType<ActivatedSkillSlots>();
+        activatedSkillSlots.Init();
+
+        equippedSkillSlots = FindObjectOfType<EquippedSkillSlots>();
+        equippedSkillSlots.Init();
+
+        skillButtonsActive = FindObjectsOfType<SkillButtonActive>();
+        foreach (SkillButtonActive skillBtn in skillButtonsActive)
+            skillBtn.Init();
+
+        skillButtonsDash = FindObjectsOfType<SkillButtonDash>();
+        foreach (SkillButtonDash skillBtn in skillButtonsDash)
+            skillBtn.Init();
+
+        skillSlotDash = FindObjectOfType<SkillSlotDash>();
+        skillSlotDash.Init();
+
+        skillButtonsSecondary = FindObjectsOfType<SkillButtonSecondary>();
+        foreach (SkillButtonSecondary skillBtn in skillButtonsSecondary)
+            skillBtn.Init();
+
+        skillButtonsPassive = FindObjectsOfType<SkillButtonPassive>();
+        foreach (SkillButtonPassive skillBtn in skillButtonsPassive)
+            skillBtn.Init();
+
+        skillSlotSecondary = FindObjectOfType<SkillSlotSecondary>();
+        skillSlotSecondary.Init();
     }
 
     public void Close()

@@ -17,8 +17,8 @@ TagManager:
   - Enemy
   - EnemyAttack
   - Walls
-  - 
-  - 
+  - Obstacles
+  - MinimapOnly
   - 
   - 
   - 

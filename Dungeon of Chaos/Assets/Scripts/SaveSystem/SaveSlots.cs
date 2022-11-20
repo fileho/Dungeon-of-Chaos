@@ -34,7 +34,7 @@ public class SaveSlots : MonoBehaviour
         if (data == null)
             return "Empty Save Slot";
 
-        string s = "Dungeon " + data.dungeon + "\n" + data.timestamp;
+        string s = "Dungeon " + data.dungeonData.dungeon + "\n" + data.timestamp;
         return s;
     }
 
