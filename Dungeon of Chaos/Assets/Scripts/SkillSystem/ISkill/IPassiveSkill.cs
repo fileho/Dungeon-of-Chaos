@@ -2,17 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class IPassiveSkill : ScriptableObject
+[CreateAssetMenu(menuName = "SO/Skills/Skills/Passive")]
+public abstract class IPassiveSkill : ISkill
 {
-    [SerializeField] protected SkillData skillData;
-
     public abstract void Equip(Stats stats);
     public abstract void Unequip(Stats stats);
 
-    public SkillData GetSkillData()
+    public override string GetCostDescription()
     {
-        return skillData;
+        return "";
     }
-
-    public abstract string GetDescription();
 }

@@ -7,13 +7,17 @@ public class TooltipContent : MonoBehaviour
 {
     [SerializeField] public GameObject contentHeader;
     [SerializeField] public GameObject description;
+    [SerializeField] public GameObject cost;
+    [SerializeField] public GameObject requirements;
 
-    public void Fill(string cH, string des)
+    public void Fill(SkillDescription skillDes)
     {
-        bool head = FillField(cH, contentHeader);
-        bool d = FillField(des, description);
+        bool head = FillField(skillDes.header, contentHeader);
+        bool d = FillField(skillDes.description, description);
+        bool c = FillField(skillDes.cost, this.cost);
+        bool r = FillField(skillDes.requirements, requirements);
 
-        this.enabled = (head || d);
+        this.enabled = (head || d || c || r);
     }
 
     private bool FillField(string s, GameObject obj)
