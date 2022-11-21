@@ -17,6 +17,9 @@ public struct SaveAttributes
     }
 }
 
+/// <summary>
+/// Raw data to be written to a file, has all data for one save slot
+/// </summary>
 [System.Serializable]
 public class SaveData
 {

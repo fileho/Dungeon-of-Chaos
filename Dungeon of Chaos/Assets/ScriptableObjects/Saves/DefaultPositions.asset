@@ -9,8 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 833ba32a6e382ba45a2dbbb7e9cf7750, type: 3}
-  m_Name: Save1
+  m_Script: {fileID: 11500000, guid: b53c5b4f6e03ba24ea8a62d6d900da2a, type: 3}
+  m_Name: DefaultPositions
   m_EditorClassIdentifier: 
-  dungeon: 1
-  characterPosition: {x: -17.66, y: -8.59, z: 0}
+  positions:
+  - {x: 65.78142, y: 82.94105, z: 0}
+  - {x: 92.5, y: 143.4, z: 0}
