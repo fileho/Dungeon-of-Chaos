@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using JetBrains.Annotations;
 using UnityEngine;
 using UnityEngine.Experimental.Rendering.Universal;
 using UnityEngine.Tilemaps;
@@ -10,7 +11,9 @@ public class RockShadows : MonoBehaviour
     [System.Serializable]
     struct RockShadow
     {
+        // ReSharper disable once UnassignedField.Local
         public TileBase rock;
+        // ReSharper disable once UnassignedField.Local
         public ShadowCaster2D shadow;
     }
 
