@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-[CreateAssetMenu(menuName = "SO/Skills/SkillEffects/RepeatedTemporalEffect")]
 public abstract class RepeatedTemporalEffect : TemporalEffect
 {
     [SerializeField] private float frequency;

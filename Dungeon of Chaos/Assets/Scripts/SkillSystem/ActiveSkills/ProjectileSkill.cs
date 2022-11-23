@@ -9,9 +9,15 @@ public class ProjectileSkill : ISkillEffect
     [SerializeField] private Projectile prefab;
     [SerializeField] private List<ISkillEffect> effects;
 
+    [SerializeField] private int amountOfProjectiles = 1;
+
+    private const float coneWidth = 60f;
+
     public override string[] GetEffectsValues(Unit owner)
     {
         List<string> descriptionValues = new List<string>();
+        if (amountOfProjectiles > 1)
+            descriptionValues.Add(amountOfProjectiles.ToString());
         foreach (ISkillEffect effect in effects)
         {
             var d = effect.GetEffectsValues(owner);
@@ -31,8 +37,16 @@ public class ProjectileSkill : ISkillEffect
     {
         foreach (var targetPos in targetPositions)
         {
-            var projectile = Instantiate(prefab, unit.transform.position, Quaternion.identity);
-            projectile.Init(effects, unit, speed, targetPos);
+            float rotation = coneWidth / (amountOfProjectiles - 1);
+            float initialAngle = amountOfProjectiles == 1
+                ? 0
+                : rotation;
+            for (int i = 0; i < amountOfProjectiles; i++)
+            {
+                Vector2 dir = Quaternion.AngleAxis(initialAngle + i*rotation, Vector3.forward) * targetPos;
+                var projectile = Instantiate(prefab, unit.transform.position, Quaternion.identity);
+                projectile.Init(effects, unit, speed, dir);
+            }            
         }
     }
 }

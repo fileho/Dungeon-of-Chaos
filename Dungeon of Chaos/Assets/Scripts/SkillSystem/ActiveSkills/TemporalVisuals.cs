@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[CreateAssetMenu(menuName = "SO/Skills/SkillEffects/TemporalEffectVisuals")]
 public class TemporalVisuals : ISkillEffect
 {
     [SerializeField] private GameObject vfx;
