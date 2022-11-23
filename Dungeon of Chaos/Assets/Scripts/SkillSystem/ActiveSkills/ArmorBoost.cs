@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[CreateAssetMenu(menuName = "SO/Skills/SkillEffects/ArmorBoost")]
 public class ArmorBoost : OneTimeTemporalEffect
 {
     protected override void ApplyEffect()
