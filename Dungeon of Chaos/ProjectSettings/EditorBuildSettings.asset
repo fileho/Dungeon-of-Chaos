@@ -12,7 +12,7 @@ EditorBuildSettings:
     path: Assets/Scenes/DungeonGameplay.unity
     guid: b6341b0402bc8cf4da24707c8c3726c8
   - enabled: 1
-    path: Assets/Scenes/DungeonGameplay2.unity
+    path: Assets/Scenes/OrcCampDungeon.unity
     guid: ccbcd6cdc6a46144ba7b55cd714c72e3
   - enabled: 0
     path: Assets/Scenes/MVPDungeon.unity
