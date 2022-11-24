@@ -19,7 +19,9 @@ public class Essence : MonoBehaviour
     void Start()
     {
         Invoke(nameof(CleanUp), lifetime);
-        GetComponent<Rigidbody2D>().AddForce(80 * force * Random.insideUnitCircle);
+        var rb = GetComponent<Rigidbody2D>();
+        rb.AddForce(80 * force * Random.insideUnitCircle);
+        rb.AddTorque((Random.value -0.5f) * 200);
     }
 
     private void CleanUp()
