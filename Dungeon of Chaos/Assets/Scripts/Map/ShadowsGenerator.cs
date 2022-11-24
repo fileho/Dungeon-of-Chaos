@@ -54,8 +54,12 @@ public class ShadowsGenerator : MonoBehaviour
         // Spawn shadows for rocks
         GetComponent<RockShadows>().PlaceShadows(GetTilemap(grid, "Rocks"), scale);
 
-        // scene has to be reload for the shadows to rebuild
+        // Fog
+        foreach (var fog in FindObjectsOfType<Fog>())
+            fog.BakeShadows();
+
 #if UNITY_EDITOR
+        // scene has to be reload for the shadows to rebuild
         EditorSceneManager.SaveScene(EditorSceneManager.GetActiveScene());
         EditorSceneManager.OpenScene(EditorSceneManager.GetActiveScene().path);
 #endif

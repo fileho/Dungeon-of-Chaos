@@ -80,7 +80,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4991145636393533705}
-  - component: {fileID: 4991145636393533706}
+  - component: {fileID: 1195470590}
   m_Layer: 0
   m_Name: Shadow
   m_TagString: Untagged
@@ -97,12 +97,12 @@ Transform:
   m_GameObject: {fileID: 4991145636393533704}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 2, y: 2, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4991145637670211364}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &4991145636393533706
+--- !u!114 &1195470590
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -121,13 +121,13 @@ MonoBehaviour:
   m_SelfShadows: 0
   m_ApplyToSortingLayers: 00000000
   m_ShapePath:
-  - {x: -1.4989583, y: -0.5013664, z: 0}
-  - {x: 1.499668, y: -0.49949372, z: 0}
-  - {x: 1.4996223, y: 0.49996638, z: 0}
-  - {x: -1.4990345, y: 0.4997207, z: 0}
-  m_ShapePathHash: 316769985
+  - {x: 3, y: 1, z: 0}
+  - {x: 3, y: -1, z: 0}
+  - {x: -3, y: -1, z: 0}
+  - {x: -3, y: 1, z: 0}
+  m_ShapePathHash: 0
   m_Mesh: {fileID: 0}
-  m_InstanceId: -141116
+  m_InstanceId: 411472
 --- !u!1 &4991145637095282422
 GameObject:
   m_ObjectHideFlags: 0

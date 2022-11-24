@@ -1,7 +1,9 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Reflection;
 using UnityEngine;
+using UnityEngine.Experimental.Rendering.Universal;
 
 public class Fog : MonoBehaviour
 {
@@ -15,6 +17,23 @@ public class Fog : MonoBehaviour
         var t = tooltipCanvas.transform;
         t.rotation = Quaternion.identity;
         t.Translate(0, 3, 0);
+
+        BakeShadows();
+    }
+
+    /// <summary>
+    /// Bakes shadows for a pixel perfect alignment to avoid shimmering
+    /// </summary>
+    public void BakeShadows()
+    {
+        var shadow = transform.parent.Find("Shadow").GetComponent<ShadowCaster2D>();
+
+        BindingFlags accessFlagsPrivate = BindingFlags.NonPublic | BindingFlags.Instance;
+        FieldInfo shapePathField = typeof(ShadowCaster2D).GetField("m_ShapePath", accessFlagsPrivate);
+
+        Vector3[] points =
+            new[] { new Vector3(3, 1, 0), new Vector3(3, -1, 0), new Vector3(-3, -1, 0), new Vector3(-3, 1, 0) };
+        shapePathField.SetValue(shadow, points);
     }
 
     private void Update()
