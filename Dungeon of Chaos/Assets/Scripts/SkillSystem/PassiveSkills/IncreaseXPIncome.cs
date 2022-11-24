@@ -1,0 +1,10 @@
+using UnityEngine;
+
+[CreateAssetMenu(menuName = "SO/Skills/PassiveSkills/XPModifier")]
+public class IncreaseXPIncome : IncreaseStat
+{
+    protected override void ChangeStat(Stats stats, float val)
+    {
+        stats.ChangeXPModifier(val);
+    }
+}

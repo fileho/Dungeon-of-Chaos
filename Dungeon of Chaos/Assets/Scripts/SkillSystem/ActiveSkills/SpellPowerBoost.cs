@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[CreateAssetMenu(menuName = "SO/Skills/SkillEffects/SpellPowerBoost")]
 public class SpellPowerBoost : OneTimeTemporalEffect
 {
     protected override void ApplyEffect()

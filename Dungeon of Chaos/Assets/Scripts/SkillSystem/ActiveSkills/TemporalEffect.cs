@@ -14,10 +14,10 @@ public abstract class TemporalEffect : ISkillEffect
 
     public override string[] GetEffectsValues(Unit owner)
     {
-        return new string[] { GetValue(owner).ToString() };
+        return new string[] { GetValue(owner).ToString(), duration.ToString() + " seconds" };
     }
 
-    private float GetValue(Unit owner)
+    private float GetValue(Unit owner) 
     {
         return value * owner.stats.GetSpellPower();
     }
@@ -32,7 +32,7 @@ public abstract class TemporalEffect : ISkillEffect
 
     protected abstract void ApplyEffect();
 
-    public abstract bool DestroyEffect();
+    public abstract bool Update();
 
     protected bool UpdateTime()
     {

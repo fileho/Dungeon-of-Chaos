@@ -8,7 +8,7 @@ public abstract class RepeatedTemporalEffect : TemporalEffect
     [SerializeField] private float frequency;
     private float time = 0f;
 
-    public override bool DestroyEffect()
+    public override bool Update()
     {
         if (!UpdateTime())
             return true;

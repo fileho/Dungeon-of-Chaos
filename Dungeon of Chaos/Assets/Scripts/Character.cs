@@ -37,6 +37,7 @@ public class Character : Unit
         if (dead)
             return;
         RegenerateStamina();
+        RegenerateMana();
         RotateWeapon();
         Attack();
         FlipSprite();
@@ -89,6 +90,11 @@ public class Character : Unit
     private void RegenerateStamina()
     {
         stats.RegenerateStamina(stats.GetStaminaRegen() * Time.deltaTime);
+    }
+
+    private void RegenerateMana()
+    {
+        stats.RegenerateMana(stats.GetManaRegen() * Time.deltaTime);
     }
 
     private void FlipSprite()
