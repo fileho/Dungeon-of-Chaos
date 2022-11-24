@@ -7,12 +7,13 @@ public class CharacterMovement : IMovement
     private Vector2 moveDir;
 
     private Rigidbody2D rb;
+    private Animator animator;
 
     public override IMovement Init(Transform transform, Stats stats)
     {
         this.stats = stats;
         rb = transform.GetComponent<Rigidbody2D>();
-
+        animator = transform.GetComponent<Animator>();
         return this;
     }
 
@@ -29,11 +30,15 @@ public class CharacterMovement : IMovement
             dir += Vector2.down;
 
         dir = dir.normalized;
-        if (dir != Vector2.zero)
-        {
+        if (dir != Vector2.zero) {
             moveDir = dir;
+            animator.SetBool("isMoving", true);
             // TODO ADD this with animations
             // SoundManager.instance.PlaySound(footstepsSFX);
+        }
+        else
+        {
+            animator.SetBool("isMoving", false);
         }
 
         rb.AddForce(stats.MovementSpeed() * Time.fixedDeltaTime * 1000 * dir);

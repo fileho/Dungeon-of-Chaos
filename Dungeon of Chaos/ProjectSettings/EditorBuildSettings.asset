@@ -5,13 +5,16 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 0
-    path: 
-    guid: 00000000000000000000000000000000
-  - enabled: 0
-    path: 
-    guid: 00000000000000000000000000000000
   - enabled: 1
+    path: Assets/Scenes/SaveSystemDevelopment.unity
+    guid: 6d1896482a3802149bdbcee64488348e
+  - enabled: 1
+    path: Assets/Scenes/DungeonGameplay.unity
+    guid: b6341b0402bc8cf4da24707c8c3726c8
+  - enabled: 1
+    path: Assets/Scenes/DungeonGameplay2.unity
+    guid: ccbcd6cdc6a46144ba7b55cd714c72e3
+  - enabled: 0
     path: Assets/Scenes/MVPDungeon.unity
     guid: 72699e7d8ae61ed458085435ba0be3d3
   m_configObjects: {}
