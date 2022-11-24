@@ -21,7 +21,7 @@ public class TemporalVisualEffect : MonoBehaviour
     {
         for (int i = 0; i < effects.Count; i++)
         {
-            if (effects[i].DestroyEffect())
+            if (effects[i].Update())
                 activeEffects[i] = false;                
         }
 

@@ -5,7 +5,7 @@ using UnityEngine.Events;
 
 public abstract class OneTimeTemporalEffect : TemporalEffect
 {
-    public override bool DestroyEffect()
+    public override bool Update()
     {
         if (UpdateTime())
             return false;

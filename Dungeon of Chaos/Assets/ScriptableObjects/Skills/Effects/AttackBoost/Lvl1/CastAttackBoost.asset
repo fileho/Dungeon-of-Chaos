@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e94f9c68a919a364f890aaf4ee247101, type: 3}
+  m_Name: CastAttackBoost
+  m_EditorClassIdentifier: 
+  target: {fileID: 11400000, guid: c562b796c0bf8db4b823a7b0d5e0a5db, type: 2}
+  range: 0
+  vfx: {fileID: 3440211394499801297, guid: 4f26aa18ace843d46835c34a16789dad, type: 3}
+  sfx:
+    soundCategory: 3
+    sound: 0
+    volume: 1
+    pitch: 1
+    priority: 0
+  duration: 1
+  effects:
+  - {fileID: 11400000, guid: 159e458f5e1dd054d97816d55ffbb807, type: 2}
+  - {fileID: 11400000, guid: 8915879ac3640a84ea1bf1c449b79e49, type: 2}

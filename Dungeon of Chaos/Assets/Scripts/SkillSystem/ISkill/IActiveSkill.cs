@@ -16,11 +16,21 @@ public class IActiveSkill : ISkill
     [SerializeField] protected List<ISkillEffect> effects;
 
     protected float cooldownLeft;
-
-    /*public SkillData GetSkillData()
+    
+    private float RecalculateCooldown()
     {
-        return skillData;
-    }*/
+        return cooldown * Character.instance.stats.GetCooldownModifier();
+    }
+
+    private float RecalculateManaCost()
+    {
+        return manaCost * Character.instance.stats.GetManaCostMod();
+    }
+
+    private float RecalculateStaminaCost()
+    {
+        return staminaCost * Character.instance.stats.GetStaminaCostMod();
+    }
 
     public override string GetEffectDescription()
     {
@@ -44,14 +54,14 @@ public class IActiveSkill : ISkill
 
     public override string GetCostDescription()
     {
-        string mCost = manaCost > 0
-            ? "Mana Cost: " + manaCost.ToString() + " "
+        string mCost = RecalculateManaCost() > 0
+            ? "Mana Cost: " + RecalculateManaCost().ToString() + " "
             : "";
-        string sCost = staminaCost > 0
-            ? "Stamina Cost: " + staminaCost.ToString() + " "
+        string sCost = RecalculateStaminaCost() > 0
+            ? "Stamina Cost: " + RecalculateStaminaCost().ToString() + " "
             : "";
-        string cool = cooldown > 0
-            ? "Cooldown: " + cooldown.ToString() + " s"
+        string cool = RecalculateCooldown() > 0
+            ? "Cooldown: " + RecalculateCooldown().ToString() + " s"
             : "";
         return mCost + sCost + cool;
     }
@@ -73,7 +83,7 @@ public class IActiveSkill : ISkill
         if (!CanUse(unit.stats))
             return;
 
-        cooldownLeft = cooldown;
+        cooldownLeft = RecalculateCooldown();
         Consume(unit.stats);
 
         foreach (var e in effects)
@@ -84,7 +94,7 @@ public class IActiveSkill : ISkill
 
     protected void Consume(Stats stats)
     {
-        stats.ConsumeMana(manaCost);
-        stats.ConsumeStamina(staminaCost);
+        stats.ConsumeMana(RecalculateManaCost());
+        stats.ConsumeStamina(RecalculateStaminaCost());
     }
 }

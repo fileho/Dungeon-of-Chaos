@@ -4,22 +4,24 @@ public abstract class IncreaseStat : IPassiveSkill
 {
     [SerializeField] private float amount;
 
+    private float value;
+
     public override void Equip(Stats stats)
     {
-        //TODO: Maybe the value could be slightly increased with level of the character?
-        ChangeStat(stats, amount);
+        value = amount * (1 + stats.GetLevel() * 0.2f);
+        ChangeStat(stats, value);
     }
 
     public override void Unequip(Stats stats)
     {
-        ChangeStat(stats, -amount);
+        ChangeStat(stats, -value);
     }
 
     protected abstract void ChangeStat(Stats stats, float val);
 
     public override string GetEffectDescription()
     {
-        string s = string.Format(skillData.GetDescription(), amount.ToString());
-        return s;
+        value = amount * (1 + Character.instance.stats.GetLevel() * 0.2f);
+        return string.Format(skillData.GetDescription(), value.ToString());
     }
 }
