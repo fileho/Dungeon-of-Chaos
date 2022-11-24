@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: DefaultPositions
   m_EditorClassIdentifier: 
   positions:
-  - {x: 65.78142, y: 82.94105, z: 0}
+  - {x: 37, y: 10, z: 0}
   - {x: 92.5, y: 143.4, z: 0}

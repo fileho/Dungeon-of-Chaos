@@ -117210,7 +117210,7 @@ GameObject:
   - component: {fileID: 1291762671}
   - component: {fileID: 1291762673}
   - component: {fileID: 1291762672}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Ground
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -128759,7 +128759,7 @@ GameObject:
   - component: {fileID: 1416051624}
   - component: {fileID: 1416051623}
   - component: {fileID: 1416051622}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Walls
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -190281,7 +190281,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5979cddd334a3ec488b4103c81d3846d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  size: {x: 60, y: 50}
+  size: {x: 40, y: 35}
   seed:
     seed: 0
   postprocessing: {fileID: 58307580}
