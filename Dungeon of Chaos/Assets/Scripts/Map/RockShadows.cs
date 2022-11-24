@@ -27,6 +27,10 @@ public class RockShadows : MonoBehaviour
     public void PlaceShadows(Tilemap tilemap, float scale)
     {
         const string transformName = "Rocks";
+        var t = transform.Find(transformName);
+        if (t != null)
+            DestroyImmediate(t.gameObject);
+
         var r = new GameObject(transformName).transform;
         r.parent = transform;
 
