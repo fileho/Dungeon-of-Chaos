@@ -11,6 +11,35 @@ public class GameController : MonoBehaviour
     {
         saveSystem = FindObjectOfType<SaveSystem>();
         saveSystem.Load();
+
+        LoadMapElements(FindObjectsOfType<Checkpoint>());
+        LoadMapElements(FindObjectsOfType<MapFragment>());
+    }
+
+    // TODO remove this later
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.C))
+        {
+            Debug.Log("Level complete - cheat");
+            LevelComplete();
+        }
+    }
+
+    private void LoadMapElements<T>(IEnumerable<T> list)
+        where T : IMapSavable
+    {
+        foreach (var elem in list)
+        {
+            if (saveSystem.DungeonData.IsSaved(elem.GetUniqueId()))
+                elem.Load();
+        }
+    }
+
+    public void LevelComplete()
+    {
+        saveSystem.LevelComplete();
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 
     public void Death()
