@@ -14,10 +14,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   range: 3.5
   damage: 1
-  staminaCost: 20
+  staminaCost: 25
+  rangeWeight: 1
+  damageWeight: 1
+  staminaCostWeight: 1
   cooldown: 1
   attackAnimationDuration: 0.6
   indicator: {fileID: 0}
+  indicatorConfiguration: {fileID: 0}
   type: 1
   swingSFX:
     soundCategory: 2

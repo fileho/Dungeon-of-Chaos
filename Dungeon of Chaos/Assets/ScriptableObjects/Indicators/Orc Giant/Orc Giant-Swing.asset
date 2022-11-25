@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 93fe0077bee90467d98ac8d0d71773b3, type: 3}
   m_Name: Orc Giant-Swing
   m_EditorClassIdentifier: 
-  duration: 0.6
+  duration: 0.5
   color: {r: 1, g: 0.9411765, b: 0.28627452, a: 1}
   scale: 5
   sweep: 60
