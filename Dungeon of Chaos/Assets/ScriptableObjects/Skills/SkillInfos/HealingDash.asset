@@ -10,12 +10,20 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e85e0a7db5f2a0b48bcfea02e34342bf, type: 3}
-  m_Name: DefensiveDash
+  m_Name: HealingDash
   m_EditorClassIdentifier: 
-  name: Defensive Dash
+  name: Healing Dash
   skills:
-  - {fileID: 11400000, guid: 7f2f6fba4e0f3c146a4916cc82123d50, type: 2}
-  - {fileID: 11400000, guid: 5331628804f6ff3408199108c9c998e9, type: 2}
-  requirements: []
-  level: 1
-  maxLevel: 2
+  - {fileID: 11400000, guid: 45eabfb2fa5d81246a89e6ef01bedb34, type: 2}
+  requirements:
+  - skillPointsCost: 1
+    level: 13
+    primaryAttribute:
+      attribute: 4
+      value: 15
+    secondaryAttribute:
+      attribute: 2
+      value: 13
+    skillKey: 
+  level: 0
+  maxLevel: 1
