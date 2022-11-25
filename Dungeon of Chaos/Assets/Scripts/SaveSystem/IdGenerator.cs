@@ -14,6 +14,7 @@ public class IdGenerator : MonoBehaviour
         id = 0; 
         SetIds(FindObjectsOfType<Checkpoint>());
         SetIds(FindObjectsOfType<MapFragment>());
+        SetIds(FindObjectsOfType<Chest>());
     }
 
     private int GenerateNextId()
