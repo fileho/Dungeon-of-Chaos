@@ -18,7 +18,7 @@ public class Fog : MonoBehaviour
         t.rotation = Quaternion.identity;
         t.Translate(0, 3, 0);
 
-        BakeShadows();
+    //    BakeShadows();
     }
 
     /// <summary>

@@ -58,6 +58,9 @@ public class ShadowsGenerator : MonoBehaviour
         foreach (var fog in FindObjectsOfType<Fog>())
             fog.BakeShadows();
 
+        foreach (var box in FindObjectsOfType<Box>())
+            box.BakeShadows();
+
 #if UNITY_EDITOR
         // scene has to be reload for the shadows to rebuild
         EditorSceneManager.SaveScene(EditorSceneManager.GetActiveScene());
