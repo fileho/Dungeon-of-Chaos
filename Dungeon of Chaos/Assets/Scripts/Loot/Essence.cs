@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class Essence : MonoBehaviour
@@ -18,10 +19,10 @@ public class Essence : MonoBehaviour
   
     void Start()
     {
-        Invoke(nameof(CleanUp), lifetime);
         var rb = GetComponent<Rigidbody2D>();
         rb.AddForce(80 * force * Random.insideUnitCircle);
         rb.AddTorque((Random.value -0.5f) * 200);
+        StartCoroutine(SmoothCleanup());
     }
 
     private void CleanUp()
@@ -78,5 +79,23 @@ public class Essence : MonoBehaviour
                 break;
         }
         CleanUp();
+    }
+
+    private IEnumerator SmoothCleanup()
+    {
+        yield return new WaitForSeconds(lifetime);
+
+        var sp = GetComponent<SpriteRenderer>();
+        const float duration = 1f;
+        float time = 0;
+
+        while (time <= duration)
+        {
+            float t = time / duration;
+            sp.color = new Color(sp.color.r, sp.color.g, sp.color.b, 1 - t);
+            time += Time.deltaTime;
+            yield return null;
+        }
+        Destroy(gameObject);
     }
 }

@@ -12,9 +12,9 @@ public class GameController : MonoBehaviour
         saveSystem = FindObjectOfType<SaveSystem>();
         saveSystem.Load();
 
-        LoadMapElements(FindObjectsOfType<Checkpoint>());
-        LoadMapElements(FindObjectsOfType<MapFragment>());
+        LoadMap();
     }
+
 
     // TODO remove this later
     private void Update()
@@ -25,6 +25,14 @@ public class GameController : MonoBehaviour
             LevelComplete();
         }
     }
+
+    private void LoadMap()
+    {
+        LoadMapElements(FindObjectsOfType<Checkpoint>());
+        LoadMapElements(FindObjectsOfType<MapFragment>());
+        LoadMapElements(FindObjectsOfType<Chest>());
+    }
+
 
     private void LoadMapElements<T>(IEnumerable<T> list)
         where T : IMapSavable
