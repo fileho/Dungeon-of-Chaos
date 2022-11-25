@@ -485,6 +485,8 @@ public class SkillSystem : MonoBehaviour
         for (int i = 0; i < saved.backlogPassive.Count; i++)
         {
             passiveSkills[i].Load(saved.backlogPassive[i]);
+            if (passiveSkills[i].IsUnlocked())
+                passiveSkills[i].Equip(owner.stats);
         }
 
         Assert.AreEqual(dashSkills.Count, saved.backlogDash.Count);
