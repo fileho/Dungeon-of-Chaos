@@ -16,4 +16,4 @@ MonoBehaviour:
   color: {r: 1, g: 0.93992954, b: 0.28773582, a: 1}
   scale: 4
   secondarySpriteColor: {r: 1, g: 0.9411765, b: 0.28627452, a: 1}
-  secondarySpriteScale: 8
+  secondarySpriteScale: 6
