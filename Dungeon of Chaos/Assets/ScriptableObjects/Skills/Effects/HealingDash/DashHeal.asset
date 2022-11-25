@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4f4b9ff954e8be744afb07941f646ec0, type: 3}
   m_Name: DashHeal
   m_EditorClassIdentifier: 
-  target: {fileID: 11400000, guid: c562b796c0bf8db4b823a7b0d5e0a5db, type: 2}
+  target: {fileID: 0}
   range: 0
-  value: 0.75
+  value: 1
