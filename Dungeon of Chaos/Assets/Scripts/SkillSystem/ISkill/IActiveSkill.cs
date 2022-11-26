@@ -7,8 +7,6 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "SO/Skills/Skills/Active")]
 public class IActiveSkill : ISkill
 {
-    //[SerializeField] protected SkillData skillData;
-
     [SerializeField] protected float cooldown;
     [SerializeField] protected float manaCost;
     [SerializeField] protected float staminaCost;
@@ -19,7 +17,7 @@ public class IActiveSkill : ISkill
     
     private float RecalculateCooldown()
     {
-        return cooldown * Character.instance.stats.GetCooldownModifier();
+        return cooldown / Character.instance.stats.GetCooldownModifier();
     }
 
     private float RecalculateManaCost()

@@ -8,6 +8,11 @@ public abstract class RepeatedTemporalEffect : TemporalEffect
     [SerializeField] private float frequency;
     private float time = 0f;
 
+    public override string[] GetEffectsValues(Unit owner)
+    {
+        return new string[] { GetValue(owner).ToString(), frequency.ToString(), duration.ToString() };
+    }
+
     public override bool Update()
     {
         if (!UpdateTime())

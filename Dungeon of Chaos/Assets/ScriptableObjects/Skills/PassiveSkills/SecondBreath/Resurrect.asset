@@ -9,17 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e94f9c68a919a364f890aaf4ee247101, type: 3}
-  m_Name: ArmorBoostVFX
+  m_Script: {fileID: 11500000, guid: 0ea46220144fb6d40b2106b9d818c8b2, type: 3}
+  m_Name: Resurrect
   m_EditorClassIdentifier: 
   target: {fileID: 11400000, guid: c562b796c0bf8db4b823a7b0d5e0a5db, type: 2}
   range: 0
-  vfx: {fileID: 4617805228910178686, guid: 95ee1b7c06c6b3f4fa860e76a7984594, type: 3}
-  sfx:
-    soundCategory: 3
-    sound: 3
-    volume: 1
-    pitch: 1
-    priority: 0
-  duration: 0.5
-  effects: []
+  value: 0.3

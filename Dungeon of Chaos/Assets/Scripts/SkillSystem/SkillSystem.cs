@@ -294,6 +294,30 @@ public class SkillSystem : MonoBehaviour
     {
         return IsValidPassive(index) ? passiveSkills[index] : null;
     }
+
+    public bool ShouldResurrect()
+    {
+        foreach (SkillInfoPassive skill in passiveSkills)
+        {
+            if (skill.GetId() == "SecondBreath" && skill.IsUnlocked() && 
+                (skill.GetCurrentSkill() as SecondBreath).ShouldResurrect())
+                return true;
+        }
+        return false;
+    }
+
+    public void Resurrect()
+    {
+        foreach (SkillInfoPassive skill in passiveSkills)
+        {
+            if (skill.GetId() == "SecondBreath" && skill.IsUnlocked())
+            {
+                (skill.GetCurrentSkill() as SecondBreath).Resurrect(owner);
+                return;
+            }
+        }
+    }
+
     #endregion
 
     #region Dash
