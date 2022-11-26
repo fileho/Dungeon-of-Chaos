@@ -26,6 +26,16 @@ public class Character : Unit
         attack = GetComponentInChildren<IAttack>();
     }
 
+    protected override void Die()
+    {
+        if (SkillSystem.ShouldResurrect())
+        {
+            SkillSystem.Resurrect();
+            return;
+        }
+        base.Die();
+    }
+
     protected override void CleanUp()
     {
         // TODO respawn logic

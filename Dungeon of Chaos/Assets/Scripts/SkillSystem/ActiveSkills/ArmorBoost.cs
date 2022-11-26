@@ -7,7 +7,7 @@ public class ArmorBoost : OneTimeTemporalEffect
 {
     public override string[] GetEffectsValues(Unit owner)
     {
-        return new string[] { val.ToString()};
+        return new string[] { GetValue(owner).ToString()};
     }
     protected override void ApplyEffect()
     {

@@ -17,7 +17,7 @@ public abstract class TemporalEffect : ISkillEffect
         return new string[] { GetValue(owner).ToString(), duration.ToString() + " seconds" };
     }
 
-    private float GetValue(Unit owner) 
+    protected float GetValue(Unit owner) 
     {
         return value * owner.stats.GetSpellPower();
     }
