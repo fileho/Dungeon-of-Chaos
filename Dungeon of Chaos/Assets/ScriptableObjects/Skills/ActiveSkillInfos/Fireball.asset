@@ -16,10 +16,18 @@ MonoBehaviour:
   skills:
   - {fileID: 11400000, guid: 8abe12a138da3be42b8774f3331a1374, type: 2}
   - {fileID: 11400000, guid: ab6ae21c7e70dfa44bdd000e312abb0e, type: 2}
-  - {fileID: 11400000, guid: 234e0c0ed510f1a4f95ade74ac26d919, type: 2}
   requirements:
-  - skillPointsCost: 0
-    level: 0
+  - skillPointsCost: 1
+    level: 5
+    primaryAttribute:
+      attribute: 0
+      value: 0
+    secondaryAttribute:
+      attribute: 0
+      value: 0
+    skillKey: 
+  - skillPointsCost: 2
+    level: 13
     primaryAttribute:
       attribute: 0
       value: 0
@@ -28,4 +36,4 @@ MonoBehaviour:
       value: 0
     skillKey: 
   level: 0
-  maxLevel: 3
+  maxLevel: 2

@@ -48,9 +48,6 @@ public class SkillSystem : MonoBehaviour
     [SerializeField]
     private int activeSkillsSlots;
 
-    [SerializeField]
-    private List<int> skillPointsRequired;
-
     private Unit owner;
     private Levelling levelling;
 

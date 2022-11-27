@@ -19,11 +19,11 @@ MonoBehaviour:
   - skillPointsCost: 1
     level: 13
     primaryAttribute:
-      attribute: 4
-      value: 15
+      attribute: 0
+      value: 0
     secondaryAttribute:
-      attribute: 2
-      value: 13
+      attribute: 0
+      value: 0
     skillKey: 
   level: 0
   maxLevel: 1
