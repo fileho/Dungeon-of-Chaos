@@ -1,0 +1,60 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using static UnityEditor.PlayerSettings;
+
+public class HealAttack : IAttack
+{
+
+    protected float healAmount = 2;
+    protected float healRadius = 10;
+
+    protected override void ApplyConfigurations()
+    {
+        base.ApplyConfigurations();
+        HealAttackConfiguration _attackConfiguration = attackConfiguration as HealAttackConfiguration;
+        healAmount = _attackConfiguration.healAmount;
+        healRadius = _attackConfiguration.healRadius;
+    }
+
+
+    protected override IEnumerator StartAttackAnimation()
+    {
+        IIndicator indicator = CreateIndicator(transform);
+        if (indicator)
+        {
+            indicator.transform.localPosition = Weapon.GetWeaponTipOffset();
+            indicator.Use();
+            yield return new WaitForSeconds(indicator.Duration);
+        }
+
+        PrepareWeapon();
+        Heal();
+
+        //SoundManager.instance.PlaySound(swingSFX);
+        ResetWeapon();
+        isAttacking = false;
+    }
+
+
+    private void Heal()
+    {
+        Collider2D[] colliders = Physics2D.OverlapCircleAll(owner.transform.position, healRadius, 1 << LayerMask.NameToLayer("Enemy"));
+        if (colliders.Length > 0)
+        {
+            for (int i = 0; i < colliders.Length; i++)
+            {
+                if (colliders[i].GetComponent<Unit>())
+                {
+                    // Increase health
+                    colliders[i].GetComponent<Unit>().stats.RegenerateHealth(healAmount);
+                }
+            }
+        }
+    }
+
+    public override string ToString()
+    {
+        return base.ToString() + "_Ranged";
+    }
+}

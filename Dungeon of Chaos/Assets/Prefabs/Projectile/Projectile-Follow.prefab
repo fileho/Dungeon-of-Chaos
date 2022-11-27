@@ -134,4 +134,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e09dd1c0d59634925a21cfd847df1d1a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  projectileConfiguration: {fileID: 11400000, guid: 045a0780cd4934d8fa0a501c7066533b, type: 2}
+  projectileConfiguration: {fileID: 11400000, guid: 1432104e8cd1e449c8be964a505c5de4, type: 2}
