@@ -18,7 +18,7 @@ public class SkillButtonPassive : SkillButton
         }
         SetLevel();
         SetIcon();
-        frame.color = Color.blue;
+        //frame.color = Color.blue;
     }
 
     public override void OnBeginDrag(PointerEventData eventData)

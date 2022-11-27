@@ -10,7 +10,7 @@ public abstract class SkillButton : MonoBehaviour, IPointerDownHandler, IPointer
     [SerializeField] protected Text level;
     [SerializeField] protected GameObject locked;
     [SerializeField] protected GameObject load;
-    [SerializeField] protected Image frame;
+    //[SerializeField] protected Image frame;
 
     protected SkillSystem skillSystem;
 
