@@ -11,7 +11,9 @@ GameObject:
   - component: {fileID: 5574832814731392626}
   - component: {fileID: 8987129635712844092}
   - component: {fileID: 4206247659596657827}
-  - component: {fileID: 915715879013471167}
+  - component: {fileID: 8951698297141142934}
+  - component: {fileID: 5762757451150156253}
+  - component: {fileID: 7779720129590994047}
   m_Layer: 9
   m_Name: Arm
   m_TagString: Untagged
@@ -101,7 +103,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &915715879013471167
+--- !u!114 &8951698297141142934
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -110,10 +112,36 @@ MonoBehaviour:
   m_GameObject: {fileID: 1094064536408609657}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0c6cba19a2df74cc3b714cd8c73f1623, type: 3}
+  m_Script: {fileID: 11500000, guid: c6bf42a5706df494298f1bf9baee028f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackConfiguration: {fileID: 11400000, guid: 4787b10b4551b4f5dba751e04b8ae571, type: 2}
+  attackConfiguration: {fileID: 11400000, guid: 42851a5238dff413098e474cc353bfa5, type: 2}
+--- !u!114 &5762757451150156253
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1094064536408609657}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 35b2d618a1fec449394e1b37bb14da08, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  attackConfiguration: {fileID: 11400000, guid: 33bad7b7f7a554a6cbbb5360f34fe8ee, type: 2}
+--- !u!114 &7779720129590994047
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1094064536408609657}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 33415e21cbcad4a9a9dd743561af4894, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  attackConfiguration: {fileID: 11400000, guid: 7f44ca523643e4fffb1b069a00599a37, type: 2}
 --- !u!1 &1419886181399069787
 GameObject:
   m_ObjectHideFlags: 0
@@ -780,7 +808,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1419886182692781938}
   m_Layer: 0
-  m_Name: Tou-Boss
+  m_Name: Tou-Lich Boss
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
