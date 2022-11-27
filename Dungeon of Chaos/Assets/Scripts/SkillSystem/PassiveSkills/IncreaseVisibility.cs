@@ -13,7 +13,7 @@ public class IncreaseVisibility : IPassiveSkill
 
     public override string GetEffectDescription()
     {
-        return "";
+        return skillData.GetDescription();
     }
 
     public override void Unequip(Stats stats)

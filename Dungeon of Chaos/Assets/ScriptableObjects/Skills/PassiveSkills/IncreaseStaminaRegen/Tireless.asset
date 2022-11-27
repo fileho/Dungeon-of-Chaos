@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 68a57157fe999814db78fa28376daab5, type: 3}
   m_Name: Tireless
   m_EditorClassIdentifier: 
-  name: Tireless
+  name: Tireless II
   skills:
   - {fileID: 11400000, guid: 926239c453e5be541a38eedba6fc0848, type: 2}
   - {fileID: 11400000, guid: 38510b3737535a34f9cb0cbb57c6b682, type: 2}

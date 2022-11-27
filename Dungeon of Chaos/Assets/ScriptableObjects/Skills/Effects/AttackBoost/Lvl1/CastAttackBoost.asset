@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   target: {fileID: 11400000, guid: c562b796c0bf8db4b823a7b0d5e0a5db, type: 2}
   range: 0
+  angle: 360
   vfx: {fileID: 3440211394499801297, guid: 4f26aa18ace843d46835c34a16789dad, type: 3}
   sfx:
     soundCategory: 3
@@ -23,5 +24,4 @@ MonoBehaviour:
     priority: 0
   duration: 1
   effects:
-  - {fileID: 11400000, guid: 159e458f5e1dd054d97816d55ffbb807, type: 2}
-  - {fileID: 11400000, guid: 8915879ac3640a84ea1bf1c449b79e49, type: 2}
+  - {fileID: 11400000, guid: 1c751c837fdb8a64dbf5462f31dcd39e, type: 2}
