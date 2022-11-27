@@ -15,5 +15,15 @@ MonoBehaviour:
   name: Strong Attack
   skills:
   - {fileID: 11400000, guid: ad08b273084b36f4aa61ea82ba051cd8, type: 2}
+  requirements:
+  - skillPointsCost: 1
+    level: 8
+    primaryAttribute:
+      attribute: 0
+      value: 0
+    secondaryAttribute:
+      attribute: 0
+      value: 0
+    skillKey: 
   level: 0
   maxLevel: 1
