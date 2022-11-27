@@ -12,7 +12,7 @@ public enum TutorialState
     Attack,
     Skills,
     EnemyAttack,
-    CheckPoint,
+    Checkpoint,
     MapUnlock,
     Default = 999,
 }
@@ -53,6 +53,7 @@ public class TutorialManager : MonoBehaviour
     {
         currentState = TutorialState.Default;
         StopCoroutine(coroutine);
+        EnableDisableTutorialScreen(false);
     }
 
     void EnableDisableTutorialScreen(bool state)
@@ -69,11 +70,9 @@ public class TutorialManager : MonoBehaviour
 
     IEnumerator ShowTutorial(TutorialState state)
     {
-        //PlayerPrefsManager.ClearData();
         currentState = state;
-        //print(currentState.ToString() + "__" + PlayerPrefsManager.Tutorial[currentState.ToString()]);
 
-        while (currentState != TutorialState.Default && !PlayerPrefsManager.Tutorial[currentState.ToString()])
+        while (currentState != TutorialState.Default && PlayerPrefs.GetInt(currentState.ToString(), 0) == 0)
         {
             currentTutorial = transform.Find(currentState.ToString()).gameObject;
             EnableDisableTutorialScreen(true);
@@ -98,9 +97,7 @@ public class TutorialManager : MonoBehaviour
             }
 
 
-            PlayerPrefsManager.Tutorial[currentState.ToString()] = true;
-            //print(currentState.ToString() + "__" + PlayerPrefsManager.Tutorial[currentState.ToString()]);
-
+            PlayerPrefs.SetInt(currentState.ToString(), 1);
             EnableDisableTutorialScreen(false);
             yield return new WaitForSeconds(0.5f);
 
