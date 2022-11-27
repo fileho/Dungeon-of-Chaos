@@ -10,6 +10,7 @@ public enum TutorialState
     Movement = 0,
     Dash,
     Attack,
+    Skills,
     EnemyAttack,
     CheckPoint,
     MapUnlock,
@@ -25,18 +26,21 @@ public struct Keys
 
 public class TutorialManager : MonoBehaviour
 {
+    private GameObject bg;
+    private Animator animator;
+    private TutorialState currentState = TutorialState.Default;
+    private Coroutine coroutine;
+    private GameObject currentTutorial;
 
-    Animator animator;
-    TutorialState currentState = TutorialState.Default;
-    Coroutine coroutine;
 
     public List<Keys> keys;
 
-    // @TODO: Add Playerprefs
     // Start is called before the first frame update
     void Start()
     {
         animator = GetComponent<Animator>();
+        bg = transform.Find("BG").gameObject;
+        Show(TutorialState.Movement);
     }
 
     public void Show(TutorialState state)
@@ -51,40 +55,66 @@ public class TutorialManager : MonoBehaviour
         StopCoroutine(coroutine);
     }
 
+    void EnableDisableTutorialScreen(bool state)
+    {
+        bg.SetActive(state);
+        currentTutorial.SetActive(state);
+
+        if (state)
+            animator.Play(currentState.ToString());
+        else
+            animator.StopPlayback();
+    }
+
 
     IEnumerator ShowTutorial(TutorialState state)
     {
+        //PlayerPrefsManager.ClearData();
         currentState = state;
-        while (currentState != TutorialState.Default)
+        //print(currentState.ToString() + "__" + PlayerPrefsManager.Tutorial[currentState.ToString()]);
+
+        while (currentState != TutorialState.Default && !PlayerPrefsManager.Tutorial[currentState.ToString()])
         {
-            GameObject currentTutorial = transform.Find(currentState.ToString()).gameObject;
-            currentTutorial.SetActive(true);
-            animator.Play(currentState.ToString());
+            currentTutorial = transform.Find(currentState.ToString()).gameObject;
+            EnableDisableTutorialScreen(true);
             bool pressed = false;
 
-            foreach (KeyCode key in keys[(int)currentState].KeyCodes)
-                if (Input.GetKeyDown(key))
-                    pressed = true;
 
+            KeyCode[] keycodes = keys[(int)currentState].KeyCodes;
             while (!pressed)
+            {
+                if (keycodes.Length > 0)
+                {
+                    foreach (KeyCode key in keycodes)
+                        if (Input.GetKeyDown(key))
+                            pressed = true;
+                }
+                else
+                {
+                    if (Input.anyKeyDown)
+                        pressed = true;
+                }
                 yield return null;
+            }
 
-            yield return new WaitForSeconds(2);
-            currentTutorial.SetActive(false);
-            switch (state)
+
+            PlayerPrefsManager.Tutorial[currentState.ToString()] = true;
+            //print(currentState.ToString() + "__" + PlayerPrefsManager.Tutorial[currentState.ToString()]);
+
+            EnableDisableTutorialScreen(false);
+            yield return new WaitForSeconds(0.5f);
+
+            switch (currentState)
             {
                 case TutorialState.Movement:
                     currentState = TutorialState.Dash;
                     break;
-
                 case TutorialState.Dash:
                     currentState = TutorialState.Attack;
                     break;
-
                 case TutorialState.Attack:
-                    currentState = TutorialState.Default;
+                    currentState = TutorialState.Skills;
                     break;
-
                 default:
                     currentState = TutorialState.Default;
                     break;
