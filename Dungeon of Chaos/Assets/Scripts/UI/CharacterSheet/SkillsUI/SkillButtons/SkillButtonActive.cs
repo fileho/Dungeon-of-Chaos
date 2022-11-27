@@ -20,7 +20,7 @@ public class SkillButtonActive : SkillButton
         }
         SetLevel();
         SetIcon();
-        frame.color = Color.red;
+        //frame.color = Color.red;
     }
 
     public override void OnBeginDrag(PointerEventData eventData)

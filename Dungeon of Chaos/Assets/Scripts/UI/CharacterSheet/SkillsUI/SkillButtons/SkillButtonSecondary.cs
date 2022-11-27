@@ -22,7 +22,7 @@ public class SkillButtonSecondary : SkillButton
         }
         SetLevel();
         SetIcon();
-        frame.color = new Color(1.0f, 0.64f, 0.0f);
+        //frame.color = new Color(1.0f, 0.64f, 0.0f);
     }
 
     public override void OnBeginDrag(PointerEventData eventData)

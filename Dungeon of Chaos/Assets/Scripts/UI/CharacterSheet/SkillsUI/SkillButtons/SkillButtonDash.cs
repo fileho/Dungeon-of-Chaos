@@ -22,7 +22,7 @@ public class SkillButtonDash : SkillButton
         }
         SetLevel();
         SetIcon();
-        frame.color = Color.green;
+        //frame.color = Color.green;
     }
 
     public override void OnBeginDrag(PointerEventData eventData)
