@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8bc651cb94d067c469a759ae729fca7c, type: 3}
-  m_Name: IncreaseXPIncome2
+  m_Name: IncreaseXP1
   m_EditorClassIdentifier: 
   skillData:
     name: Quick Learner
-    description: Increases XP gain multiplier by {0}.
+    description: Increases the multiplier of received XP by {0}.
     icon: {fileID: 21300000, guid: 3d8002bc6e9ac244eb072c4b507627de, type: 3}
-  amount: 0.5
+  amount: 0.1

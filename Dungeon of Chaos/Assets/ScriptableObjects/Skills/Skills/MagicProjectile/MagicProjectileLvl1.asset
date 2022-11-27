@@ -15,7 +15,7 @@ MonoBehaviour:
   skillData:
     name: Magic Shot
     description: Shoots a magical projectile which deals {0} damage.
-    icon: {fileID: 0}
+    icon: {fileID: 21300000, guid: 3b3e208032229904795dc24074e03452, type: 3}
   cooldown: 5
   manaCost: 10
   staminaCost: 0
