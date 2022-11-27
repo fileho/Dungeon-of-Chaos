@@ -10,7 +10,8 @@ public enum SkillEffectType
 public abstract class ISkillEffect : ScriptableObject
 {
     [SerializeReference] protected ITarget target;
-    [SerializeField] protected float range;
+    [SerializeField] protected float range = float.MaxValue;
+    [SerializeField] private float angle = 360;
 
     public void Use(Unit unit, List<Unit> targets = null, List<Vector2> targetPositions = null)
     {
@@ -34,7 +35,7 @@ public abstract class ISkillEffect : ScriptableObject
 
     protected virtual void Apply(Unit unit)
     {
-        target.InitTargettingData(unit, range, unit.transform.position);
+        target.InitTargettingData(unit, range, unit.transform.position, angle);
         var targets = target.GetTargetUnits();
         if (targets != null)
         {
