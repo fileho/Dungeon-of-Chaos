@@ -22,7 +22,7 @@ MonoBehaviour:
   attackAnimationDuration: 0.8
   indicator: {fileID: 8311782001119121317, guid: 5d2397d273438452f8dc020bad462a71, type: 3}
   indicatorConfiguration: {fileID: 11400000, guid: e7da8521095c34fa5b68bf1726b9f97c, type: 2}
-  type: 0
+  type: 1
   swingSFX:
     soundCategory: 0
     sound: 0
