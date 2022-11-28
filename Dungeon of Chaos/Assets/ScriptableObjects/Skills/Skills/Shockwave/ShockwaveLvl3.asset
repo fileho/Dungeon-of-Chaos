@@ -15,7 +15,7 @@ MonoBehaviour:
   skillData:
     name: Shockwave
     description: Creates a shockwave which deals {0} damage in range.
-    icon: {fileID: 21300000, guid: 8f67516c88cd5334c8d7dab392942f70, type: 3}
+    icon: {fileID: 21300000, guid: aa562f9447233654789b885e0646fd2c, type: 3}
   cooldown: 5
   manaCost: 15
   staminaCost: 0

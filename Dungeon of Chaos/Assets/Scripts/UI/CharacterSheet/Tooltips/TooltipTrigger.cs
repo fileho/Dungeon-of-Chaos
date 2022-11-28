@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class TooltipTrigger : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
+/*public class TooltipTrigger : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
     [SerializeField] private string header;
     [SerializeField] private string subheader;
@@ -29,4 +29,4 @@ public class TooltipTrigger : MonoBehaviour, IPointerEnterHandler, IPointerExitH
         TooltipSystem.instance.Show(header, subheader, "", content);
         yield return null;
     }
-}
+}*/

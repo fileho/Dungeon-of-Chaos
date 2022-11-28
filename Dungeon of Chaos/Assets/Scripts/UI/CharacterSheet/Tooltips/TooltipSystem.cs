@@ -12,10 +12,10 @@ public class TooltipSystem : MonoBehaviour
         instance = this;
     }
     
-    public void Show(string header, string subheader, string ch1, string des1, string ch2="", string des2="")
+    public void Show(string header, string subheader, SkillDescription current, SkillDescription next = new SkillDescription())
     {
         tooltip.gameObject.SetActive(true);
-        tooltip.SetText(header, subheader, ch1, des1, ch2, des2);        
+        tooltip.SetText(header, subheader, current, next);        
     }
 
     public void DisplayMessage(string message)

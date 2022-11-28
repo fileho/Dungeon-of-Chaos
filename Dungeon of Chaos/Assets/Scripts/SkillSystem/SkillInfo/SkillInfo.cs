@@ -1,5 +1,5 @@
 using System;
-using System.Collections;
+using System.Linq;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -18,16 +18,94 @@ public class SavedSkillInfo
     }
 }
 
-public class SkillInfo<T> : ScriptableObject
+public struct SkillDescription
+{
+    public string header;
+    public string cost;
+    public string description;
+    public string requirements;
+
+    public SkillDescription(string h="", string c="", string d="", string r="")
+    {
+        header = h;
+        cost = c;
+        description = d;
+        requirements = r;
+    }
+
+    public int GetLongestLength()
+    {
+        string[] array = new string[] { header, cost, description, requirements };
+        return array.Max(w => w.Length);
+    }
+}
+
+public class SkillInfo<T> : ScriptableObject where T : ISkill
 {
     [SerializeField] private new string name;
     [SerializeField] protected List<T> skills;
+    [SerializeField] private List<UnlockingRequirements> requirements = new List<UnlockingRequirements>();
 
     private bool unlocked = false;
 
     [SerializeField] protected int level = 0;
 
     [SerializeField] protected int maxLevel;
+
+    public UnlockingRequirements GetUnlockingRequirements()
+    {
+        if (requirements.Count == 0)
+            return new UnlockingRequirements();
+        if (level > requirements.Count)
+        {
+            requirements.Add(new UnlockingRequirements(requirements[requirements.Count - 1], level));
+        }
+        return requirements[level];
+    }
+    public SkillData GetSkillData()
+    {
+        return skills[GetIndex()].GetSkillData();
+    }
+
+    public SkillDescription GetCurrentDescription()
+    {
+        if (level == 0)
+            return new SkillDescription("Locked");
+        return new SkillDescription("Current Level", GetCost(), GetDescription());
+    }
+
+    public SkillDescription GetNextDescription()
+    {
+        if (level == maxLevel)
+            return new SkillDescription("Max level reached");
+        return new SkillDescription("Next Level", GetCost(1), GetDescription(1), GetRequirementsDescription());
+    }
+
+    public string GetCost(int inc = 0)
+    {
+        if (level + inc == 0 || level == maxLevel)
+            return "";
+        return skills[level - 1 + inc].GetCostDescription();
+    }
+
+    public string GetDescription(int inc = 0)
+    {
+        if (level + inc == 0 || level == maxLevel)
+            return "";
+
+        return skills[level - 1 + inc].GetEffectDescription();
+    }
+
+    public string GetRequirementsDescription()
+    {
+        if (requirements.Count == 0 || level == maxLevel)
+            return "";
+        if (level > requirements.Count)
+        {
+            UnlockingRequirements req = GetUnlockingRequirements();
+        }
+        return requirements[level].GetRequirementsDescription();
+    }    
 
     public string GetId()
     {

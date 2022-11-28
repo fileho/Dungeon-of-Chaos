@@ -37,7 +37,7 @@ public class Dash : ScriptableObject
         return this;
     }
 
-    public void Use(Vector2 dir)
+    public virtual void Use(Vector2 dir)
     {
         owner.StartCoroutine(DashAnimation(dir));
     }

@@ -16,9 +16,9 @@ MonoBehaviour:
     name: Attacking Dash
     description: Allows the player to dash. The dash deals {0} damage.
     icon: {fileID: 21300000, guid: d964aa84a7441424c9c0b351b7abeda5, type: 3}
-  cooldown: 0
+  cooldown: 1
   manaCost: 0
-  staminaCost: 15
+  staminaCost: 40
   effects:
   - {fileID: 11400000, guid: 2f3e16b399f31a04d98e52a3179a3a04, type: 2}
   dash: {fileID: 11400000, guid: f362aadcfb4d0784ab39c05ed9347fca, type: 2}

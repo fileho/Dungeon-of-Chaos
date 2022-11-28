@@ -41,10 +41,10 @@ MonoBehaviour:
       additive: 0
   - name: Blend Style 3
     maskTextureChannel: 0
-    renderTextureScale: 0.5
+    renderTextureScale: 0.01
     blendMode: 1
     customBlendFactors:
-      multiplicative: 0
+      multiplicative: 1
       additive: 0
   m_UseDepthStencilBuffer: 1
   m_ShapeLightShader: {fileID: 4800000, guid: d79e1c784eaf80c4585c0be7391f757a, type: 3}
