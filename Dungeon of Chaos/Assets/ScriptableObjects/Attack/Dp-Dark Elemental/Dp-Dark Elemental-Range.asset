@@ -9,38 +9,39 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bbd3a0c455db840c4b2d4da7454d06f3, type: 3}
-  m_Name: Tou-Lich King-Range
+  m_Script: {fileID: 11500000, guid: e1ad98ea46cff4447b72bd5bc9e6ed08, type: 3}
+  m_Name: Dp-Dark Elemental-Range
   m_EditorClassIdentifier: 
   range: 9
-  damage: 1.4
+  damage: 18
   staminaCost: 0
   rangeWeight: 1
   damageWeight: 1
   staminaCostWeight: 1
   cooldown: 1
-  attackAnimationDuration: 0.2
+  attackAnimationDuration: 1.5
   indicator: {fileID: 5248374025804181554, guid: bd368bb0dca0445629bdf0b149f13967, type: 3}
-  indicatorConfiguration: {fileID: 11400000, guid: 406d643571fbd41aeb8fa4d411a560f5, type: 2}
+  indicatorConfiguration: {fileID: 11400000, guid: 10a191f912c284ed89b393c8431a632c, type: 2}
   type: 0
   swingSFX:
-    soundCategory: 3
+    soundCategory: 0
     sound: 0
     volume: 1
     pitch: 1
     priority: 0
   impactSFX:
-    soundCategory: 3
-    sound: 2
+    soundCategory: 0
+    sound: 0
     volume: 1
     pitch: 1
     priority: 0
   indicatorSFX:
-    soundCategory: 2
-    sound: 4
+    soundCategory: 0
+    sound: 0
     volume: 1
     pitch: 1
     priority: 0
-  projectile: {fileID: 1052187207571410619, guid: 07725d23fa80e469b83e030ca9c065e6, type: 3}
-  projectileConfiguration: {fileID: 11400000, guid: 1432104e8cd1e449c8be964a505c5de4, type: 2}
+  projectile: {fileID: 1052187207571410619, guid: b03845b2e170c4237ad5953ab466b279, type: 3}
+  projectileConfiguration: {fileID: 11400000, guid: 045a0780cd4934d8fa0a501c7066533b, type: 2}
   wandReach: 1
+  projectileNumber: 5

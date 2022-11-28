@@ -3,12 +3,11 @@ using UnityEngine;
 
 public abstract class IProjectile : MonoBehaviour
 {
-    [SerializeField] protected ProjectileConfiguration projectileConfiguration;
+    protected ProjectileConfiguration projectileConfiguration;
     protected float speed = 1f;
     protected float delay = 0.5f;
     protected float offset = 0f;
     protected float destroyTime = 5f;
-    protected float scale = 1f;
 
 
     protected IAttack attack;
@@ -21,7 +20,6 @@ public abstract class IProjectile : MonoBehaviour
         collider = GetComponent<Collider2D>();
         sprite = GetComponent<SpriteRenderer>();
         rb = GetComponent<Rigidbody2D>();
-        transform.localScale *= scale;
     }
 
     private void SetAttack(IAttack att)
@@ -47,11 +45,13 @@ public abstract class IProjectile : MonoBehaviour
         delay = projectileConfiguration.delay;
         offset = projectileConfiguration.offset;
         destroyTime = projectileConfiguration.destroyTime;
-        scale = projectileConfiguration.scale;
+        sprite.size = projectileConfiguration.scale;
+        sprite.color = projectileConfiguration.color;
     }
 
-    public virtual void Init(IAttack att)
+    public virtual void Init(IAttack att, ProjectileConfiguration pc)
     {
+        projectileConfiguration = pc;
         SetAttack(att);
         ApplyConfigurations();
     }

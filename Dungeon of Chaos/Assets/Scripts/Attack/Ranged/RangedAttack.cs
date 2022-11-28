@@ -2,22 +2,26 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RangedAttack : IAttack {
+public class RangedAttack : IAttack
+{
 
     protected GameObject projectile;
-
+    protected ProjectileConfiguration projectileConfiguration;
     protected float wandReach = 1f;
 
 
-    protected override void ApplyConfigurations() {
+    protected override void ApplyConfigurations()
+    {
         base.ApplyConfigurations();
         RangedAttackConfiguration _attackConfiguration = attackConfiguration as RangedAttackConfiguration;
         projectile = _attackConfiguration.projectile;
+        projectileConfiguration = _attackConfiguration.projectileConfiguration;
         wandReach = _attackConfiguration.wandReach;
     }
 
     // Ideal attack duration = 1
-    protected override IEnumerator StartAttackAnimation() {
+    protected override IEnumerator StartAttackAnimation()
+    {
 
         Vector3 weaponPos = Weapon.transform.position;
         Vector3 targetDirection = (GetTargetPosition() - (Vector2)weaponPos).normalized;
@@ -28,7 +32,8 @@ public class RangedAttack : IAttack {
         Vector3 midPos = (endPos + startPos) / 2f;
 
         IIndicator indicator = CreateIndicator(transform);
-        if (indicator) {
+        if (indicator)
+        {
             indicator.transform.localPosition = Weapon.GetWeaponTipOffset();
             indicator.Use();
             yield return new WaitForSeconds(indicator.Duration);
@@ -46,19 +51,21 @@ public class RangedAttack : IAttack {
         // Forward
         float time = 0;
         midPos -= new Vector3(0, 0.1f);
-        while (time <= 1) {
+        while (time <= 1)
+        {
             time += (Time.deltaTime / attackAnimationDurationOneWay);
             float currentPos = Tweens.EaseInCubic(time);
             Weapon.transform.localPosition = Vector3.Slerp(startPos - midPos, endPos - midPos, currentPos) + midPos;
             yield return null;
         }
 
-        SpawnProjectile(projectile, targetDirection);
+        SpawnProjectile(projectile, projectileConfiguration, targetDirection);
 
         // Backward
         time = 0;
         midPos += new Vector3(0, 0.2f);
-        while (time <= 1) {
+        while (time <= 1)
+        {
             time += (Time.deltaTime / attackAnimationDurationOneWay);
             float currentPos = Tweens.EaseOutCubic(time);
             Weapon.transform.localPosition = Vector3.Slerp(endPos - midPos, startPos - midPos, currentPos) + midPos;
@@ -76,17 +83,19 @@ public class RangedAttack : IAttack {
     }
 
 
-    protected void SpawnProjectile(GameObject projectile, Vector2 direction) {
+    protected virtual void SpawnProjectile(GameObject projectile, ProjectileConfiguration projectileConfiguration, Vector2 direction)
+    {
         GameObject _projectile = Instantiate(projectile, transform);
         _projectile.transform.localPosition = Weapon.GetWeaponTipOffset();
         _projectile.transform.parent = null;
         IProjectile iProjectile = _projectile.GetComponent<IProjectile>();
-        iProjectile.Init(this);
+        iProjectile.Init(this, projectileConfiguration);
         iProjectile.Launch(direction);
     }
 
 
-    public override string ToString() {
+    public override string ToString()
+    {
         return base.ToString() + "_Ranged";
     }
 }
