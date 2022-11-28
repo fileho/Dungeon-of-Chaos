@@ -18,8 +18,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 6222ec3c16fdaf348bcf3892a8669f36, type: 2}
   - {fileID: 11400000, guid: 195b7eb5b05fbb148a31fc372fceaeeb, type: 2}
   requirements:
-  - skillPointsCost: 1
-    level: 8
+  - skillPointsCost: 0
+    level: 0
     primaryAttribute:
       attribute: 0
       value: 0
