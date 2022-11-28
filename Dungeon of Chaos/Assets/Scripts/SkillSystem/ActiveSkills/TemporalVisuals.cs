@@ -30,8 +30,8 @@ public class TemporalVisuals : ISkillEffect
     {
         foreach (Unit t in targets)
         {
-            Instantiate(vfx, t.transform);
-            vfx.GetComponent<TemporalVisualEffect>().Init(unit, effects, t);
+            var clone = Instantiate(vfx, t.transform);
+            clone.GetComponent<TemporalVisualEffect>().Init(unit, effects, t);
         }
     }
 

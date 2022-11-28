@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2b14320022c3fd54ca3208b6994e5ec2, type: 3}
   m_Name: ArmorBoost1
   m_EditorClassIdentifier: 
-  target: {fileID: 11400000, guid: c562b796c0bf8db4b823a7b0d5e0a5db, type: 2}
+  target: {fileID: 0}
   range: 0
+  angle: 360
   duration: 5
   value: 1.25

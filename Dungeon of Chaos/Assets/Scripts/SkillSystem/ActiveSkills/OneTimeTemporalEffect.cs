@@ -10,7 +10,7 @@ public abstract class OneTimeTemporalEffect : TemporalEffect
         if (UpdateTime())
             return false;
         CancelEffect();
-        return false;
+        return true;
     }
 
     protected abstract void CancelEffect();
