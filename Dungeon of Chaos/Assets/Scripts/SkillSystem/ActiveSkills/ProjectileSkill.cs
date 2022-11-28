@@ -45,7 +45,7 @@ public class ProjectileSkill : ISkillEffect
             {
                 Vector2 dir = Quaternion.AngleAxis(initialAngle + i*rotation, Vector3.forward) * targetPos;
                 var projectile = Instantiate(prefab, unit.transform.position, Quaternion.identity);
-                projectile.Init(effects, unit, speed, dir);
+                projectile.Init(effects, unit, speed, targetPos);
             }            
         }
     }

@@ -44,7 +44,7 @@ public class SkillInfo<T> : ScriptableObject where T : ISkill
 {
     [SerializeField] private new string name;
     [SerializeField] protected List<T> skills;
-    [SerializeField] private List<UnlockingRequirements> requirements;
+    [SerializeField] private List<UnlockingRequirements> requirements = new List<UnlockingRequirements>();
 
     private bool unlocked = false;
 
