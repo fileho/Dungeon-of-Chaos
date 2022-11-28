@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class SkillSlots<T> : MonoBehaviour
+public abstract class SkillSlots<T> : MonoBehaviour where T : ISkill
 {
     private List<SkillSlot> skillSlots = new List<SkillSlot>();
 

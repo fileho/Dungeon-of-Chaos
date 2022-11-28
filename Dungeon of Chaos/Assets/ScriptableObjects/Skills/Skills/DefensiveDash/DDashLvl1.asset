@@ -13,13 +13,13 @@ MonoBehaviour:
   m_Name: DDashLvl1
   m_EditorClassIdentifier: 
   skillData:
-    name: Defensive Dash
+    name: Dash
     description: Allows the player to dash.
-    icon: {fileID: 21300000, guid: d5e79e0e2fb320c4b96a70f7a5cad5d3, type: 3}
-  cooldown: 0
+    icon: {fileID: 21300000, guid: 0f542b2386573744eabe02e60622a898, type: 3}
+  cooldown: 1
   manaCost: 0
-  staminaCost: 10
+  staminaCost: 30
   effects: []
   dash: {fileID: 11400000, guid: f362aadcfb4d0784ab39c05ed9347fca, type: 2}
   dashSpeed: 10
-  trailColor: {r: 0.2565333, g: 0.735849, b: 0, a: 1}
+  trailColor: {r: 0.94509804, g: 0.89720935, b: 0, a: 1}

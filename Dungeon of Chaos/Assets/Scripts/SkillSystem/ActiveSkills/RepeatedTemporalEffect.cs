@@ -3,22 +3,31 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-[CreateAssetMenu(menuName = "SO/Skills/SkillEffects/RepeatedTemporalEffect")]
 public abstract class RepeatedTemporalEffect : TemporalEffect
 {
     [SerializeField] private float frequency;
+    private float time = 0f;
 
-    public override bool DestroyEffect()
+    public override string[] GetEffectsValues(Unit owner)
+    {
+        return new string[] { GetValue(owner).ToString(), frequency.ToString(), duration.ToString() };
+    }
+
+    public override bool Update()
     {
         if (!UpdateTime())
             return true;
         if (ShouldApplyEffect())
+        {
             ApplyEffect();
+            time -= frequency;
+        }
         return false;
     }
 
     protected bool ShouldApplyEffect()
     {
-        return (duration - timeLeft) % frequency == 0f;
+        time += Time.deltaTime;
+        return time >= frequency;
     }
 }

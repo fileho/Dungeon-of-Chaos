@@ -17,9 +17,9 @@ MonoBehaviour:
     description: Allows the player to dash. The dash deals {0} damage and pushes
       the enemy back.
     icon: {fileID: 21300000, guid: d964aa84a7441424c9c0b351b7abeda5, type: 3}
-  cooldown: 0
+  cooldown: 1
   manaCost: 0
-  staminaCost: 20
+  staminaCost: 55
   effects:
   - {fileID: 11400000, guid: 126e641a57eca0d45bea055de98252fc, type: 2}
   - {fileID: 11400000, guid: e82e76d6209e0024a88a4920c474661c, type: 2}

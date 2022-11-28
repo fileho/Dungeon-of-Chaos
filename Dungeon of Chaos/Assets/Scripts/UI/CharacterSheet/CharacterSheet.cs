@@ -9,7 +9,6 @@ public class CharacterSheet : MonoBehaviour
     private SkillSlotDash skillSlotDash;
     private SkillSlotSecondary skillSlotSecondary;
     private ActivatedSkillSlots activatedSkillSlots;
-    private EquippedSkillSlots equippedSkillSlots;
 
     private SkillButtonActive[] skillButtonsActive;
     private SkillButtonDash[] skillButtonsDash;
@@ -35,9 +34,6 @@ public class CharacterSheet : MonoBehaviour
 
         activatedSkillSlots = FindObjectOfType<ActivatedSkillSlots>();
         activatedSkillSlots.Init();
-
-        equippedSkillSlots = FindObjectOfType<EquippedSkillSlots>();
-        equippedSkillSlots.Init();
 
         skillButtonsActive = FindObjectsOfType<SkillButtonActive>();
         foreach (SkillButtonActive skillBtn in skillButtonsActive)

@@ -20,4 +20,4 @@ MonoBehaviour:
   manaCost: 10
   staminaCost: 0
   effects:
-  - {fileID: 11400000, guid: 7777e72acda0e254cb9d7db30aedd795, type: 2}
+  - {fileID: 11400000, guid: 0027115aa628d664584a2db18ad13955, type: 2}

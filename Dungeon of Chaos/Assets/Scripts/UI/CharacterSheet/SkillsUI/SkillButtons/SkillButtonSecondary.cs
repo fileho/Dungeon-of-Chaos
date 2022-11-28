@@ -22,7 +22,7 @@ public class SkillButtonSecondary : SkillButton
         }
         SetLevel();
         SetIcon();
-        frame.color = new Color(1.0f, 0.64f, 0.0f);
+        //frame.color = new Color(1.0f, 0.64f, 0.0f);
     }
 
     public override void OnBeginDrag(PointerEventData eventData)
@@ -42,9 +42,7 @@ public class SkillButtonSecondary : SkillButton
 
     public override void OnPointerEnter(PointerEventData eventData)
     {
-        string ch1 = GetLevelDescription(skillInfo.GetLevel());
-        TooltipSystem.instance.Show(skillInfo.GetSkillData().GetName(), "Secondary Attack", ch1, skillInfo.GetDescription(),
-            GetNextLevelDescription(skillInfo.GetLevel(), skillInfo.GetMaxLevel()), skillInfo.GetDescription(1));
+        TooltipSystem.instance.Show(skillInfo.GetSkillData().GetName(), "Secondary Attack", skillInfo.GetCurrentDescription(), skillInfo.GetNextDescription());
     }
 
     public override void OnPointerExit(PointerEventData eventData)

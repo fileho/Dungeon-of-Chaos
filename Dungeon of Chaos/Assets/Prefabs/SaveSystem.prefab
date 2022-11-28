@@ -44,7 +44,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   saveData:
-    dungeon: 0
     characterPosition:
       x: 0
       y: 0
@@ -64,5 +63,14 @@ MonoBehaviour:
     savedSkillSystem:
       backlogActive: []
       backlogPassive: []
+      backlogDash: []
+      backlogSecondary: []
       activated: 
       equipped: 
+      activatedDash: 0
+      activatedSecondary: 0
+    dungeonData:
+      dungeon: 1
+  dungeonData:
+    dungeon: 1
+  defaultCharacterPositions: {fileID: 11400000, guid: e1751fb7febdb0b4a867ec629ab189e5, type: 2}

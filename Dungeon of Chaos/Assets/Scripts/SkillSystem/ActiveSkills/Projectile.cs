@@ -13,6 +13,8 @@ public class Projectile : MonoBehaviour
     private SpriteRenderer sprite;
     private Rigidbody2D rb;
 
+    private Vector3 targetScale;
+
     [SerializeField] private float delay;
     [SerializeField] private SoundSettings castSFX;
     [SerializeField] private SoundSettings impactSFX;
@@ -23,6 +25,8 @@ public class Projectile : MonoBehaviour
         collider = GetComponent<Collider2D>();
         sprite = GetComponent<SpriteRenderer>();
         rb = GetComponent<Rigidbody2D>();
+
+        targetScale = transform.localScale;
 
         StartCoroutine(ExecuteAction());
     }
@@ -38,14 +42,18 @@ public class Projectile : MonoBehaviour
     private IEnumerator ExecuteAction()
     {
         float time = 0f;
+        Vector2 dir = target - (Vector2)transform.position;
+        dir.Normalize();
+
+        transform.Rotate(0, 0, Vector2.SignedAngle(Vector2.down, dir));
 
         while (time < delay)
         {
             SoundManager.instance.PlaySound(castSFX);
             time += Time.deltaTime;
             float t = time / delay;
-            sprite.color = Color.Lerp(Color.yellow, new Color(1f, 0.5f, 0f), t);
-            transform.localScale = Vector3.Lerp(Vector3.zero, Vector3.one, t);
+            //sprite.color = Color.Lerp(Color.yellow, new Color(1f, 0.5f, 0f), t);
+            transform.localScale = Vector3.Lerp(Vector3.zero, targetScale, t);
 
             if (source)
                 transform.position = source.transform.position;
@@ -54,8 +62,7 @@ public class Projectile : MonoBehaviour
         }
 
         collider.enabled = true;
-        Vector2 dir = target - (Vector2)transform.position;
-        dir.Normalize();
+        
 
         rb.AddForce(100 * speed * dir);
         SoundManager.instance.PlaySound(flightSFX);
