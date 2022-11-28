@@ -51,7 +51,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   upRightAngle: -60
   armAlignAngle: 72
-  weaponTipOffset: {x: 0, y: 0, z: 0}
+  weaponTipOffset: {x: -0.549, y: 1.16, z: 0}
 --- !u!212 &4206247659596657827
 SpriteRenderer:
   m_ObjectHideFlags: 0
