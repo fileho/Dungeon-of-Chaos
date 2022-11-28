@@ -47,9 +47,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c51d3eb4b0ae042b1bf2167d65c7bf36, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  upRightAngle: -60
-  armAlignAngle: 60
-  weaponTipOffset: {x: 0, y: 0, z: 0}
+  upRightAngle: -160
+  armAlignAngle: -60
+  weaponTipOffset: {x: -1.281, y: 0.106, z: 0}
 --- !u!212 &4206247659596657827
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -829,13 +829,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3857842880315447389}
-  m_LocalRotation: {x: 0, y: 0, z: -0.258819, w: 0.9659259}
-  m_LocalPosition: {x: -0.919, y: -0.03, z: 0}
+  m_LocalRotation: {x: 0, y: 0, z: -0.5, w: 0.8660254}
+  m_LocalPosition: {x: -0.829, y: -0.003, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 5574832814731392626}
   m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -30}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -60}
 --- !u!212 &8858206756772395308
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -876,12 +876,12 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 46fa0ce29aa874e8da06cb3195757d69, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 3d5db7d64509c47ddb6efbd32f927af5, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 1
-  m_Size: {x: 0.65673107, y: 1.2077811}
+  m_Size: {x: 0.7586189, y: 0.7586189}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -903,9 +903,9 @@ BoxCollider2D:
   m_Offset: {x: -0.32565776, y: 0.54759717}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.766136, y: 0.20085482}
-    oldSize: {x: 2.94, y: 5.3}
-    newSize: {x: 0.65673107, y: 1.2077811}
+    pivot: {x: 0.7473453, y: 0.8923856}
+    oldSize: {x: 2.56, y: 2.56}
+    newSize: {x: 0.7586189, y: 0.7586189}
     adaptiveTilingThreshold: 0.5
     drawMode: 1
     adaptiveTiling: 0
@@ -971,7 +971,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6175988435252244576}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.836, y: 0.828, z: 0}
+  m_LocalPosition: {x: -1.281, y: 0.106, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 5574832814731392626}
