@@ -9,10 +9,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 93fe0077bee90467d98ac8d0d71773b3, type: 3}
-  m_Name: Orc Shaman-Swing
+  m_Script: {fileID: 11500000, guid: 9838b9745913b47a5b8f3ea98c04fd74, type: 3}
+  m_Name: Tou-Lich King-Summon
   m_EditorClassIdentifier: 
-  duration: 0.5
-  color: {r: 0.92941177, g: 1, b: 0, a: 1}
-  scale: 5
-  sweep: 60
+  duration: 0.6
+  color: {r: 1, g: 0, b: 0.3372549, a: 1}
+  scale: 1
+  initialScale: {x: 0, y: 0}
+  finalScale: {x: 1.25, y: 1.25}
