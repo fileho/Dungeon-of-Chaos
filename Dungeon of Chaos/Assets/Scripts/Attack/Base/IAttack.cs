@@ -3,7 +3,8 @@ using UnityEngine;
 using static UnityEngine.GraphicsBuffer;
 
 [RequireComponent(typeof(Weapon))]
-public abstract class IAttack : MonoBehaviour {
+public abstract class IAttack : MonoBehaviour
+{
 
     [SerializeField] protected AttackConfiguration attackConfiguration;
 
@@ -38,6 +39,7 @@ public abstract class IAttack : MonoBehaviour {
     public Vector3 IndicatorLocalPosition { get; protected set; } = Vector3.zero;
 
     protected Unit owner;
+    protected Rigidbody2D ownerRB;
     protected GameObject indicatorPrefab;
     protected IIndicator indicator;
 
@@ -47,7 +49,8 @@ public abstract class IAttack : MonoBehaviour {
     protected Quaternion weaponAssetOriginalRotation;
     protected IndicatorConfiguration indicatorConfiguration;
 
-    public virtual void Attack() {
+    public virtual void Attack()
+    {
         if (isAttacking)
             return;
 
@@ -58,24 +61,29 @@ public abstract class IAttack : MonoBehaviour {
 
     protected abstract IEnumerator StartAttackAnimation();
 
-    public virtual bool CanAttack() {
+    public virtual bool CanAttack()
+    {
         return (IsTargetInAttackRange() && !isAttacking && cooldownLeft <= 0);
     }
 
-    public float GetAttackRange() {
+    public float GetAttackRange()
+    {
         return range;
     }
 
-    public float GetAttackRangeWeighted() {
+    public float GetAttackRangeWeighted()
+    {
         return GetAttackRange() * rangeWeight;
     }
 
-    private bool IsTargetInAttackRange() {
+    private bool IsTargetInAttackRange()
+    {
         return owner.GetTargetDistance() <= GetAttackRange();
     }
 
 
-    public float GetDamage() {
+    public float GetDamage()
+    {
         if (owner == null)
             return 0;
 
@@ -84,40 +92,48 @@ public abstract class IAttack : MonoBehaviour {
             : damage * owner.stats.GetSpellPower();
     }
 
-    public float GetDamageWeighted() {
+    public float GetDamageWeighted()
+    {
         return GetDamage() * damageWeight;
     }
 
-    public float GetCoolDownTime() {
+    public float GetCoolDownTime()
+    {
         return cooldown;
     }
 
-    public bool IsAttacking() {
+    public bool IsAttacking()
+    {
         return isAttacking;
     }
 
 
-    public float GetStaminaCost() {
+    public float GetStaminaCost()
+    {
         return staminaCost;
     }
 
 
-    public float GetStaminaCostWeighted() {
+    public float GetStaminaCostWeighted()
+    {
         return GetStaminaCost() * staminaCostWeight;
     }
 
 
-    public Unit GetTarget() {
+    public Unit GetTarget()
+    {
         return owner.Target;
     }
 
 
-    public Vector2 GetTargetPosition() {
+    public Vector2 GetTargetPosition()
+    {
         return owner.GetTargetPosition();
     }
 
 
-    protected virtual IIndicator CreateIndicator(Transform parent = null) {
+    protected virtual IIndicator CreateIndicator(Transform parent = null)
+    {
         if (indicatorPrefab == null) return null;
 
         if (parent == null)
@@ -129,7 +145,8 @@ public abstract class IAttack : MonoBehaviour {
         return indicator;
     }
 
-    protected virtual void PrepareWeapon() {
+    protected virtual void PrepareWeapon()
+    {
         Weapon.SetDamage(GetDamage());
         Weapon.SetImpactSound(impactSFX);
         Weapon.ResetHitUnits();
@@ -137,11 +154,13 @@ public abstract class IAttack : MonoBehaviour {
     }
 
 
-    protected virtual void ResetWeapon() {
+    protected virtual void ResetWeapon()
+    {
         Weapon.EnableDisableTrail(false);
     }
 
-    protected virtual void ApplyConfigurations() {
+    protected virtual void ApplyConfigurations()
+    {
         range = attackConfiguration.range;
         damage = attackConfiguration.damage;
         staminaCost = attackConfiguration.staminaCost;
@@ -161,16 +180,20 @@ public abstract class IAttack : MonoBehaviour {
     }
 
 
-    protected virtual void Awake() {
+    protected virtual void Awake()
+    {
         if (attackConfiguration == null)
             return;
         Weapon = GetComponent<Weapon>();
         owner = GetComponentInParent<Unit>();
+        ownerRB = owner.GetComponent<Rigidbody2D>();
         ApplyConfigurations();
     }
 
-    public IAttack Init(Unit owner, Weapon weapon, AttackConfiguration configuration) {
+    public IAttack Init(Unit owner, Weapon weapon, AttackConfiguration configuration)
+    {
         this.owner = owner;
+        ownerRB = this.owner.GetComponent<Rigidbody2D>();
         Weapon = weapon;
         attackConfiguration = configuration;
         ApplyConfigurations();
@@ -179,7 +202,8 @@ public abstract class IAttack : MonoBehaviour {
     }
 
 
-    protected virtual void Update() {
+    protected virtual void Update()
+    {
         if (!isAttacking && cooldownLeft > 0)
             cooldownLeft -= Time.deltaTime;
     }

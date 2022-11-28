@@ -42,4 +42,5 @@ MonoBehaviour:
     pitch: 1
     priority: 0
   projectile: {fileID: 1052187207571410619, guid: 07725d23fa80e469b83e030ca9c065e6, type: 3}
+  projectileConfiguration: {fileID: 11400000, guid: 1432104e8cd1e449c8be964a505c5de4, type: 2}
   wandReach: 1
