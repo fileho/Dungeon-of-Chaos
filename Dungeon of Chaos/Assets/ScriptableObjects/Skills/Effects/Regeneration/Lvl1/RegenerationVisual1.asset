@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   target: {fileID: 11400000, guid: c562b796c0bf8db4b823a7b0d5e0a5db, type: 2}
   range: 0
+  angle: 360
   vfx: {fileID: 0}
   effects:
   - {fileID: 11400000, guid: 26d493d4d657b3b4cb251aac784f8e89, type: 2}
