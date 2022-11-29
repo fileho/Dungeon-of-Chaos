@@ -15,4 +15,5 @@ MonoBehaviour:
   positions:
   - {x: 37, y: 10, z: 0}
   - {x: 23, y: 115, z: 0}
+  - {x: 34, y: 20, z: 0}
   - {x: 90, y: 189, z: 0}
