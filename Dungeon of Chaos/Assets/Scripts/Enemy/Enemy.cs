@@ -8,7 +8,7 @@ using System.Linq;
 public class Enemy : Unit
 {
     private const float CHASE_HEAT = 3f;
-    private float RAYCAST_TIME_INTERVAL = 1f;
+    private const float RAYCAST_TIME_INTERVAL = 1f;
 
     private enum State
     {
