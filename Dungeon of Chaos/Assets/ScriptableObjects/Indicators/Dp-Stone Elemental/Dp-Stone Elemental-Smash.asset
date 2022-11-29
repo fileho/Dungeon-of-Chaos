@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: Dp-Stone Elemental-Smash
   m_EditorClassIdentifier: 
   duration: 1
-  color: {r: 1, g: 0, b: 0.3372549, a: 1}
+  color: {r: 1, g: 0.15399846, b: 0, a: 1}
   scale: 1
