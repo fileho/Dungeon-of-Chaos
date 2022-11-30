@@ -31,7 +31,7 @@ public class Projectile : MonoBehaviour
         StartCoroutine(ExecuteAction());
     }
 
-    public void Init(List<ISkillEffect> effects, Unit source, float speed, Vector2 target)
+    public void Init(List<ISkillEffect> effects, Unit source, float speed, Vector3 target)
     {
         this.effects = effects;
         this.source = source;

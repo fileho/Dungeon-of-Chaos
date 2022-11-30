@@ -15,6 +15,6 @@ MonoBehaviour:
   target: {fileID: 11400000, guid: c562b796c0bf8db4b823a7b0d5e0a5db, type: 2}
   range: 0
   angle: 360
-  vfx: {fileID: 4617805228910178686, guid: e124b5a91d76ff543936171e041cab2e, type: 3}
+  vfx: {fileID: 4617805228910178686, guid: fea3ab681b389e84d842562f80e97c3a, type: 3}
   effects:
   - {fileID: 11400000, guid: f7e977f57eda47c4980a46704c04d608, type: 2}

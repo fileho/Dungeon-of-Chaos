@@ -44,6 +44,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 35911a30ff1a6bd42ae1eddcebb92bd5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  applyOnWeapon: 1
+  defaultMaterial: {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  effectMaterial: {fileID: 2100000, guid: a08496b66d01fbb4ca0b6d643777db5d, type: 2}
 --- !u!1 &7775649046850707757
 GameObject:
   m_ObjectHideFlags: 0
@@ -156,7 +159,7 @@ ParticleSystem:
   cullingMode: 0
   ringBufferMode: 0
   ringBufferLoopRange: {x: 0, y: 1}
-  looping: 1
+  looping: 0
   prewarm: 0
   playOnAwake: 1
   useUnscaledTime: 0
@@ -394,7 +397,7 @@ ParticleSystem:
     startSize:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 0.5
+      scalar: 0.75
       minScalar: 1
       maxCurve:
         serializedVersion: 2

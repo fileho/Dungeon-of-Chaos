@@ -14,7 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   target: {fileID: 0}
   range: 0
-  damage: 0.65
+  angle: 360
+  damage: 1
   skillEffectType: 0
   dmgSFX:
     soundCategory: 3

@@ -3,15 +3,21 @@ using UnityEngine;
 
 public class TemporalVisualEffect : MonoBehaviour
 {
+    [SerializeField] private bool applyOnWeapon = true;
+    [SerializeField] private Material defaultMaterial;
+    [SerializeField] private Material effectMaterial;
+
     private List<TemporalEffect> effects;
     private List<bool> activeEffects;
-    private Material material = null;
-    private Unit t;
+    private SpriteRenderer t;
 
     public void Init(Unit source, List<TemporalEffect> effects, Unit target)
     {
         this.effects = effects;
-        t = target;
+        t = applyOnWeapon
+            ? target.GetComponentInChildren<Weapon>().gameObject.GetComponentInChildren<SpriteRenderer>(false)
+            : target.gameObject.GetComponent<SpriteRenderer>();
+        
         activeEffects = new List<bool>();
         foreach (var e in effects)
         {
@@ -19,10 +25,9 @@ public class TemporalVisualEffect : MonoBehaviour
             activeEffects.Add(true);
         }
 
-        if (gameObject.GetComponent<SpriteRenderer>() != null)
+        if (effectMaterial != null && t != null && defaultMaterial != null)
         {
-            material = target.gameObject.GetComponent<SpriteRenderer>().sharedMaterial;
-            target.gameObject.GetComponent<SpriteRenderer>().material = gameObject.GetComponent<SpriteRenderer>().sharedMaterial;
+            t.material = effectMaterial;
         }
     }
     
@@ -36,8 +41,10 @@ public class TemporalVisualEffect : MonoBehaviour
 
         if (!activeEffects.Contains(true))
         {
-            if (t != null && t.gameObject != null && t.gameObject.GetComponent<SpriteRenderer>() != null && material != null)
-                t.gameObject.GetComponent<SpriteRenderer>().material = material;
+            if (t != null)
+            {
+                t.material = defaultMaterial;
+            }
             Destroy(gameObject);
         }
     }

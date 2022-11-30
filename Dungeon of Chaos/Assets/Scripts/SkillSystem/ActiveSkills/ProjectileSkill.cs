@@ -37,15 +37,15 @@ public class ProjectileSkill : ISkillEffect
     {
         foreach (var targetPos in targetPositions)
         {
-            float rotation = coneWidth / (amountOfProjectiles - 1);
-            float initialAngle = amountOfProjectiles == 1
-                ? 0
-                : rotation;
+            float rotation = amountOfProjectiles == 1 
+                ? 0 
+                : coneWidth / (amountOfProjectiles - 1);
+            float initialAngle = -rotation;
             for (int i = 0; i < amountOfProjectiles; i++)
             {
-                Vector2 dir = Quaternion.AngleAxis(initialAngle + i*rotation, Vector3.forward) * targetPos;
+                Vector2 dir = Quaternion.AngleAxis(initialAngle + i * rotation, Vector3.forward) * targetPos;
                 var projectile = Instantiate(prefab, unit.transform.position, Quaternion.identity);
-                projectile.Init(effects, unit, speed, targetPos);
+                projectile.Init(effects, unit, speed, dir);
             }            
         }
     }
