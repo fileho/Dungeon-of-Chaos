@@ -109,9 +109,6 @@ public class TutorialManager : MonoBehaviour
                 case TutorialState.Dash:
                     currentState = TutorialState.Attack;
                     break;
-                case TutorialState.Attack:
-                    currentState = TutorialState.Skills;
-                    break;
                 default:
                     currentState = TutorialState.Default;
                     break;
