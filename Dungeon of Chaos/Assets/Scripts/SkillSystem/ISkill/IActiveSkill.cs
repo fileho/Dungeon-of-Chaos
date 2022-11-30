@@ -4,35 +4,9 @@ using System.Net.Configuration;
 using System.Reflection;
 using UnityEngine;
 
-
-[System.Serializable]
-public class SkillData
-{
-    [SerializeField] private string name;
-    [SerializeField] private string description;
-    [SerializeField] private Sprite icon;
-
-    public Sprite GetIcon()
-    {
-        return icon;
-    }
-
-    public string GetName()
-    {
-        return name;
-    }
-
-    public string GetDescription()
-    {
-        return description;
-    }
-}
-
 [CreateAssetMenu(menuName = "SO/Skills/Skills/Active")]
-public class IActiveSkill : ScriptableObject
+public class IActiveSkill : ISkill
 {
-    [SerializeField] protected SkillData skillData;
-
     [SerializeField] protected float cooldown;
     [SerializeField] protected float manaCost;
     [SerializeField] protected float staminaCost;
@@ -40,13 +14,23 @@ public class IActiveSkill : ScriptableObject
     [SerializeField] protected List<ISkillEffect> effects;
 
     protected float cooldownLeft;
-
-    public SkillData GetSkillData()
+    
+    private float RecalculateCooldown()
     {
-        return skillData;
+        return cooldown / Character.instance.stats.GetCooldownModifier();
     }
 
-    public virtual string GetDescription()
+    private float RecalculateManaCost()
+    {
+        return manaCost * Character.instance.stats.GetManaCostMod();
+    }
+
+    private float RecalculateStaminaCost()
+    {
+        return staminaCost * Character.instance.stats.GetStaminaCostMod();
+    }
+
+    public override string GetEffectDescription()
     {
         List<string> descriptionValues = new List<string>();
         foreach (ISkillEffect effect in effects)
@@ -63,19 +47,19 @@ public class IActiveSkill : ScriptableObject
         object[] args = descriptionValues.ToArray();
         string skillDes = string.Format(skillData.GetDescription(), args);
 
-        return skillDes + "\n" + "\n" + GetStaticDescription();
+        return skillDes;
     }   
 
-    protected string GetStaticDescription()
+    public override string GetCostDescription()
     {
-        string mCost = manaCost > 0
-            ? "Mana Cost: " + manaCost.ToString() + "\n"
+        string mCost = RecalculateManaCost() > 0
+            ? "Mana Cost: " + RecalculateManaCost().ToString() + " "
             : "";
-        string sCost = staminaCost > 0
-            ? "Stamina Cost: " + staminaCost.ToString() + "\n"
+        string sCost = RecalculateStaminaCost() > 0
+            ? "Stamina Cost: " + RecalculateStaminaCost().ToString() + " "
             : "";
-        string cool = cooldown > 0
-            ? "Cooldown: " + cooldown.ToString() + " seconds"
+        string cool = RecalculateCooldown() > 0
+            ? "Cooldown: " + RecalculateCooldown().ToString() + " s"
             : "";
         return mCost + sCost + cool;
     }
@@ -97,7 +81,7 @@ public class IActiveSkill : ScriptableObject
         if (!CanUse(unit.stats))
             return;
 
-        cooldownLeft = cooldown;
+        cooldownLeft = RecalculateCooldown();
         Consume(unit.stats);
 
         foreach (var e in effects)
@@ -108,7 +92,7 @@ public class IActiveSkill : ScriptableObject
 
     protected void Consume(Stats stats)
     {
-        stats.ConsumeMana(manaCost);
-        stats.ConsumeStamina(staminaCost);
+        stats.ConsumeMana(RecalculateManaCost());
+        stats.ConsumeStamina(RecalculateStaminaCost());
     }
 }

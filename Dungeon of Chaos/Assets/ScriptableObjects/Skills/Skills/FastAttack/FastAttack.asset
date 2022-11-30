@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3de3c60034ba628419d440da57140cfd, type: 3}
+  m_Name: FastAttack
+  m_EditorClassIdentifier: 
+  skillData:
+    name: Fast Attack
+    description: An attack that deals {0} damage, is faster and costs less stamina.
+    icon: {fileID: 21300000, guid: 4873aa989d5fcd546b28025805f15ee8, type: 3}
+  cooldown: 0
+  manaCost: 0
+  staminaCost: 20
+  effects: []
+  attack: {fileID: 5963835019539033489, guid: efc54e89ef7329549bed42ca2642b8f2, type: 3}
+  attackConfiguration: {fileID: 11400000, guid: a54ec2c5d660d2644b459689942ed5f0, type: 2}

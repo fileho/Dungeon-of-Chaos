@@ -11,13 +11,13 @@ public class ISecondaryAttack : IActiveSkill
 
     private IAttack secondaryAttack;
 
-    public override string GetDescription()
+    public override string GetEffectDescription()
     {
         float dmg = attackConfiguration.type == SkillEffectType.physical
             ? Character.instance.stats.GetPhysicalDamage() * attackConfiguration.damage
             : Character.instance.stats.GetSpellPower() * attackConfiguration.damage;
         string s = String.Format(skillData.GetDescription(), dmg.ToString());
-        return s + "\n" + "\n" + GetStaticDescription();        
+        return s;        
     }
 
     public override void Use(Unit unit, List<Unit> targets = null, List<Vector2> targetPositions = null)
