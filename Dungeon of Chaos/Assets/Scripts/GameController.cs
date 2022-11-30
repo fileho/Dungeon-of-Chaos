@@ -9,11 +9,6 @@ public class GameController : MonoBehaviour
 
     private bool loaded = false;
 
-    private void Start()
-    {
-        loaded = false;
-    }
-
     private void LateUpdate()
     {
         if (loaded)
