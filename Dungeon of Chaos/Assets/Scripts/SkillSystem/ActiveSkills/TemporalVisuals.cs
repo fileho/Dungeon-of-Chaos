@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[CreateAssetMenu(menuName = "SO/Skills/SkillEffects/TemporalEffectVisuals")]
 public class TemporalVisuals : ISkillEffect
 {
     [SerializeField] private GameObject vfx;
@@ -29,8 +30,8 @@ public class TemporalVisuals : ISkillEffect
     {
         foreach (Unit t in targets)
         {
-            Instantiate(vfx, t.transform);
-            vfx.GetComponent<TemporalVisualEffect>().Init(unit, effects, t);
+            var clone = Instantiate(vfx, t.transform);
+            clone.GetComponent<TemporalVisualEffect>().Init(unit, effects, t);
         }
     }
 

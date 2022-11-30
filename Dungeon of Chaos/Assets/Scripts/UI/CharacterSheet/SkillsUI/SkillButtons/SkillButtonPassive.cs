@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -7,13 +5,11 @@ using UnityEngine.UI;
 public class SkillButtonPassive : SkillButton
 {
     [SerializeField] private int skillIndex;
-    private EquippedSkillSlots equippedSkillSlots;
     private SkillInfoPassive skillInfo;
 
     public override void Init()
     {
         base.Init();
-        equippedSkillSlots = FindObjectOfType<EquippedSkillSlots>();
         skillInfo = skillSystem.GetSkillInfoPassive(skillIndex);
         if (skillInfo == null)
         {
@@ -22,35 +18,24 @@ public class SkillButtonPassive : SkillButton
         }
         SetLevel();
         SetIcon();
-        frame.color = Color.blue;
+        //frame.color = Color.blue;
     }
 
     public override void OnBeginDrag(PointerEventData eventData)
     {
-        if (eventData.button == PointerEventData.InputButton.Right || 
-            !skillSystem.IsUnlockedPassive(skillIndex))
-        {
             eventData.pointerDrag = null;
             return;
-        }
-        dragDrop.transform.position = eventData.position;
-        dragDrop.GetComponent<Image>().sprite = skillInfo.GetSkillData().GetIcon();
-        dragDrop.SetActive(true);
-
-        equippedSkillSlots.Highlight();
     }
 
     public override void OnPointerEnter(PointerEventData eventData)
     {
-        string ch1 = GetLevelDescription(skillInfo.GetLevel());
-        TooltipSystem.instance.Show(skillInfo.GetSkillData().GetName(), "Passive Skill", ch1, skillInfo.GetDescription(),
-            GetNextLevelDescription(skillInfo.GetLevel(), skillInfo.GetMaxLevel()), skillInfo.GetDescription(1));
+        TooltipSystem.instance.Show(skillInfo.GetSkillData().GetName(), "Passive Skill",
+            skillInfo.GetCurrentDescription(), skillInfo.GetNextDescription());
     }
 
     public override void OnEndDrag(PointerEventData eventData)
     {
-        base.OnEndDrag(eventData);
-        equippedSkillSlots.RemoveHighlight();
+        return;
     }
 
     public override void OnPointerExit(PointerEventData eventData)

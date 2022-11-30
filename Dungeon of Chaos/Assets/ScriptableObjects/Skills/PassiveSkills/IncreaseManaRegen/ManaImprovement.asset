@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2e9b347dd9954f54db081bef44ff087b, type: 3}
+  m_Name: ManaImprovement
+  m_EditorClassIdentifier: 
+  skillData:
+    name: Magic Mastery
+    description: Increases mana regeneration by {0}. Moreover mana cost of all skills
+      is divided by {1}.
+    icon: {fileID: 21300000, guid: 0c1265cd3a5d7a944b8a9003d8b8df9e, type: 3}
+  regeneration: 10
+  costMod: 0.6

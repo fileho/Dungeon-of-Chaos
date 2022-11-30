@@ -20,17 +20,4 @@ public class SkillInfoPassive : SkillInfo<IPassiveSkill>
     {
         skills[level].Unequip(stats);
     }
-
-    public SkillData GetSkillData()
-    {
-        return skills[GetIndex()].GetSkillData();
-    }
-
-    public string GetDescription(int inc = 0)
-    {
-        if (level + inc == 0 || level == maxLevel)
-            return "";
-
-        return skills[level - 1 + inc].GetDescription();
-    }
 }

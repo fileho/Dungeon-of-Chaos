@@ -77,7 +77,7 @@ public class Unit : MonoBehaviour
             Die();
     }
 
-    private void Die()
+    protected virtual void Die()
     {
         dead = true;
         GetComponent<Collider2D>().enabled = false;

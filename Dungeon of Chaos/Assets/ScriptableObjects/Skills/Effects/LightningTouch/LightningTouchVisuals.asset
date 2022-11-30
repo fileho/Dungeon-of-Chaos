@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e94f9c68a919a364f890aaf4ee247101, type: 3}
+  m_Name: LightningTouchVisuals
+  m_EditorClassIdentifier: 
+  target: {fileID: 11400000, guid: c562b796c0bf8db4b823a7b0d5e0a5db, type: 2}
+  range: 3
+  angle: 60
+  vfx: {fileID: 5983016294900404892, guid: e515b34be13c7904a8015628ae31a61a, type: 3}
+  sfx:
+    soundCategory: 3
+    sound: 0
+    volume: 1
+    pitch: 1
+    priority: 0
+  duration: 1
+  effects:
+  - {fileID: 11400000, guid: 28fa1dbe7d2694c4db520fcae7a8abca, type: 2}
