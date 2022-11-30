@@ -146,6 +146,8 @@ public class Levelling
         level = saved.level;
         statsPoints = saved.statsPoints;
         skillPoints = saved.skillPoints;
+
+        SetNextLevelXP();
     }
 
     public SavedLevelling Save()

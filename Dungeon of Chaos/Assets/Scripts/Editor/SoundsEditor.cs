@@ -1,4 +1,4 @@
-using System.Reflection;
+using System;
 using UnityEngine;
 using UnityEditor;
 
@@ -39,52 +39,51 @@ public class SoundsEditor : PropertyDrawer
         // Draw fields - pass GUIContent.none to each so they are drawn without labels
         EditorGUI.PropertyField(categoryRect, soundType, GUIContent.none);
 
-        int index = soundType.enumValueIndex;
+        var index = (SoundCategories.SoundCategory)soundType.enumValueIndex;
         switch (index)
         {
-        case 0: {
+        case SoundCategories.SoundCategory.Ambient: {
             SoundCategories.Ambient s = (SoundCategories.Ambient)soundIndex.intValue;
             soundIndex.intValue = (int)(SoundCategories.Ambient)EditorGUI.EnumPopup(soundRect, s);
             break;
         }
-        case 1: {
+        case SoundCategories.SoundCategory.Footsteps: {
             SoundCategories.FootSteps s = (SoundCategories.FootSteps)soundIndex.intValue;
             soundIndex.intValue = (int)(SoundCategories.FootSteps)EditorGUI.EnumPopup(soundRect, s);
             break;
         }
-        case 2: {
+        case SoundCategories.SoundCategory.Attack: {
             SoundCategories.Attack s = (SoundCategories.Attack)soundIndex.intValue;
             soundIndex.intValue = (int)(SoundCategories.Attack)EditorGUI.EnumPopup(soundRect, s);
             break;
         }
-        case 3: {
+        case SoundCategories.SoundCategory.Skill: {
             SoundCategories.Skill s = (SoundCategories.Skill)soundIndex.intValue;
             soundIndex.intValue = (int)(SoundCategories.Skill)EditorGUI.EnumPopup(soundRect, s);
             break;
         }
-        case 4: {
+        case SoundCategories.SoundCategory.Ui: {
             SoundCategories.Ui s = (SoundCategories.Ui)soundIndex.intValue;
             soundIndex.intValue = (int)(SoundCategories.Ui)EditorGUI.EnumPopup(soundRect, s);
             break;
         }
-        case 5: {
+        case SoundCategories.SoundCategory.Items: {
             SoundCategories.Items s = (SoundCategories.Items)soundIndex.intValue;
             soundIndex.intValue = (int)(SoundCategories.Items)EditorGUI.EnumPopup(soundRect, s);
             break;
         }
-        case 6: {
+        case SoundCategories.SoundCategory.Death: {
             SoundCategories.Death s = (SoundCategories.Death)soundIndex.intValue;
             soundIndex.intValue = (int)(SoundCategories.Death)EditorGUI.EnumPopup(soundRect, s);
             break;
         }
-        case 7: {
+        case SoundCategories.SoundCategory.TakeDamage: {
             SoundCategories.TakeDamage s = (SoundCategories.TakeDamage)soundIndex.intValue;
             soundIndex.intValue = (int)(SoundCategories.TakeDamage)EditorGUI.EnumPopup(soundRect, s);
             break;
         }
-
         default:
-            break;
+            throw new ArgumentOutOfRangeException();
         }
 
         float labelWidth = EditorGUIUtility.labelWidth;
