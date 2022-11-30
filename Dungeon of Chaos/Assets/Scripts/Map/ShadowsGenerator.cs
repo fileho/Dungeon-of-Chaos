@@ -19,13 +19,16 @@ public class ShadowsGenerator : MonoBehaviour
 
     private float scale = 1f;
 
+    const string transformName = "Walls";
+
     public void BakeShadows()
     {
+
         var grid = FindObjectOfType<Grid>();
         tilemap = GetTilemap(grid, "Walls");
 
-
         Setup();
+        Transform parent = transform.Find(transformName);
         BindingFlags accessFlagsPrivate = BindingFlags.NonPublic | BindingFlags.Instance;
 
         // Assume uniform scaling
@@ -39,7 +42,7 @@ public class ShadowsGenerator : MonoBehaviour
                 break;
 
             var o = new GameObject("ShadowCaster");
-            o.transform.parent = transform;
+            o.transform.parent = parent;
             ShadowCaster2D shadowCaster2D = o.AddComponent<ShadowCaster2D>();
 
             // Use reflection since m_ShapePath is private without any wrappers
@@ -51,8 +54,12 @@ public class ShadowsGenerator : MonoBehaviour
         // Spawn shadows for rocks
         GetComponent<RockShadows>().PlaceShadows(GetTilemap(grid, "Rocks"), scale);
 
-        // scene has to be reload for the shadows to rebuild
+        // Fog
+        foreach (var fog in FindObjectsOfType<Fog>())
+            fog.BakeShadows();
+
 #if UNITY_EDITOR
+        // scene has to be reload for the shadows to rebuild
         EditorSceneManager.SaveScene(EditorSceneManager.GetActiveScene());
         EditorSceneManager.OpenScene(EditorSceneManager.GetActiveScene().path);
 #endif
@@ -66,10 +73,13 @@ public class ShadowsGenerator : MonoBehaviour
 
     private void Setup()
     {
-        for (int i = transform.childCount - 1; i >= 0; i--)
-        {
-            DestroyImmediate(transform.GetChild(i).gameObject);
-        }
+        Transform t = transform.Find(transformName);
+        if (t != null)
+            DestroyImmediate(t.gameObject);
+
+        var go = new GameObject(transformName);
+        go.transform.parent = transform;
+
         tilemap.CompressBounds();
         visited = new HashSet<Vector3Int>();
     }
