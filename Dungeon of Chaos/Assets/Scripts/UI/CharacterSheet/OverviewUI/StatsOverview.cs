@@ -16,6 +16,7 @@ public class StatsOverview : MonoBehaviour
     [SerializeField] private GameObject levelUpButton;
     [SerializeField] private TextMeshProUGUI statsPoints;
     [SerializeField] private TextMeshProUGUI skillPoints;
+    [SerializeField] private TextMeshProUGUI skillTabSkillPoints;
     [SerializeField] private List<GameObject> statsIncreaseButtons;
 
     [Header("Primary Stats Text")]
@@ -31,6 +32,10 @@ public class StatsOverview : MonoBehaviour
     [SerializeField] private TextMeshProUGUI hpText;
     [SerializeField] private TextMeshProUGUI staminaText;
     [SerializeField] private TextMeshProUGUI manaText;
+
+    [Header("Tertiary Stats Text")]
+    [SerializeField] private TextMeshProUGUI armorText;
+    [SerializeField] private TextMeshProUGUI staminaRegenText;
 
     public static StatsOverview instance;
 
@@ -79,6 +84,7 @@ public class StatsOverview : MonoBehaviour
     public void UpdateSkillPoints()
     {
         skillPoints.text = stats.GetLevellingData().skillPoints.ToString();
+        skillTabSkillPoints.text = stats.GetLevellingData().skillPoints.ToString();
     }
     
     public void LevelUp()
@@ -140,5 +146,13 @@ public class StatsOverview : MonoBehaviour
         SetStat(value, staminaText);
     }
 
+    public void SetArmor(float value)
+    {
+        SetStat(value, armorText);
+    }
 
+    public void SetStaminaRegen(float value)
+    {
+        SetStat(value, staminaRegenText);
+    }
 }

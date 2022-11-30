@@ -208,9 +208,11 @@ public class SkillSystem : MonoBehaviour
         if (!IsValidActive(index))
             return;
         SkillInfoActive skill = activeSkills[index];
-        levelling.skillPoints -= activeSkills[index].GetUnlockingRequirements().GetCost();
+        levelling.ConsumeSkillPoints(activeSkills[index].GetUnlockingRequirements().GetCost());
         skill.Unlock();
         skill.Upgrade();
+        TooltipSystem.instance.Show(skill.GetSkillData().GetName(), "Active Skill",
+            skill.GetCurrentDescription(), skill.GetNextDescription());
     }
 
     public void Activate(int index, int slot)
@@ -277,9 +279,11 @@ public class SkillSystem : MonoBehaviour
         if (!IsValidPassive(index))
             return;
         SkillInfoPassive skill = passiveSkills[index];
-        levelling.skillPoints -= passiveSkills[index].GetUnlockingRequirements().GetCost();
+        levelling.ConsumeSkillPoints(passiveSkills[index].GetUnlockingRequirements().GetCost());
         skill.Unlock();
         skill.Upgrade();
+        TooltipSystem.instance.Show(skill.GetSkillData().GetName(), "Passive Skill",
+            skill.GetCurrentDescription(), skill.GetNextDescription());
     }
 
     public bool IsUnlockedPassive(int index)
@@ -348,9 +352,11 @@ public class SkillSystem : MonoBehaviour
         if (!IsValidDash(index))
             return;
         SkillInfoDash skill = dashSkills[index];
-        levelling.skillPoints -= dashSkills[index].GetUnlockingRequirements().GetCost();
+        levelling.ConsumeSkillPoints(dashSkills[index].GetUnlockingRequirements().GetCost());
         skill.Unlock();
         skill.Upgrade();
+        TooltipSystem.instance.Show(skill.GetSkillData().GetName(), "Dash Skill",
+            skill.GetCurrentDescription(), skill.GetNextDescription());
     }
 
     public void ActivateDash(int index)
@@ -402,9 +408,11 @@ public class SkillSystem : MonoBehaviour
         if (!IsValidSecondary(index))
             return;
         SkillInfoSecondaryAttack skill = secondaryAttacks[index];
-        levelling.skillPoints -= secondaryAttacks[index].GetUnlockingRequirements().GetCost();
+        levelling.ConsumeSkillPoints(secondaryAttacks[index].GetUnlockingRequirements().GetCost());
         skill.Unlock();
         skill.Upgrade();
+        TooltipSystem.instance.Show(skill.GetSkillData().GetName(), "Secondary Attack",
+            skill.GetCurrentDescription(), skill.GetNextDescription());
     }
 
     private void DeactivateSecondary()

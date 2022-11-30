@@ -291,6 +291,8 @@ public class Stats : ScriptableObject
         health.maxValue = primaryStats.GetMaxHP(XP.GetLevel());
         stamina.maxValue = primaryStats.GetMaxStamina(XP.GetLevel());
         mana.maxValue = primaryStats.GetMaxMana(XP.GetLevel());
+        staminaRegen = primaryStats.GetStaminaRegen();
+        armor = primaryStats.GetArmor();
     }
 
     public void UpdateStatsUI()
@@ -308,6 +310,8 @@ public class Stats : ScriptableObject
         StatsOverview.instance.SetStamina(stamina.maxValue);
         StatsOverview.instance.SetWisdom(primaryStats.wisdom);
         StatsOverview.instance.SetMana(mana.maxValue);
+        StatsOverview.instance.SetArmor(armor);
+        StatsOverview.instance.SetStaminaRegen(staminaRegen);
     }
     #endregion
 
@@ -345,8 +349,10 @@ public class Stats : ScriptableObject
         primaryStats.constitution++;
         XP.ConsumeStatsPoint();
         health.maxValue = primaryStats.GetMaxHP(XP.GetLevel());
+        armor = primaryStats.GetArmor();
         StatsOverview.instance.SetConstitution(primaryStats.constitution);
         StatsOverview.instance.SetHP(health.maxValue);
+        StatsOverview.instance.SetArmor(armor);
     }
 
     public float GetConstitution()
@@ -358,9 +364,11 @@ public class Stats : ScriptableObject
     {
         primaryStats.endurance++;
         stamina.maxValue = primaryStats.GetMaxStamina(XP.GetLevel());
+        staminaRegen = primaryStats.GetStaminaRegen();
         XP.ConsumeStatsPoint();
         StatsOverview.instance.SetEndurance(primaryStats.endurance);
         StatsOverview.instance.SetStamina(stamina.maxValue);
+        StatsOverview.instance.SetStaminaRegen(staminaRegen);
     }
 
     public float GetEndurance()
