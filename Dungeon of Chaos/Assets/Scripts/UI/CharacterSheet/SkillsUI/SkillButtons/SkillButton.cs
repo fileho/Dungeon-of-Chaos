@@ -10,7 +10,7 @@ public abstract class SkillButton : MonoBehaviour, IPointerDownHandler, IPointer
     [SerializeField] protected Text level;
     [SerializeField] protected GameObject locked;
     [SerializeField] protected GameObject load;
-    [SerializeField] protected Image frame;
+    //[SerializeField] protected Image frame;
 
     protected SkillSystem skillSystem;
 
@@ -84,19 +84,4 @@ public abstract class SkillButton : MonoBehaviour, IPointerDownHandler, IPointer
     public abstract void SetIcon();
 
     public abstract void SetLevel();
-
-    protected string GetLevelDescription(int lvl)
-    {
-        string ret = string.Format("Current level ({0})", lvl.ToString());
-        return lvl == 0
-            ? "Locked"
-            : ret;
-    }
-    protected string GetNextLevelDescription(int lvl, int max)
-    {
-        string ret = string.Format("Next level ({0})", (lvl + 1).ToString());
-        return lvl == max
-            ? "Max level reached"
-            : ret;
-    }
 }

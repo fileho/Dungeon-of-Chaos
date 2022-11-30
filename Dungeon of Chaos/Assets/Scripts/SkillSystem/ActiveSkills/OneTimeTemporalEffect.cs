@@ -3,15 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-[CreateAssetMenu(menuName = "SO/Skills/SkillEffects/OneTimeTemporalEffect")]
 public abstract class OneTimeTemporalEffect : TemporalEffect
 {
-    public override bool DestroyEffect()
+    public override bool Update()
     {
         if (UpdateTime())
             return false;
         CancelEffect();
-        return false;
+        return true;
     }
 
     protected abstract void CancelEffect();

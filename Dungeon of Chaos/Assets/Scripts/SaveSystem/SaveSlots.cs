@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class SaveSlots : MonoBehaviour
@@ -34,7 +35,8 @@ public class SaveSlots : MonoBehaviour
         if (data == null)
             return "Empty Save Slot";
 
-        string s = "Dungeon " + data.dungeonData.dungeon + "\n" + data.timestamp;
+        string s = "Dungeon " + data.dungeonData.dungeon + '\n' + "Level " + data.savedStats.savedLevelling.level +
+                   '\n' + data.timestamp;
         return s;
     }
 
@@ -47,5 +49,9 @@ public class SaveSlots : MonoBehaviour
     private void ButtonClick(int index)
     {
         saveSystem.SetSaveSlot(index);
+        var saveData = saveSystem.GetSavedData(index);
+
+        int load = saveData?.dungeonData.dungeon - 1 ?? 0;
+        SceneManager.LoadScene(load + SaveSystem.SceneOffset);
     }
 }
