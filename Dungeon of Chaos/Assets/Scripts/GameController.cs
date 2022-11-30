@@ -7,8 +7,19 @@ public class GameController : MonoBehaviour
 {
     private SaveSystem saveSystem;
 
+    private bool loaded = false;
+
     private void Start()
     {
+        loaded = false;
+    }
+
+    private void LateUpdate()
+    {
+        if (loaded)
+            return;
+
+        loaded = true;
         saveSystem = FindObjectOfType<SaveSystem>();
         saveSystem.Load();
 
