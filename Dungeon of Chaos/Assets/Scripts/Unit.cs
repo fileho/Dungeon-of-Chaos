@@ -6,13 +6,19 @@ public class Unit : MonoBehaviour
 
     protected Weapon weapon;
 
-    [SerializeField] protected IMovement movement;
-    [SerializeField] protected Ieffects effects;
-    [SerializeField] protected IBars bars;
+    [SerializeField]
+    protected IMovement movement;
+    [SerializeField]
+    protected Ieffects effects;
+    [SerializeField]
+    protected IBars bars;
 
-    [SerializeField] protected SoundSettings takeDmgSFX;
-    [SerializeField] protected SoundSettings deathSFX;
-    [SerializeField] protected SoundSettings footstepsSFX;
+    [SerializeField]
+    protected SoundSettings takeDmgSFX;
+    [SerializeField]
+    protected SoundSettings deathSFX;
+    [SerializeField]
+    protected SoundSettings footstepsSFX;
 
     protected bool dead = false;
 
@@ -31,16 +37,23 @@ public class Unit : MonoBehaviour
         Init();
     }
 
-    protected virtual void Init() { }
+    protected virtual void Init()
+    {
+    }
 
     // It can be either the position of the Unit or Mouse Position [In case of the character]
-    public virtual Vector2 GetTargetPosition() { return Target == null ? Vector2.positiveInfinity : (Vector2)Target.transform.position; }
+    public virtual Vector2 GetTargetPosition()
+    {
+        return Target == null ? Vector2.positiveInfinity : (Vector2)Target.transform.position;
+    }
 
-    public virtual Vector2 GetTargetDirection() {
+    public virtual Vector2 GetTargetDirection()
+    {
         return Target == null ? Vector2.positiveInfinity : (GetTargetPosition() - (Vector2)transform.position);
     }
 
-    public float GetTargetDistance() {
+    public float GetTargetDistance()
+    {
         return GetTargetDirection().magnitude;
     }
 
@@ -56,7 +69,7 @@ public class Unit : MonoBehaviour
             stats.SetArmor(-value);
         if (rest <= 0)
             return;
-        
+
         stats.ConsumeHealth(rest);
         effects.TakeDamage();
         SoundManager.instance.PlaySound(takeDmgSFX);
@@ -64,14 +77,15 @@ public class Unit : MonoBehaviour
             Die();
     }
 
-
     protected virtual void Die()
     {
         dead = true;
         GetComponent<Collider2D>().enabled = false;
+        var vfx = transform.Find("DeathVFX");
+        if (vfx)
+            vfx.GetComponent<ParticleSystem>().Play();
         SoundManager.instance.PlaySound(deathSFX);
         Invoke(nameof(CleanUp), SoundManager.instance.GetLength(deathSFX));
-        //Destroy(gameObject);
     }
 
     protected virtual void CleanUp()
