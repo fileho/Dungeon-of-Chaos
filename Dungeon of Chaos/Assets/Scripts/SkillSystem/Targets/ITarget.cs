@@ -7,17 +7,19 @@ public struct TargettingData
     public Unit owner;
     public float range;
     public Vector2 position;
+    public float angle;
 }
 
 public abstract class ITarget : ScriptableObject
 {
     protected TargettingData targettingData;
 
-    public void InitTargettingData(Unit owner, float range = float.MaxValue, Vector2 position = default(Vector2))
+    public void InitTargettingData(Unit owner, float range = float.MaxValue, Vector2 position = default(Vector2), float angle = 360f)
     {
         targettingData.owner = owner;
         targettingData.range = range;
         targettingData.position = position;
+        targettingData.angle = angle;
     }
 
     public virtual List<Unit> GetTargetUnits() { return null; }

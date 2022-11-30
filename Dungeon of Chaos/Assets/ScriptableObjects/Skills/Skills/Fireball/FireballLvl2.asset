@@ -14,7 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   skillData:
     name: Fireball
-    description: Shoots a fireball which deals {0} damage.
+    description: Shoots a fireball which deals {0} damage and applies burn dealing
+      {1} damage. Moreover, the fireball explodes on collision and deals {2} damage
+      in range..
     icon: {fileID: 21300000, guid: d41ff3b3475455b41a30e8f9b02aa352, type: 3}
   cooldown: 5
   manaCost: 10

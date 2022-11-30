@@ -17,12 +17,20 @@ public class SavedStats
 [CreateAssetMenu(menuName = "SO/Stats/Stats")]
 public class Stats : ScriptableObject
 {
+    #region Stats Variables
+
     [SerializeField]
     private float movementSpeed;
     [SerializeField]
     private float chaseDistance;
     [SerializeField]
     private float staminaRegen;
+
+    private float manaRegen = 0f;
+    private float xpGainModifier = 1f;
+    private float cooldownModifier = 1f;
+    private float staminaCostModifier = 1f;
+    private float manaCostModifier = 1f;
 
     [SerializeReference]
     private PrimaryStats primaryStats = new PrimaryStats();
@@ -37,6 +45,7 @@ public class Stats : ScriptableObject
 
     [SerializeField]
     private Levelling XP = new Levelling();
+    #endregion
 
     private IBars bars;
 
@@ -50,6 +59,29 @@ public class Stats : ScriptableObject
         return XP;
     }
 
+    #region Utils
+    public float GetCooldownModifier()
+    {
+        return cooldownModifier;
+    }
+
+    public void ChangeCooldownModifier(float value)
+    {
+        cooldownModifier += value;
+    }
+
+    public float GetXPModifier()
+    {
+        return xpGainModifier;
+    }
+
+    public void ChangeXPModifier(float value)
+    {
+        xpGainModifier += value;
+    }
+    #endregion
+
+    #region Health
     public void ConsumeHealth(float value)
     {
         health.Consume(value);
@@ -72,6 +104,14 @@ public class Stats : ScriptableObject
         return health.maxValue;
     }
 
+    public void ChangeMaxHealth(float value)
+    {
+        health.ChangeMaxValue(value);
+        bars.UpdateHpBar(health.Ratio());
+    }
+    #endregion
+
+    #region Mana
     public bool HasMana(float value)
     {
         return mana.HasEnough(value);
@@ -93,7 +133,35 @@ public class Stats : ScriptableObject
     {
         return mana.maxValue;
     }
+    public void ChangeMaxMana(float value)
+    {
+        mana.ChangeMaxValue(value);
+        bars.UpdateManaBar(mana.Ratio());
+    }
 
+    public float GetManaRegen()
+    {
+        return manaRegen;
+    }
+
+    public void ChangeManaRegen(float value)
+    {
+        manaRegen += value;
+    }
+
+    public float GetManaCostMod()
+    {
+        return manaCostModifier;
+    }
+
+    public void SetManaCostMod(float value)
+    {
+        manaCostModifier = value;
+    }
+
+    #endregion
+
+    #region Stamina
     public bool HasStamina(float value)
     {
         return stamina.HasEnough(value);
@@ -115,25 +183,10 @@ public class Stats : ScriptableObject
     {
         return stamina.maxValue;
     }
-
-    public float MovementSpeed()
+    public void ChangeMaxStamina(float value)
     {
-        return movementSpeed;
-    }
-
-    public float ChaseDistance()
-    {
-        return chaseDistance;
-    }
-
-    public float GetPhysicalDamage()
-    {
-        return physicalDamage;
-    }
-
-    public float GetSpellPower()
-    {
-        return spellPower;
+        stamina.ChangeMaxValue(value);
+        bars.UpdateStaminaBar(stamina.Ratio());
     }
 
     public float GetStaminaRegen()
@@ -146,34 +199,54 @@ public class Stats : ScriptableObject
         staminaRegen += value;
     }
 
-    public void ChangeMaxHealth(float value)
+    public float GetStaminaCostMod()
     {
-        health.ChangeMaxValue(value);
-        bars.UpdateHpBar(health.Ratio());
+        return staminaCostModifier;
     }
 
-    public void ChangeMaxStamina(float value)
+    public void SetStaminaCostMod(float value)
     {
-        stamina.ChangeMaxValue(value);
-        bars.UpdateStaminaBar(stamina.Ratio());
+        staminaCostModifier = value;
+    }
+    #endregion
+
+    #region Movement
+    public float MovementSpeed()
+    {
+        return movementSpeed;
     }
 
-    public void ChangeMaxMana(float value)
+    public float ChaseDistance()
     {
-        mana.ChangeMaxValue(value);
-        bars.UpdateManaBar(mana.Ratio());
+        return chaseDistance;
+    }
+    #endregion
+
+    #region Physical Damage
+    public float GetPhysicalDamage()
+    {
+        return physicalDamage;
     }
 
     public void ChangePhysicalDamage(float value)
     {
         physicalDamage += value;
     }
+    #endregion
+
+    #region Spell Power
+    public float GetSpellPower()
+    {
+        return spellPower;
+    }  
 
     public void ChangeSpellPower(float value)
     {
         spellPower += value;
     }
+    #endregion
 
+    #region Armor
     public bool HasArmor()
     {
         return armor > 0;
@@ -190,7 +263,9 @@ public class Stats : ScriptableObject
         armor = Mathf.Max(armor, 0);
         // TODO Display/Hide/Update UI
     }
+    #endregion
 
+    #region Stats Updating
     public Stats ResetStats(IBars bars = null)
     {
         if (bars != null)
@@ -216,6 +291,8 @@ public class Stats : ScriptableObject
         health.maxValue = primaryStats.GetMaxHP(XP.GetLevel());
         stamina.maxValue = primaryStats.GetMaxStamina(XP.GetLevel());
         mana.maxValue = primaryStats.GetMaxMana(XP.GetLevel());
+        staminaRegen = primaryStats.GetStaminaRegen();
+        armor = primaryStats.GetArmor();
     }
 
     public void UpdateStatsUI()
@@ -233,8 +310,12 @@ public class Stats : ScriptableObject
         StatsOverview.instance.SetStamina(stamina.maxValue);
         StatsOverview.instance.SetWisdom(primaryStats.wisdom);
         StatsOverview.instance.SetMana(mana.maxValue);
+        StatsOverview.instance.SetArmor(armor);
+        StatsOverview.instance.SetStaminaRegen(staminaRegen);
     }
+    #endregion
 
+    #region Primary Stats
     public void IncreaseStrength()
     {
         primaryStats.strength++;
@@ -268,8 +349,10 @@ public class Stats : ScriptableObject
         primaryStats.constitution++;
         XP.ConsumeStatsPoint();
         health.maxValue = primaryStats.GetMaxHP(XP.GetLevel());
+        armor = primaryStats.GetArmor();
         StatsOverview.instance.SetConstitution(primaryStats.constitution);
         StatsOverview.instance.SetHP(health.maxValue);
+        StatsOverview.instance.SetArmor(armor);
     }
 
     public float GetConstitution()
@@ -281,9 +364,11 @@ public class Stats : ScriptableObject
     {
         primaryStats.endurance++;
         stamina.maxValue = primaryStats.GetMaxStamina(XP.GetLevel());
+        staminaRegen = primaryStats.GetStaminaRegen();
         XP.ConsumeStatsPoint();
         StatsOverview.instance.SetEndurance(primaryStats.endurance);
         StatsOverview.instance.SetStamina(stamina.maxValue);
+        StatsOverview.instance.SetStaminaRegen(staminaRegen);
     }
 
     public float GetEndurance()
@@ -304,6 +389,7 @@ public class Stats : ScriptableObject
     {
         return primaryStats.wisdom;
     }
+    #endregion
 
     public SavedStats Save()
     {

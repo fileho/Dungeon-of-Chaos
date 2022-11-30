@@ -6,9 +6,24 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/Scenes/SaveSystemDevelopment.unity
+    guid: 6d1896482a3802149bdbcee64488348e
+  - enabled: 1
+    path: Assets/Scenes/TutorialDungeon.unity
+    guid: 160ad19d0428c1f4b9735ad46307f394
+  - enabled: 1
+    path: Assets/Scenes/OrcCampDungeon.unity
+    guid: ccbcd6cdc6a46144ba7b55cd714c72e3
+  - enabled: 1
+    path: Assets/Scenes/Skeletons.unity
+    guid: 4a8badcc22cecd94aaa18dc4779b0f45
+  - enabled: 1
+    path: Assets/Scenes/Elementals.unity
+    guid: 4cea915718bbe0540b729b6beeb75698
+  - enabled: 0
     path: Assets/Scenes/DungeonGameplay.unity
     guid: b6341b0402bc8cf4da24707c8c3726c8
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/MVPDungeon.unity
     guid: 72699e7d8ae61ed458085435ba0be3d3
   m_configObjects: {}

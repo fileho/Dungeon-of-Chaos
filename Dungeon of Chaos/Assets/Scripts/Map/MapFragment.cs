@@ -41,7 +41,7 @@ public class MapFragment : MonoBehaviour, IMapSavable
 
     public void Interact()
     {
-        saveSystem.dungeonData.AddSavedUid(id);
+        saveSystem.DungeonData.AddSavedUid(id);
         Load();
         tooltipCanvas.SetActive(false);
     }

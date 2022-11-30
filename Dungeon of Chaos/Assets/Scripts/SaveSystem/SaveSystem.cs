@@ -1,17 +1,26 @@
-using System.Collections;
-using System.Collections.Generic;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
+using JetBrains.Annotations;
 using UnityEngine;
 using UnityEngine.Assertions;
 
+/// <summary>
+/// Handles all saving, uses the BinaryFormatter
+/// </summary>
 public class SaveSystem : MonoBehaviour
 {
-    public SaveData saveData;
-    public DungeonData dungeonData;
+    public SaveData SaveData { get; private set; }
+    public DungeonData DungeonData { get; private set; }
 
+    [SerializeField]
+    [NotNull]
+    private DefaultCharacterPositions defaultCharacterPositions;
+
+    [Tooltip("Index of the first dungeon in build settings")]
+    public const int SceneOffset = 1;
+
+    // Which save file should be used
     private readonly ActiveSaveSlot saveSlot = new ActiveSaveSlot();
-
     private Character character;
 
     private void Start()
@@ -19,25 +28,49 @@ public class SaveSystem : MonoBehaviour
         character = FindObjectOfType<Character>();
     }
 
-    void Update()
+    /// <summary>
+    /// Move to the next dungeon - reset all dungeon data, keep character data
+    /// </summary>
+    public void LevelComplete()
     {
-        if (Input.GetKeyDown(KeyCode.K))
-            SaveProgress();
-        if (Input.GetKeyDown(KeyCode.L))
-            Load();
-    }
+        int dungeon = SaveData.dungeonData.dungeon + 1 - SceneOffset;
+        var charPos = defaultCharacterPositions.positions[dungeon];
+        SaveData = new SaveData(
+            new SaveAttributes(charPos, character.stats, character.SkillSystem, new DungeonData(dungeon + 1)));
 
-    public void SaveProgress(SaveAttributes attributes)
-    {
-        saveData = new SaveData(attributes);
         Save();
     }
 
+    /// <summary>
+    /// Save the progress in character and dungeonData
+    /// </summary>
     public void SaveProgress()
     {
-        saveData =
-            new SaveData(new SaveAttributes(character.transform.position, character.stats, character.SkillSystem, dungeonData));
+        SaveData = new SaveData(
+            new SaveAttributes(character.transform.position, character.stats, character.SkillSystem, DungeonData));
         Save();
+    }
+
+    /// <summary>
+    /// Load progress, called when the scene loads by the GameController
+    /// </summary>
+    public void Load()
+    {
+        if (!character)
+            character = FindObjectOfType<Character>();
+
+        string path = CreatePath();
+        SaveData = LoadData(path);
+
+        Assert.IsNotNull(SaveData);
+        DungeonData = SaveData.dungeonData;
+
+        // Save slot screen, we don't want to load character data
+        if (character == null)
+            return;
+        character.stats.Load(SaveData.savedStats);
+        character.SkillSystem.Load(SaveData.savedSkillSystem);
+        character.transform.position = SaveData.characterPosition.ToV3();
     }
 
     private string CreatePath()
@@ -56,30 +89,17 @@ public class SaveSystem : MonoBehaviour
         string path = CreatePath();
         FileStream stream = new FileStream(path, FileMode.Create) { Position = 0 };
 
-        formatter.Serialize(stream, saveData);
+        formatter.Serialize(stream, SaveData);
         stream.Close();
-    }
-
-    public void Load()
-    {
-        if (!character)
-            character = FindObjectOfType<Character>();
-
-        string path = CreatePath();
-        saveData = LoadData(path);
-
-        Assert.IsNotNull(saveData);
-        character.stats.Load(saveData.savedStats);
-        character.SkillSystem.Load(saveData.savedSkillSystem);
-        character.transform.position = saveData.characterPosition.ToV3();
-        dungeonData = saveData.dungeonData;
     }
 
     private SaveData LoadData(string filePath)
     {
         if (!File.Exists(filePath))
         {
-            return new SaveData(new SaveAttributes(Vector3.zero, character.stats, character.SkillSystem, dungeonData));
+            // Default save
+            return new SaveData(new SaveAttributes(defaultCharacterPositions.positions[0], character.stats,
+                                                   character.SkillSystem, new DungeonData()));
         }
 
         var formatter = new BinaryFormatter();
@@ -90,6 +110,7 @@ public class SaveSystem : MonoBehaviour
         return data;
     }
 
+    // Public API functions for the save slot
     public SaveData GetSavedData(int saveSlotIndex)
     {
         var path = CreatePath(saveSlotIndex);
