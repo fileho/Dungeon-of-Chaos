@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4617805228910178657}
   - component: {fileID: 168817505422937789}
   m_Layer: 0
-  m_Name: BurnEffect
+  m_Name: BurnEffectWeapon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -43,6 +43,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 35911a30ff1a6bd42ae1eddcebb92bd5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  applyOnWeapon: 0
+  applyOnWeapon: 1
   defaultMaterial: {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
-  effectMaterial: {fileID: 2100000, guid: f1188bae2212d904b902941a2bd762ba, type: 2}
+  effectMaterial: {fileID: 2100000, guid: 84a83a6a7bc3b824f9b9fa6242e45b7d, type: 2}

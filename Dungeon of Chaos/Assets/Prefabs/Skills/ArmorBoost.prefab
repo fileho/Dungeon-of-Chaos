@@ -44,6 +44,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 35911a30ff1a6bd42ae1eddcebb92bd5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  applyOnWeapon: 0
+  defaultMaterial: {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  effectMaterial: {fileID: 0}
 --- !u!1 &7775649046850707757
 GameObject:
   m_ObjectHideFlags: 0

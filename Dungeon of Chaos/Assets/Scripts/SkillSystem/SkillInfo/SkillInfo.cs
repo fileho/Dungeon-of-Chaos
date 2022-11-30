@@ -83,14 +83,14 @@ public class SkillInfo<T> : ScriptableObject where T : ISkill
 
     public string GetCost(int inc = 0)
     {
-        if (level + inc == 0 || level == maxLevel)
+        if (level + inc == 0 || level > maxLevel)
             return "";
         return skills[level - 1 + inc].GetCostDescription();
     }
 
     public string GetDescription(int inc = 0)
     {
-        if (level + inc == 0 || level == maxLevel)
+        if (level + inc == 0 || level > maxLevel)
             return "";
 
         return skills[level - 1 + inc].GetEffectDescription();
