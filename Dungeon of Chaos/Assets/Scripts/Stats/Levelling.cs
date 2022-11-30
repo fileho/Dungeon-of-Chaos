@@ -129,10 +129,15 @@ public class Levelling
 
     public void ConsumeStatsPoint()
     {
-        Debug.Log("Stats Points: " + statsPoints);
         statsPoints--;
         StatsOverview.instance.SetStatsPoints(statsPoints);
         StatsOverview.instance.ShowStatsIncreaseButtons(HasStatsPoints());
+    }
+
+    public void ConsumeSkillPoints(int amount)
+    {
+        skillPoints -= amount;
+        StatsOverview.instance.UpdateSkillPoints();
     }
 
     public void Load(SavedLevelling saved)

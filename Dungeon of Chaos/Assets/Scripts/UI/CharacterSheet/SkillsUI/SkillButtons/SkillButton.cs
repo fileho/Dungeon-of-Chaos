@@ -84,19 +84,4 @@ public abstract class SkillButton : MonoBehaviour, IPointerDownHandler, IPointer
     public abstract void SetIcon();
 
     public abstract void SetLevel();
-
-    protected string GetLevelDescription(int lvl)
-    {
-        string ret = "Current level";
-        return lvl == 0
-            ? "Locked"
-            : ret;
-    }
-    protected string GetNextLevelDescription(int lvl, int max)
-    {
-        string ret = "Next level";
-        return lvl == max
-            ? "Max level reached"
-            : ret;
-    }
 }
