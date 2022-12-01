@@ -42,9 +42,9 @@ public class SoundsEditor : PropertyDrawer
         var index = (SoundCategories.SoundCategory)soundType.enumValueIndex;
         switch (index)
         {
-        case SoundCategories.SoundCategory.Ambient: {
-            SoundCategories.Ambient s = (SoundCategories.Ambient)soundIndex.intValue;
-            soundIndex.intValue = (int)(SoundCategories.Ambient)EditorGUI.EnumPopup(soundRect, s);
+        case SoundCategories.SoundCategory.Looping: {
+            SoundCategories.Looping s = (SoundCategories.Looping)soundIndex.intValue;
+            soundIndex.intValue = (int)(SoundCategories.Looping)EditorGUI.EnumPopup(soundRect, s);
             break;
         }
         case SoundCategories.SoundCategory.Footsteps: {

@@ -6,7 +6,7 @@ public class SoundCategories
 {
     public enum SoundCategory
     {
-        Ambient, 
+        Looping, 
         Footsteps, 
         Attack, 
         Skill, 
@@ -16,7 +16,7 @@ public class SoundCategories
         TakeDamage
     }
 
-    public enum Ambient
+    public enum Looping
     {
         Firepit,
         ScaryNoises

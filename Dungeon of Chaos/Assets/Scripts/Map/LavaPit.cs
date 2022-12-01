@@ -18,7 +18,7 @@ public class LavaPit : MonoBehaviour
         if (!collider2d.CompareTag("Player"))
             return;
 
-        collider2d.GetComponent<Unit>().TakeDamage(dps * Time.deltaTime);
+        collider2d.GetComponent<Unit>().TakeDamage(dps * Time.deltaTime, false);
     }
 
     private IEnumerator InterpolateLights()

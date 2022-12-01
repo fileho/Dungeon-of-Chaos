@@ -62,7 +62,7 @@ public class Unit : MonoBehaviour
     // Null in the case of player
     public Unit Target { get; protected set; }
 
-    public void TakeDamage(float value)
+    public void TakeDamage(float value, bool playSfx = true)
     {
         float rest = value - stats.GetArmor();
         if (stats.HasArmor())
@@ -72,7 +72,8 @@ public class Unit : MonoBehaviour
 
         stats.ConsumeHealth(rest);
         effects.TakeDamage();
-        SoundManager.instance.PlaySound(takeDmgSFX);
+        if (playSfx)
+            SoundManager.instance.PlaySound(takeDmgSFX);
         if (stats.IsDead())
             Die();
     }
