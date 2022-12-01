@@ -75,7 +75,7 @@ MonoBehaviour:
     volume: 1
     pitch: 1
     priority: 0
-  loot: {fileID: 11400000, guid: 55110f0bef1256e42a7f83b3fc2b4ea9, type: 2}
+  loot: {fileID: 11400000, guid: 417bba6363d3c0e47884167da49313b1, type: 2}
   lootModifiers: {fileID: 11400000, guid: 54be39060d6909b4983736398e32d996, type: 2}
 --- !u!212 &4749972822253201943
 SpriteRenderer:
