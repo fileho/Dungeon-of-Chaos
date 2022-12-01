@@ -9990,6 +9990,7 @@ GameObject:
   - component: {fileID: 6708584098905018863}
   - component: {fileID: 6708584098905018856}
   - component: {fileID: 6708584098905018862}
+  - component: {fileID: 1673530349}
   m_Layer: 5
   m_Name: Panel-LoadGame
   m_TagString: Untagged
@@ -10065,7 +10066,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6708584098905018858}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0170e7f9799f64aaf8e6b5cfb81683d8, type: 3}
   m_Name: 
@@ -10077,6 +10078,22 @@ MonoBehaviour:
   - {fileID: 6708584098304741512}
   - {fileID: 6708584098620968701}
   - {fileID: 6708584099497605433}
+--- !u!114 &1673530349
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6708584098905018858}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 87e1824996518cd4aa14258ee68d86a3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  buttons:
+  - {fileID: 6708584098174487110}
+  - {fileID: 6708584098616783770}
+  - {fileID: 6708584098997314680}
 --- !u!1 &6708584098905543194
 GameObject:
   m_ObjectHideFlags: 0
@@ -13086,6 +13103,12 @@ MonoBehaviour:
   healthBar: {fileID: 6708584098931188126}
   manaBar: {fileID: 6708584098936936537}
   staminaBar: {fileID: 6708584099280826968}
+  activeSkills: []
+  dashSkill: {fileID: 0}
+  secondarySkill: {fileID: 0}
+  activeCooldowns: []
+  dashCooldown: {fileID: 0}
+  secondaryCooldown: {fileID: 0}
 --- !u!1 &6708584099263024701
 GameObject:
   m_ObjectHideFlags: 0

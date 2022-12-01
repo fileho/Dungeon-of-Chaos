@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using TMPro;
 
 public class SaveSlots : MonoBehaviour
 {
@@ -27,7 +28,7 @@ public class SaveSlots : MonoBehaviour
     private void DrawInfo(int index)
     {
         var saveData = saveSystem.GetSavedData(index);
-        DrawInfo(saveData, buttons[index].GetComponentInChildren<Text>());
+        DrawInfo(saveData, buttons[index].GetComponentInChildren<TMP_Text>());
     }
 
     private string GetOutputText(SaveData data)
@@ -40,7 +41,7 @@ public class SaveSlots : MonoBehaviour
         return s;
     }
 
-    private void DrawInfo(SaveData data, Text target)
+    private void DrawInfo(SaveData data, TMP_Text target)
     {
         string output = GetOutputText(data);
         target.text = output;
