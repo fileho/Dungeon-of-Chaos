@@ -13,6 +13,8 @@ public class Spikes : MonoBehaviour
     private Sprite spikesDown;
     [SerializeField]
     private Sprite spikesUp;
+    [SerializeField]
+    private float reloadTime;
 
     private bool attacking = false;
 
@@ -27,7 +29,7 @@ public class Spikes : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collider)
     {
-        if (!attacking && !collider.CompareTag("Player"))
+        if (attacking || !collider.CompareTag("Player"))
             return;
 
         StartCoroutine(ActivateSpikes());
@@ -48,8 +50,10 @@ public class Spikes : MonoBehaviour
                 unit.TakeDamage(damage);
         }
 
-        yield return new WaitForSeconds(delay);
+        yield return new WaitForSeconds(delay * 2);
         spriteRenderer.sprite = spikesDown;
+
+        yield return new WaitForSeconds(reloadTime);
         attacking = false;
     }
 }
