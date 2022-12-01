@@ -10,23 +10,30 @@ public class SaveGameUIManager : MonoBehaviour
 
     private UnityAction[] actions;
 
-    private void OnEnable() {
+    private void OnEnable()
+    {
         actions = new UnityAction[loadSlots.Length];
-        for (int i = 0; i < loadSlots.Length; i++) {
-            actions[i] = () => { OnSlotPressed(i); };
-            loadSlots[i].onClick.AddListener(actions[i]);
+        for (int i = 0; i < loadSlots.Length; i++)
+        {
+            // Storing index in a local variable since closures reference the same copy of the i variable (last value)
+            int index = i;
+            actions[index] = () => { OnSlotPressed(index); };
+            loadSlots[index].onClick.AddListener(actions[index]);
         }
     }
 
 
-    private void OnDisable() {
-        for (int i = 0; i < loadSlots.Length; i++) {
+    private void OnDisable()
+    {
+        for (int i = 0; i < loadSlots.Length; i++)
+        {
             loadSlots[i].onClick.RemoveListener(actions[i]);
         }
     }
 
 
-    void OnSlotPressed(int slotIndex) {
+    void OnSlotPressed(int slotIndex)
+    {
         UIEvents.SaveSlotPressed?.Invoke(slotIndex);
         print("SaveSlotIndex: " + slotIndex);
     }

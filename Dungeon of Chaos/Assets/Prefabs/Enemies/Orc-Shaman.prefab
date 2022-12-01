@@ -25,7 +25,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1085722302207365719}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -1.13, y: 0.36, z: 0}
+  m_LocalPosition: {x: -0.991, y: 0.63, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4097452341035697016}
@@ -177,9 +177,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c51d3eb4b0ae042b1bf2167d65c7bf36, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  upRightAngle: -30
-  armAlignAngle: 0
-  weaponTipOffset: {x: -1.12, y: 0.66, z: 0}
+  upRightAngle: -70
+  armAlignAngle: 70
+  weaponTipOffset: {x: -0.991, y: 0.63, z: 0}
 --- !u!212 &8779196864980001321
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -284,13 +284,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2617678687406560127}
-  m_LocalRotation: {x: 0, y: 0, z: -0.28401542, w: 0.95881975}
-  m_LocalPosition: {x: -1.14, y: 0.01, z: 0}
+  m_LocalRotation: {x: 0, y: 0, z: -0.3420201, w: 0.9396927}
+  m_LocalPosition: {x: -0.981, y: -0.003, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4097452341035697016}
   m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -33}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -40}
 --- !u!212 &7803548120034628150
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -358,7 +358,7 @@ BoxCollider2D:
   m_Offset: {x: -0.31115383, y: 0.4250153}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.70473975, y: 0.30833977}
+    pivot: {x: 0.8786584, y: 0.36272985}
     oldSize: {x: 0.8333333, y: 1.4166666}
     newSize: {x: 4.4, y: 2.14}
     adaptiveTilingThreshold: 0.5

@@ -5,14 +5,14 @@ using Pathfinding;
 using UnityEngine;
 
 [CreateAssetMenu(menuName = "SO/Movement/MeleeEnemy")]
-public class EnemyMovement : IMovement {
+public class EnemyMovement : IMovement
+{
     private AIAgent agent;
     private Rigidbody2D rb;
     private Stats stats;
     [Header("Steer")]
     //[SerializeField] private float steerForce = 1f;
     //[SerializeField] private float lookAheadDistance = 0.5f;
-    [SerializeField] private float nextWaypointDistance = 5f;
     [Header("Separation")]
     [SerializeField] private float separationForce = 1f;
     [SerializeField] private float separationWeight = 1f;
@@ -29,12 +29,16 @@ public class EnemyMovement : IMovement {
 
     public Collider2D collider { get; private set; }
 
-    public override IMovement Init(Transform transform, Stats stats) {
+    public override IMovement Init(Transform transform, Stats stats)
+    {
         agent = transform.GetComponent<AIAgent>();
         rb = transform.GetComponent<Rigidbody2D>();
+
         this.stats = stats;
         collider = transform.GetComponent<Collider2D>();
-        if (agent != null) {
+        if (agent != null)
+        {
+            float nextWaypointDistance = transform.GetComponent<AttackManager>().GetMinimumAttackRange() + 1;
             agent.Init(stats.MovementSpeed(), rb, nextWaypointDistance);
         }
 
@@ -44,9 +48,11 @@ public class EnemyMovement : IMovement {
     private float updatePathInterval = 1f;
     private float lastPathUpdateTime = 0f;
 
-    public override void Move(SoundSettings footstepsSFX) {
+    public override void Move(SoundSettings footstepsSFX)
+    {
         Rigidbody2D targetRB = Character.instance.GetComponent<Rigidbody2D>();
-        if (Time.time - lastPathUpdateTime > updatePathInterval) {
+        if (Time.time - lastPathUpdateTime > updatePathInterval)
+        {
             agent.UpdatePath(targetRB.transform);
             lastPathUpdateTime = Time.time;
         }
@@ -58,7 +64,8 @@ public class EnemyMovement : IMovement {
         agent.UpdateMovement(separation);
     }
 
-    public override Vector2 GetMoveDir() {
+    public override Vector2 GetMoveDir()
+    {
         return Vector2.zero;
     }
 }
