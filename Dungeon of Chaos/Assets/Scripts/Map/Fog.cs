@@ -8,7 +8,7 @@ using UnityEngine.Experimental.Rendering.Universal;
 public class Fog : MonoBehaviour
 {
     private GameObject tooltipCanvas;
-    private float range = 2f;
+    private const float range = 2f;
 
     private void Start()
     {

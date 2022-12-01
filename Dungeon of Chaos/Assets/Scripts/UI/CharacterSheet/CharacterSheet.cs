@@ -25,6 +25,8 @@ public class CharacterSheet : MonoBehaviour
 
     private void Update()
     {
+        if (!child.activeSelf)
+            return;
         if (Input.GetKeyDown(KeyCode.Escape))
             Close();
     }

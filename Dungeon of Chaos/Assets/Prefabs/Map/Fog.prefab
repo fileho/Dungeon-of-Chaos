@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4991145636304450549}
   - component: {fileID: 4991145636304450550}
   - component: {fileID: 4991145636304450551}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Collider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -81,7 +81,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4991145636393533705}
   - component: {fileID: 1195470590}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Shadow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -127,7 +127,7 @@ MonoBehaviour:
   - {x: -3, y: 1, z: 0}
   m_ShapePathHash: 0
   m_Mesh: {fileID: 0}
-  m_InstanceId: 63400
+  m_InstanceId: 861216
 --- !u!1 &4991145637095282422
 GameObject:
   m_ObjectHideFlags: 0
@@ -140,7 +140,7 @@ GameObject:
   - component: {fileID: 4991145637095282426}
   - component: {fileID: 4991145637095282425}
   - component: {fileID: 4991145637095282424}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -239,7 +239,7 @@ GameObject:
   - component: {fileID: 4991145637186651655}
   - component: {fileID: 4991145637186651657}
   - component: {fileID: 4991145637186651656}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -317,7 +317,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4991145637670211364}
   - component: {fileID: 4991145637670211363}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Fog
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -378,7 +378,7 @@ GameObject:
   - component: {fileID: 4991145637872881288}
   - component: {fileID: 4991145637872881290}
   - component: {fileID: 4991145637872881289}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Particles
   m_TagString: Untagged
   m_Icon: {fileID: 0}
