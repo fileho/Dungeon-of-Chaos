@@ -17,8 +17,6 @@ public class Fog : MonoBehaviour
         var t = tooltipCanvas.transform;
         t.rotation = Quaternion.identity;
         t.Translate(0, 3, 0);
-
-    //    BakeShadows();
     }
 
     /// <summary>
@@ -72,6 +70,7 @@ public class Fog : MonoBehaviour
         Vector3 dir = new Vector3(0, -6, 0);
         dir = transform.rotation * dir;
 
+        FindObjectOfType<GameController>().StartBossFight();
         StartCoroutine(MovePlayer(dir));
     }
 

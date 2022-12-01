@@ -31,16 +31,6 @@ public class SaveSlots : MonoBehaviour
         DrawInfo(saveData, buttons[index].transform);
     }
 
-    private string GetOutputText(SaveData data)
-    {
-        if (data == null)
-            return "Empty Save Slot";
-
-        string s = "Dungeon " + data.dungeonData.dungeon + '\n' + "Level " + data.savedStats.savedLevelling.level +
-                   '\n' + data.timestamp;
-        return s;
-    }
-
     private void DrawInfo(SaveData data, Transform target)
     {
         var dungeon = target.GetChild(0).GetComponent<TMP_Text>();
