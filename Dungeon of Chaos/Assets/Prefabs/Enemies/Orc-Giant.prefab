@@ -729,8 +729,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   upRightAngle: -110
-  armAlignAngle: 0
-  weaponTipOffset: {x: 0, y: 0, z: 0}
+  armAlignAngle: -20
+  weaponTipOffset: {x: -2.838, y: -0.031, z: 0}
 --- !u!212 &5931388970103229238
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -738,7 +738,7 @@ SpriteRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5372153891445836542}
-  m_Enabled: 0
+  m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
   m_DynamicOccludee: 1

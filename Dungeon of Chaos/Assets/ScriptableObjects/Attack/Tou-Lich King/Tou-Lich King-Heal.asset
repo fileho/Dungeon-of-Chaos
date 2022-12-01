@@ -1,0 +1,45 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 631bee89e6c9445ca85ecb0cf07de520, type: 3}
+  m_Name: Tou-Lich King-Heal
+  m_EditorClassIdentifier: 
+  range: 1000
+  damage: 0
+  staminaCost: 0
+  rangeWeight: 1
+  damageWeight: 1
+  staminaCostWeight: 1
+  cooldown: 10
+  attackAnimationDuration: 1.5
+  indicator: {fileID: 5248374025804181554, guid: bd368bb0dca0445629bdf0b149f13967, type: 3}
+  indicatorConfiguration: {fileID: 11400000, guid: 290b739ca57ac40bca62015b1ecc40e7, type: 2}
+  type: 0
+  swingSFX:
+    soundCategory: 0
+    sound: 0
+    volume: 1
+    pitch: 1
+    priority: 0
+  impactSFX:
+    soundCategory: 0
+    sound: 0
+    volume: 1
+    pitch: 1
+    priority: 0
+  indicatorSFX:
+    soundCategory: 0
+    sound: 0
+    volume: 1
+    pitch: 1
+    priority: 0
+  healAmount: 30
+  healRadius: 10

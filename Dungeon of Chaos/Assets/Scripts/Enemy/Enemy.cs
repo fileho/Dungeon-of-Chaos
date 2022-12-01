@@ -5,16 +5,20 @@ using System.Collections.Generic;
 using System.Linq;
 
 [RequireComponent(typeof(AttackManager))]
-public class Enemy : Unit {
+public class Enemy : Unit
+{
+    private const float CHASE_HEAT = 3f;
+    private const float RAYCAST_TIME_INTERVAL = 1f;
 
-    private enum State {
+    private enum State
+    {
         Idle,
         Patrol,
         Chase,
         Attack,
     }
 
-[SerializeField] private ILoot loot;
+    [SerializeField] private ILoot loot;
     public LootModifiers lootModifiers;
     private AttackManager attackManager;
     private IAttack currentAttack;
@@ -22,7 +26,8 @@ public class Enemy : Unit {
     private Animator animator;
     private Rigidbody2D rb;
 
-    protected override void Init() {
+    protected override void Init()
+    {
         loot = Instantiate(loot).Init(this);
         lootModifiers = Instantiate(lootModifiers);
         Target = Character.instance;
@@ -32,50 +37,68 @@ public class Enemy : Unit {
         rb = transform.GetComponent<Rigidbody2D>();
     }
 
-    private RaycastHit2D[] targetLosHits = new RaycastHit2D[1];
-    private float losDistance = 10f;
-    private float lastLosTime = 0f;
-    private float chaseForSecondsAfterLoseSight = 10f;
+    private float lastLosTime = Mathf.NegativeInfinity;
+    private float lastRayCastCheck = 0f;
 
-    private bool IsTargetInChaseRange() {
-        int hitsCount = Physics2D.RaycastNonAlloc(transform.position, (GetTargetPosition() - (Vector2)transform.position).normalized, targetLosHits, losDistance, 1 << LayerMask.NameToLayer("Player"));
+    private bool IsTargetInChaseRange()
+    {
+        Vector2 forward = transform.lossyScale.x > 0 ? -transform.right : transform.right;
+        bool playerHit = false;
 
-        if (hitsCount > 0) {
-            lastLosTime = Time.time;
+        if (Time.time - lastRayCastCheck > RAYCAST_TIME_INTERVAL)
+        {
+            for (int i = 0; i < 60; i++)
+            {
+                Vector2 dir = Quaternion.AngleAxis((-90 + (3 * i)), Vector3.forward) * forward;
+                RaycastHit2D hit = Physics2D.Linecast(transform.position, (Vector2)transform.position + (dir * stats.ChaseDistance()), ~(1 << LayerMask.NameToLayer("Enemy")));
+
+                //Debug.DrawLine(transform.position, (Vector2)transform.position + (dir * stats.ChaseDistance()), Color.red);
+
+                if (hit.collider && hit.collider.CompareTag("Player"))
+                {
+                    playerHit = true;
+                    lastLosTime = Time.time;
+                    break;
+                }
+            }
+            lastRayCastCheck = Time.time;
         }
-
-        // if target is within line of sight || target has been out of sight for less than threshold
-        // and if target is within chase distance
-        return (hitsCount > 0 || (hitsCount == 0 && Time.time - lastLosTime < chaseForSecondsAfterLoseSight)) && GetTargetDistance() < stats.ChaseDistance();
-        //return GetTargetDistance() < stats.ChaseDistance();
+        return playerHit || (!playerHit && Time.time - lastLosTime < CHASE_HEAT);
     }
 
-    private void FixedUpdate() {
+    private void FixedUpdate()
+    {
         animator.SetBool("isMoving", rb.velocity.magnitude > 0.01f);
         SwitchEnemyStates();
     }
 
 
-    private bool IsAttacking() {
+    private bool IsAttacking()
+    {
         return currentAttack != null && currentAttack.IsAttacking();
     }
 
 
-    private void RotateWeapon() {
-        if (weapon != null) {
+    private void RotateWeapon()
+    {
+        if (weapon != null)
+        {
             weapon.RotateWeapon(GetTargetPosition());
         }
     }
 
 
-    private void ResetWeapon() {
-        if (weapon != null) {
+    private void ResetWeapon()
+    {
+        if (weapon != null)
+        {
             weapon.ResetWeapon();
         }
     }
 
 
-    private void FlipSprite() {
+    private void FlipSprite()
+    {
         Vector2 dir = GetTargetDirection();
 
         if (dir.x > 0.01f)
@@ -84,12 +107,14 @@ public class Enemy : Unit {
             transform.localScale = Vector3.one;
     }
 
-    private bool Attack() {
+    private bool Attack()
+    {
         if (IsAttacking()) return true;
         currentAttack = attackManager.GetBestAvailableAttack();
         FlipSprite();
         RotateWeapon();
-        if (currentAttack != null) {
+        if (currentAttack != null)
+        {
             state = State.Attack;
             currentAttack.Attack();
             return true;
@@ -97,15 +122,19 @@ public class Enemy : Unit {
         return false;
     }
 
-    private void Move() {
+    private void Move()
+    {
         movement.Move(footstepsSFX);
     }
 
-    private bool Chase() {
-        if (IsTargetInChaseRange()) {
+    private bool Chase()
+    {
+        if (IsTargetInChaseRange())
+        {
             state = State.Chase;
 
-            if (GetTargetDistance() > attackManager.GetMinimumAttackRange()) {
+            if (GetTargetDistance() > attackManager.GetMinimumAttackRange())
+            {
                 Move();
             }
             FlipSprite();
@@ -116,14 +145,16 @@ public class Enemy : Unit {
     }
 
 
-    private bool Patrol() {
+    private bool Patrol()
+    {
         //TODO: Write the patrol logic
         state = State.Patrol;
         ResetWeapon();
         return false;
     }
 
-    private void SwitchEnemyStates() {
+    private void SwitchEnemyStates()
+    {
         if (dead) return;
         if (Attack()) { }
         else if (Chase()) { }
@@ -132,12 +163,14 @@ public class Enemy : Unit {
     }
 
 
-    public bool IsAwake() {
+    public bool IsAwake()
+    {
         return state == State.Attack || state == State.Chase;
     }
 
 
-    protected override void CleanUp() {
+    protected override void CleanUp()
+    {
         loot.Drop();
         Destroy(transform.parent.gameObject);
     }

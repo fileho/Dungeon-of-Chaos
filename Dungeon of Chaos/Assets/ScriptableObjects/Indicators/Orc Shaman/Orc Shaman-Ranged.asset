@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Orc Shaman-Ranged
   m_EditorClassIdentifier: 
   duration: 0.6
-  color: {r: 1, g: 0.9411765, b: 0.28627452, a: 1}
+  color: {r: 0.92941177, g: 1, b: 0, a: 1}
   scale: 1
   initialScale: {x: 0, y: 0}
   finalScale: {x: 1.25, y: 1.25}
