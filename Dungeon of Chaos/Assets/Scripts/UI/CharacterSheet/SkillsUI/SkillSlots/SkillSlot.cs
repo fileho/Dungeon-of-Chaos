@@ -36,6 +36,10 @@ public abstract class SkillSlot : MonoBehaviour, IDropHandler
     public void SetImage(Sprite sprite)
     {
         image.sprite = sprite;
+        if (sprite == null)
+            image.color = new Color(1f, 1f, 1f, 0f);
+        else
+            image.color = new Color(1f, 1f, 1f, 1f);
     }
 }
 
