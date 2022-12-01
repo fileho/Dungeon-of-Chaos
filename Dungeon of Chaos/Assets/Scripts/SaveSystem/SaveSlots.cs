@@ -28,7 +28,7 @@ public class SaveSlots : MonoBehaviour
     private void DrawInfo(int index)
     {
         var saveData = saveSystem.GetSavedData(index);
-        DrawInfo(saveData, buttons[index].GetComponentInChildren<TMP_Text>());
+        DrawInfo(saveData, buttons[index].transform);
     }
 
     private string GetOutputText(SaveData data)
@@ -41,10 +41,22 @@ public class SaveSlots : MonoBehaviour
         return s;
     }
 
-    private void DrawInfo(SaveData data, TMP_Text target)
+    private void DrawInfo(SaveData data, Transform target)
     {
-        string output = GetOutputText(data);
-        target.text = output;
+        var dungeon = target.GetChild(0).GetComponent<TMP_Text>();
+        var level = target.GetChild(1).GetComponent<TMP_Text>();
+        var time = target.GetChild(2).GetComponent<TMP_Text>();
+
+        if (data == null)
+        {
+            level.gameObject.SetActive(false);
+            time.gameObject.SetActive(false);
+            return;
+        }
+
+        dungeon.text = "Dungeon " + data.dungeonData.dungeon;
+        level.text = "Level " + data.savedStats.savedLevelling.level;
+        time.text = data.timestamp.ToString();
     }
 
     private void ButtonClick(int index)
