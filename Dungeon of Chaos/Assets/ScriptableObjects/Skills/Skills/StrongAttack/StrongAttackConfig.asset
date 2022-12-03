@@ -12,12 +12,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 656d4005658cf4e07808ec6178e5ef23, type: 3}
   m_Name: StrongAttackConfig
   m_EditorClassIdentifier: 
-  range: 0
+  range: 3.5
   damage: 1.5
   staminaCost: 30
+  rangeWeight: 1
+  damageWeight: 1
+  staminaCostWeight: 1
   cooldown: 3
   attackAnimationDuration: 0.8
   indicator: {fileID: 0}
+  indicatorConfiguration: {fileID: 0}
   type: 1
   swingSFX:
     soundCategory: 2
@@ -38,4 +42,3 @@ MonoBehaviour:
     pitch: 1
     priority: 0
   swing: 18
-  reach: 1.5

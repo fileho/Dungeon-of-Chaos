@@ -15,6 +15,8 @@ public class Weapon : MonoBehaviour {
     [Tooltip("Local position of weaapon tip")]
     [SerializeField] private Vector3 weaponTipOffset = Vector3.zero;
 
+    private ISkillEffect skillEffect = null;
+
     private float weaponAssetWidth = 0;
     public float WeaponAssetWidth {
         get {
@@ -60,6 +62,11 @@ public class Weapon : MonoBehaviour {
         impactSFX = sound;
     }
 
+    public void SetEffect(ISkillEffect effect)
+    {
+        skillEffect = effect;
+    }
+
     public float GetUprightAngle() {
         return upRightAngle;
     }
@@ -77,6 +84,8 @@ public class Weapon : MonoBehaviour {
             hitUnits.Add(unit);
             SoundManager.instance.PlaySound(impactSFX);
             unit.TakeDamage(damage);
+            if (skillEffect != null)
+                skillEffect.Use(gameObject.GetComponentInParent<Unit>(), new List<Unit>() { unit });
         }
     }
 
