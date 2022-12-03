@@ -29,6 +29,8 @@ public class InGameUIManager : MonoBehaviour
 
     public static InGameUIManager instance;
 
+    [SerializeField]
+    private GameObject settings;
     private SkillSystem skillSystem;
 
     private void Awake()
@@ -44,6 +46,9 @@ public class InGameUIManager : MonoBehaviour
     private void Update()
     {
         UpdateSkills();
+
+        if (Input.GetKeyDown(KeyCode.Escape))
+            ToggleSettings();
     }
 
     public void SetHealthBar(float value)
@@ -95,5 +100,21 @@ public class InGameUIManager : MonoBehaviour
             return;
         secondarySkill.sprite = secondary.GetSkillData().GetIcon();
         secondaryCooldown.fillAmount = secondary.GetCurrentSkill().GetCooldownRatio();
+    }
+
+    public void ToggleSettings()
+    {
+        bool isActive = settings.activeSelf;
+
+        if (!isActive)
+        {
+            Character.instance.BlockInput();
+        }
+        else
+        {
+            Character.instance.UnblockInput();
+        }
+
+        settings.SetActive(!isActive);
     }
 }

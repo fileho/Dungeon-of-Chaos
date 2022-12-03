@@ -39,6 +39,9 @@ public class Minimap : MonoBehaviour
         }
         else
         {
+            // Some overlap is already active
+            if (Character.instance.IsInputBlocked())
+                return;
             Show();
         }
     }
