@@ -5225,10 +5225,10 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 493887442690776190}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
-        m_Mode: 6
+      - m_Target: {fileID: 493887442939434517}
+        m_TargetAssemblyTypeName: InGameUIManager, Assembly-CSharp
+        m_MethodName: ToggleSettings
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -5625,6 +5625,7 @@ MonoBehaviour:
   - {fileID: 4225374556447113682}
   dashCooldown: {fileID: 5714424291920231145}
   secondaryCooldown: {fileID: 2691828887607529059}
+  settings: {fileID: 493887442690776190}
 --- !u!1 &493887442942057518
 GameObject:
   m_ObjectHideFlags: 0

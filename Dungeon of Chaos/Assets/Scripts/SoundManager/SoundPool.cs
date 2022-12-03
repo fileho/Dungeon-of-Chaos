@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-
 [System.Serializable]
 public class SoundPool
 {
@@ -44,8 +43,8 @@ public class SoundPool
                              soundSettings.GetSoundIndex());
             return;
         }
-        source.volume = sound.GetVolume() * soundSettings.GetVolume() * PlayerPrefsManager.MasterVolume *
-                        PlayerPrefsManager.SFXVolume;
+        source.volume = sound.GetVolume() * soundSettings.GetVolume() * PlayerPrefsManager.MasterVolume / 100 *
+                        PlayerPrefsManager.SFXVolume / 100;
         source.pitch = sound.GetPitch() * soundSettings.GetPitch();
         source.clip = sound.GetAudioClip();
         source.Play();
@@ -72,4 +71,3 @@ public class SoundPool
         return pool[(lastIndex + 1) % poolSize];
     }
 }
-

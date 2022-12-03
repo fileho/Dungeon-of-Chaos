@@ -50,7 +50,7 @@ public class Character : Unit
         if (dead)
             return;
 
-        if (blockedInput > 0)
+        if (IsInputBlocked())
             return;
         RegenerateStamina();
         RegenerateMana();
@@ -79,6 +79,11 @@ public class Character : Unit
     public void UnblockInput()
     {
         --blockedInput;
+    }
+
+    public bool IsInputBlocked()
+    {
+        return blockedInput > 0;
     }
 
     private void UpdateCooldowns()
@@ -111,7 +116,7 @@ public class Character : Unit
         if (dead)
             return;
 
-        if (blockedInput > 0)
+        if (IsInputBlocked())
             return;
 
         if (SkillSystem.IsDashing())

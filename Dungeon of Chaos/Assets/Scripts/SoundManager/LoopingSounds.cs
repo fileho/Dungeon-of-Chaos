@@ -64,8 +64,8 @@ public class SoundPoolLooping
 
         var audio = pool[audioIndex].audioSource;
         audio.clip = sound.GetAudioClip();
-        audio.volume = soundSettings.GetVolume() * sound.GetVolume() * PlayerPrefsManager.MasterVolume *
-                       PlayerPrefsManager.SFXVolume;
+        audio.volume = soundSettings.GetVolume() * sound.GetVolume() * PlayerPrefsManager.MasterVolume / 100 *
+                       PlayerPrefsManager.SFXVolume / 100;
         audio.Play();
         var uid = NextUid();
         pool[audioIndex].uid = uid;
@@ -89,8 +89,8 @@ public class SoundPoolLooping
 
         if (p.uid == soundData.Uid)
         {
-            p.audioSource.volume = sounds[soundData.Index].GetVolume() * volume * PlayerPrefsManager.MasterVolume *
-                                   PlayerPrefsManager.SFXVolume;
+            p.audioSource.volume = sounds[soundData.Index].GetVolume() * volume * PlayerPrefsManager.MasterVolume / 100 *
+                                   PlayerPrefsManager.SFXVolume / 100;
         }
     }
 
