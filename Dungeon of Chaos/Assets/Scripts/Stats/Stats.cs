@@ -59,6 +59,13 @@ public class Stats : ScriptableObject
         return XP;
     }
 
+    public void ModifyCurrentXP(int value)
+    {
+        XP.ModifyCurrentXP(value);
+        float ratio = (float)XP.GetCurrentXP() / (float)XP.GetNextLevelXP();
+        bars.UpdateXpBar(ratio);
+    }    
+
     #region Utils
     public float GetCooldownModifier()
     {
@@ -279,8 +286,10 @@ public class Stats : ScriptableObject
         stamina.Reset();
 
         if (this.bars)
+        {
             this.bars.FillAllBars();
-
+            this.bars.UpdateXpBar((float)XP.GetCurrentXP() / XP.GetNextLevelXP());
+        }
         return this;
     }
 

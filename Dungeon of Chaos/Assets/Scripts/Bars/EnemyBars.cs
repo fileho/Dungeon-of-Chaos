@@ -29,4 +29,9 @@ public class EnemyBars : IBars
     {
         
     }
+
+    public override void UpdateXpBar(float value)
+    {
+        
+    }
 }
