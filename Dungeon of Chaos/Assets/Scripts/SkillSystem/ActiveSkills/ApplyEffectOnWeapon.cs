@@ -9,7 +9,7 @@ public class ApplyEffectOnWeapon : OneTimeTemporalEffect
 
     public override string[] GetEffectsValues(Unit owner)
     {
-        string[] effects = new string[] { GetValue(owner).ToString() };
+        string[] effects = new string[] {duration.ToString(), GetValue(owner).ToString() };
         string[] e = effect.GetEffectsValues(owner);
         effects.CopyTo(e, 1);
         return e;

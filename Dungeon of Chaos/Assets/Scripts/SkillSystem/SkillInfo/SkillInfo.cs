@@ -158,6 +158,15 @@ public class SkillInfo<T> : ScriptableObject where T : ISkill
     public void ResetLevel()
     {
         level = 0;
+        unlocked = false;
+    }
+
+    public int GetInvestedSkillPoints()
+    {
+        int invested = 0;
+        for (int i = 0; i < level; i++)
+            invested += requirements[i].GetCost();
+        return invested;
     }
 
     public SavedSkillInfo Save()
