@@ -91,7 +91,10 @@ public class SkillButtonDash : SkillButton
     {
         @lock.SetActive(false);
         if (skillInfo.GetLevel() == 0)
-            @lock.SetActive(true);        
+        {
+            @lock.SetActive(true);
+            @lock.GetComponent<Image>().fillAmount = 1;
+        }
         level.text = skillInfo.GetLevel() + "/" + skillInfo.GetMaxLevel();
     }
 }
