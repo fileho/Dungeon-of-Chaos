@@ -8,15 +8,14 @@ public abstract class SkillButton : MonoBehaviour, IPointerDownHandler, IPointer
 { 
     [SerializeField] protected GameObject dragDrop;
     [SerializeField] protected Text level;
-    [SerializeField] protected GameObject locked;
+    [SerializeField] protected GameObject @lock;
     [SerializeField] protected GameObject load;
-    //[SerializeField] protected Image frame;
 
     protected SkillSystem skillSystem;
 
     protected bool rightClick = false;
     protected float time = 0f;
-    float upgradeTime = 1f;
+    float upgradeTime = 0.5f;
 
     public abstract void OnBeginDrag(PointerEventData eventData);
     public void OnDrag(PointerEventData eventData)
@@ -32,9 +31,7 @@ public abstract class SkillButton : MonoBehaviour, IPointerDownHandler, IPointer
 
     public void OnPointerDown(PointerEventData eventData)
     {
-        if (eventData.button == PointerEventData.InputButton.Left)
-            Debug.Log("Left Button");
-        else if (eventData.button == PointerEventData.InputButton.Right)
+        if (eventData.button == PointerEventData.InputButton.Right)
         {
             RightMouseDown();
         }
@@ -70,7 +67,10 @@ public abstract class SkillButton : MonoBehaviour, IPointerDownHandler, IPointer
         if (rightClick)
         {
             time += Time.unscaledDeltaTime;
-            load.GetComponent<Image>().fillAmount = time / upgradeTime;
+            if (@lock.activeInHierarchy)
+                @lock.GetComponent<Image>().fillAmount = 1 - (time / upgradeTime);
+            else
+                load.GetComponent<Image>().fillAmount = time / upgradeTime;
         }
         if (time >= upgradeTime)
         {

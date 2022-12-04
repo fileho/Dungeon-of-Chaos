@@ -22,7 +22,6 @@ public class SkillButtonDash : SkillButton
         }
         SetLevel();
         SetIcon();
-        //frame.color = Color.green;
     }
 
     public override void OnBeginDrag(PointerEventData eventData)
@@ -55,7 +54,7 @@ public class SkillButtonDash : SkillButton
     {
         if (!skillSystem.CanUpgradeDash(skillIndex))
         {
-            TooltipSystem.instance.DisplayMessage("Not enough skill points");
+            TooltipSystem.instance.DisplayMessage("Requirements not met");
             return;
         }
         base.RightMouseDown();
@@ -90,9 +89,9 @@ public class SkillButtonDash : SkillButton
 
     public override void SetLevel()
     {
-        locked.SetActive(false);
+        @lock.SetActive(false);
         if (skillInfo.GetLevel() == 0)
-            locked.SetActive(true);        
+            @lock.SetActive(true);        
         level.text = skillInfo.GetLevel() + "/" + skillInfo.GetMaxLevel();
     }
 }
