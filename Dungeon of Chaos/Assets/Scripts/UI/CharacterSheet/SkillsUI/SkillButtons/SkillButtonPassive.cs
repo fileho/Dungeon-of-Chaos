@@ -18,7 +18,6 @@ public class SkillButtonPassive : SkillButton
         }
         SetLevel();
         SetIcon();
-        //frame.color = Color.blue;
     }
 
     public override void OnBeginDrag(PointerEventData eventData)
@@ -47,7 +46,7 @@ public class SkillButtonPassive : SkillButton
     {
         if (!skillSystem.CanUpgradePassive(skillIndex))
         {
-            TooltipSystem.instance.DisplayMessage("Not enough skill points");
+            TooltipSystem.instance.DisplayMessage("Requirements not met");
             return;
         }
         base.RightMouseDown();
@@ -70,9 +69,9 @@ public class SkillButtonPassive : SkillButton
 
     public override void SetLevel()
     {
-        locked.SetActive(false);
+        @lock.SetActive(false);
         if (skillInfo.GetLevel() == 0)
-            locked.SetActive(true);
+            @lock.SetActive(true);
         level.text = skillInfo.GetLevel() + "/" + skillInfo.GetMaxLevel();
     }
 
