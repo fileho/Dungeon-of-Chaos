@@ -36,6 +36,7 @@ public class GameController : MonoBehaviour
         LoadMapElements(FindObjectsOfType<Checkpoint>());
         LoadMapElements(FindObjectsOfType<MapFragment>());
         LoadMapElements(FindObjectsOfType<Chest>());
+        LoadMapElements(FindObjectsOfType<ResetBook>());
     }
 
     private void LoadMapElements<T>(IEnumerable<T> list)

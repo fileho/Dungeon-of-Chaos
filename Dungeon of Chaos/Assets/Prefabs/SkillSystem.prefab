@@ -55,6 +55,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: a7061317d431d39429ac2beb91f5aa88, type: 2}
   - {fileID: 11400000, guid: 44cd0267ded839b43bf83009b1ff5151, type: 2}
   - {fileID: 11400000, guid: f3d57bc632d9db64394821407c225799, type: 2}
+  - {fileID: 11400000, guid: 0697d7e5dbb0d8146a3c3bb147d42eb4, type: 2}
   passiveSkills:
   - {fileID: 11400000, guid: 27921fe9ac8249a49b57bffb3cacc4af, type: 2}
   - {fileID: 11400000, guid: 34c44c30e59e0a848b351307a9f8520a, type: 2}
@@ -73,5 +74,5 @@ MonoBehaviour:
   secondaryAttacks:
   - {fileID: 11400000, guid: 6a66b102a01a45049a369e6dc7507d03, type: 2}
   - {fileID: 11400000, guid: c787ed1be5afe1646986ab4da6d09ac2, type: 2}
+  - {fileID: 11400000, guid: c787ed1be5afe1646986ab4da6d09ac2, type: 2}
   activeSkillsSlots: 5
-  skillPointsRequired: 010000000200000003000000

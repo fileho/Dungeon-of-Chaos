@@ -15,8 +15,6 @@ public class StatsOverview : MonoBehaviour
     [SerializeField] private TextMeshProUGUI level;
     [SerializeField] private GameObject levelUpButton;
     [SerializeField] private TextMeshProUGUI statsPoints;
-    [SerializeField] private TextMeshProUGUI skillPoints;
-    [SerializeField] private TextMeshProUGUI skillTabSkillPoints;
     [SerializeField] private List<GameObject> statsIncreaseButtons;
 
     [Header("Primary Stats Text")]
@@ -81,12 +79,6 @@ public class StatsOverview : MonoBehaviour
         SetStat(value, statsPoints);
     }
 
-    public void UpdateSkillPoints()
-    {
-        skillPoints.text = stats.GetLevellingData().skillPoints.ToString();
-        skillTabSkillPoints.text = stats.GetLevellingData().skillPoints.ToString();
-    }
-    
     public void LevelUp()
     {
         stats.GetLevellingData().LevelUp();
