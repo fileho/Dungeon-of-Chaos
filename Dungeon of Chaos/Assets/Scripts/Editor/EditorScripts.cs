@@ -5,35 +5,11 @@ using UnityEditor;
 
 public class EditorScripts
 {
-    public GameObject particles;
-
-    [MenuItem("Dungeon/Replace Torches")]
-    public static void ReplaceTorches()
-    {
-        GameObject assetRoot = Selection.activeObject as GameObject;
-        string assetPath = PrefabUtility.GetPrefabAssetPathOfNearestInstanceRoot(assetRoot);
-        GameObject contentsRoot = PrefabUtility.LoadPrefabContents(assetPath);
-
-        foreach (var torch in contentsRoot.GetComponentsInChildren<Torch>())
-        {
-            var pos = torch.transform.position;
-
-            var t = AssetDatabase.LoadAssetAtPath("Assets/Prefabs/Map/Torch.prefab", typeof(GameObject));
-            var go = PrefabUtility.InstantiatePrefab(t, torch.transform.parent) as GameObject;
-            go.transform.position = pos;
-
-            Editor.DestroyImmediate(torch.gameObject, true);
-        }
-
-        PrefabUtility.SaveAsPrefabAsset(contentsRoot, assetPath);
-        PrefabUtility.UnloadPrefabContents(contentsRoot);
-    }
-
     private static int id = 0;
     [MenuItem("Dungeon/Assign Ids")]
     public static void AssignIds()
     {
-        id = 0; 
+        id = 0;
         SetIds(Editor.FindObjectsOfType<Checkpoint>());
         SetIds(Editor.FindObjectsOfType<MapFragment>());
         SetIds(Editor.FindObjectsOfType<Chest>());
@@ -55,4 +31,37 @@ public class EditorScripts
         }
     }
 
+    [MenuItem("Dungeon/Replace Torches")]
+
+    public static void ReplaceTorches()
+    {
+        ReplaceTorches("Assets/Prefabs/Map/Torch.prefab");
+    }
+
+    [MenuItem("Dungeon/Replace Torches Blue")]
+    public static void ReplaceTorchesBlue()
+    {
+        ReplaceTorches("Assets/Prefabs/Map/TorchBlue.prefab");
+    }
+
+    private static void ReplaceTorches(string torchPath)
+    {
+        GameObject assetRoot = Selection.activeObject as GameObject;
+        string assetPath = PrefabUtility.GetPrefabAssetPathOfNearestInstanceRoot(assetRoot);
+        GameObject contentsRoot = PrefabUtility.LoadPrefabContents(assetPath);
+
+        foreach (var torch in contentsRoot.GetComponentsInChildren<Torch>())
+        {
+            var pos = torch.transform.position;
+
+            var t = AssetDatabase.LoadAssetAtPath(torchPath, typeof(GameObject));
+            var go = PrefabUtility.InstantiatePrefab(t, torch.transform.parent) as GameObject;
+            go.transform.position = pos;
+
+            Editor.DestroyImmediate(torch.gameObject, true);
+        }
+
+        PrefabUtility.SaveAsPrefabAsset(contentsRoot, assetPath);
+        PrefabUtility.UnloadPrefabContents(contentsRoot);
+    }
 }

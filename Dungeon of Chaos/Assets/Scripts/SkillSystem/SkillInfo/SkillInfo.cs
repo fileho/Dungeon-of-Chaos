@@ -56,7 +56,7 @@ public class SkillInfo<T> : ScriptableObject where T : ISkill
     {
         if (requirements.Count == 0)
             return new UnlockingRequirements();
-        if (level > requirements.Count)
+        if (level >= requirements.Count)
         {
             requirements.Add(new UnlockingRequirements(requirements[requirements.Count - 1], level));
         }
@@ -100,7 +100,7 @@ public class SkillInfo<T> : ScriptableObject where T : ISkill
     {
         if (requirements.Count == 0 || level == maxLevel)
             return "";
-        if (level > requirements.Count)
+        if (level >= requirements.Count)
         {
             UnlockingRequirements req = GetUnlockingRequirements();
         }

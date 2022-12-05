@@ -90,6 +90,11 @@ public class IActiveSkill : ISkill
         }
     }
 
+    public float GetCooldownRatio()
+    {
+        return cooldownLeft / cooldown;
+    }
+
     protected void Consume(Stats stats)
     {
         stats.ConsumeMana(RecalculateManaCost());
