@@ -8,7 +8,7 @@ public abstract class SkillButton : MonoBehaviour, IPointerDownHandler, IPointer
 { 
     [SerializeField] protected GameObject dragDrop;
     [SerializeField] protected Text level;
-    [SerializeField] protected GameObject @lock;
+    [SerializeField] protected GameObject lockObj;
     [SerializeField] protected GameObject load;
 
     protected SkillSystem skillSystem;
@@ -67,8 +67,8 @@ public abstract class SkillButton : MonoBehaviour, IPointerDownHandler, IPointer
         if (rightClick)
         {
             time += Time.unscaledDeltaTime;
-            if (@lock.activeInHierarchy)
-                @lock.GetComponent<Image>().fillAmount = 1 - (time / upgradeTime);
+            if (lockObj.activeInHierarchy)
+                lockObj.GetComponent<Image>().fillAmount = 1 - (time / upgradeTime);
             else
                 load.GetComponent<Image>().fillAmount = time / upgradeTime;
         }

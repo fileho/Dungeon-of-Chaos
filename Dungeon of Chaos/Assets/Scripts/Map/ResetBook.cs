@@ -53,9 +53,8 @@ public class ResetBook : MonoBehaviour, IMapSavable
     {
         if (!collision.collider.CompareTag("Player")) return;
 
-        Debug.Log("Collect");
         collision.gameObject.GetComponent<Character>().stats.ColectReset();
+        Interact();
         CleanUp();
     }
-
 }

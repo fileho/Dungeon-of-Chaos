@@ -88,11 +88,11 @@ public class SkillButtonActive : SkillButton
 
     public override void SetLevel()
     {
-        @lock.SetActive(false);
+        lockObj.SetActive(false);
         if (skillInfo.GetLevel() == 0)
         {
-            @lock.SetActive(true);
-            @lock.GetComponent<Image>().fillAmount = 1;
+            lockObj.SetActive(true);
+            lockObj.GetComponent<Image>().fillAmount = 1;
         }
         level.text = skillInfo.GetLevel() + "/" + skillInfo.GetMaxLevel();
     }
