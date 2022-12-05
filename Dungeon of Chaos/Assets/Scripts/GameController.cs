@@ -21,7 +21,6 @@ public class GameController : MonoBehaviour
         LoadMap();
     }
 
-
     // TODO remove this later
     private void Update()
     {
@@ -38,7 +37,6 @@ public class GameController : MonoBehaviour
         LoadMapElements(FindObjectsOfType<MapFragment>());
         LoadMapElements(FindObjectsOfType<Chest>());
     }
-
 
     private void LoadMapElements<T>(IEnumerable<T> list)
         where T : IMapSavable
@@ -66,6 +64,12 @@ public class GameController : MonoBehaviour
         Time.timeScale = 1f;
         saveSystem.SaveProgress();
         ReloadScene();
+    }
+
+    public void StartBossFight()
+    {
+        foreach (var lavaPit in FindObjectsOfType<LavaPit>())
+            lavaPit.StartLights();
     }
 
     private void ReloadScene()

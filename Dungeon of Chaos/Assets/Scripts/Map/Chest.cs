@@ -9,6 +9,7 @@ public class Chest : MonoBehaviour, IMapSavable
     private GameObject loot;
     [SerializeField]
     private int lootCount = 1;
+    [SerializeField] private float value;
 
     [SerializeField]
     [ReadOnly]
@@ -38,7 +39,12 @@ public class Chest : MonoBehaviour, IMapSavable
     private void DropLoot()
     {
         for (int i = 0; i < lootCount; i++)
-            Instantiate(loot, transform.position, Quaternion.identity);
+        {
+            if (loot.GetComponent<Essence>())
+                Instantiate(loot, transform.position, Quaternion.identity).GetComponent<Essence>().SetValue(value);
+            else
+                Instantiate(loot, transform.position, Quaternion.identity);
+        }
         saveSystem.DungeonData.AddSavedUid(id);
     }
 

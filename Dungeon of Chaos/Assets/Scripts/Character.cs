@@ -11,6 +11,8 @@ public class Character : Unit
     public SkillSystem SkillSystem { get; private set; }
     private GameController gameController;
 
+    private int blockedInput = 0;
+
     private void Awake()
     {
         instance = this;
@@ -33,6 +35,7 @@ public class Character : Unit
             SkillSystem.Resurrect();
             return;
         }
+
         base.Die();
     }
 
@@ -45,6 +48,9 @@ public class Character : Unit
     void Update()
     {
         if (dead)
+            return;
+
+        if (IsInputBlocked())
             return;
         RegenerateStamina();
         RegenerateMana();
@@ -60,10 +66,25 @@ public class Character : Unit
         return camera.ScreenToWorldPoint(Input.mousePosition);
     }
 
-    public override Vector2 GetTargetDirection() {
-        return (GetTargetPosition() - (Vector2)transform.position);
+    public override Vector2 GetTargetDirection()
+    {
+        return (GetTargetPosition() - (Vector2) transform.position);
     }
 
+    public void BlockInput()
+    {
+        ++blockedInput;
+    }
+
+    public void UnblockInput()
+    {
+        --blockedInput;
+    }
+
+    public bool IsInputBlocked()
+    {
+        return blockedInput > 0;
+    }
 
     private void UpdateCooldowns()
     {
@@ -92,6 +113,12 @@ public class Character : Unit
 
     private void FixedUpdate()
     {
+        if (dead)
+            return;
+
+        if (IsInputBlocked())
+            return;
+
         if (SkillSystem.IsDashing())
             return;
         Move();

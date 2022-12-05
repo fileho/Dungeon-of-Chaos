@@ -9,7 +9,7 @@ public class Loot : ILoot
 
     private Transform transform;
     private Enemy owner;
-    //private float totalWeight;
+
     public override ILoot Init(Enemy enemy)
     {
         this.transform = enemy.transform;
@@ -21,14 +21,19 @@ public class Loot : ILoot
     {
         foreach (LootItem item in lootTable)
         {
-            float rnd = Random.Range(0f, 1f);
-            float chance = item.prefab.GetComponent<Essence>().GetChance(owner) * item.weight;
-            if (rnd <= chance)
-                Spawn(item.prefab);
+            if (item.prefab.GetComponent<Essence>() != null)
+            {
+                float rnd = Random.Range(0f, 1f);
+                float chance = item.prefab.GetComponent<Essence>().GetChance(owner) * item.weight;
+                if (rnd <= chance)
+                    SpawnEssence(item.prefab);
+            }
+            else
+                Instantiate(item.prefab, transform.position, Quaternion.identity);
         }
     }
 
-    private void Spawn(GameObject go)
+    private void SpawnEssence(GameObject go)
     {
         Instantiate(go, transform.position, Quaternion.identity).GetComponent<Essence>().SetValue(owner);
     }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using TMPro;
 
 public class SaveSlots : MonoBehaviour
 {
@@ -27,23 +28,25 @@ public class SaveSlots : MonoBehaviour
     private void DrawInfo(int index)
     {
         var saveData = saveSystem.GetSavedData(index);
-        DrawInfo(saveData, buttons[index].GetComponentInChildren<Text>());
+        DrawInfo(saveData, buttons[index].transform);
     }
 
-    private string GetOutputText(SaveData data)
+    private void DrawInfo(SaveData data, Transform target)
     {
+        var dungeon = target.GetChild(0).GetComponent<TMP_Text>();
+        var level = target.GetChild(1).GetComponent<TMP_Text>();
+        var time = target.GetChild(2).GetComponent<TMP_Text>();
+
         if (data == null)
-            return "Empty Save Slot";
+        {
+            level.gameObject.SetActive(false);
+            time.gameObject.SetActive(false);
+            return;
+        }
 
-        string s = "Dungeon " + data.dungeonData.dungeon + '\n' + "Level " + data.savedStats.savedLevelling.level +
-                   '\n' + data.timestamp;
-        return s;
-    }
-
-    private void DrawInfo(SaveData data, Text target)
-    {
-        string output = GetOutputText(data);
-        target.text = output;
+        dungeon.text = "Dungeon " + data.dungeonData.dungeon;
+        level.text = "Level " + data.savedStats.savedLevelling.level;
+        time.text = data.timestamp.ToString();
     }
 
     private void ButtonClick(int index)
