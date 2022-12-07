@@ -21,5 +21,4 @@ public abstract class AttackConfiguration : ScriptableObject
 
     public SoundSettings swingSFX;
     public SoundSettings impactSFX;
-    public SoundSettings indicatorSFX;
 }
