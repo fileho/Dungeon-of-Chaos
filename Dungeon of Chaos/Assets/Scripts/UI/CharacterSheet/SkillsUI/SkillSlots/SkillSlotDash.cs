@@ -17,6 +17,7 @@ public class SkillSlotDash : SkillSlot
         if (eventData.pointerDrag == null || 
             eventData.pointerDrag.GetComponent<SkillButtonDash>() == null)
             return;
+        SoundManager.instance.PlaySound(drop);
         int skillIndex = eventData.pointerDrag.GetComponent<SkillButtonDash>().GetSkillIndex();
         skillSystem.ActivateDash(skillIndex);
         SetImage(skillSystem.GetActivatedDash().GetSkillData().GetIcon());
