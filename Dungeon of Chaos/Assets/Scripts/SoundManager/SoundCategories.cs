@@ -7,7 +7,7 @@ public class SoundCategories
     public enum SoundCategory
     {
         Looping, 
-        Footsteps, 
+        EnemyAmbients, 
         Attack, 
         Skill, 
         Ui, 
@@ -16,16 +16,20 @@ public class SoundCategories
         TakeDamage
     }
 
+    // ToDo: Implementation
     public enum Looping
     {
         CaveAmbients,
         Checkpoint,
         Torch,
         Teleport,
-        Burn
+        Burn,
+        CharacterFootsteps
     }
 
-    public enum FootSteps
+
+    //ToDo: Implementation
+    public enum EnemyAmbients
     {
         Character,
         Chieftain,
@@ -93,6 +97,7 @@ public class SoundCategories
         WraithThrustAttack
     }
 
+    //ToDo: Connect with VFX 
     public enum Skill
     {
         ApplyBurn,
@@ -119,6 +124,7 @@ public class SoundCategories
         Whirlwind
     }
 
+    //ToDo: Implementation
     public enum Ui
     {
         ButtonClick,
@@ -126,6 +132,7 @@ public class SoundCategories
         RequirementsNotMet
     }
 
+    //ToDo: Implementation
     public enum Items
     {
         BookPickup,

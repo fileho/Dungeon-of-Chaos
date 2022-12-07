@@ -15,9 +15,11 @@ MonoBehaviour:
   range: 5
   damage: 2
   staminaCost: 50
+  manaCost: 0
   rangeWeight: 1
   damageWeight: 1
   staminaCostWeight: 1
+  manaCostWeight: 1
   cooldown: 1
   attackAnimationDuration: 1
   indicator: {fileID: 3188580857372310462, guid: 62aeaf3d3d69f48c3842ea6d3f0200dd, type: 3}
@@ -25,19 +27,13 @@ MonoBehaviour:
   type: 1
   swingSFX:
     soundCategory: 2
-    sound: 0
+    sound: 3
     volume: 1
     pitch: 1
     priority: 0
   impactSFX:
     soundCategory: 2
-    sound: 3
-    volume: 1
-    pitch: 1
-    priority: 0
-  indicatorSFX:
-    soundCategory: 2
-    sound: 4
+    sound: 2
     volume: 1
     pitch: 1
     priority: 0

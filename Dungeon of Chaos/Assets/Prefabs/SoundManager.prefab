@@ -61,12 +61,12 @@ MonoBehaviour:
     - audioClip: {fileID: 8300000, guid: ed2da378ec584714a950e4af78f9f9d3, type: 3}
       volume: 0.5
       pitch: 1
+    - audioClip: {fileID: 8300000, guid: 8345160ccada7d644b04113494483030, type: 3}
+      volume: 0.25
+      pitch: 1
   footsteps:
     poolSize: 10
     sounds:
-    - audioClip: {fileID: 8300000, guid: 8345160ccada7d644b04113494483030, type: 3}
-      volume: 0.5
-      pitch: 1
     - audioClip: {fileID: 8300000, guid: dabd4dffe80e77b429aed73611848ec8, type: 3}
       volume: 0.5
       pitch: 1

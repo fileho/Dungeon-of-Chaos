@@ -86,7 +86,7 @@ public class SoundManager : MonoBehaviour
     [SerializeField]
     private SoundPoolLooping looping;
     [SerializeField]
-    private SoundPool footsteps;
+    private SoundPool enemyAmbients;
     [SerializeField]
     private SoundPool attack;
     [SerializeField]
@@ -107,7 +107,7 @@ public class SoundManager : MonoBehaviour
         instance = this;
 
         looping.Start(transform);
-        footsteps.Start(transform);
+        enemyAmbients.Start(transform);
         attack.Start(transform);
         skill.Start(transform);
         ui.Start(transform);
@@ -151,7 +151,7 @@ public class SoundManager : MonoBehaviour
     {
         Assert.AreNotEqual(category, SoundCategories.SoundCategory.Looping,
                            "Normal sound must not be in loop; use PlaySoundLooping() instead");
-        return category switch { SoundCategories.SoundCategory.Footsteps => footsteps,
+        return category switch { SoundCategories.SoundCategory.EnemyAmbients => enemyAmbients,
                                  SoundCategories.SoundCategory.Attack => attack,
                                  SoundCategories.SoundCategory.Skill => skill,
                                  SoundCategories.SoundCategory.Ui => ui,
