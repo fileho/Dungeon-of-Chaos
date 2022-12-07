@@ -41,8 +41,8 @@ MonoBehaviour:
     volume: 1
     pitch: 1
     priority: 0
-  lift: 2
-  fall: 0.8
+  lift: 6
+  fall: 2.4
   scaleMultiplier: 1.5
   damageRadiusMajor: 12
   damageMajor: 10

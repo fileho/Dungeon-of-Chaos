@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 656d4005658cf4e07808ec6178e5ef23, type: 3}
   m_Name: Orc Giant-Swing
   m_EditorClassIdentifier: 
-  range: 5
+  range: 15
   damage: 1.5
   staminaCost: 0
   rangeWeight: 1
