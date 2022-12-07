@@ -18,63 +18,163 @@ public class SoundCategories
 
     public enum Looping
     {
-        Firepit,
-        ScaryNoises
+        CaveAmbients,
+        Checkpoint,
+        Torch,
+        Teleport,
+        Burn
     }
 
     public enum FootSteps
     {
         Character,
+        Chieftain,
+        DarkElemental,
+        Demon,
+        ElectricElemental,
         Giant,
-        Orc
+        Imp,
+        LichKing,
+        OrcFighter,
+        Poltergeist,
+        Shaman,
+        SkeletonFighter,
+        SkeletonWarrior,
+        StoneElemental,
+        Wraith
     }
 
     public enum Attack
     {
-        CharacterSwing,
-        CharacterSwingImpact,
-        GiantSwing,
+        CharacterSwordImpact,
+        CharacterSwordSwing,
+        OrcChieftainImpact,
+        OrchChieftainSmashAttack,
+        OrcChieftainSwingAttack,
+        DarkElementalChargedAttack,
+        DarkElementalProjectile,
+        DarkElementalProjectileImpact,
+        DemonFireball,
+        DemonFireballImpact,
+        DemonFlamingSwordAttack,
+        DemonStompAttack,
+        DemonFlamingSwordImpact,
+        ElectricElementalProjectile,
+        ElectricElementalProjectileImpact,
+        ElectricElementalSlashAttack,
+        ElectricElementalSlashAttackImpact,
+        GiantSmashAttack,
+        GiantStompAttack,
+        GiantSwingAttack,
         GiantSwingImpact,
-        GiantSwingIndicator,
-        OrcSwing,
-        OrcSwingImpact
+        ImpAttack,
+        ImpAttackImpact,
+        LichKingHealAttack,
+        LichKingProjectile,
+        LichKingProjectileImpact,
+        LichKingSummonAttack,
+        OrcFighterClubHit,
+        OrcFighterClubSwing,
+        PoltergeistAttack,
+        PoltergeistSlashImpact,
+        ShamanProjectile,
+        ShamanProjectileImpact,
+        ShamanStaffImpact,
+        ShamanStaffSwing,
+        SkeletonFighterImpact,
+        SkeletonFighterSwing,
+        SkeletonWarriorAttackImpact,
+        SkeletonWarriorSmashAttack,
+        SkeletonWarriorThrustAttack,
+        StoneElementalAttack,
+        StoneElementalSmashImpact,
+        WraithAttackImpact,
+        WraithSwingAttack,
+        WraithThrustAttack
     }
 
     public enum Skill
     {
-        SpellCast,
-        FireballFlight,
-        FireballImpact,
-        Healing,
+        ApplyBurn,
+        ArmourUp,
+        AttackUp,
+        BasicProjectile,
         Dash,
-        DamagingDash,
-        DashImpact
+        FastAttack,
+        Fireball,
+        FireballExplosion,
+        FireballImpact,
+        FlamingSwodApplyEffect,
+        Healing,
+        LightningTouch,
+        Regeneration,
+        Resurrection,
+        Shockwave,
+        SpellCast,
+        SpellPowerBuff,
+        StrongAttack,
+        ThrowingDaggers,
+        ThrowingDaggersFlying,
+        ThrustAttack,
+        Whirlwind
     }
 
     public enum Ui
     {
         ButtonClick,
-        ButtonHover
+        ButtonHover,
+        RequirementsNotMet
     }
 
     public enum Items
     {
-        Pickup,
-        Drop
+        BookPickup,
+        ChestOpen,
+        CrateDestroy,
+        EssencePickup,
+        MapFragmentPickup,
+        SpikeTrapDown,
+        SpikeTrapUp,
+        TeleportUse,
+        TorchFlameOn
     }
 
     public enum Death
     {
         Character,
+        Chieftain,
+        DarkElemental,
+        Demon,
+        ElectricElemental,
         Giant,
-        Orc
+        Imp,
+        LichKing,
+        OrcFighter,
+        Poltergeist,
+        Shaman,
+        SkeletonFighter,
+        SkeletonWarrior,
+        StoneElemental,
+        Wraith
     }
 
     public enum TakeDamage
-    { 
+    {
         Character,
+        Chieftain,
+        DarkElemental,
+        Demon,
+        ElectricElemental,
         Giant,
-        Orc
+        Imp,
+        LichKing,
+        OrcFighter,
+        Poltergeist,
+        Shaman,
+        SkeletonFighter,
+        SkeletonWarrior,
+        StoneElemental,
+        Wraith
     }
 
 }

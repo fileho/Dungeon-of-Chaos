@@ -127,6 +127,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   range: 2.5
+  checkpointSFX:
+    soundCategory: 0
+    sound: 1
+    volume: 1
+    pitch: 1
+    priority: 0
   id: 0
 --- !u!114 &6318422444007334249
 MonoBehaviour:

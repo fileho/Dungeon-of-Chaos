@@ -10,6 +10,8 @@ public class Checkpoint : MonoBehaviour, IMapSavable
     private CharacterSheet characterSheet;
     private SaveSystem saveSystem;
 
+    [SerializeField] private SoundSettings checkpointSFX;
+
     [SerializeField]
     [ReadOnly]
     private int id;
@@ -22,6 +24,8 @@ public class Checkpoint : MonoBehaviour, IMapSavable
         saveSystem = FindObjectOfType<SaveSystem>();
 
         tooltipCanvas.SetActive(false);
+        if (SoundManager.instance)
+            SoundManager.instance.PlaySoundLooping(checkpointSFX);
     }
 
     private void Update()
