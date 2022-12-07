@@ -42,6 +42,7 @@ public class SkillButtonSecondary : SkillButton
 
     public override void OnPointerEnter(PointerEventData eventData)
     {
+        SoundManager.instance.PlaySound(hover);
         TooltipSystem.instance.Show(skillInfo.GetSkillData().GetName(), "Secondary Attack", skillInfo.GetCurrentDescription(), skillInfo.GetNextDescription());
     }
 
@@ -55,6 +56,7 @@ public class SkillButtonSecondary : SkillButton
         if (!skillSystem.CanUpgradeSecondaryAttack(skillIndex))
         {
             TooltipSystem.instance.DisplayMessage("Not enough skill points");
+            SoundManager.instance.PlaySound(requirements);
             return;
         }
         base.RightMouseDown();
