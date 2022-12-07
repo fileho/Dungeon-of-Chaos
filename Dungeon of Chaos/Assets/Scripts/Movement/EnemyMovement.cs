@@ -38,7 +38,7 @@ public class EnemyMovement : IMovement
         collider = transform.GetComponent<Collider2D>();
         if (agent != null)
         {
-            float nextWaypointDistance = transform.GetComponent<AttackManager>().GetMinimumAttackRange() + 1;
+            float nextWaypointDistance = transform.GetComponent<AttackManager>().GetMinimumAttackRange() / 2f;
             agent.Init(stats.MovementSpeed(), rb, nextWaypointDistance);
         }
 
