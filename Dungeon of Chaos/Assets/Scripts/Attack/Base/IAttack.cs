@@ -16,11 +16,14 @@ public abstract class IAttack : MonoBehaviour
     protected float damage;
     // The stamina cost of the attack
     protected float staminaCost;
+    // The mana cost of the attack
+    protected float manaCost;
 
     // Weights of the respective parameters to calculate priority
     protected float rangeWeight;
     protected float damageWeight;
     protected float staminaCostWeight;
+    protected float manaCostWeight;
 
     // Time after which the attack can be used again
     protected float cooldown;
@@ -119,6 +122,21 @@ public abstract class IAttack : MonoBehaviour
         return GetStaminaCost() * staminaCostWeight;
     }
 
+    public float GetManaCost()
+    {
+        return manaCost;
+    }
+
+    public float GetManaCostWeighted()
+    {
+        return GetManaCost() * manaCostWeight;
+    }
+
+    public float GetCost()
+    {
+        return GetStaminaCostWeighted() + GetManaCostWeighted();
+    }
+
 
     public Unit GetTarget()
     {
@@ -164,10 +182,12 @@ public abstract class IAttack : MonoBehaviour
         range = attackConfiguration.range;
         damage = attackConfiguration.damage;
         staminaCost = attackConfiguration.staminaCost;
+        manaCost = attackConfiguration.manaCost;
 
         rangeWeight = attackConfiguration.rangeWeight;
         damageWeight = attackConfiguration.damageWeight;
         staminaCostWeight = attackConfiguration.staminaCostWeight;
+        manaCostWeight = attackConfiguration.manaCostWeight;
 
         cooldown = attackConfiguration.cooldown;
         indicatorPrefab = attackConfiguration.indicator;
