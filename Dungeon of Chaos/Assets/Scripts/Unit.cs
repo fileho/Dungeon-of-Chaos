@@ -49,12 +49,12 @@ public class Unit : MonoBehaviour
 
     public virtual Vector2 GetTargetDirection()
     {
-        return Target == null ? Vector2.positiveInfinity : (GetTargetPosition() - (Vector2)transform.position);
+        return Target == null ? Vector2.positiveInfinity : (GetTargetPosition() - (Vector2)transform.position).normalized;
     }
 
     public float GetTargetDistance()
     {
-        return GetTargetDirection().magnitude;
+        return (GetTargetPosition() - (Vector2)transform.position).magnitude;
     }
 
     // Character in case of the enemy.
