@@ -75,7 +75,7 @@ public class Checkpoint : MonoBehaviour, IMapSavable
 
     public void Load()
     {
-        var l = LayerMask.NameToLayer("Walls");
+        var l = LayerMask.NameToLayer("BothMaps");
         gameObject.layer = l;
         gameObject.GetComponentInChildren<ParticleSystem>().gameObject.layer = l;
     }
