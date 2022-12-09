@@ -2,6 +2,8 @@ using UnityEngine;
 
 public class Box : MonoBehaviour
 {
+    [SerializeField] private SoundSettings crateDestroySFX;
+
     protected void OnTriggerEnter2D(Collider2D collision)
     {
         DestroyBox();
@@ -11,6 +13,7 @@ public class Box : MonoBehaviour
     {
         var ps = GetComponentInChildren<ParticleSystem>();
         ps.Play();
+        SoundManager.instance.PlaySound(crateDestroySFX);
         Invoke(nameof(CleanUp), ps.main.duration);
     }
 

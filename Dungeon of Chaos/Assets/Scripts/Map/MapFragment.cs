@@ -15,6 +15,8 @@ public class MapFragment : MonoBehaviour, IMapSavable
     [SerializeField]
     private float range = 2.5f;
 
+    [SerializeField] private SoundSettings pickupSFX;
+
     private void Awake()
     {
         light = transform.Find("Light").gameObject;
@@ -41,6 +43,7 @@ public class MapFragment : MonoBehaviour, IMapSavable
 
     public void Interact()
     {
+        SoundManager.instance.PlaySound(pickupSFX);
         saveSystem.DungeonData.AddSavedUid(id);
         Load();
         tooltipCanvas.SetActive(false);

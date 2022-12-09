@@ -16,7 +16,6 @@ public class SoundCategories
         TakeDamage
     }
 
-    // ToDo: Implementation
     public enum Looping
     {
         CaveAmbients,
@@ -28,7 +27,6 @@ public class SoundCategories
     }
 
 
-    //ToDo: Implementation
     public enum EnemyAmbients
     {
         Chieftain,
@@ -130,7 +128,6 @@ public class SoundCategories
         RequirementsNotMet
     }
 
-    //ToDo: Implementation
     public enum Items
     {
         BookPickup,
