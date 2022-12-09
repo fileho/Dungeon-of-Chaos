@@ -13,6 +13,8 @@ MonoBehaviour:
   m_Name: CharacterMovement
   m_EditorClassIdentifier: 
   footstepsSFX:
-    name: CharacterFootsteps
+    soundCategory: 0
+    sound: 5
     volume: 1
     pitch: 1
+    priority: 0

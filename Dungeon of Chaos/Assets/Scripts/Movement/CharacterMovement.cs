@@ -9,6 +9,9 @@ public class CharacterMovement : IMovement
     private Rigidbody2D rb;
     private Animator animator;
 
+    [SerializeField] private SoundSettings footstepsSFX;
+    private SoundData sfx;
+
     public override IMovement Init(Transform transform, Stats stats)
     {
         this.stats = stats;
@@ -34,11 +37,14 @@ public class CharacterMovement : IMovement
             moveDir = dir;
             animator.SetBool("isMoving", true);
             // TODO ADD this with animations
-            // SoundManager.instance.PlaySound(footstepsSFX);
+            if (sfx == null)
+                sfx = SoundManager.instance.PlaySoundLooping(footstepsSFX);
         }
         else
         {
             animator.SetBool("isMoving", false);
+            SoundManager.instance.StopLoopingSound(sfx);
+            sfx = null;
         }
 
         rb.AddForce(stats.MovementSpeed() * Time.fixedDeltaTime * 1000 * dir);
