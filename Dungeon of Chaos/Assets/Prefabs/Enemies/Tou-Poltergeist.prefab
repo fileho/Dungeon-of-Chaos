@@ -633,14 +633,15 @@ MonoBehaviour:
     volume: 1
     pitch: 1
     priority: 0
-  footstepsSFX:
+  loot: {fileID: 11400000, guid: 55110f0bef1256e42a7f83b3fc2b4ea9, type: 2}
+  lootModifiers: {fileID: 11400000, guid: 35780333c3ddf16479422c4965e1b2c2, type: 2}
+  maxDistance: 50
+  ambientSFX:
     soundCategory: 1
-    sound: 9
+    sound: 8
     volume: 1
     pitch: 1
     priority: 0
-  loot: {fileID: 11400000, guid: 55110f0bef1256e42a7f83b3fc2b4ea9, type: 2}
-  lootModifiers: {fileID: 11400000, guid: 35780333c3ddf16479422c4965e1b2c2, type: 2}
 --- !u!114 &7622948688001900169
 MonoBehaviour:
   m_ObjectHideFlags: 0

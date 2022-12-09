@@ -31,7 +31,6 @@ public class SoundCategories
     //ToDo: Implementation
     public enum EnemyAmbients
     {
-        Character,
         Chieftain,
         DarkElemental,
         Demon,
@@ -124,7 +123,6 @@ public class SoundCategories
         Whirlwind
     }
 
-    //ToDo: Implementation
     public enum Ui
     {
         ButtonClick,

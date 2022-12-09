@@ -17,7 +17,7 @@ public class CharacterMovement : IMovement
         return this;
     }
 
-    public override void Move(SoundSettings footstepsSFX)
+    public override void Move()
     {
         Vector2 dir = Vector2.zero;
         if (Input.GetKey(KeyCode.A))

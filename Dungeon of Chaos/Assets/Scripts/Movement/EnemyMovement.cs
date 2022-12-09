@@ -48,7 +48,7 @@ public class EnemyMovement : IMovement
     private float updatePathInterval = 1f;
     private float lastPathUpdateTime = 0f;
 
-    public override void Move(SoundSettings footstepsSFX)
+    public override void Move()
     {
         Rigidbody2D targetRB = Character.instance.GetComponent<Rigidbody2D>();
         if (Time.time - lastPathUpdateTime > updatePathInterval)
