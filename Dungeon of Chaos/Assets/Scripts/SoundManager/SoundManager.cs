@@ -22,6 +22,8 @@ public class SoundSettings
     [SerializeField]
     private float priority = 0;
 
+    private float maxVolume = float.MaxValue;
+
     public SoundCategories.SoundCategory GetSoundCategory()
     {
         return soundCategory;
@@ -45,6 +47,13 @@ public class SoundSettings
     public float GetPriority()
     {
         return priority;
+    }
+
+    public void SetVolumeFromDistance(float distance, float maxDistance)
+    {
+        if (maxVolume == float.MaxValue)
+            maxVolume = volume;
+        volume = Mathf.Max(0, maxVolume - maxVolume / maxDistance * distance);
     }
 }
 
