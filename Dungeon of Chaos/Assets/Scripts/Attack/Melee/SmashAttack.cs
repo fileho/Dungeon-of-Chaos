@@ -77,6 +77,7 @@ public class SmashAttack : MeleeAttack {
         float time = 0;
         float attackAnimationDurationOneWay = AttackAnimationDuration / 2f;
 
+        SoundManager.instance.PlaySound(swingSFX);
         // Up
         while (time <= 1) {
             time += (Time.deltaTime / attackAnimationDurationOneWay);
@@ -99,7 +100,7 @@ public class SmashAttack : MeleeAttack {
         }
 
         CheckHits(owner.transform.TransformPoint(endPosdown), damageRadius);
-        SoundManager.instance.PlaySound(swingSFX);
+        
 
         // Reset
         Weapon.Asset.localScale = startScale;

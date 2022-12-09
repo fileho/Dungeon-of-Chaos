@@ -115,7 +115,7 @@ MonoBehaviour:
     - audioClip: {fileID: 8300000, guid: 15bd83e2d033b7546a50fe3943d229a6, type: 3}
       volume: 0.5
       pitch: 1
-    - audioClip: {fileID: 8300000, guid: c7eae21f6564ee9498aaa588e64c35fc, type: 3}
+    - audioClip: {fileID: 8300000, guid: 89ba0b2cff02d33489a32407b1567c69, type: 3}
       volume: 0.5
       pitch: 1
     - audioClip: {fileID: 8300000, guid: f7b90c9c60a927b428a74117d5fd7d29, type: 3}
@@ -263,7 +263,7 @@ MonoBehaviour:
       volume: 0.5
       pitch: 1
     - audioClip: {fileID: 8300000, guid: 34b3d893209fc4b46a67da9a3796e054, type: 3}
-      volume: 0.5
+      volume: 0.2
       pitch: 1
     - audioClip: {fileID: 8300000, guid: 7dad0266ccb7426498bc9256e318a712, type: 3}
       volume: 0.5

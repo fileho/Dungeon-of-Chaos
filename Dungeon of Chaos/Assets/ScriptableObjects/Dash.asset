@@ -15,6 +15,6 @@ MonoBehaviour:
   dashSFX:
     soundCategory: 3
     sound: 4
-    volume: 1
+    volume: 0.5
     pitch: 1
     priority: 0
