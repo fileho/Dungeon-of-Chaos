@@ -332,31 +332,31 @@ MonoBehaviour:
     poolSize: 30
     sounds:
     - audioClip: {fileID: 8300000, guid: 152d19a1f7dd1654b9d8bc73a6a4feee, type: 3}
-      volume: 1
+      volume: 0.5
       pitch: 1
     - audioClip: {fileID: 8300000, guid: af874bffcf48cab48a37382b7d34b9d3, type: 3}
-      volume: 1
+      volume: 0.5
       pitch: 1
     - audioClip: {fileID: 8300000, guid: ea6e611b0618e0e42bc1cf7ffb6bd8a3, type: 3}
-      volume: 1
+      volume: 0.5
       pitch: 1
     - audioClip: {fileID: 8300000, guid: 6def85bdfe793b748972d82d91e9022e, type: 3}
-      volume: 1
+      volume: 0.5
       pitch: 1
     - audioClip: {fileID: 8300000, guid: df26a85f766e0854fbc796039988a1f5, type: 3}
-      volume: 1
+      volume: 0.5
       pitch: 1
     - audioClip: {fileID: 8300000, guid: 5b815e230a52d834caf1bf24cb4cd171, type: 3}
-      volume: 1
+      volume: 0.5
       pitch: 1
     - audioClip: {fileID: 8300000, guid: ca5e91463adc4d047ba6e10575120863, type: 3}
-      volume: 1
+      volume: 0.5
       pitch: 1
     - audioClip: {fileID: 8300000, guid: 35667e23aad9ebd489b17f0eb116a846, type: 3}
-      volume: 1
+      volume: 0.5
       pitch: 1
     - audioClip: {fileID: 8300000, guid: 51b3271c59ef0024d806829cdcd77aec, type: 3}
-      volume: 1
+      volume: 0.5
       pitch: 1
   deaths:
     poolSize: 30

@@ -15,6 +15,9 @@ public class Chest : MonoBehaviour, IMapSavable
     [ReadOnly]
     private int id;
 
+    [Header("SFX")]
+    [SerializeField] private SoundSettings chestOpen;
+
     private SaveSystem saveSystem;
 
     private void Start()
@@ -25,6 +28,7 @@ public class Chest : MonoBehaviour, IMapSavable
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        SoundManager.instance.PlaySound(chestOpen);
         DestroyBox();
     }
 

@@ -194,6 +194,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 274fcad5908f5b448844e49bb1ed1b26, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  teleportLooping:
+    soundCategory: 0
+    sound: 3
+    volume: 1
+    pitch: 1
+    priority: 0
+  teleportUse:
+    soundCategory: 5
+    sound: 7
+    volume: 1
+    pitch: 1
+    priority: 0
 --- !u!114 &7126548749077254862
 MonoBehaviour:
   m_ObjectHideFlags: 0

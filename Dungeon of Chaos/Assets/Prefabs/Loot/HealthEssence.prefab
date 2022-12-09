@@ -101,6 +101,12 @@ MonoBehaviour:
   essenceType: 0
   lifetime: 8
   force: 5
+  essencePickupSFX:
+    soundCategory: 5
+    sound: 3
+    volume: 1
+    pitch: 1
+    priority: 0
 --- !u!58 &-689852826091450854
 CircleCollider2D:
   m_ObjectHideFlags: 0

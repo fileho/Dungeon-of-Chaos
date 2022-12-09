@@ -11,7 +11,7 @@ public class Teleport : MonoBehaviour
     [Header("SFX")]
     [SerializeField] private SoundSettings teleportLooping;
     [SerializeField] private SoundSettings teleportUse;
-    private float maxDistance;
+    private float maxDistance = 15f;
     private SoundData sfx = null;
 
     private void Start()

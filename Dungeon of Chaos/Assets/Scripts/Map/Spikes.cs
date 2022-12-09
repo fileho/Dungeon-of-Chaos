@@ -16,6 +16,10 @@ public class Spikes : MonoBehaviour
     [SerializeField]
     private float reloadTime;
 
+    [Header("SFX")]
+    [SerializeField] private SoundSettings spikesUpSFX;
+    [SerializeField] private SoundSettings spikesDownSFX;
+
     private bool attacking = false;
 
     private BoxCollider2D boxCollider;
@@ -38,6 +42,7 @@ public class Spikes : MonoBehaviour
     IEnumerator ActivateSpikes()
     {
         attacking = true;
+        SoundManager.instance.PlaySound(spikesUpSFX);
         yield return new WaitForSeconds(delay);
 
         spriteRenderer.sprite = spikesUp;
@@ -50,7 +55,9 @@ public class Spikes : MonoBehaviour
                 unit.TakeDamage(damage);
         }
 
-        yield return new WaitForSeconds(delay * 2);
+        yield return new WaitForSeconds(delay);
+        SoundManager.instance.PlaySound(spikesDownSFX);
+        yield return new WaitForSeconds(delay);
         spriteRenderer.sprite = spikesDown;
 
         yield return new WaitForSeconds(reloadTime);
