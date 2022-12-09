@@ -107,7 +107,6 @@ public class Checkpoint : MonoBehaviour, IMapSavable
 
     private void PlaySound()
     {
-        Debug.Log("Play Sound");
         float distance = Vector2.Distance(Character.instance.transform.position, transform.position);
         checkpointSFX.SetVolumeFromDistance(distance, sfxRange);
 
