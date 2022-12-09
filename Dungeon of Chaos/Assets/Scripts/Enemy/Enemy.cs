@@ -29,7 +29,9 @@ public class Enemy : Unit
     [Header("Enemy Ambient")]
     [SerializeField] private float maxDistance;
     [SerializeField] private SoundSettings ambientSFX;
-    private const float frequency = 2.5f;
+    private const float minFrequency = 2f;
+    private const float maxFrequency = 5.5f;
+    private float frequency = 0f;
     private float time = 0f;
 
 
@@ -187,6 +189,8 @@ public class Enemy : Unit
     private void PlayAmbientSound()
     {
         time = 0f;
+        frequency = Random.Range(minFrequency, maxFrequency);
+
         float distance = Vector2.Distance(Character.instance.transform.position, transform.position);
         if (distance > maxDistance)
             return;

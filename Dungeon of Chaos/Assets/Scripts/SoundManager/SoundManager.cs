@@ -49,11 +49,16 @@ public class SoundSettings
         return priority;
     }
 
+    public float GetVolumeFromDistance(float distance, float maxDistance)
+    {
+        return Mathf.Max(0, maxVolume - maxVolume / maxDistance * distance);
+    }
+
     public void SetVolumeFromDistance(float distance, float maxDistance)
     {
         if (maxVolume == float.MaxValue)
             maxVolume = volume;
-        volume = Mathf.Max(0, maxVolume - maxVolume / maxDistance * distance);
+        volume = GetVolumeFromDistance(distance, maxDistance);
     }
 }
 
@@ -132,7 +137,7 @@ public class SoundManager : MonoBehaviour
     }
 
     /// <summary>
-    /// The called must ensure stopping the played sound by calling StopLoopingSound() with returned SoundData
+    /// The caller must ensure stopping the played sound by calling StopLoopingSound() with returned SoundData
     /// </summary>
     [Pure]
     public SoundData PlaySoundLooping(SoundSettings soundSettings)

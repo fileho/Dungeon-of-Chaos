@@ -81,6 +81,8 @@ public class StompAttack : MeleeAttack {
         float time = 0;
         float attackAnimationDurationOneWay = AttackAnimationDuration / 2f;
 
+        SoundManager.instance.PlaySound(swingSFX);
+
         // Up
         while (time <= 1) {
             time += (Time.deltaTime / attackAnimationDurationOneWay);
@@ -104,7 +106,7 @@ public class StompAttack : MeleeAttack {
         Weapon.SetDamage(damageMinor);
         CheckHits(owner.transform.position, damageRadiusMinor);
 
-        SoundManager.instance.PlaySound(swingSFX);
+        
 
         // Reset
         Weapon.Asset.localScale = startScale;
