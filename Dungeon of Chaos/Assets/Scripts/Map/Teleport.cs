@@ -8,6 +8,12 @@ public class Teleport : MonoBehaviour
     private GameObject tooltipCanvas;
     private float range = 2f;
 
+    [Header("SFX")]
+    [SerializeField] private SoundSettings teleportLooping;
+    [SerializeField] private SoundSettings teleportUse;
+    private float maxDistance;
+    private SoundData sfx = null;
+
     private void Start()
     {
         tooltipCanvas = transform.GetChild(0).gameObject;
@@ -19,6 +25,18 @@ public class Teleport : MonoBehaviour
 
     private void Update()
     {
+        if (Vector2.Distance(Character.instance.transform.position, transform.position) <= maxDistance)
+        {
+            if (sfx == null)
+                PlaySound();
+            else
+                UpdateSound();
+        }
+        else
+        {
+            SoundManager.instance.StopLoopingSound(sfx);
+            sfx = null;
+        }
         if (!Input.GetKeyDown(KeyCode.F))
             return;
 
@@ -45,6 +63,23 @@ public class Teleport : MonoBehaviour
 
     private void Travel()
     {
+        SoundManager.instance.PlaySound(teleportUse);
         FindObjectOfType<GameController>().LevelComplete();
+    }
+
+    private void PlaySound()
+    {
+        float distance = Vector2.Distance(Character.instance.transform.position, transform.position);
+        teleportLooping.SetVolumeFromDistance(distance, maxDistance);
+
+        sfx = SoundManager.instance.PlaySoundLooping(teleportLooping);
+    }
+
+    private void UpdateSound()
+    {
+        float distance = Vector2.Distance(Character.instance.transform.position, transform.position);
+
+        float volume = teleportLooping.GetVolumeFromDistance(distance, maxDistance);
+        SoundManager.instance.UpdateLoopingSound(sfx, volume);
     }
 }
