@@ -50,7 +50,7 @@ MonoBehaviour:
       volume: 0.25
       pitch: 1
     - audioClip: {fileID: 8300000, guid: f873e8163c13db74384f7bd344121ef9, type: 3}
-      volume: 0.15
+      volume: 0.25
       pitch: 1
     - audioClip: {fileID: 8300000, guid: 8df738175b3cb684db7ef4a15faff385, type: 3}
       volume: 0.5

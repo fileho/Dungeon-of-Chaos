@@ -8,6 +8,10 @@ public class LavaPit : MonoBehaviour
     [SerializeField]
     private float dps = 30;
 
+    [Header("SFX")]
+    [SerializeField] SoundSettings burnSFX;
+    private SoundData sfx = null;
+
     public void StartLights()
     {
         StartCoroutine(InterpolateLights());
@@ -19,6 +23,15 @@ public class LavaPit : MonoBehaviour
             return;
 
         collider2d.GetComponent<Unit>().TakeDamage(dps * Time.deltaTime, false);
+        sfx = SoundManager.instance.PlaySoundLooping(burnSFX);
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (!collision.CompareTag("Player"))
+            return;
+
+        SoundManager.instance.StopLoopingSound(sfx);
     }
 
     private IEnumerator InterpolateLights()
