@@ -22,7 +22,7 @@ public class Levelling
         }
     }
 
-    private int currentXP = 1000;
+    private int currentXP = 0;
     private int nextLevelXP;
     [Header("Levelling settings")]
     [Tooltip("Only for character")]
