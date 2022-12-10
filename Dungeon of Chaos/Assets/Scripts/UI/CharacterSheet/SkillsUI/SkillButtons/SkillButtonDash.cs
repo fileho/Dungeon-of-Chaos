@@ -47,7 +47,7 @@ public class SkillButtonDash : SkillButton
 
     public override void OnPointerExit(PointerEventData eventData)
     {
-        TooltipSystem.instance.Hide();
+        TooltipSystem.instance.HideSkillTooltip();
     }
 
     public override void RightMouseDown()

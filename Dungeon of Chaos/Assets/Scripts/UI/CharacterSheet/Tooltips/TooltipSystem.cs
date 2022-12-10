@@ -5,7 +5,8 @@ using UnityEngine;
 public class TooltipSystem : MonoBehaviour
 {
     public static TooltipSystem instance;
-    public Tooltip tooltip;
+    public SkillTooltip skillTooltip;
+    public SimpleTooltip simpleTooltip;
     // Start is called before the first frame update
     private void Awake()
     {
@@ -14,18 +15,29 @@ public class TooltipSystem : MonoBehaviour
     
     public void Show(string header, string subheader, SkillDescription current, SkillDescription next = new SkillDescription())
     {
-        tooltip.gameObject.SetActive(true);
-        tooltip.SetText(header, subheader, current, next);        
+        skillTooltip.gameObject.SetActive(true);
+        skillTooltip.SetText(header, subheader, current, next);        
+    }
+
+    public void Show(string header, string content)
+    {
+        simpleTooltip.gameObject.SetActive(true);
+        simpleTooltip.SetText(header, content);
     }
 
     public void DisplayMessage(string message)
     {
-        tooltip.DisplayMessage(message);
+        skillTooltip.DisplayMessage(message);
     }
 
-    public void Hide()
+    public void HideSkillTooltip()
     {
-        tooltip.gameObject.SetActive(false);
-        tooltip.DeleteMessage();
+        skillTooltip.gameObject.SetActive(false);
+        skillTooltip.DeleteMessage();
+    }
+
+    public void HideSimpleTooltip()
+    {
+        simpleTooltip.gameObject.SetActive(false);
     }
 }

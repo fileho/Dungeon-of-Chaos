@@ -20,7 +20,7 @@ public abstract class SkillButton : MonoBehaviour, IPointerDownHandler, IPointer
     public abstract void OnBeginDrag(PointerEventData eventData);
     public void OnDrag(PointerEventData eventData)
     {
-        TooltipSystem.instance.Hide();
+        TooltipSystem.instance.HideSkillTooltip();
         dragDrop.GetComponent<RectTransform>().position = eventData.position;
     }
 
