@@ -889,7 +889,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 70bb7df65ed914d47bd6b0310fe56741, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  wrapLimit: 100
+  wrapLimit: 55
   headerText: {fileID: 2059087129616664014}
   contentText: {fileID: 894047749434672532}
 --- !u!1 &3006580736010785008
@@ -1075,7 +1075,7 @@ MonoBehaviour:
   m_lineSpacingMax: 0
   m_paragraphSpacing: 0
   m_charWidthMaxAdj: 0
-  m_enableWordWrapping: 0
+  m_enableWordWrapping: 1
   m_wordWrappingRatios: 0.4
   m_overflowMode: 0
   m_linkedTextComponent: {fileID: 0}
