@@ -20,8 +20,8 @@ MonoBehaviour:
   staminaCostWeight: 1
   cooldown: 10
   attackAnimationDuration: 1.5
-  indicator: {fileID: 5248374025804181554, guid: bd368bb0dca0445629bdf0b149f13967, type: 3}
-  indicatorConfiguration: {fileID: 11400000, guid: 5d1d6872bd88e4db1a830d77bc8f59a0, type: 2}
+  indicator: {fileID: 156674, guid: 276e7fe7d9e2d4dadaca2292f0bffc92, type: 3}
+  indicatorConfiguration: {fileID: 11400000, guid: e521a2eda4ac94f36b66c64cfb58d9f3, type: 2}
   type: 0
   swingSFX:
     soundCategory: 0
