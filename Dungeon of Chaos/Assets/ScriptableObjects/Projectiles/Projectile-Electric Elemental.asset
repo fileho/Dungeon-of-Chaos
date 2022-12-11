@@ -10,12 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 82c44c60208284cf18924fc92ba23d62, type: 3}
-  m_Name: Projectile-Basic
+  m_Name: Projectile-Electric Elemental
   m_EditorClassIdentifier: 
   speed: 20
   delay: 0.5
   offset: 0
   destroyTime: 5
   scale: {x: 1, y: 1}
-  sprite: {fileID: 21300000, guid: 0209ce5877c5647e5b816bb84167f098, type: 3}
-  color: {r: 0.92941177, g: 1, b: 0, a: 1}
+  mainPS: {fileID: 1943713314487726, guid: ec205f9894ffa8a4394bfa1e4fc27aad, type: 3}
+  impactPS: {fileID: 1996017431227444, guid: 58ac3aada3d952a4ebf80c7fb5c94f0a, type: 3}

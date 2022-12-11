@@ -18,9 +18,9 @@ MonoBehaviour:
   rangeWeight: 1
   damageWeight: 1
   staminaCostWeight: 1
-  cooldown: 10
+  cooldown: 4
   attackAnimationDuration: 1.5
-  indicator: {fileID: 5248374025804181554, guid: bd368bb0dca0445629bdf0b149f13967, type: 3}
+  indicator: {fileID: 1708544336482566, guid: 0a66f9023007d419e965eb8a8929d55a, type: 3}
   indicatorConfiguration: {fileID: 11400000, guid: 290b739ca57ac40bca62015b1ecc40e7, type: 2}
   type: 0
   swingSFX:
@@ -42,4 +42,4 @@ MonoBehaviour:
     pitch: 1
     priority: 0
   healAmount: 30
-  healRadius: 10
+  healRadius: 30

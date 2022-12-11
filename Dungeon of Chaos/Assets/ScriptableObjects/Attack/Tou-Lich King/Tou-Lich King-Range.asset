@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bbd3a0c455db840c4b2d4da7454d06f3, type: 3}
   m_Name: Tou-Lich King-Range
   m_EditorClassIdentifier: 
-  range: 9
+  range: 25
   damage: 1.4
   staminaCost: 0
   rangeWeight: 1
@@ -42,5 +42,5 @@ MonoBehaviour:
     pitch: 1
     priority: 0
   projectile: {fileID: 1052187207571410619, guid: 07725d23fa80e469b83e030ca9c065e6, type: 3}
-  projectileConfiguration: {fileID: 11400000, guid: 1432104e8cd1e449c8be964a505c5de4, type: 2}
+  projectileConfiguration: {fileID: 11400000, guid: 04f2a5827e2cf499ca2196bdb412cf18, type: 2}
   wandReach: 1
