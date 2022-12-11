@@ -48,7 +48,7 @@ public class Weapon : MonoBehaviour
     void Start()
     {
         trail = GetComponentInChildren<TrailRenderer>();
-        collider = GetComponentInChildren<BoxCollider2D>();
+        collider = GetComponentInChildren<Collider2D>();
         hitUnits = new List<Unit>();
         EnableDisableCollider(false);
         EnableDisableTrail(false);
