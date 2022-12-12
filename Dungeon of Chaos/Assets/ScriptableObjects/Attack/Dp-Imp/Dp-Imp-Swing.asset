@@ -12,12 +12,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 656d4005658cf4e07808ec6178e5ef23, type: 3}
   m_Name: Dp-Imp-Swing
   m_EditorClassIdentifier: 
-  range: 2.5
+  range: 2
   damage: 1.5
-  staminaCost: 0
+  staminaCost: 25
+  manaCost: 0
   rangeWeight: 1
   damageWeight: 1
   staminaCostWeight: 1
+  manaCostWeight: 1
   cooldown: 1
   attackAnimationDuration: 0.35
   indicator: {fileID: 8311782001119121317, guid: c7018b97d1c15436b967c0ae91874678, type: 3}

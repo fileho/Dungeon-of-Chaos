@@ -13,11 +13,13 @@ MonoBehaviour:
   m_Name: Dp-Dark Elemental-Range
   m_EditorClassIdentifier: 
   range: 9
-  damage: 18
+  damage: 1.6
   staminaCost: 0
+  manaCost: 40
   rangeWeight: 1
   damageWeight: 1
   staminaCostWeight: 1
+  manaCostWeight: 1
   cooldown: 1
   attackAnimationDuration: 1.5
   indicator: {fileID: 5248374025804181554, guid: bd368bb0dca0445629bdf0b149f13967, type: 3}

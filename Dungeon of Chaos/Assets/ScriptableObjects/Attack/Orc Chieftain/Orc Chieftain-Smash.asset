@@ -13,8 +13,11 @@ MonoBehaviour:
   m_Name: Orc Chieftain-Smash
   m_EditorClassIdentifier: 
   range: 5
-  damage: 5
-  staminaCost: 0
+  damage: 2
+  staminaCost: 50
+  rangeWeight: 1
+  damageWeight: 1
+  staminaCostWeight: 1
   cooldown: 1
   attackAnimationDuration: 1
   indicator: {fileID: 3188580857372310462, guid: 62aeaf3d3d69f48c3842ea6d3f0200dd, type: 3}

@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Orc-Swing
   m_EditorClassIdentifier: 
   range: 5
-  damage: 1.5
-  staminaCost: 0
+  damage: 1.2
+  staminaCost: 25
   rangeWeight: 1
   damageWeight: 1
   staminaCostWeight: 1

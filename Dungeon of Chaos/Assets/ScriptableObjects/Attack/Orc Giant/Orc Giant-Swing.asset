@@ -14,10 +14,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   range: 5
   damage: 1.5
-  staminaCost: 0
+  staminaCost: 35
+  manaCost: 0
   rangeWeight: 1
   damageWeight: 1
   staminaCostWeight: 1
+  manaCostWeight: 1
   cooldown: 1
   attackAnimationDuration: 0.5
   indicator: {fileID: 8311782001119121317, guid: c7018b97d1c15436b967c0ae91874678, type: 3}
