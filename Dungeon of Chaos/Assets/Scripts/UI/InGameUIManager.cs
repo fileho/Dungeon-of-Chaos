@@ -4,6 +4,7 @@ using UnityEngine.UI;
 
 public class InGameUIManager : MonoBehaviour
 {
+    [Header("Bars")]
     [SerializeField]
     private Slider healthBar;
     [SerializeField]
@@ -12,6 +13,8 @@ public class InGameUIManager : MonoBehaviour
     private Slider staminaBar;
     [SerializeField]
     private Slider xpBar;
+    [SerializeField]
+    private GameObject armorBar;
 
     [Header("Skills")]
     [SerializeField]
@@ -70,6 +73,18 @@ public class InGameUIManager : MonoBehaviour
     public void SetXpBar(float value)
     {
         xpBar.value = value;
+    }
+
+    public void SetArmorBar(float value)
+    {
+        armorBar.GetComponent<Slider>().value = value;
+        if (value > 0)
+        {
+            armorBar.SetActive(true);
+            return;
+        }
+
+        armorBar.SetActive(false);
     }
 
     public void UpdateSkills()
