@@ -436,5 +436,6 @@ public class Stats : ScriptableObject
         primaryStats.Load(saved.savedPrimary);
         XP.Load(saved.savedLevelling);
         resetAmount = saved.resetBooks;
+        ResetStats();
     }
 }
