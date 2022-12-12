@@ -7,13 +7,15 @@ using UnityEngine;
 /// </summary>
 public class SoundData
 {
-    public SoundData(int index, int uid)
+    public SoundData(int index, int soundIndex, int uid)
     {
-        Index = index;
+        PoolIndex = index;
+        SoundIndex = soundIndex;
         Uid = uid;
     }
 
-    public int Index { get; }
+    public int PoolIndex { get; }
+    public int SoundIndex { get; }
     public int Uid { get; }
 }
 
@@ -70,12 +72,12 @@ public class SoundPoolLooping
         var uid = NextUid();
         pool[audioIndex].uid = uid;
 
-        return new SoundData(audioIndex, uid);
+        return new SoundData(audioIndex, soundSettings.GetSoundIndex(), uid);
     }
 
     public void StopSound(SoundData soundData)
     {
-        var p = pool[soundData.Index];
+        var p = pool[soundData.PoolIndex];
 
         if (p.uid == soundData.Uid)
         {
@@ -85,12 +87,12 @@ public class SoundPoolLooping
 
     public void UpdateSound(SoundData soundData, float volume)
     {
-        var p = pool[soundData.Index];
+        var p = pool[soundData.PoolIndex];
 
         if (p.uid == soundData.Uid)
         {
-            p.audioSource.volume = sounds[soundData.Index].GetVolume() * volume * PlayerPrefsManager.MasterVolume / 100 *
-                                   PlayerPrefsManager.SFXVolume / 100;
+            p.audioSource.volume = sounds[soundData.SoundIndex].GetVolume() * volume * PlayerPrefsManager.MasterVolume /
+                                   100 * PlayerPrefsManager.SFXVolume / 100;
         }
     }
 

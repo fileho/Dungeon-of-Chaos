@@ -29,6 +29,7 @@ public class SkillButtonPassive : SkillButton
 
     public override void OnPointerEnter(PointerEventData eventData)
     {
+        SoundManager.instance.PlaySound(hover);
         TooltipSystem.instance.Show(skillInfo.GetSkillData().GetName(), "Passive Skill",
             skillInfo.GetCurrentDescription(), skillInfo.GetNextDescription());
     }
@@ -48,6 +49,7 @@ public class SkillButtonPassive : SkillButton
         if (!skillSystem.CanUpgradePassive(skillIndex))
         {
             TooltipSystem.instance.DisplayMessage("Not enough skill points");
+            SoundManager.instance.PlaySound(requirements);
             return;
         }
         base.RightMouseDown();

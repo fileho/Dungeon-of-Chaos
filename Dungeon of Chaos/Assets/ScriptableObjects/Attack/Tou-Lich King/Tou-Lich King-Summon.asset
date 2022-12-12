@@ -26,18 +26,12 @@ MonoBehaviour:
   indicatorConfiguration: {fileID: 11400000, guid: 5d1d6872bd88e4db1a830d77bc8f59a0, type: 2}
   type: 0
   swingSFX:
-    soundCategory: 0
-    sound: 0
+    soundCategory: 2
+    sound: 26
     volume: 1
     pitch: 1
     priority: 0
   impactSFX:
-    soundCategory: 0
-    sound: 0
-    volume: 1
-    pitch: 1
-    priority: 0
-  indicatorSFX:
     soundCategory: 0
     sound: 0
     volume: 1

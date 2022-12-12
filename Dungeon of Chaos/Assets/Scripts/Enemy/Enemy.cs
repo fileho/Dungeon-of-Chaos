@@ -26,6 +26,15 @@ public class Enemy : Unit
     private Animator animator;
     private Rigidbody2D rb;
 
+    [Header("Enemy Ambient")]
+    [SerializeField] private float maxDistance;
+    [SerializeField] private SoundSettings ambientSFX;
+    private const float minFrequency = 2f;
+    private const float maxFrequency = 5.5f;
+    private float frequency = 0f;
+    private float time = 0f;
+
+
     protected override void Init()
     {
         loot = Instantiate(loot).Init(this);
@@ -70,6 +79,8 @@ public class Enemy : Unit
     {
         animator.SetBool("isMoving", rb.velocity.magnitude > 0.01f);
         SwitchEnemyStates();
+        if (ShouldPlaySound())
+            PlayAmbientSound();
     }
 
 
@@ -124,7 +135,7 @@ public class Enemy : Unit
 
     private void Move()
     {
-        movement.Move(footstepsSFX);
+        movement.Move();
     }
 
     private bool Chase()
@@ -175,4 +186,22 @@ public class Enemy : Unit
         Destroy(transform.parent.gameObject);
     }
 
+    private void PlayAmbientSound()
+    {
+        time = 0f;
+        frequency = Random.Range(minFrequency, maxFrequency);
+
+        float distance = Vector2.Distance(Character.instance.transform.position, transform.position);
+        if (distance > maxDistance)
+            return;
+
+        ambientSFX.SetVolumeFromDistance(distance, maxDistance);
+        SoundManager.instance.PlaySound(ambientSFX);
+    }
+
+    private bool ShouldPlaySound()
+    {
+        time += Time.deltaTime;
+        return time >= frequency;
+    }
 }

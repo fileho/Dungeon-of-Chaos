@@ -22,6 +22,8 @@ public class SoundSettings
     [SerializeField]
     private float priority = 0;
 
+    private float maxVolume = float.MaxValue;
+
     public SoundCategories.SoundCategory GetSoundCategory()
     {
         return soundCategory;
@@ -45,6 +47,18 @@ public class SoundSettings
     public float GetPriority()
     {
         return priority;
+    }
+
+    public float GetVolumeFromDistance(float distance, float maxDistance)
+    {
+        return Mathf.Max(0, maxVolume - maxVolume / maxDistance * distance);
+    }
+
+    public void SetVolumeFromDistance(float distance, float maxDistance)
+    {
+        if (maxVolume == float.MaxValue)
+            maxVolume = volume;
+        volume = GetVolumeFromDistance(distance, maxDistance);
     }
 }
 
@@ -86,7 +100,7 @@ public class SoundManager : MonoBehaviour
     [SerializeField]
     private SoundPoolLooping looping;
     [SerializeField]
-    private SoundPool footsteps;
+    private SoundPool enemyAmbients;
     [SerializeField]
     private SoundPool attack;
     [SerializeField]
@@ -107,7 +121,7 @@ public class SoundManager : MonoBehaviour
         instance = this;
 
         looping.Start(transform);
-        footsteps.Start(transform);
+        enemyAmbients.Start(transform);
         attack.Start(transform);
         skill.Start(transform);
         ui.Start(transform);
@@ -123,7 +137,7 @@ public class SoundManager : MonoBehaviour
     }
 
     /// <summary>
-    /// The called must ensure stopping the played sound by calling StopLoopingSound() with returned SoundData
+    /// The caller must ensure stopping the played sound by calling StopLoopingSound() with returned SoundData
     /// </summary>
     [Pure]
     public SoundData PlaySoundLooping(SoundSettings soundSettings)
@@ -151,7 +165,7 @@ public class SoundManager : MonoBehaviour
     {
         Assert.AreNotEqual(category, SoundCategories.SoundCategory.Looping,
                            "Normal sound must not be in loop; use PlaySoundLooping() instead");
-        return category switch { SoundCategories.SoundCategory.Footsteps => footsteps,
+        return category switch { SoundCategories.SoundCategory.EnemyAmbients => enemyAmbients,
                                  SoundCategories.SoundCategory.Attack => attack,
                                  SoundCategories.SoundCategory.Skill => skill,
                                  SoundCategories.SoundCategory.Ui => ui,

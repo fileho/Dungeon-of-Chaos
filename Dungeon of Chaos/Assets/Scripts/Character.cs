@@ -148,7 +148,7 @@ public class Character : Unit
 
     private void Move()
     {
-        movement.Move(footstepsSFX);
+        movement.Move();
     }
 
     private void RotateWeapon()

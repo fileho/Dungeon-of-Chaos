@@ -17,8 +17,6 @@ public class Unit : MonoBehaviour
     protected SoundSettings takeDmgSFX;
     [SerializeField]
     protected SoundSettings deathSFX;
-    [SerializeField]
-    protected SoundSettings footstepsSFX;
 
     protected bool dead = false;
 

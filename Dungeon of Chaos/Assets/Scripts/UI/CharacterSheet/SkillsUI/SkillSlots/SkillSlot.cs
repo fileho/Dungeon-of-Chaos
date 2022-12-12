@@ -10,6 +10,8 @@ public abstract class SkillSlot : MonoBehaviour, IDropHandler
     [SerializeField] protected Image image;
     [SerializeField] protected Image highlight;
 
+    [SerializeField] protected SoundSettings drop;
+
     protected SkillSystem skillSystem;
 
     protected virtual void Start()

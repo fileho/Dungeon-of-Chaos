@@ -27,19 +27,13 @@ MonoBehaviour:
   type: 0
   swingSFX:
     soundCategory: 2
-    sound: 5
+    sound: 29
     volume: 1
     pitch: 1
     priority: 0
   impactSFX:
     soundCategory: 2
-    sound: 6
-    volume: 1
-    pitch: 1
-    priority: 0
-  indicatorSFX:
-    soundCategory: 2
-    sound: 4
+    sound: 30
     volume: 1
     pitch: 1
     priority: 0

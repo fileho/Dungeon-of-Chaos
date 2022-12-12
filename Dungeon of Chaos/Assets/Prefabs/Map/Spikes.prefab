@@ -101,6 +101,18 @@ MonoBehaviour:
   spikesDown: {fileID: 21300000, guid: c47c9d39694403044a4fd4bb72c254e0, type: 3}
   spikesUp: {fileID: 21300000, guid: b3bb645b1a4dc9340a0d36909d071f94, type: 3}
   reloadTime: 3
+  spikesUpSFX:
+    soundCategory: 5
+    sound: 6
+    volume: 1
+    pitch: 1
+    priority: 0
+  spikesDownSFX:
+    soundCategory: 5
+    sound: 5
+    volume: 1
+    pitch: 1
+    priority: 0
 --- !u!61 &2593127217162138057
 BoxCollider2D:
   m_ObjectHideFlags: 0

@@ -5045,4 +5045,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   loot: {fileID: 8244884464711860287, guid: 596bf0917306bf541ab1986b9de1ff38, type: 3}
   lootCount: 1
+  value: 0
   id: 0
+  chestOpen:
+    soundCategory: 5
+    sound: 1
+    volume: 1
+    pitch: 1
+    priority: 0

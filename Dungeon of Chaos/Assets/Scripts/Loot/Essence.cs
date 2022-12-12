@@ -15,6 +15,8 @@ public class Essence : MonoBehaviour
     [SerializeField] private float lifetime = 5f;
     [SerializeField] private float force = 5f;
 
+    [SerializeField] private SoundSettings essencePickupSFX;
+
     private float value;
   
     void Start()
@@ -68,6 +70,7 @@ public class Essence : MonoBehaviour
 
     private void Collect()
     {
+        SoundManager.instance.PlaySound(essencePickupSFX);
         switch (essenceType)
         {
             case EssenceType.health:

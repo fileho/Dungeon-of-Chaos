@@ -4986,6 +4986,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eeba97e31cbad314c92083b96aa43e02, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  crateDestroySFX:
+    soundCategory: 5
+    sound: 2
+    volume: 1
+    pitch: 1
+    priority: 0
 --- !u!1 &3499052025494104262
 GameObject:
   m_ObjectHideFlags: 0

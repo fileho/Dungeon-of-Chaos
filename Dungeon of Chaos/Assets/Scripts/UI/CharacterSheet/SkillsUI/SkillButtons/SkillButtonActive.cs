@@ -41,6 +41,7 @@ public class SkillButtonActive : SkillButton
 
     public override void OnPointerEnter(PointerEventData eventData)
     {
+        SoundManager.instance.PlaySound(hover);
         TooltipSystem.instance.Show(skillInfo.GetSkillData().GetName(), "Active Skill", 
             skillInfo.GetCurrentDescription(), skillInfo.GetNextDescription());
     }
@@ -55,6 +56,7 @@ public class SkillButtonActive : SkillButton
         if (!skillSystem.CanUpgradeActive(skillIndex))
         {
             TooltipSystem.instance.DisplayMessage("Not enough skill points");
+            SoundManager.instance.PlaySound(requirements);
             return;
         }
         base.RightMouseDown();

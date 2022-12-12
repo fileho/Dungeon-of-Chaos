@@ -10,6 +10,11 @@ public class Checkpoint : MonoBehaviour, IMapSavable
     private CharacterSheet characterSheet;
     private SaveSystem saveSystem;
 
+    [Header("SFX")]
+    [SerializeField] private SoundSettings checkpointSFX;
+    private const float sfxRange = 50f;
+    private SoundData sfx = null;
+
     [SerializeField]
     [ReadOnly]
     private int id;
@@ -26,11 +31,26 @@ public class Checkpoint : MonoBehaviour, IMapSavable
 
     private void Update()
     {
+        if (Vector2.Distance(Character.instance.transform.position, transform.position) <= sfxRange)
+        {
+            if (sfx == null)
+                PlaySound();
+            else
+                UpdateSound();
+        }
+        else
+        {
+            SoundManager.instance.StopLoopingSound(sfx);
+            sfx = null;
+        }
+
         if (!Input.GetKeyDown(KeyCode.F))
             return;
 
         if (((Vector2)transform.position - (Vector2)Character.instance.transform.position).magnitude < range)
             Interact();
+
+        
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -83,5 +103,21 @@ public class Checkpoint : MonoBehaviour, IMapSavable
     public Object GetAttachedComponent()
     {
         return this;
+    }
+
+    private void PlaySound()
+    {
+        float distance = Vector2.Distance(Character.instance.transform.position, transform.position);
+        checkpointSFX.SetVolumeFromDistance(distance, sfxRange);
+
+        sfx = SoundManager.instance.PlaySoundLooping(checkpointSFX);
+    }
+
+    private void UpdateSound()
+    {
+        float distance = Vector2.Distance(Character.instance.transform.position, transform.position);
+
+        float volume = checkpointSFX.GetVolumeFromDistance(distance, sfxRange);
+        SoundManager.instance.UpdateLoopingSound(sfx, volume);
     }
 }
