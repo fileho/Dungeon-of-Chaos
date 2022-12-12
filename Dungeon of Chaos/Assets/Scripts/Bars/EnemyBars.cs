@@ -34,4 +34,9 @@ public class EnemyBars : IBars
     {
         
     }
+
+    public override void UpdateArmorBar(float value)
+    {
+
+    }
 }

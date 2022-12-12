@@ -8,6 +8,11 @@ public class CharacterBars : IBars
         return this;
     }
 
+    public override void UpdateArmorBar(float value)
+    {
+        InGameUIManager.instance.SetArmorBar(value);
+    }
+
     public override void UpdateHpBar(float value)
     {
         InGameUIManager.instance.SetHealthBar(value);
