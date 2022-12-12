@@ -7,6 +7,8 @@ public abstract class IBars : ScriptableObject
     public abstract void UpdateManaBar(float value);
     public abstract void UpdateStaminaBar(float value);
 
+    public abstract void UpdateXpBar(float value);
+
     public void FillAllBars()
     {
         UpdateHpBar(1);

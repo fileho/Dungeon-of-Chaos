@@ -10,6 +10,8 @@ public class TooltipContent : MonoBehaviour
     [SerializeField] public GameObject cost;
     [SerializeField] public GameObject requirements;
 
+    [SerializeField] private GameObject separator;
+
     public void Fill(SkillDescription skillDes)
     {
         bool head = FillField(skillDes.header, contentHeader);
@@ -17,7 +19,9 @@ public class TooltipContent : MonoBehaviour
         bool c = FillField(skillDes.cost, this.cost);
         bool r = FillField(skillDes.requirements, requirements);
 
-        this.enabled = (head || d || c || r);
+        enabled = (head || d || c || r);
+        separator.SetActive(this.enabled);
+        separator.GetComponent<RectTransform>().sizeDelta = new Vector2(GetComponent<RectTransform>().rect.width, 3);
     }
 
     private bool FillField(string s, GameObject obj)

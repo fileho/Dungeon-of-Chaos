@@ -6,7 +6,7 @@ using UnityEngine;
 public class StatsModifiers : ScriptableObject
 {
     [SerializeField] private float statsBonus;
-    private const float lvlBonus = 0.3f;
+    private const float lvlBonus = 0.75f;
 
     public float GetStatsBonus()
     {

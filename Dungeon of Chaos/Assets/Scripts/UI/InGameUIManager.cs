@@ -10,6 +10,8 @@ public class InGameUIManager : MonoBehaviour
     private Slider manaBar;
     [SerializeField]
     private Slider staminaBar;
+    [SerializeField]
+    private Slider xpBar;
 
     [Header("Skills")]
     [SerializeField]
@@ -63,6 +65,11 @@ public class InGameUIManager : MonoBehaviour
     public void SetStaminaBar(float value)
     {
         staminaBar.value = value;
+    }
+
+    public void SetXpBar(float value)
+    {
+        xpBar.value = value;
     }
 
     public void UpdateSkills()

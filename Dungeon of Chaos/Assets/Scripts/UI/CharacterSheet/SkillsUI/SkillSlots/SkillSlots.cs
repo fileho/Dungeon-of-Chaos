@@ -14,6 +14,7 @@ public abstract class SkillSlots<T> : MonoBehaviour where T : ISkill
         if (skillSlots.Count != GetAmountOfSlots())
             InitSkillSlots();
         RemoveHighlight();
+        Redraw();
     }
 
     protected abstract int GetAmountOfSlots();

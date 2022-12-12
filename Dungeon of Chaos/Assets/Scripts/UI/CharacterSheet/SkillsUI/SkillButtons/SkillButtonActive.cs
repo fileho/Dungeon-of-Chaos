@@ -20,7 +20,6 @@ public class SkillButtonActive : SkillButton
         }
         SetLevel();
         SetIcon();
-        //frame.color = Color.red;
     }
 
     public override void OnBeginDrag(PointerEventData eventData)
@@ -48,14 +47,14 @@ public class SkillButtonActive : SkillButton
 
     public override void OnPointerExit(PointerEventData eventData)
     {
-        TooltipSystem.instance.Hide();
+        TooltipSystem.instance.HideSkillTooltip();
     }
 
     public override void RightMouseDown()
     {
         if (!skillSystem.CanUpgradeActive(skillIndex))
         {
-            TooltipSystem.instance.DisplayMessage("Not enough skill points");
+            TooltipSystem.instance.DisplayMessage("Requirements not met");
             SoundManager.instance.PlaySound(requirements);
             return;
         }
@@ -91,9 +90,12 @@ public class SkillButtonActive : SkillButton
 
     public override void SetLevel()
     {
-        locked.SetActive(false);
+        lockObj.SetActive(false);
         if (skillInfo.GetLevel() == 0)
-            locked.SetActive(true);        
+        {
+            lockObj.SetActive(true);
+            lockObj.GetComponent<Image>().fillAmount = 1;
+        }
         level.text = skillInfo.GetLevel() + "/" + skillInfo.GetMaxLevel();
     }
 }
