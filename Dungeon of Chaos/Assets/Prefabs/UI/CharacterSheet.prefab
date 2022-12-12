@@ -9680,6 +9680,18 @@ MonoBehaviour:
   level: {fileID: 5675015394678058511}
   lockObj: {fileID: 3298593817534262428}
   load: {fileID: 2088090330528408953}
+  hover:
+    soundCategory: 0
+    sound: 0
+    volume: 1
+    pitch: 1
+    priority: 0
+  requirements:
+    soundCategory: 0
+    sound: 0
+    volume: 1
+    pitch: 1
+    priority: 0
   skillIndex: 2
 --- !u!1 &3349969891599029968
 GameObject:
@@ -22678,6 +22690,18 @@ MonoBehaviour:
   level: {fileID: 6754002739433287283}
   lockObj: {fileID: 6751762657653954982}
   load: {fileID: 5200618850791016283}
+  hover:
+    soundCategory: 4
+    sound: 1
+    volume: 1
+    pitch: 1
+    priority: 0
+  requirements:
+    soundCategory: 4
+    sound: 0
+    volume: 1
+    pitch: 1
+    priority: 0
   skillIndex: 11
 --- !u!225 &1787206102587957817
 CanvasGroup:
