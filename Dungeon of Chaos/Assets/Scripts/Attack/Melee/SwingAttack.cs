@@ -62,6 +62,7 @@ public class SwingAttack : MeleeAttack {
         float time = 0;
         float attackAnimationDurationOneWay = AttackAnimationDuration / 3f;
 
+        SoundManager.instance.PlaySound(swingSFX);
         // Forward
         while (time <= 1) {
             time += (Time.deltaTime / attackAnimationDurationOneWay);
@@ -87,9 +88,7 @@ public class SwingAttack : MeleeAttack {
             time += (Time.deltaTime / attackAnimationDurationOneWay);
             Weapon.transform.localPosition = Vector3.Lerp(endPosdownAdjusted, startPos, time);
             yield return null;
-        }
-
-        SoundManager.instance.PlaySound(swingSFX);
+        }        
 
         // Reset
         Weapon.Asset.localRotation = initialAssetRotation;

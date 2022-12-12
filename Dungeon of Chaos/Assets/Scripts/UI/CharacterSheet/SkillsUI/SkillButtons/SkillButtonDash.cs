@@ -42,6 +42,7 @@ public class SkillButtonDash : SkillButton
 
     public override void OnPointerEnter(PointerEventData eventData)
     {
+        SoundManager.instance.PlaySound(hover);
         TooltipSystem.instance.Show(skillInfo.GetSkillData().GetName(), "Dash Skill",
             skillInfo.GetCurrentDescription(), skillInfo.GetNextDescription());
     }
@@ -56,6 +57,7 @@ public class SkillButtonDash : SkillButton
         if (!skillSystem.CanUpgradeDash(skillIndex))
         {
             TooltipSystem.instance.DisplayMessage("Not enough skill points");
+            SoundManager.instance.PlaySound(requirements);
             return;
         }
         base.RightMouseDown();

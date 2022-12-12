@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -10,7 +8,9 @@ public abstract class SkillButton : MonoBehaviour, IPointerDownHandler, IPointer
     [SerializeField] protected Text level;
     [SerializeField] protected GameObject locked;
     [SerializeField] protected GameObject load;
-    //[SerializeField] protected Image frame;
+    
+    [SerializeField] protected SoundSettings hover;
+    [SerializeField] protected SoundSettings requirements;
 
     protected SkillSystem skillSystem;
 

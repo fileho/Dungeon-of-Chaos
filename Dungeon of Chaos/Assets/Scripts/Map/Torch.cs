@@ -14,6 +14,10 @@ public class Torch : MonoBehaviour
 
     private ParticleSystem ps;
 
+    [SerializeField] private SoundSettings torchLoopingSFX;
+    private SoundData sfx = null;
+    [SerializeField] private SoundSettings torchStartBurningSFX;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -28,6 +32,19 @@ public class Torch : MonoBehaviour
         Vector2 charPos = Character.instance.transform.position;
         float dist = (pos2d - charPos).magnitude;
 
+        if (dist <= range)
+        {
+            if (sfx == null)
+                PlaySound();
+            else
+                UpdateSound();
+        }
+        else
+        {
+            SoundManager.instance.StopLoopingSound(sfx);
+            sfx = null;
+        }
+
         float offset = dist < range ? 1f : dist < range * 1.5f ? 0f : -1f;
         offset *= Time.deltaTime * 0.5f;
 
@@ -37,6 +54,25 @@ public class Torch : MonoBehaviour
         if (state < 0.01f && ps.isPlaying)
             ps.Stop();
         if (state > 0.01 && !ps.isPlaying)
+        {
             ps.Play();
+            SoundManager.instance.PlaySound(torchStartBurningSFX);
+        }
+    }
+
+    private void PlaySound()
+    {
+        float distance = Vector2.Distance(Character.instance.transform.position, transform.position);
+        torchLoopingSFX.SetVolumeFromDistance(distance, range);
+
+        sfx = SoundManager.instance.PlaySoundLooping(torchLoopingSFX);
+    }
+
+    private void UpdateSound()
+    {
+        float distance = Vector2.Distance(Character.instance.transform.position, pos2d);
+
+        float volume = torchLoopingSFX.GetVolumeFromDistance(distance, range);
+        SoundManager.instance.UpdateLoopingSound(sfx, volume);
     }
 }

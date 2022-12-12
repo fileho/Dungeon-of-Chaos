@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 7070446174992468513}
   - component: {fileID: 1976062405514662783}
   - component: {fileID: 6780542046898616817}
+  - component: {fileID: 5152230228340092022}
   m_Layer: 5
   m_Name: Button-Slot2
   m_TagString: Untagged
@@ -150,6 +151,51 @@ MonoBehaviour:
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
   m_ReverseArrangement: 0
+--- !u!114 &5152230228340092022
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 448411828297299727}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 0
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 4930313194304313338}
+          m_TargetAssemblyTypeName: UISounds, Assembly-CSharp
+          m_MethodName: OnHoverSound
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - eventID: 4
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 4930313194304313338}
+          m_TargetAssemblyTypeName: UISounds, Assembly-CSharp
+          m_MethodName: OnClickSound
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1 &2589978468083796029
 GameObject:
   m_ObjectHideFlags: 0
@@ -431,6 +477,7 @@ GameObject:
   - component: {fileID: 4296506792117483137}
   - component: {fileID: 5628763469717001945}
   - component: {fileID: 1740071569348118372}
+  - component: {fileID: 5928681417896298158}
   m_Layer: 5
   m_Name: Button-Slot3
   m_TagString: Untagged
@@ -568,6 +615,51 @@ MonoBehaviour:
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
   m_ReverseArrangement: 0
+--- !u!114 &5928681417896298158
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2965032929529820236}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 0
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 4930313194304313338}
+          m_TargetAssemblyTypeName: UISounds, Assembly-CSharp
+          m_MethodName: OnHoverSound
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - eventID: 4
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 4930313194304313338}
+          m_TargetAssemblyTypeName: UISounds, Assembly-CSharp
+          m_MethodName: OnClickSound
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1 &3443145282974015271
 GameObject:
   m_ObjectHideFlags: 0
@@ -1537,6 +1629,7 @@ GameObject:
   - component: {fileID: 5962640223670170578}
   - component: {fileID: 8418009418185767779}
   - component: {fileID: 3505541088822203561}
+  - component: {fileID: 1363337952249404211}
   m_Layer: 5
   m_Name: Button-Yes
   m_TagString: Untagged
@@ -1646,6 +1739,51 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &1363337952249404211
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6608130579096157914}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 0
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 4930313194304313338}
+          m_TargetAssemblyTypeName: UISounds, Assembly-CSharp
+          m_MethodName: OnHoverSound
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - eventID: 4
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 4930313194304313338}
+          m_TargetAssemblyTypeName: UISounds, Assembly-CSharp
+          m_MethodName: OnClickSound
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1 &6623751871158568193
 GameObject:
   m_ObjectHideFlags: 0
@@ -2344,6 +2482,7 @@ GameObject:
   - component: {fileID: 6708584097890236710}
   - component: {fileID: 6708584097890236711}
   - component: {fileID: 6708584097890236704}
+  - component: {fileID: 4158588457247652131}
   m_Layer: 5
   m_Name: Button-QuitGame
   m_TagString: Untagged
@@ -2465,6 +2604,51 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
+--- !u!114 &4158588457247652131
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6708584097890236706}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 0
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 4930313194304313338}
+          m_TargetAssemblyTypeName: UISounds, Assembly-CSharp
+          m_MethodName: OnHoverSound
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - eventID: 4
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 4930313194304313338}
+          m_TargetAssemblyTypeName: UISounds, Assembly-CSharp
+          m_MethodName: OnClickSound
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1 &6708584097931365714
 GameObject:
   m_ObjectHideFlags: 0
@@ -3090,6 +3274,7 @@ GameObject:
   - component: {fileID: 6708584098000269640}
   - component: {fileID: 6708584098000269641}
   - component: {fileID: 6708584098000269642}
+  - component: {fileID: 7078878114167981416}
   m_Layer: 5
   m_Name: Button-LoadGame
   m_TagString: Untagged
@@ -3211,6 +3396,51 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
+--- !u!114 &7078878114167981416
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6708584098000269636}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 0
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 4930313194304313338}
+          m_TargetAssemblyTypeName: UISounds, Assembly-CSharp
+          m_MethodName: OnHoverSound
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - eventID: 4
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 4930313194304313338}
+          m_TargetAssemblyTypeName: UISounds, Assembly-CSharp
+          m_MethodName: OnClickSound
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1 &6708584098019437501
 GameObject:
   m_ObjectHideFlags: 0
@@ -4423,6 +4653,7 @@ GameObject:
   - component: {fileID: 6708584098174487109}
   - component: {fileID: 6708584098174487110}
   - component: {fileID: 6706442162545819983}
+  - component: {fileID: 5659263527614705639}
   m_Layer: 5
   m_Name: Button-Slot1
   m_TagString: Untagged
@@ -4560,6 +4791,51 @@ MonoBehaviour:
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
   m_ReverseArrangement: 0
+--- !u!114 &5659263527614705639
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6708584098174487104}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 0
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 4930313194304313338}
+          m_TargetAssemblyTypeName: UISounds, Assembly-CSharp
+          m_MethodName: OnHoverSound
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - eventID: 4
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 4930313194304313338}
+          m_TargetAssemblyTypeName: UISounds, Assembly-CSharp
+          m_MethodName: OnClickSound
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1 &6708584098176140665
 GameObject:
   m_ObjectHideFlags: 0
@@ -4781,6 +5057,7 @@ GameObject:
   - component: {fileID: 6708584098185873361}
   - component: {fileID: 6708584098185873362}
   - component: {fileID: 6708584098185873363}
+  - component: {fileID: 1026924204662004088}
   m_Layer: 5
   m_Name: Button-Settings
   m_TagString: Untagged
@@ -4902,6 +5179,51 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
+--- !u!114 &1026924204662004088
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6708584098185873357}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 0
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 4930313194304313338}
+          m_TargetAssemblyTypeName: UISounds, Assembly-CSharp
+          m_MethodName: OnHoverSound
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - eventID: 4
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 4930313194304313338}
+          m_TargetAssemblyTypeName: UISounds, Assembly-CSharp
+          m_MethodName: OnClickSound
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1 &6708584098201381462
 GameObject:
   m_ObjectHideFlags: 0
@@ -5561,6 +5883,7 @@ GameObject:
   - component: {fileID: 6708584098244657525}
   - component: {fileID: 6708584098244657526}
   - component: {fileID: 6708584098244657527}
+  - component: {fileID: 4857248833133753607}
   m_Layer: 5
   m_Name: Button-Quit
   m_TagString: Untagged
@@ -5670,6 +5993,51 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &4857248833133753607
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6708584098244657521}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 0
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 4930313194304313338}
+          m_TargetAssemblyTypeName: UISounds, Assembly-CSharp
+          m_MethodName: OnHoverSound
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - eventID: 4
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 4930313194304313338}
+          m_TargetAssemblyTypeName: UISounds, Assembly-CSharp
+          m_MethodName: OnClickSound
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1 &6708584098282959143
 GameObject:
   m_ObjectHideFlags: 0
@@ -6211,6 +6579,7 @@ GameObject:
   - component: {fileID: 6708584098324656597}
   - component: {fileID: 6708584098324656598}
   - component: {fileID: 6708584098324656599}
+  - component: {fileID: 5214888637086124788}
   m_Layer: 5
   m_Name: Button-Back
   m_TagString: Untagged
@@ -6332,6 +6701,51 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &5214888637086124788
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6708584098324656593}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 0
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 4930313194304313338}
+          m_TargetAssemblyTypeName: UISounds, Assembly-CSharp
+          m_MethodName: OnHoverSound
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - eventID: 4
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 4930313194304313338}
+          m_TargetAssemblyTypeName: UISounds, Assembly-CSharp
+          m_MethodName: OnClickSound
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1 &6708584098364744784
 GameObject:
   m_ObjectHideFlags: 0
@@ -6443,6 +6857,7 @@ GameObject:
   - component: {fileID: 6708584098376232541}
   - component: {fileID: 6708584098376232542}
   - component: {fileID: 6708584098376232543}
+  - component: {fileID: 8481879804883114053}
   m_Layer: 5
   m_Name: Button-LoadGame
   m_TagString: Untagged
@@ -6564,6 +6979,51 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
+--- !u!114 &8481879804883114053
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6708584098376232537}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 0
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 4930313194304313338}
+          m_TargetAssemblyTypeName: UISounds, Assembly-CSharp
+          m_MethodName: OnHoverSound
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - eventID: 4
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 4930313194304313338}
+          m_TargetAssemblyTypeName: UISounds, Assembly-CSharp
+          m_MethodName: OnClickSound
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1 &6708584098382992892
 GameObject:
   m_ObjectHideFlags: 0
@@ -9585,6 +10045,7 @@ GameObject:
   - component: {fileID: 6708584098800318221}
   - component: {fileID: 6708584098800318222}
   - component: {fileID: 6708584098800318223}
+  - component: {fileID: 7480898756085198633}
   m_Layer: 5
   m_Name: Button-NewGame
   m_TagString: Untagged
@@ -9694,6 +10155,51 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &7480898756085198633
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6708584098800318217}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 0
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 4930313194304313338}
+          m_TargetAssemblyTypeName: UISounds, Assembly-CSharp
+          m_MethodName: OnHoverSound
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - eventID: 4
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 4930313194304313338}
+          m_TargetAssemblyTypeName: UISounds, Assembly-CSharp
+          m_MethodName: OnClickSound
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1 &6708584098817440092
 GameObject:
   m_ObjectHideFlags: 0
@@ -13467,6 +13973,7 @@ MonoBehaviour:
   activeCooldowns: []
   dashCooldown: {fileID: 0}
   secondaryCooldown: {fileID: 0}
+  settings: {fileID: 0}
 --- !u!1 &6708584099263024701
 GameObject:
   m_ObjectHideFlags: 0
@@ -14139,6 +14646,7 @@ GameObject:
   - component: {fileID: 6708584099343992584}
   - component: {fileID: 6708584099343992585}
   - component: {fileID: 6708584099343992586}
+  - component: {fileID: 6395831714300234491}
   m_Layer: 5
   m_Name: Button-Done
   m_TagString: Untagged
@@ -14260,6 +14768,51 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &6395831714300234491
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6708584099343992580}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 0
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 4930313194304313338}
+          m_TargetAssemblyTypeName: UISounds, Assembly-CSharp
+          m_MethodName: OnHoverSound
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - eventID: 4
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 4930313194304313338}
+          m_TargetAssemblyTypeName: UISounds, Assembly-CSharp
+          m_MethodName: OnClickSound
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1 &6708584099356418100
 GameObject:
   m_ObjectHideFlags: 0
@@ -16275,6 +16828,7 @@ GameObject:
   - component: {fileID: 6708584099782442563}
   - component: {fileID: 6708584099782441404}
   - component: {fileID: 6708584099782441405}
+  - component: {fileID: 2461087400083883576}
   m_Layer: 5
   m_Name: Button-NewGame
   m_TagString: Untagged
@@ -16384,6 +16938,51 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &2461087400083883576
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6708584099782441407}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 0
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 4930313194304313338}
+          m_TargetAssemblyTypeName: UISounds, Assembly-CSharp
+          m_MethodName: OnHoverSound
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - eventID: 4
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 4930313194304313338}
+          m_TargetAssemblyTypeName: UISounds, Assembly-CSharp
+          m_MethodName: OnClickSound
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1 &6708584099837542839
 GameObject:
   m_ObjectHideFlags: 0
@@ -16793,6 +17392,7 @@ GameObject:
   - component: {fileID: 6708584099927283027}
   - component: {fileID: 6708584099927283020}
   - component: {fileID: 6708584099927283021}
+  - component: {fileID: 4930313194304313338}
   m_Layer: 5
   m_Name: MainMenu
   m_TagString: Untagged
@@ -16889,6 +17489,30 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!114 &4930313194304313338
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6708584099927283022}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5578081df35346f43b682f00817c5687, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  buttonClick:
+    soundCategory: 4
+    sound: 0
+    volume: 1
+    pitch: 1
+    priority: 0
+  buttonHover:
+    soundCategory: 4
+    sound: 1
+    volume: 1
+    pitch: 1
+    priority: 0
 --- !u!1 &6708584099947345466
 GameObject:
   m_ObjectHideFlags: 0
@@ -17265,6 +17889,7 @@ GameObject:
   - component: {fileID: 3125776410399582290}
   - component: {fileID: 3970303491265838535}
   - component: {fileID: 8304755821047916137}
+  - component: {fileID: 7221060461552699028}
   m_Layer: 5
   m_Name: Button-No
   m_TagString: Untagged
@@ -17386,6 +18011,51 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &7221060461552699028
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8136562167623651076}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 0
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 4930313194304313338}
+          m_TargetAssemblyTypeName: UISounds, Assembly-CSharp
+          m_MethodName: OnHoverSound
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - eventID: 4
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 4930313194304313338}
+          m_TargetAssemblyTypeName: UISounds, Assembly-CSharp
+          m_MethodName: OnClickSound
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1 &8219368912987969107
 GameObject:
   m_ObjectHideFlags: 0

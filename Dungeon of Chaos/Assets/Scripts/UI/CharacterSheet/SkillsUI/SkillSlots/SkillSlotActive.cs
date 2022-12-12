@@ -14,6 +14,7 @@ public class SkillSlotActive : SkillSlot
         if (eventData.pointerDrag == null || 
             eventData.pointerDrag.GetComponent<SkillButtonActive>() == null)
             return;
+        SoundManager.instance.PlaySound(drop);
         int skillIndex = eventData.pointerDrag.GetComponent<SkillButtonActive>().GetSkillIndex();
         skillSystem.Activate(skillIndex, index);
         activatedSkillSlots.Redraw();

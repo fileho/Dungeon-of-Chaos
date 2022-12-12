@@ -47,9 +47,9 @@ public class SoundsEditor : PropertyDrawer
             soundIndex.intValue = (int)(SoundCategories.Looping)EditorGUI.EnumPopup(soundRect, s);
             break;
         }
-        case SoundCategories.SoundCategory.Footsteps: {
-            SoundCategories.FootSteps s = (SoundCategories.FootSteps)soundIndex.intValue;
-            soundIndex.intValue = (int)(SoundCategories.FootSteps)EditorGUI.EnumPopup(soundRect, s);
+        case SoundCategories.SoundCategory.EnemyAmbients: {
+            SoundCategories.EnemyAmbients s = (SoundCategories.EnemyAmbients)soundIndex.intValue;
+            soundIndex.intValue = (int)(SoundCategories.EnemyAmbients)EditorGUI.EnumPopup(soundRect, s);
             break;
         }
         case SoundCategories.SoundCategory.Attack: {

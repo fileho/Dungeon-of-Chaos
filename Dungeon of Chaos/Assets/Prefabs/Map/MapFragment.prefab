@@ -251,6 +251,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 0
   range: 2.5
+  pickupSFX:
+    soundCategory: 5
+    sound: 4
+    volume: 1
+    pitch: 1
+    priority: 0
 --- !u!61 &3171237639404659403
 BoxCollider2D:
   m_ObjectHideFlags: 0

@@ -590,24 +590,25 @@ MonoBehaviour:
   bars: {fileID: 11400000, guid: 0221322a962978542a4599e9d2390aec, type: 2}
   takeDmgSFX:
     soundCategory: 7
-    sound: 2
+    sound: 10
     volume: 1
     pitch: 0
     priority: 0
   deathSFX:
     soundCategory: 7
-    sound: 2
-    volume: 1
-    pitch: 1
-    priority: 0
-  footstepsSFX:
-    soundCategory: 1
-    sound: 2
+    sound: 10
     volume: 1
     pitch: 1
     priority: 0
   loot: {fileID: 11400000, guid: 55110f0bef1256e42a7f83b3fc2b4ea9, type: 2}
   lootModifiers: {fileID: 11400000, guid: b66fa80e2c306c643b62404643421f30, type: 2}
+  maxDistance: 60
+  ambientSFX:
+    soundCategory: 1
+    sound: 9
+    volume: 1
+    pitch: 1
+    priority: 0
 --- !u!114 &1765402845439064865
 MonoBehaviour:
   m_ObjectHideFlags: 0

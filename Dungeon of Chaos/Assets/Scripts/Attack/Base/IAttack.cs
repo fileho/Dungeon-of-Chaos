@@ -32,7 +32,6 @@ public abstract class IAttack : MonoBehaviour
 
     protected SoundSettings swingSFX;
     protected SoundSettings impactSFX;
-    protected SoundSettings indicatorSFX;
     // The duration of the attack animation
     public float AttackAnimationDuration { get; private set; }
 
@@ -196,7 +195,6 @@ public abstract class IAttack : MonoBehaviour
         type = attackConfiguration.type;
         swingSFX = attackConfiguration.swingSFX;
         impactSFX = attackConfiguration.impactSFX;
-        indicatorSFX = attackConfiguration.indicatorSFX;
     }
 
 

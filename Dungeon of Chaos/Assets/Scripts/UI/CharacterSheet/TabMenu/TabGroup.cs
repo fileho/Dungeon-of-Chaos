@@ -11,6 +11,9 @@ public class TabGroup : MonoBehaviour
     [SerializeField] private Color tabSelected;
     [SerializeField] private TabBtn defaultTab;
 
+    [SerializeField] private SoundSettings buttonHover;
+    [SerializeField] private SoundSettings buttonClick;
+
     [HideInInspector]
     public TabBtn selectedTab;
 
@@ -35,7 +38,10 @@ public class TabGroup : MonoBehaviour
     {
         ResetTabs();
         if (selectedTab == null || button != selectedTab)
+        {
             button.background.color = tabHover;
+            SoundManager.instance.PlaySound(buttonHover);
+        }
     }
 
     public void OnTabExit(TabBtn button)
@@ -46,6 +52,7 @@ public class TabGroup : MonoBehaviour
     public void OnTabSelected(TabBtn button)
     {
         selectedTab = button;
+        SoundManager.instance.PlaySound(buttonClick);
         ResetTabs();
         button.background.color = tabSelected;
         int index = button.transform.GetSiblingIndex();

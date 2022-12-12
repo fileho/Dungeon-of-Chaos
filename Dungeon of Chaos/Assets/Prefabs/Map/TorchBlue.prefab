@@ -4942,3 +4942,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 969380e8d09b4454ca7adea85f1fff17, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  torchLoopingSFX:
+    soundCategory: 0
+    sound: 2
+    volume: 1
+    pitch: 1
+    priority: 0
+  torchStartBurningSFX:
+    soundCategory: 5
+    sound: 8
+    volume: 1
+    pitch: 1
+    priority: 0

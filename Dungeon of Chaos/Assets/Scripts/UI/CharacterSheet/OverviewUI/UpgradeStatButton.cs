@@ -13,6 +13,9 @@ public class UpgradeStatButton : MonoBehaviour, IPointerEnterHandler, IPointerEx
     [SerializeField] private Color hover;
     [SerializeField] private Color selected;
 
+    [SerializeField] private SoundSettings buttonHover;
+    [SerializeField] private SoundSettings buttonClick;
+
     void Start()
     {
         gameObject.GetComponent<Image>().color = idle;
@@ -20,12 +23,14 @@ public class UpgradeStatButton : MonoBehaviour, IPointerEnterHandler, IPointerEx
     public void OnPointerClick(PointerEventData eventData)
     {
         gameObject.GetComponent<Image>().color = selected;
+        SoundManager.instance.PlaySound(buttonClick);
         changeStat.Invoke();
     }
 
     public void OnPointerEnter(PointerEventData eventData)
     {
         gameObject.GetComponent<Image>().color = hover;
+        SoundManager.instance.PlaySound(buttonHover);
     }
 
     public void OnPointerExit(PointerEventData eventData)
