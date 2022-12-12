@@ -15,9 +15,11 @@ MonoBehaviour:
   range: 1000
   damage: 0
   staminaCost: 0
+  manaCost: 0
   rangeWeight: 1
   damageWeight: 1
   staminaCostWeight: 1
+  manaCostWeight: 1
   cooldown: 10
   attackAnimationDuration: 1.5
   indicator: {fileID: 5248374025804181554, guid: bd368bb0dca0445629bdf0b149f13967, type: 3}
@@ -43,6 +45,6 @@ MonoBehaviour:
     priority: 0
   minion: {fileID: 1419886182692781939, guid: b2da123613c3f4f428251a4530610f8d, type: 3}
   minAmountOfMinions: 2
-  maxAmountOfMinions: 10
+  maxAmountOfMinions: 6
   timeBetweenSpawns: 0.5
   spawnRadius: 3

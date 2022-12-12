@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c7862adca1b56944f82bba604ba0d4b9, type: 3}
-  m_Name: GiantStats
+  m_Name: DarkElementalLvl10Stats
   m_EditorClassIdentifier: 
-  movementSpeed: 5
-  chaseDistance: 30
+  movementSpeed: 6
+  chaseDistance: 35
   staminaRegen: 20
   primaryStats:
     id: 0
@@ -21,7 +21,7 @@ MonoBehaviour:
     maxLevel: 0
     baseMultiplier: 0
     baseXP: 0
-    level: 1
+    level: 10
     statsPoints: 0
     skillPoints: 0
   references:
@@ -29,10 +29,10 @@ MonoBehaviour:
     00000000:
       type: {class: PrimaryStats, ns: , asm: Assembly-CSharp}
       data:
-        strength: 11
-        intelligence: 0
-        constitution: 12
-        endurance: 12
-        wisdom: 0
+        strength: 5
+        intelligence: 15
+        constitution: 9
+        endurance: 5
+        wisdom: 12
         multipliers: {fileID: 11400000, guid: 9bc05dc5e43aa9f49a343ca8e90f53ed, type: 2}
-        statsModifiers: {fileID: 11400000, guid: 24725120b3e39774aa9da97ceb21376a, type: 2}
+        statsModifiers: {fileID: 11400000, guid: 45c6f8569f640f242b3e61668af2c96a, type: 2}

@@ -1,0 +1,38 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c7862adca1b56944f82bba604ba0d4b9, type: 3}
+  m_Name: OrcFighterLvl4Stats
+  m_EditorClassIdentifier: 
+  movementSpeed: 6
+  chaseDistance: 35
+  staminaRegen: 20
+  primaryStats:
+    id: 0
+  XP:
+    maxLevel: 0
+    baseMultiplier: 0
+    baseXP: 0
+    level: 3
+    statsPoints: 0
+    skillPoints: 0
+  references:
+    version: 1
+    00000000:
+      type: {class: PrimaryStats, ns: , asm: Assembly-CSharp}
+      data:
+        strength: 6
+        intelligence: 0
+        constitution: 7
+        endurance: 9
+        wisdom: 0
+        multipliers: {fileID: 11400000, guid: 9bc05dc5e43aa9f49a343ca8e90f53ed, type: 2}
+        statsModifiers: {fileID: 11400000, guid: c69963b711bc6cf4192b46465e4ad3d7, type: 2}

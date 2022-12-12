@@ -12,17 +12,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7fbaf47bf9eac450c86f1a35680d95f4, type: 3}
   m_Name: Dp-Dark Elemental-Dash
   m_EditorClassIdentifier: 
-  range: 9
-  damage: 18
-  staminaCost: 0
+  range: 7.5
+  damage: 1.75
+  staminaCost: 15
+  manaCost: 55
   rangeWeight: 1
   damageWeight: 1
   staminaCostWeight: 1
+  manaCostWeight: 1
   cooldown: 1
   attackAnimationDuration: 0.8
   indicator: {fileID: 8311782001119121317, guid: 5d2397d273438452f8dc020bad462a71, type: 3}
   indicatorConfiguration: {fileID: 11400000, guid: e7da8521095c34fa5b68bf1726b9f97c, type: 2}
-  type: 1
+  type: 0
   swingSFX:
     soundCategory: 0
     sound: 0

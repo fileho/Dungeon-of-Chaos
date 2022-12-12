@@ -13,11 +13,13 @@ MonoBehaviour:
   m_Name: Dp-Boss Demon-Stomp
   m_EditorClassIdentifier: 
   range: 8
-  damage: 2
-  staminaCost: 0
+  damage: 1.4
+  staminaCost: 50
+  manaCost: 20
   rangeWeight: 1
   damageWeight: 1
   staminaCostWeight: 1
+  manaCostWeight: 1
   cooldown: 1
   attackAnimationDuration: 0.5
   indicator: {fileID: 6574973472230569996, guid: a0623113f577f4b6392df8d8ef3d53ba, type: 3}
