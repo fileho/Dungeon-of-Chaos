@@ -13,6 +13,7 @@ public class EditorScripts
         SetIds(Editor.FindObjectsOfType<Checkpoint>());
         SetIds(Editor.FindObjectsOfType<MapFragment>());
         SetIds(Editor.FindObjectsOfType<Chest>());
+        SetIds(Editor.FindObjectsOfType<ResetBook>());
     }
 
     private static int GenerateNextId()

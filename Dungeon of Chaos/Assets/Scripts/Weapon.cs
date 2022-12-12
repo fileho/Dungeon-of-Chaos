@@ -15,6 +15,9 @@ public class Weapon : MonoBehaviour {
     [Tooltip("Local position of weaapon tip")]
     [SerializeField] private Vector3 weaponTipOffset = Vector3.zero;
 
+    private ISkillEffect skillEffect = null;
+    private float dmgBoost = 0;
+
     private float weaponAssetWidth = 0;
     public float WeaponAssetWidth {
         get {
@@ -60,6 +63,18 @@ public class Weapon : MonoBehaviour {
         impactSFX = sound;
     }
 
+    // Some skills can enchant weapons. Enchanted weapons then can apply effects (such as burn) on enemies
+    public void SetEffect(ISkillEffect effect)
+    {
+        skillEffect = effect;
+    }
+
+    // Enchanted weapons might have some bonus to damage
+    public void ChangeDamageBoost(float value)
+    {
+        dmgBoost += value;
+    }
+
     public float GetUprightAngle() {
         return upRightAngle;
     }
@@ -76,7 +91,9 @@ public class Weapon : MonoBehaviour {
         if (unit.gameObject.layer == enemyLayer && !hitUnits.Contains(unit)) {
             hitUnits.Add(unit);
             SoundManager.instance.PlaySound(impactSFX);
-            unit.TakeDamage(damage);
+            unit.TakeDamage(damage + dmgBoost);
+            if (skillEffect != null)
+                skillEffect.Use(gameObject.GetComponentInParent<Unit>(), new List<Unit>() { unit });
         }
     }
 

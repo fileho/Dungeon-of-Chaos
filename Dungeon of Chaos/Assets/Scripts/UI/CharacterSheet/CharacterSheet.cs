@@ -6,14 +6,7 @@ public class CharacterSheet : MonoBehaviour
 {
     [SerializeField] private GameObject child;
 
-    private SkillSlotDash skillSlotDash;
-    private SkillSlotSecondary skillSlotSecondary;
-    private ActivatedSkillSlots activatedSkillSlots;
-
-    private SkillButtonActive[] skillButtonsActive;
-    private SkillButtonDash[] skillButtonsDash;
-    private SkillButtonSecondary[] skillButtonsSecondary;
-    private SkillButtonPassive[] skillButtonsPassive;
+    private SkillsUI skillsUI;
 
 
     private GameController gameController;
@@ -34,30 +27,8 @@ public class CharacterSheet : MonoBehaviour
     {
         child.SetActive(true);
 
-        activatedSkillSlots = FindObjectOfType<ActivatedSkillSlots>();
-        activatedSkillSlots.Init();
-
-        skillButtonsActive = FindObjectsOfType<SkillButtonActive>();
-        foreach (SkillButtonActive skillBtn in skillButtonsActive)
-            skillBtn.Init();
-
-        skillButtonsDash = FindObjectsOfType<SkillButtonDash>();
-        foreach (SkillButtonDash skillBtn in skillButtonsDash)
-            skillBtn.Init();
-
-        skillSlotDash = FindObjectOfType<SkillSlotDash>();
-        skillSlotDash.Init();
-
-        skillButtonsSecondary = FindObjectsOfType<SkillButtonSecondary>();
-        foreach (SkillButtonSecondary skillBtn in skillButtonsSecondary)
-            skillBtn.Init();
-
-        skillButtonsPassive = FindObjectsOfType<SkillButtonPassive>();
-        foreach (SkillButtonPassive skillBtn in skillButtonsPassive)
-            skillBtn.Init();
-
-        skillSlotSecondary = FindObjectOfType<SkillSlotSecondary>();
-        skillSlotSecondary.Init();
+        skillsUI = FindObjectOfType<SkillsUI>();
+        skillsUI.UpdateSkillsUI();
     }
 
     public void Close()

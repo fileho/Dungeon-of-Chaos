@@ -71,6 +71,70 @@ public class SkillSystem : MonoBehaviour
         levelling = owner.stats.GetLevellingData();
     }
 
+    #region Reset Skills
+    public void ResetSkills()
+    {
+        ResetActiveSkills();
+        ResetDashSkills();
+        ResetSecondaryAttacks();
+        ResetPassiveSkills();
+
+        owner.stats.ConsumeReset();
+    }
+
+    private void ResetActiveSkills()
+    {
+        foreach (SkillInfoActive skill in activeSkills)
+        {
+            for (int i = 0; i < skill.GetLevel(); i++)
+                Character.instance.stats.GetLevellingData().skillPoints += skill.GetInvestedSkillPoints();
+            skill.ResetLevel();
+        }
+
+        for (int i = 0; i < activated.Count; i++)
+        {
+            Debug.Log("Reset");
+            activated[i] = -1;
+        }
+    }
+
+    private void ResetDashSkills()
+    {
+        foreach (SkillInfoDash skill in dashSkills)
+        {
+            for (int i = 0; i < skill.GetLevel(); i++)
+                Character.instance.stats.GetLevellingData().skillPoints += skill.GetInvestedSkillPoints();
+            skill.ResetLevel();
+        }
+
+        UpgradeDash(0);
+        activatedDash = 0;
+    }
+
+    private void ResetSecondaryAttacks()
+    {
+        foreach (SkillInfoSecondaryAttack skill in secondaryAttacks)
+        {
+            for (int i = 0; i < skill.GetLevel(); i++)
+                Character.instance.stats.GetLevellingData().skillPoints += skill.GetInvestedSkillPoints();
+            skill.ResetLevel();
+        }
+
+        activatedSecondary = -1;
+    }
+
+    private void ResetPassiveSkills()
+    {
+        foreach (SkillInfoPassive skill in passiveSkills)
+        {
+            for (int i = 0; i < skill.GetLevel(); i++)
+                Character.instance.stats.GetLevellingData().skillPoints += skill.GetInvestedSkillPoints();
+            skill.Unequip(Character.instance.stats);
+            skill.ResetLevel();
+        }
+    }
+    #endregion
+
     public void UpdateCooldowns()
     {
         foreach (int index in activated)

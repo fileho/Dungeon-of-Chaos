@@ -6,11 +6,13 @@ public class SavedStats
 {
     public PrimaryStats.SavedPrimaryStats savedPrimary;
     public Levelling.SavedLevelling savedLevelling;
+    public int resetBooks;
 
-    public SavedStats(PrimaryStats.SavedPrimaryStats savedPrimary, Levelling.SavedLevelling savedLevelling)
+    public SavedStats(PrimaryStats.SavedPrimaryStats savedPrimary, Levelling.SavedLevelling savedLevelling, int resetBooks)
     {
         this.savedPrimary = savedPrimary;
         this.savedLevelling = savedLevelling;
+        this.resetBooks = resetBooks;
     }
 }
 
@@ -58,6 +60,37 @@ public class Stats : ScriptableObject
     {
         return XP;
     }
+
+    public void ModifyCurrentXP(int value)
+    {
+        XP.ModifyCurrentXP(value);
+        float ratio = (float)XP.GetCurrentXP() / (float)XP.GetNextLevelXP();
+        bars.UpdateXpBar(ratio);
+    }
+
+    #region Skills Reset
+    private int resetAmount = 0;
+
+    public void ColectReset()
+    {
+        resetAmount++;
+    }
+
+    public void ConsumeReset()
+    {
+        resetAmount--;
+    }
+
+    public bool HasReset()
+    {
+        return resetAmount > 0;
+    }
+
+    public int GetResetAmount()
+    {
+        return resetAmount; 
+    }
+    #endregion
 
     #region Utils
     public float GetCooldownModifier()
@@ -279,8 +312,10 @@ public class Stats : ScriptableObject
         stamina.Reset();
 
         if (this.bars)
+        {
             this.bars.FillAllBars();
-
+            this.bars.UpdateXpBar((float)XP.GetCurrentXP() / XP.GetNextLevelXP());
+        }
         return this;
     }
 
@@ -297,7 +332,7 @@ public class Stats : ScriptableObject
 
     public void UpdateStatsUI()
     {
-        if (StatsOverview.instance == null)
+        if (StatsOverview.instance == null || SkillsUI.instance == null)
             return;
         XP.UpdateLevellingUI();
         StatsOverview.instance.SetStrength(primaryStats.strength);
@@ -393,12 +428,13 @@ public class Stats : ScriptableObject
 
     public SavedStats Save()
     {
-        return new SavedStats(primaryStats.Save(), XP.Save());
+        return new SavedStats(primaryStats.Save(), XP.Save(), resetAmount);
     }
 
     public void Load(SavedStats saved)
     {
         primaryStats.Load(saved.savedPrimary);
         XP.Load(saved.savedLevelling);
+        resetAmount = saved.resetBooks;
     }
 }

@@ -22,7 +22,7 @@ public class Levelling
         }
     }
 
-    private int currentXP = 100;
+    private int currentXP = 0;
     private int nextLevelXP;
     [Header("Levelling settings")]
     [Tooltip("Only for character")]
@@ -100,9 +100,10 @@ public class Levelling
         StatsOverview.instance.SetXP(currentXP);
         StatsOverview.instance.SetNextLevelXP(nextLevelXP);
         StatsOverview.instance.SetStatsPoints(statsPoints);
-        StatsOverview.instance.UpdateSkillPoints();
         StatsOverview.instance.ShowLevelUpButton(CanLevelUp());
         StatsOverview.instance.ShowStatsIncreaseButtons(HasStatsPoints());
+
+        SkillsUI.instance.UpdateSkillPoints();
     }
 
     private int GetStatsPointsReward()
@@ -137,7 +138,7 @@ public class Levelling
     public void ConsumeSkillPoints(int amount)
     {
         skillPoints -= amount;
-        StatsOverview.instance.UpdateSkillPoints();
+        SkillsUI.instance.UpdateSkillPoints();
     }
 
     public void Load(SavedLevelling saved)

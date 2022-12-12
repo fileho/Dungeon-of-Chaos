@@ -22,4 +22,9 @@ public class CharacterBars : IBars
     {
         InGameUIManager.instance.SetStaminaBar(value);
     }
+
+    public override void UpdateXpBar(float value)
+    {
+        InGameUIManager.instance.SetXpBar(value);
+    }
 }
