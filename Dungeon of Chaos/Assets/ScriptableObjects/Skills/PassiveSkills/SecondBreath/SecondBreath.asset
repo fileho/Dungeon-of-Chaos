@@ -16,7 +16,7 @@ MonoBehaviour:
     name: Second Breath
     description: The character resurrects with {0} health.
     icon: {fileID: 21300000, guid: d74ca35adb1a0924a8fb12b20e501cc7, type: 3}
-  vfx: {fileID: 0}
+  vfx: {fileID: 3440211394499801297, guid: 5cc95557806b5d9489dcab30b2d91afd, type: 3}
   duration: 1
   effects:
   - {fileID: 11400000, guid: 0d5988d8a6b9767479fc49bc6ca0b332, type: 2}
