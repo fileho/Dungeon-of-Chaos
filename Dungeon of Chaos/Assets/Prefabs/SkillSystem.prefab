@@ -58,11 +58,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 0697d7e5dbb0d8146a3c3bb147d42eb4, type: 2}
   passiveSkills:
   - {fileID: 11400000, guid: 27921fe9ac8249a49b57bffb3cacc4af, type: 2}
-  - {fileID: 11400000, guid: 34c44c30e59e0a848b351307a9f8520a, type: 2}
-  - {fileID: 11400000, guid: 70b49b23543b479468e8f0029a8c50fe, type: 2}
-  - {fileID: 11400000, guid: 9d1125d6024ecc548930b06398623726, type: 2}
   - {fileID: 11400000, guid: cbfb1160547bd614babab423a564c621, type: 2}
-  - {fileID: 11400000, guid: 186de799ab1a6aa459d94c4e1c1a5ce7, type: 2}
   - {fileID: 11400000, guid: 80a3ef90ffbf6a34ca9d26b9b014a9ab, type: 2}
   - {fileID: 11400000, guid: 4f35dca4ce0ae5542beb4cf6596a97b5, type: 2}
   - {fileID: 11400000, guid: 04b4140461f82784885cb55b89f9fc4b, type: 2}
@@ -74,5 +70,5 @@ MonoBehaviour:
   secondaryAttacks:
   - {fileID: 11400000, guid: 6a66b102a01a45049a369e6dc7507d03, type: 2}
   - {fileID: 11400000, guid: c787ed1be5afe1646986ab4da6d09ac2, type: 2}
-  - {fileID: 11400000, guid: c787ed1be5afe1646986ab4da6d09ac2, type: 2}
+  - {fileID: 11400000, guid: 97a3482befdbd0846aaa9b88d4b43c77, type: 2}
   activeSkillsSlots: 5
