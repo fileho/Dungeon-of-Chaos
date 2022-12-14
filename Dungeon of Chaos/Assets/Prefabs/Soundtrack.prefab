@@ -140,5 +140,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9a91878b52518f546ab70f92d30ef7ef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  music: []
-  bossMusic: []
+  music:
+  - {fileID: 8300000, guid: 16b5340d6db23a04d80b09154b68f3d7, type: 3}
+  - {fileID: 8300000, guid: 9d50381a41b0ee5439c03d1454f8da1b, type: 3}
+  - {fileID: 8300000, guid: 13dbd99f6ac9e7f40bf035d7ab24ea7b, type: 3}
+  bossMusic:
+  - {fileID: 8300000, guid: 7084122c0100cfc41bcf31235a02fa31, type: 3}
+  - {fileID: 8300000, guid: 8728204d73f78da40be9f0fb52f13847, type: 3}
+  - {fileID: 8300000, guid: a538cba8592be514abdf7c9203913450, type: 3}
