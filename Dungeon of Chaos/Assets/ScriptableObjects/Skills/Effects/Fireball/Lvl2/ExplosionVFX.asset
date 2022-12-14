@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: ExplosionVFX
   m_EditorClassIdentifier: 
   target: {fileID: 0}
-  range: 5
+  range: 7
   angle: 360
   vfx: {fileID: 3440211394499801297, guid: a39c2e02da9473f47872bbc71a74e50c, type: 3}
   sfx:
