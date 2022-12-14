@@ -9,16 +9,18 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 917d96df368b0af4795ff79d2540644b, type: 3}
-  m_Name: DashDamage3
+  m_Script: {fileID: 11500000, guid: e94f9c68a919a364f890aaf4ee247101, type: 3}
+  m_Name: SelfHealVFX
   m_EditorClassIdentifier: 
-  target: {fileID: 0}
+  target: {fileID: 11400000, guid: c562b796c0bf8db4b823a7b0d5e0a5db, type: 2}
   range: 0
-  damage: 0.55
-  skillEffectType: 1
-  dmgSFX:
+  angle: 360
+  vfx: {fileID: 4617805228910178686, guid: 95ee1b7c06c6b3f4fa860e76a7984594, type: 3}
+  sfx:
     soundCategory: 3
-    sound: 6
+    sound: 10
     volume: 1
     pitch: 1
     priority: 0
+  duration: 0.5
+  effects: []

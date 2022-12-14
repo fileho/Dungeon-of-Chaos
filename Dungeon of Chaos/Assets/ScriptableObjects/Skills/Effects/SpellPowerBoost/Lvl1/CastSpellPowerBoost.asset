@@ -18,7 +18,7 @@ MonoBehaviour:
   vfx: {fileID: 3440211394499801297, guid: 4f26aa18ace843d46835c34a16789dad, type: 3}
   sfx:
     soundCategory: 3
-    sound: 0
+    sound: 15
     volume: 1
     pitch: 1
     priority: 0

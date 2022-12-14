@@ -22,7 +22,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 0d5988d8a6b9767479fc49bc6ca0b332, type: 2}
   sfx:
     soundCategory: 3
-    sound: 3
+    sound: 13
     volume: 1
     pitch: 1
     priority: 0

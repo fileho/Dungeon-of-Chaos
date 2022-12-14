@@ -6,6 +6,7 @@ using UnityEngine;
 public class TemporalVisuals : ISkillEffect
 {
     [SerializeField] private GameObject vfx;
+    [SerializeField] private SoundSettings sfx;
     [SerializeField] private List<TemporalEffect> effects;
 
     public override string[] GetEffectsValues(Unit owner)
@@ -32,6 +33,7 @@ public class TemporalVisuals : ISkillEffect
         {
             var clone = Instantiate(vfx, t.transform);
             clone.GetComponent<TemporalVisualEffect>().Init(unit, effects, t);
+            SoundManager.instance.PlaySound(sfx);
         }
     }
 
