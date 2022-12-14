@@ -18,8 +18,8 @@ MonoBehaviour:
   damage: 0.55
   skillEffectType: 0
   dmgSFX:
-    soundCategory: 0
-    sound: 0
+    soundCategory: 3
+    sound: 22
     volume: 1
     pitch: 1
     priority: 0

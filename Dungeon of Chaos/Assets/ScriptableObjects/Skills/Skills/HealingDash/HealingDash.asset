@@ -20,6 +20,7 @@ MonoBehaviour:
   manaCost: 10
   staminaCost: 30
   effects:
+  - {fileID: 11400000, guid: ee3c1f9c72e0e3b498b38a5b864bbdcb, type: 2}
   - {fileID: 11400000, guid: 758cc373a270acd41863d4c36bf49968, type: 2}
   dash: {fileID: 11400000, guid: 3951998361b7c4444b0e6a93bb644728, type: 2}
   dashSpeed: 10

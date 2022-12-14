@@ -15,7 +15,6 @@ MonoBehaviour:
   name: Attacking Dash
   skills:
   - {fileID: 11400000, guid: 7da62e3c9fba41b4cb8a599d6000b027, type: 2}
-  - {fileID: 11400000, guid: 46a53ed5b9d082248a4353ba8e652d11, type: 2}
   - {fileID: 11400000, guid: 74a1936dd40136047bec476b00b64cc2, type: 2}
   requirements:
   - skillPointsCost: 1
@@ -28,4 +27,4 @@ MonoBehaviour:
       value: 0
     skillKey: 
   level: 0
-  maxLevel: 3
+  maxLevel: 2
