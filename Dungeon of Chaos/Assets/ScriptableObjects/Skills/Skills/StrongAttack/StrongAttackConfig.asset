@@ -14,10 +14,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   range: 3.5
   damage: 1.5
-  staminaCost: 30
+  staminaCost: 35
+  manaCost: 0
   rangeWeight: 1
   damageWeight: 1
   staminaCostWeight: 1
+  manaCostWeight: 1
   cooldown: 3
   attackAnimationDuration: 0.8
   indicator: {fileID: 0}
@@ -32,12 +34,6 @@ MonoBehaviour:
   impactSFX:
     soundCategory: 2
     sound: 1
-    volume: 1
-    pitch: 1
-    priority: 0
-  indicatorSFX:
-    soundCategory: 0
-    sound: 0
     volume: 1
     pitch: 1
     priority: 0
