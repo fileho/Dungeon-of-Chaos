@@ -4,7 +4,8 @@ using UnityEngine;
 using static UnityEngine.GraphicsBuffer;
 using static UnityEngine.Rendering.DebugUI;
 
-public class Weapon : MonoBehaviour {
+public class Weapon : MonoBehaviour
+{
 
     [Tooltip("Angle at which the weapon asset aligns with the Y axis")]
     [SerializeField] private float upRightAngle = 0f;
@@ -19,23 +20,27 @@ public class Weapon : MonoBehaviour {
     private float dmgBoost = 0;
 
     private float weaponAssetWidth = 0;
-    public float WeaponAssetWidth {
-        get {
-            return weaponAssetWidth != 0 ? weaponAssetWidth : Asset.GetComponent<SpriteRenderer>().bounds.size.x /2f;
+    public float WeaponAssetWidth
+    {
+        get
+        {
+            return weaponAssetWidth != 0 ? weaponAssetWidth : Asset.GetComponent<SpriteRenderer>().bounds.size.x / 2f;
         }
     }
 
 
     private Transform asset;
-    public Transform Asset {
-        get {
+    public Transform Asset
+    {
+        get
+        {
             return asset != null ? asset : (asset = transform.Find("Asset"));
         }
     }
 
 
     private TrailRenderer trail;
-    private new BoxCollider2D collider;
+    private new Collider2D collider;
     private List<Unit> hitUnits;
     private float damage = 0;
     private int enemyLayer;
@@ -43,9 +48,10 @@ public class Weapon : MonoBehaviour {
 
     private SoundSettings impactSFX;
 
-    void Start() {
+    void Start()
+    {
         trail = GetComponentInChildren<TrailRenderer>();
-        collider = GetComponentInChildren<BoxCollider2D>();
+        collider = GetComponentInChildren<Collider2D>();
         hitUnits = new List<Unit>();
         EnableDisableCollider(false);
         EnableDisableTrail(false);
@@ -54,12 +60,14 @@ public class Weapon : MonoBehaviour {
 
 
     // Damage is set by the attack as different attacks can have different damage for the same weapon.
-    public void SetDamage(float d) {
+    public void SetDamage(float d)
+    {
         damage = d;
     }
 
     // Impact sound is set by the attack as different attacks can have different impact sounds
-    public void SetImpactSound(SoundSettings sound) {
+    public void SetImpactSound(SoundSettings sound)
+    {
         impactSFX = sound;
     }
 
@@ -75,20 +83,25 @@ public class Weapon : MonoBehaviour {
         dmgBoost += value;
     }
 
-    public float GetUprightAngle() {
+    public float GetUprightAngle()
+    {
         return upRightAngle;
     }
 
-    public float GetArmAlignAngle() {
+    public float GetArmAlignAngle()
+    {
         return armAlignAngle;
     }
 
-    public Vector3 GetWeaponTipOffset() {
+    public Vector3 GetWeaponTipOffset()
+    {
         return weaponTipOffset;
     }
 
-    public void InflictDamage(Unit unit) {
-        if (unit.gameObject.layer == enemyLayer && !hitUnits.Contains(unit)) {
+    public void InflictDamage(Unit unit)
+    {
+        if (unit.gameObject.layer == enemyLayer && !hitUnits.Contains(unit))
+        {
             hitUnits.Add(unit);
             SoundManager.instance.PlaySound(impactSFX);
             unit.TakeDamage(damage + dmgBoost);
@@ -97,20 +110,24 @@ public class Weapon : MonoBehaviour {
         }
     }
 
-    public void EnableDisableCollider(bool state) {
+    public void EnableDisableCollider(bool state)
+    {
         collider.enabled = state;
     }
 
-    public void EnableDisableTrail(bool state) {
+    public void EnableDisableTrail(bool state)
+    {
         trail.gameObject.SetActive(state);
     }
 
-    public void ResetHitUnits() {
+    public void ResetHitUnits()
+    {
         hitUnits.Clear();
     }
 
 
-    public void RotateWeapon(Vector2 target) {
+    public void RotateWeapon(Vector2 target)
+    {
         Vector2 dir = (target - (Vector2)transform.position).normalized;
 
         if (transform.lossyScale.x > 0)
@@ -128,12 +145,14 @@ public class Weapon : MonoBehaviour {
 
 
     // Resets weapon to the default position
-    public void ResetWeapon() {
+    public void ResetWeapon()
+    {
         RotateWeapon(transform.position);
     }
 
 
-    public Vector3 GetForwardDirection() {
+    public Vector3 GetForwardDirection()
+    {
         float dir = transform.lossyScale.x > 0 ? 1 : -1;
 
         float a = transform.rotation.eulerAngles.z * dir;
@@ -145,7 +164,8 @@ public class Weapon : MonoBehaviour {
 
 
     // Assumes the current scale of the Enemy, useful for attack indicators
-    public Vector3 GetForwardDirectionRotated() {
+    public Vector3 GetForwardDirectionRotated()
+    {
         float dir = transform.lossyScale.x > 0 ? 1 : -1;
 
         var ret = GetForwardDirection();
@@ -154,7 +174,8 @@ public class Weapon : MonoBehaviour {
         return ret;
     }
 
-    public int GetEnemyLayer(int ownerLayer) {
+    public int GetEnemyLayer(int ownerLayer)
+    {
         return (ownerLayer == LayerMask.NameToLayer("Enemy") || ownerLayer == LayerMask.NameToLayer("EnemyAttack"))
             ? LayerMask.NameToLayer("Player")
             : LayerMask.NameToLayer("Enemy");

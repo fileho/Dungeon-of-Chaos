@@ -39,5 +39,6 @@ MonoBehaviour:
     priority: 0
   lift: 2
   fall: 0.8
+  impact: {fileID: 1477782971762948, guid: 8e2edb2a8a19e674f80d0fb19fe5c051, type: 3}
   scaleMultiplier: 1.5
   damageRadius: 1

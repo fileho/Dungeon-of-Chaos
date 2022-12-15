@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 82c44c60208284cf18924fc92ba23d62, type: 3}
+  m_Name: Projectile-Shaman
+  m_EditorClassIdentifier: 
+  speed: 20
+  delay: 0.5
+  offset: 0
+  destroyTime: 5
+  scale: {x: 1, y: 1}
+  mainPS: {fileID: 1923825553450198, guid: b3b1bbb7044543c4c9355bbe7b065911, type: 3}
+  impactPS: {fileID: 150592, guid: 2c82b2af38b82f442bd9a24539b8d33c, type: 3}
