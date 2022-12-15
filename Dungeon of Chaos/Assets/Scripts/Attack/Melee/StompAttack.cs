@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using static UnityEngine.Rendering.DebugUI.Table;
 
-public class StompAttack : MeleeAttack {
+public class StompAttack : MeleeAttack
+{
 
     // Weapon lift before stomping
     protected float lift;
@@ -24,12 +25,16 @@ public class StompAttack : MeleeAttack {
     //Damage radius major [Should be less than the default range of the attack ]
     protected float damageRadiusMajor;
 
+    protected GameObject impact;
 
-    protected override void ApplyConfigurations() {
+
+    protected override void ApplyConfigurations()
+    {
         base.ApplyConfigurations();
         StompAttackConfiguration _attackConfiguration = attackConfiguration as StompAttackConfiguration;
         fall = _attackConfiguration.fall;
         lift = _attackConfiguration.lift;
+        impact = _attackConfiguration.impact;
         scaleMultiplier = _attackConfiguration.scaleMultiplier;
         damageRadiusMajor = _attackConfiguration.damageRadiusMajor;
         damageMajor = _attackConfiguration.damageMajor;
@@ -37,12 +42,21 @@ public class StompAttack : MeleeAttack {
         damageMinor = damage;
     }
 
+    protected void EnableImpact(Vector3 pos)
+    {
+        GameObject impactPs = Instantiate(impact, pos, Quaternion.identity);
+        Destroy(impactPs, 5f);
+    }
 
-    private void CheckHits(Vector3 pos, float radius) {
+    private void CheckHits(Vector3 pos, float radius)
+    {
         Collider2D[] colliders = Physics2D.OverlapCircleAll(pos, radius);
-        if (colliders.Length > 0) {
-            for (int i = 0; i < colliders.Length; i++) {
-                if (colliders[i].GetComponent<Unit>()) {
+        if (colliders.Length > 0)
+        {
+            for (int i = 0; i < colliders.Length; i++)
+            {
+                if (colliders[i].GetComponent<Unit>())
+                {
                     Weapon.InflictDamage(colliders[i].GetComponent<Unit>());
                 }
             }
@@ -50,7 +64,8 @@ public class StompAttack : MeleeAttack {
     }
 
     // Ideal attack duration = 1
-    protected override IEnumerator StartAttackAnimation() {
+    protected override IEnumerator StartAttackAnimation()
+    {
 
         // Cache weapon rotation to restore it after the animation
         var initialWeaponRotation = Weapon.transform.rotation;
@@ -62,7 +77,8 @@ public class StompAttack : MeleeAttack {
         Vector3 endScale = Weapon.Asset.localScale * scaleMultiplier;
 
         IIndicator indicator = CreateIndicator();
-        if (indicator) {
+        if (indicator)
+        {
             indicator.Use();
             yield return new WaitForSeconds(indicator.Duration);
         }
@@ -84,7 +100,8 @@ public class StompAttack : MeleeAttack {
         SoundManager.instance.PlaySound(swingSFX);
 
         // Up
-        while (time <= 1) {
+        while (time <= 1)
+        {
             time += (Time.deltaTime / attackAnimationDurationOneWay);
             float currentPos = Tweens.EaseOutExponential(time);
             Weapon.transform.localPosition = Vector3.Lerp(startPos, endPosUp, currentPos);
@@ -94,13 +111,16 @@ public class StompAttack : MeleeAttack {
 
         // Down
         time = 0;
-        while (time <= 1) {
+        while (time <= 1)
+        {
             time += (Time.deltaTime / attackAnimationDurationOneWay);
             float currentPos = Tweens.EaseOutElastic(time);
             Weapon.transform.localPosition = Vector3.Lerp(endPosUp, endPosdown, currentPos);
             yield return null;
         }
 
+
+        EnableImpact(owner.transform.position);
         Weapon.SetDamage(damageMajor);
         CheckHits(owner.transform.position, damageRadiusMajor);
         Weapon.SetDamage(damageMinor);

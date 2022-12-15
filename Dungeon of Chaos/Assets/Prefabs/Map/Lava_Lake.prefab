@@ -120,7 +120,7 @@ MonoBehaviour:
   m_Color: {r: 0.9150943, g: 0.38399702, b: 0, a: 1}
   m_Intensity: 0
   m_LightVolumeOpacity: 0
-  m_ApplyToSortingLayers: 00000000
+  m_ApplyToSortingLayers: 00000000b1e4d313
   m_LightCookieSprite: {fileID: 0}
   m_UseNormalMap: 0
   m_LightOrder: 0
@@ -156,6 +156,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dps: 30
+  burnSFX:
+    soundCategory: 0
+    sound: 0
+    volume: 1
+    pitch: 1
+    priority: 0
 --- !u!114 &4313074281757797133
 MonoBehaviour:
   m_ObjectHideFlags: 0

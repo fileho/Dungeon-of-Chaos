@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Dp-Boss Demon-Stomp
   m_EditorClassIdentifier: 
   duration: 0.7
-  color: {r: 1, g: 0.15686275, b: 0, a: 1}
+  color: {r: 0.92941177, g: 1, b: 0, a: 1}
   scale: 4
-  secondarySpriteColor: {r: 1, g: 0.15686275, b: 0, a: 1}
+  secondarySpriteColor: {r: 0.92941177, g: 1, b: 0, a: 1}
   secondarySpriteScale: 8

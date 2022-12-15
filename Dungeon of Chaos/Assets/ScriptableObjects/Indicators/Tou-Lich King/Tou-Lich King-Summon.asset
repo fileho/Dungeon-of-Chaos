@@ -9,11 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9838b9745913b47a5b8f3ea98c04fd74, type: 3}
+  m_Script: {fileID: 11500000, guid: 2385b2117c6f14bbead5e01e7518b5f3, type: 3}
   m_Name: Tou-Lich King-Summon
   m_EditorClassIdentifier: 
-  duration: 0.6
-  color: {r: 1, g: 0, b: 0.3372549, a: 1}
-  scale: 1
-  initialScale: {x: 0, y: 0}
-  finalScale: {x: 1.25, y: 1.25}
+  duration: 5
+  range: 10
+  factor: 0.5

@@ -3,7 +3,7 @@ using UnityEngine;
 
 public abstract class IIndicator : MonoBehaviour
 {
-    public float Duration { get; private set; }
+    public float Duration { get; protected set; }
     protected SpriteRenderer sprite;
 
     public void Init(IndicatorConfiguration indicatorConfiguration)
@@ -13,24 +13,25 @@ public abstract class IIndicator : MonoBehaviour
     }
 
 
-    protected virtual void InitSprites() {
+    protected virtual void InitSprites()
+    {
         sprite = transform.Find("Primary").GetComponent<SpriteRenderer>();
     }
 
 
-    protected virtual void ApplyConfigurations(IndicatorConfiguration indicatorConfiguration) {
+    protected virtual void ApplyConfigurations(IndicatorConfiguration indicatorConfiguration)
+    {
         Duration = indicatorConfiguration.duration;
-        sprite.color = indicatorConfiguration.color;
-        sprite.transform.localScale *= indicatorConfiguration.scale; 
     }
 
-    public virtual void Use() {
+    public virtual void Use()
+    {
         //SoundManager.instance.PlaySound(indicatorSFX);
         StartCoroutine(ShowIndicator());
     }
 
     protected abstract IEnumerator ShowIndicator();
-    
+
 
     protected virtual void CleanUp()
     {

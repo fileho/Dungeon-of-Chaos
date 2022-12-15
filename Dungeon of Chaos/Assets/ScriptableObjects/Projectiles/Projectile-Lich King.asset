@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bc3dd44361355472483be6165dacfa4e, type: 3}
+  m_Name: Projectile-Lich King
+  m_EditorClassIdentifier: 
+  speed: 20
+  delay: 0.5
+  offset: 0
+  destroyTime: 5
+  scale: {x: 3, y: 3}
+  mainPS: {fileID: 109530, guid: 8a30595d8f5ffe244b5b70512f0dc5fc, type: 3}
+  impactPS: {fileID: 115286, guid: ec1c5863f61e8ff4a84dbdb8a282a7ac, type: 3}
+  maxSteerForce: 25000
+  lag: 0

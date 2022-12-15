@@ -14,6 +14,7 @@ public abstract class IProjectile : MonoBehaviour
     protected SpriteRenderer sprite;
     protected new Collider2D collider;
     protected Rigidbody2D rb;
+    protected GameObject mainPs;
 
     private void Awake()
     {
@@ -40,13 +41,12 @@ public abstract class IProjectile : MonoBehaviour
 
     protected virtual void ApplyConfigurations()
     {
-        sprite.sprite = projectileConfiguration.sprite;
         speed = projectileConfiguration.speed;
         delay = projectileConfiguration.delay;
         offset = projectileConfiguration.offset;
         destroyTime = projectileConfiguration.destroyTime;
-        sprite.size = projectileConfiguration.scale;
-        sprite.color = projectileConfiguration.color;
+        mainPs = Instantiate(projectileConfiguration.mainPS, transform);
+        transform.localScale = projectileConfiguration.scale;
     }
 
     public virtual void Init(IAttack att, ProjectileConfiguration pc)
@@ -62,9 +62,14 @@ public abstract class IProjectile : MonoBehaviour
         {
             attack.Weapon.InflictDamage(col.GetComponent<Unit>());
         }
-        Destroy(gameObject);
+        CleanUp();
     }
 
+    protected void EnableImpact()
+    {
+        GameObject impactPs = Instantiate(projectileConfiguration.impactPS, transform.position, Quaternion.identity);
+        Destroy(impactPs, 1f);
+    }
 
     public virtual void Launch(Vector2 direction)
     {
@@ -82,6 +87,7 @@ public abstract class IProjectile : MonoBehaviour
 
     protected virtual void CleanUp()
     {
+        EnableImpact();
         Destroy(gameObject);
     }
 }

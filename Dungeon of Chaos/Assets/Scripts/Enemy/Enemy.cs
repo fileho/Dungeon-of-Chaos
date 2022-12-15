@@ -51,17 +51,19 @@ public class Enemy : Unit
 
     private bool IsTargetInChaseRange()
     {
-        Vector2 forward = transform.lossyScale.x > 0 ? -transform.right : transform.right;
+        //Vector2 direction = transform.lossyScale.x > 0 ? -transform.right : transform.right;
+        Vector2 direction = GetTargetDirection();
+
         bool playerHit = false;
 
         if (Time.time - lastRayCastCheck > RAYCAST_TIME_INTERVAL)
         {
-            for (int i = 0; i < 60; i++)
+            for (int i = 0; i < 10; i++)
             {
-                Vector2 dir = Quaternion.AngleAxis((-90 + (3 * i)), Vector3.forward) * forward;
+                Vector2 dir = Quaternion.AngleAxis((-5 + (1 * i)), Vector3.forward) * direction;
                 RaycastHit2D hit = Physics2D.Linecast(transform.position, (Vector2)transform.position + (dir * stats.ChaseDistance()), ~(1 << LayerMask.NameToLayer("Enemy")));
 
-                //Debug.DrawLine(transform.position, (Vector2)transform.position + (dir * stats.ChaseDistance()), Color.red);
+                //Debug.DrawLine(transform.position, (Vector2)transform.position + (dir * stats.ChaseDistance()), Color.red, 0.1f);
 
                 if (hit.collider && hit.collider.CompareTag("Player"))
                 {
@@ -144,7 +146,7 @@ public class Enemy : Unit
         {
             state = State.Chase;
 
-            if (GetTargetDistance() > attackManager.GetMinimumAttackRange())
+            if (GetTargetDistance() >= attackManager.GetMinimumAttackRange())
             {
                 Move();
             }
