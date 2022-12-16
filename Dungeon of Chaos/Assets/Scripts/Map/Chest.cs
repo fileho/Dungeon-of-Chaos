@@ -6,38 +6,48 @@ using UnityEngine.Assertions;
 public class Chest : MonoBehaviour, IMapSavable
 {
     [SerializeField]
+    private Sprite openedSprite;
+    [SerializeField]
     private GameObject loot;
     [SerializeField]
     private int lootCount = 1;
-    [SerializeField] private float value;
+    [SerializeField]
+    private float value;
 
     [SerializeField]
     [ReadOnly]
     private int id;
 
     [Header("SFX")]
-    [SerializeField] private SoundSettings chestOpen;
+    [SerializeField]
+    private SoundSettings chestOpen;
 
     private SaveSystem saveSystem;
+    private SpriteRenderer spriteRenderer;
+    private bool isOpened;
 
     private void Start()
     {
         Assert.AreNotEqual(id, 0, "Unique id not set");
+        spriteRenderer = GetComponent<SpriteRenderer>();
         saveSystem = FindObjectOfType<SaveSystem>();
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        if (isOpened)
+            return;
         SoundManager.instance.PlaySound(chestOpen);
-        DestroyBox();
+        OpenBox();
     }
 
-    private void DestroyBox()
+    private void OpenBox()
     {
         DropLoot();
+        isOpened = true;
+        spriteRenderer.sprite = openedSprite;
         var ps = GetComponentInChildren<ParticleSystem>();
         ps.Play();
-        Invoke(nameof(CleanUp), ps.main.duration);
     }
 
     private void DropLoot()
@@ -52,9 +62,10 @@ public class Chest : MonoBehaviour, IMapSavable
         saveSystem.DungeonData.AddSavedUid(id);
     }
 
-    private void CleanUp()
+    private void DrawOpened()
     {
-        Destroy(gameObject);
+        isOpened = true;
+        spriteRenderer.sprite = openedSprite;
     }
 
     public void SetUniqueId(int uid)
@@ -69,7 +80,7 @@ public class Chest : MonoBehaviour, IMapSavable
 
     public void Load()
     {
-        CleanUp();
+        DrawOpened();
     }
 
     public Object GetAttachedComponent()

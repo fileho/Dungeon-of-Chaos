@@ -50,13 +50,19 @@ MonoBehaviour:
   m_SelfShadows: 0
   m_ApplyToSortingLayers: 00000000b1e4d313
   m_ShapePath:
-  - {x: -0.5, y: -0.5, z: 0}
-  - {x: 0.5, y: -0.5, z: 0}
-  - {x: 0.5, y: 0.5, z: 0}
-  - {x: -0.5, y: 0.5, z: 0}
-  m_ShapePathHash: 0
+  - {x: -0.49767876, y: -0.27779388, z: 0}
+  - {x: -0.06800842, y: -0.51992035, z: 0}
+  - {x: 0.27800846, y: -0.35635376, z: 0}
+  - {x: 0.3028345, y: 0.078704834, z: 0}
+  - {x: 0.24924088, y: 0.12569427, z: 0}
+  - {x: 0.18598461, y: 0.15538788, z: 0}
+  - {x: -0.28779602, y: 0.2715683, z: 0}
+  - {x: -0.3618679, y: 0.25471497, z: 0}
+  - {x: -0.438838, y: 0.20573425, z: 0}
+  - {x: -0.51758957, y: 0.1128006, z: 0}
+  m_ShapePathHash: -278522675
   m_Mesh: {fileID: 0}
-  m_InstanceId: 50920
+  m_InstanceId: 154774
 --- !u!1 &9001922996148652808
 GameObject:
   m_ObjectHideFlags: 0
@@ -103,7 +109,7 @@ ParticleSystem:
   cullingMode: 0
   ringBufferMode: 0
   ringBufferLoopRange: {x: 0, y: 1}
-  looping: 1
+  looping: 0
   prewarm: 0
   playOnAwake: 0
   useUnscaledTime: 0
@@ -4994,7 +5000,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: faf682b7aa9226e4f889fedcdc4fd55d, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 584f0a865069864458e47f49a0937a6a, type: 3}
   m_Color: {r: 0.5660378, g: 0.47695547, b: 0.3812745, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -5018,18 +5024,18 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: -0.10307312, y: -0.11009979}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
+    oldSize: {x: 1.3476562, y: 1.0820312}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 0.79385376, y: 0.7798004}
   m_EdgeRadius: 0
 --- !u!114 &6052213528753554343
 MonoBehaviour:
@@ -5043,6 +5049,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 947b7b1a901bf3e40bcb504ac9d1646b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  openedSprite: {fileID: 21300000, guid: 4bb7adda356043f46a03ca98814c6d0b, type: 3}
   loot: {fileID: 8244884464711860287, guid: 596bf0917306bf541ab1986b9de1ff38, type: 3}
   lootCount: 1
   value: 0
