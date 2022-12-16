@@ -21,7 +21,7 @@ public class Soundtrack : MonoBehaviour
     private void Awake()
     {
         var soundtracks = FindObjectsOfType<Soundtrack>();
-        if (soundtracks.Length > 0)
+        if (soundtracks.Length > 1)
         {
             Destroy(gameObject);
             return;
