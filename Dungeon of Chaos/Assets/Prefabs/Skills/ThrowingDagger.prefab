@@ -137,19 +137,19 @@ MonoBehaviour:
   delay: 0.5
   castSFX:
     soundCategory: 3
-    sound: 0
+    sound: 18
     volume: 1
     pitch: 1
     priority: 0
   impactSFX:
-    soundCategory: 3
-    sound: 2
+    soundCategory: 2
+    sound: 0
     volume: 1
     pitch: 1
     priority: 0
   flightSFX:
     soundCategory: 3
-    sound: 1
+    sound: 19
     volume: 1
     pitch: 1
     priority: 0

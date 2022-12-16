@@ -118,7 +118,8 @@ public class SoundCategories
         ThrowingDaggers,
         ThrowingDaggersFlying,
         ThrustAttack,
-        Whirlwind
+        Whirlwind,
+        DashImpact
     }
 
     public enum Ui

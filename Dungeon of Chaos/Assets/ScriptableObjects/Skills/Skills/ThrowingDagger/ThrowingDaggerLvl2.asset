@@ -16,8 +16,8 @@ MonoBehaviour:
     name: Throwing Dagger
     description: Throws {0} daggers which deal {1} damage each.
     icon: {fileID: 21300000, guid: 912f2333824ee3946814a450e92ab11a, type: 3}
-  cooldown: 5
+  cooldown: 7.5
   manaCost: 0
-  staminaCost: 45
+  staminaCost: 55
   effects:
   - {fileID: 11400000, guid: a7434f7886f521d4fac9a7a867746d8d, type: 2}

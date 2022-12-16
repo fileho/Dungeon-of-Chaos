@@ -16,5 +16,11 @@ MonoBehaviour:
   range: 0
   angle: 360
   vfx: {fileID: 0}
+  sfx:
+    soundCategory: 3
+    sound: 0
+    volume: 1
+    pitch: 1
+    priority: 0
   effects:
   - {fileID: 11400000, guid: 933d9522096ea4844813aff49ca6acf3, type: 2}
