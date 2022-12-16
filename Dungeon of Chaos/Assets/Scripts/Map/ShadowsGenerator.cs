@@ -49,6 +49,10 @@ public class ShadowsGenerator : MonoBehaviour
             // It is still in experimental phase
             FieldInfo shapePathField = typeof(ShadowCaster2D).GetField("m_ShapePath", accessFlagsPrivate);
             shapePathField.SetValue(shadowCaster2D, TrackEdges(f.Value));
+
+            FieldInfo applyToSortingLayers =
+                typeof(ShadowCaster2D).GetField("m_ApplyToSortingLayers", accessFlagsPrivate);
+            applyToSortingLayers.SetValue(shadowCaster2D, SetDefaultSortingLayers());
         }
 
         // Spawn shadows for rocks
@@ -63,6 +67,19 @@ public class ShadowsGenerator : MonoBehaviour
         EditorSceneManager.SaveScene(EditorSceneManager.GetActiveScene());
         EditorSceneManager.OpenScene(EditorSceneManager.GetActiveScene().path);
 #endif
+    }
+
+    static int[] SetDefaultSortingLayers()
+    {
+        int layerCount = SortingLayer.layers.Length;
+        int[] allLayers = new int[layerCount];
+
+        for (int layerIndex = 0; layerIndex < layerCount; layerIndex++)
+        {
+            allLayers[layerIndex] = SortingLayer.layers[layerIndex].id;
+        }
+
+        return allLayers;
     }
 
     private Tilemap GetTilemap(Grid grid, string mapName)
