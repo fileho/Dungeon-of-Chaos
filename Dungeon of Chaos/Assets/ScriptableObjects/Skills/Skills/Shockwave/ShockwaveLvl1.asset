@@ -17,7 +17,7 @@ MonoBehaviour:
     description: Creates a shockwave which deals {0} damage in range.
     icon: {fileID: 21300000, guid: 8f67516c88cd5334c8d7dab392942f70, type: 3}
   cooldown: 5
-  manaCost: 15
+  manaCost: 30
   staminaCost: 0
   effects:
   - {fileID: 11400000, guid: b6e0b0dae8cec784790728427268be20, type: 2}

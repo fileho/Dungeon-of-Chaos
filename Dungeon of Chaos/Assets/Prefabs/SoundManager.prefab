@@ -316,6 +316,9 @@ MonoBehaviour:
     - audioClip: {fileID: 8300000, guid: ce1c7037aa16ae4428da4e455cb388e0, type: 3}
       volume: 0.5
       pitch: 1
+    - audioClip: {fileID: 8300000, guid: 3739557f470a7274181ee8a5fee9013f, type: 3}
+      volume: 0.5
+      pitch: 1
   ui:
     poolSize: 30
     sounds:

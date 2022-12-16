@@ -18,7 +18,7 @@ MonoBehaviour:
       has increased damage by {1} and applies burn on the target which deals {2}
       damage.
     icon: {fileID: 21300000, guid: 4b5c3887b0bad8548a4414947f05a7ba, type: 3}
-  cooldown: 3
+  cooldown: 15
   manaCost: 20
   staminaCost: 20
   effects:

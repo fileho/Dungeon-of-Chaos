@@ -44,6 +44,7 @@ public class Stats : ScriptableObject
     private float spellPower;
 
     private float armor = 0;
+    private float maxArmor = 0;
 
     [SerializeField]
     private Levelling XP = new Levelling();
@@ -294,7 +295,18 @@ public class Stats : ScriptableObject
     {
         armor += value;
         armor = Mathf.Max(armor, 0);
-        // TODO Display/Hide/Update UI
+
+        if (armor == 0)
+        {
+            maxArmor = primaryStats.GetArmor();
+            bars.UpdateArmorBar(0);
+            return;
+        }
+
+        if (armor > maxArmor)
+            maxArmor = armor;
+
+        bars.UpdateArmorBar(armor / maxArmor);     
     }
     #endregion
 
@@ -315,6 +327,10 @@ public class Stats : ScriptableObject
         {
             this.bars.FillAllBars();
             this.bars.UpdateXpBar((float)XP.GetCurrentXP() / XP.GetNextLevelXP());
+            if (maxArmor == 0)
+                this.bars.UpdateArmorBar(0f);
+            else
+                this.bars.UpdateArmorBar(1f);
         }
         return this;
     }
@@ -328,6 +344,7 @@ public class Stats : ScriptableObject
         mana.maxValue = primaryStats.GetMaxMana(XP.GetLevel());
         staminaRegen = primaryStats.GetStaminaRegen();
         armor = primaryStats.GetArmor();
+        maxArmor = armor;
     }
 
     public void UpdateStatsUI()
@@ -436,5 +453,6 @@ public class Stats : ScriptableObject
         primaryStats.Load(saved.savedPrimary);
         XP.Load(saved.savedLevelling);
         resetAmount = saved.resetBooks;
+        ResetStats();
     }
 }

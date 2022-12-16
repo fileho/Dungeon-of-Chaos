@@ -16,10 +16,11 @@ MonoBehaviour:
     name: Healing Dash
     description: The characters heals himself for {0} health whenever he dashes.
     icon: {fileID: 21300000, guid: 18682c8eb8f03f044a64c5e8d52b720d, type: 3}
-  cooldown: 2
+  cooldown: 3
   manaCost: 10
   staminaCost: 30
   effects:
+  - {fileID: 11400000, guid: ee3c1f9c72e0e3b498b38a5b864bbdcb, type: 2}
   - {fileID: 11400000, guid: 758cc373a270acd41863d4c36bf49968, type: 2}
   dash: {fileID: 11400000, guid: 3951998361b7c4444b0e6a93bb644728, type: 2}
   dashSpeed: 10

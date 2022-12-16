@@ -14,10 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   target: {fileID: 11400000, guid: c562b796c0bf8db4b823a7b0d5e0a5db, type: 2}
   range: 10
+  angle: 360
   vfx: {fileID: 3440211394499801297, guid: 107b93b1367157848aacc4dfa551850f, type: 3}
   sfx:
-    soundCategory: 0
-    sound: 0
+    soundCategory: 3
+    sound: 14
     volume: 1
     pitch: 1
     priority: 0
