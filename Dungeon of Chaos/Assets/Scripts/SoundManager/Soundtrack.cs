@@ -32,6 +32,21 @@ public class Soundtrack : MonoBehaviour
     private void Start()
     {
         audioSource = GetComponent<AudioSource>();
+        UIEvents.SoundTrackVolumeChanged += SetVolume;
+        UIEvents.MasterVolumeChanged += SetVolume;
+        SetVolume();
+    }
+
+    private void OnDestroy()
+    {
+        UIEvents.SoundTrackVolumeChanged -= SetVolume;
+        UIEvents.MasterVolumeChanged -= SetVolume;
+    }
+
+    private void SetVolume(float _ = 0)
+    {
+        volume = PlayerPrefsManager.MasterVolume / 100 * PlayerPrefsManager.SoundTrackVolume / 100;
+        audioSource.volume = volume;
     }
 
     private void Update()
