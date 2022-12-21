@@ -6,7 +6,9 @@ using UnityEngine.Assertions;
 public class MapFragment : MonoBehaviour, IMapSavable
 {
     [SerializeField]
+#if UNITY_EDITOR
     [ReadOnly]
+#endif
     private int id;
 
     private new GameObject light;
@@ -15,7 +17,8 @@ public class MapFragment : MonoBehaviour, IMapSavable
     [SerializeField]
     private float range = 2.5f;
 
-    [SerializeField] private SoundSettings pickupSFX;
+    [SerializeField]
+    private SoundSettings pickupSFX;
 
     private void Awake()
     {

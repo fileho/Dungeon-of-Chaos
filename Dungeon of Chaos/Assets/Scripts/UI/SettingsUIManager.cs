@@ -19,6 +19,7 @@ public class SettingsUIManager : MonoBehaviour
         soundTrackVolume.value = PlayerPrefsManager.SoundTrackVolume;
         sfxVolume.value = PlayerPrefsManager.SFXVolume;
         brightness.value = PlayerPrefsManager.Brightness;
+
     }
 
     private void OnEnable()

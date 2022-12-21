@@ -15,7 +15,9 @@ public class Chest : MonoBehaviour, IMapSavable
     private float value;
 
     [SerializeField]
+#if UNITY_EDITOR
     [ReadOnly]
+#endif
     private int id;
 
     [Header("SFX")]

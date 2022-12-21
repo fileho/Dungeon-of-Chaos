@@ -3,9 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics.Contracts;
 using UnityEngine;
-#if UNITY_EDITOR
 using UnityEngine.Assertions;
-#endif
 
 [System.Serializable]
 public class SoundSettings

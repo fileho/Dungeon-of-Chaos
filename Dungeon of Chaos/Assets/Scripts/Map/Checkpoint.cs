@@ -16,7 +16,9 @@ public class Checkpoint : MonoBehaviour, IMapSavable
     private SoundData sfx = null;
 
     [SerializeField]
+#if UNITY_EDITOR
     [ReadOnly]
+#endif
     private int id;
 
     private void Start()
