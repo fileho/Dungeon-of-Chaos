@@ -21,7 +21,7 @@ MonoBehaviour:
   staminaCostWeight: 1
   manaCostWeight: 1
   cooldown: 1
-  attackAnimationDuration: 0.5
+  attackAnimationDuration: 0.6
   indicator: {fileID: 6574973472230569996, guid: a0623113f577f4b6392df8d8ef3d53ba, type: 3}
   indicatorConfiguration: {fileID: 11400000, guid: 93dfcd500e80a4ae8bfaf6440605dacb, type: 2}
   type: 1

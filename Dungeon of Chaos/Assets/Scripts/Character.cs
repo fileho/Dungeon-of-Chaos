@@ -68,7 +68,7 @@ public class Character : Unit
 
     public override Vector2 GetTargetDirection()
     {
-        return (GetTargetPosition() - (Vector2) transform.position);
+        return (GetTargetPosition() - (Vector2)transform.position);
     }
 
     public void BlockInput()
@@ -100,6 +100,18 @@ public class Character : Unit
         if (Input.GetKeyDown(KeyCode.E))
         {
             SkillSystem.UseSkill(1);
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha1))
+        {
+            SkillSystem.UseSkill(2);
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha2))
+        {
+            SkillSystem.UseSkill(3);
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha3))
+        {
+            SkillSystem.UseSkill(4);
         }
         if (Input.GetKeyDown(KeyCode.Space))
         {
