@@ -26,6 +26,7 @@ public class EnemyMovement : IMovement
     [Header("Layers")]
     private Collider2D[] evadeEnemyHits = new Collider2D[maxEvadeTargets];
     private RaycastHit2D[] steerWallHits = new RaycastHit2D[1];
+    private Rigidbody2D targetRB;
 
     public Collider2D collider { get; private set; }
 
@@ -33,7 +34,7 @@ public class EnemyMovement : IMovement
     {
         agent = transform.GetComponent<AIAgent>();
         rb = transform.GetComponent<Rigidbody2D>();
-
+        targetRB = Character.instance.GetComponent<Rigidbody2D>();
         this.stats = stats;
         collider = transform.GetComponent<Collider2D>();
         if (agent != null)
@@ -45,17 +46,9 @@ public class EnemyMovement : IMovement
         return this;
     }
 
-    private float updatePathInterval = 1f;
-    private float lastPathUpdateTime = 0f;
-
     public override void Move()
     {
-        Rigidbody2D targetRB = Character.instance.GetComponent<Rigidbody2D>();
-        if (Time.time - lastPathUpdateTime > updatePathInterval)
-        {
-            agent.UpdatePath(targetRB.transform);
-            lastPathUpdateTime = Time.time;
-        }
+        agent.UpdatePath(targetRB.transform);
 
         Vector2 separation = Vector2.zero;
         int separationHitsCount = Physics2D.OverlapCircleNonAlloc(rb.position, separationDetectionRadius, evadeEnemyHits, obstacleLayer);
