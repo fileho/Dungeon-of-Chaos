@@ -34,21 +34,14 @@ public class AIAgent : MonoBehaviour
         if (!p.error)
         {
             path = p;
-            currentWaypoint = 0;
+            currentWaypoint = 1;
         }
     }
 
     public void UpdateMovement(Vector2 extraForce) // call this in fixed update
     {
-        if (path == null)
+        if (path == null || currentWaypoint >= path.vectorPath.Count)
             return;
-
-        if (currentWaypoint >= path.vectorPath.Count)
-        {
-            //reachedEndOfPath = true;
-            return;
-        }
-        //reachedEndOfPath = false;
 
         Vector2 direction = ((Vector2)path.vectorPath[currentWaypoint] - rb.position).normalized;
         Vector2 force = direction * speed * 1000f * Time.fixedDeltaTime;
