@@ -51,7 +51,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   upRightAngle: -60
   armAlignAngle: 72
-  weaponTipOffset: {x: -2.48, y: 5.4, z: 0}
+  weaponTipOffset: {x: -3, y: 7.31, z: 0}
 --- !u!212 &4206247659596657827
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -993,7 +993,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6175988435252244576}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -2.48, y: 5.4, z: 0}
+  m_LocalPosition: {x: -3, y: 7.31, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 5574832814731392626}
