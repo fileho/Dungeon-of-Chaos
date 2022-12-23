@@ -44,7 +44,7 @@ public class AIAgent : MonoBehaviour
             return;
 
         Vector2 direction = ((Vector2)path.vectorPath[currentWaypoint] - rb.position).normalized;
-        Vector2 force = direction * speed * 1000f * Time.fixedDeltaTime;
+        Vector2 force = direction * speed * rb.mass * 1000f * Time.fixedDeltaTime;
 
         rb.AddForce(force + extraForce);
 

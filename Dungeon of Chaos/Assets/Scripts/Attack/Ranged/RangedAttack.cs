@@ -34,7 +34,7 @@ public class RangedAttack : IAttack
         IIndicator indicator = CreateIndicator(transform);
         if (indicator)
         {
-            indicator.transform.localPosition = Weapon.GetWeaponTipOffset();
+            indicator.transform.localPosition = Weapon.GetTrailLocalPosition();
             indicator.Use();
             yield return new WaitForSeconds(indicator.Duration);
         }
@@ -59,6 +59,7 @@ public class RangedAttack : IAttack
             yield return null;
         }
 
+        targetDirection = (GetTargetPosition() - (Vector2)Weapon.GetTrailPosition()).normalized;
         SpawnProjectile(projectile, projectileConfiguration, targetDirection);
 
         // Backward
@@ -86,7 +87,7 @@ public class RangedAttack : IAttack
     protected virtual void SpawnProjectile(GameObject projectile, ProjectileConfiguration projectileConfiguration, Vector2 direction)
     {
         GameObject _projectile = Instantiate(projectile, transform);
-        _projectile.transform.localPosition = Weapon.GetWeaponTipOffset();
+        _projectile.transform.localPosition = Weapon.GetTrailLocalPosition();
         _projectile.transform.parent = null;
         IProjectile iProjectile = _projectile.GetComponent<IProjectile>();
         iProjectile.Init(this, projectileConfiguration);
