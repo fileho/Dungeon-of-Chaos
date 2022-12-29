@@ -751,6 +751,7 @@ GameObject:
   - component: {fileID: 3949141268348850627}
   - component: {fileID: 8360392854542617716}
   - component: {fileID: 7639428768450621260}
+  - component: {fileID: 3687928393643681671}
   m_Layer: 5
   m_Name: SimpleTooltip
   m_TagString: Untagged
@@ -892,6 +893,18 @@ MonoBehaviour:
   wrapLimit: 55
   headerText: {fileID: 2059087129616664014}
   contentText: {fileID: 894047749434672532}
+--- !u!225 &3687928393643681671
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2010671085845429962}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 0
+  m_BlocksRaycasts: 0
+  m_IgnoreParentGroups: 0
 --- !u!1 &3006580736010785008
 GameObject:
   m_ObjectHideFlags: 0
@@ -1471,11 +1484,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8f26d6b06834f6b48a9342dcca42b3be, type: 3}
---- !u!224 &8250174250819365317 stripped
-RectTransform:
-  m_CorrespondingSourceObject: {fileID: 8878433814290939684, guid: 8f26d6b06834f6b48a9342dcca42b3be, type: 3}
-  m_PrefabInstance: {fileID: 668794743291451105}
-  m_PrefabAsset: {fileID: 0}
 --- !u!114 &1392651038969295895 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 1881301758192313078, guid: 8f26d6b06834f6b48a9342dcca42b3be, type: 3}
@@ -1487,6 +1495,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ec8b426a3c2a9424097c3aa70fceb1f9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!224 &8250174250819365317 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 8878433814290939684, guid: 8f26d6b06834f6b48a9342dcca42b3be, type: 3}
+  m_PrefabInstance: {fileID: 668794743291451105}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &4432067026052485849
 PrefabInstance:
   m_ObjectHideFlags: 0
