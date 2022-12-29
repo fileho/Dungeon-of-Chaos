@@ -26,6 +26,9 @@ public class Chest : MonoBehaviour, IMapSavable
 
     private SaveSystem saveSystem;
     private SpriteRenderer spriteRenderer;
+    private GameObject shadowClosed;
+    private GameObject shadowOpened;
+
     private bool isOpened;
 
     private void Start()
@@ -33,6 +36,9 @@ public class Chest : MonoBehaviour, IMapSavable
         Assert.AreNotEqual(id, 0, "Unique id not set");
         spriteRenderer = GetComponent<SpriteRenderer>();
         saveSystem = FindObjectOfType<SaveSystem>();
+        shadowClosed = transform.Find("ShadowClosed").gameObject;
+        shadowOpened = transform.Find("ShadowOpened").gameObject;
+        shadowOpened.SetActive(false);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -46,8 +52,7 @@ public class Chest : MonoBehaviour, IMapSavable
     private void OpenBox()
     {
         DropLoot();
-        isOpened = true;
-        spriteRenderer.sprite = openedSprite;
+        DrawOpened();
         var ps = GetComponentInChildren<ParticleSystem>();
         ps.Play();
     }
@@ -68,6 +73,8 @@ public class Chest : MonoBehaviour, IMapSavable
     {
         isOpened = true;
         spriteRenderer.sprite = openedSprite;
+        shadowClosed.SetActive(false);
+        shadowOpened.SetActive(true);
     }
 
     public void SetUniqueId(int uid)
