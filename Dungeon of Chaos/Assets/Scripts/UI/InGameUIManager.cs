@@ -38,6 +38,9 @@ public class InGameUIManager : MonoBehaviour
     private GameObject settings;
     private SkillSystem skillSystem;
 
+    // Delay after which it is possible to open the settings UI so it cannot be opened accidentally
+    private float openUIstartDelay = 0.25f;
+
     private void Awake()
     {
         instance = this;
@@ -51,6 +54,12 @@ public class InGameUIManager : MonoBehaviour
     private void Update()
     {
         UpdateSkills();
+
+        if (openUIstartDelay > 0)
+        {
+            openUIstartDelay -= Time.deltaTime;
+            return;
+        }
 
         if (Input.GetKeyDown(KeyCode.Escape))
             ToggleSettings();
