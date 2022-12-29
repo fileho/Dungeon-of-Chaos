@@ -33,7 +33,7 @@ public class MapFragment : MonoBehaviour, IMapSavable
     {
         SoundManager.instance.PlaySound(pickupSFX);
         saveSystem.DungeonData.AddSavedUid(id);
-        FindObjectOfType<TooltipSystem>().ShowMessage("Map Revealed", 2f);
+        TooltipSystem.instance.ShowMessage("Map Revealed", 2f);
         Load();
     }
 

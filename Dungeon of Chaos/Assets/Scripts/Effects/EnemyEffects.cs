@@ -24,12 +24,16 @@ public class EnemyEffects : Ieffects
 
     public override void TakeDamage()
     {
-        monoBehaviour.StartCoroutine(FlashRedEffect());
+        if (transform.GetComponent<Enemy>().stats.IsDead())
+        {
+            monoBehaviour.StartCoroutine(Kill());
+            return;
+        }
 
+        monoBehaviour.StartCoroutine(FlashRedEffect());
         Vector2 dir = (transform.position - Character.instance.transform.position).normalized;
         rb.AddForce(dir * 500);
         Vector2 n = new Vector2(dir.y, -dir.x).normalized;
-
         monoBehaviour.StartCoroutine(Wiggle(n));
     }
 
@@ -59,6 +63,27 @@ public class EnemyEffects : Ieffects
             float sign = (i & 0x1) * 2 - 1;
             rb.AddForce(sign * 200 * dir);
             yield return new WaitForSeconds(duration);
+        }
+    }
+
+    private IEnumerator Kill()
+    {
+        yield return new WaitForSeconds(0.5f);
+        const float duration = 1f;
+        float time = 0;
+        // Change all sprites including the weapon
+        var sprites = transform.GetComponentsInChildren<SpriteRenderer>();
+        while (time < duration)
+        {
+            time += Time.deltaTime;
+            float t = time / duration;
+            foreach (var s in sprites)
+            {
+                // Could be destroyed during the animation
+                if (s != null)
+                    s.color = new Color(1, 1, 1, 1 - t);
+            }
+            yield return null;
         }
     }
 }
