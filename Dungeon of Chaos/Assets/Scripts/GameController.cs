@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,6 +9,14 @@ public class GameController : MonoBehaviour
     private SaveSystem saveSystem;
 
     private bool loaded = false;
+
+    private Soundtrack soundtrack;
+
+    private void Start()
+    {
+        soundtrack = FindObjectOfType<Soundtrack>();
+        soundtrack.StopBossMusic();
+    }
 
     private void LateUpdate()
     {
@@ -71,6 +80,9 @@ public class GameController : MonoBehaviour
     {
         foreach (var lavaPit in FindObjectsOfType<LavaPit>())
             lavaPit.StartLights();
+
+        int level = Math.Max(0, SceneManager.GetActiveScene().buildIndex - 2);
+        FindObjectOfType<Soundtrack>().PlayBossMusic(level);
     }
 
     private void ReloadScene()

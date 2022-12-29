@@ -60,15 +60,18 @@ public class Soundtrack : MonoBehaviour
         NextSong();
     }
 
-    public void PlayBossMusic()
+    public void PlayBossMusic(int level)
     {
         boss = true;
-        song = 0;
-        StartCoroutine(Transition(bossMusic[0]));
+        song = level;
+        StartCoroutine(Transition(bossMusic[song]));
     }
 
     public void StopBossMusic()
     {
+        if (!boss)
+            return;
+
         boss = false;
         song = 0;
         StartCoroutine(Transition(music[0]));
@@ -76,15 +79,14 @@ public class Soundtrack : MonoBehaviour
 
     private void NextSong()
     {
-        song++;
         if (!boss)
         {
+            song++;
             song %= music.Count;
             StartCoroutine(Transition(music[song]));
         }
         else
         {
-            song %= bossMusic.Count;
             StartCoroutine(Transition(bossMusic[song]));
         }
     }
