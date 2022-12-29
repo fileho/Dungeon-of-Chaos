@@ -12,17 +12,26 @@ public class TooltipSystem : MonoBehaviour
     {
         instance = this;
     }
-    
-    public void Show(string header, string subheader, SkillDescription current, SkillDescription next = new SkillDescription())
+
+    public void Show(string header, string subheader, SkillDescription current,
+                     SkillDescription next = new SkillDescription())
     {
         skillTooltip.gameObject.SetActive(true);
-        skillTooltip.SetText(header, subheader, current, next);        
+        skillTooltip.SetText(header, subheader, current, next);
     }
 
     public void Show(string header, string content)
     {
         simpleTooltip.gameObject.SetActive(true);
         simpleTooltip.SetText(header, content);
+    }
+
+    public void ShowMessage(string text, float duration)
+    {
+        simpleTooltip.gameObject.SetActive(true);
+        simpleTooltip.SetText(text, "", false);
+        simpleTooltip.SetPosition(new Vector2(0.5f, 0.8f));
+        StartCoroutine(TweenSimpleTooltip(duration / 4));
     }
 
     public void DisplayMessage(string message)
@@ -39,5 +48,31 @@ public class TooltipSystem : MonoBehaviour
     public void HideSimpleTooltip()
     {
         simpleTooltip.gameObject.SetActive(false);
+    }
+
+    private IEnumerator TweenSimpleTooltip(float duration)
+    {
+        float time = 0;
+        while (time < duration)
+        {
+            time += Time.deltaTime;
+            float t = time / duration;
+
+            simpleTooltip.SetAlpha(t);
+            yield return null;
+        }
+        yield return new WaitForSeconds(duration * 2);
+
+        time = 0;
+        while (time < duration)
+        {
+            time += Time.deltaTime;
+            float t = time / duration;
+
+            simpleTooltip.SetAlpha(1 - t);
+            yield return null;
+        }
+        simpleTooltip.SetAlpha(1);
+        HideSimpleTooltip();
     }
 }
