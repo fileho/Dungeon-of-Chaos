@@ -3,8 +3,10 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "SO/Bars/CharacterBars")]
 public class CharacterBars : IBars
 {
+    private HealthIndicator healthIndicator;
     public override IBars Init(Transform transform)
     {
+        healthIndicator = FindObjectOfType<HealthIndicator>();
         return this;
     }
 
@@ -15,6 +17,9 @@ public class CharacterBars : IBars
 
     public override void UpdateHpBar(float value)
     {
+        // Damage effects
+        if (healthIndicator != null)
+            healthIndicator.Change(Mathf.Clamp01(1 - value * 2));
         InGameUIManager.instance.SetHealthBar(value);
     }
 
