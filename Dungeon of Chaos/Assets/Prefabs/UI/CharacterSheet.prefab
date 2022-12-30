@@ -25238,8 +25238,8 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
   idle: {r: 1, g: 1, b: 1, a: 1}
-  hover: {r: 0.5, g: 0.5, b: 0.5, a: 1}
-  selected: {r: 0.2924528, g: 0.2924528, b: 0.2924528, a: 1}
+  hover: {r: 0.83137256, g: 0.83137256, b: 0.83137256, a: 1}
+  selected: {r: 0.6039216, g: 0.6039216, b: 0.6039216, a: 1}
   buttonHover:
     soundCategory: 4
     sound: 1
@@ -25357,8 +25357,8 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
   idle: {r: 1, g: 1, b: 1, a: 1}
-  hover: {r: 0.5, g: 0.5, b: 0.5, a: 1}
-  selected: {r: 0.2924528, g: 0.2924528, b: 0.2924528, a: 1}
+  hover: {r: 0.83137256, g: 0.83137256, b: 0.83137256, a: 1}
+  selected: {r: 0.6039216, g: 0.6039216, b: 0.6039216, a: 1}
   buttonHover:
     soundCategory: 4
     sound: 1
@@ -25476,8 +25476,8 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
   idle: {r: 1, g: 1, b: 1, a: 1}
-  hover: {r: 0.5, g: 0.5, b: 0.5, a: 1}
-  selected: {r: 0.2924528, g: 0.2924528, b: 0.2924528, a: 1}
+  hover: {r: 0.83137256, g: 0.83137256, b: 0.83137256, a: 1}
+  selected: {r: 0.6039216, g: 0.6039216, b: 0.6039216, a: 1}
   buttonHover:
     soundCategory: 4
     sound: 1
@@ -25595,8 +25595,8 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
   idle: {r: 1, g: 1, b: 1, a: 1}
-  hover: {r: 0.5, g: 0.5, b: 0.5, a: 1}
-  selected: {r: 0.2924528, g: 0.2924528, b: 0.2924528, a: 1}
+  hover: {r: 0.83137256, g: 0.83137256, b: 0.83137256, a: 1}
+  selected: {r: 0.6039216, g: 0.6039216, b: 0.6039216, a: 1}
   buttonHover:
     soundCategory: 4
     sound: 1
@@ -25714,8 +25714,8 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
   idle: {r: 1, g: 1, b: 1, a: 1}
-  hover: {r: 0.5, g: 0.5, b: 0.5, a: 1}
-  selected: {r: 0.2924528, g: 0.2924528, b: 0.2924528, a: 1}
+  hover: {r: 0.8301887, g: 0.8301887, b: 0.8301887, a: 1}
+  selected: {r: 0.6037736, g: 0.6037736, b: 0.6037736, a: 1}
   buttonHover:
     soundCategory: 4
     sound: 1
@@ -25833,8 +25833,8 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
   idle: {r: 1, g: 1, b: 1, a: 1}
-  hover: {r: 0.5, g: 0.5, b: 0.5, a: 1}
-  selected: {r: 0.2924528, g: 0.2924528, b: 0.2924528, a: 1}
+  hover: {r: 0.83137256, g: 0.83137256, b: 0.83137256, a: 1}
+  selected: {r: 0.6039216, g: 0.6039216, b: 0.6039216, a: 1}
   buttonHover:
     soundCategory: 4
     sound: 1
