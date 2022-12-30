@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine.UI;
 using TMPro;
 using UnityEngine;
@@ -90,6 +88,7 @@ public class SkillsUI : MonoBehaviour
     {
         skillPoints.text = stats.GetLevellingData().skillPoints.ToString();
         skillTabSkillPoints.text = stats.GetLevellingData().skillPoints.ToString();
+        UpdateSkillButtons();
     }
 
     private void UpdateResetPoints()
