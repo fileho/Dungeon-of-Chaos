@@ -458,6 +458,8 @@ public class SkillSystem : MonoBehaviour
 
     public bool IsAttacking()
     {
+        if (!IsValidSecondary(activatedSecondary))
+            return false;
         return secondaryAttacks[activatedSecondary].GetCurrentSkill().IsAttacking();
     }
 

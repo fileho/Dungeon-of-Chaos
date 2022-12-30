@@ -369,6 +369,7 @@ GameObject:
   m_Component:
   - component: {fileID: 719547176106950801}
   - component: {fileID: 3971527775224859596}
+  - component: {fileID: 6849258104729552462}
   m_Layer: 5
   m_Name: Tier15Skills
   m_TagString: Untagged
@@ -395,8 +396,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 950, y: -386.35}
-  m_SizeDelta: {x: 100, y: 772.7}
+  m_AnchoredPosition: {x: 1137.5, y: -386.35}
+  m_SizeDelta: {x: 175, y: 772.7}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &3971527775224859596
 MonoBehaviour:
@@ -424,6 +425,14 @@ MonoBehaviour:
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
   m_ReverseArrangement: 0
+--- !u!222 &6849258104729552462
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 523198692012311938}
+  m_CullTransparentMesh: 1
 --- !u!1 &554418466930350870
 GameObject:
   m_ObjectHideFlags: 0
@@ -1467,6 +1476,8 @@ GameObject:
   m_Component:
   - component: {fileID: 5908075926179330194}
   - component: {fileID: 5467981682234357978}
+  - component: {fileID: 4675511038896550626}
+  - component: {fileID: 1737013950693951235}
   m_Layer: 5
   m_Name: Tier0Skills
   m_TagString: Untagged
@@ -1492,8 +1503,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 50, y: -386.35}
-  m_SizeDelta: {x: 100, y: 772.7}
+  m_AnchoredPosition: {x: 87.5, y: -386.35}
+  m_SizeDelta: {x: 175, y: 772.7}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &5467981682234357978
 MonoBehaviour:
@@ -1521,6 +1532,44 @@ MonoBehaviour:
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
   m_ReverseArrangement: 0
+--- !u!222 &4675511038896550626
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 809707344589897848}
+  m_CullTransparentMesh: 1
+--- !u!114 &1737013950693951235
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 809707344589897848}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 21300000, guid: 42c15381ee3b74448b5695c7ffae6e54, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 0.01
 --- !u!1 &837061272386271163
 GameObject:
   m_ObjectHideFlags: 0
@@ -1961,7 +2010,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 50, y: -100}
+  m_AnchoredPosition: {x: 87.5, y: -110}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2043521524811647294
@@ -2158,7 +2207,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 50, y: -675}
+  m_AnchoredPosition: {x: 87.5, y: -685}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6704846907246587159
@@ -2285,6 +2334,7 @@ GameObject:
   - component: {fileID: 676980969042773963}
   - component: {fileID: 717046406987973359}
   - component: {fileID: 6254747012797486729}
+  - component: {fileID: 2435999900175961113}
   m_Layer: 5
   m_Name: Tier
   m_TagString: Untagged
@@ -2309,8 +2359,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 50, y: -20}
-  m_SizeDelta: {x: 30, y: 30}
+  m_AnchoredPosition: {x: 87.5, y: -25}
+  m_SizeDelta: {x: 40, y: 40}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &717046406987973359
 CanvasRenderer:
@@ -2350,6 +2400,21 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 10
+--- !u!114 &2435999900175961113
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1110319695837396543}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c2c39a8dde9187b46aca496775b40fd4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  header: Tier
+  content: Determines the character's level at which the first level of the skill
+    can be unlocked.
 --- !u!1 &1123059829376741531
 GameObject:
   m_ObjectHideFlags: 0
@@ -3704,7 +3769,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 50, y: -100}
+  m_AnchoredPosition: {x: 87.5, y: -110}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4444352368662762354
@@ -7098,6 +7163,7 @@ GameObject:
   - component: {fileID: 2334016777732712629}
   - component: {fileID: 4497662867832121194}
   - component: {fileID: 8377475043849650647}
+  - component: {fileID: 103150827641602732}
   m_Layer: 5
   m_Name: Tier
   m_TagString: Untagged
@@ -7122,8 +7188,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 50, y: -20}
-  m_SizeDelta: {x: 30, y: 30}
+  m_AnchoredPosition: {x: 87.5, y: -25}
+  m_SizeDelta: {x: 40, y: 40}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4497662867832121194
 CanvasRenderer:
@@ -7163,6 +7229,21 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 10
+--- !u!114 &103150827641602732
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2180048220895818186}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c2c39a8dde9187b46aca496775b40fd4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  header: Tier
+  content: Determines the character's level at which the first level of the skill
+    can be unlocked.
 --- !u!1 &2187168529689369534
 GameObject:
   m_ObjectHideFlags: 0
@@ -7201,7 +7282,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 50, y: -215}
+  m_AnchoredPosition: {x: 87.5, y: -225}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &222267976046009852
@@ -7331,6 +7412,8 @@ GameObject:
   m_Component:
   - component: {fileID: 8565838754622578156}
   - component: {fileID: 8696809013545796905}
+  - component: {fileID: 337175824477099455}
+  - component: {fileID: 277927192669005045}
   m_Layer: 5
   m_Name: Tier3Skills
   m_TagString: Untagged
@@ -7361,8 +7444,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 200, y: -386.35}
-  m_SizeDelta: {x: 100, y: 772.7}
+  m_AnchoredPosition: {x: 262.5, y: -386.35}
+  m_SizeDelta: {x: 175, y: 772.7}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &8696809013545796905
 MonoBehaviour:
@@ -7390,6 +7473,44 @@ MonoBehaviour:
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
   m_ReverseArrangement: 0
+--- !u!222 &337175824477099455
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2221314473665611198}
+  m_CullTransparentMesh: 1
+--- !u!114 &277927192669005045
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2221314473665611198}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 21300000, guid: 42c15381ee3b74448b5695c7ffae6e54, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 0.01
 --- !u!1 &2233685470054605729
 GameObject:
   m_ObjectHideFlags: 0
@@ -7652,6 +7773,8 @@ GameObject:
   m_Component:
   - component: {fileID: 8016778577621547996}
   - component: {fileID: 4815135648443417446}
+  - component: {fileID: 4840932786401797135}
+  - component: {fileID: 5993333694935289121}
   m_Layer: 5
   m_Name: Tier5Skills
   m_TagString: Untagged
@@ -7682,8 +7805,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 350, y: -386.35}
-  m_SizeDelta: {x: 100, y: 772.7}
+  m_AnchoredPosition: {x: 437.5, y: -386.35}
+  m_SizeDelta: {x: 175, y: 772.7}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &4815135648443417446
 MonoBehaviour:
@@ -7711,6 +7834,44 @@ MonoBehaviour:
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
   m_ReverseArrangement: 0
+--- !u!222 &4840932786401797135
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2383594116392618995}
+  m_CullTransparentMesh: 1
+--- !u!114 &5993333694935289121
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2383594116392618995}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 21300000, guid: 42c15381ee3b74448b5695c7ffae6e54, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 0.01
 --- !u!1 &2454430197530278166
 GameObject:
   m_ObjectHideFlags: 0
@@ -7749,7 +7910,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 50, y: -445}
+  m_AnchoredPosition: {x: 87.5, y: -455}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4630191321845710702
@@ -8860,6 +9021,7 @@ GameObject:
   - component: {fileID: 6711265376673820354}
   - component: {fileID: 7545604167253544477}
   - component: {fileID: 4656462081294665272}
+  - component: {fileID: 4892269712192454880}
   m_Layer: 5
   m_Name: Tier
   m_TagString: Untagged
@@ -8884,8 +9046,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 50, y: -20}
-  m_SizeDelta: {x: 30, y: 30}
+  m_AnchoredPosition: {x: 87.5, y: -25}
+  m_SizeDelta: {x: 40, y: 40}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7545604167253544477
 CanvasRenderer:
@@ -8925,6 +9087,21 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 10
+--- !u!114 &4892269712192454880
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3104147294810350853}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c2c39a8dde9187b46aca496775b40fd4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  header: Tier
+  content: Determines the character's level at which the first level of the skill
+    can be unlocked.
 --- !u!1 &3107149695716719272
 GameObject:
   m_ObjectHideFlags: 0
@@ -9272,7 +9449,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 50, y: -215}
+  m_AnchoredPosition: {x: 87.5, y: -225}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6299770893050523046
@@ -10819,7 +10996,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 50, y: -675}
+  m_AnchoredPosition: {x: 87.5, y: -685}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &601868467628237436
@@ -11266,7 +11443,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 50, y: -100}
+  m_AnchoredPosition: {x: 87.5, y: -110}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4493385693087281378
@@ -11463,7 +11640,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 50, y: -445}
+  m_AnchoredPosition: {x: 87.5, y: -455}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &8547633234630077071
@@ -11542,7 +11719,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 50, y: -100}
+  m_AnchoredPosition: {x: 87.5, y: -110}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &9014199640440848309
@@ -12437,7 +12614,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 50, y: -560}
+  m_AnchoredPosition: {x: 87.5, y: -570}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6826003494802750354
@@ -12563,6 +12740,8 @@ GameObject:
   m_Component:
   - component: {fileID: 351163210861169287}
   - component: {fileID: 717627360193722960}
+  - component: {fileID: 4747521320496953851}
+  - component: {fileID: 3351169733479190206}
   m_Layer: 5
   m_Name: Tier13Skills
   m_TagString: Untagged
@@ -12590,8 +12769,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 800, y: -386.35}
-  m_SizeDelta: {x: 100, y: 772.7}
+  m_AnchoredPosition: {x: 962.5, y: -386.35}
+  m_SizeDelta: {x: 175, y: 772.7}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &717627360193722960
 MonoBehaviour:
@@ -12619,6 +12798,44 @@ MonoBehaviour:
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
   m_ReverseArrangement: 0
+--- !u!222 &4747521320496953851
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4675875752981450280}
+  m_CullTransparentMesh: 1
+--- !u!114 &3351169733479190206
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4675875752981450280}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 21300000, guid: 42c15381ee3b74448b5695c7ffae6e54, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 0.01
 --- !u!1 &4683894761178091290
 GameObject:
   m_ObjectHideFlags: 0
@@ -13836,7 +14053,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 50, y: -215}
+  m_AnchoredPosition: {x: 87.5, y: -225}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4736313222161730949
@@ -15877,7 +16094,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 50, y: -215}
+  m_AnchoredPosition: {x: 87.5, y: -225}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4736313222834688514
@@ -16626,7 +16843,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 50, y: -100}
+  m_AnchoredPosition: {x: 87.5, y: -110}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4736313223246260318
@@ -17332,7 +17549,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 50, y: -330}
+  m_AnchoredPosition: {x: 87.5, y: -340}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4736313223462659695
@@ -18562,7 +18779,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 50, y: -445}
+  m_AnchoredPosition: {x: 87.5, y: -455}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5772764455802603355
@@ -18984,7 +19201,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 50, y: -330}
+  m_AnchoredPosition: {x: 87.5, y: -340}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6103240604722282066
@@ -19569,7 +19786,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 50, y: -100}
+  m_AnchoredPosition: {x: 87.5, y: -110}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4180449591910555132
@@ -20281,7 +20498,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 50, y: -560}
+  m_AnchoredPosition: {x: 87.5, y: -570}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5837561038591839379
@@ -20360,7 +20577,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 50, y: -215}
+  m_AnchoredPosition: {x: 87.5, y: -225}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3975500888369283484
@@ -20672,7 +20889,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 50, y: -215}
+  m_AnchoredPosition: {x: 87.5, y: -225}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5265206103880193402
@@ -20842,6 +21059,7 @@ GameObject:
   - component: {fileID: 1987361128959362199}
   - component: {fileID: 9030377731724455778}
   - component: {fileID: 617213322029992902}
+  - component: {fileID: 5199221228057104403}
   m_Layer: 5
   m_Name: Tier
   m_TagString: Untagged
@@ -20866,8 +21084,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 50, y: -20}
-  m_SizeDelta: {x: 30, y: 30}
+  m_AnchoredPosition: {x: 87.5, y: -25}
+  m_SizeDelta: {x: 40, y: 40}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &9030377731724455778
 CanvasRenderer:
@@ -20907,6 +21125,21 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 10
+--- !u!114 &5199221228057104403
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6255473297863012371}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c2c39a8dde9187b46aca496775b40fd4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  header: Tier
+  content: Determines the character's level at which the first level of the skill
+    can be unlocked.
 --- !u!1 &6329097500454081937
 GameObject:
   m_ObjectHideFlags: 0
@@ -20917,6 +21150,8 @@ GameObject:
   m_Component:
   - component: {fileID: 7797877069051378767}
   - component: {fileID: 7103574558243384050}
+  - component: {fileID: 7130427965605767993}
+  - component: {fileID: 8476873167940168427}
   m_Layer: 5
   m_Name: Tier8Skills
   m_TagString: Untagged
@@ -20945,8 +21180,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 500, y: -386.35}
-  m_SizeDelta: {x: 100, y: 772.7}
+  m_AnchoredPosition: {x: 612.5, y: -386.35}
+  m_SizeDelta: {x: 175, y: 772.7}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &7103574558243384050
 MonoBehaviour:
@@ -20974,6 +21209,44 @@ MonoBehaviour:
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
   m_ReverseArrangement: 0
+--- !u!222 &7130427965605767993
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6329097500454081937}
+  m_CullTransparentMesh: 1
+--- !u!114 &8476873167940168427
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6329097500454081937}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 21300000, guid: 42c15381ee3b74448b5695c7ffae6e54, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 0.01
 --- !u!1 &6357852301189501657
 GameObject:
   m_ObjectHideFlags: 0
@@ -21684,7 +21957,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 50, y: -100}
+  m_AnchoredPosition: {x: 87.5, y: -110}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1547756767885546384
@@ -21786,7 +22059,7 @@ MonoBehaviour:
     m_Top: 0
     m_Bottom: 0
   m_ChildAlignment: 0
-  m_Spacing: 50
+  m_Spacing: 0
   m_ChildForceExpandWidth: 0
   m_ChildForceExpandHeight: 1
   m_ChildControlWidth: 0
@@ -22131,6 +22404,8 @@ GameObject:
   m_Component:
   - component: {fileID: 8366477217419519943}
   - component: {fileID: 1637908870972146556}
+  - component: {fileID: 2151252508993601763}
+  - component: {fileID: 4524973517266337840}
   m_Layer: 5
   m_Name: Tier11Skills
   m_TagString: Untagged
@@ -22157,8 +22432,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 650, y: -386.35}
-  m_SizeDelta: {x: 100, y: 772.7}
+  m_AnchoredPosition: {x: 787.5, y: -386.35}
+  m_SizeDelta: {x: 175, y: 772.7}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1637908870972146556
 MonoBehaviour:
@@ -22186,6 +22461,44 @@ MonoBehaviour:
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
   m_ReverseArrangement: 0
+--- !u!222 &2151252508993601763
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7100547476492430351}
+  m_CullTransparentMesh: 1
+--- !u!114 &4524973517266337840
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7100547476492430351}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 21300000, guid: 42c15381ee3b74448b5695c7ffae6e54, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 0.01
 --- !u!1 &7126741563560365634
 GameObject:
   m_ObjectHideFlags: 0
@@ -22347,6 +22660,7 @@ GameObject:
   - component: {fileID: 4212193181742127731}
   - component: {fileID: 8065867423632250091}
   - component: {fileID: 4696902473342728702}
+  - component: {fileID: 8372289622725560980}
   m_Layer: 5
   m_Name: Tier
   m_TagString: Untagged
@@ -22371,8 +22685,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 50, y: -20}
-  m_SizeDelta: {x: 30, y: 30}
+  m_AnchoredPosition: {x: 87.5, y: -25}
+  m_SizeDelta: {x: 40, y: 40}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &8065867423632250091
 CanvasRenderer:
@@ -22412,6 +22726,21 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 10
+--- !u!114 &8372289622725560980
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7207755543700006631}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c2c39a8dde9187b46aca496775b40fd4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  header: Tier
+  content: Determines the character's level at which the first level of the skill
+    can be unlocked.
 --- !u!1 &7265278068014910067
 GameObject:
   m_ObjectHideFlags: 0
@@ -23799,6 +24128,7 @@ GameObject:
   - component: {fileID: 5833959816745965847}
   - component: {fileID: 4422487595445733918}
   - component: {fileID: 402112763098707369}
+  - component: {fileID: 4979490444429334208}
   m_Layer: 5
   m_Name: Tier
   m_TagString: Untagged
@@ -23823,8 +24153,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 50, y: -20}
-  m_SizeDelta: {x: 30, y: 30}
+  m_AnchoredPosition: {x: 87.5, y: -25}
+  m_SizeDelta: {x: 40, y: 40}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4422487595445733918
 CanvasRenderer:
@@ -23864,6 +24194,21 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 10
+--- !u!114 &4979490444429334208
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7547838570092067245}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c2c39a8dde9187b46aca496775b40fd4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  header: Tier
+  content: Determines the character's level at which the first level of the skill
+    can be unlocked.
 --- !u!1 &7599274214397442894
 GameObject:
   m_ObjectHideFlags: 0
@@ -24020,7 +24365,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 50, y: -330}
+  m_AnchoredPosition: {x: 87.5, y: -340}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1529977215099175819
@@ -25885,7 +26230,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 50, y: -330}
+  m_AnchoredPosition: {x: 87.5, y: -340}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7059812440653048489
@@ -26169,6 +26514,7 @@ GameObject:
   - component: {fileID: 2082028643527627131}
   - component: {fileID: 8603637760959873674}
   - component: {fileID: 2028960389929215630}
+  - component: {fileID: 6266388472312164638}
   m_Layer: 5
   m_Name: Tier
   m_TagString: Untagged
@@ -26193,8 +26539,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 50, y: -20}
-  m_SizeDelta: {x: 30, y: 30}
+  m_AnchoredPosition: {x: 87.5, y: -25}
+  m_SizeDelta: {x: 40, y: 40}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &8603637760959873674
 CanvasRenderer:
@@ -26234,6 +26580,21 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 10
+--- !u!114 &6266388472312164638
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8733735283921469388}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c2c39a8dde9187b46aca496775b40fd4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  header: Tier
+  content: Determines the character's level at which the first level of the skill
+    can be unlocked.
 --- !u!1 &8742868311241263227
 GameObject:
   m_ObjectHideFlags: 0
