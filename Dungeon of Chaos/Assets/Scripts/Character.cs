@@ -172,7 +172,7 @@ public class Character : Unit
 
     private void Attack()
     {
-        if (!Input.GetMouseButtonDown(0) || attack.IsAttacking())
+        if (!Input.GetMouseButtonDown(0) || attack.IsAttacking() || SkillSystem.IsAttacking())
             return;
 
         float staminaCost = attack.GetStaminaCost();
