@@ -50,7 +50,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   upRightAngle: -60
   armAlignAngle: 60
-  weaponTipOffset: {x: -1.959, y: 2.787, z: 0}
 --- !u!212 &4206247659596657827
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -621,7 +620,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 50c0fd73315984dc787ff687bd683fb2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  stats: {fileID: 11400000, guid: 8de6aac91f1482043b659913e862caac, type: 2}
+  stats: {fileID: 11400000, guid: 63d892556c0c2ef43a1ec1e6006249ef, type: 2}
   movement: {fileID: 11400000, guid: 2a1e0ff95ed4b814db5f1624832232f4, type: 2}
   effects: {fileID: 11400000, guid: b8c2e379a823a5f4a907481e41277e70, type: 2}
   bars: {fileID: 11400000, guid: 0221322a962978542a4599e9d2390aec, type: 2}
