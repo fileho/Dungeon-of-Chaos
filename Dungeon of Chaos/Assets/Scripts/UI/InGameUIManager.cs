@@ -41,6 +41,8 @@ public class InGameUIManager : MonoBehaviour
     // Delay after which it is possible to open the settings UI so it cannot be opened accidentally
     private float openUIstartDelay = 0.25f;
 
+    private Color baseColor = new Color(0.2f, 0.2f, 0.2f);
+
     private void Awake()
     {
         instance = this;
@@ -96,6 +98,12 @@ public class InGameUIManager : MonoBehaviour
         armorBar.SetActive(false);
     }
 
+    private void ResetIcon(Image image)
+    {
+        image.sprite = null;
+        image.color = baseColor;
+    }
+
     public void UpdateSkills()
     {
         UpdateActiveSkills();
@@ -109,8 +117,12 @@ public class InGameUIManager : MonoBehaviour
         {
             var skill = skillSystem.GetActivatedSkill(i);
             if (!skill)
+            {
+                ResetIcon(activeSkills[i]);
                 continue;
+            }
             activeSkills[i].sprite = skill.GetSkillData().GetIcon();
+            activeSkills[i].color = Color.white;
             activeCooldowns[i].fillAmount = skill.GetCurrentSkill().GetCooldownRatio();
         }
     }
@@ -128,8 +140,12 @@ public class InGameUIManager : MonoBehaviour
         var secondary = skillSystem.GetActivatedSecondary();
 
         if (!secondary)
+        {
+            ResetIcon(secondarySkill);
             return;
+        }
         secondarySkill.sprite = secondary.GetSkillData().GetIcon();
+        secondarySkill.color = Color.white;
         secondaryCooldown.fillAmount = secondary.GetCurrentSkill().GetCooldownRatio();
     }
 
