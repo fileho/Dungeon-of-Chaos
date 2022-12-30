@@ -5,7 +5,7 @@ using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using UnityEngine.Events;
 
-public class UpgradeStatButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerClickHandler, IPointerUpHandler
+public class UpgradeStatButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerClickHandler, IPointerUpHandler, IPointerDownHandler
 {
     [SerializeField] private UnityEvent changeStat;
 
@@ -40,7 +40,7 @@ public class UpgradeStatButton : MonoBehaviour, IPointerEnterHandler, IPointerEx
 
     public void OnPointerUp(PointerEventData eventData)
     {
-        gameObject.GetComponent<Image>().color = hover;
+        gameObject.GetComponent<Image>().color = idle;
     }
 
     public void UpgradeStrength()
@@ -66,6 +66,11 @@ public class UpgradeStatButton : MonoBehaviour, IPointerEnterHandler, IPointerEx
     public void UpgradeWisdom()
     {
         Character.instance.stats.IncreaseWisdom();
+    }
+
+    public void OnPointerDown(PointerEventData eventData)
+    {
+        gameObject.GetComponent<Image>().color = selected;
     }
 }
 
