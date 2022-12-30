@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Orc Giant-Stomp
   m_EditorClassIdentifier: 
   range: 18
-  damage: 1.65
+  damage: 1.85
   staminaCost: 80
   manaCost: 0
   rangeWeight: 1
@@ -42,4 +42,4 @@ MonoBehaviour:
   impact: {fileID: 1477782971762948, guid: 8e2edb2a8a19e674f80d0fb19fe5c051, type: 3}
   scaleMultiplier: 1.5
   damageRadiusMajor: 12
-  damageMajor: 10
+  damageMajor: 1.5
