@@ -18,6 +18,7 @@ public class SkillButtonPassive : SkillButton
         }
         SetLevel();
         SetIcon();
+        SetRequirementsOverlay();
     }
 
     public override void OnBeginDrag(PointerEventData eventData)
@@ -84,5 +85,10 @@ public class SkillButtonPassive : SkillButton
     {
         Sprite icon = skillInfo.GetSkillData().GetIcon();
         GetComponent<Image>().sprite = icon;
+    }
+
+    public override void SetRequirementsOverlay()
+    {
+        requirementsNotMet.SetActive(!skillSystem.CanUnlock(skillInfo));
     }
 }

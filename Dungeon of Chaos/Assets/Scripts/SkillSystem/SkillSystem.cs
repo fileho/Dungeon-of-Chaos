@@ -93,7 +93,6 @@ public class SkillSystem : MonoBehaviour
 
         for (int i = 0; i < activated.Count; i++)
         {
-            Debug.Log("Reset");
             activated[i] = -1;
         }
     }
@@ -149,7 +148,7 @@ public class SkillSystem : MonoBehaviour
     }
 
     #region Unlocking
-    private bool CanUnlock<T>(SkillInfo<T> skillInfo) where T : ISkill
+    public bool CanUnlock<T>(SkillInfo<T> skillInfo) where T : ISkill
     {
         if (skillInfo.GetUnlockingRequirements() == null)
             return true;

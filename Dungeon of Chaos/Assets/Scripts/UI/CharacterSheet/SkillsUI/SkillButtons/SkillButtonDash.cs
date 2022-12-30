@@ -22,6 +22,7 @@ public class SkillButtonDash : SkillButton
         }
         SetLevel();
         SetIcon();
+        SetRequirementsOverlay();
     }
 
     public override void OnBeginDrag(PointerEventData eventData)
@@ -98,5 +99,10 @@ public class SkillButtonDash : SkillButton
             lockObj.GetComponent<Image>().fillAmount = 1;
         }
         level.text = skillInfo.GetLevel() + "/" + skillInfo.GetMaxLevel();
+    }
+
+    public override void SetRequirementsOverlay()
+    {
+        requirementsNotMet.SetActive(!skillSystem.CanUnlock(skillInfo));
     }
 }

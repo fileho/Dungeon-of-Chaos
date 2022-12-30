@@ -22,6 +22,7 @@ public class SkillButtonSecondary : SkillButton
         }
         SetLevel();
         SetIcon();
+        SetRequirementsOverlay();
     }
 
     public override void OnBeginDrag(PointerEventData eventData)
@@ -97,5 +98,10 @@ public class SkillButtonSecondary : SkillButton
             lockObj.GetComponent<Image>().fillAmount = 1;
         }
         level.text = skillInfo.GetLevel() + "/" + skillInfo.GetMaxLevel();
+    }
+
+    public override void SetRequirementsOverlay()
+    {
+        requirementsNotMet.SetActive(!skillSystem.CanUnlock(skillInfo));
     }
 }
