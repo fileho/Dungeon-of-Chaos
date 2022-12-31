@@ -17,6 +17,8 @@ public class SimpleTooltip : Tooltip
         contentText.text = content;
         this.followMouse = followMouse;
 
+        contentText.gameObject.SetActive(content != "");
+
         layoutElement.enabled = (header.Length > wrapLimit || content.Length > wrapLimit);
     }
 
