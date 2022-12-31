@@ -9,6 +9,8 @@ public class SkillsUI : MonoBehaviour
     [SerializeField] private TextMeshProUGUI skillTabSkillPoints;
     [SerializeField] private TextMeshProUGUI skillPoints;
 
+    [SerializeField] private GameObject notification;
+
 
     private SkillSlotDash skillSlotDash;
     private SkillSlotSecondary skillSlotSecondary;
@@ -86,8 +88,10 @@ public class SkillsUI : MonoBehaviour
 
     public void UpdateSkillPoints()
     {
-        skillPoints.text = stats.GetLevellingData().skillPoints.ToString();
-        skillTabSkillPoints.text = stats.GetLevellingData().skillPoints.ToString();
+        int skillPts = stats.GetLevellingData().skillPoints;
+        skillPoints.text = skillPts.ToString();
+        skillTabSkillPoints.text = skillPts.ToString();
+        notification.SetActive(skillPts > 0);
         UpdateSkillButtons();
     }
 
