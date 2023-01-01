@@ -138,6 +138,11 @@ public class Stats : ScriptableObject
         return health.maxValue;
     }
 
+    public float GetCurrentHealth()
+    {
+        return health.GetCurrent();
+    }
+
     public void ChangeMaxHealth(float value)
     {
         health.ChangeMaxValue(value);
