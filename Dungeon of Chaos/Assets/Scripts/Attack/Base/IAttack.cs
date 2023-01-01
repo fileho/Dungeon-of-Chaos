@@ -30,6 +30,9 @@ public abstract class IAttack : MonoBehaviour
     // The type (physical/magical) of the attack
     protected SkillEffectType type;
 
+    // The effect (such as burn or poison) the attack applies
+    protected ISkillEffect attackEffect;
+
     protected SoundSettings swingSFX;
     protected SoundSettings impactSFX;
     // The duration of the attack animation
@@ -165,6 +168,8 @@ public abstract class IAttack : MonoBehaviour
     protected virtual void PrepareWeapon()
     {
         Weapon.SetDamage(GetDamage());
+        if (owner.gameObject.tag != "Player")
+            Weapon.SetEffect(attackEffect);
         Weapon.SetImpactSound(impactSFX);
         Weapon.ResetHitUnits();
         Weapon.EnableDisableTrail(true);
@@ -193,8 +198,10 @@ public abstract class IAttack : MonoBehaviour
         indicatorConfiguration = attackConfiguration.indicatorConfiguration;
         AttackAnimationDuration = attackConfiguration.attackAnimationDuration;
         type = attackConfiguration.type;
+        attackEffect = attackConfiguration.attackEffect;
         swingSFX = attackConfiguration.swingSFX;
         impactSFX = attackConfiguration.impactSFX;
+
     }
 
 

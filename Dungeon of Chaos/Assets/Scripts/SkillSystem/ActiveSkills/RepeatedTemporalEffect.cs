@@ -5,8 +5,8 @@ using UnityEngine.Events;
 
 public abstract class RepeatedTemporalEffect : TemporalEffect
 {
-    [SerializeField] private float frequency;
-    private float time = 0f;
+    [SerializeField] protected float frequency;
+    protected float time = 0f;
 
     public override string[] GetEffectsValues(Unit owner)
     {
@@ -16,13 +16,13 @@ public abstract class RepeatedTemporalEffect : TemporalEffect
     public override bool Update()
     {
         if (!UpdateTime())
-            return true;
+            return false;
         if (ShouldApplyEffect())
         {
             ApplyEffect();
             time -= frequency;
         }
-        return false;
+        return true;
     }
 
     protected bool ShouldApplyEffect()

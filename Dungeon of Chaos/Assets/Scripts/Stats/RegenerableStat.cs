@@ -39,6 +39,11 @@ public class RegenerableStat
         return currentValue >= value;
     }
 
+    public float GetCurrent()
+    {
+        return currentValue;
+    }
+
     public bool IsDepleted()
     {
         return currentValue <= 0;
