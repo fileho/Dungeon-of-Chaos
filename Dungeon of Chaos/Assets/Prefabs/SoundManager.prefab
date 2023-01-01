@@ -62,7 +62,7 @@ MonoBehaviour:
       volume: 0.5
       pitch: 1
     - audioClip: {fileID: 8300000, guid: 8345160ccada7d644b04113494483030, type: 3}
-      volume: 0.25
+      volume: 0.15
       pitch: 1
   enemyAmbients:
     poolSize: 30
@@ -197,7 +197,7 @@ MonoBehaviour:
       volume: 0.5
       pitch: 1
     - audioClip: {fileID: 8300000, guid: 57dbd848447bf9d40845bb56534d1e64, type: 3}
-      volume: 0.5
+      volume: 0.75
       pitch: 1
     - audioClip: {fileID: 8300000, guid: 320f1b4bc56c97442a03b3214607004f, type: 3}
       volume: 0.5
@@ -344,7 +344,7 @@ MonoBehaviour:
       volume: 0.5
       pitch: 1
     - audioClip: {fileID: 8300000, guid: 6def85bdfe793b748972d82d91e9022e, type: 3}
-      volume: 0.5
+      volume: 0.25
       pitch: 1
     - audioClip: {fileID: 8300000, guid: df26a85f766e0854fbc796039988a1f5, type: 3}
       volume: 0.5
