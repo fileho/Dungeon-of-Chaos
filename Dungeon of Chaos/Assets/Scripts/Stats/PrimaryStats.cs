@@ -45,6 +45,11 @@ public class PrimaryStats
             value += statsModifiers.GetStatsBonus() + (l - 1) * statsModifiers.GetLvlBonus();
         return value;
     }
+
+    private float ModifiedHP(int l, float value)
+    {
+        return ModifiedStat(l, value) * statsModifiers.GetHPMultiplier();
+    }
     public float GetDamage(int l)
     {
         float s = ModifiedStat(l, strength);
@@ -59,7 +64,7 @@ public class PrimaryStats
 
     public float GetMaxHP(int l)
     {
-        float c = ModifiedStat(l, constitution);
+        float c = ModifiedHP(l, constitution);
         return c * multipliers.hpMultiplier;
     }
 
