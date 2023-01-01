@@ -13,3 +13,4 @@ MonoBehaviour:
   m_Name: BasicStatsModifiers
   m_EditorClassIdentifier: 
   statsBonus: 0
+  hpMultiplier: 1
