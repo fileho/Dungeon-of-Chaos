@@ -25,6 +25,7 @@ MonoBehaviour:
   indicator: {fileID: 156674, guid: 276e7fe7d9e2d4dadaca2292f0bffc92, type: 3}
   indicatorConfiguration: {fileID: 11400000, guid: e521a2eda4ac94f36b66c64cfb58d9f3, type: 2}
   type: 0
+  attackEffect: {fileID: 0}
   swingSFX:
     soundCategory: 2
     sound: 26
@@ -39,6 +40,6 @@ MonoBehaviour:
     priority: 0
   minion: {fileID: 1419886182692781939, guid: b2da123613c3f4f428251a4530610f8d, type: 3}
   minAmountOfMinions: 2
-  maxAmountOfMinions: 6
-  timeBetweenSpawns: 0.5
+  maxAmountOfMinions: 4
+  timeBetweenSpawns: 0.8
   spawnRadius: 3
