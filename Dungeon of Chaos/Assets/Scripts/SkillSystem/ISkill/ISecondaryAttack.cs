@@ -30,7 +30,7 @@ public class ISecondaryAttack : IActiveSkill
             Debug.Log("Cooldown Left: " + cooldownLeft);
             return;
         }
-        if (secondaryAttack.IsAttacking())
+        if (secondaryAttack.IsAttacking() || Character.instance.IsAttacking())
         {
             Debug.Log("Already attacking");
             return;
