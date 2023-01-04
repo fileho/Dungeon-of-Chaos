@@ -12,7 +12,6 @@ public class DashAttack : MeleeAttack
         Weapon.EnableDisableCollider(true);
     }
 
-
     protected override void ResetWeapon()
     {
         base.ResetWeapon();
@@ -30,7 +29,7 @@ public class DashAttack : MeleeAttack
         if (indicator)
         {
             indicator.transform.localPosition = Vector3.zero;
-            indicator.transform.up = Weapon.GetForwardDirectionRotated();
+            indicator.transform.up = targetDirection;
             indicator.Use();
             yield return new WaitForSeconds(indicator.Duration);
         }
@@ -43,12 +42,13 @@ public class DashAttack : MeleeAttack
         {
             ++count;
             time += (Time.fixedDeltaTime / AttackAnimationDuration);
-            ownerRB.MovePosition(owner.transform.position + (targetDirection * (6f * range * Time.fixedDeltaTime / AttackAnimationDuration)));
+            ownerRB.MovePosition(owner.transform.position +
+                                 (targetDirection * (6f * range * Time.fixedDeltaTime / AttackAnimationDuration)));
             yield return null;
         }
 
         yield return new WaitForSeconds(0.3f);
-        //SoundManager.instance.PlaySound(swingSFX);
+        // SoundManager.instance.PlaySound(swingSFX);
 
         // Reset
         owner.transform.position = ownerPos;
@@ -56,6 +56,4 @@ public class DashAttack : MeleeAttack
         ResetWeapon();
         isAttacking = false;
     }
-
-
 }

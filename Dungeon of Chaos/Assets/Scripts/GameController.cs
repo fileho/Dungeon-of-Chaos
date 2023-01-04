@@ -38,6 +38,12 @@ public class GameController : MonoBehaviour
             Debug.Log("Level complete - cheat");
             LevelComplete();
         }
+
+        if (Input.GetKeyDown(KeyCode.L))
+        {
+            Debug.Log("Cheat + 1000xp");
+            Character.instance.stats.GetLevellingData().ModifyCurrentXP(1000);
+        }
     }
 
     private void LoadMap()
