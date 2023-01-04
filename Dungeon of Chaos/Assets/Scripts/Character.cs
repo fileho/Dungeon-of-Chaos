@@ -168,6 +168,11 @@ public class Character : Unit
             transform.localScale = Vector3.one;
     }
 
+    public bool IsAttacking()
+    {
+        return attack.IsAttacking();
+    }
+
     private void Move()
     {
         movement.Move();
