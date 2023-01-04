@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using static UnityEngine.Rendering.DebugUI.Table;
 
 public class StompAttack : MeleeAttack
 {
@@ -15,18 +14,17 @@ public class StompAttack : MeleeAttack
     // How big the weapon grows
     protected float scaleMultiplier;
 
-    //Damage minor [It is the default range of the attack]
+    // Damage minor [It is the default range of the attack]
     protected float damageMinor;
-    //Damage major [should be more than the default damage]
+    // Damage major [should be more than the default damage]
     protected float damageMajor;
 
-    //Damage radius minor [It is the default damage of the attack]
+    // Damage radius minor [It is the default damage of the attack]
     protected float damageRadiusMinor;
-    //Damage radius major [Should be less than the default range of the attack ]
+    // Damage radius major [Should be less than the default range of the attack ]
     protected float damageRadiusMajor;
 
     protected GameObject impact;
-
 
     protected override void ApplyConfigurations()
     {
@@ -66,7 +64,6 @@ public class StompAttack : MeleeAttack
     // Ideal attack duration = 1
     protected override IEnumerator StartAttackAnimation()
     {
-
         // Cache weapon rotation to restore it after the animation
         var initialWeaponRotation = Weapon.transform.rotation;
         Vector3 startPos = Weapon.transform.localPosition;
@@ -87,12 +84,9 @@ public class StompAttack : MeleeAttack
         Weapon.ResetWeapon();
         PrepareWeapon();
 
-
         // Cache weapon rotation to restore after the animation
         var initialAssetRotation = Weapon.Asset.localRotation;
         Weapon.Asset.localRotation = Quaternion.Euler(0, 0, Weapon.GetUprightAngle());
-
-
 
         float time = 0;
         float attackAnimationDurationOneWay = AttackAnimationDuration / 2f;
@@ -119,14 +113,11 @@ public class StompAttack : MeleeAttack
             yield return null;
         }
 
-
         EnableImpact(owner.transform.position);
-        Weapon.SetDamage(damageMajor);
+        Weapon.SetDamage(GetDamage() / damage * damageMajor);
         CheckHits(owner.transform.position, damageRadiusMajor);
-        Weapon.SetDamage(damageMinor);
+        Weapon.SetDamage(GetDamage());
         CheckHits(owner.transform.position, damageRadiusMinor);
-
-        
 
         // Reset
         Weapon.Asset.localScale = startScale;
@@ -137,5 +128,4 @@ public class StompAttack : MeleeAttack
         ResetWeapon();
         isAttacking = false;
     }
-
 }

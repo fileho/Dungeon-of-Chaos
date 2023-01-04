@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 307959e3ed6fc4c359a0a6360033ccb5, type: 3}
   m_Name: Orc Giant-Smash
   m_EditorClassIdentifier: 
-  range: 4
+  range: 6
   damage: 2.2
   staminaCost: 50
   manaCost: 0
@@ -25,6 +25,7 @@ MonoBehaviour:
   indicator: {fileID: 3188580857372310462, guid: 62aeaf3d3d69f48c3842ea6d3f0200dd, type: 3}
   indicatorConfiguration: {fileID: 11400000, guid: fd0fcbea778e34ec8ad56095564a8a89, type: 2}
   type: 1
+  attackEffect: {fileID: 0}
   swingSFX:
     soundCategory: 2
     sound: 17
@@ -41,4 +42,4 @@ MonoBehaviour:
   fall: 2.4
   impact: {fileID: 1477782971762948, guid: 8e2edb2a8a19e674f80d0fb19fe5c051, type: 3}
   scaleMultiplier: 1.5
-  damageRadius: 1
+  damageRadius: 6

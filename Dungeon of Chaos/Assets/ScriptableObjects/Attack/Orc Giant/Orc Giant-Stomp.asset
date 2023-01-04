@@ -12,19 +12,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e5a9f7272ab0a4da3b3dfeedc26d8fb7, type: 3}
   m_Name: Orc Giant-Stomp
   m_EditorClassIdentifier: 
-  range: 18
-  damage: 1.85
+  range: 15
+  damage: 0.65
   staminaCost: 80
   manaCost: 0
   rangeWeight: 1
   damageWeight: 1
   staminaCostWeight: 1
   manaCostWeight: 1
-  cooldown: 1
+  cooldown: 5
   attackAnimationDuration: 0.6
   indicator: {fileID: 6574973472230569996, guid: a0623113f577f4b6392df8d8ef3d53ba, type: 3}
   indicatorConfiguration: {fileID: 11400000, guid: 93dfcd500e80a4ae8bfaf6440605dacb, type: 2}
   type: 1
+  attackEffect: {fileID: 0}
   swingSFX:
     soundCategory: 2
     sound: 18
@@ -41,5 +42,5 @@ MonoBehaviour:
   fall: 2.4
   impact: {fileID: 1477782971762948, guid: 8e2edb2a8a19e674f80d0fb19fe5c051, type: 3}
   scaleMultiplier: 1.5
-  damageRadiusMajor: 12
-  damageMajor: 1.5
+  damageRadiusMajor: 9
+  damageMajor: 1.1
