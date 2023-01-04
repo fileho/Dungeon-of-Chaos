@@ -143,6 +143,8 @@ public abstract class IAttack : MonoBehaviour
 
     public Vector2 GetTargetPosition()
     {
+        if (owner == Character.instance)
+            return owner.GetTargetPosition();
         return owner.GetTargetPosition() + Random.insideUnitCircle * 5;
     }
 

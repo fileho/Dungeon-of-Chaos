@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 160e83d0fa0c944858efbe1f24b5b0b4, type: 3}
   m_Name: Dp-Stone Elemental-Smash
   m_EditorClassIdentifier: 
-  duration: 1
+  duration: 0.5
   color: {r: 0.92941177, g: 1, b: 0, a: 1}
   scale: 1
