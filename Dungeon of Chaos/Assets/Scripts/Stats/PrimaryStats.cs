@@ -48,6 +48,8 @@ public class PrimaryStats
 
     private float ModifiedHP(int l, float value)
     {
+        if (statsModifiers == null)
+            return value;
         return ModifiedStat(l, value) * statsModifiers.GetHPMultiplier();
     }
     public float GetDamage(int l)
