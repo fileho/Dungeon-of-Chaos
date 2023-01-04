@@ -82,6 +82,11 @@ public class Projectile : MonoBehaviour
         // Ignore triggers
         if (collision.isTrigger)
             return;
+
+        // Don't destroy projectile with essences
+        if (collision.transform.GetComponent<Essence>())
+            return;
+
         SoundManager.instance.PlaySound(impactSFX);
         if (collision.CompareTag("Player"))
         {
