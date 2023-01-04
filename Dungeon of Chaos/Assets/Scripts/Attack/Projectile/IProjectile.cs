@@ -59,6 +59,11 @@ public abstract class IProjectile : MonoBehaviour
         // Don't destroy the projectile over triggers
         if (col.isTrigger)
             return;
+
+        // Don't destroy projectile with essences
+        if (col.transform.GetComponent<Essence>())
+            return;
+
         if (col.GetComponent<Unit>())
         {
             attack.Weapon.InflictDamage(col.GetComponent<Unit>());
