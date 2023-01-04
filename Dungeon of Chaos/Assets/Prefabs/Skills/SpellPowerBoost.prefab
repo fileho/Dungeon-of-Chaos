@@ -9,9 +9,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4617805228910178657}
-  - component: {fileID: 168817505422937789}
+  - component: {fileID: 8233318964522458645}
   m_Layer: 0
-  m_Name: PoisonEffect
+  m_Name: SpellPowerBoost
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -31,7 +31,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &168817505422937789
+--- !u!114 &8233318964522458645
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -45,4 +45,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   applyOnWeapon: 0
   defaultMaterial: {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
-  effectMaterial: {fileID: 2100000, guid: 06220f16170981241bf1758223fcbcaa, type: 2}
+  effectMaterial: {fileID: 2100000, guid: 5023bca0d9c4a3a4586822ca418df186, type: 2}
