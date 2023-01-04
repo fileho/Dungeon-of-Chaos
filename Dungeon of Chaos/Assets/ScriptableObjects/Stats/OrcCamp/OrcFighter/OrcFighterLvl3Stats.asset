@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c7862adca1b56944f82bba604ba0d4b9, type: 3}
   m_Name: OrcFighterLvl3Stats
   m_EditorClassIdentifier: 
-  movementSpeed: 6
+  movementSpeed: 7.5
   chaseDistance: 35
   staminaRegen: 20
   primaryStats:

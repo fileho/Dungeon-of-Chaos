@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 
 public class Character : Unit
@@ -12,6 +13,8 @@ public class Character : Unit
     private GameController gameController;
 
     private int blockedInput = 0;
+    private const float maxBiteCooldown = 0.5f;
+    private float biteCooldown = 0f;
 
     private void Awake()
     {
@@ -59,6 +62,13 @@ public class Character : Unit
         FlipSprite();
         UseSkills();
         UpdateCooldowns();
+        UpdateBite();
+    }
+
+    private void UpdateBite()
+    {
+        if (biteCooldown > 0)
+            biteCooldown -= Time.deltaTime;
     }
 
     public override Vector2 GetTargetPosition()
@@ -186,5 +196,13 @@ public class Character : Unit
     private void OnCollisionEnter2D(Collision2D col)
     {
         SkillSystem.DashCollision(col);
+
+        if (biteCooldown > 0)
+            return;
+        var e = col.transform.GetComponent<Enemy>();
+        if (e == null)
+            return;
+        TakeDamage(10 + e.stats.GetPhysicalDamage() / 2);
+        biteCooldown = maxBiteCooldown;
     }
 }
