@@ -40,6 +40,6 @@ MonoBehaviour:
     priority: 0
   minion: {fileID: 1419886182692781939, guid: b2da123613c3f4f428251a4530610f8d, type: 3}
   minAmountOfMinions: 2
-  maxAmountOfMinions: 4
-  timeBetweenSpawns: 0.8
+  maxAmountOfMinions: 3
+  timeBetweenSpawns: 1
   spawnRadius: 3
