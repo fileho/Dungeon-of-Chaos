@@ -202,7 +202,7 @@ public class Character : Unit
     {
         SkillSystem.DashCollision(col);
 
-        if (biteCooldown > 0)
+        if (biteCooldown > 0 || SkillSystem.IsAttackDashing())
             return;
         var e = col.transform.GetComponent<Enemy>();
         if (e == null)

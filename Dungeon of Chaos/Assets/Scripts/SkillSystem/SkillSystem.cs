@@ -400,6 +400,11 @@ public class SkillSystem : MonoBehaviour
         return dashSkills[activatedDash].GetCurrentSkill().IsDashing();
     }
 
+    public bool IsAttackDashing()
+    {
+        return IsDashing() && dashSkills[activatedDash].GetId() == "Attacking Dash";
+    }
+
     public void DashCollision(Collision2D col)
     {
         dashSkills[activatedDash].GetCurrentSkill().TriggerCollision(col);
