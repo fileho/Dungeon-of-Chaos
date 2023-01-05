@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 5910979173556585713}
   - component: {fileID: 8609556347132602918}
   - component: {fileID: 7342213805182123860}
+  - component: {fileID: -5530013171198041674}
   m_Layer: 0
   m_Name: Crystal_Weak
   m_TagString: Untagged
@@ -141,3 +142,17 @@ CapsuleCollider2D:
   m_Offset: {x: -0.035743713, y: -0.0000038146973}
   m_Size: {x: 0.28651428, y: 0.6593857}
   m_Direction: 0
+--- !u!114 &-5530013171198041674
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4322241314559127637}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 36fc3e4d9db9daf44a98a5cd58058ffc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hpBoost: 30
+  manaBoost: 40
