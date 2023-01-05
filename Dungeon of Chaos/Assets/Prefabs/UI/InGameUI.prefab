@@ -5818,6 +5818,8 @@ MonoBehaviour:
   - {fileID: 4225374556447113682}
   dashCooldown: {fileID: 5714424291920231145}
   secondaryCooldown: {fileID: 2691828887607529059}
+  bossHPbar: {fileID: 8101731930876240157}
+  bossName: {fileID: 6214739381743744224}
   settings: {fileID: 493887442690776190}
 --- !u!1 &493887442942057518
 GameObject:

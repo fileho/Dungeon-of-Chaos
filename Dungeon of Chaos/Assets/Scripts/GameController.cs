@@ -6,10 +6,11 @@ using UnityEngine.SceneManagement;
 
 public class GameController : MonoBehaviour
 {
+    [SerializeField]
+    private string bossName;
+
     private SaveSystem saveSystem;
-
     private bool loaded = false;
-
     private Soundtrack soundtrack;
 
     private void Start()
@@ -89,6 +90,7 @@ public class GameController : MonoBehaviour
 
         int level = Math.Max(0, SceneManager.GetActiveScene().buildIndex - 2);
         FindObjectOfType<Soundtrack>().PlayBossMusic(level);
+        InGameUIManager.instance.StartBossFight(bossName);
     }
 
     private void ReloadScene()
