@@ -4,14 +4,18 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "SO/Skills/Skills/Active")]
 public class IActiveSkill : ISkill
 {
-    [SerializeField] protected float cooldown;
-    [SerializeField] protected float manaCost;
-    [SerializeField] protected float staminaCost;
+    [SerializeField]
+    protected float cooldown;
+    [SerializeField]
+    protected float manaCost;
+    [SerializeField]
+    protected float staminaCost;
 
-    [SerializeField] protected List<ISkillEffect> effects;
+    [SerializeField]
+    protected List<ISkillEffect> effects;
 
     protected float cooldownLeft;
-    
+
     private float RecalculateCooldown()
     {
         return cooldown / Character.instance.stats.GetCooldownModifier();
@@ -45,28 +49,33 @@ public class IActiveSkill : ISkill
         string skillDes = string.Format(skillData.GetDescription(), args);
 
         return skillDes;
-    }   
+    }
 
     public override string GetCostDescription()
     {
-        string mCost = RecalculateManaCost() > 0
-            ? "Mana Cost: " + RecalculateManaCost().ToString() + " "
-            : "";
-        string sCost = RecalculateStaminaCost() > 0
-            ? "Stamina Cost: " + RecalculateStaminaCost().ToString() + " "
-            : "";
-        string cool = RecalculateCooldown() > 0
-            ? "Cooldown: " + RecalculateCooldown().ToString() + " s"
-            : "";
+        string mCost = RecalculateManaCost() > 0 ? "Mana Cost: " + RecalculateManaCost().ToString() + " " : "";
+        string sCost = RecalculateStaminaCost() > 0 ? "Stamina Cost: " + RecalculateStaminaCost().ToString() + " " : "";
+        string cool = RecalculateCooldown() > 0 ? "Cooldown: " + RecalculateCooldown().ToString() + " s" : "";
         return mCost + sCost + cool;
     }
-    
 
     public bool CanUse(Stats stats)
     {
-        return cooldownLeft <= 0 && stats.HasMana(manaCost) && stats.HasStamina(staminaCost);
+        if (!stats.HasMana(manaCost))
+        {
+            InGameUIManager.instance.NotEnoughMana();
+            return false;
+        }
+
+        if (!stats.HasStamina(staminaCost))
+        {
+            InGameUIManager.instance.NotEnoughStamina();
+            return false;
+        }
+
+        return cooldownLeft <= 0;
     }
- 
+
     public void UpdateCooldown()
     {
         if (cooldownLeft > 0)
@@ -76,7 +85,9 @@ public class IActiveSkill : ISkill
     public virtual void Use(Unit unit, List<Unit> targets = null, List<Vector2> targetPositions = null)
     {
         if (!CanUse(unit.stats))
+        {
             return;
+        }
 
         cooldownLeft = RecalculateCooldown();
         Consume(unit.stats);
