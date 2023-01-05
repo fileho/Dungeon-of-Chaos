@@ -51,7 +51,7 @@ public class DashAttack : MeleeAttack
         // SoundManager.instance.PlaySound(swingSFX);
 
         // Reset
-        owner.transform.position = ownerPos;
+        // owner.transform.position = ownerPos;
 
         ResetWeapon();
         isAttacking = false;
