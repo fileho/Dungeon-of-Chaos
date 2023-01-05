@@ -1,0 +1,82 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &5729181366821117555
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6443979062186913609}
+  - component: {fileID: 5340434103781860332}
+  m_Layer: 0
+  m_Name: Tomb_shadow
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6443979062186913609
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5729181366821117555}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5340434103781860332
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5729181366821117555}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7db70e0ea77f5ac47a8f4565a9406397, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_ShadowGroup: 0
+  m_HasRenderer: 0
+  m_UseRendererSilhouette: 1
+  m_CastsShadows: 1
+  m_SelfShadows: 0
+  m_ApplyToSortingLayers: 00000000b1e4d313
+  m_ShapePath:
+  - {x: -0.31769744, y: -0.45621425, z: 0}
+  - {x: 0.3931821, y: -0.45617506, z: 0}
+  - {x: 0.37419915, y: -0.38437885, z: 0}
+  - {x: 0.34006682, y: -0.38437882, z: 0}
+  - {x: 0.31449485, y: -0.25192687, z: 0}
+  - {x: 0.24224913, y: -0.2544419, z: 0}
+  - {x: 0.23429745, y: -0.042880867, z: 0}
+  - {x: 0.21689405, y: -0.00983673, z: 0}
+  - {x: 0.19345972, y: 0.22184184, z: 0}
+  - {x: 0.18340257, y: 0.25839427, z: 0}
+  - {x: 0.16535604, y: 0.30246648, z: 0}
+  - {x: 0.14213413, y: 0.3436467, z: 0}
+  - {x: 0.10463478, y: 0.39013267, z: 0}
+  - {x: 0.07317776, y: 0.41048887, z: 0}
+  - {x: 0.052730385, y: 0.42166358, z: 0}
+  - {x: 0.018437147, y: 0.42924857, z: 0}
+  - {x: -0.02243954, y: 0.42756727, z: 0}
+  - {x: -0.096895814, y: 0.414614, z: 0}
+  - {x: -0.13164543, y: 0.40075114, z: 0}
+  - {x: -0.17524445, y: 0.35899612, z: 0}
+  - {x: -0.20136064, y: 0.3198218, z: 0}
+  - {x: -0.22935304, y: 0.24963199, z: 0}
+  - {x: -0.24659447, y: -0.26576942, z: 0}
+  - {x: -0.26871976, y: -0.2682692, z: 0}
+  - {x: -0.27868077, y: -0.3189867, z: 0}
+  - {x: -0.2879675, y: -0.38500774, z: 0}
+  - {x: -0.31718263, y: -0.38486424, z: 0}
+  m_ShapePathHash: 302315893
+  m_Mesh: {fileID: 0}
+  m_InstanceId: 349962
