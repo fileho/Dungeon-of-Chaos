@@ -21,10 +21,11 @@ MonoBehaviour:
   staminaCostWeight: 1
   manaCostWeight: 1
   cooldown: 1
-  attackAnimationDuration: 0.2
+  attackAnimationDuration: 0.3
   indicator: {fileID: 5248374025804181554, guid: bd368bb0dca0445629bdf0b149f13967, type: 3}
   indicatorConfiguration: {fileID: 11400000, guid: ad78fe672de4142a0a1c7226ee7548d4, type: 2}
   type: 0
+  attackEffect: {fileID: 0}
   swingSFX:
     soundCategory: 2
     sound: 13

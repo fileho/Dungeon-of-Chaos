@@ -145,7 +145,7 @@ public abstract class IAttack : MonoBehaviour
     {
         if (owner == Character.instance)
             return owner.GetTargetPosition();
-        return owner.GetTargetPosition() + Random.insideUnitCircle * 5;
+        return owner.GetTargetPosition() + Random.insideUnitCircle * 3;
     }
 
     protected virtual IIndicator CreateIndicator(Transform parent = null)
