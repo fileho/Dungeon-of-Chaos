@@ -565,7 +565,7 @@ SpriteRenderer:
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 1
-  m_Size: {x: 7.05, y: 7.05}
+  m_Size: {x: 6, y: 6}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -584,8 +584,8 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.39660645, y: -0.29945612}
-  m_Size: {x: 3.4311523, y: 5.1918354}
+  m_Offset: {x: 0.21396446, y: -0.28206134}
+  m_Size: {x: 2.6483955, y: 4.2525277}
   m_Direction: 0
 --- !u!50 &1419886182394290242
 Rigidbody2D:
@@ -834,7 +834,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3857842880315447389}
   m_LocalRotation: {x: 0, y: 0, z: -0.258819, w: 0.9659259}
-  m_LocalPosition: {x: -2.24, y: -0, z: 0}
+  m_LocalPosition: {x: -2.22, y: -0.02, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 5574832814731392626}
@@ -885,7 +885,7 @@ SpriteRenderer:
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 1
-  m_Size: {x: 1.97, y: 3.62}
+  m_Size: {x: 1.5, y: 3.3}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -909,7 +909,7 @@ PolygonCollider2D:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.766136, y: 0.20085482}
     oldSize: {x: 2.94, y: 5.3}
-    newSize: {x: 1.97, y: 3.62}
+    newSize: {x: 1.5, y: 3.3}
     adaptiveTilingThreshold: 0.5
     drawMode: 1
     adaptiveTiling: 0
@@ -917,9 +917,9 @@ PolygonCollider2D:
   m_Points:
     m_Paths:
     - - {x: 0.044018358, y: -0.58136237}
-      - {x: -0.87671214, y: 0.30859083}
-      - {x: -1.2980683, y: 2.8318975}
-      - {x: -1.2571712, y: 2.9097393}
+      - {x: -0.6082783, y: 0.45272854}
+      - {x: -0.98632115, y: 2.1037278}
+      - {x: -0.95525956, y: 2.612094}
       - {x: 0.17892344, y: 0.7426758}
       - {x: 0.18251485, y: 0.73628134}
       - {x: 0.34101686, y: -0.4173129}

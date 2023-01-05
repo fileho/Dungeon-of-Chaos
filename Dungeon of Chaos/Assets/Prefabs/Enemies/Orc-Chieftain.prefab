@@ -157,7 +157,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5844642170122747997}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2.693, y: -0.025, z: 0}
+  m_LocalPosition: {x: -2.36, y: -0.05, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 90988334486645520}
@@ -208,7 +208,7 @@ SpriteRenderer:
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 1
-  m_Size: {x: 2.72, y: 2.54}
+  m_Size: {x: 2.2, y: 2.1}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -232,7 +232,7 @@ PolygonCollider2D:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.7974883, y: 0.26430982}
     oldSize: {x: 1.36, y: 1.27}
-    newSize: {x: 2.72, y: 2.54}
+    newSize: {x: 2.2, y: 2.1}
     adaptiveTilingThreshold: 0.5
     drawMode: 1
     adaptiveTiling: 0
@@ -240,9 +240,10 @@ PolygonCollider2D:
   m_Points:
     m_Paths:
     - - {x: 0.13950068, y: -0.6892703}
-      - {x: -0.8657058, y: 0.1784141}
-      - {x: -2.0735872, y: 1.3415076}
-      - {x: -0.79567814, y: 1.8473809}
+      - {x: -0.6431548, y: 0.6076232}
+      - {x: -1.0905408, y: 0.30461293}
+      - {x: -1.6824424, y: 1.0247859}
+      - {x: -0.61578625, y: 1.5138572}
       - {x: 0.44319183, y: -0.47833937}
 --- !u!50 &2340568992007117391
 Rigidbody2D:
@@ -431,7 +432,7 @@ SpriteRenderer:
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 1
-  m_Size: {x: 5.9, y: 5.9}
+  m_Size: {x: 5, y: 5}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -450,8 +451,8 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.5903053, y: 0.02556181}
-  m_Size: {x: 3.0771866, y: 4.509425}
+  m_Offset: {x: 0.59030724, y: -0.05924487}
+  m_Size: {x: 2.8397255, y: 3.6952834}
   m_Direction: 0
 --- !u!50 &7516238224852970472
 Rigidbody2D:
@@ -641,7 +642,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 3}
+  m_AnchoredPosition: {x: 0.49, y: 2.93}
   m_SizeDelta: {x: 4, y: 2}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!223 &7516238225079490590
@@ -1007,7 +1008,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   upRightAngle: -65
   armAlignAngle: 60
-  weaponTipOffset: {x: -3.73, y: 1.43, z: 0}
 --- !u!212 &3697788780731461818
 SpriteRenderer:
   m_ObjectHideFlags: 0
