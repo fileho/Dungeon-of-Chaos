@@ -192,7 +192,10 @@ public class Character : Unit
 
         float staminaCost = attack.GetStaminaCost();
         if (!stats.HasStamina(staminaCost))
+        {
+            InGameUIManager.instance.NotEnoughStamina();
             return;
+        }
 
         stats.ConsumeStamina(staminaCost);
         attack.Attack();

@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -43,6 +44,9 @@ public class InGameUIManager : MonoBehaviour
     private GameObject settings;
     private SkillSystem skillSystem;
 
+    private CanvasGroup manaCanvasGroup;
+    private CanvasGroup staminaCanvasGroup;
+
     // Delay after which it is possible to open the settings UI so it cannot be opened accidentally
     private float openUIstartDelay = 0.25f;
 
@@ -59,6 +63,8 @@ public class InGameUIManager : MonoBehaviour
         bossHPbar.value = 1;
         bossHPbar.gameObject.SetActive(false);
         bossName.gameObject.SetActive(false);
+        manaCanvasGroup = manaBar.GetComponent<CanvasGroup>();
+        staminaCanvasGroup = staminaBar.GetComponent<CanvasGroup>();
     }
 
     private void Update()
@@ -104,6 +110,16 @@ public class InGameUIManager : MonoBehaviour
         bossHPbar.gameObject.SetActive(true);
         bossName.gameObject.SetActive(true);
         bossName.text = bName;
+    }
+
+    public void NotEnoughMana()
+    {
+        StartCoroutine(FlashBar(manaCanvasGroup));
+    }
+
+    public void NotEnoughStamina()
+    {
+        StartCoroutine(FlashBar(staminaCanvasGroup));
     }
 
     public void SetArmorBar(float value)
@@ -183,5 +199,19 @@ public class InGameUIManager : MonoBehaviour
         }
 
         settings.SetActive(!isActive);
+    }
+
+    private IEnumerator FlashBar(CanvasGroup cg)
+    {
+        const float duration = 0.4f;
+        float time = 0;
+
+        while (time < duration)
+        {
+            time += Time.deltaTime;
+            float t = time / duration;
+            cg.alpha = 1 - t * (1 - t) * 3;
+            yield return null;
+        }
     }
 }
