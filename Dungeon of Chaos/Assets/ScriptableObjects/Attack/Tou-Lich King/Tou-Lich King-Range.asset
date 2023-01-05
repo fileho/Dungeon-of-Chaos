@@ -25,6 +25,7 @@ MonoBehaviour:
   indicator: {fileID: 5248374025804181554, guid: bd368bb0dca0445629bdf0b149f13967, type: 3}
   indicatorConfiguration: {fileID: 11400000, guid: 406d643571fbd41aeb8fa4d411a560f5, type: 2}
   type: 0
+  attackEffect: {fileID: 0}
   swingSFX:
     soundCategory: 2
     sound: 24
@@ -38,5 +39,5 @@ MonoBehaviour:
     pitch: 1
     priority: 0
   projectile: {fileID: 1052187207571410619, guid: 07725d23fa80e469b83e030ca9c065e6, type: 3}
-  projectileConfiguration: {fileID: 11400000, guid: 1432104e8cd1e449c8be964a505c5de4, type: 2}
+  projectileConfiguration: {fileID: 11400000, guid: 04f2a5827e2cf499ca2196bdb412cf18, type: 2}
   wandReach: 1
