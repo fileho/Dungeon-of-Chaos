@@ -57,7 +57,7 @@ public class Chest : MonoBehaviour, IMapSavable
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (!collision.CompareTag("Player"))
+        if (isOpened || !collision.CompareTag("Player"))
             return;
 
         tooltipCanvas.SetActive(true);
@@ -81,6 +81,7 @@ public class Chest : MonoBehaviour, IMapSavable
     {
         if (isOpened)
             return;
+        tooltipCanvas.SetActive(false);
         SoundManager.instance.PlaySound(chestOpen);
         DropLoot();
         DrawOpened();
