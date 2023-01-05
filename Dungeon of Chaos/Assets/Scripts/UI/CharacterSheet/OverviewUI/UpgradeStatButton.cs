@@ -7,7 +7,17 @@ using UnityEngine.Events;
 
 public class UpgradeStatButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerClickHandler, IPointerUpHandler, IPointerDownHandler
 {
+    private enum Stat
+    {
+        Strength,
+        Intelligence,
+        Constitution, 
+        Endurance,
+        Wisdom
+    }
+
     [SerializeField] private UnityEvent changeStat;
+    [SerializeField] private Stat stat;
 
     [SerializeField] private Color idle;
     [SerializeField] private Color hover;
@@ -71,6 +81,25 @@ public class UpgradeStatButton : MonoBehaviour, IPointerEnterHandler, IPointerEx
     public void OnPointerDown(PointerEventData eventData)
     {
         gameObject.GetComponent<Image>().color = selected;
+    }
+
+    public bool CanUpgrade()
+    {
+        switch (stat)
+        {
+            case Stat.Strength:
+                return Character.instance.stats.CanUpgradeStrength();
+            case Stat.Intelligence:
+                return Character.instance.stats.CanUpgradeIntelligence();
+            case Stat.Constitution:
+                return Character.instance.stats.CanUpgradeConstitution();
+            case Stat.Endurance:
+                return Character.instance.stats.CanUpgradeEndurance();
+            case Stat.Wisdom:
+                return Character.instance.stats.CanUpgradeWisdom();
+            default:
+                return true;
+        }
     }
 }
 

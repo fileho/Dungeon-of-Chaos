@@ -39,6 +39,13 @@ public class PrimaryStats
     [SerializeField]
     private StatsModifiers statsModifiers;
 
+    private const int max = 25;
+
+    public bool CanUpgradeStat(float val)
+    {
+        return (int)val < max;
+    }
+
     private float ModifiedStat(int l, float value)
     {
         if (statsModifiers != null)
@@ -52,6 +59,7 @@ public class PrimaryStats
             return value;
         return ModifiedStat(l, value) * statsModifiers.GetHPMultiplier();
     }
+
     public float GetDamage(int l)
     {
         float s = ModifiedStat(l, strength);
