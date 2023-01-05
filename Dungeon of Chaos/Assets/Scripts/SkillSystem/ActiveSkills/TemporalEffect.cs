@@ -1,4 +1,4 @@
-using System.Collections;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -14,7 +14,7 @@ public abstract class TemporalEffect : ISkillEffect
 
     public override string[] GetEffectsValues(Unit owner)
     {
-        return new string[] { GetValue(owner).ToString(), duration.ToString() + " seconds" };
+        return new string[] { Math.Round(GetValue(owner),2).ToString(), duration.ToString() + " seconds" };
     }
 
     protected float GetValue(Unit owner) 

@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Events;
+using System;
 
 public abstract class RegenerableStatBuff : ISkillEffect
 {
@@ -8,7 +8,7 @@ public abstract class RegenerableStatBuff : ISkillEffect
 
     public override string[] GetEffectsValues(Unit owner)
     {
-        return new string[]{ GetValue(owner).ToString()};
+        return new string[]{ Math.Round(GetValue(owner),2).ToString()};
     }
 
     private float GetValue(Unit owner)

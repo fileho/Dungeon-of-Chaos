@@ -1,5 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
+using System;
 using UnityEngine;
 
 [CreateAssetMenu(menuName = "SO/Skills/SkillEffects/ArmorBoost")]
@@ -7,7 +6,7 @@ public class ArmorBoost : OneTimeTemporalEffect
 {
     public override string[] GetEffectsValues(Unit owner)
     {
-        return new string[] { GetValue(owner).ToString()};
+        return new string[] { Math.Round(GetValue(owner),2).ToString()};
     }
     protected override void ApplyEffect()
     {

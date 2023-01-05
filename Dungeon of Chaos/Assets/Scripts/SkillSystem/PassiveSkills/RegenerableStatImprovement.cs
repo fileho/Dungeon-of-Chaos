@@ -1,5 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
+using System;
 using UnityEngine;
 
 public abstract class RegenerableStatImprovement : IPassiveSkill
@@ -34,7 +33,7 @@ public abstract class RegenerableStatImprovement : IPassiveSkill
     public override string GetEffectDescription()
     {
         return string.Format(skillData.GetDescription(),
-            CalculateRegen(Character.instance.stats), CalculateCost(Character.instance.stats));
+            Math.Round(CalculateRegen(Character.instance.stats),2), Math.Round(CalculateCost(Character.instance.stats),2));
     }
 
     public override void Unequip(Stats stats)
