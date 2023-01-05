@@ -18,6 +18,6 @@ MonoBehaviour:
     icon: {fileID: 21300000, guid: 912f2333824ee3946814a450e92ab11a, type: 3}
   cooldown: 5
   manaCost: 0
-  staminaCost: 30
+  staminaCost: 45
   effects:
   - {fileID: 11400000, guid: 9290ca00097828b4ba7b2476ef06dd36, type: 2}
