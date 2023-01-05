@@ -1,10 +1,11 @@
 using UnityEngine;
+using System;
 
 public abstract class IncreaseStat : IPassiveSkill
 {
-    [SerializeField] private float amount;
+    [SerializeField] protected float amount;
 
-    private float value;
+    protected float value;
 
     public override void Equip(Stats stats)
     {
@@ -22,6 +23,6 @@ public abstract class IncreaseStat : IPassiveSkill
     public override string GetEffectDescription()
     {
         value = amount * (1 + Character.instance.stats.GetLevel() * 0.2f);
-        return string.Format(skillData.GetDescription(), value.ToString());
+        return string.Format(skillData.GetDescription(), Math.Round(value,2).ToString());
     }
 }

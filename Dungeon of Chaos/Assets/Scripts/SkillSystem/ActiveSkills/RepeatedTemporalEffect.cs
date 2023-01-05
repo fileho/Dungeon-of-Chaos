@@ -1,7 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
+using System;
 using UnityEngine;
-using UnityEngine.Events;
 
 public abstract class RepeatedTemporalEffect : TemporalEffect
 {
@@ -10,7 +8,7 @@ public abstract class RepeatedTemporalEffect : TemporalEffect
 
     public override string[] GetEffectsValues(Unit owner)
     {
-        return new string[] { GetValue(owner).ToString(), frequency.ToString(), duration.ToString() };
+        return new string[] { Math.Round(GetValue(owner),2).ToString(), frequency.ToString(), duration.ToString() };
     }
 
     public override bool Update()

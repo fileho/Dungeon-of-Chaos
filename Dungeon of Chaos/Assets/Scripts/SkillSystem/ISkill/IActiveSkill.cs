@@ -1,7 +1,4 @@
-using System.Collections;
 using System.Collections.Generic;
-using System.Net.Configuration;
-using System.Reflection;
 using UnityEngine;
 
 [CreateAssetMenu(menuName = "SO/Skills/Skills/Active")]
