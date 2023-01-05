@@ -387,6 +387,11 @@ public class Stats : ScriptableObject
         return primaryStats.strength;
     }
 
+    public bool CanUpgradeStrength()
+    {
+        return primaryStats.CanUpgradeStat(primaryStats.strength);
+    }
+
     public void IncreaseIntelligence()
     {
         primaryStats.intelligence++;
@@ -399,6 +404,11 @@ public class Stats : ScriptableObject
     public float GetIntelligence()
     {
         return primaryStats.intelligence;
+    }
+
+    public bool CanUpgradeIntelligence()
+    {
+        return primaryStats.CanUpgradeStat(primaryStats.intelligence);
     }
 
     public void IncreaseConstitution()
@@ -417,6 +427,11 @@ public class Stats : ScriptableObject
         return primaryStats.constitution;
     }
 
+    public bool CanUpgradeConstitution()
+    {
+        return primaryStats.CanUpgradeStat(primaryStats.constitution);
+    }
+
     public void IncreaseEndurance()
     {
         primaryStats.endurance++;
@@ -432,6 +447,10 @@ public class Stats : ScriptableObject
     {
         return primaryStats.endurance;
     }
+    public bool CanUpgradeEndurance()
+    {
+        return primaryStats.CanUpgradeStat(primaryStats.endurance);
+    }
 
     public void IncreaseWisdom()
     {
@@ -445,6 +464,11 @@ public class Stats : ScriptableObject
     public float GetWisdom()
     {
         return primaryStats.wisdom;
+    }
+
+    public bool CanUpgradeWisdom()
+    {
+        return primaryStats.CanUpgradeStat(primaryStats.wisdom);
     }
     #endregion
 

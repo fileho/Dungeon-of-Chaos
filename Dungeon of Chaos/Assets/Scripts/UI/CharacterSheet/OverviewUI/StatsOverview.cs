@@ -70,7 +70,7 @@ public class StatsOverview : MonoBehaviour
     {
         foreach (GameObject btn in statsIncreaseButtons)
         {
-            btn.SetActive(show); 
+            btn.SetActive(show && btn.GetComponent<UpgradeStatButton>().CanUpgrade()); 
         }            
     }
 
