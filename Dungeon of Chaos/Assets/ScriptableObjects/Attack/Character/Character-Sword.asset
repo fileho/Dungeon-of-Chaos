@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   range: 3.5
   damage: 1
-  staminaCost: 25
+  staminaCost: 35
   manaCost: 0
   rangeWeight: 1
   damageWeight: 1
@@ -25,6 +25,7 @@ MonoBehaviour:
   indicator: {fileID: 0}
   indicatorConfiguration: {fileID: 0}
   type: 1
+  attackEffect: {fileID: 0}
   swingSFX:
     soundCategory: 2
     sound: 1
@@ -33,12 +34,6 @@ MonoBehaviour:
     priority: 0
   impactSFX:
     soundCategory: 2
-    sound: 0
-    volume: 1
-    pitch: 1
-    priority: 0
-  indicatorSFX:
-    soundCategory: 0
     sound: 0
     volume: 1
     pitch: 1
