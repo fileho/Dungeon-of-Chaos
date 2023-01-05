@@ -1,3 +1,4 @@
+using System.Linq;
 using UnityEngine;
 using UnityEngine.Assertions;
 
@@ -16,6 +17,8 @@ public class Checkpoint : MonoBehaviour, IMapSavable
     private SoundSettings checkpointSFX;
     private const float sfxRange = 50f;
     private SoundData sfx = null;
+
+    private const float enemyRadius = 20f;
 
     [SerializeField]
 #if UNITY_EDITOR
@@ -51,8 +54,22 @@ public class Checkpoint : MonoBehaviour, IMapSavable
         if (!Input.GetKeyDown(KeyCode.F))
             return;
 
-        if (((Vector2)transform.position - (Vector2)Character.instance.transform.position).magnitude < range)
+        if (!(((Vector2)transform.position - (Vector2)Character.instance.transform.position).magnitude < range))
+            return;
+        if (!CheckEnemyNearby())
+        {
             Interact();
+        }
+        else
+        {
+            TooltipSystem.instance.ShowMessage("Enemies are nearby!", 1.5f);
+        }
+    }
+
+    private bool CheckEnemyNearby()
+    {
+        var cols = Physics2D.OverlapCircleAll(transform.position, enemyRadius, LayerMask.GetMask("Enemy"));
+        return cols.Length > 0;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -67,6 +84,8 @@ public class Checkpoint : MonoBehaviour, IMapSavable
     {
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, range);
+
+        Gizmos.DrawWireSphere(transform.position, enemyRadius);
     }
 
     private void OnTriggerExit2D(Collider2D collision)
