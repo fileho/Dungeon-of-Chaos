@@ -6,6 +6,8 @@ using UnityEngine.Assertions;
 public class Chest : MonoBehaviour, IMapSavable
 {
     [SerializeField]
+    private float range = 2.5f;
+    [SerializeField]
     private Sprite openedSprite;
     [SerializeField]
     private GameObject loot;
@@ -28,6 +30,7 @@ public class Chest : MonoBehaviour, IMapSavable
     private SpriteRenderer spriteRenderer;
     private GameObject shadowClosed;
     private GameObject shadowOpened;
+    private GameObject tooltipCanvas;
 
     private bool isOpened;
 
@@ -39,18 +42,46 @@ public class Chest : MonoBehaviour, IMapSavable
         shadowClosed = transform.Find("ShadowClosed").gameObject;
         shadowOpened = transform.Find("ShadowOpened").gameObject;
         shadowOpened.SetActive(false);
+        tooltipCanvas = transform.Find("Canvas").gameObject;
+        tooltipCanvas.SetActive(false);
+    }
+
+    private void Update()
+    {
+        if (!Input.GetKeyDown(KeyCode.F))
+            return;
+
+        if (((Vector2)transform.position - (Vector2)Character.instance.transform.position).magnitude < range)
+            OpenBox();
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (isOpened)
+        if (!collision.CompareTag("Player"))
             return;
-        SoundManager.instance.PlaySound(chestOpen);
-        OpenBox();
+
+        tooltipCanvas.SetActive(true);
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(transform.position, range);
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (!collision.CompareTag("Player"))
+            return;
+
+        tooltipCanvas.SetActive(false);
     }
 
     private void OpenBox()
     {
+        if (isOpened)
+            return;
+        SoundManager.instance.PlaySound(chestOpen);
         DropLoot();
         DrawOpened();
         var ps = GetComponentInChildren<ParticleSystem>();
