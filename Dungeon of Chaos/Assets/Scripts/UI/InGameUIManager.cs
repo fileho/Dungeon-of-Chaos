@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -31,6 +32,10 @@ public class InGameUIManager : MonoBehaviour
     private Image dashCooldown;
     [SerializeField]
     private Image secondaryCooldown;
+    [SerializeField]
+    private Slider bossHPbar;
+    [SerializeField]
+    private TMP_Text bossName;
 
     public static InGameUIManager instance;
 
@@ -51,6 +56,9 @@ public class InGameUIManager : MonoBehaviour
     private void Start()
     {
         skillSystem = FindObjectOfType<SkillSystem>();
+        bossHPbar.value = 1;
+        bossHPbar.gameObject.SetActive(false);
+        bossName.gameObject.SetActive(false);
     }
 
     private void Update()
@@ -84,6 +92,18 @@ public class InGameUIManager : MonoBehaviour
     public void SetXpBar(float value)
     {
         xpBar.value = value;
+    }
+
+    public void SetBossHPbar(float value)
+    {
+        bossHPbar.value = value;
+    }
+
+    public void StartBossFight(string bName)
+    {
+        bossHPbar.gameObject.SetActive(true);
+        bossName.gameObject.SetActive(true);
+        bossName.text = bName;
     }
 
     public void SetArmorBar(float value)
