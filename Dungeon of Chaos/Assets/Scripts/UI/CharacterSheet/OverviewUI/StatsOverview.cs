@@ -1,10 +1,6 @@
-
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Events;
-using UnityEngine.UI;
 using TMPro;
 
 public class StatsOverview : MonoBehaviour
@@ -86,7 +82,7 @@ public class StatsOverview : MonoBehaviour
 
     private void SetStat(float value, TextMeshProUGUI textGUI)
     {
-        textGUI.text = value.ToString();
+        textGUI.text = Math.Round(value,1).ToString();
     }
 
     public void SetStrength(float value)
