@@ -102,6 +102,11 @@ public class SkillButtonSecondary : SkillButton
 
     public override void SetRequirementsOverlay()
     {
-        requirementsNotMet.SetActive(!skillSystem.CanUnlock(skillInfo));
+        requirementsNotMet.SetActive(!skillSystem.CanUnlock(skillInfo) && !skillInfo.IsUnlocked());
+    }
+
+    public override void SetHighlightOverlay()
+    {
+        highlight.SetActive(skillSystem.CanUnlock(skillInfo) && skillInfo.IsUnlocked());
     }
 }

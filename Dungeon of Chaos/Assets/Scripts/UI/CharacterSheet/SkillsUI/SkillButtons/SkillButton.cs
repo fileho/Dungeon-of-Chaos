@@ -10,6 +10,7 @@ public abstract class SkillButton : MonoBehaviour, IPointerDownHandler, IPointer
     [SerializeField] protected Text level;
     [SerializeField] protected GameObject lockObj;
     [SerializeField] protected GameObject requirementsNotMet;
+    [SerializeField] protected GameObject highlight;
 
     
     [SerializeField] protected SoundSettings hover;
@@ -88,4 +89,6 @@ public abstract class SkillButton : MonoBehaviour, IPointerDownHandler, IPointer
     public abstract void SetLevel();
 
     public abstract void SetRequirementsOverlay();
+
+    public abstract void SetHighlightOverlay();
 }

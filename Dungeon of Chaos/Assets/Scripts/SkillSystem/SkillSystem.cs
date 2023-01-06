@@ -271,9 +271,9 @@ public class SkillSystem : MonoBehaviour
         if (!IsValidActive(index))
             return;
         SkillInfoActive skill = activeSkills[index];
-        levelling.ConsumeSkillPoints(activeSkills[index].GetUnlockingRequirements().GetCost());
         skill.Unlock();
         skill.Upgrade();
+        levelling.ConsumeSkillPoints(activeSkills[index].GetUnlockingRequirements().GetCost());
         TooltipSystem.instance.Show(skill.GetSkillData().GetName(), "Active Skill",
             skill.GetCurrentDescription(), skill.GetNextDescription());
     }
