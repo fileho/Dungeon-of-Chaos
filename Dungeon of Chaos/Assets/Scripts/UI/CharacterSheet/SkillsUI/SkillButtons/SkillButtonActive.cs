@@ -21,6 +21,7 @@ public class SkillButtonActive : SkillButton
         SetLevel();
         SetIcon();
         SetRequirementsOverlay();
+        SetHighlightOverlay();
     }
 
     public override void OnBeginDrag(PointerEventData eventData)
@@ -102,6 +103,11 @@ public class SkillButtonActive : SkillButton
 
     public override void SetRequirementsOverlay()
     {
-        requirementsNotMet.SetActive(!skillSystem.CanUnlock(skillInfo));
+        requirementsNotMet.SetActive(!skillSystem.CanUnlock(skillInfo) && !skillInfo.IsUnlocked());
+    }
+
+    public override void SetHighlightOverlay()
+    {
+        highlight.SetActive(skillInfo.IsUnlocked() && skillSystem.CanUnlock(skillInfo));
     }
 }
