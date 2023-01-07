@@ -53,9 +53,9 @@ public class IActiveSkill : ISkill
 
     public override string GetCostDescription()
     {
-        string mCost = RecalculateManaCost() > 0 ? "Mana Cost: " + RecalculateManaCost().ToString() + " " : "";
-        string sCost = RecalculateStaminaCost() > 0 ? "Stamina Cost: " + RecalculateStaminaCost().ToString() + " " : "";
-        string cool = RecalculateCooldown() > 0 ? "Cooldown: " + RecalculateCooldown().ToString() + " s" : "";
+        string mCost = RecalculateManaCost() > 0 ? "<i>Mana Cost:</i> " + RecalculateManaCost().ToString() + " " : "";
+        string sCost = RecalculateStaminaCost() > 0 ? "<i>Stamina Cost:</i> " + RecalculateStaminaCost().ToString() + " " : "";
+        string cool = RecalculateCooldown() > 0 ? "<i>Cooldown:</i> " + RecalculateCooldown().ToString() + " s" : "";
         return mCost + sCost + cool;
     }
 
