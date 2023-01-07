@@ -34,4 +34,8 @@ public class ApplyEffectOnWeapon : OneTimeTemporalEffect
             }
         }
     }
+    protected override void Init()
+    {
+        InitStatusIcon(StatusEffectType.FlamingSword);
+    }
 }

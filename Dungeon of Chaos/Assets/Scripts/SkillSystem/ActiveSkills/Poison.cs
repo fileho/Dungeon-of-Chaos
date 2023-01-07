@@ -62,4 +62,9 @@ public class Poison : RepeatedTemporalEffect
             deleted++;
         }
     }
+
+    protected override void Init()
+    {
+        return;
+    }
 }

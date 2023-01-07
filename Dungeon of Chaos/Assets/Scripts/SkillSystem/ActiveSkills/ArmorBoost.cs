@@ -18,4 +18,9 @@ public class ArmorBoost : OneTimeTemporalEffect
     {
         return;
     }
+
+    protected override void Init()
+    {
+        return;
+    }
 }

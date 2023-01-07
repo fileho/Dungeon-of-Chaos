@@ -6,6 +6,8 @@ public abstract class TemporalEffect : ISkillEffect
 {
     [SerializeField] protected float duration;
     [SerializeField] private float value;
+    
+    protected StatusEffectIcon effectIcon;
 
     protected float timeLeft;
     protected float val;
@@ -22,12 +24,33 @@ public abstract class TemporalEffect : ISkillEffect
         return value * owner.stats.GetSpellPower();
     }
 
+    protected abstract void Init();
+
+    protected void InitStatusIcon(StatusEffectType type)
+    {
+        var icons = FindObjectsOfType<StatusEffectIcon>();
+        foreach (StatusEffectIcon icon in icons)
+        {
+            if (icon.GetEffectType() == type)
+            {
+                effectIcon = icon;
+                return;
+            }
+        }
+    }
+
     protected override void ApplyOnTargets(Unit unit, List<Unit> targets)
     {
         this.targets = targets;
         val = GetValue(unit);
         timeLeft = duration;
         ApplyEffect();
+        Init();
+        if (targets.Contains(Character.instance) && effectIcon != null)
+        {
+            effectIcon.Show();
+            effectIcon.UpdateTime(duration, timeLeft);
+        }
     }
 
     protected abstract void ApplyEffect();
@@ -39,8 +62,12 @@ public abstract class TemporalEffect : ISkillEffect
         if (timeLeft > 0)
         {
             timeLeft -= Time.deltaTime;
+            if (effectIcon != null)
+                effectIcon.UpdateTime(duration, timeLeft);
             return true;
         }
+        if (effectIcon != null)
+            effectIcon.Hide();
         return false;
     }
 }
