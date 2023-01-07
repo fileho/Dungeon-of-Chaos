@@ -71,6 +71,7 @@ public class Essence : MonoBehaviour
     private void Collect()
     {
         SoundManager.instance.PlaySound(essencePickupSFX);
+        Debug.Log("Essence Value: " + value);
         switch (essenceType)
         {
             case EssenceType.health:

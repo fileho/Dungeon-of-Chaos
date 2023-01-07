@@ -14,7 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   xpMultiplier: 1
   baseXP: 10
-  essenceChance: 15
-  healthEssence: 5
-  staminaEssence: 5
-  manaEssence: 5
+  essenceChance: 20
+  manaEssenceChanceMultiplier: 1.1
+  healthEssence: 20
+  staminaEssence: 15
+  manaEssence: 20

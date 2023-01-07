@@ -13,13 +13,14 @@ public class LootModifiers : ScriptableObject
 
     [Header("Essence Drop Chance")]
     [SerializeField] private float essenceChance;
+    [SerializeField] private float manaEssenceChanceMultiplier;
     private const float lvlEssenceChanceMultiplier = 1.08f;
 
     [Header("Essence Values")]
     [SerializeField] private float healthEssence;  
     [SerializeField] private float staminaEssence;
     [SerializeField] private float manaEssence;
-    private const float essenceLvlMultiplier = 1.15f;
+    private const float essenceLvlMultiplier = 1.25f;
 
     private float LvlMultiplier(float multiplier, int lvl)
     {
@@ -34,6 +35,11 @@ public class LootModifiers : ScriptableObject
     public float GetEssenceChance(int lvl)
     {
         return (essenceChance/100)*LvlMultiplier(lvlEssenceChanceMultiplier, lvl);
+    }
+
+    public float GetManaEssenceChance(int lvl)
+    {
+        return GetEssenceChance(lvl) * manaEssenceChanceMultiplier;
     }
 
     private float GetEssenceValue(int lvl, float baseEssence)
