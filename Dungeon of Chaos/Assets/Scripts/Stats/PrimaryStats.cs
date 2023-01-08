@@ -40,10 +40,16 @@ public class PrimaryStats
     private StatsModifiers statsModifiers;
 
     private const int max = 25;
+    private const int min = 10;
 
     public bool CanUpgradeStat(float val)
     {
         return (int)val < max;
+    }
+
+    public bool CanDowngradeStat(float val)
+    {
+        return (int)val > min;
     }
 
     private float ModifiedStat(int l, float value)

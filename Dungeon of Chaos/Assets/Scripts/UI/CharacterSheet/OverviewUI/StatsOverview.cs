@@ -12,6 +12,7 @@ public class StatsOverview : MonoBehaviour
     [SerializeField] private GameObject levelUpButton;
     [SerializeField] private TextMeshProUGUI statsPoints;
     [SerializeField] private List<GameObject> statsIncreaseButtons;
+    [SerializeField] private List<GameObject> statsDecreaseButtons;
 
     [Header("Primary Stats Text")]
     [SerializeField] private TextMeshProUGUI strengthText;
@@ -66,8 +67,16 @@ public class StatsOverview : MonoBehaviour
     {
         foreach (GameObject btn in statsIncreaseButtons)
         {
-            btn.SetActive(show && btn.GetComponent<UpgradeStatButton>().CanUpgrade()); 
+            btn.SetActive(show && btn.GetComponent<ChangeStatButton>().CanUpgrade()); 
         }            
+    }
+
+    public void ShowStatsDecreaseButtons(bool show)
+    {
+        foreach (GameObject btn in statsDecreaseButtons)
+        {
+            btn.SetActive(show && btn.GetComponent<ChangeStatButton>().CanDowngrade());
+        }
     }
 
     public void SetStatsPoints(float value)
