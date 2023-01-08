@@ -5,7 +5,7 @@ using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using UnityEngine.Events;
 
-public class UpgradeStatButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerClickHandler, IPointerUpHandler, IPointerDownHandler
+public class ChangeStatButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerClickHandler, IPointerUpHandler, IPointerDownHandler
 {
     private enum Stat
     {
@@ -53,29 +53,29 @@ public class UpgradeStatButton : MonoBehaviour, IPointerEnterHandler, IPointerEx
         gameObject.GetComponent<Image>().color = idle;
     }
 
-    public void UpgradeStrength()
+    public void ChangeStrength(int mod)
     {
-        Character.instance.stats.IncreaseStrength();
+        Character.instance.stats.ChangeStrength(mod);
     }
 
-    public void UpgradeIntelligence()
+    public void ChangeIntelligence(int mod)
     {
-        Character.instance.stats.IncreaseIntelligence();
+        Character.instance.stats.ChangeIntelligence(mod);
     }
 
-    public void UpgradeConstitution()
+    public void ChangeConstitution(int mod)
     {
-        Character.instance.stats.IncreaseConstitution();
+        Character.instance.stats.ChangeConstitution(mod);
     }
 
-    public void UpgradeEndurance()
+    public void ChangeEndurance(int mod)
     {
-        Character.instance.stats.IncreaseEndurance();
+        Character.instance.stats.ChangeEndurance(mod);
     }
 
-    public void UpgradeWisdom()
+    public void ChangeWisdom(int mod)
     {
-        Character.instance.stats.IncreaseWisdom();
+        Character.instance.stats.ChangeWisdom(mod);
     }
 
     public void OnPointerDown(PointerEventData eventData)
@@ -101,5 +101,25 @@ public class UpgradeStatButton : MonoBehaviour, IPointerEnterHandler, IPointerEx
                 return true;
         }
     }
+    public bool CanDowngrade()
+    {
+        switch (stat)
+        {
+            case Stat.Strength:
+                return Character.instance.stats.CanDowngradeStrength();
+            case Stat.Intelligence:
+                return Character.instance.stats.CanDowngradeIntelligence();
+            case Stat.Constitution:
+                return Character.instance.stats.CanDowngradeConstitution();
+            case Stat.Endurance:
+                return Character.instance.stats.CanDowngradeEndurance();
+            case Stat.Wisdom:
+                return Character.instance.stats.CanDowngradeWisdom();
+            default:
+                return true;
+        }
+    }
+
+
 }
 
