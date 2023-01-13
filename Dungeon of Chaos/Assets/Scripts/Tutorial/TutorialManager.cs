@@ -69,7 +69,6 @@ public class TutorialManager : MonoBehaviour
 
         while (currentState != TutorialState.Default && PlayerPrefs.GetInt(currentState.ToString(), 0) == 0)
         {
-            Character.instance.BlockInput();
             currentTutorial = transform.Find(currentState.ToString()).gameObject;
             EnableDisableTutorialScreen(true);
             bool pressed = false;
@@ -90,8 +89,6 @@ public class TutorialManager : MonoBehaviour
                 yield return null;
             }
 
-            Character.instance.UnblockInput();
-            Character.instance.UseSkills();
             PlayerPrefs.SetInt(currentState.ToString(), 1);
             EnableDisableTutorialScreen(false);
             yield return new WaitForSeconds(0.5f);
