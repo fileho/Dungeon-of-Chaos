@@ -10,16 +10,12 @@ public class SettingsUIManager : MonoBehaviour
     Slider soundTrackVolume;
     [SerializeField]
     Slider sfxVolume;
-    [SerializeField]
-    Slider brightness;
 
     private void Init()
     {
         masterVolume.value = PlayerPrefsManager.MasterVolume;
         soundTrackVolume.value = PlayerPrefsManager.SoundTrackVolume;
         sfxVolume.value = PlayerPrefsManager.SFXVolume;
-        brightness.value = PlayerPrefsManager.Brightness;
-
     }
 
     private void OnEnable()
@@ -27,7 +23,6 @@ public class SettingsUIManager : MonoBehaviour
         masterVolume.onValueChanged.AddListener(OnMasterVolumeChanged);
         soundTrackVolume.onValueChanged.AddListener(OnSoundTrackVolumeChanged);
         sfxVolume.onValueChanged.AddListener(OnSFXVolumeChanged);
-        brightness.onValueChanged.AddListener(OnBrightnessChanged);
 
         Init();
     }
@@ -37,7 +32,6 @@ public class SettingsUIManager : MonoBehaviour
         masterVolume.onValueChanged.RemoveListener(OnMasterVolumeChanged);
         soundTrackVolume.onValueChanged.RemoveListener(OnSoundTrackVolumeChanged);
         sfxVolume.onValueChanged.RemoveListener(OnSFXVolumeChanged);
-        brightness.onValueChanged.RemoveListener(OnBrightnessChanged);
     }
 
     void OnMasterVolumeChanged(float value)
@@ -56,11 +50,5 @@ public class SettingsUIManager : MonoBehaviour
     {
         PlayerPrefsManager.SFXVolume = sfxVolume.value;
         UIEvents.SFXVolumeChanged?.Invoke(value);
-    }
-
-    void OnBrightnessChanged(float value)
-    {
-        PlayerPrefsManager.Brightness = brightness.value;
-        UIEvents.BrightnessChanged?.Invoke(value);
     }
 }
