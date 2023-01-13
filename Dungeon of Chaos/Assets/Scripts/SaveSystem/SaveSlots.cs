@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Globalization;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -12,6 +13,8 @@ public class SaveSlots : MonoBehaviour
 
     void Start()
     {
+        CultureInfo.CurrentCulture = new CultureInfo("cs-cz");
+
         saveSystem = FindObjectOfType<SaveSystem>();
 
         for (int i = 0; i < buttons.Count; i++)
