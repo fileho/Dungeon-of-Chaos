@@ -2958,7 +2958,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 272.4283, y: -45.563}
+  m_AnchoredPosition: {x: 272.42834, y: -45.563}
   m_SizeDelta: {x: 98, y: 72}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &493887442531669259
@@ -4494,7 +4494,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 54.485664, y: -45.563}
+  m_AnchoredPosition: {x: 54.48567, y: -45.563}
   m_SizeDelta: {x: 98, y: 72}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &493887442741753753
@@ -5711,6 +5711,7 @@ MonoBehaviour:
   bossHPbar: {fileID: 8101731930876240157}
   bossName: {fileID: 6214739381743744224}
   settings: {fileID: 493887442690776190}
+  panelPopUp: {fileID: 2237365464210714039}
 --- !u!1 &493887442942057518
 GameObject:
   m_ObjectHideFlags: 0
@@ -14428,7 +14429,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 493887442939434517}
         m_TargetAssemblyTypeName: InGameUIManager, Assembly-CSharp
-        m_MethodName: ToggleSettings
+        m_MethodName: MainMenu
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -15560,7 +15561,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1106798372991067173}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 493887442939434517}
+        m_TargetAssemblyTypeName: InGameUIManager, Assembly-CSharp
+        m_MethodName: MainMenuConfirm
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &5327924272157944065
 GameObject:
   m_ObjectHideFlags: 0
