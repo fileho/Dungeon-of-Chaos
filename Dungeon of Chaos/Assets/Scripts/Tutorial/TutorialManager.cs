@@ -1,9 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
-using static System.Runtime.CompilerServices.RuntimeHelpers;
-using static UnityEngine.Rendering.DebugUI;
-
 
 public enum TutorialState
 {
@@ -32,7 +30,6 @@ public class TutorialManager : MonoBehaviour
     private Coroutine coroutine;
     private GameObject currentTutorial;
 
-
     public List<Keys> keys;
 
     // Start is called before the first frame update
@@ -47,7 +44,6 @@ public class TutorialManager : MonoBehaviour
     {
         coroutine = StartCoroutine(ShowTutorial(state));
     }
-
 
     public void Hide()
     {
@@ -67,26 +63,24 @@ public class TutorialManager : MonoBehaviour
             animator.StopPlayback();
     }
 
-
     IEnumerator ShowTutorial(TutorialState state)
     {
         currentState = state;
 
         while (currentState != TutorialState.Default && PlayerPrefs.GetInt(currentState.ToString(), 0) == 0)
         {
+            Character.instance.BlockInput();
             currentTutorial = transform.Find(currentState.ToString()).gameObject;
             EnableDisableTutorialScreen(true);
             bool pressed = false;
-
 
             KeyCode[] keycodes = keys[(int)currentState].KeyCodes;
             while (!pressed)
             {
                 if (keycodes.Length > 0)
                 {
-                    foreach (KeyCode key in keycodes)
-                        if (Input.GetKeyDown(key))
-                            pressed = true;
+                    if (keycodes.Any(key => Input.GetKeyDown(key)))
+                        break;
                 }
                 else
                 {
@@ -96,22 +90,23 @@ public class TutorialManager : MonoBehaviour
                 yield return null;
             }
 
-
+            Character.instance.UnblockInput();
+            Character.instance.UseSkills();
             PlayerPrefs.SetInt(currentState.ToString(), 1);
             EnableDisableTutorialScreen(false);
             yield return new WaitForSeconds(0.5f);
 
             switch (currentState)
             {
-                case TutorialState.Movement:
-                    currentState = TutorialState.Dash;
-                    break;
-                case TutorialState.Dash:
-                    currentState = TutorialState.Attack;
-                    break;
-                default:
-                    currentState = TutorialState.Default;
-                    break;
+            case TutorialState.Movement:
+                currentState = TutorialState.Dash;
+                break;
+            case TutorialState.Dash:
+                currentState = TutorialState.Attack;
+                break;
+            default:
+                currentState = TutorialState.Default;
+                break;
             }
         }
         yield return null;

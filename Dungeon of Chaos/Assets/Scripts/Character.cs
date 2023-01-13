@@ -102,7 +102,7 @@ public class Character : Unit
         SkillSystem.UpdateCooldowns();
     }
 
-    private void UseSkills()
+    public void UseSkills()
     {
         if (Input.GetKeyDown(KeyCode.Q))
         {
