@@ -13,6 +13,7 @@ public class SkillTooltip : Tooltip
     [SerializeField] private TooltipContent content2;
 
     [SerializeField] private GameObject message;
+    [SerializeField] private GameObject separator;
 
     private const float headerSizeModifier = 2.5f;
 
@@ -32,6 +33,9 @@ public class SkillTooltip : Tooltip
 
         content1.Fill(current);
         content2.Fill(next);
+
+        separator.SetActive(true);
+        separator.GetComponent<RectTransform>().sizeDelta = new Vector2(content1.GetComponent<RectTransform>().rect.width, 3);
     } 
 
     public void DisplayMessage(string message)
