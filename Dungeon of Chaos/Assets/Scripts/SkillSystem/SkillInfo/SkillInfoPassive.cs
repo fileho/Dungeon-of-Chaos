@@ -13,6 +13,8 @@ public class SkillInfoPassive : SkillInfo<IPassiveSkill>
     }
     public void Equip(Stats stats)
     {
+        if (level - 1 < 0)
+            return;
         skills[level-1].Equip(stats);
     }
 

@@ -47,6 +47,7 @@ public abstract class SkillButton : MonoBehaviour, IPointerDownHandler, IPointer
         rightClick = true;
         time = 0f;
         lockObj.GetComponent<Image>().fillAmount = 1;
+        highlight.GetComponent<Image>().fillAmount = 1;
     }
 
     public abstract void OnPointerEnter(PointerEventData eventData);
@@ -73,11 +74,12 @@ public abstract class SkillButton : MonoBehaviour, IPointerDownHandler, IPointer
             if (lockObj.activeInHierarchy)
                 lockObj.GetComponent<Image>().fillAmount = 1 - (time / upgradeTime);
             else
-                lockObj.GetComponent<Image>().fillAmount = time / upgradeTime;
+                highlight.GetComponent<Image>().fillAmount = 1 - (time / upgradeTime);
         }
         if (time >= upgradeTime)
         {
             lockObj.SetActive(false);
+            highlight.SetActive(false);
             Upgrade();
         }
     }
