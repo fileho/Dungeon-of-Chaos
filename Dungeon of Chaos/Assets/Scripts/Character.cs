@@ -84,6 +84,7 @@ public class Character : Unit
     public void BlockInput()
     {
         ++blockedInput;
+        movement.MuteSfx();
     }
 
     public void UnblockInput()

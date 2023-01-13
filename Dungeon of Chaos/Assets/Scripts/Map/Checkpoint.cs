@@ -100,6 +100,7 @@ public class Checkpoint : MonoBehaviour, IMapSavable
     {
         saveSystem.DungeonData.AddSavedUid(id);
         tooltipCanvas.SetActive(false);
+        Character.instance.BlockInput();
         // Disable setting overlay
         gameUI.SetActive(false);
         characterSheet.Open();

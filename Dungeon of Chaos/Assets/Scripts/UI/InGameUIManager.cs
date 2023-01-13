@@ -210,7 +210,8 @@ public class InGameUIManager : MonoBehaviour
         {
             time += Time.deltaTime;
             float t = time / duration;
-            cg.alpha = 1 - t * (1 - t) * 3;
+            if (cg != null)
+                cg.alpha = 1 - t * (1 - t) * 3;
             yield return null;
         }
     }
