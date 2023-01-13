@@ -129,4 +129,15 @@ public class SaveSystem : MonoBehaviour
         if (File.Exists(path))
             File.Delete(path);
     }
+
+    public void RemoveAllSaves()
+    {
+        const int saveSlots = 3;
+        for (int i = 0; i < saveSlots; i++)
+        {
+            string path = CreatePath(i);
+            if (File.Exists(path))
+                File.Delete(path);
+        }
+    }
 }
