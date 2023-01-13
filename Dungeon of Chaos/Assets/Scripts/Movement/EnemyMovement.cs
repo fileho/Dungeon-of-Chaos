@@ -14,13 +14,19 @@ public class EnemyMovement : IMovement
     //[SerializeField] private float steerForce = 1f;
     //[SerializeField] private float lookAheadDistance = 0.5f;
     [Header("Separation")]
-    [SerializeField] private float separationForce = 1f;
-    [SerializeField] private float separationWeight = 1f;
-    [SerializeField] private float separationDistance = 1.25f;
-    [SerializeField] private float separationDetectionRadius = 7.5f;
+    [SerializeField]
+    private float separationForce = 1f;
+    [SerializeField]
+    private float separationWeight = 1f;
+    [SerializeField]
+    private float separationDistance = 1.25f;
+    [SerializeField]
+    private float separationDetectionRadius = 7.5f;
 
-    [SerializeField] private LayerMask obstacleLayer;
-    [SerializeField] private LayerMask wallLayer;
+    [SerializeField]
+    private LayerMask obstacleLayer;
+    [SerializeField]
+    private LayerMask wallLayer;
 
     private const int maxEvadeTargets = 5;
     [Header("Layers")]
@@ -51,10 +57,17 @@ public class EnemyMovement : IMovement
         agent.UpdatePath(targetRB.transform);
 
         Vector2 separation = Vector2.zero;
-        int separationHitsCount = Physics2D.OverlapCircleNonAlloc(rb.position, separationDetectionRadius, evadeEnemyHits, obstacleLayer);
+        int separationHitsCount =
+            Physics2D.OverlapCircleNonAlloc(rb.position, separationDetectionRadius, evadeEnemyHits, obstacleLayer);
         if (separationHitsCount > 1) // it collides with self also
-            separation = Helper.AutonomousAgent.SeparationGetSteering(collider, evadeEnemyHits, separationHitsCount, separationDistance, separationForce) * separationWeight;
+            separation = Helper.AutonomousAgent.SeparationGetSteering(collider, evadeEnemyHits, separationHitsCount,
+                                                                      separationDistance, separationForce) *
+                         separationWeight;
         agent.UpdateMovement(separation);
+    }
+
+    public override void MuteSfx()
+    {
     }
 
     public override Vector2 GetMoveDir()
