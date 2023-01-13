@@ -23,6 +23,7 @@ public class SkillButtonSecondary : SkillButton
         SetLevel();
         SetIcon();
         SetRequirementsOverlay();
+        SetHighlightOverlay();
     }
 
     public override void OnBeginDrag(PointerEventData eventData)

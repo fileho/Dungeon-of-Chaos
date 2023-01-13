@@ -19,6 +19,7 @@ public class SkillButtonPassive : SkillButton
         SetLevel();
         SetIcon();
         SetRequirementsOverlay();
+        SetHighlightOverlay();
     }
 
     public override void OnBeginDrag(PointerEventData eventData)
