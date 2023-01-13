@@ -69,7 +69,7 @@ public class Checkpoint : MonoBehaviour, IMapSavable
     private bool CheckEnemyNearby()
     {
         var cols = Physics2D.OverlapCircleAll(transform.position, enemyRadius, LayerMask.GetMask("Enemy"));
-        return cols.Length > 0;
+        return cols.Any(col => col.GetComponent<Enemy>() != null);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
