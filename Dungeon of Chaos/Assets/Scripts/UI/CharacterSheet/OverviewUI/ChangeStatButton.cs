@@ -46,6 +46,7 @@ public class ChangeStatButton : MonoBehaviour, IPointerEnterHandler, IPointerExi
     public void OnPointerExit(PointerEventData eventData)
     {
         gameObject.GetComponent<Image>().color = idle;
+        eventData.selectedObject = null;
     }
 
     public void OnPointerUp(PointerEventData eventData)
@@ -119,7 +120,5 @@ public class ChangeStatButton : MonoBehaviour, IPointerEnterHandler, IPointerExi
                 return true;
         }
     }
-
-
 }
 
