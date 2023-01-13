@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class InGameUIManager : MonoBehaviour
@@ -33,6 +34,8 @@ public class InGameUIManager : MonoBehaviour
     private Image dashCooldown;
     [SerializeField]
     private Image secondaryCooldown;
+
+    [Space]
     [SerializeField]
     private Slider bossHPbar;
     [SerializeField]
@@ -42,6 +45,10 @@ public class InGameUIManager : MonoBehaviour
 
     [SerializeField]
     private GameObject settings;
+
+    [SerializeField]
+    private GameObject panelPopUp;
+
     private SkillSystem skillSystem;
 
     private CanvasGroup manaCanvasGroup;
@@ -214,5 +221,15 @@ public class InGameUIManager : MonoBehaviour
                 cg.alpha = 1 - t * (1 - t) * 3;
             yield return null;
         }
+    }
+
+    public void MainMenu()
+    {
+        panelPopUp.SetActive(true);
+    }
+
+    public void MainMenuConfirm()
+    {
+        SceneManager.LoadScene(0);
     }
 }
