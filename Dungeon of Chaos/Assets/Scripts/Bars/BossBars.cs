@@ -12,6 +12,11 @@ public class BossBars : IBars
 
     public override void UpdateHpBar(float value)
     {
+        if (value <= 0)
+        {
+            InGameUIManager.instance.EndBossFight();
+            return;
+        }
         InGameUIManager.instance.SetBossHPbar(value);
     }
 
