@@ -28,7 +28,6 @@ public class SavedSkillSystem
     }
 }
 
-
 public class SkillSystem : MonoBehaviour
 {
     [SerializeField]
@@ -41,6 +40,7 @@ public class SkillSystem : MonoBehaviour
     private List<SkillInfoSecondaryAttack> secondaryAttacks;
 
     private List<int> activated;
+    private string[] controls = { "Q", "E", "1", "2", "3" };
 
     private int activatedDash;
     private int activatedSecondary;
@@ -197,7 +197,6 @@ public class SkillSystem : MonoBehaviour
                 return true;
         }
     }
-
     private bool HasPrerequisiteSkill<T>(SkillInfo<T> skillInfo) where T : ISkill
     {
         string key = skillInfo.GetUnlockingRequirements().GetSkillKey();
@@ -274,7 +273,7 @@ public class SkillSystem : MonoBehaviour
         skill.Unlock();
         skill.Upgrade();
         levelling.ConsumeSkillPoints(activeSkills[index].GetUnlockingRequirements().GetCost());
-        TooltipSystem.instance.Show(skill.GetSkillData().GetName(), "Active Skill",
+        TooltipSystem.instance.Show(skill.GetSkillData().GetName(), "Active Skill", GetActiveStatusDescription(index),
             skill.GetCurrentDescription(), skill.GetNextDescription());
     }
 
@@ -324,6 +323,21 @@ public class SkillSystem : MonoBehaviour
     {
         return GetSkillInfoActive(activated[index]);
     }
+
+    public string GetActiveStatusDescription(int index)
+    {
+        string description = "Drag and drop to slots below to use";
+
+        if (IsActivated(index))
+        {
+            int activatedIndex = activated.IndexOf(index);
+            description = "Press <b>" + controls[activatedIndex] + "</b> to use in the game";            
+        }
+
+        return description;
+    }
+
+    
     #endregion
 
     #region PassiveSkills
@@ -345,7 +359,7 @@ public class SkillSystem : MonoBehaviour
         levelling.ConsumeSkillPoints(passiveSkills[index].GetUnlockingRequirements().GetCost());
         skill.Unlock();
         skill.Upgrade();
-        TooltipSystem.instance.Show(skill.GetSkillData().GetName(), "Passive Skill",
+        TooltipSystem.instance.Show(skill.GetSkillData().GetName(), "Passive Skill", "No further actions required",
             skill.GetCurrentDescription(), skill.GetNextDescription());
     }
 
@@ -423,7 +437,7 @@ public class SkillSystem : MonoBehaviour
         levelling.ConsumeSkillPoints(dashSkills[index].GetUnlockingRequirements().GetCost());
         skill.Unlock();
         skill.Upgrade();
-        TooltipSystem.instance.Show(skill.GetSkillData().GetName(), "Dash Skill",
+        TooltipSystem.instance.Show(skill.GetSkillData().GetName(), "Dash Skill", GetDashStatusDescription(index),
             skill.GetCurrentDescription(), skill.GetNextDescription());
     }
 
@@ -445,6 +459,23 @@ public class SkillSystem : MonoBehaviour
     public SkillInfoDash GetActivatedDash()
     {
         return GetSkillInfoDash(activatedDash);
+    }
+
+    private bool IsActivatedDash(int index)
+    {
+        return activatedDash == index;
+    }
+
+    public string GetDashStatusDescription(int index)
+    {
+        string description = "Drag and drop to slots below to use";
+
+        if (IsActivatedDash(index))
+        {
+            description = "Press <b>SPACE</b> to use in the game";
+        }
+
+        return description;
     }
 
     #endregion
@@ -481,7 +512,7 @@ public class SkillSystem : MonoBehaviour
         levelling.ConsumeSkillPoints(secondaryAttacks[index].GetUnlockingRequirements().GetCost());
         skill.Unlock();
         skill.Upgrade();
-        TooltipSystem.instance.Show(skill.GetSkillData().GetName(), "Secondary Attack",
+        TooltipSystem.instance.Show(skill.GetSkillData().GetName(), "Secondary Attack", GetSecondaryStatusDescription(index),
             skill.GetCurrentDescription(), skill.GetNextDescription());
     }
 
@@ -514,6 +545,23 @@ public class SkillSystem : MonoBehaviour
     public SkillInfoSecondaryAttack GetActivatedSecondary()
     {
         return GetSkillInfoSecondary(activatedSecondary);
+    }
+
+    private bool IsActivatedSecondary(int index)
+    {
+        return index == activatedSecondary;
+    }
+
+    public string GetSecondaryStatusDescription(int index)
+    {
+        string description = "Drag and drop to slots below to use";
+
+        if (IsActivatedSecondary(index))
+        {
+            description = "Press <b>RMB</b> to use in the game";
+        }
+
+        return description;
     }
     #endregion
 

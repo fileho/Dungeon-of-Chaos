@@ -44,7 +44,8 @@ public class SkillButtonSecondary : SkillButton
     public override void OnPointerEnter(PointerEventData eventData)
     {
         SoundManager.instance.PlaySound(hover);
-        TooltipSystem.instance.Show(skillInfo.GetSkillData().GetName(), "Secondary Attack", skillInfo.GetCurrentDescription(), skillInfo.GetNextDescription());
+        TooltipSystem.instance.Show(skillInfo.GetSkillData().GetName(), "Secondary Attack", skillSystem.GetSecondaryStatusDescription(skillIndex),
+            skillInfo.GetCurrentDescription(), skillInfo.GetNextDescription());
     }
 
     public override void OnPointerExit(PointerEventData eventData)
