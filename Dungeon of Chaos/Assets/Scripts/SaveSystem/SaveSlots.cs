@@ -13,6 +13,10 @@ public class SaveSlots : MonoBehaviour
     private List<Button> slots;
     [SerializeField]
     private List<Button> deletes;
+    [SerializeField]
+    private GameObject popUp;
+
+    private int removeIndex;
 
     void Start()
     {
@@ -24,8 +28,13 @@ public class SaveSlots : MonoBehaviour
         {
             var index = i;
             slots[i].onClick.AddListener(delegate { ButtonClick(index); });
+            deletes[i].onClick.AddListener(delegate { ShowRemovePopUp(index); });
         }
+        Draw();
+    }
 
+    private void Draw()
+    {
         DrawInfo(0);
         DrawInfo(1);
         DrawInfo(2);
@@ -47,6 +56,7 @@ public class SaveSlots : MonoBehaviour
         {
             level.gameObject.SetActive(false);
             time.gameObject.SetActive(false);
+            dungeon.text = "Empty Slot";
             var cg = delete.GetComponent<CanvasGroup>();
             cg.alpha = 0;
             cg.interactable = false;
@@ -66,5 +76,17 @@ public class SaveSlots : MonoBehaviour
 
         int load = saveData?.dungeonData.dungeon - 1 ?? 0;
         SceneManager.LoadScene(load + SaveSystem.SceneOffset);
+    }
+
+    private void ShowRemovePopUp(int index)
+    {
+        removeIndex = index;
+        popUp.SetActive(true);
+    }
+
+    public void RemoveSave()
+    {
+        saveSystem.RemoveSave(removeIndex);
+        Draw();
     }
 }

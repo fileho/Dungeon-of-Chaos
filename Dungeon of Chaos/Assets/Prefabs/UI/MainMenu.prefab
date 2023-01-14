@@ -1844,7 +1844,31 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 5846860290819322052}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1673530349}
+        m_TargetAssemblyTypeName: SaveSlots, Assembly-CSharp
+        m_MethodName: RemoveSave
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 499636039943659594}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &7339792041316149462
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12679,6 +12703,7 @@ MonoBehaviour:
   - {fileID: 8679680496745455824}
   - {fileID: 4672655967172740490}
   - {fileID: 2695022866910513507}
+  popUp: {fileID: 499636039943659594}
 --- !u!1 &6708584098905543194
 GameObject:
   m_ObjectHideFlags: 0
