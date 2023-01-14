@@ -5784,6 +5784,12 @@ MonoBehaviour:
   bossName: {fileID: 6214739381743744224}
   settings: {fileID: 493887442690776190}
   panelPopUp: {fileID: 2237365464210714039}
+  lowNotificationSound:
+    soundCategory: 4
+    sound: 3
+    volume: 1
+    pitch: 1
+    priority: 0
 --- !u!1 &493887442942057518
 GameObject:
   m_ObjectHideFlags: 0

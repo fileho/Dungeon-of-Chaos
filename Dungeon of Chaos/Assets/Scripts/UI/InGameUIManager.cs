@@ -49,6 +49,9 @@ public class InGameUIManager : MonoBehaviour
     [SerializeField]
     private GameObject panelPopUp;
 
+    [SerializeField]
+    private SoundSettings lowNotificationSound;
+
     private SkillSystem skillSystem;
 
     private CanvasGroup manaCanvasGroup;
@@ -212,6 +215,7 @@ public class InGameUIManager : MonoBehaviour
     {
         const float duration = 0.4f;
         float time = 0;
+        SoundManager.instance.PlaySound(lowNotificationSound);
 
         while (time < duration)
         {
