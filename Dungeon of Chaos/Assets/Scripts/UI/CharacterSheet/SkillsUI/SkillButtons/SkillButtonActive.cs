@@ -43,7 +43,7 @@ public class SkillButtonActive : SkillButton
     public override void OnPointerEnter(PointerEventData eventData)
     {
         SoundManager.instance.PlaySound(hover);
-        TooltipSystem.instance.Show(skillInfo.GetSkillData().GetName(), "Active Skill", 
+        TooltipSystem.instance.Show(skillInfo.GetSkillData().GetName(), "Active Skill", skillSystem.GetActiveStatusDescription(skillIndex),
             skillInfo.GetCurrentDescription(), skillInfo.GetNextDescription());
     }
 

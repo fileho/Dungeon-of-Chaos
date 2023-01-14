@@ -44,7 +44,7 @@ public class SkillButtonDash : SkillButton
     public override void OnPointerEnter(PointerEventData eventData)
     {
         SoundManager.instance.PlaySound(hover);
-        TooltipSystem.instance.Show(skillInfo.GetSkillData().GetName(), "Dash Skill",
+        TooltipSystem.instance.Show(skillInfo.GetSkillData().GetName(), "Dash Skill", skillSystem.GetDashStatusDescription(skillIndex),
             skillInfo.GetCurrentDescription(), skillInfo.GetNextDescription());
     }
 

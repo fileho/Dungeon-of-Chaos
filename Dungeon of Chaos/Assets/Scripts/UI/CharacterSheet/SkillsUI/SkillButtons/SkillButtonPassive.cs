@@ -31,7 +31,7 @@ public class SkillButtonPassive : SkillButton
     public override void OnPointerEnter(PointerEventData eventData)
     {
         SoundManager.instance.PlaySound(hover);
-        TooltipSystem.instance.Show(skillInfo.GetSkillData().GetName(), "Passive Skill",
+        TooltipSystem.instance.Show(skillInfo.GetSkillData().GetName(), "Passive Skill", "No further actions required",
             skillInfo.GetCurrentDescription(), skillInfo.GetNextDescription());
     }
 
