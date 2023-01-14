@@ -122,6 +122,11 @@ public class InGameUIManager : MonoBehaviour
         bossName.text = bName;
     }
 
+    public void EndBossFight()
+    {
+        StartCoroutine(HideBossBar());
+    }
+
     public void NotEnoughMana()
     {
         StartCoroutine(FlashBar(manaCanvasGroup));
@@ -225,6 +230,28 @@ public class InGameUIManager : MonoBehaviour
                 cg.alpha = 1 - t * (1 - t) * 3;
             yield return null;
         }
+    }
+
+    private IEnumerator HideBossBar()
+    {
+        CanvasGroup cg = bossHPbar.transform.parent.GetComponent<CanvasGroup>();
+
+        const float duration = 3f;
+        float time = 0;
+
+        while (time < duration)
+        {
+            time += Time.deltaTime;
+            if (cg)
+                cg.alpha = 1 - time / duration;
+            yield return null;
+        }
+
+        if (cg)
+            cg.alpha = 1;
+
+        bossHPbar.gameObject.SetActive(false);
+        bossName.gameObject.SetActive(false);
     }
 
     public void MainMenu()
