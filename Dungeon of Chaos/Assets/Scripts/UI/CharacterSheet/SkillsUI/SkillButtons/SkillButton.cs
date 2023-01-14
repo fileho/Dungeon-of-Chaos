@@ -59,6 +59,7 @@ public abstract class SkillButton : MonoBehaviour, IPointerDownHandler, IPointer
         rightClick = false;
         time = 0f;
         lockObj.GetComponent<Image>().fillAmount = 1;
+        highlight.GetComponent<Image>().fillAmount = 1;
     }
 
     public virtual void Init()
