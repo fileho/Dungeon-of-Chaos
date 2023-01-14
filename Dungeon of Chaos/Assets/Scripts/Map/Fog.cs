@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using System.Reflection;
 using UnityEngine;
 using UnityEngine.Experimental.Rendering.Universal;
@@ -9,6 +10,7 @@ public class Fog : MonoBehaviour
 {
     private GameObject tooltipCanvas;
     private const float range = 2f;
+    private const float enemyRadius = 10f;
 
     private void Start()
     {
@@ -39,8 +41,22 @@ public class Fog : MonoBehaviour
         if (!Input.GetKeyDown(KeyCode.F))
             return;
 
-        if (Remap((Vector2)transform.position - (Vector2)Character.instance.transform.position) < range)
+        if (!(Remap((Vector2)transform.position - (Vector2)Character.instance.transform.position) < range))
+            return;
+        if (!CheckEnemyNearby())
+        {
             Travel();
+        }
+        else
+        {
+            TooltipSystem.instance.ShowMessage("Enemies are nearby!", 1.5f);
+        }
+    }
+
+    private bool CheckEnemyNearby()
+    {
+        var cols = Physics2D.OverlapCircleAll(transform.position, enemyRadius, LayerMask.GetMask("Enemy"));
+        return cols.Any(col => col.GetComponent<Enemy>() != null);
     }
 
     private float Remap(Vector2 v)
