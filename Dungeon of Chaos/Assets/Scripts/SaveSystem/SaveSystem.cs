@@ -122,10 +122,17 @@ public class SaveSystem : MonoBehaviour
         saveSlot.SaveActiveSlot(index);
     }
 
-    public void RemoveCurrentSave()
+    public void RemoveSave()
     {
         string path = CreatePath();
 
+        if (File.Exists(path))
+            File.Delete(path);
+    }
+
+    public void RemoveSave(int saveIndex)
+    {
+        string path = CreatePath(saveIndex);
         if (File.Exists(path))
             File.Delete(path);
     }
@@ -135,9 +142,7 @@ public class SaveSystem : MonoBehaviour
         const int saveSlots = 3;
         for (int i = 0; i < saveSlots; i++)
         {
-            string path = CreatePath(i);
-            if (File.Exists(path))
-                File.Delete(path);
+            RemoveSave(i);
         }
     }
 }

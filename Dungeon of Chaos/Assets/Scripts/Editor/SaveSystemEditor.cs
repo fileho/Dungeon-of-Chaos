@@ -21,7 +21,7 @@ public class SaveSystemEditor : Editor
 
         if (GUILayout.Button("Remove current save"))
         {
-            saveSystem.RemoveCurrentSave();
+            saveSystem.RemoveSave();
         }
 
         EditorGUILayout.PropertyField(defaultCharacterPositions);
