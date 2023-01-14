@@ -50,10 +50,9 @@ public class Projectile : MonoBehaviour
         dir.Normalize();
 
         transform.Rotate(0, 0, Vector2.SignedAngle(Vector2.down, dir));
-
+        SoundManager.instance.PlaySound(castSFX);
         while (time < delay)
-        {
-            SoundManager.instance.PlaySound(castSFX);
+        {            
             time += Time.deltaTime;
             float t = time / delay;
             // sprite.color = Color.Lerp(Color.yellow, new Color(1f, 0.5f, 0f), t);
