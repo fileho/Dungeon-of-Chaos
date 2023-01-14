@@ -31,7 +31,7 @@ public class SaveSlots : MonoBehaviour
     private void DrawInfo(int index)
     {
         var saveData = saveSystem.GetSavedData(index);
-        DrawInfo(saveData, buttons[index].transform);
+        DrawInfo(saveData, buttons[index].transform.GetChild(0));
     }
 
     private void DrawInfo(SaveData data, Transform target)
