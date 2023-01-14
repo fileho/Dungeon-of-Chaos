@@ -9,7 +9,10 @@ using TMPro;
 public class SaveSlots : MonoBehaviour
 {
     private SaveSystem saveSystem;
-    public List<Button> buttons;
+    [SerializeField]
+    private List<Button> slots;
+    [SerializeField]
+    private List<Button> deletes;
 
     void Start()
     {
@@ -17,10 +20,10 @@ public class SaveSlots : MonoBehaviour
 
         saveSystem = FindObjectOfType<SaveSystem>();
 
-        for (int i = 0; i < buttons.Count; i++)
+        for (int i = 0; i < slots.Count; i++)
         {
             var index = i;
-            buttons[i].onClick.AddListener(delegate { ButtonClick(index); });
+            slots[i].onClick.AddListener(delegate { ButtonClick(index); });
         }
 
         DrawInfo(0);
@@ -31,10 +34,10 @@ public class SaveSlots : MonoBehaviour
     private void DrawInfo(int index)
     {
         var saveData = saveSystem.GetSavedData(index);
-        DrawInfo(saveData, buttons[index].transform.GetChild(0));
+        DrawInfo(saveData, slots[index].transform.GetChild(0), deletes[index].transform);
     }
 
-    private void DrawInfo(SaveData data, Transform target)
+    private void DrawInfo(SaveData data, Transform target, Transform delete)
     {
         var dungeon = target.GetChild(0).GetComponent<TMP_Text>();
         var level = target.GetChild(1).GetComponent<TMP_Text>();
@@ -44,6 +47,10 @@ public class SaveSlots : MonoBehaviour
         {
             level.gameObject.SetActive(false);
             time.gameObject.SetActive(false);
+            var cg = delete.GetComponent<CanvasGroup>();
+            cg.alpha = 0;
+            cg.interactable = false;
+            cg.blocksRaycasts = false;
             return;
         }
 
