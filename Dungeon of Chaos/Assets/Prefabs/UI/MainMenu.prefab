@@ -342,8 +342,9 @@ GameObject:
   - component: {fileID: 6275426182787265733}
   - component: {fileID: 8679680496745455824}
   - component: {fileID: 6605599923945310009}
+  - component: {fileID: 4694107049978585337}
   m_Layer: 5
-  m_Name: Button-Delete
+  m_Name: Button-Delete1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -496,6 +497,18 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
+--- !u!225 &4694107049978585337
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2268038085232722680}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &2332315917439931263
 GameObject:
   m_ObjectHideFlags: 0
@@ -2068,8 +2081,9 @@ GameObject:
   - component: {fileID: 871104257316262648}
   - component: {fileID: 4672655967172740490}
   - component: {fileID: 5359842909762209855}
+  - component: {fileID: 4501828305032229758}
   m_Layer: 5
-  m_Name: Button-Delete
+  m_Name: Button-Delete2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2222,6 +2236,18 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
+--- !u!225 &4501828305032229758
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5448383473438556217}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &5674613976792584642
 GameObject:
   m_ObjectHideFlags: 0
@@ -11744,10 +11770,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 87e1824996518cd4aa14258ee68d86a3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  buttons:
+  slots:
   - {fileID: 6708584098174487110}
   - {fileID: 493756014239515644}
   - {fileID: 7205363938369298836}
+  deletes:
+  - {fileID: 8679680496745455824}
+  - {fileID: 4672655967172740490}
+  - {fileID: 2695022866910513507}
 --- !u!1 &6708584098905543194
 GameObject:
   m_ObjectHideFlags: 0
@@ -17925,8 +17955,9 @@ GameObject:
   - component: {fileID: 8628030746381862949}
   - component: {fileID: 2695022866910513507}
   - component: {fileID: 5948858186315358471}
+  - component: {fileID: 1399532692400659813}
   m_Layer: 5
-  m_Name: Button-Delete
+  m_Name: Button-Delete3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -18079,6 +18110,18 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
+--- !u!225 &1399532692400659813
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8138831792418331389}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &8219368912987969107
 GameObject:
   m_ObjectHideFlags: 0
