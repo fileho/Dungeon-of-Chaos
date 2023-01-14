@@ -66,6 +66,11 @@ public class TutorialManager : MonoBehaviour
             animator.StopPlayback();
     }
 
+    public bool AlreadyUsed(TutorialState state)
+    {
+        return PlayerPrefs.GetInt(currentState.ToString(), 0) != 0;
+    }
+
     IEnumerator ShowTutorial(TutorialState state)
     {
         currentState = state;
@@ -76,7 +81,6 @@ public class TutorialManager : MonoBehaviour
             EnableDisableTutorialScreen(true);
             breakCorutine = false;
 
-            KeyCode[] keycodes = keys[(int)currentState].KeyCodes;
             while (!breakCorutine)
             {
                 yield return null;

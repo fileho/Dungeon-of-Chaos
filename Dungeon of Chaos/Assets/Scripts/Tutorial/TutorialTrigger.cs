@@ -6,9 +6,10 @@ public class TutorialTrigger : MonoBehaviour
 {
     [SerializeField]
     private TutorialState tutorialState;
-
     [SerializeField]
     private Vector2 size;
+    [SerializeField]
+    private GameObject sideEffects;
 
     private TutorialManager tutorialManager;
 
@@ -17,6 +18,8 @@ public class TutorialTrigger : MonoBehaviour
     private void Start()
     {
         tutorialManager = FindObjectOfType<TutorialManager>();
+        if (sideEffects)
+            sideEffects.SetActive(false);
     }
 
     private void OnDrawGizmos()
@@ -30,8 +33,10 @@ public class TutorialTrigger : MonoBehaviour
         if (triggered >= 2)
             return;
 
-        if (triggered == 0 && IsInside())
+        if (triggered == 0 && IsInside() && !tutorialManager.AlreadyUsed(tutorialState))
         {
+            if (sideEffects)
+                sideEffects.SetActive(true);
             tutorialManager.Show(tutorialState);
             ++triggered;
             return;
@@ -39,6 +44,8 @@ public class TutorialTrigger : MonoBehaviour
 
         if (triggered == 1 && !IsInside())
         {
+            if (sideEffects)
+                sideEffects.SetActive(false);
             tutorialManager.Hide();
             ++triggered;
         }
