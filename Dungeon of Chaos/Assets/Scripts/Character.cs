@@ -44,7 +44,6 @@ public class Character : Unit
 
     protected override void CleanUp()
     {
-        // TODO respawn logic
         gameController.Death();
     }
 
