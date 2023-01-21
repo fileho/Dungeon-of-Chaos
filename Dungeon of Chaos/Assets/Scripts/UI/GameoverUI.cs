@@ -24,14 +24,6 @@ public class GameoverUI : MonoBehaviour
         HideCanvas();
     }
 
-    void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.G))
-        {
-            ShowGameover();
-        }
-    }
-
     public void ShowGameover()
     {
         StartCoroutine(Gameover());
