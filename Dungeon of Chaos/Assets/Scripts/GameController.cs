@@ -73,7 +73,8 @@ public class GameController : MonoBehaviour
 
     public void Death()
     {
-        ReloadScene();
+        FindObjectOfType<GameoverUI>().ShowGameover();
+        Invoke(nameof(ReloadScene), 2f);
     }
 
     public void SaveAndReload()
