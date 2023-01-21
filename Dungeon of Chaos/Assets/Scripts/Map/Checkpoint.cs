@@ -18,7 +18,7 @@ public class Checkpoint : MonoBehaviour, IMapSavable
     private const float sfxRange = 50f;
     private SoundData sfx = null;
 
-    private const float enemyRadius = 20f;
+    private const float enemyRadius = 15f;
 
     [SerializeField]
 #if UNITY_EDITOR

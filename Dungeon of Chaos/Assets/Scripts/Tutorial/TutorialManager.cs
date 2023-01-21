@@ -68,7 +68,7 @@ public class TutorialManager : MonoBehaviour
 
     public bool AlreadyUsed(TutorialState state)
     {
-        return PlayerPrefs.GetInt(currentState.ToString(), 0) != 0;
+        return PlayerPrefs.GetInt(state.ToString(), 0) != 0;
     }
 
     IEnumerator ShowTutorial(TutorialState state)
