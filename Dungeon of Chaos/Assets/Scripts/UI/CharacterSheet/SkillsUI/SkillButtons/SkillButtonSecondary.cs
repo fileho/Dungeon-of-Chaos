@@ -22,6 +22,8 @@ public class SkillButtonSecondary : SkillButton
         }
         SetLevel();
         SetIcon();
+        SetRequirementsOverlay();
+        SetHighlightOverlay();
     }
 
     public override void OnBeginDrag(PointerEventData eventData)
@@ -42,7 +44,8 @@ public class SkillButtonSecondary : SkillButton
     public override void OnPointerEnter(PointerEventData eventData)
     {
         SoundManager.instance.PlaySound(hover);
-        TooltipSystem.instance.Show(skillInfo.GetSkillData().GetName(), "Secondary Attack", skillInfo.GetCurrentDescription(), skillInfo.GetNextDescription());
+        TooltipSystem.instance.Show(skillInfo.GetSkillData().GetName(), "Secondary Attack", skillSystem.GetSecondaryStatusDescription(skillIndex),
+            skillInfo.GetCurrentDescription(), skillInfo.GetNextDescription());
     }
 
     public override void OnPointerExit(PointerEventData eventData)
@@ -97,5 +100,15 @@ public class SkillButtonSecondary : SkillButton
             lockObj.GetComponent<Image>().fillAmount = 1;
         }
         level.text = skillInfo.GetLevel() + "/" + skillInfo.GetMaxLevel();
+    }
+
+    public override void SetRequirementsOverlay()
+    {
+        requirementsNotMet.SetActive(!skillSystem.CanUnlock(skillInfo) && !skillInfo.IsUnlocked());
+    }
+
+    public override void SetHighlightOverlay()
+    {
+        highlight.SetActive(skillSystem.CanUnlock(skillInfo) && skillInfo.IsUnlocked());
     }
 }

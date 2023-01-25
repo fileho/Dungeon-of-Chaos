@@ -1,5 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
+using System;
 using UnityEngine;
 
 [CreateAssetMenu(menuName = "SO/Skills/SkillEffects/WeaponEffect")]
@@ -9,7 +8,7 @@ public class ApplyEffectOnWeapon : OneTimeTemporalEffect
 
     public override string[] GetEffectsValues(Unit owner)
     {
-        string[] effects = new string[] {duration.ToString(), GetValue(owner).ToString() };
+        string[] effects = new string[] {duration.ToString(), Math.Round(GetValue(owner),2).ToString() };
         string[] e = effect.GetEffectsValues(owner);
         effects.CopyTo(e, 1);
         return e;
@@ -34,5 +33,9 @@ public class ApplyEffectOnWeapon : OneTimeTemporalEffect
                 target.gameObject.GetComponentInChildren<Weapon>().ChangeDamageBoost(-val);
             }
         }
+    }
+    protected override void Init()
+    {
+        InitStatusIcon(StatusEffectType.FlamingSword);
     }
 }

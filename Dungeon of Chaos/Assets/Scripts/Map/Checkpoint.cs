@@ -1,3 +1,4 @@
+using System.Linq;
 using UnityEngine;
 using UnityEngine.Assertions;
 
@@ -9,14 +10,20 @@ public class Checkpoint : MonoBehaviour, IMapSavable
     private GameObject tooltipCanvas;
     private CharacterSheet characterSheet;
     private SaveSystem saveSystem;
+    private GameObject gameUI;
 
     [Header("SFX")]
-    [SerializeField] private SoundSettings checkpointSFX;
+    [SerializeField]
+    private SoundSettings checkpointSFX;
     private const float sfxRange = 50f;
     private SoundData sfx = null;
 
+    private const float enemyRadius = 15f;
+
     [SerializeField]
+#if UNITY_EDITOR
     [ReadOnly]
+#endif
     private int id;
 
     private void Start()
@@ -25,7 +32,7 @@ public class Checkpoint : MonoBehaviour, IMapSavable
         tooltipCanvas = GetComponentInChildren<Canvas>().gameObject;
         characterSheet = FindObjectOfType<CharacterSheet>();
         saveSystem = FindObjectOfType<SaveSystem>();
-
+        gameUI = FindObjectOfType<InGameUIManager>().transform.parent.gameObject;
         tooltipCanvas.SetActive(false);
     }
 
@@ -47,10 +54,22 @@ public class Checkpoint : MonoBehaviour, IMapSavable
         if (!Input.GetKeyDown(KeyCode.F))
             return;
 
-        if (((Vector2)transform.position - (Vector2)Character.instance.transform.position).magnitude < range)
+        if (!(((Vector2)transform.position - (Vector2)Character.instance.transform.position).magnitude < range))
+            return;
+        if (!CheckEnemyNearby())
+        {
             Interact();
+        }
+        else
+        {
+            TooltipSystem.instance.ShowMessage("Enemies are nearby!", 1.5f);
+        }
+    }
 
-        
+    private bool CheckEnemyNearby()
+    {
+        var cols = Physics2D.OverlapCircleAll(transform.position, enemyRadius, LayerMask.GetMask("Enemy"));
+        return cols.Any(col => col.GetComponent<Enemy>() != null);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -65,6 +84,8 @@ public class Checkpoint : MonoBehaviour, IMapSavable
     {
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, range);
+
+        Gizmos.DrawWireSphere(transform.position, enemyRadius);
     }
 
     private void OnTriggerExit2D(Collider2D collision)
@@ -79,6 +100,9 @@ public class Checkpoint : MonoBehaviour, IMapSavable
     {
         saveSystem.DungeonData.AddSavedUid(id);
         tooltipCanvas.SetActive(false);
+        Character.instance.BlockInput();
+        // Disable setting overlay
+        gameUI.SetActive(false);
         characterSheet.Open();
         Time.timeScale = 0f;
     }

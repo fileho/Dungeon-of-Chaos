@@ -39,12 +39,33 @@ public class PrimaryStats
     [SerializeField]
     private StatsModifiers statsModifiers;
 
+    private const int max = 25;
+    private const int min = 10;
+
+    public bool CanUpgradeStat(float val)
+    {
+        return (int)val < max;
+    }
+
+    public bool CanDowngradeStat(float val)
+    {
+        return (int)val > min;
+    }
+
     private float ModifiedStat(int l, float value)
     {
         if (statsModifiers != null)
             value += statsModifiers.GetStatsBonus() + (l - 1) * statsModifiers.GetLvlBonus();
         return value;
     }
+
+    private float ModifiedHP(int l, float value)
+    {
+        if (statsModifiers == null)
+            return value;
+        return ModifiedStat(l, value) * statsModifiers.GetHPMultiplier();
+    }
+
     public float GetDamage(int l)
     {
         float s = ModifiedStat(l, strength);
@@ -59,8 +80,11 @@ public class PrimaryStats
 
     public float GetMaxHP(int l)
     {
-        float c = ModifiedStat(l, constitution);
-        return c * multipliers.hpMultiplier;
+        float c = ModifiedHP(l, constitution);
+        if (c < 10)
+            return c * multipliers.hpLinearMultiplier;
+        else
+            return 100 * Mathf.Exp((c - 10) * multipliers.hpExp) + multipliers.hpExpMultiplier * (c - 10);
     }
 
     public float GetMaxStamina(int l)
@@ -72,7 +96,10 @@ public class PrimaryStats
     public float GetMaxMana(int l)
     {
         float w = ModifiedStat(l, wisdom);
-        return w * multipliers.manaMultiplier;
+        if (w < 10)
+            return w * multipliers.hpLinearMultiplier;
+        else
+            return 100 * Mathf.Exp((w - 10) * multipliers.hpExp) + multipliers.hpExpMultiplier * (w - 10);
     }
 
     public float GetStaminaRegen()

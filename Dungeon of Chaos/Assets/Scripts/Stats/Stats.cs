@@ -138,6 +138,11 @@ public class Stats : ScriptableObject
         return health.maxValue;
     }
 
+    public float GetCurrentHealth()
+    {
+        return health.GetCurrent();
+    }
+
     public void ChangeMaxHealth(float value)
     {
         health.ChangeMaxValue(value);
@@ -368,10 +373,10 @@ public class Stats : ScriptableObject
     #endregion
 
     #region Primary Stats
-    public void IncreaseStrength()
+    public void ChangeStrength(int mod)
     {
-        primaryStats.strength++;
-        XP.ConsumeStatsPoint();
+        primaryStats.strength += mod;
+        XP.ChangeStatsPoints(mod);
         physicalDamage = primaryStats.GetDamage(XP.GetLevel());
         StatsOverview.instance.SetStrength(primaryStats.strength);
         StatsOverview.instance.SetDamage(physicalDamage);
@@ -382,10 +387,20 @@ public class Stats : ScriptableObject
         return primaryStats.strength;
     }
 
-    public void IncreaseIntelligence()
+    public bool CanUpgradeStrength()
     {
-        primaryStats.intelligence++;
-        XP.ConsumeStatsPoint();
+        return primaryStats.CanUpgradeStat(primaryStats.strength);
+    }
+
+    public bool CanDowngradeStrength()
+    {
+        return primaryStats.CanDowngradeStat(primaryStats.strength);
+    }
+
+    public void ChangeIntelligence(int mod)
+    {
+        primaryStats.intelligence += mod;
+        XP.ChangeStatsPoints(mod);
         spellPower = primaryStats.GetSpellPower(XP.GetLevel());
         StatsOverview.instance.SetIntelligence(primaryStats.intelligence);
         StatsOverview.instance.SetPower(spellPower);
@@ -396,10 +411,20 @@ public class Stats : ScriptableObject
         return primaryStats.intelligence;
     }
 
-    public void IncreaseConstitution()
+    public bool CanUpgradeIntelligence()
     {
-        primaryStats.constitution++;
-        XP.ConsumeStatsPoint();
+        return primaryStats.CanUpgradeStat(primaryStats.intelligence);
+    }
+
+    public bool CanDowngradeIntelligence()
+    {
+        return primaryStats.CanDowngradeStat(primaryStats.intelligence);
+    }
+
+    public void ChangeConstitution(int mod)
+    {
+        primaryStats.constitution += mod;
+        XP.ChangeStatsPoints(mod);
         health.maxValue = primaryStats.GetMaxHP(XP.GetLevel());
         armor = primaryStats.GetArmor();
         StatsOverview.instance.SetConstitution(primaryStats.constitution);
@@ -412,12 +437,21 @@ public class Stats : ScriptableObject
         return primaryStats.constitution;
     }
 
-    public void IncreaseEndurance()
+    public bool CanUpgradeConstitution()
     {
-        primaryStats.endurance++;
+        return primaryStats.CanUpgradeStat(primaryStats.constitution);
+    }
+
+    public bool CanDowngradeConstitution()
+    {
+        return primaryStats.CanDowngradeStat(primaryStats.constitution);
+    }
+    public void ChangeEndurance(int mod)
+    {
+        primaryStats.endurance += mod;
         stamina.maxValue = primaryStats.GetMaxStamina(XP.GetLevel());
         staminaRegen = primaryStats.GetStaminaRegen();
-        XP.ConsumeStatsPoint();
+        XP.ChangeStatsPoints(mod);
         StatsOverview.instance.SetEndurance(primaryStats.endurance);
         StatsOverview.instance.SetStamina(stamina.maxValue);
         StatsOverview.instance.SetStaminaRegen(staminaRegen);
@@ -427,11 +461,18 @@ public class Stats : ScriptableObject
     {
         return primaryStats.endurance;
     }
-
-    public void IncreaseWisdom()
+    public bool CanUpgradeEndurance()
     {
-        primaryStats.wisdom++;
-        XP.ConsumeStatsPoint();
+        return primaryStats.CanUpgradeStat(primaryStats.endurance);
+    }
+    public bool CanDowngradeEndurance()
+    {
+        return primaryStats.CanDowngradeStat(primaryStats.endurance);
+    }
+    public void ChangeWisdom(int mod)
+    {
+        primaryStats.wisdom += mod;
+        XP.ChangeStatsPoints(mod);
         mana.maxValue = primaryStats.GetMaxMana(XP.GetLevel());
         StatsOverview.instance.SetWisdom(primaryStats.wisdom);
         StatsOverview.instance.SetMana(mana.maxValue);
@@ -440,6 +481,16 @@ public class Stats : ScriptableObject
     public float GetWisdom()
     {
         return primaryStats.wisdom;
+    }
+
+    public bool CanUpgradeWisdom()
+    {
+        return primaryStats.CanUpgradeStat(primaryStats.wisdom);
+    }
+
+    public bool CanDowngradeWisdom()
+    {
+        return primaryStats.CanDowngradeStat(primaryStats.wisdom);
     }
     #endregion
 

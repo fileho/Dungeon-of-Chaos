@@ -15,7 +15,7 @@ MonoBehaviour:
   range: 5
   damage: 1.65
   staminaCost: 55
-  manaCost: 0
+  manaCost: 10
   rangeWeight: 1
   damageWeight: 1
   staminaCostWeight: 1
@@ -25,6 +25,7 @@ MonoBehaviour:
   indicator: {fileID: 8311782001119121317, guid: c7018b97d1c15436b967c0ae91874678, type: 3}
   indicatorConfiguration: {fileID: 11400000, guid: 660c757a069a5400db9ace31c33fa975, type: 2}
   type: 1
+  attackEffect: {fileID: 11400000, guid: c324b9aa70fcecb4eba64fccabeae179, type: 2}
   swingSFX:
     soundCategory: 2
     sound: 10

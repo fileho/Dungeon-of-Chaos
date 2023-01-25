@@ -97,7 +97,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 20
-  delay: 0.35
+  delay: 0.3
   spikesDown: {fileID: 21300000, guid: c47c9d39694403044a4fd4bb72c254e0, type: 3}
   spikesUp: {fileID: 21300000, guid: b3bb645b1a4dc9340a0d36909d071f94, type: 3}
   reloadTime: 3

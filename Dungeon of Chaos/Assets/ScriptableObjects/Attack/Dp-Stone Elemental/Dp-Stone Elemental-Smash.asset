@@ -21,10 +21,11 @@ MonoBehaviour:
   staminaCostWeight: 1
   manaCostWeight: 1
   cooldown: 1
-  attackAnimationDuration: 1
+  attackAnimationDuration: 0.6
   indicator: {fileID: 3188580857372310462, guid: 62aeaf3d3d69f48c3842ea6d3f0200dd, type: 3}
   indicatorConfiguration: {fileID: 11400000, guid: b41f6c166a6a64b379b3267d4bd276b7, type: 2}
   type: 1
+  attackEffect: {fileID: 0}
   swingSFX:
     soundCategory: 2
     sound: 40
@@ -37,8 +38,8 @@ MonoBehaviour:
     volume: 1
     pitch: 1
     priority: 0
-  lift: 2
-  fall: 0.8
+  lift: 0.5
+  fall: 0.5
   impact: {fileID: 1477782971762948, guid: 8e2edb2a8a19e674f80d0fb19fe5c051, type: 3}
   scaleMultiplier: 1.5
-  damageRadius: 1
+  damageRadius: 5

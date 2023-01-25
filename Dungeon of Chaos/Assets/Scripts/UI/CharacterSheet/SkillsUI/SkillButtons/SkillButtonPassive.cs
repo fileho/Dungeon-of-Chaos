@@ -18,6 +18,8 @@ public class SkillButtonPassive : SkillButton
         }
         SetLevel();
         SetIcon();
+        SetRequirementsOverlay();
+        SetHighlightOverlay();
     }
 
     public override void OnBeginDrag(PointerEventData eventData)
@@ -29,7 +31,7 @@ public class SkillButtonPassive : SkillButton
     public override void OnPointerEnter(PointerEventData eventData)
     {
         SoundManager.instance.PlaySound(hover);
-        TooltipSystem.instance.Show(skillInfo.GetSkillData().GetName(), "Passive Skill",
+        TooltipSystem.instance.Show(skillInfo.GetSkillData().GetName(), "Passive Skill", "No further actions required",
             skillInfo.GetCurrentDescription(), skillInfo.GetNextDescription());
     }
 
@@ -84,5 +86,15 @@ public class SkillButtonPassive : SkillButton
     {
         Sprite icon = skillInfo.GetSkillData().GetIcon();
         GetComponent<Image>().sprite = icon;
+    }
+
+    public override void SetRequirementsOverlay()
+    {
+        requirementsNotMet.SetActive(!skillSystem.CanUnlock(skillInfo) && !skillInfo.IsUnlocked());
+    }
+
+    public override void SetHighlightOverlay()
+    {
+        highlight.SetActive(skillSystem.CanUnlock(skillInfo) && skillInfo.IsUnlocked());
     }
 }

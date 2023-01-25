@@ -8,9 +8,9 @@ public abstract class OneTimeTemporalEffect : TemporalEffect
     public override bool Update()
     {
         if (UpdateTime())
-            return false;
+            return true;
         CancelEffect();
-        return true;
+        return false;
     }
 
     protected abstract void CancelEffect();

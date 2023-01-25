@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -33,6 +32,5 @@ public class AoEVisual : ISkillEffect
     {
         var clone = Instantiate(vfx, unit.transform);
         clone.GetComponent<AoEVisualEffect>().Init(range, duration, unit, effects);
-        //SoundManager.instance.PlaySound(sfx.GetName(), sfx.GetVolume(), sfx.GetPitch());
     }
 }

@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 73ca3d8141a474558bd09242da784c9a, type: 3}
   m_Name: Tou-Lich King-Summon
   m_EditorClassIdentifier: 
-  range: 1000
+  range: 20
   damage: 0
   staminaCost: 0
   manaCost: 0
@@ -25,6 +25,7 @@ MonoBehaviour:
   indicator: {fileID: 156674, guid: 276e7fe7d9e2d4dadaca2292f0bffc92, type: 3}
   indicatorConfiguration: {fileID: 11400000, guid: e521a2eda4ac94f36b66c64cfb58d9f3, type: 2}
   type: 0
+  attackEffect: {fileID: 0}
   swingSFX:
     soundCategory: 2
     sound: 26
@@ -39,6 +40,6 @@ MonoBehaviour:
     priority: 0
   minion: {fileID: 1419886182692781939, guid: b2da123613c3f4f428251a4530610f8d, type: 3}
   minAmountOfMinions: 2
-  maxAmountOfMinions: 6
-  timeBetweenSpawns: 0.5
+  maxAmountOfMinions: 3
+  timeBetweenSpawns: 1
   spawnRadius: 3

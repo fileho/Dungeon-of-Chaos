@@ -1,5 +1,8 @@
+using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class InGameUIManager : MonoBehaviour
@@ -32,11 +35,32 @@ public class InGameUIManager : MonoBehaviour
     [SerializeField]
     private Image secondaryCooldown;
 
+    [Space]
+    [SerializeField]
+    private Slider bossHPbar;
+    [SerializeField]
+    private TMP_Text bossName;
+
     public static InGameUIManager instance;
 
     [SerializeField]
     private GameObject settings;
+
+    [SerializeField]
+    private GameObject panelPopUp;
+
+    [SerializeField]
+    private SoundSettings lowNotificationSound;
+
     private SkillSystem skillSystem;
+
+    private CanvasGroup manaCanvasGroup;
+    private CanvasGroup staminaCanvasGroup;
+
+    // Delay after which it is possible to open the settings UI so it cannot be opened accidentally
+    private float openUIstartDelay = 0.25f;
+
+    private Color baseColor = new Color(0.2f, 0.2f, 0.2f);
 
     private void Awake()
     {
@@ -46,11 +70,22 @@ public class InGameUIManager : MonoBehaviour
     private void Start()
     {
         skillSystem = FindObjectOfType<SkillSystem>();
+        bossHPbar.value = 1;
+        bossHPbar.gameObject.SetActive(false);
+        bossName.gameObject.SetActive(false);
+        manaCanvasGroup = manaBar.GetComponent<CanvasGroup>();
+        staminaCanvasGroup = staminaBar.GetComponent<CanvasGroup>();
     }
 
     private void Update()
     {
         UpdateSkills();
+
+        if (openUIstartDelay > 0)
+        {
+            openUIstartDelay -= Time.deltaTime;
+            return;
+        }
 
         if (Input.GetKeyDown(KeyCode.Escape))
             ToggleSettings();
@@ -75,6 +110,33 @@ public class InGameUIManager : MonoBehaviour
         xpBar.value = value;
     }
 
+    public void SetBossHPbar(float value)
+    {
+        bossHPbar.value = value;
+    }
+
+    public void StartBossFight(string bName)
+    {
+        bossHPbar.gameObject.SetActive(true);
+        bossName.gameObject.SetActive(true);
+        bossName.text = bName;
+    }
+
+    public void EndBossFight()
+    {
+        StartCoroutine(HideBossBar());
+    }
+
+    public void NotEnoughMana()
+    {
+        StartCoroutine(FlashBar(manaCanvasGroup));
+    }
+
+    public void NotEnoughStamina()
+    {
+        StartCoroutine(FlashBar(staminaCanvasGroup));
+    }
+
     public void SetArmorBar(float value)
     {
         armorBar.GetComponent<Slider>().value = value;
@@ -85,6 +147,12 @@ public class InGameUIManager : MonoBehaviour
         }
 
         armorBar.SetActive(false);
+    }
+
+    private void ResetIcon(Image image)
+    {
+        image.sprite = null;
+        image.color = baseColor;
     }
 
     public void UpdateSkills()
@@ -100,8 +168,12 @@ public class InGameUIManager : MonoBehaviour
         {
             var skill = skillSystem.GetActivatedSkill(i);
             if (!skill)
+            {
+                ResetIcon(activeSkills[i]);
                 continue;
+            }
             activeSkills[i].sprite = skill.GetSkillData().GetIcon();
+            activeSkills[i].color = Color.white;
             activeCooldowns[i].fillAmount = skill.GetCurrentSkill().GetCooldownRatio();
         }
     }
@@ -119,8 +191,12 @@ public class InGameUIManager : MonoBehaviour
         var secondary = skillSystem.GetActivatedSecondary();
 
         if (!secondary)
+        {
+            ResetIcon(secondarySkill);
             return;
+        }
         secondarySkill.sprite = secondary.GetSkillData().GetIcon();
+        secondarySkill.color = Color.white;
         secondaryCooldown.fillAmount = secondary.GetCurrentSkill().GetCooldownRatio();
     }
 
@@ -138,5 +214,53 @@ public class InGameUIManager : MonoBehaviour
         }
 
         settings.SetActive(!isActive);
+    }
+
+    private IEnumerator FlashBar(CanvasGroup cg)
+    {
+        const float duration = 0.4f;
+        float time = 0;
+        SoundManager.instance.PlaySound(lowNotificationSound);
+
+        while (time < duration)
+        {
+            time += Time.deltaTime;
+            float t = time / duration;
+            if (cg != null)
+                cg.alpha = 1 - t * (1 - t) * 3;
+            yield return null;
+        }
+    }
+
+    private IEnumerator HideBossBar()
+    {
+        CanvasGroup cg = bossHPbar.transform.parent.GetComponent<CanvasGroup>();
+
+        const float duration = 3f;
+        float time = 0;
+
+        while (time < duration)
+        {
+            time += Time.deltaTime;
+            if (cg)
+                cg.alpha = 1 - time / duration;
+            yield return null;
+        }
+
+        if (cg)
+            cg.alpha = 1;
+
+        bossHPbar.gameObject.SetActive(false);
+        bossName.gameObject.SetActive(false);
+    }
+
+    public void MainMenu()
+    {
+        panelPopUp.SetActive(true);
+    }
+
+    public void MainMenuConfirm()
+    {
+        SceneManager.LoadScene(0);
     }
 }

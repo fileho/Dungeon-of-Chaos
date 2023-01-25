@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,9 +6,18 @@ using UnityEngine.SceneManagement;
 
 public class GameController : MonoBehaviour
 {
-    private SaveSystem saveSystem;
+    [SerializeField]
+    private string bossName;
 
+    private SaveSystem saveSystem;
     private bool loaded = false;
+    private Soundtrack soundtrack;
+
+    private void Start()
+    {
+        soundtrack = FindObjectOfType<Soundtrack>();
+        soundtrack.StopBossMusic();
+    }
 
     private void LateUpdate()
     {
@@ -28,6 +38,12 @@ public class GameController : MonoBehaviour
         {
             Debug.Log("Level complete - cheat");
             LevelComplete();
+        }
+
+        if (Input.GetKeyDown(KeyCode.L))
+        {
+            Debug.Log("Cheat + 1000xp");
+            Character.instance.stats.GetLevellingData().ModifyCurrentXP(1000);
         }
     }
 
@@ -57,7 +73,8 @@ public class GameController : MonoBehaviour
 
     public void Death()
     {
-        ReloadScene();
+        FindObjectOfType<GameoverUI>().ShowGameover();
+        Invoke(nameof(ReloadScene), 2f);
     }
 
     public void SaveAndReload()
@@ -71,6 +88,10 @@ public class GameController : MonoBehaviour
     {
         foreach (var lavaPit in FindObjectsOfType<LavaPit>())
             lavaPit.StartLights();
+
+        int level = Math.Max(0, SceneManager.GetActiveScene().buildIndex - 2);
+        FindObjectOfType<Soundtrack>().PlayBossMusic(level);
+        InGameUIManager.instance.StartBossFight(bossName);
     }
 
     private void ReloadScene()

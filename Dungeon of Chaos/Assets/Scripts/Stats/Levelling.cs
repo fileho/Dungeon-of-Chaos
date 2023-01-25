@@ -39,6 +39,8 @@ public class Levelling
     private int statsPoints;
     public int skillPoints;
 
+    private bool statReset = true;
+
     public void SetNextLevelXP()
     {
         nextLevelXP = GetXPValue(level);
@@ -94,6 +96,17 @@ public class Levelling
         UpdateLevellingUI();
     }
 
+    public void SetStatReset(bool val)
+    {
+        statReset = val;
+        UpdateLevellingUI();
+    }
+
+    public bool GetStatReset()
+    {
+        return statReset;
+    }
+
     public void UpdateLevellingUI()
     {
         StatsOverview.instance.SetLevel(level);
@@ -102,6 +115,7 @@ public class Levelling
         StatsOverview.instance.SetStatsPoints(statsPoints);
         StatsOverview.instance.ShowLevelUpButton(CanLevelUp());
         StatsOverview.instance.ShowStatsIncreaseButtons(HasStatsPoints());
+        StatsOverview.instance.ShowStatsDecreaseButtons(statReset);
 
         SkillsUI.instance.UpdateSkillPoints();
     }
@@ -128,11 +142,12 @@ public class Levelling
         return skillPoints > 0;
     }
 
-    public void ConsumeStatsPoint()
+    public void ChangeStatsPoints(int mod)
     {
-        statsPoints--;
+        statsPoints -= mod;
         StatsOverview.instance.SetStatsPoints(statsPoints);
         StatsOverview.instance.ShowStatsIncreaseButtons(HasStatsPoints());
+        StatsOverview.instance.ShowStatsDecreaseButtons(statReset);
     }
 
     public void ConsumeSkillPoints(int amount)

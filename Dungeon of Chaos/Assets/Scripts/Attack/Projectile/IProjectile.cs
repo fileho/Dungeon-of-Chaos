@@ -9,7 +9,6 @@ public abstract class IProjectile : MonoBehaviour
     protected float offset = 0f;
     protected float destroyTime = 5f;
 
-
     protected IAttack attack;
     protected SpriteRenderer sprite;
     protected new Collider2D collider;
@@ -32,7 +31,6 @@ public abstract class IProjectile : MonoBehaviour
     {
         return attack.GetTarget();
     }
-
 
     protected Vector2 GetTargetPosition()
     {
@@ -58,6 +56,14 @@ public abstract class IProjectile : MonoBehaviour
 
     protected virtual void OnTriggerEnter2D(Collider2D col)
     {
+        // Don't destroy the projectile over triggers
+        if (col.isTrigger)
+            return;
+
+        // Don't destroy projectile with essences
+        if (col.transform.GetComponent<Essence>())
+            return;
+
         if (col.GetComponent<Unit>())
         {
             attack.Weapon.InflictDamage(col.GetComponent<Unit>());

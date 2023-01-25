@@ -4,10 +4,12 @@ using TMPro;
 
 public abstract class Tooltip : MonoBehaviour
 {
-    [SerializeField] protected int wrapLimit;
-    
+    [SerializeField]
+    protected int wrapLimit;
+
     protected LayoutElement layoutElement;
     private RectTransform rectTransform;
+    protected bool followMouse = true;
 
     private void Awake()
     {
@@ -17,6 +19,8 @@ public abstract class Tooltip : MonoBehaviour
 
     private void Update()
     {
+        if (!followMouse)
+            return;
         Vector2 position = Input.mousePosition;
         float pivotX = GetCoordinate(position.x / Screen.width);
         float pivotY = GetCoordinate(position.y / Screen.height);
@@ -28,8 +32,6 @@ public abstract class Tooltip : MonoBehaviour
 
     private float GetCoordinate(float coord)
     {
-        return coord < 0.5
-            ? 0
-            : 1;
+        return coord < 0.5 ? 0 : 1;
     }
 }

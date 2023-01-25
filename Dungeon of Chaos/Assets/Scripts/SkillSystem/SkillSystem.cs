@@ -28,7 +28,6 @@ public class SavedSkillSystem
     }
 }
 
-
 public class SkillSystem : MonoBehaviour
 {
     [SerializeField]
@@ -41,6 +40,7 @@ public class SkillSystem : MonoBehaviour
     private List<SkillInfoSecondaryAttack> secondaryAttacks;
 
     private List<int> activated;
+    private string[] controls = { "Q", "E", "1", "2", "3" };
 
     private int activatedDash;
     private int activatedSecondary;
@@ -93,7 +93,6 @@ public class SkillSystem : MonoBehaviour
 
         for (int i = 0; i < activated.Count; i++)
         {
-            Debug.Log("Reset");
             activated[i] = -1;
         }
     }
@@ -149,7 +148,7 @@ public class SkillSystem : MonoBehaviour
     }
 
     #region Unlocking
-    private bool CanUnlock<T>(SkillInfo<T> skillInfo) where T : ISkill
+    public bool CanUnlock<T>(SkillInfo<T> skillInfo) where T : ISkill
     {
         if (skillInfo.GetUnlockingRequirements() == null)
             return true;
@@ -198,7 +197,6 @@ public class SkillSystem : MonoBehaviour
                 return true;
         }
     }
-
     private bool HasPrerequisiteSkill<T>(SkillInfo<T> skillInfo) where T : ISkill
     {
         string key = skillInfo.GetUnlockingRequirements().GetSkillKey();
@@ -272,10 +270,10 @@ public class SkillSystem : MonoBehaviour
         if (!IsValidActive(index))
             return;
         SkillInfoActive skill = activeSkills[index];
-        levelling.ConsumeSkillPoints(activeSkills[index].GetUnlockingRequirements().GetCost());
         skill.Unlock();
         skill.Upgrade();
-        TooltipSystem.instance.Show(skill.GetSkillData().GetName(), "Active Skill",
+        levelling.ConsumeSkillPoints(activeSkills[index].GetUnlockingRequirements().GetCost());
+        TooltipSystem.instance.Show(skill.GetSkillData().GetName(), "Active Skill", GetActiveStatusDescription(index),
             skill.GetCurrentDescription(), skill.GetNextDescription());
     }
 
@@ -325,6 +323,21 @@ public class SkillSystem : MonoBehaviour
     {
         return GetSkillInfoActive(activated[index]);
     }
+
+    public string GetActiveStatusDescription(int index)
+    {
+        string description = "Drag and drop to slots below to use";
+
+        if (IsActivated(index))
+        {
+            int activatedIndex = activated.IndexOf(index);
+            description = "Press <b>" + controls[activatedIndex] + "</b> to use in the game";            
+        }
+
+        return description;
+    }
+
+    
     #endregion
 
     #region PassiveSkills
@@ -346,7 +359,7 @@ public class SkillSystem : MonoBehaviour
         levelling.ConsumeSkillPoints(passiveSkills[index].GetUnlockingRequirements().GetCost());
         skill.Unlock();
         skill.Upgrade();
-        TooltipSystem.instance.Show(skill.GetSkillData().GetName(), "Passive Skill",
+        TooltipSystem.instance.Show(skill.GetSkillData().GetName(), "Passive Skill", "No further actions required",
             skill.GetCurrentDescription(), skill.GetNextDescription());
     }
 
@@ -401,6 +414,11 @@ public class SkillSystem : MonoBehaviour
         return dashSkills[activatedDash].GetCurrentSkill().IsDashing();
     }
 
+    public bool IsAttackDashing()
+    {
+        return IsDashing() && dashSkills[activatedDash].GetId() == "Attacking Dash";
+    }
+
     public void DashCollision(Collision2D col)
     {
         dashSkills[activatedDash].GetCurrentSkill().TriggerCollision(col);
@@ -419,7 +437,7 @@ public class SkillSystem : MonoBehaviour
         levelling.ConsumeSkillPoints(dashSkills[index].GetUnlockingRequirements().GetCost());
         skill.Unlock();
         skill.Upgrade();
-        TooltipSystem.instance.Show(skill.GetSkillData().GetName(), "Dash Skill",
+        TooltipSystem.instance.Show(skill.GetSkillData().GetName(), "Dash Skill", GetDashStatusDescription(index),
             skill.GetCurrentDescription(), skill.GetNextDescription());
     }
 
@@ -443,6 +461,23 @@ public class SkillSystem : MonoBehaviour
         return GetSkillInfoDash(activatedDash);
     }
 
+    private bool IsActivatedDash(int index)
+    {
+        return activatedDash == index;
+    }
+
+    public string GetDashStatusDescription(int index)
+    {
+        string description = "Drag and drop to slots below to use";
+
+        if (IsActivatedDash(index))
+        {
+            description = "Press <b>SPACE</b> to use in the game";
+        }
+
+        return description;
+    }
+
     #endregion
 
     #region SecondaryAttack
@@ -459,6 +494,8 @@ public class SkillSystem : MonoBehaviour
 
     public bool IsAttacking()
     {
+        if (!IsValidSecondary(activatedSecondary))
+            return false;
         return secondaryAttacks[activatedSecondary].GetCurrentSkill().IsAttacking();
     }
 
@@ -475,7 +512,7 @@ public class SkillSystem : MonoBehaviour
         levelling.ConsumeSkillPoints(secondaryAttacks[index].GetUnlockingRequirements().GetCost());
         skill.Unlock();
         skill.Upgrade();
-        TooltipSystem.instance.Show(skill.GetSkillData().GetName(), "Secondary Attack",
+        TooltipSystem.instance.Show(skill.GetSkillData().GetName(), "Secondary Attack", GetSecondaryStatusDescription(index),
             skill.GetCurrentDescription(), skill.GetNextDescription());
     }
 
@@ -508,6 +545,23 @@ public class SkillSystem : MonoBehaviour
     public SkillInfoSecondaryAttack GetActivatedSecondary()
     {
         return GetSkillInfoSecondary(activatedSecondary);
+    }
+
+    private bool IsActivatedSecondary(int index)
+    {
+        return index == activatedSecondary;
+    }
+
+    public string GetSecondaryStatusDescription(int index)
+    {
+        string description = "Drag and drop to slots below to use";
+
+        if (IsActivatedSecondary(index))
+        {
+            description = "Press <b>RMB</b> to use in the game";
+        }
+
+        return description;
     }
     #endregion
 

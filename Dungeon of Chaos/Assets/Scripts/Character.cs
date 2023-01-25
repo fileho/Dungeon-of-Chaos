@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 
 public class Character : Unit
@@ -12,6 +13,8 @@ public class Character : Unit
     private GameController gameController;
 
     private int blockedInput = 0;
+    private const float maxBiteCooldown = 0.5f;
+    private float biteCooldown = 0f;
 
     private void Awake()
     {
@@ -41,7 +44,6 @@ public class Character : Unit
 
     protected override void CleanUp()
     {
-        // TODO respawn logic
         gameController.Death();
     }
 
@@ -59,6 +61,13 @@ public class Character : Unit
         FlipSprite();
         UseSkills();
         UpdateCooldowns();
+        UpdateBite();
+    }
+
+    private void UpdateBite()
+    {
+        if (biteCooldown > 0)
+            biteCooldown -= Time.deltaTime;
     }
 
     public override Vector2 GetTargetPosition()
@@ -68,12 +77,13 @@ public class Character : Unit
 
     public override Vector2 GetTargetDirection()
     {
-        return (GetTargetPosition() - (Vector2) transform.position);
+        return (GetTargetPosition() - (Vector2)transform.position);
     }
 
     public void BlockInput()
     {
         ++blockedInput;
+        movement.MuteSfx();
     }
 
     public void UnblockInput()
@@ -100,6 +110,18 @@ public class Character : Unit
         if (Input.GetKeyDown(KeyCode.E))
         {
             SkillSystem.UseSkill(1);
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha1))
+        {
+            SkillSystem.UseSkill(2);
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha2))
+        {
+            SkillSystem.UseSkill(3);
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha3))
+        {
+            SkillSystem.UseSkill(4);
         }
         if (Input.GetKeyDown(KeyCode.Space))
         {
@@ -146,6 +168,11 @@ public class Character : Unit
             transform.localScale = Vector3.one;
     }
 
+    public bool IsAttacking()
+    {
+        return attack.IsAttacking();
+    }
+
     private void Move()
     {
         movement.Move();
@@ -160,12 +187,15 @@ public class Character : Unit
 
     private void Attack()
     {
-        if (!Input.GetMouseButtonDown(0) || attack.IsAttacking())
+        if (!Input.GetMouseButtonDown(0) || attack.IsAttacking() || SkillSystem.IsAttacking())
             return;
 
         float staminaCost = attack.GetStaminaCost();
         if (!stats.HasStamina(staminaCost))
+        {
+            InGameUIManager.instance.NotEnoughStamina();
             return;
+        }
 
         stats.ConsumeStamina(staminaCost);
         attack.Attack();
@@ -174,5 +204,13 @@ public class Character : Unit
     private void OnCollisionEnter2D(Collision2D col)
     {
         SkillSystem.DashCollision(col);
+
+        if (biteCooldown > 0 || SkillSystem.IsAttackDashing())
+            return;
+        var e = col.transform.GetComponent<Enemy>();
+        if (e == null)
+            return;
+        TakeDamage(10 + e.stats.GetPhysicalDamage() / 2);
+        biteCooldown = maxBiteCooldown;
     }
 }

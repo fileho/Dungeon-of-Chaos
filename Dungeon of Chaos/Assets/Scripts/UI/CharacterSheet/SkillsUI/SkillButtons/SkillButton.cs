@@ -9,7 +9,9 @@ public abstract class SkillButton : MonoBehaviour, IPointerDownHandler, IPointer
     [SerializeField] protected GameObject dragDrop;
     [SerializeField] protected Text level;
     [SerializeField] protected GameObject lockObj;
-    [SerializeField] protected GameObject load;
+    [SerializeField] protected GameObject requirementsNotMet;
+    [SerializeField] protected GameObject highlight;
+
     
     [SerializeField] protected SoundSettings hover;
     [SerializeField] protected SoundSettings requirements;
@@ -44,8 +46,8 @@ public abstract class SkillButton : MonoBehaviour, IPointerDownHandler, IPointer
     {
         rightClick = true;
         time = 0f;
-        load.GetComponent<Image>().fillAmount = 0;
-        load.SetActive(true);
+        lockObj.GetComponent<Image>().fillAmount = 1;
+        highlight.GetComponent<Image>().fillAmount = 1;
     }
 
     public abstract void OnPointerEnter(PointerEventData eventData);
@@ -56,8 +58,8 @@ public abstract class SkillButton : MonoBehaviour, IPointerDownHandler, IPointer
     {
         rightClick = false;
         time = 0f;
-        load.GetComponent<Image>().fillAmount = 0;
-        load.SetActive(false);
+        lockObj.GetComponent<Image>().fillAmount = 1;
+        highlight.GetComponent<Image>().fillAmount = 1;
     }
 
     public virtual void Init()
@@ -73,11 +75,12 @@ public abstract class SkillButton : MonoBehaviour, IPointerDownHandler, IPointer
             if (lockObj.activeInHierarchy)
                 lockObj.GetComponent<Image>().fillAmount = 1 - (time / upgradeTime);
             else
-                load.GetComponent<Image>().fillAmount = time / upgradeTime;
+                highlight.GetComponent<Image>().fillAmount = 1 - (time / upgradeTime);
         }
         if (time >= upgradeTime)
         {
-            load.SetActive(false);
+            lockObj.SetActive(false);
+            highlight.SetActive(false);
             Upgrade();
         }
     }
@@ -87,4 +90,8 @@ public abstract class SkillButton : MonoBehaviour, IPointerDownHandler, IPointer
     public abstract void SetIcon();
 
     public abstract void SetLevel();
+
+    public abstract void SetRequirementsOverlay();
+
+    public abstract void SetHighlightOverlay();
 }

@@ -75,3 +75,7 @@ MonoBehaviour:
     shadow: {fileID: 4598243000984051694, guid: 9dba6f0dc32ca8948a09d096125d40ac, type: 3}
   - rock: {fileID: 11400000, guid: eab830bd744bd0248a7b5a85cccf8118, type: 2}
     shadow: {fileID: 5798966291095947602, guid: 062f226574884f24c92c5f845d68891e, type: 3}
+  - rock: {fileID: 11400000, guid: e4225a5d52a51c747a0898616ea0786c, type: 2}
+    shadow: {fileID: 5340434103781860332, guid: ebe116bde54d0cf42b5ad698d8b826e9, type: 3}
+  - rock: {fileID: 11400000, guid: a65b9bf5086d2c04f8982631659184f4, type: 2}
+    shadow: {fileID: 5340434103781860332, guid: ddbdc077ffc4988418969640b093fd9d, type: 3}
