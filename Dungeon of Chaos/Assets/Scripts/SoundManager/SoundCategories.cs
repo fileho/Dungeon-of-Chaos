@@ -94,7 +94,6 @@ public class SoundCategories
         WraithThrustAttack
     }
 
-    //ToDo: Connect with VFX 
     public enum Skill
     {
         ApplyBurn,
@@ -126,7 +125,8 @@ public class SoundCategories
     {
         ButtonClick,
         ButtonHover,
-        RequirementsNotMet
+        RequirementsNotMet,
+        LowManaStaminaNotification
     }
 
     public enum Items

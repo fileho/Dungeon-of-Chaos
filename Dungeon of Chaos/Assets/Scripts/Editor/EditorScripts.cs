@@ -45,6 +45,23 @@ public class EditorScripts
         ReplaceTorches("Assets/Prefabs/Map/TorchBlue.prefab");
     }
 
+    [MenuItem("Save/Reset Player Prefs")]
+    public static void ResetPlayerPrefs()
+    {
+        PlayerPrefs.DeleteAll();
+    }
+
+    [MenuItem("Save/Delete All Saves")]
+    public static void DeleteAllSaves()
+    {
+        var saveSystem = Editor.FindObjectOfType<SaveSystem>();
+        if (saveSystem != null)
+        {
+            saveSystem.RemoveAllSaves();
+            Debug.Log("All saved were removed");
+        }
+    }
+
     private static void ReplaceTorches(string torchPath)
     {
         GameObject assetRoot = Selection.activeObject as GameObject;

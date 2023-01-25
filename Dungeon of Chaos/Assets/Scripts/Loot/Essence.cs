@@ -1,5 +1,7 @@
+using System;
 using System.Collections;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class Essence : MonoBehaviour
 {
@@ -8,22 +10,26 @@ public class Essence : MonoBehaviour
         health,
         mana,
         stamina,
-        xp        
+        xp
     }
 
-    [SerializeField] private EssenceType essenceType;
-    [SerializeField] private float lifetime = 5f;
-    [SerializeField] private float force = 5f;
+    [SerializeField]
+    private EssenceType essenceType;
+    [SerializeField]
+    private float lifetime = 5f;
+    [SerializeField]
+    private float force = 5f;
 
-    [SerializeField] private SoundSettings essencePickupSFX;
+    [SerializeField]
+    private SoundSettings essencePickupSFX;
 
     private float value;
-  
+
     void Start()
     {
         var rb = GetComponent<Rigidbody2D>();
         rb.AddForce(80 * force * Random.insideUnitCircle);
-        rb.AddTorque((Random.value -0.5f) * 200);
+        rb.AddTorque((Random.value - 0.5f) * 200);
         StartCoroutine(SmoothCleanup());
     }
 
@@ -38,21 +44,21 @@ public class Essence : MonoBehaviour
     }
 
     public void SetValue(Enemy e)
-    { 
+    {
         switch (essenceType)
         {
-            case EssenceType.health:
-                value = e.lootModifiers.GetHealthEssence(e.stats.GetLevel());
-                break;
-            case EssenceType.stamina:
-                value = e.lootModifiers.GetStaminaEssence(e.stats.GetLevel());
-                break;
-            case EssenceType.mana:
-                value = e.lootModifiers.GetManaEssence(e.stats.GetLevel());
-                break;
-            case EssenceType.xp:
-                value = e.lootModifiers.GetXPValue(e.stats.GetLevel());
-                break;
+        case EssenceType.health:
+            value = e.lootModifiers.GetHealthEssence(e.stats.GetLevel());
+            break;
+        case EssenceType.stamina:
+            value = e.lootModifiers.GetStaminaEssence(e.stats.GetLevel());
+            break;
+        case EssenceType.mana:
+            value = e.lootModifiers.GetManaEssence(e.stats.GetLevel());
+            break;
+        case EssenceType.xp:
+            value = e.lootModifiers.GetXPValue(e.stats.GetLevel());
+            break;
         }
     }
 
@@ -63,7 +69,8 @@ public class Essence : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (!collision.collider.CompareTag("Player")) return;
+        if (!collision.collider.CompareTag("Player"))
+            return;
 
         Collect();
     }
@@ -73,18 +80,20 @@ public class Essence : MonoBehaviour
         SoundManager.instance.PlaySound(essencePickupSFX);
         switch (essenceType)
         {
-            case EssenceType.health:
-                Character.instance.stats.RegenerateHealth(value);
-                break;
-            case EssenceType.mana:
-                Character.instance.stats.RegenerateMana(value);
-                break;
-            case EssenceType.stamina:
-                Character.instance.stats.RegenerateStamina(value);
-                break;
-            case EssenceType.xp:
-                Character.instance.stats.ModifyCurrentXP(((int)(value*Character.instance.stats.GetXPModifier())));
-                break;
+        case EssenceType.health:
+            Character.instance.stats.RegenerateHealth(value);
+            break;
+        case EssenceType.mana:
+            Character.instance.stats.RegenerateMana(value);
+            break;
+        case EssenceType.stamina:
+            Character.instance.stats.RegenerateStamina(value);
+            break;
+        case EssenceType.xp:
+            Character.instance.stats.ModifyCurrentXP(((int)(value * Character.instance.stats.GetXPModifier())));
+            break;
+        default:
+            throw new ArgumentOutOfRangeException();
         }
         CleanUp();
     }
@@ -94,7 +103,7 @@ public class Essence : MonoBehaviour
         yield return new WaitForSeconds(lifetime);
 
         var sp = GetComponent<SpriteRenderer>();
-        const float duration = 1f;
+        const float duration = 5f;
         float time = 0;
 
         while (time <= duration)

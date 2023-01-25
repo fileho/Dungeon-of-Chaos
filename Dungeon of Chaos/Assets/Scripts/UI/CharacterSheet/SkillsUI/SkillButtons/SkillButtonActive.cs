@@ -20,6 +20,8 @@ public class SkillButtonActive : SkillButton
         }
         SetLevel();
         SetIcon();
+        SetRequirementsOverlay();
+        SetHighlightOverlay();
     }
 
     public override void OnBeginDrag(PointerEventData eventData)
@@ -41,7 +43,7 @@ public class SkillButtonActive : SkillButton
     public override void OnPointerEnter(PointerEventData eventData)
     {
         SoundManager.instance.PlaySound(hover);
-        TooltipSystem.instance.Show(skillInfo.GetSkillData().GetName(), "Active Skill", 
+        TooltipSystem.instance.Show(skillInfo.GetSkillData().GetName(), "Active Skill", skillSystem.GetActiveStatusDescription(skillIndex),
             skillInfo.GetCurrentDescription(), skillInfo.GetNextDescription());
     }
 
@@ -97,5 +99,15 @@ public class SkillButtonActive : SkillButton
             lockObj.GetComponent<Image>().fillAmount = 1;
         }
         level.text = skillInfo.GetLevel() + "/" + skillInfo.GetMaxLevel();
+    }
+
+    public override void SetRequirementsOverlay()
+    {
+        requirementsNotMet.SetActive(!skillSystem.CanUnlock(skillInfo) && !skillInfo.IsUnlocked());
+    }
+
+    public override void SetHighlightOverlay()
+    {
+        highlight.SetActive(skillInfo.IsUnlocked() && skillSystem.CanUnlock(skillInfo));
     }
 }

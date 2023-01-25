@@ -13,8 +13,8 @@ public class Weapon : MonoBehaviour
     [Tooltip("Angle at which the weapon asset aligns with the arm")]
     [SerializeField] private float armAlignAngle = 0f;
 
-    [Tooltip("Local position of weaapon tip")]
-    [SerializeField] private Vector3 weaponTipOffset = Vector3.zero;
+    //[Tooltip("Local position of weaapon tip")]
+    //[SerializeField] private Vector3 weaponTipOffset = Vector3.zero;
 
     private ISkillEffect skillEffect = null;
     private float dmgBoost = 0;
@@ -93,9 +93,14 @@ public class Weapon : MonoBehaviour
         return armAlignAngle;
     }
 
-    public Vector3 GetWeaponTipOffset()
+    public Vector3 GetTrailPosition()
     {
-        return weaponTipOffset;
+        return trail.transform.position;
+    }
+
+    public Vector3 GetTrailLocalPosition()
+    {
+        return trail.transform.localPosition;
     }
 
     public void InflictDamage(Unit unit)

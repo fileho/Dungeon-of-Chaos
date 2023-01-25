@@ -3,30 +3,34 @@ using System.Collections.Generic;
 using UnityEngine;
 using static UnityEngine.Rendering.DebugUI.Table;
 
-public class SwingAttack : MeleeAttack {
+public class SwingAttack : MeleeAttack
+{
 
     // Angle sweeped during the attack animation
     protected float swing;
 
-    protected override void ApplyConfigurations() {
+    protected override void ApplyConfigurations()
+    {
         base.ApplyConfigurations();
         SwingAttackConfiguration _attackConfiguration = attackConfiguration as SwingAttackConfiguration;
         swing = _attackConfiguration.swing;
     }
 
-    protected override void PrepareWeapon() {
+    protected override void PrepareWeapon()
+    {
         base.PrepareWeapon();
         Weapon.EnableDisableCollider(true);
     }
 
-
-    protected override void ResetWeapon() {
+    protected override void ResetWeapon()
+    {
         base.ResetWeapon();
         Weapon.EnableDisableCollider(false);
     }
 
     // Ideal attack duration = 1
-    protected override IEnumerator StartAttackAnimation() {
+    protected override IEnumerator StartAttackAnimation()
+    {
 
         Vector3 weaponPos = Weapon.transform.position;
         Vector3 targetDirection = (GetTargetPosition() - (Vector2)weaponPos).normalized;
@@ -40,15 +44,20 @@ public class SwingAttack : MeleeAttack {
         lowerEdge = Weapon.transform.lossyScale.x > 0 ? lowerEdge : -Vector3.Reflect(lowerEdge, Vector2.up);
 
         Vector3 startPos = Weapon.transform.localPosition;
-        Vector3 endPosUp = startPos + (upperEdge * range);  
+        Vector3 endPosUp = startPos + (upperEdge * range);
         Vector3 endPosdown = startPos + (lowerEdge * range);
-        Vector3 endPosUpAdjusted = startPos + (upperEdge * (range - Weapon.WeaponAssetWidth));  //to compensate for the weapon asset width
-        Vector3 endPosdownAdjusted = startPos + (lowerEdge * (range - Weapon.WeaponAssetWidth)); //to compensate for the weapon asset width
+        Vector3 endPosUpAdjusted =
+            startPos + (upperEdge * (range - Weapon.WeaponAssetWidth)); // to compensate for the weapon asset width
+        Vector3 endPosdownAdjusted =
+            startPos + (lowerEdge * (range - Weapon.WeaponAssetWidth)); // to compensate for the weapon asset width
 
         IIndicator indicator = CreateIndicator();
-        if (indicator) {
-            indicator.transform.localPosition = owner.transform.InverseTransformPoint(Weapon.Asset.transform.position); ;
-            indicator.transform.up = Weapon.GetForwardDirectionRotated();
+        if (indicator)
+        {
+            indicator.transform.localPosition = owner.transform.InverseTransformPoint(Weapon.Asset.transform.position);
+            ;
+            // indicator.transform.up = Weapon.GetForwardDirectionRotated();
+            indicator.transform.up = targetDirection;
             indicator.Use();
             yield return new WaitForSeconds(indicator.Duration);
         }
@@ -64,7 +73,8 @@ public class SwingAttack : MeleeAttack {
 
         SoundManager.instance.PlaySound(swingSFX);
         // Forward
-        while (time <= 1) {
+        while (time <= 1)
+        {
             time += (Time.deltaTime / attackAnimationDurationOneWay);
             Weapon.transform.localPosition = Vector3.Lerp(startPos, endPosUpAdjusted, time);
             yield return null;
@@ -72,23 +82,28 @@ public class SwingAttack : MeleeAttack {
 
         // Sweep
         var startRotation = Weapon.Asset.localRotation;
-        float startRotationZ = Weapon.Asset.localRotation.eulerAngles.z < 180 ? Weapon.Asset.localRotation.eulerAngles.z : Weapon.Asset.localRotation.eulerAngles.z - 360f;
+        float startRotationZ = Weapon.Asset.localRotation.eulerAngles.z < 180
+                                   ? Weapon.Asset.localRotation.eulerAngles.z
+                                   : Weapon.Asset.localRotation.eulerAngles.z - 360f;
 
         time = 0;
-        while (time <= 1) {
+        while (time <= 1)
+        {
             time += (Time.deltaTime / attackAnimationDurationOneWay);
             float currentPos = Tweens.EaseOutExponential(time);
-            Weapon.transform.localPosition = Vector3.Slerp(endPosUpAdjusted - startPos, endPosdownAdjusted - startPos, currentPos) + startPos;
+            Weapon.transform.localPosition =
+                Vector3.Slerp(endPosUpAdjusted - startPos, endPosdownAdjusted - startPos, currentPos) + startPos;
             yield return null;
         }
 
         // Backward
         time = 0;
-        while (time <= 1) {
+        while (time <= 1)
+        {
             time += (Time.deltaTime / attackAnimationDurationOneWay);
             Weapon.transform.localPosition = Vector3.Lerp(endPosdownAdjusted, startPos, time);
             yield return null;
-        }        
+        }
 
         // Reset
         Weapon.Asset.localRotation = initialAssetRotation;
@@ -97,6 +112,4 @@ public class SwingAttack : MeleeAttack {
         ResetWeapon();
         isAttacking = false;
     }
-
-
 }

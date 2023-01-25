@@ -19,6 +19,8 @@ public abstract class AttackConfiguration : ScriptableObject
     public IndicatorConfiguration indicatorConfiguration;
     public SkillEffectType type;
 
+    public ISkillEffect attackEffect = null;
+
     public SoundSettings swingSFX;
     public SoundSettings impactSFX;
 }

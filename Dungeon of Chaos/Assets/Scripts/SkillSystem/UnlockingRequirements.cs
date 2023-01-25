@@ -78,12 +78,12 @@ public class UnlockingRequirements
 
     public string GetRequirementsDescription()
     {
-        string cost = "Skill Pts: " + skillPointsCost.ToString();
-        string lvl = "Lvl: " + level.ToString();
+        string cost = "<i>Skill Pts:</i> " + skillPointsCost.ToString();
+        string lvl = "<i>Lvl:</i> " + level.ToString();
         string prim = GetAttributeDescription(primaryAttribute);
         string sec = GetAttributeDescription(secondaryAttribute);
 
-        return "Requirements: " + "\n" + cost + " " + lvl + " " + prim + " " + sec + " " + skillKey;
+        return "<b>Requirements:</b> " + "\n" + cost + " " + lvl + " " + prim + " " + sec + " " + skillKey;
     }
 
     private string GetAttributeDescription(AttributeRequirement attReq)
@@ -94,23 +94,23 @@ public class UnlockingRequirements
                 return "";
             case Attributes.Strength:
                 return attReq.value > 0
-                    ? "Str: " + attReq.value.ToString()
+                    ? "<i>Str:</i> " + attReq.value.ToString()
                     : "";
             case Attributes.Intelligence:
                 return attReq.value > 0
-                    ? "Int: " + attReq.value.ToString()
+                    ? "<i>Int:</i> " + attReq.value.ToString()
                     : "";
             case Attributes.Constitution:
                 return attReq.value > 0
-                    ? "Con: " + attReq.value.ToString()
+                    ? "<i>Con:</i> " + attReq.value.ToString()
                     : "";
             case Attributes.Endurance:
                 return attReq.value > 0
-                    ? "End: " + attReq.value.ToString()
+                    ? "<i>End:</i> " + attReq.value.ToString()
                     : "";
             case Attributes.Wisdom:
                 return attReq.value > 0
-                    ? "Wis: " + attReq.value.ToString()
+                    ? "<i>Wis:</i> " + attReq.value.ToString()
                     : "";
             default:
                 return "";

@@ -13,7 +13,11 @@ MonoBehaviour:
   m_Name: StatsMultipliers
   m_EditorClassIdentifier: 
   damageMultiplier: 2.5
-  spellPowerMultiplier: 2.5
-  hpMultiplier: 10
+  spellPowerMultiplier: 2.75
+  hpLinearMultiplier: 10
   staminaMultiplier: 10
-  manaMultiplier: 10
+  manaLinearMultiplier: 10
+  hpExp: 0.07
+  manaExp: 0.07
+  hpExpMultiplier: 3
+  manaExpMultiplier: 3

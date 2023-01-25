@@ -10,4 +10,9 @@ public class Burn : RepeatedTemporalEffect
         foreach (Unit target in targets)
             target.TakeDamage(val);
     }
+
+    protected override void Init()
+    {
+        InitStatusIcon(StatusEffectType.Burn);
+    }
 }

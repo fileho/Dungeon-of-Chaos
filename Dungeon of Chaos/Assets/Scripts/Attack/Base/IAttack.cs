@@ -6,7 +6,8 @@ using static UnityEngine.GraphicsBuffer;
 public abstract class IAttack : MonoBehaviour
 {
 
-    [SerializeField] protected AttackConfiguration attackConfiguration;
+    [SerializeField]
+    protected AttackConfiguration attackConfiguration;
 
     public Weapon Weapon { get; private set; }
 
@@ -29,6 +30,9 @@ public abstract class IAttack : MonoBehaviour
     protected float cooldown;
     // The type (physical/magical) of the attack
     protected SkillEffectType type;
+
+    // The effect (such as burn or poison) the attack applies
+    protected ISkillEffect attackEffect;
 
     protected SoundSettings swingSFX;
     protected SoundSettings impactSFX;
@@ -83,15 +87,13 @@ public abstract class IAttack : MonoBehaviour
         return owner.GetTargetDistance() <= GetAttackRange();
     }
 
-
     public float GetDamage()
     {
         if (owner == null)
             return 0;
 
-        return type == SkillEffectType.physical
-            ? damage * owner.stats.GetPhysicalDamage()
-            : damage * owner.stats.GetSpellPower();
+        return type == SkillEffectType.physical ? damage * owner.stats.GetPhysicalDamage()
+                                                : damage * owner.stats.GetSpellPower();
     }
 
     public float GetDamageWeighted()
@@ -109,12 +111,10 @@ public abstract class IAttack : MonoBehaviour
         return isAttacking;
     }
 
-
     public float GetStaminaCost()
     {
         return staminaCost;
     }
-
 
     public float GetStaminaCostWeighted()
     {
@@ -136,22 +136,22 @@ public abstract class IAttack : MonoBehaviour
         return GetStaminaCostWeighted() + GetManaCostWeighted();
     }
 
-
     public Unit GetTarget()
     {
         return owner.Target;
     }
 
-
     public Vector2 GetTargetPosition()
     {
-        return owner.GetTargetPosition();
+        if (owner == Character.instance)
+            return owner.GetTargetPosition();
+        return owner.GetTargetPosition() + Random.insideUnitCircle * 3;
     }
-
 
     protected virtual IIndicator CreateIndicator(Transform parent = null)
     {
-        if (indicatorPrefab == null) return null;
+        if (indicatorPrefab == null)
+            return null;
 
         if (parent == null)
             parent = transform.parent;
@@ -165,11 +165,12 @@ public abstract class IAttack : MonoBehaviour
     protected virtual void PrepareWeapon()
     {
         Weapon.SetDamage(GetDamage());
+        if (owner.gameObject.tag != "Player")
+            Weapon.SetEffect(attackEffect);
         Weapon.SetImpactSound(impactSFX);
         Weapon.ResetHitUnits();
         Weapon.EnableDisableTrail(true);
     }
-
 
     protected virtual void ResetWeapon()
     {
@@ -193,10 +194,10 @@ public abstract class IAttack : MonoBehaviour
         indicatorConfiguration = attackConfiguration.indicatorConfiguration;
         AttackAnimationDuration = attackConfiguration.attackAnimationDuration;
         type = attackConfiguration.type;
+        attackEffect = attackConfiguration.attackEffect;
         swingSFX = attackConfiguration.swingSFX;
         impactSFX = attackConfiguration.impactSFX;
     }
-
 
     protected virtual void Awake()
     {
@@ -219,11 +220,9 @@ public abstract class IAttack : MonoBehaviour
         return this;
     }
 
-
     protected virtual void Update()
     {
         if (!isAttacking && cooldownLeft > 0)
             cooldownLeft -= Time.deltaTime;
     }
-
 }

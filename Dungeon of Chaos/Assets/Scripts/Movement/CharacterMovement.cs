@@ -4,12 +4,13 @@ using UnityEngine;
 public class CharacterMovement : IMovement
 {
     private Stats stats;
-    private Vector2 moveDir;
+    private Vector2 moveDir = Vector2.up;
 
     private Rigidbody2D rb;
     private Animator animator;
 
-    [SerializeField] private SoundSettings footstepsSFX;
+    [SerializeField]
+    private SoundSettings footstepsSFX;
     private SoundData sfx;
 
     public override IMovement Init(Transform transform, Stats stats)
@@ -33,7 +34,8 @@ public class CharacterMovement : IMovement
             dir += Vector2.down;
 
         dir = dir.normalized;
-        if (dir != Vector2.zero) {
+        if (dir != Vector2.zero)
+        {
             moveDir = dir;
             animator.SetBool("isMoving", true);
             // TODO ADD this with animations
@@ -48,6 +50,11 @@ public class CharacterMovement : IMovement
         }
 
         rb.AddForce(stats.MovementSpeed() * Time.fixedDeltaTime * 1000 * dir);
+    }
+
+    public override void MuteSfx()
+    {
+        SoundManager.instance.StopLoopingSound(sfx);
     }
 
     public override Vector2 GetMoveDir()

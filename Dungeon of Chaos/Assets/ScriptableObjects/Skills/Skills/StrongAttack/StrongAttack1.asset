@@ -18,7 +18,7 @@ MonoBehaviour:
     icon: {fileID: 21300000, guid: 80c3bb57d3e597f4587e7ff538c4b308, type: 3}
   cooldown: 3
   manaCost: 0
-  staminaCost: 35
+  staminaCost: 55
   effects: []
   attack: {fileID: 5963835019539033489, guid: 753ba31da509cad4082d2284321b0a69, type: 3}
   attackConfiguration: {fileID: 11400000, guid: b2e30bfe2913d9446a23c5bf6481dba5, type: 2}

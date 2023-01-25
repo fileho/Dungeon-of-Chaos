@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 656d4005658cf4e07808ec6178e5ef23, type: 3}
   m_Name: Tou-Wraith-Thrust
   m_EditorClassIdentifier: 
-  range: 6
+  range: 7
   damage: 1.35
   staminaCost: 30
   manaCost: 0
@@ -21,7 +21,7 @@ MonoBehaviour:
   staminaCostWeight: 1
   manaCostWeight: 1
   cooldown: 1
-  attackAnimationDuration: 0.7
+  attackAnimationDuration: 0.4
   indicator: {fileID: 8311782001119121317, guid: c7018b97d1c15436b967c0ae91874678, type: 3}
   indicatorConfiguration: {fileID: 11400000, guid: d4710bae855564c8980615c892e77fcc, type: 2}
   type: 1

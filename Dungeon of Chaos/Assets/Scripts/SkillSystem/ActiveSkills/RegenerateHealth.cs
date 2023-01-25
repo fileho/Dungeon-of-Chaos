@@ -10,5 +10,10 @@ public class RegenerateHealth : RepeatedTemporalEffect
             target.stats.RegenerateHealth(val);
         }
     }
+
+    protected override void Init()
+    {
+        InitStatusIcon(StatusEffectType.Regeneration);
+    }
 }
 

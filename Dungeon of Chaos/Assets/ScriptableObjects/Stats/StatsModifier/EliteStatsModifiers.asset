@@ -12,4 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ab4bcf82772b4ce4ba30d81e9c45c000, type: 3}
   m_Name: EliteStatsModifiers
   m_EditorClassIdentifier: 
-  statsBonus: 1
+  statsBonus: 2
+  hpMultiplier: 1.5

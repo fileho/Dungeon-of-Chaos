@@ -6,7 +6,9 @@ using UnityEngine.Assertions;
 public class ResetBook : MonoBehaviour, IMapSavable
 {
     [SerializeField]
+#if UNITY_EDITOR
     [ReadOnly]
+#endif
     private int id;
 
     private SaveSystem saveSystem;

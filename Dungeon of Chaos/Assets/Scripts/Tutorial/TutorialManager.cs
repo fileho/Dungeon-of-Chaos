@@ -1,9 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
-using static System.Runtime.CompilerServices.RuntimeHelpers;
-using static UnityEngine.Rendering.DebugUI;
-
 
 public enum TutorialState
 {
@@ -32,15 +30,16 @@ public class TutorialManager : MonoBehaviour
     private Coroutine coroutine;
     private GameObject currentTutorial;
 
-
     public List<Keys> keys;
+
+    private bool breakCorutine;
 
     // Start is called before the first frame update
     void Start()
     {
         animator = GetComponent<Animator>();
         bg = transform.Find("BG").gameObject;
-        Show(TutorialState.Movement);
+        //    Show(TutorialState.Movement);
     }
 
     public void Show(TutorialState state)
@@ -48,18 +47,18 @@ public class TutorialManager : MonoBehaviour
         coroutine = StartCoroutine(ShowTutorial(state));
     }
 
-
     public void Hide()
     {
         currentState = TutorialState.Default;
-        StopCoroutine(coroutine);
+        breakCorutine = true;
         EnableDisableTutorialScreen(false);
     }
 
     void EnableDisableTutorialScreen(bool state)
     {
         bg.SetActive(state);
-        currentTutorial.SetActive(state);
+        if (currentTutorial)
+            currentTutorial.SetActive(state);
 
         if (state)
             animator.Play(currentState.ToString());
@@ -67,52 +66,30 @@ public class TutorialManager : MonoBehaviour
             animator.StopPlayback();
     }
 
+    public bool AlreadyUsed(TutorialState state)
+    {
+        return PlayerPrefs.GetInt(state.ToString(), 0) != 0;
+    }
 
     IEnumerator ShowTutorial(TutorialState state)
     {
         currentState = state;
-
-        while (currentState != TutorialState.Default && PlayerPrefs.GetInt(currentState.ToString(), 0) == 0)
+        if (currentState != TutorialState.Default && PlayerPrefs.GetInt(currentState.ToString(), 0) == 0)
         {
+            Time.timeScale = 0.7f;
             currentTutorial = transform.Find(currentState.ToString()).gameObject;
             EnableDisableTutorialScreen(true);
-            bool pressed = false;
+            breakCorutine = false;
 
-
-            KeyCode[] keycodes = keys[(int)currentState].KeyCodes;
-            while (!pressed)
+            while (!breakCorutine)
             {
-                if (keycodes.Length > 0)
-                {
-                    foreach (KeyCode key in keycodes)
-                        if (Input.GetKeyDown(key))
-                            pressed = true;
-                }
-                else
-                {
-                    if (Input.anyKeyDown)
-                        pressed = true;
-                }
                 yield return null;
             }
 
+            PlayerPrefs.SetInt(state.ToString(), 1);
 
-            PlayerPrefs.SetInt(currentState.ToString(), 1);
             EnableDisableTutorialScreen(false);
-            yield return new WaitForSeconds(0.5f);
-
-            switch (currentState)
-            {
-                case TutorialState.Movement:
-                    currentState = TutorialState.Dash;
-                    break;
-                case TutorialState.Dash:
-                    currentState = TutorialState.Attack;
-                    break;
-                default:
-                    currentState = TutorialState.Default;
-                    break;
-            }
+            Time.timeScale = 1f;
         }
         yield return null;
     }

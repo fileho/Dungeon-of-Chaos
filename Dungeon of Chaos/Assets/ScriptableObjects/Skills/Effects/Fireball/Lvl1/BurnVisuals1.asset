@@ -15,7 +15,7 @@ MonoBehaviour:
   target: {fileID: 0}
   range: 0
   angle: 360
-  vfx: {fileID: 0}
+  vfx: {fileID: 4617805228910178686, guid: e124b5a91d76ff543936171e041cab2e, type: 3}
   sfx:
     soundCategory: 3
     sound: 0

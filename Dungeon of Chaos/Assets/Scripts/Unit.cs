@@ -47,7 +47,8 @@ public class Unit : MonoBehaviour
 
     public virtual Vector2 GetTargetDirection()
     {
-        return Target == null ? Vector2.positiveInfinity : (GetTargetPosition() - (Vector2)transform.position).normalized;
+        return Target == null ? Vector2.positiveInfinity
+                              : (GetTargetPosition() - (Vector2)transform.position).normalized;
     }
 
     public float GetTargetDistance()
@@ -84,7 +85,7 @@ public class Unit : MonoBehaviour
         if (vfx)
             vfx.GetComponent<ParticleSystem>().Play();
         SoundManager.instance.PlaySound(deathSFX);
-        Invoke(nameof(CleanUp), SoundManager.instance.GetLength(deathSFX));
+        Invoke(nameof(CleanUp), 1);
     }
 
     protected virtual void CleanUp()

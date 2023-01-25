@@ -122,7 +122,7 @@ public class Enemy : Unit
 
     private bool Attack()
     {
-        if (IsAttacking()) return true;
+        if (!IsTargetInChaseRange() || IsAttacking()) return true;
         currentAttack = attackManager.GetBestAvailableAttack();
         FlipSprite();
         RotateWeapon();

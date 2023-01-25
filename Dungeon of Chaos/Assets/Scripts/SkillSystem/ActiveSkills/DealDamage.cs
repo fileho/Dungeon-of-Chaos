@@ -1,4 +1,4 @@
-using System.Collections;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -32,6 +32,6 @@ public class DealDamage : ISkillEffect
 
     public override string[] GetEffectsValues(Unit owner)
     {
-        return new string[] { GetValue(owner).ToString() };
+        return new string[] { Math.Round(GetValue(owner),2).ToString() };
     }
 }

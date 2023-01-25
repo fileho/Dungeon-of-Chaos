@@ -50,7 +50,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   upRightAngle: 0
   armAlignAngle: 0
-  weaponTipOffset: {x: -1.29, y: -0.17, z: 0}
 --- !u!212 &4206247659596657827
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -186,7 +185,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 2100000, guid: 8816c7ae6d725244e8d02d2ff9c2e858, type: 2}
-  m_Color: {r: 0.5471698, g: 0.002064751, b: 0.002064751, a: 1}
+  m_Color: {r: 1, g: 0, b: 0, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -239,7 +238,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 3, y: 1.5}
+  m_SizeDelta: {x: 4, y: 1}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1419886181537250100
 MonoBehaviour:
@@ -280,7 +279,7 @@ MonoBehaviour:
     m_PressedTrigger: Pressed
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
-  m_Interactable: 1
+  m_Interactable: 0
   m_TargetGraphic: {fileID: 0}
   m_FillRect: {fileID: 1419886181399069786}
   m_HandleRect: {fileID: 0}
@@ -404,8 +403,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 4}
-  m_SizeDelta: {x: 3, y: 1.5}
+  m_AnchoredPosition: {x: -0.4, y: 3.96}
+  m_SizeDelta: {x: 4, y: 1.5}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!223 &1419886182100718516
 Canvas:
@@ -566,7 +565,7 @@ SpriteRenderer:
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 1
-  m_Size: {x: 7.05, y: 7.05}
+  m_Size: {x: 6, y: 6}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -584,7 +583,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1
+  m_Mass: 7
   m_LinearDrag: 10
   m_AngularDrag: 0.05
   m_GravityScale: 0
@@ -606,8 +605,8 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.20916367, y: 0.4535098}
-  m_Size: {x: 2.0292587, y: 4.1329823}
+  m_Offset: {x: -0.13773727, y: 0.20529222}
+  m_Size: {x: 2.0994644, y: 4.0974445}
   m_Direction: 0
 --- !u!114 &624885387835044732
 MonoBehaviour:
@@ -621,7 +620,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 50c0fd73315984dc787ff687bd683fb2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  stats: {fileID: 11400000, guid: 8de6aac91f1482043b659913e862caac, type: 2}
+  stats: {fileID: 11400000, guid: 28604a55f1eab934ab62614caee45d84, type: 2}
   movement: {fileID: 11400000, guid: 2a1e0ff95ed4b814db5f1624832232f4, type: 2}
   effects: {fileID: 11400000, guid: b8c2e379a823a5f4a907481e41277e70, type: 2}
   bars: {fileID: 11400000, guid: 0221322a962978542a4599e9d2390aec, type: 2}
@@ -835,7 +834,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3857842880315447389}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2.43, y: 0.03, z: 0}
+  m_LocalPosition: {x: -1.97, y: 0.08, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 5574832814731392626}
@@ -886,7 +885,7 @@ SpriteRenderer:
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 1
-  m_Size: {x: 2.360154, y: 2.080996}
+  m_Size: {x: 1.8, y: 1.65}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -926,9 +925,9 @@ CircleCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.08758002, y: -0.29913273}
+  m_Offset: {x: -0.088905975, y: -0.31459966}
   serializedVersion: 2
-  m_Radius: 0.94
+  m_Radius: 0.7381925
 --- !u!114 &1164431088458747869
 MonoBehaviour:
   m_ObjectHideFlags: 0

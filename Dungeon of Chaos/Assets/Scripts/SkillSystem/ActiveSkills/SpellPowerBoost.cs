@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(menuName = "SO/Skills/SkillEffects/SpellPowerBoost")]
@@ -15,5 +13,10 @@ public class SpellPowerBoost : OneTimeTemporalEffect
     {
         foreach (Unit target in targets)
             target.stats.ChangeSpellPower(-val);
+    }
+
+    protected override void Init()
+    {
+        InitStatusIcon(StatusEffectType.SpellPowerBoost);
     }
 }

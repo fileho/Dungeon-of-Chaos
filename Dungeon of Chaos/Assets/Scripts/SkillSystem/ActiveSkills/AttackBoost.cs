@@ -16,4 +16,9 @@ public class AttackBoost : OneTimeTemporalEffect
         foreach (Unit target in targets)
             target.stats.ChangePhysicalDamage(-val);
     }
+
+    protected override void Init()
+    {
+        InitStatusIcon(StatusEffectType.AttackBoost);
+    }
 }

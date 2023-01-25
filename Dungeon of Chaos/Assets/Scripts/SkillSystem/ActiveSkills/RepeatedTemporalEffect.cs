@@ -1,28 +1,26 @@
-using System.Collections;
-using System.Collections.Generic;
+using System;
 using UnityEngine;
-using UnityEngine.Events;
 
 public abstract class RepeatedTemporalEffect : TemporalEffect
 {
-    [SerializeField] private float frequency;
-    private float time = 0f;
+    [SerializeField] protected float frequency;
+    protected float time = 0f;
 
     public override string[] GetEffectsValues(Unit owner)
     {
-        return new string[] { GetValue(owner).ToString(), frequency.ToString(), duration.ToString() };
+        return new string[] { Math.Round(GetValue(owner),2).ToString(), frequency.ToString(), duration.ToString() };
     }
 
     public override bool Update()
     {
         if (!UpdateTime())
-            return true;
+            return false;
         if (ShouldApplyEffect())
         {
             ApplyEffect();
             time -= frequency;
         }
-        return false;
+        return true;
     }
 
     protected bool ShouldApplyEffect()

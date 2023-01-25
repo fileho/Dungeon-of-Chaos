@@ -8,7 +8,11 @@ public class PrimaryToSecondary : ScriptableObject
     [Header("Primary to Secondary Multipliers")]
     public float damageMultiplier;
     public float spellPowerMultiplier;
-    public float hpMultiplier;
+    public float hpLinearMultiplier;
     public float staminaMultiplier;
-    public float manaMultiplier;
+    public float manaLinearMultiplier;
+    public float hpExp;
+    public float manaExp;
+    public float hpExpMultiplier;
+    public float manaExpMultiplier;
 }
