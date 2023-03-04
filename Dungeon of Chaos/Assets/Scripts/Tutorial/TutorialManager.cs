@@ -15,36 +15,24 @@ public enum TutorialState
     Default = 999,
 }
 
-[System.SerializableAttribute]
-public struct Keys
-{
-    public string name;
-    public KeyCode[] KeyCodes;
-}
-
 public class TutorialManager : MonoBehaviour
 {
     private GameObject bg;
     private Animator animator;
     private TutorialState currentState = TutorialState.Default;
-    private Coroutine coroutine;
     private GameObject currentTutorial;
-
-    public List<Keys> keys;
 
     private bool breakCorutine;
 
-    // Start is called before the first frame update
     void Start()
     {
         animator = GetComponent<Animator>();
         bg = transform.Find("BG").gameObject;
-        //    Show(TutorialState.Movement);
     }
 
     public void Show(TutorialState state)
     {
-        coroutine = StartCoroutine(ShowTutorial(state));
+        StartCoroutine(ShowTutorial(state));
     }
 
     public void Hide()

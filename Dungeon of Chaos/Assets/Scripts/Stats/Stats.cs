@@ -8,7 +8,8 @@ public class SavedStats
     public Levelling.SavedLevelling savedLevelling;
     public int resetBooks;
 
-    public SavedStats(PrimaryStats.SavedPrimaryStats savedPrimary, Levelling.SavedLevelling savedLevelling, int resetBooks)
+    public SavedStats(PrimaryStats.SavedPrimaryStats savedPrimary, Levelling.SavedLevelling savedLevelling,
+                      int resetBooks)
     {
         this.savedPrimary = savedPrimary;
         this.savedLevelling = savedLevelling;
@@ -19,7 +20,7 @@ public class SavedStats
 [CreateAssetMenu(menuName = "SO/Stats/Stats")]
 public class Stats : ScriptableObject
 {
-    #region Stats Variables
+#region Stats Variables
 
     [SerializeField]
     private float movementSpeed;
@@ -48,7 +49,7 @@ public class Stats : ScriptableObject
 
     [SerializeField]
     private Levelling XP = new Levelling();
-    #endregion
+#endregion
 
     private IBars bars;
 
@@ -69,7 +70,7 @@ public class Stats : ScriptableObject
         bars.UpdateXpBar(ratio);
     }
 
-    #region Skills Reset
+#region Skills Reset
     private int resetAmount = 0;
 
     public void ColectReset()
@@ -89,11 +90,11 @@ public class Stats : ScriptableObject
 
     public int GetResetAmount()
     {
-        return resetAmount; 
+        return resetAmount;
     }
-    #endregion
+#endregion
 
-    #region Utils
+#region Utils
     public float GetCooldownModifier()
     {
         return cooldownModifier;
@@ -113,9 +114,9 @@ public class Stats : ScriptableObject
     {
         xpGainModifier += value;
     }
-    #endregion
+#endregion
 
-    #region Health
+#region Health
     public void ConsumeHealth(float value)
     {
         health.Consume(value);
@@ -148,9 +149,9 @@ public class Stats : ScriptableObject
         health.ChangeMaxValue(value);
         bars.UpdateHpBar(health.Ratio());
     }
-    #endregion
+#endregion
 
-    #region Mana
+#region Mana
     public bool HasMana(float value)
     {
         return mana.HasEnough(value);
@@ -198,9 +199,9 @@ public class Stats : ScriptableObject
         manaCostModifier = value;
     }
 
-    #endregion
+#endregion
 
-    #region Stamina
+#region Stamina
     public bool HasStamina(float value)
     {
         return stamina.HasEnough(value);
@@ -247,9 +248,9 @@ public class Stats : ScriptableObject
     {
         staminaCostModifier = value;
     }
-    #endregion
+#endregion
 
-    #region Movement
+#region Movement
     public float MovementSpeed()
     {
         return movementSpeed;
@@ -259,9 +260,9 @@ public class Stats : ScriptableObject
     {
         return chaseDistance;
     }
-    #endregion
+#endregion
 
-    #region Physical Damage
+#region Physical Damage
     public float GetPhysicalDamage()
     {
         return physicalDamage;
@@ -271,21 +272,21 @@ public class Stats : ScriptableObject
     {
         physicalDamage += value;
     }
-    #endregion
+#endregion
 
-    #region Spell Power
+#region Spell Power
     public float GetSpellPower()
     {
         return spellPower;
-    }  
+    }
 
     public void ChangeSpellPower(float value)
     {
         spellPower += value;
     }
-    #endregion
+#endregion
 
-    #region Armor
+#region Armor
     public bool HasArmor()
     {
         return armor > 0;
@@ -311,11 +312,11 @@ public class Stats : ScriptableObject
         if (armor > maxArmor)
             maxArmor = armor;
 
-        bars.UpdateArmorBar(armor / maxArmor);     
+        bars.UpdateArmorBar(armor / maxArmor);
     }
-    #endregion
+#endregion
 
-    #region Stats Updating
+#region Stats Updating
     public Stats ResetStats(IBars bars = null)
     {
         if (bars != null)
@@ -370,9 +371,9 @@ public class Stats : ScriptableObject
         StatsOverview.instance.SetArmor(armor);
         StatsOverview.instance.SetStaminaRegen(staminaRegen);
     }
-    #endregion
+#endregion
 
-    #region Primary Stats
+#region Primary Stats
     public void ChangeStrength(int mod)
     {
         primaryStats.strength += mod;
@@ -492,7 +493,7 @@ public class Stats : ScriptableObject
     {
         return primaryStats.CanDowngradeStat(primaryStats.wisdom);
     }
-    #endregion
+#endregion
 
     public SavedStats Save()
     {

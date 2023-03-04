@@ -3892,7 +3892,6 @@ GameObject:
   - component: {fileID: 493887442688034370}
   - component: {fileID: 493887442688034372}
   - component: {fileID: 493887442688034371}
-  - component: {fileID: 493887442688034373}
   m_Layer: 5
   m_Name: Panel-LoadGame
   m_TagString: Untagged
@@ -3961,25 +3960,6 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &493887442688034373
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 493887442688034369}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0170e7f9799f64aaf8e6b5cfb81683d8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  loadSlots:
-  - {fileID: 493887443970645485}
-  - {fileID: 493887443058041905}
-  - {fileID: 493887442679673811}
-  - {fileID: 493887443824199459}
-  - {fileID: 493887443506829654}
-  - {fileID: 493887442093371026}
 --- !u!1 &493887442690173825
 GameObject:
   m_ObjectHideFlags: 0

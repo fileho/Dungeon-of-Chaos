@@ -109,7 +109,7 @@ public class PrimaryStats
 
     public float GetArmor()
     {
-        return (constitution - 10) / 2 * 5; 
+        return (constitution - 10) / 2 * 5;
     }
 
     public void Load(SavedPrimaryStats saved)

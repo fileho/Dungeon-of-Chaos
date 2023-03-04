@@ -1,8 +1,11 @@
 using System.Collections;
 using UnityEngine;
 
+/// <summary>
+/// Tweening for enemies, Flash red, wiggle, knock back, and tweening out body when enemy is dead
+/// </summary>
 [CreateAssetMenu(menuName = "SO/Effects/EnemyEffects")]
-public class EnemyEffects : Ieffects
+public class EnemyEffects : IEffects
 {
     private Transform transform;
     private SpriteRenderer sprite;
@@ -11,7 +14,7 @@ public class EnemyEffects : Ieffects
 
     private MonoBehaviour monoBehaviour;
 
-    public override Ieffects Init(Transform transform)
+    public override IEffects Init(Transform transform)
     {
         this.transform = transform;
         sprite = transform.GetComponent<SpriteRenderer>();

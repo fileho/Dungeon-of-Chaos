@@ -1,6 +1,4 @@
 using UnityEngine;
-using static UnityEngine.GraphicsBuffer;
-using UnityEngine.SocialPlatforms;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -13,12 +11,12 @@ public class Enemy : Unit
     private enum State
     {
         Idle,
-        Patrol,
         Chase,
         Attack,
     }
 
-    [SerializeField] private ILoot loot;
+    [SerializeField]
+    private ILoot loot;
     public LootModifiers lootModifiers;
     private AttackManager attackManager;
     private IAttack currentAttack;
@@ -27,20 +25,21 @@ public class Enemy : Unit
     private Rigidbody2D rb;
 
     [Header("Enemy Ambient")]
-    [SerializeField] private float maxDistance;
-    [SerializeField] private SoundSettings ambientSFX;
+    [SerializeField]
+    private float maxDistance;
+    [SerializeField]
+    private SoundSettings ambientSFX;
     private const float minFrequency = 2f;
     private const float maxFrequency = 5.5f;
     private float frequency = 0f;
     private float time = 0f;
-
 
     protected override void Init()
     {
         loot = Instantiate(loot).Init(this);
         lootModifiers = Instantiate(lootModifiers);
         Target = Character.instance;
-        state = State.Patrol;
+        state = State.Idle;
         attackManager = GetComponent<AttackManager>();
         animator = GetComponent<Animator>();
         rb = transform.GetComponent<Rigidbody2D>();
@@ -51,7 +50,6 @@ public class Enemy : Unit
 
     private bool IsTargetInChaseRange()
     {
-        //Vector2 direction = transform.lossyScale.x > 0 ? -transform.right : transform.right;
         Vector2 direction = GetTargetDirection();
 
         bool playerHit = false;
@@ -61,9 +59,9 @@ public class Enemy : Unit
             for (int i = 0; i < 10; i++)
             {
                 Vector2 dir = Quaternion.AngleAxis((-5 + (1 * i)), Vector3.forward) * direction;
-                RaycastHit2D hit = Physics2D.Linecast(transform.position, (Vector2)transform.position + (dir * stats.ChaseDistance()), ~(1 << LayerMask.NameToLayer("Enemy")));
-
-                //Debug.DrawLine(transform.position, (Vector2)transform.position + (dir * stats.ChaseDistance()), Color.red, 0.1f);
+                RaycastHit2D hit =
+                    Physics2D.Linecast(transform.position, (Vector2)transform.position + (dir * stats.ChaseDistance()),
+                                       ~(1 << LayerMask.NameToLayer("Enemy")));
 
                 if (hit.collider && hit.collider.CompareTag("Player"))
                 {
@@ -74,7 +72,7 @@ public class Enemy : Unit
             }
             lastRayCastCheck = Time.time;
         }
-        return playerHit || (!playerHit && Time.time - lastLosTime < CHASE_HEAT);
+        return playerHit || (Time.time - lastLosTime < CHASE_HEAT);
     }
 
     private void FixedUpdate()
@@ -85,12 +83,10 @@ public class Enemy : Unit
             PlayAmbientSound();
     }
 
-
     private bool IsAttacking()
     {
         return currentAttack != null && currentAttack.IsAttacking();
     }
-
 
     private void RotateWeapon()
     {
@@ -100,7 +96,6 @@ public class Enemy : Unit
         }
     }
 
-
     private void ResetWeapon()
     {
         if (weapon != null)
@@ -108,7 +103,6 @@ public class Enemy : Unit
             weapon.ResetWeapon();
         }
     }
-
 
     private void FlipSprite()
     {
@@ -122,7 +116,8 @@ public class Enemy : Unit
 
     private bool Attack()
     {
-        if (!IsTargetInChaseRange() || IsAttacking()) return true;
+        if (!IsTargetInChaseRange() || IsAttacking())
+            return true;
         currentAttack = attackManager.GetBestAvailableAttack();
         FlipSprite();
         RotateWeapon();
@@ -157,30 +152,32 @@ public class Enemy : Unit
         return false;
     }
 
-
-    private bool Patrol()
+    private void Idle()
     {
-        //TODO: Write the patrol logic
-        state = State.Patrol;
+        state = State.Idle;
         ResetWeapon();
-        return false;
     }
 
     private void SwitchEnemyStates()
     {
-        if (dead) return;
-        if (Attack()) { }
-        else if (Chase()) { }
-        else Patrol();
-        //print("Test: " + state.ToString());
+        if (dead)
+            return;
+        if (Attack())
+        {
+        }
+        else if (Chase())
+        {
+        }
+        else
+        {
+            Idle();
+        }
     }
-
 
     public bool IsAwake()
     {
         return state == State.Attack || state == State.Chase;
     }
-
 
     protected override void CleanUp()
     {

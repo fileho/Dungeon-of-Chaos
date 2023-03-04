@@ -2,15 +2,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Only flashes the Character red when he takes damage
+/// </summary>
 [CreateAssetMenu(menuName = "SO/Effects/Effects")]
-public class Effects : Ieffects
+public class CharacterEffects : IEffects
 {
     private SpriteRenderer sprite;
     private Color spriteColor;
 
     private MonoBehaviour monoBehaviour;
 
-    public override Ieffects Init(Transform transform)
+    public override IEffects Init(Transform transform)
     {
         sprite = transform.GetComponent<SpriteRenderer>();
         spriteColor = sprite.color;

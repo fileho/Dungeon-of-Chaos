@@ -50,8 +50,9 @@ public class SoundPool
         source.Play();
     }
 
-    // TODO add priority handling
-    public AudioSource FindEmptyAudioSource(float priority)
+    // It can be improved with the priority of the sound, currently it is not required
+    // Changes the last available index since there is a high chance that the next one will be also available
+    public AudioSource FindEmptyAudioSource(float _ /*priority*/)
     {
         int lastIndex = poolIndex;
         // start search from last empty position
