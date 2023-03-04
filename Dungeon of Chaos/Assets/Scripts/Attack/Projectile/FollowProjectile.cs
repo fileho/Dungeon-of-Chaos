@@ -9,11 +9,11 @@ public class FollowProjectile : IProjectile
     protected override void ApplyConfigurations()
     {
         base.ApplyConfigurations();
-        FollowProjectileConfiguration _projectileConfiguration = projectileConfiguration as FollowProjectileConfiguration;
+        FollowProjectileConfiguration _projectileConfiguration =
+            projectileConfiguration as FollowProjectileConfiguration;
         maxSteerForce = _projectileConfiguration.maxSteerForce;
         lookAhead = _projectileConfiguration.lookAhead;
     }
-
 
     void FixedUpdate()
     {
@@ -23,7 +23,8 @@ public class FollowProjectile : IProjectile
     public void Pursuit(float deltaTime)
     {
         float velMagnitude = rb.velocity.magnitude;
-        Vector2 futurePosition = (Vector2)GetTarget().transform.position + GetTarget().GetComponent<Rigidbody2D>().velocity * deltaTime * lookAhead;
+        Vector2 futurePosition = (Vector2)GetTarget().transform.position +
+                                 deltaTime * lookAhead * GetTarget().GetComponent<Rigidbody2D>().velocity;
         Vector2 desiredDirection = (futurePosition - (Vector2)transform.position).normalized;
 
         float rotateAmount = Vector3.Cross(desiredDirection, transform.up).z;
@@ -31,5 +32,3 @@ public class FollowProjectile : IProjectile
         GetComponent<Rigidbody2D>().velocity = transform.up * velMagnitude;
     }
 }
-
-

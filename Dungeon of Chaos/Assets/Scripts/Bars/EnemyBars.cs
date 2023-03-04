@@ -22,21 +22,17 @@ public class EnemyBars : IBars
 
     public override void UpdateManaBar(float value)
     {
-        
     }
 
     public override void UpdateStaminaBar(float value)
     {
-        
     }
 
     public override void UpdateXpBar(float value)
     {
-        
     }
 
     public override void UpdateArmorBar(float value)
     {
-
     }
 }

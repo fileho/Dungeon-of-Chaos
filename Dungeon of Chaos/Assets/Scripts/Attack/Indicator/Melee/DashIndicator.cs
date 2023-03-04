@@ -28,5 +28,4 @@ public class DashIndicator : MeleeIndicator
         yield return new WaitForSeconds(0.1f);
         CleanUp();
     }
-
 }

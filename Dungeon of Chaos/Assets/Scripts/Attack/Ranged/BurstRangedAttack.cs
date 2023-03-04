@@ -4,9 +4,7 @@ using UnityEngine;
 
 public class BurstRangedAttack : RangedAttack
 {
-
     protected int projectileNumber = 5;
-
 
     protected override void ApplyConfigurations()
     {
@@ -15,8 +13,8 @@ public class BurstRangedAttack : RangedAttack
         projectileNumber = _attackConfiguration.projectileNumber;
     }
 
-
-    protected override void SpawnProjectile(GameObject projectile, ProjectileConfiguration projectileConfiguration, Vector2 direction)
+    protected override void SpawnProjectile(GameObject projectile, ProjectileConfiguration projectileConfiguration,
+                                            Vector2 direction)
     {
         float multiplier = 160f / projectileNumber;
 
@@ -25,7 +23,5 @@ public class BurstRangedAttack : RangedAttack
             Vector2 dir = Quaternion.AngleAxis((-45 + (multiplier * i)), Vector3.forward) * direction;
             base.SpawnProjectile(projectile, projectileConfiguration, dir);
         }
-
     }
-
 }
