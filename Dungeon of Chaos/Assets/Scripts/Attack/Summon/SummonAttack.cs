@@ -4,13 +4,11 @@ using UnityEngine;
 
 public class SummonAttack : IAttack
 {
-
     protected GameObject minion;
     protected int minAmountOfMinions = 2;
     protected int maxAmountOfMinions = 10;
     protected float timeBetweenSpawns = 0.5f;
     protected float spawnRadius = 3f;
-
 
     protected override void ApplyConfigurations()
     {
@@ -23,7 +21,6 @@ public class SummonAttack : IAttack
         spawnRadius = _attackConfiguration.spawnRadius;
     }
 
-
     protected override IEnumerator StartAttackAnimation()
     {
         IIndicator indicator = CreateIndicator(transform);
@@ -33,13 +30,11 @@ public class SummonAttack : IAttack
             indicator.Use();
             yield return null;
         }
-
-        //SoundManager.instance.PlaySound(swingSFX);
+        SoundManager.instance.PlaySound(attackSFX);
 
         yield return SpawnMinions();
         isAttacking = false;
     }
-
 
     private IEnumerator SpawnMinions()
     {
@@ -51,10 +46,5 @@ public class SummonAttack : IAttack
             Instantiate(minion, pos + (Vector2)transform.position, Quaternion.identity);
             yield return new WaitForSeconds(timeBetweenSpawns);
         }
-    }
-
-    public override string ToString()
-    {
-        return base.ToString() + "_Ranged";
     }
 }

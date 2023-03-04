@@ -4,11 +4,9 @@ using UnityEngine;
 
 public class RangedAttack : IAttack
 {
-
     protected GameObject projectile;
     protected ProjectileConfiguration projectileConfiguration;
     protected float wandReach = 1f;
-
 
     protected override void ApplyConfigurations()
     {
@@ -22,7 +20,6 @@ public class RangedAttack : IAttack
     // Ideal attack duration = 1
     protected override IEnumerator StartAttackAnimation()
     {
-
         Vector3 weaponPos = Weapon.transform.position;
         Vector3 targetDirection = (GetTargetPosition() - (Vector2)weaponPos).normalized;
 
@@ -44,7 +41,6 @@ public class RangedAttack : IAttack
         // Cache weapon rotation to restore after the animation
         var initialAssetRotation = Weapon.Asset.localRotation;
         Weapon.Asset.localRotation = Quaternion.Euler(0, 0, Weapon.GetUprightAngle());
-
 
         float attackAnimationDurationOneWay = AttackAnimationDuration / 2f;
 
@@ -73,7 +69,7 @@ public class RangedAttack : IAttack
             yield return null;
         }
 
-        SoundManager.instance.PlaySound(swingSFX);
+        SoundManager.instance.PlaySound(attackSFX);
 
         // Reset
         Weapon.Asset.localRotation = initialAssetRotation;
@@ -83,8 +79,8 @@ public class RangedAttack : IAttack
         isAttacking = false;
     }
 
-
-    protected virtual void SpawnProjectile(GameObject projectile, ProjectileConfiguration projectileConfiguration, Vector2 direction)
+    protected virtual void SpawnProjectile(GameObject projectile, ProjectileConfiguration projectileConfiguration,
+                                           Vector2 direction)
     {
         GameObject _projectile = Instantiate(projectile, transform);
         _projectile.transform.localPosition = Weapon.GetTrailLocalPosition();
@@ -92,11 +88,5 @@ public class RangedAttack : IAttack
         IProjectile iProjectile = _projectile.GetComponent<IProjectile>();
         iProjectile.Init(this, projectileConfiguration);
         iProjectile.Launch(direction);
-    }
-
-
-    public override string ToString()
-    {
-        return base.ToString() + "_Ranged";
     }
 }

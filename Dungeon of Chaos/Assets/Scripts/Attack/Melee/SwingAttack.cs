@@ -1,11 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using static UnityEngine.Rendering.DebugUI.Table;
 
 public class SwingAttack : MeleeAttack
 {
-
     // Angle sweeped during the attack animation
     protected float swing;
 
@@ -44,8 +42,6 @@ public class SwingAttack : MeleeAttack
         lowerEdge = Weapon.transform.lossyScale.x > 0 ? lowerEdge : -Vector3.Reflect(lowerEdge, Vector2.up);
 
         Vector3 startPos = Weapon.transform.localPosition;
-        Vector3 endPosUp = startPos + (upperEdge * range);
-        Vector3 endPosdown = startPos + (lowerEdge * range);
         Vector3 endPosUpAdjusted =
             startPos + (upperEdge * (range - Weapon.WeaponAssetWidth)); // to compensate for the weapon asset width
         Vector3 endPosdownAdjusted =
@@ -71,7 +67,7 @@ public class SwingAttack : MeleeAttack
         float time = 0;
         float attackAnimationDurationOneWay = AttackAnimationDuration / 3f;
 
-        SoundManager.instance.PlaySound(swingSFX);
+        SoundManager.instance.PlaySound(attackSFX);
         // Forward
         while (time <= 1)
         {
@@ -79,12 +75,6 @@ public class SwingAttack : MeleeAttack
             Weapon.transform.localPosition = Vector3.Lerp(startPos, endPosUpAdjusted, time);
             yield return null;
         }
-
-        // Sweep
-        var startRotation = Weapon.Asset.localRotation;
-        float startRotationZ = Weapon.Asset.localRotation.eulerAngles.z < 180
-                                   ? Weapon.Asset.localRotation.eulerAngles.z
-                                   : Weapon.Asset.localRotation.eulerAngles.z - 360f;
 
         time = 0;
         while (time <= 1)

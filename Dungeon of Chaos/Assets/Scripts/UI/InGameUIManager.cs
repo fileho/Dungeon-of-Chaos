@@ -122,7 +122,7 @@ public class InGameUIManager : MonoBehaviour
         bossName.text = bName;
     }
 
-    public void EndBossFight()
+    public void HideBossHPbar()
     {
         StartCoroutine(HideBossBar());
     }

@@ -3,7 +3,6 @@ using UnityEngine;
 
 public abstract class MeleeIndicator : IIndicator
 {
-
     protected override void ApplyConfigurations(IndicatorConfiguration indicatorConfiguration)
     {
         base.ApplyConfigurations(indicatorConfiguration);
@@ -11,5 +10,4 @@ public abstract class MeleeIndicator : IIndicator
         sprite.color = _indicatorConfiguration.color;
         sprite.transform.localScale *= _indicatorConfiguration.scale;
     }
-
 }

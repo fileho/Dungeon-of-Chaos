@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class StompAttack : MeleeAttack
 {
-
     // Weapon lift before stomping
     protected float lift;
 
@@ -91,7 +90,7 @@ public class StompAttack : MeleeAttack
         float time = 0;
         float attackAnimationDurationOneWay = AttackAnimationDuration / 2f;
 
-        SoundManager.instance.PlaySound(swingSFX);
+        SoundManager.instance.PlaySound(attackSFX);
 
         // Up
         while (time <= 1)

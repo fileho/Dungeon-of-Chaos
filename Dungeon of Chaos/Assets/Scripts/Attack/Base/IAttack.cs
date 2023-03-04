@@ -1,11 +1,9 @@
 using System.Collections;
 using UnityEngine;
-using static UnityEngine.GraphicsBuffer;
 
 [RequireComponent(typeof(Weapon))]
 public abstract class IAttack : MonoBehaviour
 {
-
     [SerializeField]
     protected AttackConfiguration attackConfiguration;
 
@@ -34,25 +32,19 @@ public abstract class IAttack : MonoBehaviour
     // The effect (such as burn or poison) the attack applies
     protected ISkillEffect attackEffect;
 
-    protected SoundSettings swingSFX;
+    protected SoundSettings attackSFX;
     protected SoundSettings impactSFX;
     // The duration of the attack animation
     public float AttackAnimationDuration { get; private set; }
 
     protected float cooldownLeft = 0f;
     protected bool isAttacking = false;
-    protected bool isEnemyInRange = false;
-    public Vector3 IndicatorLocalPosition { get; protected set; } = Vector3.zero;
 
     protected Unit owner;
     protected Rigidbody2D ownerRB;
     protected GameObject indicatorPrefab;
     protected IIndicator indicator;
 
-    protected Vector3 weaponOriginalPosition;
-    protected Vector3 weaponAssetOriginalPosition;
-    protected Quaternion weaponOriginalRotation;
-    protected Quaternion weaponAssetOriginalRotation;
     protected IndicatorConfiguration indicatorConfiguration;
 
     public virtual void Attack()
@@ -165,7 +157,7 @@ public abstract class IAttack : MonoBehaviour
     protected virtual void PrepareWeapon()
     {
         Weapon.SetDamage(GetDamage());
-        if (owner.gameObject.tag != "Player")
+        if (owner.gameObject.CompareTag("Player"))
             Weapon.SetEffect(attackEffect);
         Weapon.SetImpactSound(impactSFX);
         Weapon.ResetHitUnits();
@@ -195,7 +187,7 @@ public abstract class IAttack : MonoBehaviour
         AttackAnimationDuration = attackConfiguration.attackAnimationDuration;
         type = attackConfiguration.type;
         attackEffect = attackConfiguration.attackEffect;
-        swingSFX = attackConfiguration.swingSFX;
+        attackSFX = attackConfiguration.swingSFX;
         impactSFX = attackConfiguration.impactSFX;
     }
 
