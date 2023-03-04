@@ -1,8 +1,9 @@
 using UnityEngine;
 
-public class Follow : MonoBehaviour
+public class EnemyHealthBarPosition : MonoBehaviour
 {
-    [SerializeField] private float offset;
+    [SerializeField]
+    private float offset;
     private Transform target;
 
     // Start is called before the first frame update

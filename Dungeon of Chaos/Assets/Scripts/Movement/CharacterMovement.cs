@@ -38,7 +38,6 @@ public class CharacterMovement : IMovement
         {
             moveDir = dir;
             animator.SetBool("isMoving", true);
-            // TODO ADD this with animations
             if (sfx == null)
                 sfx = SoundManager.instance.PlaySoundLooping(footstepsSFX);
         }

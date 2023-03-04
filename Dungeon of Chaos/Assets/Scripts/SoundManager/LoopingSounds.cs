@@ -98,13 +98,15 @@ public class SoundPoolLooping
 
     private int NextUid()
     {
-        currentId %= 1000000000;
+        const int largeEnoughNumber = 1000000000;
+        currentId %= largeEnoughNumber;
         ++currentId;
         return currentId;
     }
 
-    // TODO add priority handling
-    private int FindEmptyAudioSource(float priority)
+    // It can be improved with the priority of the sound, currently it is not required
+    // Changes the last available index since there is a high chance that the next one will be also available
+    private int FindEmptyAudioSource(float _ /*priority*/)
     {
         int lastIndex = poolIndex;
         // start search from last empty position

@@ -10,7 +10,6 @@ public class AIAgent : MonoBehaviour
     private float nextWaypointDistance = 5f;
     private int currentWaypoint = 0;
     private float speed = 10f;
-    //private bool reachedEndOfPath = false;
     private Path path;
     private Seeker seeker;
     private Rigidbody2D rb;

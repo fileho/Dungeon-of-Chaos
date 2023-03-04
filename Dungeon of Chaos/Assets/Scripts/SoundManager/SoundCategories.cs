@@ -2,15 +2,19 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Each sound effect can be picked from two enums, SoundCategory and then the sound effect itself in the category
+/// This representation makes it easy to set up in the inspector
+/// </summary>
 public class SoundCategories
 {
     public enum SoundCategory
     {
-        Looping, 
-        EnemyAmbients, 
-        Attack, 
-        Skill, 
-        Ui, 
+        Looping,
+        EnemyAmbients,
+        Attack,
+        Skill,
+        Ui,
         Items,
         Death,
         TakeDamage
@@ -25,7 +29,6 @@ public class SoundCategories
         Burn,
         CharacterFootsteps
     }
-
 
     public enum EnemyAmbients
     {
@@ -142,7 +145,6 @@ public class SoundCategories
         TorchFlameOn
     }
 
-
     public enum Death
     {
         Character,
@@ -180,5 +182,4 @@ public class SoundCategories
         StoneElemental,
         Wraith
     }
-
 }

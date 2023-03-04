@@ -4,35 +4,38 @@ using UnityEngine.UI;
 public class MainMenuUIManager : MonoBehaviour
 {
     [Header("=== Main Menu ===")]
-    [SerializeField] Button newGame;
-    [SerializeField] Button quitGame;
-  
+    [SerializeField]
+    Button newGame;
+    [SerializeField]
+    Button quitGame;
 
-    private void OnEnable() {
+    private void OnEnable()
+    {
         newGame.onClick.AddListener(OnNewGamePressed);
         quitGame.onClick.AddListener(OnQuitGamePressed);
     }
 
-    private void OnDisable() {
+    private void OnDisable()
+    {
         newGame.onClick.RemoveListener(OnNewGamePressed);
         quitGame.onClick.RemoveListener(OnQuitGamePressed);
     }
 
-    void OnNewGamePressed() {
+    void OnNewGamePressed()
+    {
         print("New Game Called");
         UIEvents.NewGamePressed?.Invoke();
     }
 
-    void OnQuitGamePressed() {
+    void OnQuitGamePressed()
+    {
         print("Application Quit Called");
         Application.Quit();
     }
-
 }
 
-
-
-public static class UIEvents {
+public static class UIEvents
+{
     public static UnityAction<int> LoadSlotPressed;
     public static UnityAction NewGamePressed;
     public static UnityAction<float> MasterVolumeChanged;

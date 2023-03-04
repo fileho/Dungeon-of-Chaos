@@ -90,7 +90,7 @@ public class Essence : MonoBehaviour
             Character.instance.stats.RegenerateStamina(value);
             break;
         case EssenceType.xp:
-            Character.instance.stats.ModifyCurrentXP(((int)(value * Character.instance.stats.GetXPModifier())));
+            Character.instance.stats.ModifyCurrentXP((int)(value * Character.instance.stats.GetXPModifier()));
             break;
         default:
             throw new ArgumentOutOfRangeException();

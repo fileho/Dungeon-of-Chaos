@@ -9,7 +9,7 @@ public class Unit : MonoBehaviour
     [SerializeField]
     protected IMovement movement;
     [SerializeField]
-    protected Ieffects effects;
+    protected IEffects effects;
     [SerializeField]
     protected IBars bars;
 
