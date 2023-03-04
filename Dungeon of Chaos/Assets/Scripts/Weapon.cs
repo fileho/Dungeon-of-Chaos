@@ -15,9 +15,6 @@ public class Weapon : MonoBehaviour
     [SerializeField]
     private float armAlignAngle = 0f;
 
-    //[Tooltip("Local position of weaapon tip")]
-    //[SerializeField] private Vector3 weaponTipOffset = Vector3.zero;
-
     private ISkillEffect skillEffect = null;
     private float dmgBoost = 0;
 
