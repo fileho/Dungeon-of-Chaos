@@ -1,17 +1,19 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using static UnityEngine.GraphicsBuffer;
-using static UnityEngine.Rendering.DebugUI;
 
+/// <summary>
+/// Rotates and controls the weapon
+/// </summary>
 public class Weapon : MonoBehaviour
 {
-
     [Tooltip("Angle at which the weapon asset aligns with the Y axis")]
-    [SerializeField] private float upRightAngle = 0f;
+    [SerializeField]
+    private float upRightAngle = 0f;
 
     [Tooltip("Angle at which the weapon asset aligns with the arm")]
-    [SerializeField] private float armAlignAngle = 0f;
+    [SerializeField]
+    private float armAlignAngle = 0f;
 
     //[Tooltip("Local position of weaapon tip")]
     //[SerializeField] private Vector3 weaponTipOffset = Vector3.zero;
@@ -22,29 +24,24 @@ public class Weapon : MonoBehaviour
     private float weaponAssetWidth = 0;
     public float WeaponAssetWidth
     {
-        get
-        {
+        get {
             return weaponAssetWidth != 0 ? weaponAssetWidth : Asset.GetComponent<SpriteRenderer>().bounds.size.x / 2f;
         }
     }
 
-
     private Transform asset;
     public Transform Asset
     {
-        get
-        {
+        get {
             return asset != null ? asset : (asset = transform.Find("Asset"));
         }
     }
-
 
     private TrailRenderer trail;
     private new Collider2D collider;
     private List<Unit> hitUnits;
     private float damage = 0;
     private int enemyLayer;
-
 
     private SoundSettings impactSFX;
 
@@ -57,7 +54,6 @@ public class Weapon : MonoBehaviour
         EnableDisableTrail(false);
         enemyLayer = GetEnemyLayer(transform.parent.gameObject.layer);
     }
-
 
     // Damage is set by the attack as different attacks can have different damage for the same weapon.
     public void SetDamage(float d)
@@ -130,7 +126,6 @@ public class Weapon : MonoBehaviour
         hitUnits.Clear();
     }
 
-
     public void RotateWeapon(Vector2 target)
     {
         Vector2 dir = (target - (Vector2)transform.position).normalized;
@@ -138,16 +133,12 @@ public class Weapon : MonoBehaviour
         if (transform.lossyScale.x > 0)
             dir *= -1;
 
-
         Vector3 rotated = Quaternion.Euler(0, 0, 90) * dir;
-
         var q = Quaternion.LookRotation(Vector3.forward, rotated);
-
         var e = q.eulerAngles;
 
         transform.rotation = Quaternion.Euler(e);
     }
-
 
     // Resets weapon to the default position
     public void ResetWeapon()
@@ -155,18 +146,15 @@ public class Weapon : MonoBehaviour
         RotateWeapon(transform.position);
     }
 
-
     public Vector3 GetForwardDirection()
     {
         float dir = transform.lossyScale.x > 0 ? 1 : -1;
 
         float a = transform.rotation.eulerAngles.z * dir;
         a *= Mathf.Deg2Rad;
-        // Vector3.R
 
         return new Vector3(-Mathf.Cos(a), -Mathf.Sin(a), 0);
     }
-
 
     // Assumes the current scale of the Enemy, useful for attack indicators
     public Vector3 GetForwardDirectionRotated()
@@ -182,7 +170,7 @@ public class Weapon : MonoBehaviour
     public int GetEnemyLayer(int ownerLayer)
     {
         return (ownerLayer == LayerMask.NameToLayer("Enemy") || ownerLayer == LayerMask.NameToLayer("EnemyAttack"))
-            ? LayerMask.NameToLayer("Player")
-            : LayerMask.NameToLayer("Enemy");
+                   ? LayerMask.NameToLayer("Player")
+                   : LayerMask.NameToLayer("Enemy");
     }
 }
