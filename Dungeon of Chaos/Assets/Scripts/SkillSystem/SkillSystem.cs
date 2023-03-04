@@ -299,16 +299,6 @@ public class SkillSystem : MonoBehaviour
         return IsValidActive(index) && activeSkills[index].IsUnlocked();
     }
 
-    public bool HasActivatedSkill()
-    {
-        foreach (var skill in activated)
-        {
-            if (skill != -1)
-                return true;
-        }
-        return false;
-    }
-
     public bool IsActivated(int index)
     {
         return activated.Contains(index);
@@ -335,9 +325,7 @@ public class SkillSystem : MonoBehaviour
         }
 
         return description;
-    }
-
-    
+    }   
     #endregion
 
     #region PassiveSkills
