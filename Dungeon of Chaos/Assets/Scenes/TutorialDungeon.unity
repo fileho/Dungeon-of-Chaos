@@ -3903,7 +3903,7 @@ PrefabInstance:
     - target: {fileID: 4490694391614662484, guid: c53129d46b8aeae47b713a89fb1f438b, type: 3}
       propertyPath: lootModifiers
       value: 
-      objectReference: {fileID: 11400000, guid: 54be39060d6909b4983736398e32d996, type: 2}
+      objectReference: {fileID: 11400000, guid: ee6519d38b1c68f41a738724a204f3ae, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c53129d46b8aeae47b713a89fb1f438b, type: 3}
 --- !u!4 &755935421 stripped
