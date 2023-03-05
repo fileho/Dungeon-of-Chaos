@@ -31,7 +31,7 @@ MonoBehaviour:
       data:
         strength: 16
         intelligence: 16
-        constitution: 14
+        constitution: 19
         endurance: 13
         wisdom: 13
         multipliers: {fileID: 11400000, guid: 9bc05dc5e43aa9f49a343ca8e90f53ed, type: 2}
