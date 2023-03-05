@@ -16,4 +16,4 @@ MonoBehaviour:
   range: 0
   angle: 360
   duration: 15
-  value: 0.25
+  value: 0.35

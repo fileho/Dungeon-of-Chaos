@@ -394,6 +394,7 @@ public class SkillSystem : MonoBehaviour
 
     public void Dash(Vector2 dir)
     {
+        dashSkills[activatedDash].GetCurrentSkill().Init(owner);
         dashSkills[activatedDash].GetCurrentSkill().Use(owner, null, new List<Vector2>() { dir });
     }
 
