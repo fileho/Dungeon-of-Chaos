@@ -27,19 +27,15 @@ public class ISecondaryAttack : IActiveSkill
 
         if (!CanUse(unit.stats))
         {
-            Debug.Log("Cooldown Left: " + cooldownLeft);
             return;
         }
         if (secondaryAttack.IsAttacking() || Character.instance.IsAttacking())
         {
-            Debug.Log("Already attacking");
             return;
         }
 
         cooldownLeft = cooldown;
         Consume(unit.stats);
-
-        Debug.Log("Attack!");
 
         secondaryAttack.Attack();
     }

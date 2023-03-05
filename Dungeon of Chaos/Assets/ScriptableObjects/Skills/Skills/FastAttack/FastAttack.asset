@@ -16,9 +16,9 @@ MonoBehaviour:
     name: Fast Attack
     description: An attack that deals {0} damage, is faster and costs less stamina.
     icon: {fileID: 21300000, guid: 4873aa989d5fcd546b28025805f15ee8, type: 3}
-  cooldown: 0
+  cooldown: 1
   manaCost: 0
-  staminaCost: 30
+  staminaCost: 20
   effects: []
   attack: {fileID: 5963835019539033489, guid: efc54e89ef7329549bed42ca2642b8f2, type: 3}
   attackConfiguration: {fileID: 11400000, guid: a54ec2c5d660d2644b459689942ed5f0, type: 2}

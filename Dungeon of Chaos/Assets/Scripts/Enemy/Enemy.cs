@@ -28,8 +28,8 @@ public class Enemy : Unit {
 	private float maxDistance;
 	[SerializeField]
 	private SoundSettings ambientSFX;
-	private const float minFrequency = 2f;
-	private const float maxFrequency = 5.5f;
+	private float minFrequency = 3.5f;
+	private float maxFrequency = 6.5f;
 	private float frequency = 0f;
 	private float time = 0f;
 
@@ -59,6 +59,8 @@ public class Enemy : Unit {
 		attackManager = GetComponent<AttackManager> ();
 		animator = GetComponent<Animator> ();
 		rb = transform.GetComponent<Rigidbody2D> ();
+		minFrequency = SoundManager.instance.GetSoundLenght(ambientSFX) + 1;
+		maxFrequency = minFrequency * 3;
 	}
 
 	private float lastLosTime = Mathf.NegativeInfinity;

@@ -344,9 +344,9 @@ public class SkillSystem : MonoBehaviour
         if (!IsValidPassive(index))
             return;
         SkillInfoPassive skill = passiveSkills[index];
-        levelling.ConsumeSkillPoints(passiveSkills[index].GetUnlockingRequirements().GetCost());
         skill.Unlock();
         skill.Upgrade();
+        levelling.ConsumeSkillPoints(passiveSkills[index].GetUnlockingRequirements().GetCost());
         TooltipSystem.instance.Show(skill.GetSkillData().GetName(), "Passive Skill", "No further actions required",
             skill.GetCurrentDescription(), skill.GetNextDescription());
     }
@@ -422,9 +422,9 @@ public class SkillSystem : MonoBehaviour
         if (!IsValidDash(index))
             return;
         SkillInfoDash skill = dashSkills[index];
-        levelling.ConsumeSkillPoints(dashSkills[index].GetUnlockingRequirements().GetCost());
         skill.Unlock();
         skill.Upgrade();
+        levelling.ConsumeSkillPoints(dashSkills[index].GetUnlockingRequirements().GetCost());
         TooltipSystem.instance.Show(skill.GetSkillData().GetName(), "Dash Skill", GetDashStatusDescription(index),
             skill.GetCurrentDescription(), skill.GetNextDescription());
     }
@@ -497,9 +497,9 @@ public class SkillSystem : MonoBehaviour
         if (!IsValidSecondary(index))
             return;
         SkillInfoSecondaryAttack skill = secondaryAttacks[index];
-        levelling.ConsumeSkillPoints(secondaryAttacks[index].GetUnlockingRequirements().GetCost());
         skill.Unlock();
         skill.Upgrade();
+        levelling.ConsumeSkillPoints(secondaryAttacks[index].GetUnlockingRequirements().GetCost());
         TooltipSystem.instance.Show(skill.GetSkillData().GetName(), "Secondary Attack", GetSecondaryStatusDescription(index),
             skill.GetCurrentDescription(), skill.GetNextDescription());
     }

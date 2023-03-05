@@ -111,6 +111,6 @@ public class SkillButtonActive : SkillButton
 
     public override void SetHighlightOverlay()
     {
-        highlight.SetActive(skillInfo.IsUnlocked() && skillSystem.CanUnlock(skillInfo));
+        highlight.SetActive(skillInfo.IsUnlocked() && skillSystem.CanUnlock(skillInfo) && skillInfo.CanUpgrade());
     }
 }
