@@ -43,20 +43,23 @@ public class SkillButtonActive : SkillButton
     public override void OnPointerEnter(PointerEventData eventData)
     {
         SoundManager.instance.PlaySound(hover);
-        TooltipSystem.instance.Show(skillInfo.GetSkillData().GetName(), "Active Skill", skillSystem.GetActiveStatusDescription(skillIndex),
+        if (TooltipSystem.instance != null)
+            TooltipSystem.instance.Show(skillInfo.GetSkillData().GetName(), "Active Skill", skillSystem.GetActiveStatusDescription(skillIndex),
             skillInfo.GetCurrentDescription(), skillInfo.GetNextDescription());
     }
 
     public override void OnPointerExit(PointerEventData eventData)
     {
-        TooltipSystem.instance.HideSkillTooltip();
+        if (TooltipSystem.instance != null)
+            TooltipSystem.instance.HideSkillTooltip();
     }
 
     public override void RightMouseDown()
     {
         if (!skillSystem.CanUpgradeActive(skillIndex))
         {
-            TooltipSystem.instance.DisplayMessage("Requirements not met");
+            if (TooltipSystem.instance != null)
+                TooltipSystem.instance.DisplayMessage("Requirements not met");
             SoundManager.instance.PlaySound(requirements);
             return;
         }
