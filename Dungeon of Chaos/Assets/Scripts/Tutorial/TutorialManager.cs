@@ -24,9 +24,12 @@ public class TutorialManager : MonoBehaviour
 
     private bool breakCorutine;
 
+    private SaveSystem saveSystem;
+
     void Start()
     {
         animator = GetComponent<Animator>();
+        saveSystem = FindObjectOfType<SaveSystem>();
         bg = transform.Find("BG").gameObject;
     }
 
@@ -56,13 +59,13 @@ public class TutorialManager : MonoBehaviour
 
     public bool AlreadyUsed(TutorialState state)
     {
-        return PlayerPrefs.GetInt(state.ToString(), 0) != 0;
+        return saveSystem.TutorialData.HasState((int)state);
     }
 
     IEnumerator ShowTutorial(TutorialState state)
     {
         currentState = state;
-        if (currentState != TutorialState.Default && PlayerPrefs.GetInt(currentState.ToString(), 0) == 0)
+        if (currentState != TutorialState.Default && !saveSystem.TutorialData.HasState((int)state))
         {
             Time.timeScale = 0.7f;
             currentTutorial = transform.Find(currentState.ToString()).gameObject;
@@ -74,7 +77,7 @@ public class TutorialManager : MonoBehaviour
                 yield return null;
             }
 
-            PlayerPrefs.SetInt(state.ToString(), 1);
+            saveSystem.TutorialData.SaveState((int)state);
 
             EnableDisableTutorialScreen(false);
             Time.timeScale = 1f;
