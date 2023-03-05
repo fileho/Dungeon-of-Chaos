@@ -45,8 +45,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   applyOnWeapon: 0
-  defaultMaterial: {fileID: 0}
-  effectMaterial: {fileID: 0}
+  defaultMaterial: {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  effectMaterial: {fileID: 2100000, guid: 9a67177dcf4b6db458a57d9ae56419f1, type: 2}
 --- !u!1 &7775649046850707757
 GameObject:
   m_ObjectHideFlags: 0
