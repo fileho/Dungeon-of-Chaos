@@ -15,7 +15,7 @@ MonoBehaviour:
   target: {fileID: 0}
   range: 0
   angle: 360
-  damage: 1.05
+  damage: 1.1
   skillEffectType: 1
   dmgSFX:
     soundCategory: 2

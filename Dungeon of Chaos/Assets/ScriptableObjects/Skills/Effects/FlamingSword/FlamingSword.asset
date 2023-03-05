@@ -16,5 +16,5 @@ MonoBehaviour:
   range: 3.4028235e+38
   angle: 360
   duration: 10
-  value: 0.35
+  value: 0.55
   effect: {fileID: 11400000, guid: b99ae913238e8794290b48d4667d4231, type: 2}

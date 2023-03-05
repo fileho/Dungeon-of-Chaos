@@ -9,7 +9,7 @@ public abstract class IncreaseStat : IPassiveSkill
 
     public override void Equip(Stats stats)
     {
-        value = amount * (1 + stats.GetLevel() * 0.2f);
+        value = amount * (1 + stats.GetLevel() * 0.15f);
         ChangeStat(stats, value);
     }
 

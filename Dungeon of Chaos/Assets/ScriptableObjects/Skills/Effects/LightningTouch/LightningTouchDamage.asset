@@ -15,7 +15,7 @@ MonoBehaviour:
   target: {fileID: 11400000, guid: 4dc6e893f65ceac47ac6c60b1e0b3a89, type: 2}
   range: 5
   angle: 60
-  damage: 1.25
+  damage: 1.45
   skillEffectType: 0
   dmgSFX:
     soundCategory: 2
