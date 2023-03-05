@@ -34,7 +34,7 @@ public class SecondBreath : IPassiveSkill
 
     public override string GetEffectDescription()
     {
-        return effects[0].GetEffectsValues(Character.instance)[0];
+        return string.Format(skillData.GetDescription(), effects[0].GetEffectsValues(Character.instance)[0]);
     }
 
     public override void Unequip(Stats stats)

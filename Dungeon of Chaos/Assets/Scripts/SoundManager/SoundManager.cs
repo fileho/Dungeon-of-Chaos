@@ -174,4 +174,11 @@ public class SoundManager : MonoBehaviour
                                  SoundCategories.SoundCategory.TakeDamage => takeDamage,
                                  _ => throw new ArgumentOutOfRangeException(nameof(category), category, null) };
     }
+
+    public float GetSoundLenght(SoundSettings settings)
+    {
+        SoundPool pool = GetPool(settings.GetSoundCategory());
+        Sound sound = pool.GetSoundAtIndex(settings.GetSoundIndex());
+        return sound.GetLength();
+    }
 }

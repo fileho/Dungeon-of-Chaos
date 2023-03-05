@@ -98,6 +98,6 @@ public class SkillButtonPassive : SkillButton
 
     public override void SetHighlightOverlay()
     {
-        highlight.SetActive(skillSystem.CanUnlock(skillInfo) && skillInfo.IsUnlocked());
+        highlight.SetActive(skillSystem.CanUnlock(skillInfo) && skillInfo.IsUnlocked() && skillInfo.CanUpgrade());
     }
 }

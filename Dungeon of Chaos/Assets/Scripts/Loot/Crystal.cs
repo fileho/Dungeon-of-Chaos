@@ -11,11 +11,14 @@ public class Crystal : MonoBehaviour
     private float hpBoost;
     [SerializeField]
     private float manaBoost;
+    [SerializeField]
+    private SoundSettings crystalPickupSFX;
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.CompareTag("Player"))
         {
+            SoundManager.instance.PlaySound(crystalPickupSFX);
             Character.instance.stats.RegenerateHealth(hpBoost);
             Character.instance.stats.RegenerateMana(manaBoost);
             Destroy(gameObject);

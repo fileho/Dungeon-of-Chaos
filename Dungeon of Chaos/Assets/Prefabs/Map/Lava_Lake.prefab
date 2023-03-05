@@ -158,7 +158,7 @@ MonoBehaviour:
   dps: 30
   burnSFX:
     soundCategory: 0
-    sound: 0
+    sound: 4
     volume: 1
     pitch: 1
     priority: 0
