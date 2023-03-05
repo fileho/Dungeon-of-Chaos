@@ -6,35 +6,34 @@ using UnityEngine.UI;
 /// Currently, we are not using this class, as this way of handling dying slows down the game too much (we are
 /// attempting to have a more fast paced game)
 /// </summary>
-public class GameOverUIManager : MonoBehaviour
-{
-    [Header("=== Game Over Menu ===")]
-    [SerializeField]
-    Button newGame;
-    [SerializeField]
-    Button quitGame;
+public class GameOverUIManager : MonoBehaviour {
+	[Header ("=== Game Won Menu ===")]
+	[SerializeField]
+	Button mainMenu;
+	[SerializeField]
+	Button quitGame;
 
-    private void OnEnable()
-    {
-        newGame.onClick.AddListener(OnNewGamePressed);
-        quitGame.onClick.AddListener(OnQuitGamePressed);
-    }
+	private void OnEnable ()
+	{
+		mainMenu.onClick.AddListener (OnMainMenuPressed);
+		quitGame.onClick.AddListener (OnQuitGamePressed);
+	}
 
-    private void OnDisable()
-    {
-        newGame.onClick.RemoveListener(OnNewGamePressed);
-        quitGame.onClick.RemoveListener(OnQuitGamePressed);
-    }
+	private void OnDisable ()
+	{
+		mainMenu.onClick.RemoveListener (OnMainMenuPressed);
+		quitGame.onClick.RemoveListener (OnQuitGamePressed);
+	}
 
-    void OnNewGamePressed()
-    {
-        print("New Game Called");
-        UIEvents.NewGamePressed?.Invoke();
-    }
+	void OnMainMenuPressed ()
+	{
+		print ("Main Menu Called");
+		UIEvents.MainMenuPressed?.Invoke ();
+	}
 
-    void OnQuitGamePressed()
-    {
-        print("Application Quit Called");
-        Application.Quit();
-    }
+	void OnQuitGamePressed ()
+	{
+		print ("Application Quit Called");
+		Application.Quit ();
+	}
 }

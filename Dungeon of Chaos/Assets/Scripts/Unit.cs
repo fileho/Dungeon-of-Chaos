@@ -1,95 +1,97 @@
 using UnityEngine;
 
-public class Unit : MonoBehaviour
-{
-    public Stats stats;
+public class Unit : MonoBehaviour {
+	public Stats stats;
 
-    protected Weapon weapon;
+	protected Weapon weapon;
 
-    [SerializeField]
-    protected IMovement movement;
-    [SerializeField]
-    protected IEffects effects;
-    [SerializeField]
-    protected IBars bars;
+	[SerializeField]
+	protected IMovement movement;
+	[SerializeField]
+	protected IEffects effects;
+	[SerializeField]
+	protected IBars bars;
 
-    [SerializeField]
-    protected SoundSettings takeDmgSFX;
-    [SerializeField]
-    protected SoundSettings deathSFX;
+	[SerializeField]
+	protected SoundSettings takeDmgSFX;
+	[SerializeField]
+	protected SoundSettings deathSFX;
 
-    protected bool dead = false;
+	protected bool dead = false;
 
-    protected void Start()
-    {
-        weapon = GetComponentInChildren<Weapon>();
+	protected System.Action unitHit;
 
-        bars = Instantiate(bars).Init(transform);
-        stats = Instantiate(stats).ResetStats(bars);
+	protected void Start ()
+	{
+		weapon = GetComponentInChildren<Weapon> ();
 
-        movement = Instantiate(movement).Init(transform, stats);
-        effects = Instantiate(effects).Init(transform);
+		bars = Instantiate (bars).Init (transform);
+		stats = Instantiate (stats).ResetStats (bars);
 
-        bars.FillAllBars();
+		movement = Instantiate (movement).Init (transform, stats);
+		effects = Instantiate (effects).Init (transform);
 
-        Init();
-    }
+		bars.FillAllBars ();
 
-    protected virtual void Init()
-    {
-    }
+		Init ();
+	}
 
-    // It can be either the position of the Unit or Mouse Position [In case of the character]
-    public virtual Vector2 GetTargetPosition()
-    {
-        return Target == null ? Vector2.positiveInfinity : (Vector2)Target.transform.position;
-    }
+	protected virtual void Init ()
+	{
+	}
 
-    public virtual Vector2 GetTargetDirection()
-    {
-        return Target == null ? Vector2.positiveInfinity
-                              : (GetTargetPosition() - (Vector2)transform.position).normalized;
-    }
+	// It can be either the position of the Unit or Mouse Position [In case of the character]
+	public virtual Vector2 GetTargetPosition ()
+	{
+		return Target == null ? Vector2.positiveInfinity : (Vector2)Target.transform.position;
+	}
 
-    public float GetTargetDistance()
-    {
-        return (GetTargetPosition() - (Vector2)transform.position).magnitude;
-    }
+	public virtual Vector2 GetTargetDirection ()
+	{
+		return Target == null ? Vector2.positiveInfinity
+							  : (GetTargetPosition () - (Vector2)transform.position).normalized;
+	}
 
-    // Character in case of the enemy.
-    // It can be changed at runtime.
-    // Null in the case of player
-    public Unit Target { get; protected set; }
+	public float GetTargetDistance ()
+	{
+		return (GetTargetPosition () - (Vector2)transform.position).magnitude;
+	}
 
-    public void TakeDamage(float value, bool playSfx = true)
-    {
-        float rest = value - stats.GetArmor();
-        if (stats.HasArmor())
-            stats.SetArmor(-value);
-        if (rest <= 0)
-            return;
+	// Character in case of the enemy.
+	// It can be changed at runtime.
+	// Null in the case of player
+	public Unit Target { get; protected set; }
 
-        stats.ConsumeHealth(rest);
-        effects.TakeDamage();
-        if (playSfx)
-            SoundManager.instance.PlaySound(takeDmgSFX);
-        if (stats.IsDead())
-            Die();
-    }
+	public void TakeDamage (float value, bool playSfx = true)
+	{
+		unitHit.Invoke ();
+		float rest = value - stats.GetArmor ();
+		if (stats.HasArmor ())
+			stats.SetArmor (-value);
+		if (rest <= 0)
+			return;
 
-    protected virtual void Die()
-    {
-        dead = true;
-        GetComponent<Collider2D>().enabled = false;
-        var vfx = transform.Find("DeathVFX");
-        if (vfx)
-            vfx.GetComponent<ParticleSystem>().Play();
-        SoundManager.instance.PlaySound(deathSFX);
-        Invoke(nameof(CleanUp), 1);
-    }
+		stats.ConsumeHealth (rest);
+		effects.TakeDamage ();
+		if (playSfx)
+			SoundManager.instance.PlaySound (takeDmgSFX);
+		if (stats.IsDead ())
+			Die ();
+	}
 
-    protected virtual void CleanUp()
-    {
-        Destroy(gameObject);
-    }
+	protected virtual void Die ()
+	{
+		dead = true;
+		GetComponent<Collider2D> ().enabled = false;
+		var vfx = transform.Find ("DeathVFX");
+		if (vfx)
+			vfx.GetComponent<ParticleSystem> ().Play ();
+		SoundManager.instance.PlaySound (deathSFX);
+		Invoke (nameof (CleanUp), 1);
+	}
+
+	protected virtual void CleanUp ()
+	{
+		Destroy (gameObject);
+	}
 }
