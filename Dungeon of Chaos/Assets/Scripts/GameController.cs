@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Globalization;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -17,6 +18,7 @@ public class GameController : MonoBehaviour
     {
         soundtrack = FindObjectOfType<Soundtrack>();
         soundtrack.StopBossMusic();
+        CultureInfo.CurrentCulture = new CultureInfo("en-us");
     }
 
     private void LateUpdate()
