@@ -637,7 +637,7 @@ MonoBehaviour:
     pitch: 1
     priority: 0
   loot: {fileID: 11400000, guid: 55110f0bef1256e42a7f83b3fc2b4ea9, type: 2}
-  lootModifiers: {fileID: 11400000, guid: 35780333c3ddf16479422c4965e1b2c2, type: 2}
+  lootModifiers: {fileID: 11400000, guid: b66fa80e2c306c643b62404643421f30, type: 2}
   maxDistance: 60
   ambientSFX:
     soundCategory: 1
