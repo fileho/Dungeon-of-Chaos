@@ -5,6 +5,7 @@ using System.Linq;
 [RequireComponent (typeof (AttackManager))]
 public class Enemy : Unit {
 	private const float CHASE_HEAT = 3f;
+	private const float ATTACK_HEAT = 3f;
 	private const float RAYCAST_TIME_INTERVAL = 1f;
 
 	private enum State {
@@ -32,6 +33,23 @@ public class Enemy : Unit {
 	private float frequency = 0f;
 	private float time = 0f;
 
+
+
+	private void OnEnable ()
+	{
+		unitHit += OnEnemyHit;
+	}
+
+	private void OnDisable ()
+	{
+		unitHit -= OnEnemyHit;
+	}
+
+	private void OnEnemyHit ()
+	{
+		lastAttackTime = Time.time;
+	}
+
 	protected override void Init ()
 	{
 		loot = Instantiate (loot).Init (this);
@@ -44,6 +62,7 @@ public class Enemy : Unit {
 	}
 
 	private float lastLosTime = Mathf.NegativeInfinity;
+	private float lastAttackTime = Mathf.NegativeInfinity;
 	private float lastRayCastCheck = 0f;
 
 	private bool IsTargetInChaseRange ()
@@ -67,7 +86,7 @@ public class Enemy : Unit {
 			}
 			lastRayCastCheck = Time.time;
 		}
-		return playerHit || (Time.time - lastLosTime < CHASE_HEAT);
+		return playerHit || (Time.time - lastLosTime < CHASE_HEAT) || (Time.time - lastAttackTime < ATTACK_HEAT);
 	}
 
 	private void FixedUpdate ()
