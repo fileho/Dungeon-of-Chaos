@@ -5,7 +5,7 @@ using System.Linq;
 [RequireComponent (typeof (AttackManager))]
 public class Enemy : Unit {
 	private const float CHASE_HEAT = 3f;
-	private const float ATTACK_HEAT = 3f;
+	private const float ATTACKED_HEAT = 3f;
 	private const float RAYCAST_TIME_INTERVAL = 1f;
 
 	private enum State {
@@ -22,6 +22,8 @@ public class Enemy : Unit {
 	private State state;
 	private Animator animator;
 	private Rigidbody2D rb;
+	private float cooldownLeft = 0f;
+
 
 	[Header ("Enemy Ambient")]
 	[SerializeField]
@@ -32,7 +34,6 @@ public class Enemy : Unit {
 	private float maxFrequency = 6.5f;
 	private float frequency = 0f;
 	private float time = 0f;
-
 
 
 	private void OnEnable ()
@@ -47,7 +48,7 @@ public class Enemy : Unit {
 
 	private void OnEnemyHit ()
 	{
-		lastAttackTime = Time.time;
+		lastAttackedTime = Time.time;
 	}
 
 	protected override void Init ()
@@ -59,12 +60,12 @@ public class Enemy : Unit {
 		attackManager = GetComponent<AttackManager> ();
 		animator = GetComponent<Animator> ();
 		rb = transform.GetComponent<Rigidbody2D> ();
-		minFrequency = SoundManager.instance.GetSoundLenght(ambientSFX) + 1;
+		minFrequency = SoundManager.instance.GetSoundLenght (ambientSFX) + 1;
 		maxFrequency = minFrequency * 3;
 	}
 
 	private float lastLosTime = Mathf.NegativeInfinity;
-	private float lastAttackTime = Mathf.NegativeInfinity;
+	private float lastAttackedTime = Mathf.NegativeInfinity;
 	private float lastRayCastCheck = 0f;
 
 	private bool IsTargetInChaseRange ()
@@ -88,7 +89,7 @@ public class Enemy : Unit {
 			}
 			lastRayCastCheck = Time.time;
 		}
-		return playerHit || (Time.time - lastLosTime < CHASE_HEAT) || (Time.time - lastAttackTime < ATTACK_HEAT);
+		return playerHit || (Time.time - lastLosTime < CHASE_HEAT) || (Time.time - lastAttackedTime < ATTACKED_HEAT);
 	}
 
 	private void FixedUpdate ()
@@ -130,14 +131,16 @@ public class Enemy : Unit {
 
 	private bool Attack ()
 	{
-		if (!IsTargetInChaseRange () || IsAttacking ())
+		if (IsAttacking ())
 			return true;
+
 		currentAttack = attackManager.GetBestAvailableAttack ();
 		FlipSprite ();
 		RotateWeapon ();
-		if (currentAttack != null) {
+		if (currentAttack != null && cooldownLeft <= 0) {
 			state = State.Attack;
 			currentAttack.Attack ();
+			cooldownLeft = Random.Range (0.25f, 0.75f);
 			return true;
 		}
 		return false;
@@ -215,5 +218,11 @@ public class Enemy : Unit {
 		if (currentAttack != null)
 			currentAttack.StopAttackIfDead ();
 		base.Die ();
+	}
+
+	private void Update ()
+	{
+		if (!IsAttacking () && cooldownLeft > 0)
+			cooldownLeft -= Time.deltaTime;
 	}
 }
