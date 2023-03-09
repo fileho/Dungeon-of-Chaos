@@ -15,6 +15,8 @@ public class Projectile : MonoBehaviour
 
     private Vector3 targetScale;
 
+    [SerializeField] private GameObject impactVFX;
+
     [SerializeField]
     private float delay;
     [SerializeField]
@@ -87,6 +89,8 @@ public class Projectile : MonoBehaviour
             return;
 
         SoundManager.instance.PlaySound(impactSFX);
+        GameObject impactPs = Instantiate(impactVFX, transform.position, Quaternion.identity);
+        Destroy(impactPs, 1f);
         if (collision.CompareTag("Player"))
         {
             foreach (var e in effects)

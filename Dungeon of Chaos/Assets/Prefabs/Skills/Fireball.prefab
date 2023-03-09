@@ -135,6 +135,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e2a63a279bd364641a32991e5023ac7d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  impactVFX: {fileID: 130848, guid: d16221e794fe16e4e8994a7f8c770561, type: 3}
   delay: 0.5
   castSFX:
     soundCategory: 3
