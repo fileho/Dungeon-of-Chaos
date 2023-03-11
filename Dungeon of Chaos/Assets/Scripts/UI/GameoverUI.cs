@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using Doozy.Engine.UI;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
@@ -18,8 +19,8 @@ public class GameoverUI : MonoBehaviour
         gameover = transform.GetChild(0).GetComponent<TMP_Text>();
         tooltip = transform.GetChild(1).GetComponent<TMP_Text>();
 
-        gameover.gameObject.SetActive(false);
-        tooltip.gameObject.SetActive(false);
+        //gameover.gameObject.SetActive(false);
+        //tooltip.gameObject.SetActive(false);
 
         HideCanvas();
     }
@@ -34,9 +35,11 @@ public class GameoverUI : MonoBehaviour
         StartCoroutine(CanvasAnimation(2f, f => f));
 
         yield return new WaitForSeconds(0.6f);
-        gameover.gameObject.SetActive(true);
+        //gameover.gameObject.SetActive(true);
+        gameover.GetComponent<UIView>().Show();
         yield return new WaitForSeconds(0.4f);
-        tooltip.gameObject.SetActive(true);
+        tooltip.GetComponent<UIView>().Show();
+        //tooltip.gameObject.SetActive(true);
     }
 
     private void HideCanvas()
