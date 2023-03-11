@@ -35,7 +35,7 @@ public class Unit : MonoBehaviour {
 
 		bars.FillAllBars ();
 
-		cameraShake = transform.Find ("Main Camera").GetComponent<CameraShake> ();
+		cameraShake = transform.GetComponentInChildren<CameraShake> ();
 		Init ();
 	}
 
