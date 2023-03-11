@@ -1,10 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
+using Doozy.Engine.UI;
 using UnityEngine;
 
 public class CharacterSheet : MonoBehaviour
 {
     [SerializeField] private GameObject child;
+    [SerializeField] private UIView uiView;
 
     private SkillsUI skillsUI;
 
@@ -33,6 +35,7 @@ public class CharacterSheet : MonoBehaviour
 
     public void Close()
     {
+        uiView.Hide();
         gameController.SaveAndReload();
     }
 }

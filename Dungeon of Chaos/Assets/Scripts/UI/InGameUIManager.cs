@@ -1,5 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
+using DG.Tweening;
+using Doozy.Engine.UI;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -10,6 +12,7 @@ public class InGameUIManager : MonoBehaviour
     [Header("Bars")]
     [SerializeField]
     private Slider healthBar;
+    [SerializeField] private Image healthBarPartialFillImage;
     [SerializeField]
     private Slider manaBar;
     [SerializeField]
@@ -45,9 +48,12 @@ public class InGameUIManager : MonoBehaviour
 
     [SerializeField]
     private GameObject settings;
+    [SerializeField]
+    private UIView settingsView;
 
     [SerializeField]
     private GameObject panelPopUp;
+    private UIView panelPopUpView => panelPopUp.transform.GetChild(0).GetComponent<UIView>();
 
     [SerializeField]
     private SoundSettings lowNotificationSound;
@@ -61,6 +67,8 @@ public class InGameUIManager : MonoBehaviour
     private float openUIstartDelay = 0.25f;
 
     private Color baseColor = new Color(0.2f, 0.2f, 0.2f);
+
+    private Tweener healthBarAnimationTween;
 
     private void Awake()
     {
@@ -91,10 +99,25 @@ public class InGameUIManager : MonoBehaviour
             ToggleSettings();
     }
 
+    private Tweener PlayBarAnimation(Image fillImage, float value, Tweener tween)
+    {
+        if (fillImage != null)
+        {
+            fillImage.fillAmount = healthBar.value;
+            if (tween != null)
+                tween.Kill();
+            tween.SetDelay(0.5f);
+            tween = fillImage.DOFillAmount(value, 0.8f).SetEase(Ease.OutQuad);
+        }
+        return tween;
+    }
+
     public void SetHealthBar(float value)
     {
+        healthBarAnimationTween = PlayBarAnimation(healthBarPartialFillImage, value, healthBarAnimationTween);
         healthBar.value = value;
     }
+
     public void SetManaBar(float value)
     {
         manaBar.value = value;
@@ -213,7 +236,13 @@ public class InGameUIManager : MonoBehaviour
             Character.instance.UnblockInput();
         }
 
-        settings.SetActive(!isActive);
+        if (!isActive)
+        {
+            settings.SetActive(true);
+            settingsView.Show();
+        }
+        else
+            settingsView.Hide();
     }
 
     private IEnumerator FlashBar(CanvasGroup cg)
@@ -257,6 +286,7 @@ public class InGameUIManager : MonoBehaviour
     public void MainMenu()
     {
         panelPopUp.SetActive(true);
+        panelPopUpView.Show();
     }
 
     public void MainMenuConfirm()
