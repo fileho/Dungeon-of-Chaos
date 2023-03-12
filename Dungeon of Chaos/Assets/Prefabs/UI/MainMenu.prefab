@@ -5763,7 +5763,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   DebugMode: 0
-  StartPosition: {x: 299, y: -574, z: 0}
+  StartPosition: {x: 299, y: -508, z: 0}
   StartRotation: {x: -0, y: 0, z: 0}
   StartScale: {x: 1, y: 1, z: 1}
   StartAlpha: 1
@@ -6280,7 +6280,7 @@ MonoBehaviour:
           m_PreInfinity: 2
           m_PostInfinity: 2
           m_RotationOrder: 4
-        StartDelay: 3.7
+        StartDelay: 1.85
         Duration: 0.4
       Fade:
         AnimationType: 1
@@ -6299,7 +6299,7 @@ MonoBehaviour:
           m_PreInfinity: 2
           m_PostInfinity: 2
           m_RotationOrder: 4
-        StartDelay: 3.7
+        StartDelay: 1.85
         Duration: 0.05
     AutoStartLoopAnimation: 1
     LoadSelectedPresetAtRuntime: 0
@@ -7475,7 +7475,7 @@ MonoBehaviour:
           m_PreInfinity: 2
           m_PostInfinity: 2
           m_RotationOrder: 4
-        StartDelay: 2.7
+        StartDelay: 1.35
         Duration: 0.4
       Fade:
         AnimationType: 1
@@ -7494,7 +7494,7 @@ MonoBehaviour:
           m_PreInfinity: 2
           m_PostInfinity: 2
           m_RotationOrder: 4
-        StartDelay: 2.7
+        StartDelay: 1.35
         Duration: 0.05
     AutoStartLoopAnimation: 1
     LoadSelectedPresetAtRuntime: 0
@@ -9026,7 +9026,7 @@ MonoBehaviour:
           m_PreInfinity: 2
           m_PostInfinity: 2
           m_RotationOrder: 4
-        StartDelay: 3.2
+        StartDelay: 1.6
         Duration: 0.4
       Fade:
         AnimationType: 1
@@ -9045,7 +9045,7 @@ MonoBehaviour:
           m_PreInfinity: 2
           m_PostInfinity: 2
           m_RotationOrder: 4
-        StartDelay: 3.2
+        StartDelay: 1.6
         Duration: 0.05
     AutoStartLoopAnimation: 1
     LoadSelectedPresetAtRuntime: 0
@@ -16689,7 +16689,7 @@ MonoBehaviour:
           m_PreInfinity: 2
           m_PostInfinity: 2
           m_RotationOrder: 4
-        StartDelay: 2
+        StartDelay: 1
         Duration: 0.4
       Rotate:
         AnimationType: 1
@@ -16868,7 +16868,7 @@ MonoBehaviour:
           m_PreInfinity: 2
           m_PostInfinity: 2
           m_RotationOrder: 4
-        StartDelay: 2.05
+        StartDelay: 1.05
         Duration: 0.2
     AutoStartLoopAnimation: 1
     LoadSelectedPresetAtRuntime: 0
@@ -17620,6 +17620,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   healthBar: {fileID: 6708584098931188126}
+  healthBarPartialFillImage: {fileID: 0}
   manaBar: {fileID: 6708584098936936537}
   staminaBar: {fileID: 6708584099280826968}
   xpBar: {fileID: 0}
@@ -17633,6 +17634,7 @@ MonoBehaviour:
   bossHPbar: {fileID: 0}
   bossName: {fileID: 0}
   settings: {fileID: 0}
+  settingsView: {fileID: 0}
   panelPopUp: {fileID: 0}
   lowNotificationSound:
     soundCategory: 0
