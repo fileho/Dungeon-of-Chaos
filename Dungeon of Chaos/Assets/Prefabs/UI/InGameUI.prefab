@@ -5744,6 +5744,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   healthBar: {fileID: 493887442743703093}
   healthBarPartialFillImage: {fileID: 7800031196013611718}
+  staminaBarPartialFillImage: {fileID: 6146389566664864228}
+  manaBarPartialFillImage: {fileID: 2600837096194057540}
   manaBar: {fileID: 493887442741055474}
   staminaBar: {fileID: 493887442916779507}
   xpBar: {fileID: 3819846498625626454}
@@ -20876,12 +20878,12 @@ GameObject:
   - component: {fileID: 2265588449354239541}
   - component: {fileID: 2600837096194057540}
   m_Layer: 5
-  m_Name: Fill_Partial (1)
+  m_Name: Fill_Partial
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &4296054280627595689
 RectTransform:
   m_ObjectHideFlags: 0
@@ -21609,12 +21611,12 @@ GameObject:
   - component: {fileID: 2696053741498504184}
   - component: {fileID: 6146389566664864228}
   m_Layer: 5
-  m_Name: Fill_Partial (2)
+  m_Name: Fill_Partial
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &4858377078322258704
 RectTransform:
   m_ObjectHideFlags: 0
