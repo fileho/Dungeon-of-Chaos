@@ -35,6 +35,7 @@ public class Character : Unit
     {
         if (SkillSystem.ShouldResurrect())
         {
+            Debug.Log("Resurrect");
             SkillSystem.Resurrect();
             return;
         }

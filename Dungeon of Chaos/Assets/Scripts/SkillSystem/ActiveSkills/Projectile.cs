@@ -16,6 +16,7 @@ public class Projectile : MonoBehaviour
     private Vector3 targetScale;
 
     [SerializeField] private GameObject impactVFX;
+    [SerializeField] private GameObject spellCastVFX;
 
     [SerializeField]
     private float delay;
@@ -53,11 +54,15 @@ public class Projectile : MonoBehaviour
 
         transform.Rotate(0, 0, Vector2.SignedAngle(Vector2.down, dir));
         SoundManager.instance.PlaySound(castSFX);
+        if (spellCastVFX != null)
+        {
+            var castVFX = Instantiate(spellCastVFX, source.gameObject.transform);
+            Destroy(castVFX, delay);
+        }
         while (time < delay)
         {            
             time += Time.deltaTime;
             float t = time / delay;
-            // sprite.color = Color.Lerp(Color.yellow, new Color(1f, 0.5f, 0f), t);
             transform.localScale = Vector3.Lerp(Vector3.zero, targetScale, t);
 
             if (source)
