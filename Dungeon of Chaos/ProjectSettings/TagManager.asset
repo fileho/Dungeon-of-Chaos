@@ -45,3 +45,6 @@ TagManager:
   - name: Unit
     uniqueID: 332653745
     locked: 0
+  - name: VFX
+    uniqueID: 794305313
+    locked: 0
