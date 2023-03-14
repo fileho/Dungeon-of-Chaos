@@ -365,7 +365,7 @@ public class SkillSystem : MonoBehaviour
     {
         foreach (SkillInfoPassive skill in passiveSkills)
         {
-            if (skill.GetId() == "SecondBreath" && skill.IsUnlocked() && 
+            if (skill.GetId() == "Second Breath" && skill.IsUnlocked() && 
                 (skill.GetCurrentSkill() as SecondBreath).ShouldResurrect())
                 return true;
         }
@@ -376,7 +376,7 @@ public class SkillSystem : MonoBehaviour
     {
         foreach (SkillInfoPassive skill in passiveSkills)
         {
-            if (skill.GetId() == "SecondBreath" && skill.IsUnlocked())
+            if (skill.GetId() == "Second Breath" && skill.IsUnlocked())
             {
                 (skill.GetCurrentSkill() as SecondBreath).Resurrect(owner);
                 return;

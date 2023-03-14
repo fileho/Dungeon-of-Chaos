@@ -22,5 +22,5 @@ MonoBehaviour:
     volume: 1
     pitch: 1
     priority: 0
-  duration: 0.5
+  duration: 1
   effects: []
