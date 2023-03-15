@@ -74,8 +74,22 @@ public class Projectile : MonoBehaviour
         collider.enabled = true;
 
         rb.AddForce(100 * speed * dir);
+        if (spellCastVFX == null)
+        {
+            StartCoroutine(Rotate());
+        }
+
         SoundManager.instance.PlaySound(flightSFX);
         Invoke(nameof(CleanUp), 10f);
+    }
+
+    private IEnumerator Rotate()
+    {
+        while (true)
+        {
+            transform.Rotate(0, 0, 1080 * Time.deltaTime);
+            yield return null;
+        }
     }
 
     private void CleanUp()
