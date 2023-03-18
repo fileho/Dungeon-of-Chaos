@@ -11,12 +11,12 @@ public class VisualEffects : MonoBehaviour
         this.source = source;
         this.effects = effects;
         
-        Invoke(nameof(End), duration);
+        Invoke(nameof(CastEffects), duration);
     }
-    protected void End()
+    protected void CastEffects()
     {
         foreach (ISkillEffect e in effects)
             e.Use(source);
-        Destroy(gameObject);
+        Destroy(gameObject, 1.5f);
     }
 }

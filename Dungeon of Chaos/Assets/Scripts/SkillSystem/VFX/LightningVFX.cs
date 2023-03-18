@@ -21,7 +21,7 @@ public class LightningVFX : VisualEffects
     private IEnumerator ExecuteVFX()
     {
         float time = 0f;
-        float sparkTime = 0.1f;
+        float sparkTime = 0.05f;
         Vector2 dir = (Vector2)(target - source.gameObject.transform.position).normalized;
         float angle = Vector2.SignedAngle(Vector2.down, dir);
         if (angle > 0 && angle < 180)
@@ -33,10 +33,12 @@ public class LightningVFX : VisualEffects
             sparkTime -= Time.deltaTime;
             if (sparkTime <= 0f)
             {
-                float scale = Random.Range(0.5f, 5*(time/duration));
-                Vector3 pos = new Vector3(this.transform.position.x + dir.x*scale, transform.position.y + dir.y*scale, 0);
+                float scale = Random.Range(1.5f*(time/duration), 5*(time/duration));
+                float a = Random.Range(-30, 30f);
+                Vector2 vec = Quaternion.Euler(0, 0, a) * dir;
+                Vector3 pos = new Vector3(this.transform.position.x + vec.x*scale, transform.position.y + vec.y*scale, 0);
                 Instantiate(lightningSparks, pos, Quaternion.identity, this.transform);
-                sparkTime = 0.1f;
+                sparkTime = 0.05f;
             }
 
             time += Time.deltaTime;

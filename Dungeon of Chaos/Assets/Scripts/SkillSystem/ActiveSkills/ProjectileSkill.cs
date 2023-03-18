@@ -11,7 +11,7 @@ public class ProjectileSkill : ISkillEffect
 
     [SerializeField] private int amountOfProjectiles = 1;
 
-    private const float coneWidth = 60f;
+    private const float coneWidth = 90;
 
     public override string[] GetEffectsValues(Unit owner)
     {
@@ -43,7 +43,10 @@ public class ProjectileSkill : ISkillEffect
             float initialAngle = -rotation;
             for (int i = 0; i < amountOfProjectiles; i++)
             {
-                Vector2 dir = Quaternion.AngleAxis(initialAngle + i * rotation, Vector3.forward) * targetPos;
+                float angle = (initialAngle + i * rotation) * Mathf.Deg2Rad;
+                Vector3 targetPosition = new Vector3(targetPos.x, targetPos.y, 0);
+                //Vector2 dir = Quaternion.AngleAxis(initialAngle + i * rotation, Vector3.forward) * (targetPosition - unit.transform.position).normalized;
+                Vector2 dir = Quaternion.Euler(0, 0, angle) * targetPosition;
                 var projectile = Instantiate(prefab, unit.transform.position, Quaternion.identity);
                 projectile.Init(effects, unit, speed, dir);
             }            

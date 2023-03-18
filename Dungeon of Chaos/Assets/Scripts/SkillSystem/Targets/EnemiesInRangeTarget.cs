@@ -23,7 +23,10 @@ public class EnemiesInRangeTarget : ITarget
                 if (ownerLayer == LayerMask.NameToLayer("Enemy") || ownerLayer == LayerMask.NameToLayer("EnemyAttack"))
                     targets.Add(collider.gameObject.GetComponent<Character>());
                 else
-                    targets.Add(collider.gameObject.GetComponent<Enemy>());
+                {
+                    if (collider.gameObject.GetComponent<Enemy>() != null)
+                        targets.Add(collider.gameObject.GetComponent<Enemy>());
+                }
             }
         }
         return targets;

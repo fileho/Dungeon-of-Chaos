@@ -19,7 +19,7 @@ MonoBehaviour:
   skillEffectType: 0
   dmgSFX:
     soundCategory: 3
-    sound: 22
+    sound: 14
     volume: 1
     pitch: 1
     priority: 0
