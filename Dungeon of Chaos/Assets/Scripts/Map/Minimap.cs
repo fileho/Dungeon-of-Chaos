@@ -29,6 +29,11 @@ public class Minimap : MonoBehaviour
         {
             ToggleMinimap();
         }
+        else if (Input.GetKeyDown(KeyCode.Escape) && minimap.activeSelf)
+        {
+            // Escape can turn off the minimap
+            ToggleMinimap();
+        }
     }
 
     private void ToggleMinimap()
