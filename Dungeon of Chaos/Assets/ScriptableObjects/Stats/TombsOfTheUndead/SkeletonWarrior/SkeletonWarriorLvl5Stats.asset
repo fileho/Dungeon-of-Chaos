@@ -29,7 +29,7 @@ MonoBehaviour:
     00000000:
       type: {class: PrimaryStats, ns: , asm: Assembly-CSharp}
       data:
-        strength: 14
+        strength: 13
         intelligence: 0
         constitution: 11
         endurance: 10
