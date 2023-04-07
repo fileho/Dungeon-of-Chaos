@@ -86,8 +86,7 @@ public class SkillSystem : MonoBehaviour
     {
         foreach (SkillInfoActive skill in activeSkills)
         {
-            for (int i = 0; i < skill.GetLevel(); i++)
-                Character.instance.stats.GetLevellingData().skillPoints += skill.GetInvestedSkillPoints();
+            Character.instance.stats.GetLevellingData().skillPoints += skill.GetInvestedSkillPoints();
             skill.ResetLevel();
         }
 
@@ -101,12 +100,12 @@ public class SkillSystem : MonoBehaviour
     {
         foreach (SkillInfoDash skill in dashSkills)
         {
-            for (int i = 0; i < skill.GetLevel(); i++)
-                Character.instance.stats.GetLevellingData().skillPoints += skill.GetInvestedSkillPoints();
+            Character.instance.stats.GetLevellingData().skillPoints += skill.GetInvestedSkillPoints();
             skill.ResetLevel();
         }
 
         UpgradeDash(0);
+        Character.instance.stats.GetLevellingData().skillPoints += 1;
         activatedDash = 0;
     }
 
@@ -114,8 +113,7 @@ public class SkillSystem : MonoBehaviour
     {
         foreach (SkillInfoSecondaryAttack skill in secondaryAttacks)
         {
-            for (int i = 0; i < skill.GetLevel(); i++)
-                Character.instance.stats.GetLevellingData().skillPoints += skill.GetInvestedSkillPoints();
+            Character.instance.stats.GetLevellingData().skillPoints += skill.GetInvestedSkillPoints();
             skill.ResetLevel();
         }
 
@@ -126,8 +124,7 @@ public class SkillSystem : MonoBehaviour
     {
         foreach (SkillInfoPassive skill in passiveSkills)
         {
-            for (int i = 0; i < skill.GetLevel(); i++)
-                Character.instance.stats.GetLevellingData().skillPoints += skill.GetInvestedSkillPoints();
+            Character.instance.stats.GetLevellingData().skillPoints += skill.GetInvestedSkillPoints();
             skill.Unequip(Character.instance.stats);
             skill.ResetLevel();
         }

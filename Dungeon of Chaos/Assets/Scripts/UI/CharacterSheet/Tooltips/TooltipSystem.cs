@@ -47,6 +47,8 @@ public class TooltipSystem : MonoBehaviour
 
     public void HideSimpleTooltip()
     {
+        if (simpleTooltip == null)
+            return;
         simpleTooltip?.gameObject?.SetActive(false);
     }
 
