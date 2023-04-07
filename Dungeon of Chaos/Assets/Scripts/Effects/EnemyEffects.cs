@@ -89,7 +89,11 @@ public class EnemyEffects : IEffects
             {
                 // Could be destroyed during the animation
                 if (s != null)
-                    s.color = new Color(1, 1, 1, 1 - t);
+                {
+                    var color = s.color;
+                    color.a = 1 - t;
+                    s.color = color;
+                }
             }
             yield return null;
         }

@@ -12,6 +12,7 @@ public enum TutorialState
     EnemyAttack,
     Checkpoint,
     MapUnlock,
+    Boss,
     Default = 999,
 }
 

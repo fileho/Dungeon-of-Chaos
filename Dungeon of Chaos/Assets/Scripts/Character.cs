@@ -13,7 +13,7 @@ public class Character : Unit
     private GameController gameController;
 
     private int blockedInput = 0;
-    private const float maxBiteCooldown = 0.5f;
+    private const float maxBiteCooldown = 0.75f;
     private float biteCooldown = 0f;
 
     private void Awake()
@@ -212,7 +212,7 @@ public class Character : Unit
         var e = col.transform.GetComponent<Enemy>();
         if (e == null)
             return;
-        // TakeDamage(10 + e.stats.GetPhysicalDamage() / 2);
+        TakeDamage(3 + e.stats.GetPhysicalDamage() / 8);
         biteCooldown = maxBiteCooldown;
     }
 }
