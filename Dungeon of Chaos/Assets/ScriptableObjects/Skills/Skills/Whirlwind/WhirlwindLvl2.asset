@@ -16,8 +16,8 @@ MonoBehaviour:
     name: Whirlwind
     description: Deals {0} damage to enemies in range and pushes them back.
     icon: {fileID: 21300000, guid: 00fbb4588136cde4fbf9001df788bcfb, type: 3}
-  cooldown: 5
+  cooldown: 10
   manaCost: 0
-  staminaCost: 75
+  staminaCost: 50
   effects:
   - {fileID: 11400000, guid: 5fcf5f63c1f9e0341b29030c2200c358, type: 2}

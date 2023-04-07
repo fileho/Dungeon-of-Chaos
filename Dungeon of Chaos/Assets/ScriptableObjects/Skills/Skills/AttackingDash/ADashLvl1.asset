@@ -18,9 +18,9 @@ MonoBehaviour:
     icon: {fileID: 21300000, guid: d964aa84a7441424c9c0b351b7abeda5, type: 3}
   cooldown: 2
   manaCost: 0
-  staminaCost: 45
+  staminaCost: 25
   effects:
   - {fileID: 11400000, guid: 25ed88ac01186bf4faa8f3f68f91f71a, type: 2}
   dash: {fileID: 11400000, guid: f362aadcfb4d0784ab39c05ed9347fca, type: 2}
-  dashSpeed: 10
+  dashSpeed: 12
   trailColor: {r: 1, g: 0.13781394, b: 0, a: 1}
