@@ -1,105 +1,105 @@
 using UnityEngine;
 
-public class Unit : MonoBehaviour {
-	public Stats stats;
+public class Unit : MonoBehaviour
+{
+    public Stats stats;
 
-	protected Weapon weapon;
+    protected Weapon weapon;
 
-	[SerializeField]
-	protected IMovement movement;
-	[SerializeField]
-	protected IEffects effects;
-	[SerializeField]
-	protected IBars bars;
+    [SerializeField]
+    protected IMovement movement;
+    [SerializeField]
+    protected IEffects effects;
+    [SerializeField]
+    protected IBars bars;
 
-	[SerializeField]
-	protected SoundSettings takeDmgSFX;
-	[SerializeField]
-	protected SoundSettings deathSFX;
+    [SerializeField]
+    protected SoundSettings takeDmgSFX;
+    [SerializeField]
+    protected SoundSettings deathSFX;
 
-	protected bool dead = false;
+    protected bool dead = false;
 
-	protected System.Action unitHit;
+    protected System.Action unitHit;
 
-	private CameraShake cameraShake;
+    private CameraShake cameraShake;
 
-	protected void Start ()
-	{
-		weapon = GetComponentInChildren<Weapon> ();
+    protected void Start()
+    {
+        weapon = GetComponentInChildren<Weapon>();
 
-		bars = Instantiate (bars).Init (transform);
-		stats = Instantiate (stats).ResetStats (bars);
+        bars = Instantiate(bars).Init(transform);
+        stats = Instantiate(stats).ResetStats(bars);
 
-		movement = Instantiate (movement).Init (transform, stats);
-		effects = Instantiate (effects).Init (transform);
+        movement = Instantiate(movement).Init(transform, stats);
+        effects = Instantiate(effects).Init(transform);
 
-		bars.FillAllBars ();
+        bars.FillAllBars();
 
-		cameraShake = transform.GetComponentInChildren<CameraShake> ();
-		Init ();
-	}
+        cameraShake = transform.GetComponentInChildren<CameraShake>();
+        Init();
+    }
 
-	protected virtual void Init ()
-	{
-	}
+    protected virtual void Init()
+    {
+    }
 
-	// It can be either the position of the Unit or Mouse Position [In case of the character]
-	public virtual Vector2 GetTargetPosition ()
-	{
-		return Target == null ? Vector2.positiveInfinity : (Vector2)Target.transform.position;
-	}
+    // It can be either the position of the Unit or Mouse Position [In case of the character]
+    public virtual Vector2 GetTargetPosition()
+    {
+        return Target == null ? Vector2.positiveInfinity : (Vector2)Target.transform.position;
+    }
 
-	public virtual Vector2 GetTargetDirection ()
-	{
-		return Target == null ? Vector2.positiveInfinity
-							  : (GetTargetPosition () - (Vector2)transform.position).normalized;
-	}
+    public virtual Vector2 GetTargetDirection()
+    {
+        return Target == null ? Vector2.positiveInfinity
+                              : (GetTargetPosition() - (Vector2)transform.position).normalized;
+    }
 
-	public float GetTargetDistance ()
-	{
-		return (GetTargetPosition () - (Vector2)transform.position).magnitude;
-	}
+    public float GetTargetDistance()
+    {
+        return (GetTargetPosition() - (Vector2)transform.position).magnitude;
+    }
 
-	// Character in case of the enemy.
-	// It can be changed at runtime.
-	// Null in the case of player
-	public Unit Target { get; protected set; }
+    // Character in case of the enemy.
+    // It can be changed at runtime.
+    // Null in the case of player
+    public Unit Target { get; protected set; }
 
-	public void TakeDamage (float value, bool playSfx = true)
-	{
-		unitHit?.Invoke ();
-		float rest = value - stats.GetArmor ();
-		if (stats.HasArmor ())
-			stats.SetArmor (-value);
-		if (rest <= 0)
-			return;
+    public void TakeDamage(float value, bool playSfx = true)
+    {
+        unitHit?.Invoke();
+        float rest = value - stats.GetArmor();
+        if (stats.HasArmor())
+            stats.SetArmor(-value);
+        if (rest <= 0)
+            return;
 
-		stats.ConsumeHealth (rest);
-		effects.TakeDamage ();
+        stats.ConsumeHealth(rest);
+        effects.TakeDamage();
 
+        if (cameraShake != null)
+            cameraShake.ShakeForDuration(0.5f);
 
-		if (cameraShake != null)
-			cameraShake.ShakeForDuration (0.5f);
+        if (playSfx)
+            SoundManager.instance.PlaySound(takeDmgSFX);
+        if (stats.IsDead())
+            Die();
+    }
 
-		if (playSfx)
-			SoundManager.instance.PlaySound (takeDmgSFX);
-		if (stats.IsDead ())
-			Die ();
-	}
+    protected virtual void Die()
+    {
+        dead = true;
+        GetComponent<Collider2D>().enabled = false;
+        var vfx = transform.Find("DeathVFX");
+        if (vfx)
+            vfx.GetComponent<ParticleSystem>().Play();
+        SoundManager.instance.PlaySound(deathSFX);
+        Invoke(nameof(CleanUp), 1);
+    }
 
-	protected virtual void Die ()
-	{
-		dead = true;
-		GetComponent<Collider2D> ().enabled = false;
-		var vfx = transform.Find ("DeathVFX");
-		if (vfx)
-			vfx.GetComponent<ParticleSystem> ().Play ();
-		SoundManager.instance.PlaySound (deathSFX);
-		Invoke (nameof (CleanUp), 1);
-	}
-
-	protected virtual void CleanUp ()
-	{
-		Destroy (gameObject);
-	}
+    protected virtual void CleanUp()
+    {
+        Destroy(gameObject);
+    }
 }

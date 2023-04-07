@@ -149,7 +149,8 @@ public class Character : Unit
 
     private void RegenerateStamina()
     {
-        stats.RegenerateStamina(stats.GetStaminaRegen() * Time.deltaTime);
+        if (stats.ShouldRegenerateStamina())
+            stats.RegenerateStamina(stats.GetStaminaRegen() * Time.deltaTime);
     }
 
     private void RegenerateMana()
