@@ -14,9 +14,11 @@ public class Torch : MonoBehaviour
 
     private ParticleSystem ps;
 
-    [SerializeField] private SoundSettings torchLoopingSFX;
+    [SerializeField]
+    private SoundSettings torchLoopingSFX;
     private SoundData sfx = null;
-    [SerializeField] private SoundSettings torchStartBurningSFX;
+    [SerializeField]
+    private SoundSettings torchStartBurningSFX;
 
     // Start is called before the first frame update
     void Start()
@@ -29,6 +31,8 @@ public class Torch : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (!Character.instance)
+            return;
         Vector2 charPos = Character.instance.transform.position;
         float dist = (pos2d - charPos).magnitude;
 
@@ -50,7 +54,7 @@ public class Torch : MonoBehaviour
 
         state = Mathf.Clamp(state + offset, 0, maxIntensity);
         light2d.intensity = state;
-        
+
         if (state < 0.01f && ps.isPlaying)
             ps.Stop();
         if (state > 0.01 && !ps.isPlaying)
