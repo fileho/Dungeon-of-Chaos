@@ -54,6 +54,10 @@ public class Stats : ScriptableObject
     private IBars bars;
     // Disable stamina regen for a while after stamina consuming action
     private float staminaRegenInterval = 0.0f;
+    // Stamina cost increase per strength level
+    private float staminaCostInc = 3f;
+    // Mana cost increase per intelligence level
+    private float manaCostInc = 2f;
 
     public int GetLevel()
     {
@@ -201,6 +205,11 @@ public class Stats : ScriptableObject
         manaCostModifier = value;
     }
 
+    public float GetManaCostInc()
+    {
+        return (GetIntelligence() - 10) * manaCostInc;
+    }
+
 #endregion
 
 #region Stamina
@@ -265,9 +274,14 @@ public class Stats : ScriptableObject
     {
         staminaCostModifier = value;
     }
-#endregion
 
-#region Movement
+    public float GetStaminaCostInc()
+    {
+        return (GetStrength() - 10) * staminaCostInc;
+    }
+    #endregion
+
+    #region Movement
     public float MovementSpeed()
     {
         return movementSpeed;
