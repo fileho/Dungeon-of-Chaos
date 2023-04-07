@@ -49,7 +49,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   upRightAngle: -55
   armAlignAngle: 66
-  weaponTipOffset: {x: -1.046, y: 0.738, z: 0}
 --- !u!212 &4206247659596657827
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -568,7 +567,7 @@ CapsuleCollider2D:
   m_GameObject: {fileID: 1419886182394290244}
   m_Enabled: 1
   m_Density: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: e52415169301bb442903eb50ee01822b, type: 2}
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0

@@ -212,7 +212,7 @@ public class Character : Unit
         var e = col.transform.GetComponent<Enemy>();
         if (e == null)
             return;
-        TakeDamage(10 + e.stats.GetPhysicalDamage() / 2);
+        // TakeDamage(10 + e.stats.GetPhysicalDamage() / 2);
         biteCooldown = maxBiteCooldown;
     }
 }
