@@ -22,7 +22,7 @@ MonoBehaviour:
     volume: 1
     pitch: 1
     priority: 0
-  duration: 2
+  duration: 1
   effects:
   - {fileID: 11400000, guid: 4c4ce4e033af5f7489562b39b3c3e886, type: 2}
   - {fileID: 11400000, guid: 1e5d76f46646ebc4d90c2bf467a56b99, type: 2}

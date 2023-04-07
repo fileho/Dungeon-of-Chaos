@@ -17,7 +17,7 @@ MonoBehaviour:
     description: The character heals himself for {0} health.
     icon: {fileID: 21300000, guid: 38e26c4f05e133246ad41063dd3f18d1, type: 3}
   cooldown: 8
-  manaCost: 15
+  manaCost: 25
   staminaCost: 0
   effects:
   - {fileID: 11400000, guid: bc2107414b1f2f341b2c0f5d6582b83f, type: 2}
