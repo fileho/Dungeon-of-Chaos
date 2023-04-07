@@ -52,6 +52,8 @@ public class Stats : ScriptableObject
 #endregion
 
     private IBars bars;
+    // Disable stamina regen for a while after stamina consuming action
+    private float staminaRegenInterval = 0.0f;
 
     public int GetLevel()
     {
@@ -209,6 +211,11 @@ public class Stats : ScriptableObject
 
     public void ConsumeStamina(float value)
     {
+        if (value <= 0)
+            return;
+
+        const float staminaRegenStopDuration = 0.75f;
+        staminaRegenInterval = staminaRegenStopDuration;
         stamina.Consume(value);
         bars.UpdateStaminaBar(stamina.Ratio());
     }
@@ -227,6 +234,16 @@ public class Stats : ScriptableObject
     {
         stamina.ChangeMaxValue(value);
         bars.UpdateStaminaBar(stamina.Ratio());
+    }
+
+    public bool ShouldRegenerateStamina()
+    {
+        if (staminaRegenInterval > 0)
+        {
+            staminaRegenInterval -= Time.deltaTime;
+        }
+
+        return staminaRegenInterval <= 0;
     }
 
     public float GetStaminaRegen()
