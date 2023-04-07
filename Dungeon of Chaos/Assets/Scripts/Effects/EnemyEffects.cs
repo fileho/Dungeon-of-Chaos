@@ -71,9 +71,14 @@ public class EnemyEffects : IEffects
 
     private IEnumerator Kill()
     {
-        yield return new WaitForSeconds(0.5f);
+        // yield return new WaitForSeconds(0.5f);
         const float duration = 1f;
         float time = 0;
+
+        // Turn off hp bar
+        var hpbar = transform.parent.GetChild(1);
+        if (hpbar)
+            hpbar.gameObject.SetActive(false);
         // Change all sprites including the weapon
         var sprites = transform.GetComponentsInChildren<SpriteRenderer>();
         while (time < duration)

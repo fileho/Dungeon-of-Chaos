@@ -19,9 +19,6 @@ public class GameoverUI : MonoBehaviour
         gameover = transform.GetChild(0).GetComponent<TMP_Text>();
         tooltip = transform.GetChild(1).GetComponent<TMP_Text>();
 
-        //gameover.gameObject.SetActive(false);
-        //tooltip.gameObject.SetActive(false);
-
         HideCanvas();
     }
 
@@ -32,19 +29,17 @@ public class GameoverUI : MonoBehaviour
 
     private IEnumerator Gameover()
     {
-        StartCoroutine(CanvasAnimation(2f, f => f));
+        StartCoroutine(CanvasAnimation(1.0f, Tweens.EaseOutCubic));
 
-        yield return new WaitForSeconds(0.6f);
-        //gameover.gameObject.SetActive(true);
+        yield return new WaitForSeconds(0.3f);
         gameover.GetComponent<UIView>().Show();
         yield return new WaitForSeconds(0.4f);
         tooltip.GetComponent<UIView>().Show();
-        //tooltip.gameObject.SetActive(true);
     }
 
     private void HideCanvas()
     {
-        StartCoroutine(CanvasAnimation(0.8f, f => 1 - f));
+        StartCoroutine(CanvasAnimation(0.7f, f => 1 - f));
     }
 
     private IEnumerator CanvasAnimation(float duration, Func<float, float> func)
