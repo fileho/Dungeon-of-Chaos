@@ -192,7 +192,7 @@ public class Character : Unit
         if (!Input.GetMouseButtonDown(0) || attack.IsAttacking() || SkillSystem.IsAttacking())
             return;
 
-        float staminaCost = attack.GetStaminaCost();
+        float staminaCost = attack.GetStaminaCost() + stats.GetStaminaCostInc();
         if (!stats.HasStamina(staminaCost))
         {
             InGameUIManager.instance.NotEnoughStamina();
