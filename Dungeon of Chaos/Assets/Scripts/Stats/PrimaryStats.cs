@@ -109,7 +109,7 @@ public class PrimaryStats
 
     public float GetStaminaRegen()
     {
-        return Mathf.Floor(endurance / 3) * 6;
+        return Mathf.Floor(endurance / 3) * 5;
     }
 
     public float GetArmor()
