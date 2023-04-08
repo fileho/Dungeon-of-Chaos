@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using TMPro;
 
 public class StatsOverview : MonoBehaviour
@@ -9,17 +10,11 @@ public class StatsOverview : MonoBehaviour
     [SerializeField] private TextMeshProUGUI xp;
     [SerializeField] private TextMeshProUGUI nextLevelXP;
     [SerializeField] private TextMeshProUGUI level;
+    [SerializeField] private TextMeshProUGUI globalLevel;
     [SerializeField] private GameObject levelUpButton;
     [SerializeField] private TextMeshProUGUI statsPoints;
     [SerializeField] private List<GameObject> statsIncreaseButtons;
     [SerializeField] private List<GameObject> statsDecreaseButtons;
-
-    [Header("Primary Stats Text")]
-    [SerializeField] private TextMeshProUGUI strengthText;
-    [SerializeField] private TextMeshProUGUI intelligenceText;
-    [SerializeField] private TextMeshProUGUI constitutionText;
-    [SerializeField] private TextMeshProUGUI enduranceText;
-    [SerializeField] private TextMeshProUGUI wisdomText;
 
     [Header("Secondary Stats Text")]
     [SerializeField] private TextMeshProUGUI damageText;
@@ -56,6 +51,7 @@ public class StatsOverview : MonoBehaviour
     public void SetLevel(float value)
     {
         SetStat(value, level);
+        SetStat(value, globalLevel);
     }
 
     public void ShowLevelUpButton(bool show)
@@ -67,6 +63,7 @@ public class StatsOverview : MonoBehaviour
     {
         foreach (GameObject btn in statsIncreaseButtons)
         {
+            btn.GetComponent<Image>().color = btn.GetComponent<ChangeStatButton>().idle;
             btn.SetActive(show && btn.GetComponent<ChangeStatButton>().CanUpgrade()); 
         }            
     }
@@ -75,6 +72,7 @@ public class StatsOverview : MonoBehaviour
     {
         foreach (GameObject btn in statsDecreaseButtons)
         {
+            btn.GetComponent<Image>().color = btn.GetComponent<ChangeStatButton>().idle;
             btn.SetActive(show && btn.GetComponent<ChangeStatButton>().CanDowngrade());
         }
     }
@@ -92,31 +90,6 @@ public class StatsOverview : MonoBehaviour
     private void SetStat(float value, TextMeshProUGUI textGUI)
     {
         textGUI.text = Math.Round(value,1).ToString();
-    }
-
-    public void SetStrength(float value)
-    {
-        SetStat(value, strengthText);
-    }
-
-    public void SetIntelligence(float value)
-    {
-        SetStat(value, intelligenceText);
-    }
-
-    public void SetConstitution(float value)
-    {
-        SetStat(value, constitutionText);
-    }
-
-    public void SetEndurance(float value)
-    {
-        SetStat(value, enduranceText);
-    }
-
-    public void SetWisdom(float value)
-    {
-        SetStat(value, wisdomText);
     }
 
     public void SetDamage(float value)

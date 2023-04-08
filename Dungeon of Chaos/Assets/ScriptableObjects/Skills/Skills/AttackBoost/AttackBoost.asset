@@ -14,7 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   skillData:
     name: Attack Boost
-    description: Increases your physical damage by {0} for the duration of {1}.
+    description: Increases your physical damage by {0} ({1}* spell power) for the
+      duration of {2}.
     icon: {fileID: 21300000, guid: a2563f2b8dbc4044b9a50537d3a29962, type: 3}
   cooldown: 5
   manaCost: 20

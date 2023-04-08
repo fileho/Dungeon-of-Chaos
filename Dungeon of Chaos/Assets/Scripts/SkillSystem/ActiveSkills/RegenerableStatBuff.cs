@@ -8,7 +8,7 @@ public abstract class RegenerableStatBuff : ISkillEffect
 
     public override string[] GetEffectsValues(Unit owner)
     {
-        return new string[]{ Math.Round(GetValue(owner),2).ToString()};
+        return new string[]{ Math.Round(GetValue(owner),2).ToString(), value.ToString()};
     }
 
     private float GetValue(Unit owner)

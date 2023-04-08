@@ -5,6 +5,7 @@ using UnityEngine;
 public class SkillData
 {
     [SerializeField] private string name;
+    [TextArea()]
     [SerializeField] private string description;
     [SerializeField] private Sprite icon;
 

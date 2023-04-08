@@ -5,7 +5,7 @@ using UnityEngine;
 public abstract class TemporalEffect : ISkillEffect
 {
     [SerializeField] protected float duration;
-    [SerializeField] private float value;
+    [SerializeField] protected float value;
     
     protected StatusEffectIcon effectIcon;
 
@@ -16,7 +16,7 @@ public abstract class TemporalEffect : ISkillEffect
 
     public override string[] GetEffectsValues(Unit owner)
     {
-        return new string[] { Math.Round(GetValue(owner),2).ToString(), duration.ToString() + " seconds" };
+        return new string[] { Math.Round(GetValue(owner),2).ToString(), value.ToString(), duration.ToString() + " seconds" };
     }
 
     protected float GetValue(Unit owner) 
