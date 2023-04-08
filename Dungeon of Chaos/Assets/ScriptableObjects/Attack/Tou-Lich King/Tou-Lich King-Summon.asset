@@ -33,8 +33,8 @@ MonoBehaviour:
     pitch: 1
     priority: 0
   impactSFX:
-    soundCategory: 0
-    sound: 0
+    soundCategory: 2
+    sound: 26
     volume: 1
     pitch: 1
     priority: 0
