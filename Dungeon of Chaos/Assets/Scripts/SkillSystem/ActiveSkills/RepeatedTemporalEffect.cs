@@ -8,7 +8,7 @@ public abstract class RepeatedTemporalEffect : TemporalEffect
 
     public override string[] GetEffectsValues(Unit owner)
     {
-        return new string[] { Math.Round(GetValue(owner),2).ToString(), frequency.ToString(), duration.ToString() };
+        return new string[] { Math.Round(GetValue(owner),2).ToString(), value.ToString(), frequency.ToString(), duration.ToString() };
     }
 
     public override bool Update()

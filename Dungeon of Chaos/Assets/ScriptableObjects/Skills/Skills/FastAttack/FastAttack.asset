@@ -14,7 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   skillData:
     name: Fast Attack
-    description: An attack that deals {0} damage, is faster and costs less stamina.
+    description: An attack that deals {0} ({1}*damage) damage, is faster and costs
+      less stamina.
     icon: {fileID: 21300000, guid: 4873aa989d5fcd546b28025805f15ee8, type: 3}
   cooldown: 1
   manaCost: 0

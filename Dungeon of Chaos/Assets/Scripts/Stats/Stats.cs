@@ -389,15 +389,10 @@ public class Stats : ScriptableObject
         if (StatsOverview.instance == null || SkillsUI.instance == null)
             return;
         XP.UpdateLevellingUI();
-        StatsOverview.instance.SetStrength(primaryStats.strength);
         StatsOverview.instance.SetDamage(physicalDamage);
-        StatsOverview.instance.SetIntelligence(primaryStats.intelligence);
         StatsOverview.instance.SetPower(spellPower);
-        StatsOverview.instance.SetConstitution(primaryStats.constitution);
         StatsOverview.instance.SetHP(health.maxValue);
-        StatsOverview.instance.SetEndurance(primaryStats.endurance);
         StatsOverview.instance.SetStamina(stamina.maxValue);
-        StatsOverview.instance.SetWisdom(primaryStats.wisdom);
         StatsOverview.instance.SetMana(mana.maxValue);
         StatsOverview.instance.SetArmor(armor);
         StatsOverview.instance.SetStaminaRegen(staminaRegen);
@@ -410,7 +405,6 @@ public class Stats : ScriptableObject
         primaryStats.strength += mod;
         XP.ChangeStatsPoints(mod);
         physicalDamage = primaryStats.GetDamage(XP.GetLevel());
-        StatsOverview.instance.SetStrength(primaryStats.strength);
         StatsOverview.instance.SetDamage(physicalDamage);
     }
 
@@ -434,7 +428,6 @@ public class Stats : ScriptableObject
         primaryStats.intelligence += mod;
         XP.ChangeStatsPoints(mod);
         spellPower = primaryStats.GetSpellPower(XP.GetLevel());
-        StatsOverview.instance.SetIntelligence(primaryStats.intelligence);
         StatsOverview.instance.SetPower(spellPower);
     }
 
@@ -459,7 +452,6 @@ public class Stats : ScriptableObject
         XP.ChangeStatsPoints(mod);
         health.maxValue = primaryStats.GetMaxHP(XP.GetLevel());
         armor = primaryStats.GetArmor();
-        StatsOverview.instance.SetConstitution(primaryStats.constitution);
         StatsOverview.instance.SetHP(health.maxValue);
         StatsOverview.instance.SetArmor(armor);
     }
@@ -484,7 +476,6 @@ public class Stats : ScriptableObject
         stamina.maxValue = primaryStats.GetMaxStamina(XP.GetLevel());
         staminaRegen = primaryStats.GetStaminaRegen();
         XP.ChangeStatsPoints(mod);
-        StatsOverview.instance.SetEndurance(primaryStats.endurance);
         StatsOverview.instance.SetStamina(stamina.maxValue);
         StatsOverview.instance.SetStaminaRegen(staminaRegen);
     }
@@ -506,7 +497,6 @@ public class Stats : ScriptableObject
         primaryStats.wisdom += mod;
         XP.ChangeStatsPoints(mod);
         mana.maxValue = primaryStats.GetMaxMana(XP.GetLevel());
-        StatsOverview.instance.SetWisdom(primaryStats.wisdom);
         StatsOverview.instance.SetMana(mana.maxValue);
     }
 

@@ -16,7 +16,7 @@ public class ISecondaryAttack : IActiveSkill
         float dmg = attackConfiguration.type == SkillEffectType.physical
             ? Character.instance.stats.GetPhysicalDamage() * attackConfiguration.damage
             : Character.instance.stats.GetSpellPower() * attackConfiguration.damage;
-        string s = String.Format(skillData.GetDescription(), dmg.ToString());
+        string s = String.Format(skillData.GetDescription(), dmg.ToString(), attackConfiguration.damage.ToString());
         return s;        
     }
 

@@ -19,6 +19,6 @@ MonoBehaviour:
   prefab: {fileID: 1060440372781101492, guid: e4e9db6029823184ab520cff3913cc1a, type: 3}
   effects:
   - {fileID: 11400000, guid: 4b8603b9e3d47cc44810e4597af061be, type: 2}
-  - {fileID: 11400000, guid: 61df2e143c36df5489779338f9168257, type: 2}
   - {fileID: 11400000, guid: 8de2c692665ccb745ad508571acb87de, type: 2}
+  - {fileID: 11400000, guid: 61df2e143c36df5489779338f9168257, type: 2}
   amountOfProjectiles: 1
