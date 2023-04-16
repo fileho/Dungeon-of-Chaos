@@ -81,10 +81,15 @@ public class PrimaryStats
     public float GetMaxHP(int l)
     {
         float c = ModifiedHP(l, constitution);
-        if (c < 10)
-            return c * multipliers.hpLinearMultiplier;
+        if (statsModifiers == null)
+        {
+            if (c < 10)
+                return c * multipliers.hpLinearMultiplier;
+            else
+                return 100 * Mathf.Exp((c - 10) * multipliers.hpExp) + multipliers.hpExpMultiplier * (c - 10);
+        }
         else
-            return 100 * Mathf.Exp((c - 10) * multipliers.hpExp) + multipliers.hpExpMultiplier * (c - 10);
+            return c * multipliers.hpLinearMultiplier;
     }
 
     public float GetMaxStamina(int l)
@@ -104,12 +109,12 @@ public class PrimaryStats
 
     public float GetStaminaRegen()
     {
-        return Mathf.Floor(endurance / 3) * 6;
+        return Mathf.Floor(endurance / 3) * 5;
     }
 
     public float GetArmor()
     {
-        return (constitution - 10) / 2 * 5; 
+        return (constitution - 10) / 2 * 5;
     }
 
     public void Load(SavedPrimaryStats saved)

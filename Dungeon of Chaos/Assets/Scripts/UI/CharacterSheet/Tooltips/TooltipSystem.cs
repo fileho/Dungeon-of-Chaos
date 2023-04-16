@@ -47,7 +47,9 @@ public class TooltipSystem : MonoBehaviour
 
     public void HideSimpleTooltip()
     {
-        simpleTooltip.gameObject.SetActive(false);
+        if (simpleTooltip == null)
+            return;
+        simpleTooltip?.gameObject?.SetActive(false);
     }
 
     private IEnumerator TweenSimpleTooltip(float duration)

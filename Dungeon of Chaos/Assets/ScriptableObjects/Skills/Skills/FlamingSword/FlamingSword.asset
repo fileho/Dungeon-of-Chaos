@@ -15,11 +15,11 @@ MonoBehaviour:
   skillData:
     name: Flaming Sword
     description: Sets the sword on fire for {0} seconds. During that time every hit
-      has increased damage by {1} and applies burn on the target which deals {2}
-      damage.
+      has increased damage by {1} ({2}*spell power) and applies burn on the target
+      which deals {3} ({4}*spell power) damage.
     icon: {fileID: 21300000, guid: 4b5c3887b0bad8548a4414947f05a7ba, type: 3}
   cooldown: 15
-  manaCost: 20
-  staminaCost: 20
+  manaCost: 15
+  staminaCost: 15
   effects:
   - {fileID: 11400000, guid: 349c44059997f094e87b08de6aa6ac73, type: 2}

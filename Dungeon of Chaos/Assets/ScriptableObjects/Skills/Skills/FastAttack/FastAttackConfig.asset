@@ -20,11 +20,12 @@ MonoBehaviour:
   damageWeight: 1
   staminaCostWeight: 1
   manaCostWeight: 1
-  cooldown: 0
+  cooldown: 1
   attackAnimationDuration: 0.4
   indicator: {fileID: 0}
   indicatorConfiguration: {fileID: 0}
   type: 1
+  attackEffect: {fileID: 0}
   swingSFX:
     soundCategory: 2
     sound: 1

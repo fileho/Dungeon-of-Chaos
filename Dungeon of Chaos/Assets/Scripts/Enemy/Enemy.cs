@@ -1,209 +1,228 @@
 using UnityEngine;
-using static UnityEngine.GraphicsBuffer;
-using UnityEngine.SocialPlatforms;
 using System.Collections.Generic;
 using System.Linq;
 
-[RequireComponent(typeof(AttackManager))]
-public class Enemy : Unit
-{
-    private const float CHASE_HEAT = 3f;
-    private const float RAYCAST_TIME_INTERVAL = 1f;
+[RequireComponent (typeof (AttackManager))]
+public class Enemy : Unit {
+	private const float CHASE_HEAT = 3f;
+	private const float ATTACKED_HEAT = 3f;
+	private const float RAYCAST_TIME_INTERVAL = 1f;
 
-    private enum State
-    {
-        Idle,
-        Patrol,
-        Chase,
-        Attack,
-    }
+	private enum State {
+		Idle,
+		Chase,
+		Attack,
+	}
 
-    [SerializeField] private ILoot loot;
-    public LootModifiers lootModifiers;
-    private AttackManager attackManager;
-    private IAttack currentAttack;
-    private State state;
-    private Animator animator;
-    private Rigidbody2D rb;
-
-    [Header("Enemy Ambient")]
-    [SerializeField] private float maxDistance;
-    [SerializeField] private SoundSettings ambientSFX;
-    private const float minFrequency = 2f;
-    private const float maxFrequency = 5.5f;
-    private float frequency = 0f;
-    private float time = 0f;
+	[SerializeField]
+	private ILoot loot;
+	public LootModifiers lootModifiers;
+	private AttackManager attackManager;
+	private IAttack currentAttack;
+	private State state;
+	private Animator animator;
+	private Rigidbody2D rb;
+	private float cooldownLeft = 0f;
 
 
-    protected override void Init()
-    {
-        loot = Instantiate(loot).Init(this);
-        lootModifiers = Instantiate(lootModifiers);
-        Target = Character.instance;
-        state = State.Patrol;
-        attackManager = GetComponent<AttackManager>();
-        animator = GetComponent<Animator>();
-        rb = transform.GetComponent<Rigidbody2D>();
-    }
-
-    private float lastLosTime = Mathf.NegativeInfinity;
-    private float lastRayCastCheck = 0f;
-
-    private bool IsTargetInChaseRange()
-    {
-        //Vector2 direction = transform.lossyScale.x > 0 ? -transform.right : transform.right;
-        Vector2 direction = GetTargetDirection();
-
-        bool playerHit = false;
-
-        if (Time.time - lastRayCastCheck > RAYCAST_TIME_INTERVAL)
-        {
-            for (int i = 0; i < 10; i++)
-            {
-                Vector2 dir = Quaternion.AngleAxis((-5 + (1 * i)), Vector3.forward) * direction;
-                RaycastHit2D hit = Physics2D.Linecast(transform.position, (Vector2)transform.position + (dir * stats.ChaseDistance()), ~(1 << LayerMask.NameToLayer("Enemy")));
-
-                //Debug.DrawLine(transform.position, (Vector2)transform.position + (dir * stats.ChaseDistance()), Color.red, 0.1f);
-
-                if (hit.collider && hit.collider.CompareTag("Player"))
-                {
-                    playerHit = true;
-                    lastLosTime = Time.time;
-                    break;
-                }
-            }
-            lastRayCastCheck = Time.time;
-        }
-        return playerHit || (!playerHit && Time.time - lastLosTime < CHASE_HEAT);
-    }
-
-    private void FixedUpdate()
-    {
-        animator.SetBool("isMoving", rb.velocity.magnitude > 0.01f);
-        SwitchEnemyStates();
-        if (ShouldPlaySound())
-            PlayAmbientSound();
-    }
+	[Header ("Enemy Ambient")]
+	[SerializeField]
+	private float maxDistance;
+	[SerializeField]
+	private SoundSettings ambientSFX;
+	private float minFrequency = 3.5f;
+	private float maxFrequency = 6.5f;
+	private float frequency = 0f;
+	private float time = 0f;
 
 
-    private bool IsAttacking()
-    {
-        return currentAttack != null && currentAttack.IsAttacking();
-    }
+	private void OnEnable ()
+	{
+		unitHit += OnEnemyHit;
+	}
 
+	private void OnDisable ()
+	{
+		unitHit -= OnEnemyHit;
+	}
 
-    private void RotateWeapon()
-    {
-        if (weapon != null)
-        {
-            weapon.RotateWeapon(GetTargetPosition());
-        }
-    }
+	private void OnEnemyHit ()
+	{
+		lastAttackedTime = Time.time;
+	}
 
+	protected override void Init ()
+	{
+		loot = Instantiate (loot).Init (this);
+		lootModifiers = Instantiate (lootModifiers);
+		Target = Character.instance;
+		state = State.Idle;
+		attackManager = GetComponent<AttackManager> ();
+		animator = GetComponent<Animator> ();
+		rb = transform.GetComponent<Rigidbody2D> ();
+		minFrequency = SoundManager.instance.GetSoundLenght (ambientSFX) + 1;
+		maxFrequency = minFrequency * 3;
+	}
 
-    private void ResetWeapon()
-    {
-        if (weapon != null)
-        {
-            weapon.ResetWeapon();
-        }
-    }
+	private float lastLosTime = Mathf.NegativeInfinity;
+	private float lastAttackedTime = Mathf.NegativeInfinity;
+	private float lastRayCastCheck = 0f;
 
+	private bool IsTargetInChaseRange ()
+	{
+		Vector2 direction = GetTargetDirection ();
 
-    private void FlipSprite()
-    {
-        Vector2 dir = GetTargetDirection();
+		bool playerHit = false;
 
-        if (dir.x > 0.01f)
-            transform.localScale = new Vector3(-1, 1, 1);
-        else if (dir.x < -0.01f)
-            transform.localScale = Vector3.one;
-    }
+		if (Time.time - lastRayCastCheck > RAYCAST_TIME_INTERVAL) {
+			for (int i = 0; i < 10; i++) {
+				Vector2 dir = Quaternion.AngleAxis ((-5 + (1 * i)), Vector3.forward) * direction;
+				RaycastHit2D hit =
+					Physics2D.Linecast (transform.position, (Vector2)transform.position + (dir * stats.ChaseDistance ()),
+									   ~(1 << LayerMask.NameToLayer ("Enemy")));
 
-    private bool Attack()
-    {
-        if (!IsTargetInChaseRange() || IsAttacking()) return true;
-        currentAttack = attackManager.GetBestAvailableAttack();
-        FlipSprite();
-        RotateWeapon();
-        if (currentAttack != null)
-        {
-            state = State.Attack;
-            currentAttack.Attack();
-            return true;
-        }
-        return false;
-    }
+				if (hit.collider && hit.collider.CompareTag ("Player")) {
+					playerHit = true;
+					lastLosTime = Time.time;
+					break;
+				}
+			}
+			lastRayCastCheck = Time.time;
+		}
+		return playerHit || (Time.time - lastLosTime < CHASE_HEAT) || (Time.time - lastAttackedTime < ATTACKED_HEAT);
+	}
 
-    private void Move()
-    {
-        movement.Move();
-    }
+	private void FixedUpdate ()
+	{
+		animator.SetBool ("isMoving", rb.velocity.magnitude > 0.01f);
+		SwitchEnemyStates ();
+		if (ShouldPlaySound ())
+			PlayAmbientSound ();
+	}
 
-    private bool Chase()
-    {
-        if (IsTargetInChaseRange())
-        {
-            state = State.Chase;
+	private bool IsAttacking ()
+	{
+		return currentAttack != null && currentAttack.IsAttacking ();
+	}
 
-            if (GetTargetDistance() >= attackManager.GetMinimumAttackRange())
-            {
-                Move();
-            }
-            FlipSprite();
-            RotateWeapon();
-            return true;
-        }
-        return false;
-    }
+	private void RotateWeapon ()
+	{
+		if (weapon != null) {
+			weapon.RotateWeapon (GetTargetPosition ());
+		}
+	}
 
+	private void ResetWeapon ()
+	{
+		if (weapon != null) {
+			weapon.ResetWeapon ();
+		}
+	}
 
-    private bool Patrol()
-    {
-        //TODO: Write the patrol logic
-        state = State.Patrol;
-        ResetWeapon();
-        return false;
-    }
+	private void FlipSprite ()
+	{
+		Vector2 dir = GetTargetDirection ();
 
-    private void SwitchEnemyStates()
-    {
-        if (dead) return;
-        if (Attack()) { }
-        else if (Chase()) { }
-        else Patrol();
-        //print("Test: " + state.ToString());
-    }
+		if (dir.x > 0.01f)
+			transform.localScale = new Vector3 (-1, 1, 1);
+		else if (dir.x < -0.01f)
+			transform.localScale = Vector3.one;
+	}
 
+	private bool Attack ()
+	{
+		if (IsAttacking ())
+			return true;
 
-    public bool IsAwake()
-    {
-        return state == State.Attack || state == State.Chase;
-    }
+		currentAttack = attackManager.GetBestAvailableAttack ();
+		FlipSprite ();
+		RotateWeapon ();
+		if (currentAttack != null && cooldownLeft <= 0) {
+			state = State.Attack;
+			currentAttack.Attack ();
+			cooldownLeft = Random.Range (0.25f, 0.75f);
+			return true;
+		}
+		return false;
+	}
 
+	private void Move ()
+	{
+		movement.Move ();
+	}
 
-    protected override void CleanUp()
-    {
-        loot.Drop();
-        Destroy(transform.parent.gameObject);
-    }
+	private bool Chase ()
+	{
+		if (IsTargetInChaseRange ()) {
+			state = State.Chase;
 
-    private void PlayAmbientSound()
-    {
-        time = 0f;
-        frequency = Random.Range(minFrequency, maxFrequency);
+			if (GetTargetDistance () >= attackManager.GetMinimumAttackRange ()) {
+				Move ();
+			}
+			FlipSprite ();
+			RotateWeapon ();
+			return true;
+		}
+		return false;
+	}
 
-        float distance = Vector2.Distance(Character.instance.transform.position, transform.position);
-        if (distance > maxDistance)
-            return;
+	private void Idle ()
+	{
+		state = State.Idle;
+		ResetWeapon ();
+	}
 
-        ambientSFX.SetVolumeFromDistance(distance, maxDistance);
-        SoundManager.instance.PlaySound(ambientSFX);
-    }
+	private void SwitchEnemyStates ()
+	{
+		if (dead)
+			return;
+		if (Attack ()) {
+		} else if (Chase ()) {
+		} else {
+			Idle ();
+		}
+	}
 
-    private bool ShouldPlaySound()
-    {
-        time += Time.deltaTime;
-        return time >= frequency;
-    }
+	public bool IsAwake ()
+	{
+		return state == State.Attack || state == State.Chase;
+	}
+
+	protected override void CleanUp ()
+	{
+		loot.Drop ();
+		Destroy (transform.parent.gameObject);
+	}
+
+	private void PlayAmbientSound ()
+	{
+		time = 0f;
+		frequency = Random.Range (minFrequency, maxFrequency);
+
+		float distance = Vector2.Distance (Character.instance.transform.position, transform.position);
+		if (distance > maxDistance)
+			return;
+
+		ambientSFX.SetVolumeFromDistance (distance, maxDistance);
+		SoundManager.instance.PlaySound (ambientSFX);
+	}
+
+	private bool ShouldPlaySound ()
+	{
+		time += Time.deltaTime;
+		return time >= frequency;
+	}
+
+	protected override void Die ()
+	{
+		if (currentAttack != null)
+			currentAttack.StopAttackIfDead ();
+		base.Die ();
+	}
+
+	private void Update ()
+	{
+		if (!IsAttacking () && cooldownLeft > 0)
+			cooldownLeft -= Time.deltaTime;
+	}
 }

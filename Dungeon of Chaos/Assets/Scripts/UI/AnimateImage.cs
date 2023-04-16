@@ -17,7 +17,7 @@ public class AnimateImage : MonoBehaviour
     {
         time += Time.deltaTime;
 
-        float t = Mathf.Sin(time * 8) * 0.5f + 0.5f;
+        float t = Mathf.Sin(time * 0.1f) * 0.5f + 0.5f;
         image.color = Color.Lerp(Color.white, new Color(.9f, 0.9f, 0.9f), t);
     }
 }

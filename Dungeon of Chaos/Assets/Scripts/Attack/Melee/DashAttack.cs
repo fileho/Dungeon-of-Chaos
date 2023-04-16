@@ -1,11 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using static UnityEngine.Rendering.DebugUI.Table;
 
 public class DashAttack : MeleeAttack
 {
-
     protected override void PrepareWeapon()
     {
         base.PrepareWeapon();
@@ -21,7 +19,6 @@ public class DashAttack : MeleeAttack
     // Ideal attack duration = 1
     protected override IEnumerator StartAttackAnimation()
     {
-
         Vector2 ownerPos = owner.transform.position;
         Vector3 targetDirection = (GetTargetPosition() - ownerPos).normalized;
 
@@ -33,7 +30,6 @@ public class DashAttack : MeleeAttack
             indicator.Use();
             yield return new WaitForSeconds(indicator.Duration);
         }
-
         PrepareWeapon();
 
         float time = 0;
@@ -48,10 +44,6 @@ public class DashAttack : MeleeAttack
         }
 
         yield return new WaitForSeconds(0.3f);
-        // SoundManager.instance.PlaySound(swingSFX);
-
-        // Reset
-        // owner.transform.position = ownerPos;
 
         ResetWeapon();
         isAttacking = false;

@@ -3,7 +3,6 @@ using UnityEngine;
 
 public class RangedIndicator : IIndicator
 {
-
     private Vector2 initialScale;
     private Vector2 finalScale;
 

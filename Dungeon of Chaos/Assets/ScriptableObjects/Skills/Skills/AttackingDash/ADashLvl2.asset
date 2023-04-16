@@ -14,15 +14,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   skillData:
     name: Attacking Dash
-    description: Allows the player to dash. The dash deals {0} damage and pushes
-      the enemy back.
+    description: Allows the player to dash. The dash deals {0} ({1}*damage) damage
+      and pushes the enemy back.
     icon: {fileID: 21300000, guid: d964aa84a7441424c9c0b351b7abeda5, type: 3}
   cooldown: 1
   manaCost: 0
-  staminaCost: 60
+  staminaCost: 35
   effects:
   - {fileID: 11400000, guid: 126e641a57eca0d45bea055de98252fc, type: 2}
   - {fileID: 11400000, guid: e82e76d6209e0024a88a4920c474661c, type: 2}
   dash: {fileID: 11400000, guid: f362aadcfb4d0784ab39c05ed9347fca, type: 2}
-  dashSpeed: 15
+  dashSpeed: 18
   trailColor: {r: 1, g: 0.13725491, b: 0, a: 1}

@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2385b2117c6f14bbead5e01e7518b5f3, type: 3}
   m_Name: Tou-Lich King-Heal
   m_EditorClassIdentifier: 
-  duration: 5
+  duration: 1
   range: 10
   factor: 0.23

@@ -16,7 +16,7 @@ public class ISecondaryAttack : IActiveSkill
         float dmg = attackConfiguration.type == SkillEffectType.physical
             ? Character.instance.stats.GetPhysicalDamage() * attackConfiguration.damage
             : Character.instance.stats.GetSpellPower() * attackConfiguration.damage;
-        string s = String.Format(skillData.GetDescription(), dmg.ToString());
+        string s = String.Format(skillData.GetDescription(), dmg.ToString(), attackConfiguration.damage.ToString());
         return s;        
     }
 
@@ -27,19 +27,15 @@ public class ISecondaryAttack : IActiveSkill
 
         if (!CanUse(unit.stats))
         {
-            Debug.Log("Cooldown Left: " + cooldownLeft);
             return;
         }
         if (secondaryAttack.IsAttacking() || Character.instance.IsAttacking())
         {
-            Debug.Log("Already attacking");
             return;
         }
 
         cooldownLeft = cooldown;
         Consume(unit.stats);
-
-        Debug.Log("Attack!");
 
         secondaryAttack.Attack();
     }

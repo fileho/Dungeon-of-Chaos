@@ -32,11 +32,6 @@ public abstract class IProjectile : MonoBehaviour
         return attack.GetTarget();
     }
 
-    protected Vector2 GetTargetPosition()
-    {
-        return attack.GetTargetPosition();
-    }
-
     protected virtual void ApplyConfigurations()
     {
         speed = projectileConfiguration.speed;

@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
@@ -19,7 +17,7 @@ public class ChangeStatButton : MonoBehaviour, IPointerEnterHandler, IPointerExi
     [SerializeField] private UnityEvent changeStat;
     [SerializeField] private Stat stat;
 
-    [SerializeField] private Color idle;
+    [SerializeField] public Color idle;
     [SerializeField] private Color hover;
     [SerializeField] private Color selected;
 

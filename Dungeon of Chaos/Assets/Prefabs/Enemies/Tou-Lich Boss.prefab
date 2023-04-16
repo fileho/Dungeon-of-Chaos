@@ -282,7 +282,7 @@ MonoBehaviour:
     pitch: 1
     priority: 0
   loot: {fileID: 11400000, guid: 417bba6363d3c0e47884167da49313b1, type: 2}
-  lootModifiers: {fileID: 11400000, guid: 35780333c3ddf16479422c4965e1b2c2, type: 2}
+  lootModifiers: {fileID: 11400000, guid: 54be39060d6909b4983736398e32d996, type: 2}
   maxDistance: 80
   ambientSFX:
     soundCategory: 1
@@ -392,7 +392,7 @@ CapsuleCollider2D:
   m_GameObject: {fileID: 1419886182394290244}
   m_Enabled: 1
   m_Density: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: e52415169301bb442903eb50ee01822b, type: 2}
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0

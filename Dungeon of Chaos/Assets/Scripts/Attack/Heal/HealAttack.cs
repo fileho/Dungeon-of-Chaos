@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class HealAttack : IAttack
 {
-
     protected float healAmount = 2;
     protected float healRadius = 10;
 
@@ -16,7 +15,6 @@ public class HealAttack : IAttack
         healRadius = _attackConfiguration.healRadius;
     }
 
-
     protected override IEnumerator StartAttackAnimation()
     {
         IIndicator indicator = CreateIndicator(transform);
@@ -27,17 +25,15 @@ public class HealAttack : IAttack
             yield return null;
         }
 
-        //SoundManager.instance.PlaySound(swingSFX);
-
         Heal();
         yield return new WaitForSeconds(indicator.Duration);
         isAttacking = false;
     }
 
-
     private void Heal()
     {
-        Collider2D[] colliders = Physics2D.OverlapCircleAll(owner.transform.position, healRadius, 1 << LayerMask.NameToLayer("Enemy"));
+        Collider2D[] colliders =
+            Physics2D.OverlapCircleAll(owner.transform.position, healRadius, 1 << LayerMask.NameToLayer("Enemy"));
         if (colliders.Length > 0)
         {
             for (int i = 0; i < colliders.Length; i++)
@@ -49,10 +45,5 @@ public class HealAttack : IAttack
                 }
             }
         }
-    }
-
-    public override string ToString()
-    {
-        return base.ToString() + "_Ranged";
     }
 }

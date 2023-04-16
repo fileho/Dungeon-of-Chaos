@@ -2,6 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// HP, mana, stamina
+/// </summary>
 public class RegenerableStat
 {
     public float maxValue;

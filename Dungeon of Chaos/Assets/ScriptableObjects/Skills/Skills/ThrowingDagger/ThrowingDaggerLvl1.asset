@@ -14,10 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   skillData:
     name: Throwing Dagger
-    description: Throws a dagger which deals {0} damage.
+    description: Throws a dagger which deals {0} ({1}*damage) damage.
     icon: {fileID: 21300000, guid: 912f2333824ee3946814a450e92ab11a, type: 3}
-  cooldown: 5
+  cooldown: 8
   manaCost: 0
-  staminaCost: 45
+  staminaCost: 30
   effects:
   - {fileID: 11400000, guid: 9290ca00097828b4ba7b2476ef06dd36, type: 2}

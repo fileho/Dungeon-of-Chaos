@@ -15,13 +15,13 @@ MonoBehaviour:
   target: {fileID: 11400000, guid: c562b796c0bf8db4b823a7b0d5e0a5db, type: 2}
   range: 0
   angle: 360
-  vfx: {fileID: 3440211394499801297, guid: 4f26aa18ace843d46835c34a16789dad, type: 3}
+  vfx: {fileID: 189512, guid: 164fd1aac44965d42bfdb690e254533b, type: 3}
   sfx:
     soundCategory: 3
     sound: 15
     volume: 1
     pitch: 1
     priority: 0
-  duration: 1
+  duration: 0.75
   effects:
   - {fileID: 11400000, guid: 5b5dc518c0dfb7e42bf2630d918aad54, type: 2}

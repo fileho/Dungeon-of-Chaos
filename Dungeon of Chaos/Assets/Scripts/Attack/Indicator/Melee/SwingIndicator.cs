@@ -2,19 +2,23 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SwingIndicator : MeleeIndicator {
+public class SwingIndicator : MeleeIndicator
+{
     private float sweep;
 
-    protected override void ApplyConfigurations(IndicatorConfiguration indicatorConfiguration) {
+    protected override void ApplyConfigurations(IndicatorConfiguration indicatorConfiguration)
+    {
         base.ApplyConfigurations(indicatorConfiguration);
         SwingIndicatorConfiguration _indicatorConfiguration = indicatorConfiguration as SwingIndicatorConfiguration;
         sweep = _indicatorConfiguration.sweep;
         sprite.material = new Material(sprite.material);
     }
 
-    protected override IEnumerator ShowIndicator() {
+    protected override IEnumerator ShowIndicator()
+    {
         float time = 0f;
-        while (time < 1) {
+        while (time < 1)
+        {
             time += (Time.deltaTime / Duration);
             float currentState = Tweens.EaseOutExponential(time);
             float currentValue = Mathf.Lerp(0, sweep, currentState);
@@ -28,5 +32,4 @@ public class SwingIndicator : MeleeIndicator {
         yield return new WaitForSeconds(0.1f);
         CleanUp();
     }
-
 }

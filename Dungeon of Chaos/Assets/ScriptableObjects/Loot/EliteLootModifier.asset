@@ -16,6 +16,6 @@ MonoBehaviour:
   baseXP: 10
   essenceChance: 35
   manaEssenceChanceMultiplier: 1.2
-  healthEssence: 40
+  healthEssence: 25
   staminaEssence: 25
-  manaEssence: 40
+  manaEssence: 25

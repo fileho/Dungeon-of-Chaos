@@ -12,8 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9838b9745913b47a5b8f3ea98c04fd74, type: 3}
   m_Name: Dp-Electric Elemental-Ranged
   m_EditorClassIdentifier: 
-  duration: 0.6
+  duration: 0.65
   color: {r: 0, g: 1, b: 1, a: 1}
-  scale: 1
   initialScale: {x: 0, y: 0}
   finalScale: {x: 0.5, y: 0.5}

@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SocialPlatforms;
 
 public class SpecialIndicator : IIndicator
 {
@@ -9,7 +8,9 @@ public class SpecialIndicator : IIndicator
 
     // To make the radius of the effect equal to the range
     private float factor;
-    protected override void InitSprites() { }
+    protected override void InitSprites()
+    {
+    }
 
     protected override void ApplyConfigurations(IndicatorConfiguration indicatorConfiguration)
     {
@@ -30,9 +31,8 @@ public class SpecialIndicator : IIndicator
             transform.localScale = Vector3.one * currentValue;
             yield return null;
         }
-        transform.localScale = Vector3.one * range * factor;
+        transform.localScale = range * factor * Vector3.one;
         yield return new WaitForSeconds(0.1f);
         CleanUp();
     }
-
 }

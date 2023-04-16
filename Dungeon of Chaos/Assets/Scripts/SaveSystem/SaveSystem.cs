@@ -11,6 +11,7 @@ public class SaveSystem : MonoBehaviour
 {
     public SaveData SaveData { get; private set; }
     public DungeonData DungeonData { get; private set; }
+    public TutorialData TutorialData { get; private set; }
 
     [SerializeField]
     [NotNull]
@@ -25,6 +26,7 @@ public class SaveSystem : MonoBehaviour
 
     private void Start()
     {
+        TutorialData = new TutorialData();
         character = FindObjectOfType<Character>();
     }
 
@@ -35,8 +37,8 @@ public class SaveSystem : MonoBehaviour
     {
         int dungeon = SaveData.dungeonData.dungeon + 1 - SceneOffset;
         var charPos = defaultCharacterPositions.positions[dungeon];
-        SaveData = new SaveData(
-            new SaveAttributes(charPos, character.stats, character.SkillSystem, new DungeonData(dungeon + 1)));
+        SaveData = new SaveData(new SaveAttributes(charPos, character.stats, character.SkillSystem,
+                                                   new DungeonData(dungeon + 1), TutorialData));
 
         Save();
     }
@@ -46,8 +48,8 @@ public class SaveSystem : MonoBehaviour
     /// </summary>
     public void SaveProgress()
     {
-        SaveData = new SaveData(
-            new SaveAttributes(character.transform.position, character.stats, character.SkillSystem, DungeonData));
+        SaveData = new SaveData(new SaveAttributes(character.transform.position, character.stats, character.SkillSystem,
+                                                   DungeonData, TutorialData));
         Save();
     }
 
@@ -64,6 +66,7 @@ public class SaveSystem : MonoBehaviour
 
         Assert.IsNotNull(SaveData);
         DungeonData = SaveData.dungeonData;
+        TutorialData = SaveData.TutorialData;
 
         // Save slot screen, we don't want to load character data
         if (character == null)
@@ -99,7 +102,7 @@ public class SaveSystem : MonoBehaviour
         {
             // Default save
             return new SaveData(new SaveAttributes(defaultCharacterPositions.positions[0], character.stats,
-                                                   character.SkillSystem, new DungeonData()));
+                                                   character.SkillSystem, new DungeonData(), new TutorialData()));
         }
 
         var formatter = new BinaryFormatter();

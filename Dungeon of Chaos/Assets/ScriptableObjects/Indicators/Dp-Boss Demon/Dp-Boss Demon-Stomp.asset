@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3e063d76235dc41a3b4232a63c3735b8, type: 3}
   m_Name: Dp-Boss Demon-Stomp
   m_EditorClassIdentifier: 
-  duration: 0.7
+  duration: 0.75
   color: {r: 0.92941177, g: 1, b: 0, a: 1}
   scale: 4
   secondarySpriteColor: {r: 0.92941177, g: 1, b: 0, a: 1}

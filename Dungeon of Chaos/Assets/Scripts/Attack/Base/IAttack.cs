@@ -1,228 +1,229 @@
 using System.Collections;
 using UnityEngine;
-using static UnityEngine.GraphicsBuffer;
 
-[RequireComponent(typeof(Weapon))]
-public abstract class IAttack : MonoBehaviour
-{
+[RequireComponent (typeof (Weapon))]
+public abstract class IAttack : MonoBehaviour {
+	[SerializeField]
+	protected AttackConfiguration attackConfiguration;
 
-    [SerializeField]
-    protected AttackConfiguration attackConfiguration;
+	public Weapon Weapon { get; private set; }
 
-    public Weapon Weapon { get; private set; }
+	// The distance from the unit at which the attack can be used
+	protected float range;
+	// Damage dealt by the attack
+	protected float damage;
+	// The stamina cost of the attack
+	protected float staminaCost;
+	// The mana cost of the attack
+	protected float manaCost;
 
-    // The distance from the unit at which the attack can be used
-    protected float range;
-    // Damage dealt by the attack
-    protected float damage;
-    // The stamina cost of the attack
-    protected float staminaCost;
-    // The mana cost of the attack
-    protected float manaCost;
+	// Weights of the respective parameters to calculate priority
+	protected float rangeWeight;
+	protected float damageWeight;
+	protected float staminaCostWeight;
+	protected float manaCostWeight;
 
-    // Weights of the respective parameters to calculate priority
-    protected float rangeWeight;
-    protected float damageWeight;
-    protected float staminaCostWeight;
-    protected float manaCostWeight;
+	// Time after which the attack can be used again
+	protected float cooldown;
+	// The type (physical/magical) of the attack
+	protected SkillEffectType type;
 
-    // Time after which the attack can be used again
-    protected float cooldown;
-    // The type (physical/magical) of the attack
-    protected SkillEffectType type;
+	// The effect (such as burn or poison) the attack applies
+	protected ISkillEffect attackEffect;
 
-    // The effect (such as burn or poison) the attack applies
-    protected ISkillEffect attackEffect;
+	protected SoundSettings attackSFX;
+	protected SoundSettings impactSFX;
+	// The duration of the attack animation
+	public float AttackAnimationDuration { get; private set; }
 
-    protected SoundSettings swingSFX;
-    protected SoundSettings impactSFX;
-    // The duration of the attack animation
-    public float AttackAnimationDuration { get; private set; }
+	protected float cooldownLeft = 0f;
+	protected bool isAttacking = false;
 
-    protected float cooldownLeft = 0f;
-    protected bool isAttacking = false;
-    protected bool isEnemyInRange = false;
-    public Vector3 IndicatorLocalPosition { get; protected set; } = Vector3.zero;
+	protected Unit owner;
+	protected Rigidbody2D ownerRB;
+	protected GameObject indicatorPrefab;
+	protected IIndicator indicator;
 
-    protected Unit owner;
-    protected Rigidbody2D ownerRB;
-    protected GameObject indicatorPrefab;
-    protected IIndicator indicator;
+	protected IndicatorConfiguration indicatorConfiguration;
 
-    protected Vector3 weaponOriginalPosition;
-    protected Vector3 weaponAssetOriginalPosition;
-    protected Quaternion weaponOriginalRotation;
-    protected Quaternion weaponAssetOriginalRotation;
-    protected IndicatorConfiguration indicatorConfiguration;
+	private Coroutine attackCoroutine;
 
-    public virtual void Attack()
-    {
-        if (isAttacking)
-            return;
+	public virtual void Attack ()
+	{
+		if (isAttacking)
+			return;
 
-        isAttacking = true;
-        cooldownLeft = cooldown;
-        StartCoroutine(StartAttackAnimation());
-    }
+		isAttacking = true;
+		cooldownLeft = cooldown;
+		attackCoroutine = StartCoroutine (StartAttackAnimation ());
+	}
 
-    protected abstract IEnumerator StartAttackAnimation();
+	public void StopAttackIfDead ()
+	{
+		if (attackCoroutine != null)
+			StopCoroutine (attackCoroutine);
 
-    public virtual bool CanAttack()
-    {
-        return (IsTargetInAttackRange() && !isAttacking && cooldownLeft <= 0);
-    }
+		isAttacking = false;
+	}
 
-    public float GetAttackRange()
-    {
-        return range;
-    }
+	protected abstract IEnumerator StartAttackAnimation ();
 
-    public float GetAttackRangeWeighted()
-    {
-        return GetAttackRange() * rangeWeight;
-    }
+	public virtual bool CanAttack ()
+	{
+		return (IsTargetInAttackRange () && !isAttacking && cooldownLeft <= 0);
+	}
 
-    private bool IsTargetInAttackRange()
-    {
-        return owner.GetTargetDistance() <= GetAttackRange();
-    }
+	public float GetAttackRange ()
+	{
+		return range;
+	}
 
-    public float GetDamage()
-    {
-        if (owner == null)
-            return 0;
+	public float GetAttackRangeWeighted ()
+	{
+		return GetAttackRange () * rangeWeight;
+	}
 
-        return type == SkillEffectType.physical ? damage * owner.stats.GetPhysicalDamage()
-                                                : damage * owner.stats.GetSpellPower();
-    }
+	private bool IsTargetInAttackRange ()
+	{
+		return owner.GetTargetDistance () <= GetAttackRange ();
+	}
 
-    public float GetDamageWeighted()
-    {
-        return GetDamage() * damageWeight;
-    }
+	public float GetDamage ()
+	{
+		if (owner == null)
+			return 0;
 
-    public float GetCoolDownTime()
-    {
-        return cooldown;
-    }
+		return type == SkillEffectType.physical ? damage * owner.stats.GetPhysicalDamage ()
+												: damage * owner.stats.GetSpellPower ();
+	}
 
-    public bool IsAttacking()
-    {
-        return isAttacking;
-    }
+	public float GetDamageWeighted ()
+	{
+		return GetDamage () * damageWeight;
+	}
 
-    public float GetStaminaCost()
-    {
-        return staminaCost;
-    }
+	public float GetCoolDownTime ()
+	{
+		return cooldown;
+	}
 
-    public float GetStaminaCostWeighted()
-    {
-        return GetStaminaCost() * staminaCostWeight;
-    }
+	public bool IsAttacking ()
+	{
+		return isAttacking;
+	}
 
-    public float GetManaCost()
-    {
-        return manaCost;
-    }
+	public float GetStaminaCost ()
+	{
+		return staminaCost;
+	}
 
-    public float GetManaCostWeighted()
-    {
-        return GetManaCost() * manaCostWeight;
-    }
+	public float GetStaminaCostWeighted ()
+	{
+		return GetStaminaCost () * staminaCostWeight;
+	}
 
-    public float GetCost()
-    {
-        return GetStaminaCostWeighted() + GetManaCostWeighted();
-    }
+	public float GetManaCost ()
+	{
+		return manaCost;
+	}
 
-    public Unit GetTarget()
-    {
-        return owner.Target;
-    }
+	public float GetManaCostWeighted ()
+	{
+		return GetManaCost () * manaCostWeight;
+	}
 
-    public Vector2 GetTargetPosition()
-    {
-        if (owner == Character.instance)
-            return owner.GetTargetPosition();
-        return owner.GetTargetPosition() + Random.insideUnitCircle * 3;
-    }
+	public float GetCost ()
+	{
+		return GetStaminaCostWeighted () + GetManaCostWeighted ();
+	}
 
-    protected virtual IIndicator CreateIndicator(Transform parent = null)
-    {
-        if (indicatorPrefab == null)
-            return null;
+	public Unit GetTarget ()
+	{
+		return owner.Target;
+	}
 
-        if (parent == null)
-            parent = transform.parent;
+	public Vector2 GetTargetPosition ()
+	{
+		if (owner == Character.instance)
+			return owner.GetTargetPosition ();
+		return owner.GetTargetPosition () + Random.insideUnitCircle * 3;
+	}
 
-        GameObject _indicator = Instantiate(indicatorPrefab, parent);
-        IIndicator indicator = _indicator.GetComponent<IIndicator>();
-        indicator.Init(indicatorConfiguration);
-        return indicator;
-    }
+	protected virtual IIndicator CreateIndicator (Transform parent = null)
+	{
+		if (indicatorPrefab == null)
+			return null;
 
-    protected virtual void PrepareWeapon()
-    {
-        Weapon.SetDamage(GetDamage());
-        if (owner.gameObject.tag != "Player")
-            Weapon.SetEffect(attackEffect);
-        Weapon.SetImpactSound(impactSFX);
-        Weapon.ResetHitUnits();
-        Weapon.EnableDisableTrail(true);
-    }
+		if (parent == null)
+			parent = transform.parent;
 
-    protected virtual void ResetWeapon()
-    {
-        Weapon.EnableDisableTrail(false);
-    }
+		GameObject _indicator = Instantiate (indicatorPrefab, parent);
+		IIndicator indicator = _indicator.GetComponent<IIndicator> ();
+		indicator.Init (indicatorConfiguration);
+		return indicator;
+	}
 
-    protected virtual void ApplyConfigurations()
-    {
-        range = attackConfiguration.range;
-        damage = attackConfiguration.damage;
-        staminaCost = attackConfiguration.staminaCost;
-        manaCost = attackConfiguration.manaCost;
+	protected virtual void PrepareWeapon ()
+	{
+		Weapon.SetDamage (GetDamage ());
+		if (owner.gameObject.CompareTag ("Player"))
+			Weapon.SetEffect (attackEffect);
+		Weapon.SetImpactSound (impactSFX);
+		Weapon.ResetHitUnits ();
+		Weapon.EnableDisableTrail (true);
+	}
 
-        rangeWeight = attackConfiguration.rangeWeight;
-        damageWeight = attackConfiguration.damageWeight;
-        staminaCostWeight = attackConfiguration.staminaCostWeight;
-        manaCostWeight = attackConfiguration.manaCostWeight;
+	protected virtual void ResetWeapon ()
+	{
+		Weapon.EnableDisableTrail (false);
+	}
 
-        cooldown = attackConfiguration.cooldown;
-        indicatorPrefab = attackConfiguration.indicator;
-        indicatorConfiguration = attackConfiguration.indicatorConfiguration;
-        AttackAnimationDuration = attackConfiguration.attackAnimationDuration;
-        type = attackConfiguration.type;
-        attackEffect = attackConfiguration.attackEffect;
-        swingSFX = attackConfiguration.swingSFX;
-        impactSFX = attackConfiguration.impactSFX;
-    }
+	protected virtual void ApplyConfigurations ()
+	{
+		range = attackConfiguration.range;
+		damage = attackConfiguration.damage;
+		staminaCost = attackConfiguration.staminaCost;
+		manaCost = attackConfiguration.manaCost;
 
-    protected virtual void Awake()
-    {
-        if (attackConfiguration == null)
-            return;
-        Weapon = GetComponent<Weapon>();
-        owner = GetComponentInParent<Unit>();
-        ownerRB = owner.GetComponent<Rigidbody2D>();
-        ApplyConfigurations();
-    }
+		rangeWeight = attackConfiguration.rangeWeight;
+		damageWeight = attackConfiguration.damageWeight;
+		staminaCostWeight = attackConfiguration.staminaCostWeight;
+		manaCostWeight = attackConfiguration.manaCostWeight;
 
-    public IAttack Init(Unit owner, Weapon weapon, AttackConfiguration configuration)
-    {
-        this.owner = owner;
-        ownerRB = this.owner.GetComponent<Rigidbody2D>();
-        Weapon = weapon;
-        attackConfiguration = configuration;
-        ApplyConfigurations();
-        isAttacking = false;
-        return this;
-    }
+		cooldown = attackConfiguration.cooldown;
+		indicatorPrefab = attackConfiguration.indicator;
+		indicatorConfiguration = attackConfiguration.indicatorConfiguration;
+		AttackAnimationDuration = attackConfiguration.attackAnimationDuration;
+		type = attackConfiguration.type;
+		attackEffect = attackConfiguration.attackEffect;
+		attackSFX = attackConfiguration.swingSFX;
+		impactSFX = attackConfiguration.impactSFX;
+	}
 
-    protected virtual void Update()
-    {
-        if (!isAttacking && cooldownLeft > 0)
-            cooldownLeft -= Time.deltaTime;
-    }
+	protected virtual void Awake ()
+	{
+		if (attackConfiguration == null)
+			return;
+		Weapon = GetComponent<Weapon> ();
+		owner = GetComponentInParent<Unit> ();
+		ownerRB = owner.GetComponent<Rigidbody2D> ();
+		ApplyConfigurations ();
+	}
+
+	public IAttack Init (Unit owner, Weapon weapon, AttackConfiguration configuration)
+	{
+		this.owner = owner;
+		ownerRB = this.owner.GetComponent<Rigidbody2D> ();
+		Weapon = weapon;
+		attackConfiguration = configuration;
+		ApplyConfigurations ();
+		isAttacking = false;
+		return this;
+	}
+
+	protected virtual void Update ()
+	{
+		if (!isAttacking && cooldownLeft > 0)
+			cooldownLeft -= Time.deltaTime;
+	}
 }

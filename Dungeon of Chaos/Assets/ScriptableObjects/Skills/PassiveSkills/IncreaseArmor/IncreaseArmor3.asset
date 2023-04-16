@@ -16,4 +16,4 @@ MonoBehaviour:
     name: Shielded III
     description: Increases armor by {0}.
     icon: {fileID: 21300000, guid: 32bc153acb2b36f4bb5350da35a934d5, type: 3}
-  amount: 50
+  amount: 35
