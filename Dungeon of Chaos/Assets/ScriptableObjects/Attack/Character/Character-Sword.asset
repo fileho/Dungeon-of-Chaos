@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   range: 3.5
   damage: 1
-  staminaCost: 35
+  staminaCost: 20
   manaCost: 0
   rangeWeight: 1
   damageWeight: 1

@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c7862adca1b56944f82bba604ba0d4b9, type: 3}
   m_Name: PlayerStats
   m_EditorClassIdentifier: 
-  movementSpeed: 5.5
+  movementSpeed: 6
   chaseDistance: 0
-  staminaRegen: 10
+  staminaRegen: 7.5
   primaryStats:
     id: 0
   XP:
@@ -22,7 +22,7 @@ MonoBehaviour:
     baseMultiplier: 1.5
     baseXP: 100
     level: 1
-    statsPoints: 0
+    statsPoints: 1
     skillPoints: 0
   references:
     version: 1

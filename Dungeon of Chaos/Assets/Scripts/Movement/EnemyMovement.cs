@@ -1,7 +1,6 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using Pathfinding;
 using UnityEngine;
 
 [CreateAssetMenu(menuName = "SO/Movement/MeleeEnemy")]
@@ -9,10 +8,7 @@ public class EnemyMovement : IMovement
 {
     private AIAgent agent;
     private Rigidbody2D rb;
-    private Stats stats;
-    [Header("Steer")]
-    //[SerializeField] private float steerForce = 1f;
-    //[SerializeField] private float lookAheadDistance = 0.5f;
+
     [Header("Separation")]
     [SerializeField]
     private float separationForce = 1f;
@@ -31,7 +27,6 @@ public class EnemyMovement : IMovement
     private const int maxEvadeTargets = 5;
     [Header("Layers")]
     private Collider2D[] evadeEnemyHits = new Collider2D[maxEvadeTargets];
-    private RaycastHit2D[] steerWallHits = new RaycastHit2D[1];
     private Rigidbody2D targetRB;
 
     public Collider2D collider { get; private set; }
@@ -41,7 +36,6 @@ public class EnemyMovement : IMovement
         agent = transform.GetComponent<AIAgent>();
         rb = transform.GetComponent<Rigidbody2D>();
         targetRB = Character.instance.GetComponent<Rigidbody2D>();
-        this.stats = stats;
         collider = transform.GetComponent<Collider2D>();
         if (agent != null)
         {
@@ -54,6 +48,7 @@ public class EnemyMovement : IMovement
 
     public override void Move()
     {
+        // Uses the A* pathfinding
         agent.UpdatePath(targetRB.transform);
 
         Vector2 separation = Vector2.zero;

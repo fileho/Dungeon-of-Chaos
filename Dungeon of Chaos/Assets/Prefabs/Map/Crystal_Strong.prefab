@@ -156,3 +156,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hpBoost: 70
   manaBoost: 100
+  crystalPickupSFX:
+    soundCategory: 5
+    sound: 3
+    volume: 1
+    pitch: 1
+    priority: 0

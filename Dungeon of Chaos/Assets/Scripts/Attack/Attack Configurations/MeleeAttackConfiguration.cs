@@ -1,4 +1,5 @@
 using UnityEngine;
-public abstract class MeleeAttackConfiguration : AttackConfiguration {
 
+public abstract class MeleeAttackConfiguration : AttackConfiguration
+{
 }

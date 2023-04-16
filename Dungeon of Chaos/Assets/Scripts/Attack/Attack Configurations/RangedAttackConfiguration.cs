@@ -1,4 +1,3 @@
-
 using UnityEngine;
 
 [CreateAssetMenu(menuName = "SO/Attack/Ranged Attack Configuration")]

@@ -14,10 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   skillData:
     name: Spell Power Boost
-    description: Increases your spell power by {0} for the duration of {1}.
+    description: Increases your spell power by {0} ({1}*spell power) for the duration
+      of {2}.
     icon: {fileID: 21300000, guid: fb9bcc3943d1ca94497fd61e5e8c2fde, type: 3}
   cooldown: 5
-  manaCost: 15
+  manaCost: 20
   staminaCost: 0
   effects:
   - {fileID: 11400000, guid: e29c88cbacebb2046bb7494def3ed2af, type: 2}

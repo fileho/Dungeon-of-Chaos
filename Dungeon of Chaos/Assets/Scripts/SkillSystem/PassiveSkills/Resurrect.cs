@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 [CreateAssetMenu(menuName = "SO/Skills/SkillEffects/Resurrect")]
 public class Resurrect : ISkillEffect
@@ -7,7 +8,7 @@ public class Resurrect : ISkillEffect
     [SerializeField] private float value;
     public override string[] GetEffectsValues(Unit owner)
     {
-        return new string[] { GetValue(owner).ToString() };
+        return new string[] { Math.Round(GetValue(owner), 1).ToString() };
     }
 
     private float GetValue(Unit owner)

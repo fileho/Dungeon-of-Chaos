@@ -12,14 +12,8 @@ public enum TutorialState
     EnemyAttack,
     Checkpoint,
     MapUnlock,
+    Boss,
     Default = 999,
-}
-
-[System.SerializableAttribute]
-public struct Keys
-{
-    public string name;
-    public KeyCode[] KeyCodes;
 }
 
 public class TutorialManager : MonoBehaviour
@@ -27,24 +21,22 @@ public class TutorialManager : MonoBehaviour
     private GameObject bg;
     private Animator animator;
     private TutorialState currentState = TutorialState.Default;
-    private Coroutine coroutine;
     private GameObject currentTutorial;
-
-    public List<Keys> keys;
 
     private bool breakCorutine;
 
-    // Start is called before the first frame update
+    private SaveSystem saveSystem;
+
     void Start()
     {
         animator = GetComponent<Animator>();
+        saveSystem = FindObjectOfType<SaveSystem>();
         bg = transform.Find("BG").gameObject;
-        //    Show(TutorialState.Movement);
     }
 
     public void Show(TutorialState state)
     {
-        coroutine = StartCoroutine(ShowTutorial(state));
+        StartCoroutine(ShowTutorial(state));
     }
 
     public void Hide()
@@ -68,13 +60,13 @@ public class TutorialManager : MonoBehaviour
 
     public bool AlreadyUsed(TutorialState state)
     {
-        return PlayerPrefs.GetInt(state.ToString(), 0) != 0;
+        return saveSystem.TutorialData.HasState((int)state);
     }
 
     IEnumerator ShowTutorial(TutorialState state)
     {
         currentState = state;
-        if (currentState != TutorialState.Default && PlayerPrefs.GetInt(currentState.ToString(), 0) == 0)
+        if (currentState != TutorialState.Default && !saveSystem.TutorialData.HasState((int)state))
         {
             Time.timeScale = 0.7f;
             currentTutorial = transform.Find(currentState.ToString()).gameObject;
@@ -86,7 +78,7 @@ public class TutorialManager : MonoBehaviour
                 yield return null;
             }
 
-            PlayerPrefs.SetInt(state.ToString(), 1);
+            saveSystem.TutorialData.SaveState((int)state);
 
             EnableDisableTutorialScreen(false);
             Time.timeScale = 1f;

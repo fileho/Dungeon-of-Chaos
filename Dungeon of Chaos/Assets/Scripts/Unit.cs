@@ -9,7 +9,7 @@ public class Unit : MonoBehaviour
     [SerializeField]
     protected IMovement movement;
     [SerializeField]
-    protected Ieffects effects;
+    protected IEffects effects;
     [SerializeField]
     protected IBars bars;
 
@@ -19,6 +19,10 @@ public class Unit : MonoBehaviour
     protected SoundSettings deathSFX;
 
     protected bool dead = false;
+
+    protected System.Action unitHit;
+
+    private CameraShake cameraShake;
 
     protected void Start()
     {
@@ -32,6 +36,7 @@ public class Unit : MonoBehaviour
 
         bars.FillAllBars();
 
+        cameraShake = transform.GetComponentInChildren<CameraShake>();
         Init();
     }
 
@@ -63,6 +68,7 @@ public class Unit : MonoBehaviour
 
     public void TakeDamage(float value, bool playSfx = true)
     {
+        unitHit?.Invoke();
         float rest = value - stats.GetArmor();
         if (stats.HasArmor())
             stats.SetArmor(-value);
@@ -71,6 +77,10 @@ public class Unit : MonoBehaviour
 
         stats.ConsumeHealth(rest);
         effects.TakeDamage();
+
+        if (cameraShake != null)
+            cameraShake.ShakeForDuration(0.5f);
+
         if (playSfx)
             SoundManager.instance.PlaySound(takeDmgSFX);
         if (stats.IsDead())

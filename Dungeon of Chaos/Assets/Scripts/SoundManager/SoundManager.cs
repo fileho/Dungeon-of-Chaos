@@ -10,6 +10,7 @@ public class SoundSettings
 {
     [SerializeField]
     private SoundCategories.SoundCategory soundCategory;
+    // The index of the sound, stored as int since it can be from different enums and every enum to convertible to int
     [SerializeField]
     private int sound;
 
@@ -54,6 +55,7 @@ public class SoundSettings
 
     public void SetVolumeFromDistance(float distance, float maxDistance)
     {
+        // Store the max volume in the first iteration
         if (maxVolume == float.MaxValue)
             maxVolume = volume;
         volume = GetVolumeFromDistance(distance, maxDistance);
@@ -173,10 +175,10 @@ public class SoundManager : MonoBehaviour
                                  _ => throw new ArgumentOutOfRangeException(nameof(category), category, null) };
     }
 
-    public float GetLength(SoundSettings soundSettings)
+    public float GetSoundLenght(SoundSettings settings)
     {
-        var pool = GetPool(soundSettings.GetSoundCategory());
-        var sound = pool.GetSoundAtIndex(soundSettings.GetSoundIndex());
+        SoundPool pool = GetPool(settings.GetSoundCategory());
+        Sound sound = pool.GetSoundAtIndex(settings.GetSoundIndex());
         return sound.GetLength();
     }
 }

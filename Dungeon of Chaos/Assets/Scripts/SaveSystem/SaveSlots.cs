@@ -20,6 +20,7 @@ public class SaveSlots : MonoBehaviour
 
     void Start()
     {
+        // Sadly Czech cultureInfo looked the best for timestamps '/' looked weird with our font
         CultureInfo.CurrentCulture = new CultureInfo("cs-cz");
 
         saveSystem = FindObjectOfType<SaveSystem>();

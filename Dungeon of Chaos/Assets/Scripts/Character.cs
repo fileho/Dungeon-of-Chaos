@@ -13,7 +13,7 @@ public class Character : Unit
     private GameController gameController;
 
     private int blockedInput = 0;
-    private const float maxBiteCooldown = 0.5f;
+    private const float maxBiteCooldown = 0.75f;
     private float biteCooldown = 0f;
 
     private void Awake()
@@ -35,6 +35,7 @@ public class Character : Unit
     {
         if (SkillSystem.ShouldResurrect())
         {
+            Debug.Log("Resurrect");
             SkillSystem.Resurrect();
             return;
         }
@@ -148,7 +149,8 @@ public class Character : Unit
 
     private void RegenerateStamina()
     {
-        stats.RegenerateStamina(stats.GetStaminaRegen() * Time.deltaTime);
+        if (stats.ShouldRegenerateStamina())
+            stats.RegenerateStamina(stats.GetStaminaRegen() * Time.deltaTime);
     }
 
     private void RegenerateMana()
@@ -190,7 +192,7 @@ public class Character : Unit
         if (!Input.GetMouseButtonDown(0) || attack.IsAttacking() || SkillSystem.IsAttacking())
             return;
 
-        float staminaCost = attack.GetStaminaCost();
+        float staminaCost = attack.GetStaminaCost() + stats.GetStaminaCostInc();
         if (!stats.HasStamina(staminaCost))
         {
             InGameUIManager.instance.NotEnoughStamina();
@@ -210,7 +212,7 @@ public class Character : Unit
         var e = col.transform.GetComponent<Enemy>();
         if (e == null)
             return;
-        TakeDamage(10 + e.stats.GetPhysicalDamage() / 2);
+        TakeDamage(3 + e.stats.GetPhysicalDamage() / 8);
         biteCooldown = maxBiteCooldown;
     }
 }

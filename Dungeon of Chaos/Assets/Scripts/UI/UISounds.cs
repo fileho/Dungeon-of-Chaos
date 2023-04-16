@@ -4,8 +4,10 @@ using UnityEngine;
 
 public class UISounds : MonoBehaviour
 {
-    [SerializeField] private SoundSettings buttonClick;
-    [SerializeField] private SoundSettings buttonHover;
+    [SerializeField]
+    private SoundSettings buttonClick;
+    [SerializeField]
+    private SoundSettings buttonHover;
 
     public void OnHoverSound()
     {

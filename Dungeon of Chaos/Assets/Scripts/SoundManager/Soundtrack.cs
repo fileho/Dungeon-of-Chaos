@@ -94,7 +94,7 @@ public class Soundtrack : MonoBehaviour
     private IEnumerator Transition(AudioClip target)
     {
         isTransitioning = true;
-        const float duration = 0.5f;
+        const float duration = 2.0f;
         float time = 0f;
 
         while (time < duration)

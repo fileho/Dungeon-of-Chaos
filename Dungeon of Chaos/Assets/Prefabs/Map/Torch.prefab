@@ -265,7 +265,7 @@ ParticleSystem:
     startLifetime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 0.8
+      scalar: 2
       minScalar: 5
       maxCurve:
         serializedVersion: 2
@@ -317,9 +317,9 @@ ParticleSystem:
         m_RotationOrder: 4
     startSpeed:
       serializedVersion: 2
-      minMaxState: 0
-      scalar: 5
-      minScalar: 5
+      minMaxState: 3
+      scalar: 2
+      minScalar: 0.5
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -1454,7 +1454,7 @@ ParticleSystem:
       maxGradient:
         serializedVersion: 2
         key0: {r: 0.3773585, g: 0.34425062, b: 0.31114277, a: 0.5176471}
-        key1: {r: 0.18867922, g: 0.18867922, b: 0.18867922, a: 0.34509805}
+        key1: {r: 0.18867922, g: 0.18867922, b: 0.18867922, a: 0}
         key2: {r: 0, g: 0, b: 0, a: 0}
         key3: {r: 0, g: 0, b: 0, a: 0}
         key4: {r: 0, g: 0, b: 0, a: 0}
@@ -2832,7 +2832,7 @@ ParticleSystem:
     strength:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 2
+      scalar: 0.65
       minScalar: 1
       maxCurve:
         serializedVersion: 2
@@ -2998,7 +2998,7 @@ ParticleSystem:
     scrollSpeed:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 0
+      scalar: 0.3
       minScalar: 0
       maxCurve:
         serializedVersion: 2

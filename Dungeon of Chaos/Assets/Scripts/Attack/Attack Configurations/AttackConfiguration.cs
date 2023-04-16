@@ -1,6 +1,8 @@
-
 using UnityEngine;
 
+/// <summary>
+/// Base class defining values for attacks
+/// </summary>
 public abstract class AttackConfiguration : ScriptableObject
 {
     public float range = 9f;

@@ -57,7 +57,7 @@ GameObject:
   - component: {fileID: 6335575208195326474}
   - component: {fileID: 6335575208195326475}
   - component: {fileID: 6335575208195326477}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Rocks
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3364,7 +3364,7 @@ Tilemap:
     m_Data: {r: 1, g: 1, b: 1, a: 1}
   m_TileObjectToInstantiateArray: []
   m_AnimationFrameRate: 1
-  m_Color: {r: 1, g: 1, b: 1, a: 0.5176471}
+  m_Color: {r: 0.58440727, g: 0.58542275, b: 0.7169812, a: 0.5176471}
   m_Origin: {x: 0, y: 0, z: 0}
   m_Size: {x: 118, y: 97, z: 1}
   m_TileAnchor: {x: 0.5, y: 0.5, z: 0}
@@ -19967,7 +19967,7 @@ Tilemap:
     m_Data: {r: 1, g: 1, b: 1, a: 1}
   m_TileObjectToInstantiateArray: []
   m_AnimationFrameRate: 1
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.745283, g: 0.745283, b: 0.745283, a: 1}
   m_Origin: {x: 0, y: 0, z: 0}
   m_Size: {x: 119, y: 99, z: 1}
   m_TileAnchor: {x: 0.5, y: 0.5, z: 0}
@@ -76705,7 +76705,7 @@ Tilemap:
     m_Data: {r: 1, g: 1, b: 1, a: 1}
   m_TileObjectToInstantiateArray: []
   m_AnimationFrameRate: 1
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.645283, g: 0.666781, b: 1, a: 1}
   m_Origin: {x: 0, y: 0, z: 0}
   m_Size: {x: 118, y: 98, z: 1}
   m_TileAnchor: {x: 0.5, y: 0.5, z: 0}

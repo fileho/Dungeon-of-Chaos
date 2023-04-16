@@ -7,13 +7,16 @@ public struct SaveAttributes
     public Stats stats;
     public SkillSystem skillSystem;
     public DungeonData dungeonData;
+    public TutorialData TutorialData;
 
-    public SaveAttributes(Vector3 characterPosition, Stats stats, SkillSystem skillSystem, DungeonData dungeonData)
+    public SaveAttributes(Vector3 characterPosition, Stats stats, SkillSystem skillSystem, DungeonData dungeonData,
+                          TutorialData tutorialData)
     {
         this.characterPosition = characterPosition;
         this.stats = stats;
         this.skillSystem = skillSystem;
         this.dungeonData = dungeonData;
+        this.TutorialData = tutorialData;
     }
 }
 
@@ -28,6 +31,7 @@ public class SaveData
     public SavedSkillSystem savedSkillSystem;
     public DungeonData dungeonData;
     public DateTime timestamp;
+    public TutorialData TutorialData;
 
     public SaveData(SaveAttributes data)
     {
@@ -36,6 +40,7 @@ public class SaveData
         savedSkillSystem = data.skillSystem.Save();
         dungeonData = data.dungeonData;
         timestamp = DateTime.Now;
+        TutorialData = data.TutorialData;
     }
 
     // Serializable version of Vector3

@@ -1,8 +1,11 @@
 using System.Collections;
 using UnityEngine;
 
+/// <summary>
+/// Tweening for enemies, Flash red, wiggle, knock back, and tweening out body when enemy is dead
+/// </summary>
 [CreateAssetMenu(menuName = "SO/Effects/EnemyEffects")]
-public class EnemyEffects : Ieffects
+public class EnemyEffects : IEffects
 {
     private Transform transform;
     private SpriteRenderer sprite;
@@ -11,7 +14,7 @@ public class EnemyEffects : Ieffects
 
     private MonoBehaviour monoBehaviour;
 
-    public override Ieffects Init(Transform transform)
+    public override IEffects Init(Transform transform)
     {
         this.transform = transform;
         sprite = transform.GetComponent<SpriteRenderer>();
@@ -68,9 +71,14 @@ public class EnemyEffects : Ieffects
 
     private IEnumerator Kill()
     {
-        yield return new WaitForSeconds(0.5f);
+        // yield return new WaitForSeconds(0.5f);
         const float duration = 1f;
         float time = 0;
+
+        // Turn off hp bar
+        var hpbar = transform.parent.GetChild(1);
+        if (hpbar)
+            hpbar.gameObject.SetActive(false);
         // Change all sprites including the weapon
         var sprites = transform.GetComponentsInChildren<SpriteRenderer>();
         while (time < duration)
@@ -81,7 +89,11 @@ public class EnemyEffects : Ieffects
             {
                 // Could be destroyed during the animation
                 if (s != null)
-                    s.color = new Color(1, 1, 1, 1 - t);
+                {
+                    var color = s.color;
+                    color.a = 1 - t;
+                    s.color = color;
+                }
             }
             yield return null;
         }

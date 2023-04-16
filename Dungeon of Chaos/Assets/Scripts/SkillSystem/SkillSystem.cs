@@ -86,8 +86,7 @@ public class SkillSystem : MonoBehaviour
     {
         foreach (SkillInfoActive skill in activeSkills)
         {
-            for (int i = 0; i < skill.GetLevel(); i++)
-                Character.instance.stats.GetLevellingData().skillPoints += skill.GetInvestedSkillPoints();
+            Character.instance.stats.GetLevellingData().skillPoints += skill.GetInvestedSkillPoints();
             skill.ResetLevel();
         }
 
@@ -101,12 +100,12 @@ public class SkillSystem : MonoBehaviour
     {
         foreach (SkillInfoDash skill in dashSkills)
         {
-            for (int i = 0; i < skill.GetLevel(); i++)
-                Character.instance.stats.GetLevellingData().skillPoints += skill.GetInvestedSkillPoints();
+            Character.instance.stats.GetLevellingData().skillPoints += skill.GetInvestedSkillPoints();
             skill.ResetLevel();
         }
 
         UpgradeDash(0);
+        Character.instance.stats.GetLevellingData().skillPoints += 1;
         activatedDash = 0;
     }
 
@@ -114,8 +113,7 @@ public class SkillSystem : MonoBehaviour
     {
         foreach (SkillInfoSecondaryAttack skill in secondaryAttacks)
         {
-            for (int i = 0; i < skill.GetLevel(); i++)
-                Character.instance.stats.GetLevellingData().skillPoints += skill.GetInvestedSkillPoints();
+            Character.instance.stats.GetLevellingData().skillPoints += skill.GetInvestedSkillPoints();
             skill.ResetLevel();
         }
 
@@ -126,8 +124,7 @@ public class SkillSystem : MonoBehaviour
     {
         foreach (SkillInfoPassive skill in passiveSkills)
         {
-            for (int i = 0; i < skill.GetLevel(); i++)
-                Character.instance.stats.GetLevellingData().skillPoints += skill.GetInvestedSkillPoints();
+            Character.instance.stats.GetLevellingData().skillPoints += skill.GetInvestedSkillPoints();
             skill.Unequip(Character.instance.stats);
             skill.ResetLevel();
         }
@@ -299,16 +296,6 @@ public class SkillSystem : MonoBehaviour
         return IsValidActive(index) && activeSkills[index].IsUnlocked();
     }
 
-    public bool HasActivatedSkill()
-    {
-        foreach (var skill in activated)
-        {
-            if (skill != -1)
-                return true;
-        }
-        return false;
-    }
-
     public bool IsActivated(int index)
     {
         return activated.Contains(index);
@@ -335,9 +322,7 @@ public class SkillSystem : MonoBehaviour
         }
 
         return description;
-    }
-
-    
+    }   
     #endregion
 
     #region PassiveSkills
@@ -356,9 +341,9 @@ public class SkillSystem : MonoBehaviour
         if (!IsValidPassive(index))
             return;
         SkillInfoPassive skill = passiveSkills[index];
-        levelling.ConsumeSkillPoints(passiveSkills[index].GetUnlockingRequirements().GetCost());
         skill.Unlock();
         skill.Upgrade();
+        levelling.ConsumeSkillPoints(passiveSkills[index].GetUnlockingRequirements().GetCost());
         TooltipSystem.instance.Show(skill.GetSkillData().GetName(), "Passive Skill", "No further actions required",
             skill.GetCurrentDescription(), skill.GetNextDescription());
     }
@@ -377,7 +362,7 @@ public class SkillSystem : MonoBehaviour
     {
         foreach (SkillInfoPassive skill in passiveSkills)
         {
-            if (skill.GetId() == "SecondBreath" && skill.IsUnlocked() && 
+            if (skill.GetId() == "Second Breath" && skill.IsUnlocked() && 
                 (skill.GetCurrentSkill() as SecondBreath).ShouldResurrect())
                 return true;
         }
@@ -388,7 +373,7 @@ public class SkillSystem : MonoBehaviour
     {
         foreach (SkillInfoPassive skill in passiveSkills)
         {
-            if (skill.GetId() == "SecondBreath" && skill.IsUnlocked())
+            if (skill.GetId() == "Second Breath" && skill.IsUnlocked())
             {
                 (skill.GetCurrentSkill() as SecondBreath).Resurrect(owner);
                 return;
@@ -406,6 +391,7 @@ public class SkillSystem : MonoBehaviour
 
     public void Dash(Vector2 dir)
     {
+        dashSkills[activatedDash].GetCurrentSkill().Init(owner);
         dashSkills[activatedDash].GetCurrentSkill().Use(owner, null, new List<Vector2>() { dir });
     }
 
@@ -434,9 +420,9 @@ public class SkillSystem : MonoBehaviour
         if (!IsValidDash(index))
             return;
         SkillInfoDash skill = dashSkills[index];
-        levelling.ConsumeSkillPoints(dashSkills[index].GetUnlockingRequirements().GetCost());
         skill.Unlock();
         skill.Upgrade();
+        levelling.ConsumeSkillPoints(dashSkills[index].GetUnlockingRequirements().GetCost());
         TooltipSystem.instance.Show(skill.GetSkillData().GetName(), "Dash Skill", GetDashStatusDescription(index),
             skill.GetCurrentDescription(), skill.GetNextDescription());
     }
@@ -509,9 +495,9 @@ public class SkillSystem : MonoBehaviour
         if (!IsValidSecondary(index))
             return;
         SkillInfoSecondaryAttack skill = secondaryAttacks[index];
-        levelling.ConsumeSkillPoints(secondaryAttacks[index].GetUnlockingRequirements().GetCost());
         skill.Unlock();
         skill.Upgrade();
+        levelling.ConsumeSkillPoints(secondaryAttacks[index].GetUnlockingRequirements().GetCost());
         TooltipSystem.instance.Show(skill.GetSkillData().GetName(), "Secondary Attack", GetSecondaryStatusDescription(index),
             skill.GetCurrentDescription(), skill.GetNextDescription());
     }

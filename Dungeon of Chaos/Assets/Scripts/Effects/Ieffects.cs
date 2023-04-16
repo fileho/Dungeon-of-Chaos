@@ -1,7 +1,10 @@
 using UnityEngine;
 
-public abstract class Ieffects : ScriptableObject
+/// <summary>
+/// Visual effects on taking damage
+/// </summary>
+public abstract class IEffects : ScriptableObject
 {
-    public abstract Ieffects Init(Transform transform);
+    public abstract IEffects Init(Transform transform);
     public abstract void TakeDamage();
 }

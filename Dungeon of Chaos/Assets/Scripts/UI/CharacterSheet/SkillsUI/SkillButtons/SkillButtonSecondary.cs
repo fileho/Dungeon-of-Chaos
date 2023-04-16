@@ -44,20 +44,23 @@ public class SkillButtonSecondary : SkillButton
     public override void OnPointerEnter(PointerEventData eventData)
     {
         SoundManager.instance.PlaySound(hover);
-        TooltipSystem.instance.Show(skillInfo.GetSkillData().GetName(), "Secondary Attack", skillSystem.GetSecondaryStatusDescription(skillIndex),
+        if (TooltipSystem.instance != null)
+            TooltipSystem.instance.Show(skillInfo.GetSkillData().GetName(), "Secondary Attack", skillSystem.GetSecondaryStatusDescription(skillIndex),
             skillInfo.GetCurrentDescription(), skillInfo.GetNextDescription());
     }
 
     public override void OnPointerExit(PointerEventData eventData)
     {
-        TooltipSystem.instance.HideSkillTooltip();
+        if (TooltipSystem.instance != null)
+            TooltipSystem.instance.HideSkillTooltip();
     }
 
     public override void RightMouseDown()
     {
         if (!skillSystem.CanUpgradeSecondaryAttack(skillIndex))
         {
-            TooltipSystem.instance.DisplayMessage("Requirements not met");
+            if (TooltipSystem.instance != null)
+                TooltipSystem.instance.DisplayMessage("Requirements not met");
             SoundManager.instance.PlaySound(requirements);
             return;
         }
@@ -109,6 +112,6 @@ public class SkillButtonSecondary : SkillButton
 
     public override void SetHighlightOverlay()
     {
-        highlight.SetActive(skillSystem.CanUnlock(skillInfo) && skillInfo.IsUnlocked());
+        highlight.SetActive(skillSystem.CanUnlock(skillInfo) && skillInfo.IsUnlocked() && skillInfo.CanUpgrade());
     }
 }

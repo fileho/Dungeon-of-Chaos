@@ -13,7 +13,7 @@ public class SmashAttack : MeleeAttack
     // How big the weapon grows
     protected float scaleMultiplier;
 
-    //Damage radius
+    // Damage radius
     protected float damageRadius;
 
     protected GameObject impact;
@@ -35,7 +35,6 @@ public class SmashAttack : MeleeAttack
         Destroy(impactPs, 5f);
     }
 
-
     private void CheckHits(Vector3 pos, float radius)
     {
         Collider2D[] colliders = Physics2D.OverlapCircleAll(pos, radius);
@@ -54,13 +53,11 @@ public class SmashAttack : MeleeAttack
     // Ideal attack duration = 1
     protected override IEnumerator StartAttackAnimation()
     {
-
         // Cache weapon rotation to restore it after the animation
         var initialWeaponRotation = Weapon.transform.rotation;
         Vector3 weaponPos = Weapon.transform.position;
         Vector3 targetDirection = (GetTargetPosition() - (Vector2)weaponPos).normalized;
         Vector3 startPos = Weapon.transform.localPosition;
-
 
         float angleMultiplier = Weapon.transform.lossyScale.x > 0 ? 1 : -1;
         float swingAdjusted = 90 * angleMultiplier;
@@ -72,10 +69,8 @@ public class SmashAttack : MeleeAttack
 
         Vector3 endPosUp = startPos + (upperEdge * range);
         Vector3 endPosdown = startPos + (lowerEdge * range);
-        Vector3 endPosUpAdjusted = startPos + (upperEdge * (range - 2 * Weapon.WeaponAssetWidth));  //to compensate for the weapon asset width
-        Vector3 endPosdownAdjusted = startPos + (lowerEdge * (range - 2 * Weapon.WeaponAssetWidth)); //to compensate for the weapon asset width
-
-
+        Vector3 endPosdownAdjusted =
+            startPos + (lowerEdge * (range - 2 * Weapon.WeaponAssetWidth)); // to compensate for the weapon asset width
 
         Vector3 startScale = Weapon.Asset.localScale;
         Vector3 endScale = Weapon.Asset.localScale * scaleMultiplier;
@@ -94,7 +89,7 @@ public class SmashAttack : MeleeAttack
         float time = 0;
         float attackAnimationDurationOneWay = AttackAnimationDuration / 2f;
 
-        SoundManager.instance.PlaySound(swingSFX);
+        SoundManager.instance.PlaySound(attackSFX);
         // Up
         while (time <= 1)
         {
@@ -105,22 +100,18 @@ public class SmashAttack : MeleeAttack
             yield return null;
         }
 
-        // Down
-        var startRotation = Weapon.Asset.localRotation;
-        float startRotationZ = Weapon.Asset.localRotation.eulerAngles.z < 180 ? Weapon.Asset.localRotation.eulerAngles.z : Weapon.Asset.localRotation.eulerAngles.z - 360f;
-
         time = 0;
         while (time <= 1)
         {
             time += (Time.deltaTime / attackAnimationDurationOneWay);
             float currentPos = Tweens.EaseOutElastic(time);
-            Weapon.transform.localPosition = Vector3.Slerp(endPosUp - startPos, endPosdownAdjusted - startPos, currentPos) + startPos;
+            Weapon.transform.localPosition =
+                Vector3.Slerp(endPosUp - startPos, endPosdownAdjusted - startPos, currentPos) + startPos;
             yield return null;
         }
 
         EnableImpact(owner.transform.TransformPoint(endPosdown));
         CheckHits(owner.transform.TransformPoint(endPosdown), damageRadius);
-        
 
         // Reset
         Weapon.Asset.localScale = startScale;
@@ -130,5 +121,4 @@ public class SmashAttack : MeleeAttack
         ResetWeapon();
         isAttacking = false;
     }
-
 }

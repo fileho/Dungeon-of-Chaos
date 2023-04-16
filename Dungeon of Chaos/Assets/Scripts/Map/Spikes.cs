@@ -17,8 +17,10 @@ public class Spikes : MonoBehaviour
     private float reloadTime;
 
     [Header("SFX")]
-    [SerializeField] private SoundSettings spikesUpSFX;
-    [SerializeField] private SoundSettings spikesDownSFX;
+    [SerializeField]
+    private SoundSettings spikesUpSFX;
+    [SerializeField]
+    private SoundSettings spikesDownSFX;
 
     private bool attacking = false;
 
@@ -33,7 +35,10 @@ public class Spikes : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collider)
     {
-        if (attacking || !collider.CompareTag("Player"))
+        if (attacking)
+            return;
+
+        if (!collider.CompareTag("Enemy") && !collider.CompareTag("Player"))
             return;
 
         StartCoroutine(ActivateSpikes());

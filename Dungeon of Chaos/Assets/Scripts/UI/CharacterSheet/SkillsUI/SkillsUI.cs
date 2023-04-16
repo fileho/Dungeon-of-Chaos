@@ -98,7 +98,7 @@ public class SkillsUI : MonoBehaviour
     private void UpdateResetPoints()
     {
         resetPoints.text = stats.GetResetAmount().ToString();
-        resetButton.interactable = stats.GetResetAmount() > 0;
+        resetButton.interactable = stats.HasReset();
     }
 
 

@@ -4,6 +4,9 @@ using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 using UnityEngine;
 
+/// <summary>
+/// Stores the active save index
+/// </summary>
 public class ActiveSaveSlot
 {
     [System.Serializable]

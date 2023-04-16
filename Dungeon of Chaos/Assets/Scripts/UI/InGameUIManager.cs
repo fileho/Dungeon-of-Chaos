@@ -1,266 +1,293 @@
 using System.Collections;
 using System.Collections.Generic;
+using DG.Tweening;
+using Doozy.Engine.UI;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class InGameUIManager : MonoBehaviour
-{
-    [Header("Bars")]
-    [SerializeField]
-    private Slider healthBar;
-    [SerializeField]
-    private Slider manaBar;
-    [SerializeField]
-    private Slider staminaBar;
-    [SerializeField]
-    private Slider xpBar;
-    [SerializeField]
-    private GameObject armorBar;
+public class InGameUIManager : MonoBehaviour {
+	[Header ("Bars")]
+	[SerializeField]
+	private Slider healthBar;
+	[SerializeField] private Image healthBarPartialFillImage;
+	[SerializeField] private Image staminaBarPartialFillImage;
+	[SerializeField] private Image manaBarPartialFillImage;
+	[SerializeField]
+	private Slider manaBar;
+	[SerializeField]
+	private Slider staminaBar;
+	[SerializeField]
+	private Slider xpBar;
+	[SerializeField]
+	private GameObject armorBar;
+	[SerializeField]
+	private TextMeshProUGUI armorValue;
 
-    [Header("Skills")]
-    [SerializeField]
-    private List<Image> activeSkills;
-    [SerializeField]
-    private Image dashSkill;
-    [SerializeField]
-    private Image secondarySkill;
+	[Header ("Skills")]
+	[SerializeField]
+	private List<Image> activeSkills;
+	[SerializeField]
+	private Image dashSkill;
+	[SerializeField]
+	private Image secondarySkill;
 
-    [Header("Cooldowns")]
-    [SerializeField]
-    private List<Image> activeCooldowns;
-    [SerializeField]
-    private Image dashCooldown;
-    [SerializeField]
-    private Image secondaryCooldown;
+	[Header ("Cooldowns")]
+	[SerializeField]
+	private List<Image> activeCooldowns;
+	[SerializeField]
+	private Image dashCooldown;
+	[SerializeField]
+	private Image secondaryCooldown;
 
-    [Space]
-    [SerializeField]
-    private Slider bossHPbar;
-    [SerializeField]
-    private TMP_Text bossName;
+	[Space]
+	[SerializeField]
+	private Slider bossHPbar;
+	[SerializeField]
+	private TMP_Text bossName;
 
-    public static InGameUIManager instance;
+	public static InGameUIManager instance;
 
-    [SerializeField]
-    private GameObject settings;
+	[SerializeField]
+	private GameObject settings;
+	[SerializeField]
+	private UIView settingsView;
 
-    [SerializeField]
-    private GameObject panelPopUp;
+	[SerializeField]
+	private GameObject panelPopUp;
+	private UIView panelPopUpView => panelPopUp.transform.GetChild (0).GetComponent<UIView> ();
 
-    [SerializeField]
-    private SoundSettings lowNotificationSound;
+	[SerializeField]
+	private SoundSettings lowNotificationSound;
 
-    private SkillSystem skillSystem;
+	private SkillSystem skillSystem;
 
-    private CanvasGroup manaCanvasGroup;
-    private CanvasGroup staminaCanvasGroup;
+	private CanvasGroup manaCanvasGroup;
+	private CanvasGroup staminaCanvasGroup;
 
-    // Delay after which it is possible to open the settings UI so it cannot be opened accidentally
-    private float openUIstartDelay = 0.25f;
+	// Delay after which it is possible to open the settings UI so it cannot be opened accidentally
+	private float openUIstartDelay = 0.25f;
 
-    private Color baseColor = new Color(0.2f, 0.2f, 0.2f);
+	private Color baseColor = new Color (0.2f, 0.2f, 0.2f);
 
-    private void Awake()
-    {
-        instance = this;
-    }
+	private Tweener healthBarAnimationTween;
+	private Tweener staminaBarAnimationTween;
+	private Tweener manaBarAnimationTween;
 
-    private void Start()
-    {
-        skillSystem = FindObjectOfType<SkillSystem>();
-        bossHPbar.value = 1;
-        bossHPbar.gameObject.SetActive(false);
-        bossName.gameObject.SetActive(false);
-        manaCanvasGroup = manaBar.GetComponent<CanvasGroup>();
-        staminaCanvasGroup = staminaBar.GetComponent<CanvasGroup>();
-    }
+	private void Awake ()
+	{
+		instance = this;
+	}
 
-    private void Update()
-    {
-        UpdateSkills();
+	private void Start ()
+	{
+		skillSystem = FindObjectOfType<SkillSystem> ();
+		bossHPbar.value = 1;
+		bossHPbar.gameObject.SetActive (false);
+		bossName.gameObject.SetActive (false);
+		manaCanvasGroup = manaBar.GetComponent<CanvasGroup> ();
+		staminaCanvasGroup = staminaBar.GetComponent<CanvasGroup> ();
+	}
 
-        if (openUIstartDelay > 0)
-        {
-            openUIstartDelay -= Time.deltaTime;
-            return;
-        }
+	private void Update ()
+	{
+		UpdateSkills ();
 
-        if (Input.GetKeyDown(KeyCode.Escape))
-            ToggleSettings();
-    }
+		if (openUIstartDelay > 0) {
+			openUIstartDelay -= Time.deltaTime;
+			return;
+		}
 
-    public void SetHealthBar(float value)
-    {
-        healthBar.value = value;
-    }
-    public void SetManaBar(float value)
-    {
-        manaBar.value = value;
-    }
+		if (Input.GetKeyDown (KeyCode.Escape))
+			ToggleSettings ();
+	}
 
-    public void SetStaminaBar(float value)
-    {
-        staminaBar.value = value;
-    }
+	private Tweener PlayBarAnimation (Image fillImage, float value, Tweener tween, Slider slider, float duration)
+	{
+		if (fillImage != null) {
+			fillImage.fillAmount = slider.value;
+			if (tween != null)
+				tween.Kill ();
+			tween.SetDelay (0.5f);
+			tween = fillImage.DOFillAmount (value, duration).SetEase (Ease.OutQuad);
+		}
+		return tween;
+	}
 
-    public void SetXpBar(float value)
-    {
-        xpBar.value = value;
-    }
+	public void SetHealthBar (float value)
+	{
+		healthBarAnimationTween = PlayBarAnimation (healthBarPartialFillImage, value, healthBarAnimationTween, healthBar, 0.8f);
+		healthBar.value = value;
+	}
 
-    public void SetBossHPbar(float value)
-    {
-        bossHPbar.value = value;
-    }
+	public void SetManaBar (float value)
+	{
+		if (value < manaBar.value)
+			manaBarAnimationTween = PlayBarAnimation (manaBarPartialFillImage, value, manaBarAnimationTween, manaBar, 0.8f);
+		manaBar.value = value;
+	}
 
-    public void StartBossFight(string bName)
-    {
-        bossHPbar.gameObject.SetActive(true);
-        bossName.gameObject.SetActive(true);
-        bossName.text = bName;
-    }
+	public void SetStaminaBar (float value)
+	{
+		if (value < staminaBar.value)
+			staminaBarAnimationTween = PlayBarAnimation (staminaBarPartialFillImage, value, staminaBarAnimationTween, staminaBar, 0.8f);
+		staminaBar.value = value;
+	}
 
-    public void EndBossFight()
-    {
-        StartCoroutine(HideBossBar());
-    }
+	public void SetXpBar (float value)
+	{
+		xpBar.value = value;
+	}
 
-    public void NotEnoughMana()
-    {
-        StartCoroutine(FlashBar(manaCanvasGroup));
-    }
+	public void SetBossHPbar (float value)
+	{
+		bossHPbar.value = value;
+	}
 
-    public void NotEnoughStamina()
-    {
-        StartCoroutine(FlashBar(staminaCanvasGroup));
-    }
+	public void StartBossFight (string bName)
+	{
+		bossHPbar.gameObject.SetActive (true);
+		bossName.gameObject.SetActive (true);
+		bossName.text = bName;
+	}
 
-    public void SetArmorBar(float value)
-    {
-        armorBar.GetComponent<Slider>().value = value;
-        if (value > 0)
-        {
-            armorBar.SetActive(true);
-            return;
-        }
+	public void HideBossHPbar ()
+	{
+		StartCoroutine (HideBossBar ());
+	}
 
-        armorBar.SetActive(false);
-    }
+	public void NotEnoughMana ()
+	{
+		StartCoroutine (FlashBar (manaCanvasGroup));
+	}
 
-    private void ResetIcon(Image image)
-    {
-        image.sprite = null;
-        image.color = baseColor;
-    }
+	public void NotEnoughStamina ()
+	{
+		StartCoroutine (FlashBar (staminaCanvasGroup));
+	}
 
-    public void UpdateSkills()
-    {
-        UpdateActiveSkills();
-        UpdateDash();
-        UpdateSecondary();
-    }
+	public void SetArmorBar (float value)
+	{
+		armorBar.GetComponent<Slider> ().value = value;
+		armorValue.text = Mathf.Floor(Character.instance.stats.GetArmor()).ToString();
+		if (value > 0) {
+			armorBar.SetActive (true);
+			return;
+		}
 
-    private void UpdateActiveSkills()
-    {
-        for (int i = 0; i < 5; i++)
-        {
-            var skill = skillSystem.GetActivatedSkill(i);
-            if (!skill)
-            {
-                ResetIcon(activeSkills[i]);
-                continue;
-            }
-            activeSkills[i].sprite = skill.GetSkillData().GetIcon();
-            activeSkills[i].color = Color.white;
-            activeCooldowns[i].fillAmount = skill.GetCurrentSkill().GetCooldownRatio();
-        }
-    }
+		armorBar.SetActive (false);
+	}
 
-    private void UpdateDash()
-    {
-        var dash = skillSystem.GetActivatedDash();
+	private void ResetIcon (Image image)
+	{
+		image.sprite = null;
+		image.color = baseColor;
+	}
 
-        dashSkill.sprite = dash.GetSkillData().GetIcon();
-        dashCooldown.fillAmount = dash.GetCurrentSkill().GetCooldownRatio();
-    }
+	public void UpdateSkills ()
+	{
+		UpdateActiveSkills ();
+		UpdateDash ();
+		UpdateSecondary ();
+	}
 
-    private void UpdateSecondary()
-    {
-        var secondary = skillSystem.GetActivatedSecondary();
+	private void UpdateActiveSkills ()
+	{
+		for (int i = 0; i < 5; i++) {
+			var skill = skillSystem.GetActivatedSkill (i);
+			if (!skill) {
+				ResetIcon (activeSkills [i]);
+				continue;
+			}
+			activeSkills [i].sprite = skill.GetSkillData ().GetIcon ();
+			activeSkills [i].color = Color.white;
+			activeCooldowns [i].fillAmount = skill.GetCurrentSkill ().GetCooldownRatio ();
+		}
+	}
 
-        if (!secondary)
-        {
-            ResetIcon(secondarySkill);
-            return;
-        }
-        secondarySkill.sprite = secondary.GetSkillData().GetIcon();
-        secondarySkill.color = Color.white;
-        secondaryCooldown.fillAmount = secondary.GetCurrentSkill().GetCooldownRatio();
-    }
+	private void UpdateDash ()
+	{
+		var dash = skillSystem.GetActivatedDash ();
 
-    public void ToggleSettings()
-    {
-        bool isActive = settings.activeSelf;
+		dashSkill.sprite = dash.GetSkillData ().GetIcon ();
+		dashCooldown.fillAmount = dash.GetCurrentSkill ().GetCooldownRatio ();
+	}
 
-        if (!isActive)
-        {
-            Character.instance.BlockInput();
-        }
-        else
-        {
-            Character.instance.UnblockInput();
-        }
+	private void UpdateSecondary ()
+	{
+		var secondary = skillSystem.GetActivatedSecondary ();
 
-        settings.SetActive(!isActive);
-    }
+		if (!secondary) {
+			ResetIcon (secondarySkill);
+			return;
+		}
+		secondarySkill.sprite = secondary.GetSkillData ().GetIcon ();
+		secondarySkill.color = Color.white;
+		secondaryCooldown.fillAmount = secondary.GetCurrentSkill ().GetCooldownRatio ();
+	}
 
-    private IEnumerator FlashBar(CanvasGroup cg)
-    {
-        const float duration = 0.4f;
-        float time = 0;
-        SoundManager.instance.PlaySound(lowNotificationSound);
+	public void ToggleSettings ()
+	{
+		bool isActive = settings.activeSelf;
 
-        while (time < duration)
-        {
-            time += Time.deltaTime;
-            float t = time / duration;
-            if (cg != null)
-                cg.alpha = 1 - t * (1 - t) * 3;
-            yield return null;
-        }
-    }
+		if (!isActive) {
+			Character.instance.BlockInput ();
+		} else {
+			Character.instance.UnblockInput ();
+		}
 
-    private IEnumerator HideBossBar()
-    {
-        CanvasGroup cg = bossHPbar.transform.parent.GetComponent<CanvasGroup>();
+		if (!isActive) {
+			settings.SetActive (true);
+			settingsView.Show ();
+		} else
+			settingsView.Hide ();
+	}
 
-        const float duration = 3f;
-        float time = 0;
+	private IEnumerator FlashBar (CanvasGroup cg)
+	{
+		const float duration = 0.4f;
+		float time = 0;
+		SoundManager.instance.PlaySound (lowNotificationSound);
 
-        while (time < duration)
-        {
-            time += Time.deltaTime;
-            if (cg)
-                cg.alpha = 1 - time / duration;
-            yield return null;
-        }
+		while (time < duration) {
+			time += Time.deltaTime;
+			float t = time / duration;
+			if (cg != null)
+				cg.alpha = 1 - t * (1 - t) * 3;
+			yield return null;
+		}
+	}
 
-        if (cg)
-            cg.alpha = 1;
+	private IEnumerator HideBossBar ()
+	{
+		CanvasGroup cg = bossHPbar.transform.parent.GetComponent<CanvasGroup> ();
 
-        bossHPbar.gameObject.SetActive(false);
-        bossName.gameObject.SetActive(false);
-    }
+		const float duration = 3f;
+		float time = 0;
 
-    public void MainMenu()
-    {
-        panelPopUp.SetActive(true);
-    }
+		while (time < duration) {
+			time += Time.deltaTime;
+			if (cg)
+				cg.alpha = 1 - time / duration;
+			yield return null;
+		}
 
-    public void MainMenuConfirm()
-    {
-        SceneManager.LoadScene(0);
-    }
+		if (cg)
+			cg.alpha = 1;
+
+		bossHPbar.gameObject.SetActive (false);
+		bossName.gameObject.SetActive (false);
+	}
+
+	public void MainMenu ()
+	{
+		panelPopUp.SetActive (true);
+		panelPopUpView.Show ();
+	}
+
+	public void MainMenuConfirm ()
+	{
+		SceneManager.LoadScene (0);
+	}
 }

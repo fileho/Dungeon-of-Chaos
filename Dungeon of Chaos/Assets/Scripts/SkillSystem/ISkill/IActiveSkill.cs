@@ -23,12 +23,18 @@ public class IActiveSkill : ISkill
 
     private float RecalculateManaCost()
     {
-        return manaCost * Character.instance.stats.GetManaCostMod();
+        float mCost = manaCost > 0
+            ? manaCost + Character.instance.stats.GetManaCostInc()
+            : manaCost;
+        return mCost * Character.instance.stats.GetManaCostMod();
     }
 
     private float RecalculateStaminaCost()
     {
-        return staminaCost * Character.instance.stats.GetStaminaCostMod();
+        float sCost = staminaCost > 0
+            ? staminaCost + Character.instance.stats.GetStaminaCostInc()
+            : staminaCost;
+        return sCost * Character.instance.stats.GetStaminaCostMod();
     }
 
     public override string GetEffectDescription()

@@ -14,7 +14,7 @@ public class BossBars : IBars
     {
         if (value <= 0)
         {
-            InGameUIManager.instance.EndBossFight();
+            InGameUIManager.instance.HideBossHPbar();
             return;
         }
         InGameUIManager.instance.SetBossHPbar(value);

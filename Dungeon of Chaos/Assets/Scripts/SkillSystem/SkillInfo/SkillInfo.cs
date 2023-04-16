@@ -120,7 +120,7 @@ public class SkillInfo<T> : ScriptableObject where T : ISkill
 
     public bool IsUnlocked()
     {
-        return unlocked || level > 0;
+        return level > 0;
     }
 
     public void Unlock()

@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Globalization;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -17,6 +18,7 @@ public class GameController : MonoBehaviour
     {
         soundtrack = FindObjectOfType<Soundtrack>();
         soundtrack.StopBossMusic();
+        CultureInfo.CurrentCulture = new CultureInfo("en-us");
     }
 
     private void LateUpdate()
@@ -34,7 +36,7 @@ public class GameController : MonoBehaviour
     // TODO remove this later
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.C))
+        /*if (Input.GetKeyDown(KeyCode.C))
         {
             Debug.Log("Level complete - cheat");
             LevelComplete();
@@ -44,7 +46,7 @@ public class GameController : MonoBehaviour
         {
             Debug.Log("Cheat + 1000xp");
             Character.instance.stats.GetLevellingData().ModifyCurrentXP(1000);
-        }
+        }*/
     }
 
     private void LoadMap()

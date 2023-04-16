@@ -1,6 +1,9 @@
 using System.Collections;
 using UnityEngine;
 
+/// <summary>
+/// Specifies the tweening of indicators
+/// </summary>
 public abstract class IIndicator : MonoBehaviour
 {
     public float Duration { get; protected set; }
@@ -12,12 +15,10 @@ public abstract class IIndicator : MonoBehaviour
         ApplyConfigurations(indicatorConfiguration);
     }
 
-
     protected virtual void InitSprites()
     {
         sprite = transform.Find("Primary").GetComponent<SpriteRenderer>();
     }
-
 
     protected virtual void ApplyConfigurations(IndicatorConfiguration indicatorConfiguration)
     {
@@ -26,12 +27,10 @@ public abstract class IIndicator : MonoBehaviour
 
     public virtual void Use()
     {
-        //SoundManager.instance.PlaySound(indicatorSFX);
         StartCoroutine(ShowIndicator());
     }
 
     protected abstract IEnumerator ShowIndicator();
-
 
     protected virtual void CleanUp()
     {
