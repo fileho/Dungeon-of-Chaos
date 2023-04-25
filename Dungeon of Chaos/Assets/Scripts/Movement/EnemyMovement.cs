@@ -3,6 +3,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Handles movement of enemies
+/// </summary>
 [CreateAssetMenu(menuName = "SO/Movement/MeleeEnemy")]
 public class EnemyMovement : IMovement
 {

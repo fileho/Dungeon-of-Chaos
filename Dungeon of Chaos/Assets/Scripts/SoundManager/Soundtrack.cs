@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using System.Threading;
 using UnityEngine;
 
+/// <summary>
+/// Soundtrack constantly playing even between levels
+/// </summary>
 [RequireComponent(typeof(AudioSource))]
 public class Soundtrack : MonoBehaviour
 {
@@ -91,6 +94,11 @@ public class Soundtrack : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Smooth transition between songs
+    /// We might need to quickly swap to boss music or back
+    /// </summary>
+    /// <param name="target">new song</param>
     private IEnumerator Transition(AudioClip target)
     {
         isTransitioning = true;

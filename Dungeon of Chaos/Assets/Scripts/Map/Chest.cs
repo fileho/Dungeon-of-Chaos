@@ -3,8 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Assertions;
 
+/// <summary>
+/// Openable check the drops loot
+/// </summary>
 public class Chest : MonoBehaviour, IMapSavable
 {
+    // Interaction range
     [SerializeField]
     private float range = 2.5f;
     [SerializeField]
@@ -48,13 +52,15 @@ public class Chest : MonoBehaviour, IMapSavable
 
     private void Update()
     {
+        // Handle interaction
         if (!Input.GetKeyDown(KeyCode.F))
             return;
 
         if (((Vector2)transform.position - (Vector2)Character.instance.transform.position).magnitude < range)
-            OpenBox();
+            OpenChest();
     }
 
+    // Show tooltip
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (isOpened || !collision.CompareTag("Player"))
@@ -69,6 +75,7 @@ public class Chest : MonoBehaviour, IMapSavable
         Gizmos.DrawWireSphere(transform.position, range);
     }
 
+    // Hide tooltip
     private void OnTriggerExit2D(Collider2D collision)
     {
         if (!collision.CompareTag("Player"))
@@ -77,7 +84,7 @@ public class Chest : MonoBehaviour, IMapSavable
         tooltipCanvas.SetActive(false);
     }
 
-    private void OpenBox()
+    private void OpenChest()
     {
         if (isOpened)
             return;
@@ -101,6 +108,9 @@ public class Chest : MonoBehaviour, IMapSavable
         saveSystem.DungeonData.AddSavedUid(id);
     }
 
+    /// <summary>
+    /// Change the sprite and shadow caster for the chest
+    /// </summary>
     private void DrawOpened()
     {
         isOpened = true;
@@ -109,6 +119,7 @@ public class Chest : MonoBehaviour, IMapSavable
         shadowOpened.SetActive(true);
     }
 
+    // Interface for saves
     public void SetUniqueId(int uid)
     {
         id = uid;

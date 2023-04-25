@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
 
+/// <summary>
+/// Helper script to be called in the editor
+/// </summary>
 public class EditorScripts
 {
     private static int id = 0;
@@ -32,6 +35,9 @@ public class EditorScripts
         }
     }
 
+    /// <summary>
+    /// Torches are now generated as prefabs, this helper allows us to replace them
+    /// </summary>
     [MenuItem("Dungeon/Replace Torches")]
 
     public static void ReplaceTorches()
@@ -39,6 +45,9 @@ public class EditorScripts
         ReplaceTorches("Assets/Prefabs/Map/Torch.prefab");
     }
 
+    /// <summary>
+    /// Torches are now generated as prefabs, this helper allows us to replace them for blue torches
+    /// </summary>
     [MenuItem("Dungeon/Replace Torches Blue")]
     public static void ReplaceTorchesBlue()
     {

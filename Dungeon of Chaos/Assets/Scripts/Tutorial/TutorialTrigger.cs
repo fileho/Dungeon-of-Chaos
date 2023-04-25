@@ -2,12 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Tries to shows given tutorial when player enters area
+/// </summary>
 public class TutorialTrigger : MonoBehaviour
 {
     [SerializeField]
     private TutorialState tutorialState;
     [SerializeField]
     private Vector2 size;
+    // It can activate any object as sideeffect to make tutorials more flexible
     [SerializeField]
     private GameObject sideEffects;
 
@@ -32,7 +36,7 @@ public class TutorialTrigger : MonoBehaviour
     {
         if (triggered >= 2)
             return;
-
+        // Show
         if (triggered == 0 && IsInside() && !tutorialManager.AlreadyUsed(tutorialState))
         {
             if (sideEffects)
@@ -41,7 +45,7 @@ public class TutorialTrigger : MonoBehaviour
             ++triggered;
             return;
         }
-
+        // Hide
         if (triggered == 1 && !IsInside())
         {
             if (sideEffects)

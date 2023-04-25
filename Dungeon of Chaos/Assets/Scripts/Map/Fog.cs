@@ -6,6 +6,9 @@ using System.Reflection;
 using UnityEngine;
 using UnityEngine.Experimental.Rendering.Universal;
 
+/// <summary>
+/// For travelsable in one direction before the boss room, blocks light, can be rotated to all 4 cardinal directions
+/// </summary>
 public class Fog : MonoBehaviour
 {
     private GameObject tooltipCanvas;
@@ -65,6 +68,7 @@ public class Fog : MonoBehaviour
                                                      : new Vector2(v.x, v.y / 3).magnitude;
     }
 
+    // Show tooltip
     private void OnTriggerEnter2D(Collider2D collider2d)
     {
         if (!collider2d.CompareTag("Player"))
@@ -73,6 +77,7 @@ public class Fog : MonoBehaviour
         tooltipCanvas.SetActive(true);
     }
 
+    // Hide tooltip
     private void OnTriggerExit2D(Collider2D collider2d)
     {
         if (!collider2d.CompareTag("Player"))
@@ -81,6 +86,7 @@ public class Fog : MonoBehaviour
         tooltipCanvas.SetActive(false);
     }
 
+    // Traverse the fog to the other side
     private void Travel()
     {
         Vector3 dir = new Vector3(0, -6, 0);
@@ -90,6 +96,7 @@ public class Fog : MonoBehaviour
         StartCoroutine(MovePlayer(dir));
     }
 
+    // Smooth move of the player through the fog
     private IEnumerator MovePlayer(Vector3 dir)
     {
         GetComponent<BoxCollider2D>().enabled = false;

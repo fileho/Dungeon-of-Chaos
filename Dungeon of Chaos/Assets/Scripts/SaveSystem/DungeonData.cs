@@ -6,7 +6,9 @@ using System.Collections.Generic;
 [System.Serializable]
 public class DungeonData
 {
+    // index of current dungeon
     public int dungeon;
+    // unique ids of saved objects
     private readonly List<int> mapElements = new List<int>();
 
     public DungeonData(int dungeon = 1)

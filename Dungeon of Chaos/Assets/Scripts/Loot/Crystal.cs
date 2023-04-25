@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
-/// Shiny pickable crystals
+/// Shiny pickable crystals, restores hp and mana
+/// Similar to essences
 /// </summary>
 public class Crystal : MonoBehaviour
 {

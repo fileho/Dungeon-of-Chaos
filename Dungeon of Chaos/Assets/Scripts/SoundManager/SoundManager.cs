@@ -5,6 +5,9 @@ using System.Diagnostics.Contracts;
 using UnityEngine;
 using UnityEngine.Assertions;
 
+/// <summary>
+/// Data about sound we would like to play
+/// </summary>
 [System.Serializable]
 public class SoundSettings
 {
@@ -14,6 +17,7 @@ public class SoundSettings
     [SerializeField]
     private int sound;
 
+    // normalized [0,1]
     [SerializeField]
     private float volume = 1;
     [SerializeField]
@@ -62,6 +66,9 @@ public class SoundSettings
     }
 }
 
+/// <summary>
+/// Information about the sfx
+/// </summary>
 [System.Serializable]
 public class Sound
 {
@@ -95,6 +102,9 @@ public class Sound
     }
 }
 
+/// <summary>
+/// Sound system
+/// </summary>
 public class SoundManager : MonoBehaviour
 {
     [SerializeField]
@@ -130,6 +140,10 @@ public class SoundManager : MonoBehaviour
         takeDamage.Start(transform);
     }
 
+    /// <summary>
+    /// Play the sound
+    /// </summary>
+    /// <param name="soundSettings">setting of the sound</param>
     public void PlaySound(SoundSettings soundSettings)
     {
         var pool = GetPool(soundSettings.GetSoundCategory());
@@ -137,6 +151,7 @@ public class SoundManager : MonoBehaviour
     }
 
     /// <summary>
+    /// Play looping sound
     /// The caller must ensure stopping the played sound by calling StopLoopingSound() with returned SoundData
     /// </summary>
     [Pure]
@@ -154,12 +169,19 @@ public class SoundManager : MonoBehaviour
         looping.StopSound(soundData);
     }
 
+    /// <summary>
+    /// Update volume of the looping sound
+    /// </summary>
     public void UpdateLoopingSound(SoundData soundData, float volume)
     {
         if (soundData == null)
             return;
         looping.UpdateSound(soundData, volume);
     }
+
+    /// <summary>
+    /// Return the proper audiopool for a given sound category
+    /// </summary>
 
     private SoundPool GetPool(SoundCategories.SoundCategory category)
     {

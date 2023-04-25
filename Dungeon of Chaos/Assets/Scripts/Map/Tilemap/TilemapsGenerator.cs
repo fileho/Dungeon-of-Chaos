@@ -5,6 +5,9 @@ using hwfc;
 using UnityEditor;
 #endif
 
+/// <summary>
+/// Generates tilemaps from GameObject[,] representation
+/// </summary>
 public class TilemapsGenerator : MonoBehaviour
 {
     [SerializeField]
@@ -16,6 +19,9 @@ public class TilemapsGenerator : MonoBehaviour
             FillTilemaps();
     }
 
+    /// <summary>
+    /// Fills tilemaps with corresponding tiles
+    /// </summary>
     public void FillTilemaps()
     {
         GameObject[,] tiles = GetComponent<Postprocessing>().tiles;
@@ -28,10 +34,12 @@ public class TilemapsGenerator : MonoBehaviour
             map.transform.position = Vector3.zero;
         }
 
+        // Loop over tiles
         for (int i = 0; i < tiles.GetLength(0); i++)
         {
             for (int j = 0; j < tiles.GetLength(1); j++)
             {
+                // There can be more than 1 tile at each position
                 var et = GetExportTile(tiles[i, j]);
                 foreach (var o in et)
                 {

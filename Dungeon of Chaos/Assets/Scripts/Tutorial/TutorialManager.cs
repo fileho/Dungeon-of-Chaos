@@ -63,9 +63,14 @@ public class TutorialManager : MonoBehaviour
         return saveSystem.TutorialData.HasState((int)state);
     }
 
+    /// <summary>
+    /// Shows the given tutorial
+    /// </summary>
+    /// <param name="state">tutorial to show</param>
     IEnumerator ShowTutorial(TutorialState state)
     {
         currentState = state;
+        // Check if it was already shown
         if (currentState != TutorialState.Default && !saveSystem.TutorialData.HasState((int)state))
         {
             Time.timeScale = 0.7f;

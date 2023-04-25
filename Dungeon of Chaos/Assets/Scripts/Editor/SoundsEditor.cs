@@ -2,6 +2,11 @@ using System;
 using UnityEngine;
 using UnityEditor;
 
+/// <summary>
+/// Complex script that allows to set up sound effects in the editor
+/// Each SFX has its category and then index in that category
+/// This scripts shows proper SFX for currently selected categories
+/// </summary>
 [CustomPropertyDrawer(typeof(SoundSettings))]
 public class SoundsEditor : PropertyDrawer
 {
@@ -39,6 +44,7 @@ public class SoundsEditor : PropertyDrawer
         // Draw fields - pass GUIContent.none to each so they are drawn without labels
         EditorGUI.PropertyField(categoryRect, soundType, GUIContent.none);
 
+        // Show proper SFXs for given category
         var index = (SoundCategories.SoundCategory)soundType.enumValueIndex;
         switch (index)
         {

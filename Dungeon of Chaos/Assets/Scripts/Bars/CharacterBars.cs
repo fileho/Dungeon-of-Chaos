@@ -17,7 +17,7 @@ public class CharacterBars : IBars
 
     public override void UpdateHpBar(float value)
     {
-        // Damage effects
+        // Damage effects - make the screen progressively more red when hp are low
         if (healthIndicator != null)
             healthIndicator.Change(Mathf.Clamp01(1 - value * 2));
         InGameUIManager.instance.SetHealthBar(value);

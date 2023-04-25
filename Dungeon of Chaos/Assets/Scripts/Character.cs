@@ -12,6 +12,7 @@ public class Character : Unit
     public SkillSystem SkillSystem { get; private set; }
     private GameController gameController;
 
+    // how many things are currently blocking the input (menu, map...)
     private int blockedInput = 0;
     private const float maxBiteCooldown = 0.75f;
     private float biteCooldown = 0f;
@@ -35,7 +36,6 @@ public class Character : Unit
     {
         if (SkillSystem.ShouldResurrect())
         {
-            Debug.Log("Resurrect");
             SkillSystem.Resurrect();
             return;
         }
@@ -84,6 +84,7 @@ public class Character : Unit
     public void BlockInput()
     {
         ++blockedInput;
+        // Stop looping sound of movement
         movement.MuteSfx();
     }
 
@@ -134,6 +135,9 @@ public class Character : Unit
         }
     }
 
+    /// <summary>
+    /// Handles movement
+    /// </summary>
     private void FixedUpdate()
     {
         if (dead)
@@ -212,7 +216,9 @@ public class Character : Unit
         var e = col.transform.GetComponent<Enemy>();
         if (e == null)
             return;
-        TakeDamage(3 + e.stats.GetPhysicalDamage() / 8);
+        const float baseDmg = 3;
+        const float dmgScale = 1.0f / 8;
+        TakeDamage(baseDmg + e.stats.GetPhysicalDamage() * dmgScale);
         biteCooldown = maxBiteCooldown;
     }
 }

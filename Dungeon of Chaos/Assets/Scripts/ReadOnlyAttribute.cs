@@ -4,6 +4,9 @@ using UnityEditor;
 #if UNITY_EDITOR
 using UnityEngine;
 
+// Readonly attribute in the editor
+// Used for ids of objects to save so they are visible in the inspector
+
 public class ReadOnlyAttribute : PropertyAttribute
 {
 }

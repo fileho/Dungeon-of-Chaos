@@ -2,15 +2,19 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Portal to the next level after defeating the boss
+/// </summary>
 public class Teleport : MonoBehaviour
 {
-
     private GameObject tooltipCanvas;
     private float range = 2f;
 
     [Header("SFX")]
-    [SerializeField] private SoundSettings teleportLooping;
-    [SerializeField] private SoundSettings teleportUse;
+    [SerializeField]
+    private SoundSettings teleportLooping;
+    [SerializeField]
+    private SoundSettings teleportUse;
     private float maxDistance = 15f;
     private SoundData sfx = null;
 
@@ -25,6 +29,7 @@ public class Teleport : MonoBehaviour
 
     private void Update()
     {
+        // Ambient sounds
         if (Vector2.Distance(Character.instance.transform.position, transform.position) <= maxDistance)
         {
             if (sfx == null)
@@ -37,13 +42,13 @@ public class Teleport : MonoBehaviour
             SoundManager.instance.StopLoopingSound(sfx);
             sfx = null;
         }
+        // Check interaction
         if (!Input.GetKeyDown(KeyCode.F))
             return;
 
         if (((Vector2)transform.position - (Vector2)Character.instance.transform.position).magnitude < range)
             Travel();
     }
-
 
     private void OnTriggerEnter2D(Collider2D collider2d)
     {

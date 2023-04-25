@@ -3,6 +3,9 @@ using System.Collections;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
+/// <summary>
+/// Pickable essences, serves as loot
+/// </summary>
 public class Essence : MonoBehaviour
 {
     public enum EssenceType
@@ -15,8 +18,10 @@ public class Essence : MonoBehaviour
 
     [SerializeField]
     private EssenceType essenceType;
+    // Lifetime in seconds
     [SerializeField]
     private float lifetime = 5f;
+    // How fast should the essence travel on spawn
     [SerializeField]
     private float force = 5f;
 
@@ -28,6 +33,7 @@ public class Essence : MonoBehaviour
     void Start()
     {
         var rb = GetComponent<Rigidbody2D>();
+        // Make the essence move and rotate
         rb.AddForce(80 * force * Random.insideUnitCircle);
         rb.AddTorque((Random.value - 0.5f) * 200);
         StartCoroutine(SmoothCleanup());
@@ -38,11 +44,20 @@ public class Essence : MonoBehaviour
         Destroy(gameObject);
     }
 
+    /// <summary>
+    /// Calculates the changes to spawn essence for a given enemy
+    /// </summary>
+    /// <param name="e">enemy that was killed</param>
+    /// <returns></returns>
     public float GetChance(Enemy e)
     {
         return essenceType == EssenceType.xp ? 1 : e.lootModifiers.GetEssenceChance(e.stats.GetLevel());
     }
 
+    /// <summary>
+    /// Sets the values for the essence based on the enemy and his level
+    /// </summary>
+    /// <param name="e">enemy that was killed</param>
     public void SetValue(Enemy e)
     {
         switch (essenceType)
@@ -98,6 +113,9 @@ public class Essence : MonoBehaviour
         CleanUp();
     }
 
+    /// <summary>
+    /// Smooth fadeout of the essence so it does not disappear in from of the player
+    /// </summary>
     private IEnumerator SmoothCleanup()
     {
         yield return new WaitForSeconds(lifetime);

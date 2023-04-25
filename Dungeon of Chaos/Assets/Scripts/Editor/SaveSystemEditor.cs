@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 
+/// <summary>
+/// Custom editor to allow delete of saves directly in the editor
+/// </summary>
 [CustomEditor(typeof(SaveSystem))]
 public class SaveSystemEditor : Editor
 {

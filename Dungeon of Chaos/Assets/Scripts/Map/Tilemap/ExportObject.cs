@@ -2,6 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Maps prefab to GameObject to be exported
+/// Used for object with a runtime behavior like torches
+/// </summary>
 public class ExportObject : ExportTile
 {
     [SerializeField]

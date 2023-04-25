@@ -96,6 +96,11 @@ public class SaveSystem : MonoBehaviour
         stream.Close();
     }
 
+    /// <summary>
+    /// Gets the data from binary save
+    /// </summary>
+    /// <param name="filePath">path to the file</param>
+    /// <returns></returns>
     private SaveData LoadData(string filePath)
     {
         if (!File.Exists(filePath))

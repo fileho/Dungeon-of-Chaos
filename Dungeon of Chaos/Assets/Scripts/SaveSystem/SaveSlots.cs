@@ -6,6 +6,10 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using TMPro;
 
+/// <summary>
+/// Save slot that the player sees in load of saves
+/// Displays information about save to the user
+/// </summary>
 public class SaveSlots : MonoBehaviour
 {
     private SaveSystem saveSystem;
@@ -47,6 +51,9 @@ public class SaveSlots : MonoBehaviour
         DrawInfo(saveData, slots[index].transform.GetChild(0), deletes[index].transform);
     }
 
+    /// <summary>
+    /// Draw all the data from save
+    /// </summary>
     private void DrawInfo(SaveData data, Transform target, Transform delete)
     {
         var dungeon = target.GetChild(0).GetComponent<TMP_Text>();
@@ -70,6 +77,10 @@ public class SaveSlots : MonoBehaviour
         time.text = data.timestamp.ToString();
     }
 
+    /// <summary>
+    /// Load selected save
+    /// </summary>
+    /// <param name="index">index of the save</param>
     private void ButtonClick(int index)
     {
         saveSystem.SetSaveSlot(index);
@@ -79,6 +90,10 @@ public class SaveSlots : MonoBehaviour
         SceneManager.LoadScene(load + SaveSystem.SceneOffset);
     }
 
+    /// <summary>
+    /// Remove selected save
+    /// </summary>
+    /// <param name="index">index of the save</param>
     private void ShowRemovePopUp(int index)
     {
         removeIndex = index;

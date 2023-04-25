@@ -4,8 +4,12 @@ using UnityEngine;
 using UnityEngine.Experimental.Rendering.Universal;
 using UnityEngine.Tilemaps;
 
+/// <summary>
+/// Places correct shadows shape over each rock
+/// </summary>
 public class RockShadows : MonoBehaviour
 {
+    // Mapping from Tile to shadow shape
     [System.Serializable]
     struct RockShadow
     {
@@ -15,6 +19,7 @@ public class RockShadows : MonoBehaviour
         public ShadowCaster2D shadow;
     }
 
+    // All static object to spawn shadows
     [SerializeField]
     private List<RockShadow> rockShadows;
 

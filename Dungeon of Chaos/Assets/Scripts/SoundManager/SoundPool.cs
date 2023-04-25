@@ -2,6 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Soundpool on which we can play sounds to avoid allocations
+/// </summary>
 [System.Serializable]
 public class SoundPool
 {
@@ -33,6 +36,10 @@ public class SoundPool
         return sounds[index];
     }
 
+    /// <summary>
+    /// Plays the sound
+    /// </summary>
+    /// <param name="soundSettings">setting of the sound</param>
     public void PlaySound(SoundSettings soundSettings)
     {
         var source = FindEmptyAudioSource(soundSettings.GetPriority());
