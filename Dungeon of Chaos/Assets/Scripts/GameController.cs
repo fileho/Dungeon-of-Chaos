@@ -21,6 +21,7 @@ public class GameController : MonoBehaviour
         CultureInfo.CurrentCulture = new CultureInfo("en-us");
     }
 
+    // We need to load in LateUpdate to properly rewrite all values in spawned objects
     private void LateUpdate()
     {
         if (loaded)
@@ -33,10 +34,13 @@ public class GameController : MonoBehaviour
         LoadMap();
     }
 
-    // TODO remove this later
+    /// <summary>
+    /// Cheats that are allows only for testing in the editor
+    /// </summary>
+#if UNITY_EDITOR
     private void Update()
     {
-        /*if (Input.GetKeyDown(KeyCode.C))
+        if (Input.GetKeyDown(KeyCode.C))
         {
             Debug.Log("Level complete - cheat");
             LevelComplete();
@@ -46,9 +50,13 @@ public class GameController : MonoBehaviour
         {
             Debug.Log("Cheat + 1000xp");
             Character.instance.stats.GetLevellingData().ModifyCurrentXP(1000);
-        }*/
+        }
     }
+#endif
 
+    /// <summary>
+    /// Loads are saved elements in the dungeon
+    /// </summary>
     private void LoadMap()
     {
         LoadMapElements(FindObjectsOfType<Checkpoint>());
