@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Assertions;
 
+/// <summary>
+/// Map fragment that reveals large chunk of the minimap when collected
+/// </summary>
 public class MapFragment : MonoBehaviour, IMapSavable
 {
     [SerializeField]
@@ -37,6 +40,7 @@ public class MapFragment : MonoBehaviour, IMapSavable
         Load();
     }
 
+    // Interface for saves
     public void SetUniqueId(int uid)
     {
         id = uid;

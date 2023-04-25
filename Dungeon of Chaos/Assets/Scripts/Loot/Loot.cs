@@ -5,7 +5,9 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "SO/Loot/Loot")]
 public class Loot : ILoot
 {
-    [SerializeField] private List<LootItem> lootTable;
+    // List of all dropable items by given enemy and their weights
+    [SerializeField]
+    private List<LootItem> lootTable;
 
     private Transform transform;
     private Enemy owner;
@@ -17,6 +19,9 @@ public class Loot : ILoot
         return this;
     }
 
+    /// <summary>
+    /// Calculates a change to drop of each item in the loot table
+    /// </summary>
     public override void Drop()
     {
         foreach (LootItem item in lootTable)

@@ -3,6 +3,10 @@ using UnityEngine;
 using UnityEngine.Assertions;
 using UnityEngine.Experimental.Rendering.Universal;
 
+/// <summary>
+/// Minimap
+/// Works using second camera with different culling mask
+/// </summary>
 public class Minimap : MonoBehaviour
 {
     private Camera mainCamera;
@@ -36,6 +40,9 @@ public class Minimap : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Turn the minimap on and off
+    /// </summary>
     private void ToggleMinimap()
     {
         if (minimap.activeSelf)

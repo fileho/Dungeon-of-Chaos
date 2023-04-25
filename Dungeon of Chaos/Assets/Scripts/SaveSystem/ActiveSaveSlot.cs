@@ -37,6 +37,9 @@ public class ActiveSaveSlot
         return data.index;
     }
 
+    /// <summary>
+    /// Save the index of active save from the disk
+    /// </summary>
     private void Save()
     {
         var formatter = new BinaryFormatter();
@@ -47,6 +50,9 @@ public class ActiveSaveSlot
         stream.Close();
     }
 
+    /// <summary>
+    /// Load the index of active save from the disk
+    /// </summary>
     private void Load()
     {
         string path = Application.persistentDataPath + fileName;

@@ -2,6 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Custom scaling of values for essences based on level of enemy
+/// </summary>
 [CreateAssetMenu(menuName = "SO/Loot/LootModifiers")]
 public class LootModifiers : ScriptableObject
 {

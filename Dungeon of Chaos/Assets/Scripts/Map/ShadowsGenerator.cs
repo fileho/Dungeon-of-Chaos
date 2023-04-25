@@ -10,7 +10,9 @@ using UnityEditor.SceneManagement;
 #endif
 using Vector3 = UnityEngine.Vector3;
 
-// Generated all the shadow casters 2D for walls
+/// <summary>
+/// Generated all the shadow casters 2D for walls
+/// </summary>
 [ExecuteInEditMode]
 public class ShadowsGenerator : MonoBehaviour
 {
@@ -21,9 +23,11 @@ public class ShadowsGenerator : MonoBehaviour
 
     const string transformName = "Walls";
 
+    /// <summary>
+    /// Bake all shadows
+    /// </summary>
     public void BakeShadows()
     {
-
         var grid = FindObjectOfType<Grid>();
         tilemap = GetTilemap(grid, "Walls");
 
@@ -69,6 +73,9 @@ public class ShadowsGenerator : MonoBehaviour
 #endif
     }
 
+    /// <summary>
+    /// Required for the reflection
+    /// </summary>
     static int[] SetDefaultSortingLayers()
     {
         int layerCount = SortingLayer.layers.Length;
@@ -101,7 +108,11 @@ public class ShadowsGenerator : MonoBehaviour
         visited = new HashSet<Vector3Int>();
     }
 
-    // Finds all corners for the shadow generation
+    /// <summary>
+    /// Finds all corners for the shadow generation
+    /// </summary>
+    /// <param name="start">starting position</param>
+    /// <returns></returns>
     Vector3[] TrackEdges(Vector3Int start)
     {
         var points = new List<Vector3>();
@@ -113,12 +124,20 @@ public class ShadowsGenerator : MonoBehaviour
         return points.ToArray();
     }
 
+    /// <summary>
+    /// Walks around an edge until it gets to the start
+    /// </summary>
+    /// <param name="pos">starting postion</param>
+    /// <param name="dir">starting direction</param>
+    /// <param name="points">list of point where to push back new point</param>
     private void TrackEdge(Vector3Int pos, Vector3Int dir, List<Vector3> points)
     {
         var start = pos;
         var p = CalculatePosition(start, dir, GetNextDir(dir));
         points.Add(p);
 
+        // Limit number of iterations to stop as a fallback
+        const int maxIterations = 2000;
         int iterations = 0;
         do
         {
@@ -152,14 +171,17 @@ public class ShadowsGenerator : MonoBehaviour
                 points.Add(CalculatePosition(pos, -dir, GetNextDir(-dir)));
                 dir *= -1;
             }
-        } while (pos != start && iterations < 2000);
+        } while (pos != start && iterations < maxIterations);
 
-        if (iterations == 2000)
+        if (iterations == maxIterations)
             Debug.LogError("Shadow generation failed");
 
         points.Add(p);
     }
 
+    /// <summary>
+    /// Add the point to the proper corner
+    /// </summary>
     private Vector3 CalculatePosition(Vector3 pos, Vector3 oldDir, Vector3 newDir)
     {
         var mid = (pos + new Vector3(0.5f, 0.5f)) * scale;
@@ -169,6 +191,9 @@ public class ShadowsGenerator : MonoBehaviour
         return mid;
     }
 
+    /// <summary>
+    /// Returns filled area that is not yet covered by shadows
+    /// </summary>
     private Vector3Int? FindFilledArea()
     {
         foreach (var pos in tilemap.cellBounds.allPositionsWithin)
@@ -182,6 +207,9 @@ public class ShadowsGenerator : MonoBehaviour
         return null;
     }
 
+    /// <summary>
+    /// Prioritised selection of new direction
+    /// </summary>
     static Vector3Int GetNextDir(Vector3Int dir)
     {
         if (dir == Vector3Int.right)

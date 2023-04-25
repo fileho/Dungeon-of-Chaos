@@ -1,6 +1,9 @@
 using System;
 using UnityEngine;
 
+/// <summary>
+/// Classes that needs to be saved
+/// </summary>
 public struct SaveAttributes
 {
     public Vector3 characterPosition;

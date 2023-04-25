@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Assertions;
 
+/// <summary>
+/// Book that allows resetting unlocked of skills
+/// </summary>
 public class ResetBook : MonoBehaviour, IMapSavable
 {
     [SerializeField]
@@ -25,6 +28,7 @@ public class ResetBook : MonoBehaviour, IMapSavable
         saveSystem.DungeonData.AddSavedUid(id);
     }
 
+    // Interface for saves
     public void SetUniqueId(int uid)
     {
         id = uid;
@@ -34,7 +38,6 @@ public class ResetBook : MonoBehaviour, IMapSavable
     {
         return id;
     }
-
 
     public Object GetAttachedComponent()
     {
@@ -53,7 +56,8 @@ public class ResetBook : MonoBehaviour, IMapSavable
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (!collision.collider.CompareTag("Player")) return;
+        if (!collision.collider.CompareTag("Player"))
+            return;
 
         collision.gameObject.GetComponent<Character>().stats.ColectReset();
         Interact();

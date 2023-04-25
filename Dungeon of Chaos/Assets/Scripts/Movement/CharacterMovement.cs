@@ -1,5 +1,8 @@
 using UnityEngine;
 
+/// <summary>
+/// Handles movement of the player
+/// </summary>
 [CreateAssetMenu(menuName = "SO/Movement/Character")]
 public class CharacterMovement : IMovement
 {
@@ -21,6 +24,9 @@ public class CharacterMovement : IMovement
         return this;
     }
 
+    /// <summary>
+    /// Takes the input of the player and move the character accordingly
+    /// </summary>
     public override void Move()
     {
         Vector2 dir = Vector2.zero;
@@ -34,6 +40,7 @@ public class CharacterMovement : IMovement
             dir += Vector2.down;
 
         dir = dir.normalized;
+        // SFX
         if (dir != Vector2.zero)
         {
             moveDir = dir;

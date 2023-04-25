@@ -2,10 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Traps the hurt the player and enemies
+/// </summary>
 public class Spikes : MonoBehaviour
 {
     [SerializeField]
     private float damage;
+    // delay after which spikes appear (reaction time)
     [SerializeField]
     private float delay;
 
@@ -13,6 +17,7 @@ public class Spikes : MonoBehaviour
     private Sprite spikesDown;
     [SerializeField]
     private Sprite spikesUp;
+    // How long should the spikes be inactive after being triggered
     [SerializeField]
     private float reloadTime;
 
@@ -51,6 +56,7 @@ public class Spikes : MonoBehaviour
         yield return new WaitForSeconds(delay);
 
         spriteRenderer.sprite = spikesUp;
+        // Deal damage to all units in the area of spikes
         var results = new List<Collider2D>();
         boxCollider.OverlapCollider(new ContactFilter2D(), results);
         foreach (var r in results)
@@ -61,6 +67,7 @@ public class Spikes : MonoBehaviour
         }
 
         yield return new WaitForSeconds(delay);
+        // Move spikes down
         SoundManager.instance.PlaySound(spikesDownSFX);
         yield return new WaitForSeconds(delay);
         spriteRenderer.sprite = spikesDown;

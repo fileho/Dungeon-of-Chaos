@@ -66,6 +66,11 @@ public class Unit : MonoBehaviour
     // Null in the case of player
     public Unit Target { get; protected set; }
 
+    /// <summary>
+    /// The core way of taking damage and killing units
+    /// </summary>
+    /// <param name="value">total dmg</param>
+    /// <param name="playSfx">effect that hurt the player over a duration should not play SFX each update</param>
     public void TakeDamage(float value, bool playSfx = true)
     {
         unitHit?.Invoke();

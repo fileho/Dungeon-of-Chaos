@@ -2,8 +2,12 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.Assertions;
 
+/// <summary>
+/// Checkpoint that allows saving and character progression
+/// </summary>
 public class Checkpoint : MonoBehaviour, IMapSavable
 {
+    // Distance to activate the checkpoint
     [SerializeField]
     private float range = 2.5f;
 
@@ -38,6 +42,7 @@ public class Checkpoint : MonoBehaviour, IMapSavable
 
     private void Update()
     {
+        // Ambient SFX
         if (Vector2.Distance(Character.instance.transform.position, transform.position) <= sfxRange)
         {
             if (sfx == null)
@@ -51,6 +56,7 @@ public class Checkpoint : MonoBehaviour, IMapSavable
             sfx = null;
         }
 
+        // Handle the interaction with the checkpoint
         if (!Input.GetKeyDown(KeyCode.F))
             return;
 
@@ -72,6 +78,7 @@ public class Checkpoint : MonoBehaviour, IMapSavable
         return cols.Any(col => col.GetComponent<Enemy>() != null);
     }
 
+    // Show Interact canves
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (!collision.CompareTag("Player"))
@@ -88,6 +95,7 @@ public class Checkpoint : MonoBehaviour, IMapSavable
         Gizmos.DrawWireSphere(transform.position, enemyRadius);
     }
 
+    // Hide interact canvas
     private void OnTriggerExit2D(Collider2D collision)
     {
         if (!collision.CompareTag("Player"))
@@ -107,6 +115,7 @@ public class Checkpoint : MonoBehaviour, IMapSavable
         Time.timeScale = 0f;
     }
 
+    // Interface to save visited checkpoints
     public void SetUniqueId(int uid)
     {
         id = uid;

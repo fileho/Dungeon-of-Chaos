@@ -71,7 +71,6 @@ public class EnemyEffects : IEffects
 
     private IEnumerator Kill()
     {
-        // yield return new WaitForSeconds(0.5f);
         const float duration = 1f;
         float time = 0;
 

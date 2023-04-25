@@ -19,6 +19,9 @@ public class SoundData
     public int Uid { get; }
 }
 
+/// <summary>
+/// Soundpool for looping sounds
+/// </summary>
 [System.Serializable]
 public class SoundPoolLooping
 {
@@ -59,6 +62,9 @@ public class SoundPoolLooping
         return sounds[index];
     }
 
+    /// <summary>
+    /// Plays given sound
+    /// </summary>
     public SoundData PlaySound(SoundSettings soundSettings)
     {
         var sound = GetSoundAtIndex(soundSettings.GetSoundIndex());
@@ -85,6 +91,11 @@ public class SoundPoolLooping
         }
     }
 
+    /// <summary>
+    /// Can update volume of looping sound - ambients
+    /// </summary>
+    /// <param name="soundData">sound</param>
+    /// <param name="volume"> normalized to [0, 1]</param>
     public void UpdateSound(SoundData soundData, float volume)
     {
         var p = pool[soundData.PoolIndex];
