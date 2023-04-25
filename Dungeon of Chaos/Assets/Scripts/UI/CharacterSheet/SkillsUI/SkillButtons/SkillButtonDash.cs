@@ -1,11 +1,13 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
+/// <summary>
+/// Visualization of dash skill in UI
+/// </summary>
 public class SkillButtonDash : SkillButton
 {
+    [Tooltip("Index of the skill in skill system")]
     [SerializeField] private int skillIndex;
     private SkillSlotDash skillSlot;
     private SkillInfoDash skillInfo;

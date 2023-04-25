@@ -122,13 +122,11 @@ public class Levelling
 
     private int GetStatsPointsReward()
     {
-        // Can be modified based on level
         return 2;
     }
 
     private int GetSkillPointsReward()
     {
-        // Can be modified based on level
         return 1;
     }
 

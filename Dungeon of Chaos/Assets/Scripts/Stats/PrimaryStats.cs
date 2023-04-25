@@ -1,7 +1,8 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Normalized values of stats hidden from the player. In-game stats are calculated from them
+/// </summary>
 public class PrimaryStats
 {
     [System.Serializable]
@@ -34,7 +35,7 @@ public class PrimaryStats
     [SerializeField]
     PrimaryToSecondary multipliers;
 
-    [Header("Stats Modifier Scriptable Object")]
+    [Header("Enemy Stats Modifier Scriptable Object")]
     [Tooltip("Only for enemies, leave empty for character")]
     [SerializeField]
     private StatsModifiers statsModifiers;

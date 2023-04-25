@@ -9,7 +9,7 @@ public class IncreaseCooldownModifier : IncreaseStat
         stats.ChangeCooldownModifier(val);
     }
 
-    public override string GetEffectDescription()
+    public override string GetSkillDescription()
     {
         value = amount * (1 + Character.instance.stats.GetLevel() * 0.2f);
         

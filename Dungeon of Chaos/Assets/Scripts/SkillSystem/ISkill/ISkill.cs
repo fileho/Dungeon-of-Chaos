@@ -1,6 +1,8 @@
 using UnityEngine;
 
-
+/// <summary>
+/// Data shown in the UI about the skill
+/// </summary>
 [System.Serializable]
 public class SkillData
 {
@@ -33,7 +35,11 @@ public abstract class ISkill : ScriptableObject
         return skillData;
     }
 
-    public abstract string GetEffectDescription();
+
+    /// <summary>
+    /// Returns description of the skill behavior with inserted values based on stats
+    /// </summary>
+    public abstract string GetSkillDescription();
 
     public abstract string GetCostDescription();
 }

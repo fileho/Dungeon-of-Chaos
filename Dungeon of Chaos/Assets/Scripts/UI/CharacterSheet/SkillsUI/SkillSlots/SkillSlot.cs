@@ -1,9 +1,10 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
+/// <summary>
+/// Player can equip skills by placing them into the slots
+/// </summary>
 public abstract class SkillSlot : MonoBehaviour, IDropHandler
 {
     [SerializeField] protected int index;

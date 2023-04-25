@@ -1,7 +1,8 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Constants used for transforming primary stats into secondary (in-game) stats
+/// </summary>
 [CreateAssetMenu(menuName = "SO/Stats/StatsMultipliers")]
 public class PrimaryToSecondary : ScriptableObject
 {

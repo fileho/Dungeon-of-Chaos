@@ -11,7 +11,7 @@ public class IncreaseVisibility : IPassiveSkill
         Character.instance.GetComponentInParent<Light2D>().pointLightOuterRadius += amount;
     }
 
-    public override string GetEffectDescription()
+    public override string GetSkillDescription()
     {
         return skillData.GetDescription();
     }

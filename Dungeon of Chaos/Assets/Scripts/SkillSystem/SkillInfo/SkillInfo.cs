@@ -81,22 +81,22 @@ public class SkillInfo<T> : ScriptableObject where T : ISkill
         return new SkillDescription("Next Level", GetCost(1), GetDescription(1), GetRequirementsDescription());
     }
 
-    public string GetCost(int inc = 0)
+    private string GetCost(int inc = 0)
     {
         if (level + inc == 0 || level > maxLevel)
             return "";
         return skills[level - 1 + inc].GetCostDescription();
     }
 
-    public string GetDescription(int inc = 0)
+    private string GetDescription(int inc = 0)
     {
         if (level + inc == 0 || level > maxLevel)
             return "";
 
-        return skills[level - 1 + inc].GetEffectDescription();
+        return skills[level - 1 + inc].GetSkillDescription();
     }
 
-    public string GetRequirementsDescription()
+    private string GetRequirementsDescription()
     {
         if (requirements.Count == 0 || level == maxLevel)
             return "";

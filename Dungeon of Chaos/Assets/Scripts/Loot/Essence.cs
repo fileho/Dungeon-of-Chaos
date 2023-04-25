@@ -28,6 +28,7 @@ public class Essence : MonoBehaviour
     [SerializeField]
     private SoundSettings essencePickupSFX;
 
+    // The value of the essence based on its type and the enemy that spawned it
     private float value;
 
     void Start()
@@ -45,7 +46,7 @@ public class Essence : MonoBehaviour
     }
 
     /// <summary>
-    /// Calculates the changes to spawn essence for a given enemy
+    /// Calculates the chances to spawn essence for a given enemy
     /// </summary>
     /// <param name="e">enemy that was killed</param>
     /// <returns></returns>
@@ -55,7 +56,7 @@ public class Essence : MonoBehaviour
     }
 
     /// <summary>
-    /// Sets the values for the essence based on the enemy and his level
+    /// Sets the value for the essence based on the enemy and his level
     /// </summary>
     /// <param name="e">enemy that was killed</param>
     public void SetValue(Enemy e)
