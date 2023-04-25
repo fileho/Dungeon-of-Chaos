@@ -30,7 +30,7 @@ public abstract class RegenerableStatImprovement : IPassiveSkill
 
     protected abstract void ChangeStat(Stats stats, float reg, float c);
 
-    public override string GetEffectDescription()
+    public override string GetSkillDescription()
     {
         return string.Format(skillData.GetDescription(),
             Math.Round(CalculateRegen(Character.instance.stats),2), Math.Round(CalculateCost(Character.instance.stats),2));

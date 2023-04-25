@@ -15,7 +15,7 @@ public class IncreaseXPIncome : IncreaseStat
         stats.ChangeXPModifier(val);
     }
 
-    public override string GetEffectDescription()
+    public override string GetSkillDescription()
     {
         value = amount;
         return string.Format(skillData.GetDescription(), Math.Round(value, 2).ToString());

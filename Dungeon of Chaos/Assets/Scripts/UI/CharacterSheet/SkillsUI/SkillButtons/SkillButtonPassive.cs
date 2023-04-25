@@ -2,8 +2,12 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
+/// <summary>
+/// Visualization of passive skill in UI
+/// </summary>
 public class SkillButtonPassive : SkillButton
 {
+    [Tooltip("Index of the skill in skill system")]
     [SerializeField] private int skillIndex;
     private SkillInfoPassive skillInfo;
 

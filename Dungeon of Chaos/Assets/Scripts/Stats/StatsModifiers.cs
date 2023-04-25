@@ -1,7 +1,8 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Values used for modifying enemy stats based on level and power type
+/// </summary>
 [CreateAssetMenu(menuName = "SO/Stats/StatsModifiers")]
 public class StatsModifiers : ScriptableObject
 {

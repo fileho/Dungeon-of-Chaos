@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
@@ -6,12 +5,14 @@ using System;
 [CreateAssetMenu(menuName = "SO/Skills/Skills/SecondaryAttack")]
 public class ISecondaryAttack : IActiveSkill
 {
+    // Attack component and configuration used for constructing the secondary attack
     [SerializeField] private IAttack attack;
     [SerializeField] private AttackConfiguration attackConfiguration;
 
+    // Reference to IAttack component on the weapon
     private IAttack secondaryAttack;
 
-    public override string GetEffectDescription()
+    public override string GetSkillDescription()
     {
         float dmg = attackConfiguration.type == SkillEffectType.physical
             ? Character.instance.stats.GetPhysicalDamage() * attackConfiguration.damage
@@ -20,6 +21,12 @@ public class ISecondaryAttack : IActiveSkill
         return s;        
     }
 
+    /// <summary>
+    /// Applies all skill effects of the skill on given targets
+    /// </summary>
+    /// <param name="unit">unit using the skill</param>
+    /// <param name="targets">list of target units (optional)</param>
+    /// <param name="targetPositions">list of target positions (optional)</param>
     public override void Use(Unit unit, List<Unit> targets = null, List<Vector2> targetPositions = null)
     {
         if (secondaryAttack == null)
@@ -40,6 +47,9 @@ public class ISecondaryAttack : IActiveSkill
         secondaryAttack.Attack();
     }
 
+    /// <summary>
+    /// Adds IAttack component to the attacker's weapon and inits it
+    /// </summary>
     public void Init(Unit owner)
     {
         secondaryAttack = attack.GetComponent<IAttack>();

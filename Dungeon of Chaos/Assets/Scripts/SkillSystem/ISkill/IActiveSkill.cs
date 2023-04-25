@@ -37,7 +37,7 @@ public class IActiveSkill : ISkill
         return sCost * Character.instance.stats.GetStaminaCostMod();
     }
 
-    public override string GetEffectDescription()
+    public override string GetSkillDescription()
     {
         List<string> descriptionValues = new List<string>();
         foreach (ISkillEffect effect in effects)
@@ -88,6 +88,12 @@ public class IActiveSkill : ISkill
             cooldownLeft -= Time.deltaTime;
     }
 
+    /// <summary>
+    /// Applies all skill effects of the skill on given targets
+    /// </summary>
+    /// <param name="unit">unit using the skill</param>
+    /// <param name="targets">list of target units (optional)</param>
+    /// <param name="targetPositions">list of target positions (optional)</param>
     public virtual void Use(Unit unit, List<Unit> targets = null, List<Vector2> targetPositions = null)
     {
         if (!CanUse(unit.stats))

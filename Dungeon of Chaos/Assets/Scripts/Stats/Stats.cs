@@ -281,7 +281,7 @@ public class Stats : ScriptableObject
     }
     #endregion
 
-    #region Movement
+#region Movement
     public float MovementSpeed()
     {
         return movementSpeed;
@@ -345,9 +345,12 @@ public class Stats : ScriptableObject
 
         bars.UpdateArmorBar(armor / maxArmor);
     }
-#endregion
+    #endregion
 
-#region Stats Updating
+    #region Stats Updating
+    /// <summary>
+    /// Reseting stats when loading the game
+    /// </summary>
     public Stats ResetStats(IBars bars = null)
     {
         if (bars != null)

@@ -32,7 +32,7 @@ public class SecondBreath : IPassiveSkill
         wasResurrected = false;
     }
 
-    public override string GetEffectDescription()
+    public override string GetSkillDescription()
     {
         return string.Format(skillData.GetDescription(), effects[0].GetEffectsValues(Character.instance)[0]);
     }

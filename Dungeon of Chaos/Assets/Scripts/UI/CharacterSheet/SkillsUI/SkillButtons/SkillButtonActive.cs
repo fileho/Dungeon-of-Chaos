@@ -2,8 +2,12 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
+/// <summary>
+/// Visualization of active skill in UI
+/// </summary>
 public class SkillButtonActive : SkillButton
 {
+    [Tooltip("Index of the skill in skill system")]
     [SerializeField] private int skillIndex;
     private ActivatedSkillSlots activatedSkillSlots;
     private SkillInfoActive skillInfo;

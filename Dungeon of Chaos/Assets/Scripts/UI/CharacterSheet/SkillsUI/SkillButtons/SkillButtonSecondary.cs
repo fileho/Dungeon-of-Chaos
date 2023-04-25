@@ -1,11 +1,13 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
+/// <summary>
+/// Visualization of secondary attack in UI
+/// </summary>
 public class SkillButtonSecondary : SkillButton
 {
+    [Tooltip("Index of the skill in skill system")]
     [SerializeField] private int skillIndex;
     private SkillSlotSecondary skillSlot;
     private SkillInfoSecondaryAttack skillInfo;
