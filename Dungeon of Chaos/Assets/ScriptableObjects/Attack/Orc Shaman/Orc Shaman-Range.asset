@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Orc Shaman-Range
   m_EditorClassIdentifier: 
   range: 9
-  damage: 1.6
+  damage: 1.4
   staminaCost: 0
   manaCost: 40
   rangeWeight: 1
