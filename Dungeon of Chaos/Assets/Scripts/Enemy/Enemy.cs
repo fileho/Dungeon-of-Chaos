@@ -2,10 +2,18 @@ using UnityEngine;
 using System.Collections.Generic;
 using System.Linq;
 
+/// <summary>
+/// Class controlling the behaviour of enemy
+/// This class is derived from Unit
+/// </summary>
+
 [RequireComponent (typeof (AttackManager))]
 public class Enemy : Unit {
+	// Duration for which the enemy chases the target after it exits the chase range 
 	private const float CHASE_HEAT = 3f;
+	// Duration for which the enemy chases the target after being attacked
 	private const float ATTACKED_HEAT = 3f;
+	// Time between two consecutive raycasts
 	private const float RAYCAST_TIME_INTERVAL = 1f;
 
 	private enum State {

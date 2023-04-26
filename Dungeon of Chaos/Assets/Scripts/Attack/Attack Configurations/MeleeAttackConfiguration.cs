@@ -1,5 +1,7 @@
 using UnityEngine;
 
-public abstract class MeleeAttackConfiguration : AttackConfiguration
-{
+/// <summary>
+/// Abstract Scriptable Object Class for Melee Attack Configuration
+/// </summary>
+public abstract class MeleeAttackConfiguration : AttackConfiguration {
 }

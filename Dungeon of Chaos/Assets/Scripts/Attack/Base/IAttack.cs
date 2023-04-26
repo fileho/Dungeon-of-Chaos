@@ -1,6 +1,11 @@
 using System.Collections;
 using UnityEngine;
 
+/// <summary>
+/// The abstract class to define the attacks used by the Units.
+/// This attack defines how the attack would execute including the weapon tweening
+/// </summary>
+
 [RequireComponent (typeof (Weapon))]
 public abstract class IAttack : MonoBehaviour {
 	[SerializeField]
