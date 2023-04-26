@@ -1,6 +1,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Skill effect that shoots a projectile with skill effects
+/// </summary>
 [CreateAssetMenu(menuName = "SO/Skills/SkillEffects/Projectile")]
 public class ProjectileSkill : ISkillEffect
 {

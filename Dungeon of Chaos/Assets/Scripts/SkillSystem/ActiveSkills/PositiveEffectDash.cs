@@ -1,6 +1,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Dash that applies skill effects on the user
+/// </summary>
 [CreateAssetMenu(menuName = "SO/Dash/Positive Effect Dash")]
 public class PositiveEffectDash : Dash
 {

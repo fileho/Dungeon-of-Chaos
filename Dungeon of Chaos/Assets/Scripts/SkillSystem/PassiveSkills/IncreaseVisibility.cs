@@ -1,6 +1,9 @@
 using UnityEngine;
 using UnityEngine.Experimental.Rendering.Universal;
 
+/// <summary>
+/// Passive skill that increases the range of light around the character
+/// </summary>
 [CreateAssetMenu(menuName = "SO/Skills/PassiveSkills/IncreaseVisibility")]
 public class IncreaseVisibility : IPassiveSkill
 {

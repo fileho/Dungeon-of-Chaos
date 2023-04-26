@@ -1,13 +1,15 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Class that handles all tooltips in the game
+/// </summary>
 public class TooltipSystem : MonoBehaviour
 {
     public static TooltipSystem instance;
     public SkillTooltip skillTooltip;
     public SimpleTooltip simpleTooltip;
-    // Start is called before the first frame update
+
     private void Awake()
     {
         instance = this;

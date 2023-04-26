@@ -2,6 +2,9 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Abstract class for effects with some duration
+/// </summary>
 public abstract class TemporalEffect : ISkillEffect
 {
     [SerializeField] protected float duration;

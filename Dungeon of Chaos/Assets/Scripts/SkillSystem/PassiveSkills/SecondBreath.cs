@@ -2,6 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Passive skill that once resurrects the character 
+/// </summary>
 [CreateAssetMenu(menuName = "SO/Skills/PassiveSkills/SecondBreath")]
 public class SecondBreath : IPassiveSkill
 {

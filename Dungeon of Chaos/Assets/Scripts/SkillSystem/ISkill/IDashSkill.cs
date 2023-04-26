@@ -1,6 +1,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Class handling behaviour of one level of a dash skill
+/// </summary>
 [CreateAssetMenu(menuName = "SO/Skills/Skills/Dash")]
 public class IDashSkill : IActiveSkill
 {

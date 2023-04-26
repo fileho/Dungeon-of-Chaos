@@ -2,6 +2,9 @@ using UnityEngine.UI;
 using TMPro;
 using UnityEngine;
 
+/// <summary>
+/// Class that handles the skills tab of the character sheet
+/// </summary>
 public class SkillsUI : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI resetPoints;

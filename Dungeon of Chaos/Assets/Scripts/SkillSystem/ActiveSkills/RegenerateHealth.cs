@@ -1,5 +1,8 @@
 ﻿using UnityEngine;
 
+/// <summary>
+/// Skill effect that regenerates health over time
+/// </summary>
 [CreateAssetMenu(menuName = "SO/Skills/SkillEffects/RegenerateHealth")]
 public class RegenerateHealth : RepeatedTemporalEffect
 {

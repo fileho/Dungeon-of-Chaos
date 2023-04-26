@@ -1,6 +1,9 @@
 using UnityEngine;
 using System;
 
+/// <summary>
+/// Abstract class for passive skills that increase some stat
+/// </summary>
 public abstract class IncreaseStat : IPassiveSkill
 {
     [SerializeField] protected float amount;

@@ -2,6 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Handles the logic of the tab menu of the character sheet
+/// </summary>
 public class TabGroup : MonoBehaviour
 {
     private List<TabBtn> tabButtons;

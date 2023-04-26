@@ -1,9 +1,10 @@
- using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
 
+
+/// <summary>
+/// Tooltip that shows information provided by SkillInfo
+/// </summary>
 public class SkillTooltip : Tooltip
 {
     [SerializeField] private TextMeshProUGUI headerText;

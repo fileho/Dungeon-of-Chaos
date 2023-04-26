@@ -1,5 +1,8 @@
 using UnityEngine;
 
+/// <summary>
+/// Class that represents all levels of a passive skill and provides leveling info
+/// </summary>
 [CreateAssetMenu(menuName = "SO/SkillSystem/SkillInfoPassive")]
 public class SkillInfoPassive : SkillInfo<IPassiveSkill>
 {

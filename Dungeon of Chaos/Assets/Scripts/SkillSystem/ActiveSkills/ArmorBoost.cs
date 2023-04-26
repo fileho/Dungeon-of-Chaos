@@ -1,6 +1,9 @@
 using System;
 using UnityEngine;
 
+/// <summary>
+/// Skill effect for increasing armor
+/// </summary>
 [CreateAssetMenu(menuName = "SO/Skills/SkillEffects/ArmorBoost")]
 public class ArmorBoost : OneTimeTemporalEffect
 {

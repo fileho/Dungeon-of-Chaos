@@ -2,6 +2,9 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
+/// <summary>
+/// Tooltip used for stats and other parts of character sheet beside skills
+/// </summary>
 public class SimpleTooltip : Tooltip
 {
     [SerializeField]

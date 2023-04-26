@@ -2,6 +2,9 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
+/// <summary>
+/// UI Button that handles one skill info and allows the player to unlock, upgrade, equip or read more about a skill
+/// </summary>
 public abstract class SkillButton : MonoBehaviour, IPointerDownHandler, IPointerEnterHandler, IPointerExitHandler, IBeginDragHandler, IDragHandler, IEndDragHandler, IPointerUpHandler
 { 
     [SerializeField] protected GameObject dragDrop;

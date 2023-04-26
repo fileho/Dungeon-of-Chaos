@@ -1,5 +1,8 @@
 using UnityEngine;
 
+/// <summary>
+/// Passive skill that increases max HP
+/// </summary>
 [CreateAssetMenu(menuName = "SO/Skills/PassiveSkills/MaxHP")]
 public class IncreaseMaxHP : IncreaseStat
 {

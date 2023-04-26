@@ -1,6 +1,9 @@
 using System;
 using UnityEngine;
 
+/// <summary>
+/// Abstract class for passive skills that increase regeneration of stats and decrease cost of skills
+/// </summary>
 public abstract class RegenerableStatImprovement : IPassiveSkill
 {
     [SerializeField] private float regeneration;

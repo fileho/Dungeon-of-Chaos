@@ -1,7 +1,9 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Skill effect that deals damage over time
+/// </summary>
 [CreateAssetMenu(menuName = "SO/Skills/SkillEffects/Poison")]
 public class Poison : RepeatedTemporalEffect
 {

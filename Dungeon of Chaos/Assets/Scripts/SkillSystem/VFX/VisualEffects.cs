@@ -1,6 +1,9 @@
  using UnityEngine;
 using System.Collections.Generic;
 
+/// <summary>
+/// Generic one shot VFX
+/// </summary>
 public class VisualEffects : MonoBehaviour
 {
     private List<ISkillEffect> effects;
