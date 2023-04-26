@@ -7,6 +7,9 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
+/// <summary>
+/// Class that manages the In Game UI
+/// </summary>
 public class InGameUIManager : MonoBehaviour {
 	[Header ("Bars")]
 	[SerializeField]
@@ -170,7 +173,7 @@ public class InGameUIManager : MonoBehaviour {
 	public void SetArmorBar (float value)
 	{
 		armorBar.GetComponent<Slider> ().value = value;
-		armorValue.text = Mathf.Floor(Character.instance.stats.GetArmor()).ToString();
+		armorValue.text = Mathf.Floor (Character.instance.stats.GetArmor ()).ToString ();
 		if (value > 0) {
 			armorBar.SetActive (true);
 			return;

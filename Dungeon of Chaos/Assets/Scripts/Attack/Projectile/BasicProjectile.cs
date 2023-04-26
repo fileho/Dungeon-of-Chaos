@@ -1,6 +1,8 @@
 using System.Collections;
 using UnityEngine;
 
-public class BasicProjectile : IProjectile
-{
+/// <summary>
+/// Class defining the execution of the Basic Projectile
+/// </summary>
+public class BasicProjectile : IProjectile {
 }
