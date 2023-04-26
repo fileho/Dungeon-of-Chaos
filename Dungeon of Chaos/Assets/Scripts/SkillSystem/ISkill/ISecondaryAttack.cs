@@ -2,6 +2,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 
+/// <summary>
+/// Class handling behaviour of one level of a secondary attack
+/// </summary>
 [CreateAssetMenu(menuName = "SO/Skills/Skills/SecondaryAttack")]
 public class ISecondaryAttack : IActiveSkill
 {

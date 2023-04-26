@@ -1,5 +1,8 @@
 using UnityEngine;
 
+/// <summary>
+/// Passive skill that increases stamina regeneration and decreases stamina cost
+/// </summary>
 [CreateAssetMenu(menuName = "SO/Skills/PassiveSkills/StaminaImprovement")]
 public class StaminaImprovement : RegenerableStatImprovement
 {

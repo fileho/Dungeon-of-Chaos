@@ -1,6 +1,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Visual effect for status effects with some duration
+/// </summary>
 public class TemporalVisualEffect : MonoBehaviour
 {
     [SerializeField] private bool applyOnWeapon = true;

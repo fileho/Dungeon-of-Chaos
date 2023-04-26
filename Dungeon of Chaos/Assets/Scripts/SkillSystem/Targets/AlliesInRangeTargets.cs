@@ -1,6 +1,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Scriptable object assignable to skill effects. Skill effect then targets all allies in range from a specified point
+/// </summary>
 [CreateAssetMenu(menuName = "SO/Skills/Targets/AlliesInRange")]
 public class AlliesInRangeTargets : ITarget
 { 

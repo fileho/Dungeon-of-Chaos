@@ -1,5 +1,8 @@
 using UnityEngine;
 
+/// <summary>
+/// Passive skill that increases max mana
+/// </summary>
 [CreateAssetMenu(menuName = "SO/Skills/PassiveSkills/Mana")]
 public class IncreaseMaxMana : IncreaseStat
 {

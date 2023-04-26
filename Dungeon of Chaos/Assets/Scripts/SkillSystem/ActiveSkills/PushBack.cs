@@ -2,6 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Skill effect that pushes back the target units
+/// </summary>
 [CreateAssetMenu(menuName = "SO/Skills/SkillEffects/PushBack")]
 public class PushBack : ISkillEffect
 {

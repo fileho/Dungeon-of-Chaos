@@ -28,6 +28,9 @@ public class SavedSkillSystem
     }
 }
 
+/// <summary>
+/// Class that handles all skills and interactions with them - such as leveling, unlocking, resetting or using
+/// </summary>
 public class SkillSystem : MonoBehaviour
 {
     [SerializeField]

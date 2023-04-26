@@ -2,6 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Skill effect for visuals of effects with some duration
+/// </summary>
 [CreateAssetMenu(menuName = "SO/Skills/SkillEffects/TemporalEffectVisuals")]
 public class TemporalVisuals : ISkillEffect
 {

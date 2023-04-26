@@ -3,6 +3,9 @@ using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using UnityEngine.Events;
 
+/// <summary>
+/// Small button next to stats that either increases it or decreases it by 1
+/// </summary>
 public class ChangeStatButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerClickHandler, IPointerUpHandler, IPointerDownHandler
 {
     private enum Stat

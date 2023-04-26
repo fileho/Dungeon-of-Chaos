@@ -1,8 +1,9 @@
-using System.Collections;
-using System.Collections.Generic;
 using Doozy.Engine.UI;
 using UnityEngine;
 
+/// <summary>
+/// Character Sheet UI shows the stats and skills of the character and allows interactions with them
+/// </summary>
 public class CharacterSheet : MonoBehaviour
 {
     [SerializeField] private GameObject child;

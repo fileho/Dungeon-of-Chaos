@@ -2,6 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Visual effect for AoE skills
+/// </summary>
 public class AoEVisualEffect : MonoBehaviour
 {
     [SerializeField] private ParticleSystem aoeEffect;

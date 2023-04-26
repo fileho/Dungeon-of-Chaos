@@ -2,6 +2,9 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Skill effect that deals damage to target units
+/// </summary>
 [CreateAssetMenu(menuName = "SO/Skills/SkillEffects/DealDamage")]
 public class DealDamage : ISkillEffect
 {

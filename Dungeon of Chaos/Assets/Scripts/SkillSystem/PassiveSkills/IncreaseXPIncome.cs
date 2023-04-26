@@ -1,6 +1,9 @@
 using UnityEngine;
 using System;
 
+/// <summary>
+/// Passive skill that increases the income of XP
+/// </summary>
 [CreateAssetMenu(menuName = "SO/Skills/PassiveSkills/IncreaseXP")]
 public class IncreaseXPIncome : IncreaseStat
 {

@@ -2,6 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Scriptable object assignable to skill effects. Skill effect then targets either the player or position of mouse cursor
+/// </summary>
 [CreateAssetMenu(menuName = "SO/Skills/Targets/PlayerCursorTarget")]
 public class PlayerCursorTarget : ITarget
 {

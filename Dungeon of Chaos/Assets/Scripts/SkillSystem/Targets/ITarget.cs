@@ -1,7 +1,9 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Targeting data that can be specified for a skill effect
+/// </summary>
 public struct TargetingData
 {
     public Unit owner;
@@ -10,6 +12,9 @@ public struct TargetingData
     public float angle;
 }
 
+/// <summary>
+/// Abstract class used for returning targets of skill effects
+/// </summary>
 public abstract class ITarget : ScriptableObject
 {
     protected TargetingData targettingData;

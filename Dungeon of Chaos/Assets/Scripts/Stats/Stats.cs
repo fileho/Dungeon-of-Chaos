@@ -17,6 +17,9 @@ public class SavedStats
     }
 }
 
+/// <summary>
+/// Class that handles all interactions with stats
+/// </summary>
 [CreateAssetMenu(menuName = "SO/Stats/Stats")]
 public class Stats : ScriptableObject
 {

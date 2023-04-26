@@ -1,5 +1,8 @@
 using UnityEngine;
 
+/// <summary>
+/// Passive skill that increases spell power
+/// </summary>
 [CreateAssetMenu(menuName = "SO/Skills/PassiveSkills/SpellPower")]
 public class IncreaseSpellPower : IncreaseStat
 {

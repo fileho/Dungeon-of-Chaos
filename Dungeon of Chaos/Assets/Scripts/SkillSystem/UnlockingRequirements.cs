@@ -2,6 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Enum of primary stats that are in the game
+/// </summary>
 public enum Attributes
 {
     None,
@@ -12,6 +15,9 @@ public enum Attributes
     Wisdom
 };
 
+/// <summary>
+/// Class handling the unlocking requirements of the skill - such as level, value of attribute, cost or other skills
+/// </summary>
 [System.Serializable]
 public class UnlockingRequirements
 {

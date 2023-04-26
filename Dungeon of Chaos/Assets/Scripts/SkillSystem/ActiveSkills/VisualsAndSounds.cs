@@ -2,6 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Skill effect for playing one-shot VFX and SFX
+/// </summary>
 [CreateAssetMenu(menuName = "SO/Skills/SkillEffects/Visuals")]
 public class VisualsAndSounds : ISkillEffect
 {

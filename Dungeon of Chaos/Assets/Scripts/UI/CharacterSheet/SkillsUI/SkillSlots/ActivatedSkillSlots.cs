@@ -2,6 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// List of skill slots for activated skills
+/// </summary>
 public class ActivatedSkillSlots : SkillSlots<IActiveSkill>
 {
     protected override int GetAmountOfSlots()

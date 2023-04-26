@@ -1,6 +1,9 @@
 using UnityEngine;
 using System;
 
+/// <summary>
+/// Passive skill that decreases cooldowns of active skills
+/// </summary>
 [CreateAssetMenu(menuName = "SO/Skills/PassiveSkills/CooldownModifier")]
 public class IncreaseCooldownModifier : IncreaseStat
 {

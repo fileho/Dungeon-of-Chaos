@@ -1,6 +1,9 @@
 using System;
 using UnityEngine;
 
+/// <summary>
+/// Abstract class for effects that are applied over time (such as burn or regeneration)
+/// </summary>
 public abstract class RepeatedTemporalEffect : TemporalEffect
 {
     [SerializeField] protected float frequency;

@@ -1,6 +1,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Visual effects for AoE skills
+/// </summary>
 [CreateAssetMenu(menuName = "SO/Skills/SkillEffects/AoEVisuals")]
 public class AoEVisual : ISkillEffect
 {

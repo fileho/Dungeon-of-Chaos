@@ -1,7 +1,8 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Class used for levelling of stats, used mainly by the character
+/// </summary>
 [System.Serializable]
 public class Levelling
 {

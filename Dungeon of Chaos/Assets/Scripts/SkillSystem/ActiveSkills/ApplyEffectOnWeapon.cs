@@ -1,6 +1,9 @@
 using System;
 using UnityEngine;
 
+/// <summary>
+/// Skill effect (such as burn) applied to weapon
+/// </summary>
 [CreateAssetMenu(menuName = "SO/Skills/SkillEffects/WeaponEffect")]
 public class ApplyEffectOnWeapon : OneTimeTemporalEffect
 {

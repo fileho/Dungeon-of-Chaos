@@ -1,6 +1,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Class handling behaviour of one level of an active skill
+/// </summary>
 [CreateAssetMenu(menuName = "SO/Skills/Skills/Active")]
 public class IActiveSkill : ISkill
 {

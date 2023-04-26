@@ -2,6 +2,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 
+/// <summary>
+/// Skill effect that resurrects the character after death
+/// </summary>
 [CreateAssetMenu(menuName = "SO/Skills/SkillEffects/Resurrect")]
 public class Resurrect : ISkillEffect
 {

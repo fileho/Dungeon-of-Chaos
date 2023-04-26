@@ -1,5 +1,8 @@
 using UnityEngine;
 
+/// <summary>
+/// Skill effect that temporarily buffs spell power
+/// </summary>
 [CreateAssetMenu(menuName = "SO/Skills/SkillEffects/SpellPowerBoost")]
 public class SpellPowerBoost : OneTimeTemporalEffect
 {

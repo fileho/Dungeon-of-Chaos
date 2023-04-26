@@ -1,6 +1,9 @@
 using UnityEngine;
 using UnityEngine.UI;
-using TMPro;
+
+/// <summary>
+/// Abstract class for different kind of tooltips
+/// </summary>
 
 public abstract class Tooltip : MonoBehaviour
 {

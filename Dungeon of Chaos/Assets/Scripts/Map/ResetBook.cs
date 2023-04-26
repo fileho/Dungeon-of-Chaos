@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.Assertions;
 
 /// <summary>
-/// Book that allows resetting unlocked of skills
+/// Book that allows resetting unlocked skills
 /// </summary>
 public class ResetBook : MonoBehaviour, IMapSavable
 {

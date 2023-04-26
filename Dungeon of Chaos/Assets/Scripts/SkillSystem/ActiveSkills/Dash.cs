@@ -2,6 +2,9 @@ using System.Collections.Generic;
 using System.Collections;
 using UnityEngine;
 
+/// <summary>
+/// Allows player to dash in certain direction and apply some skill effect on collision
+/// </summary>
 [CreateAssetMenu(menuName = "SO/Dash/Dash")]
 public class Dash : ScriptableObject
 {

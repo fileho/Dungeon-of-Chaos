@@ -2,6 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Projectile that flies towards target position and applies skill effects on collision
+/// </summary>
 public class Projectile : MonoBehaviour
 {
     private List<ISkillEffect> effects;

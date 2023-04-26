@@ -18,6 +18,9 @@ public class SavedSkillInfo
     }
 }
 
+/// <summary>
+/// Complete description of the skill shown in the UI
+/// </summary>
 public struct SkillDescription
 {
     public string header;
@@ -40,6 +43,9 @@ public struct SkillDescription
     }
 }
 
+/// <summary>
+/// Generic class that represents all levels of a skill and provides leveling info
+/// </summary>
 public class SkillInfo<T> : ScriptableObject where T : ISkill
 {
     [SerializeField] private new string name;

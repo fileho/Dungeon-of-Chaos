@@ -4,6 +4,9 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
+/// <summary>
+/// Class that handles the overview tab of character sheet
+/// </summary>
 public class StatsOverview : MonoBehaviour
 {
     [Header("Levelling UI")]

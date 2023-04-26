@@ -2,6 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Visual effect for the lightning touch skill
+/// </summary>
 public class LightningVFX : VisualEffects
 {
     private Vector3 target;

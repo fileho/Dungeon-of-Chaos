@@ -6,6 +6,10 @@ public enum SkillEffectType
     spell,
     physical
 }
+
+/// <summary>
+/// Small part of behaviour of a skill, can be anything from a VFX, dealing damage to status effects
+/// </summary>
 public abstract class ISkillEffect : ScriptableObject
 {
     [Header("Targeting data")]

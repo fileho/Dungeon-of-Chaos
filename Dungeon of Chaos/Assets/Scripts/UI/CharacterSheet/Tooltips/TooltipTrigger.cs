@@ -2,6 +2,9 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
+/// <summary>
+/// Shows tooltip on mouse hover
+/// </summary>
 public class TooltipTrigger : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
     [SerializeField] private string header;

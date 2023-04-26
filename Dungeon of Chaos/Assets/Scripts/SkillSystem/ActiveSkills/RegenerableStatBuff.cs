@@ -2,6 +2,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 
+/// <summary>
+/// Abstract class for buffs increasing regenerable stats (such as hp, mana or stamina)
+/// </summary>
 public abstract class RegenerableStatBuff : ISkillEffect
 {
     [SerializeField] private float value;

@@ -26,6 +26,10 @@ public class SkillData
         return description;
     }
 }
+
+/// <summary>
+/// Abstract class for one level of a skill
+/// </summary>
 public abstract class ISkill : ScriptableObject
 {
     [SerializeField] protected SkillData skillData;

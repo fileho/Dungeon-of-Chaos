@@ -1,8 +1,9 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
+/// <summary>
+/// Part of the skill tooltip
+/// </summary>
 public class TooltipContent : MonoBehaviour
 {
     [SerializeField] public GameObject contentHeader;
